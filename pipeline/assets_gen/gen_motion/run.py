@@ -97,6 +97,46 @@ def load_momask_model(
     return model
 
 
+def load_cloud_rig_models(
+    *,
+    api_key: str | None = None,
+    cache_dir: str | None = None,
+    timeout: int = 1800,
+    verbose: bool = False,
+) -> tuple[Any, Any, Any, Any]:
+    """Load all four Tripo/TokenHub cloud models as a group.
+
+    Returns ``(rig_check_model, cloud_rig_model, cloud_animation_model,
+    cloud_format_model)``. Constructing them is free — no key, no socket.
+    Inference is where the billing begins.
+
+    The key is read from ``TOKENHUB_API_KEY`` at first infer() call (R9.7).
+    Post-pay billing must be enabled at
+    https://console.cloud.tencent.com/tokenhub/inference for the tripo-3d-*
+    model family.
+    """
+    from models.gen_motion.tripo_rigging_model import (
+        TripoAnimationModel,
+        TripoFormatModel,
+        TripoRigCheckModel,
+        TripoRiggingModel,
+    )
+    kwargs: dict[str, Any] = {
+        "cache_dir": cache_dir,
+        "timeout": timeout,
+        "verbose": verbose,
+    }
+    if api_key:
+        kwargs["api_key"] = api_key
+
+    return (
+        TripoRigCheckModel(**kwargs),
+        TripoRiggingModel(**kwargs),
+        TripoAnimationModel(**kwargs),
+        TripoFormatModel(**kwargs),
+    )
+
+
 def make_operator(
     bpy_python: str | None = None,
     output_dir: str | None = None,
@@ -105,9 +145,13 @@ def make_operator(
     *,
     puppeteer_model: Any | None = None,
     momask_model: Any | None = None,
+    rig_check_model: Any | None = None,
+    cloud_rig_model: Any | None = None,
+    cloud_animation_model: Any | None = None,
+    cloud_format_model: Any | None = None,
     device: str = "cpu",
     verbose: bool = False,
-):
+) -> Any:
     """Inject only the runtimes required by the requested motion tasks."""
     from operators.gen_motion.operator import GenMotionOperator
 
@@ -115,6 +159,10 @@ def make_operator(
         bpy_python=bpy_python,
         puppeteer_model=puppeteer_model,
         momask_model=momask_model,
+        rig_check_model=rig_check_model,
+        cloud_rig_model=cloud_rig_model,
+        cloud_animation_model=cloud_animation_model,
+        cloud_format_model=cloud_format_model,
         output_dir=output_dir,
         run_id=run_id,
         default_game_id=default_game_id,

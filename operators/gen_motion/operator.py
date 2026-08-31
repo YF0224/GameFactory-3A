@@ -1,13 +1,22 @@
 """Unified operator for rigging, text-to-motion and motion retargeting."""
 from __future__ import annotations
 
+import logging
 import time
 from pathlib import Path
 from typing import Any, Callable, Optional
 
+logger = logging.getLogger(__name__)
+
 
 TASK_KIND = "motion"
-SUPPORTED_TASK_TYPES = {"retarget", "rig", "text_to_motion", "humanoid"}
+SUPPORTED_TASK_TYPES = {
+    "retarget", "rig", "text_to_motion", "humanoid",
+    # Cloud-backend equivalents: no local weights, no subprocess, no BVH step.
+    # "cloud_rig"      → TripoRiggingModel only  (analogous to "rig")
+    # "cloud_humanoid" → check + rig + animate    (analogous to "humanoid")
+    "cloud_rig", "cloud_humanoid",
+}
 
 _PER_GAME_NAMES = {
     "rig_path": "rig.txt",
@@ -22,6 +31,20 @@ _PER_GAME_NAMES = {
     "anim_only_fbx_path": "animation.fbx",
     "mapping_path": "mapping.json",
     "retarget_info_path": "retarget_info.json",
+    # Cloud backend: a rigged GLB and an animated GLB, plus the check verdict.
+    # Named for what they are rather than for which provider made them, so a
+    # consumer does not have to know which backend ran.
+    "rigged_glb_path": "rigged.glb",
+    "animated_glb_path": "animated.glb",
+    "rig_check_path": "rig_check.json",
+    # What the rig actually came out as: named vs anonymous joints, and how many
+    # limb chains. A bone count does not separate a rig that animates from one
+    # that does not, and rigging is not deterministic.
+    "rig_report_path": "rig_report.json",
+    # How the clip landed on that rig: joints driven, and any the retarget
+    # inverted. A flipped joint shears the mesh and shows up nowhere else.
+    "anim_report_path": "anim_report.json",
+    "converted_path": "converted.fbx",
 }
 _LEGACY_SUFFIXES = {
     "rig_path": "_rig.txt",
@@ -36,6 +59,12 @@ _LEGACY_SUFFIXES = {
     "anim_only_fbx_path": "_anim_only.fbx",
     "mapping_path": "_mapping.json",
     "retarget_info_path": "_retarget_info.json",
+    "rigged_glb_path": "_rigged.glb",
+    "animated_glb_path": "_animated.glb",
+    "rig_check_path": "_rig_check.json",
+    "rig_report_path": "_rig_report.json",
+    "anim_report_path": "_anim_report.json",
+    "converted_path": "_converted.fbx",
 }
 
 
@@ -51,6 +80,12 @@ class GenMotionOperator:
         *,
         puppeteer_model: Any | None = None,
         momask_model: Any | None = None,
+        # Cloud backend slots. Injected the same way the local ones are, so the
+        # operator never learns which provider is behind them (R6 swappability).
+        rig_check_model: Any | None = None,
+        cloud_rig_model: Any | None = None,
+        cloud_animation_model: Any | None = None,
+        cloud_format_model: Any | None = None,
         device: str = "cpu",
         verbose: bool = False,
         retarget_fn: Callable[..., dict] | None = None,
@@ -58,6 +93,10 @@ class GenMotionOperator:
         self.bpy_python = str(bpy_python) if bpy_python else None
         self.puppeteer_model = puppeteer_model
         self.momask_model = momask_model
+        self.rig_check_model = rig_check_model
+        self.cloud_rig_model = cloud_rig_model
+        self.cloud_animation_model = cloud_animation_model
+        self.cloud_format_model = cloud_format_model
         self.run_id = run_id
         self.default_game_id = default_game_id
         self.device = str(device)
@@ -390,6 +429,225 @@ class GenMotionOperator:
                 fps=int((motion_artifacts or {}).get("fps", 20)),
             )
 
+        # ── Cloud-backend branches ──────────────────────────────────────────────
+        cloud_rig_result: dict[str, Any] | None = None
+        cloud_anim_result: dict[str, Any] | None = None
+
+        if task_type in {"cloud_rig", "cloud_humanoid"}:
+            from models.gen_motion.tripo_rigging_model import (
+                ANIMATABLE_SPEC,
+                RIG_TYPES,
+                UNCLASSIFIED,
+                default_preset,
+            )
+
+            from .funcs.cloud_rig_animate import (
+                animate_rigged,
+                check_riggable,
+                rig_mesh,
+            )
+
+            def _validated_rig_type(value: Any) -> str:
+                """A `rig_type` the rigging endpoint accepts, or a clear refusal.
+
+                Only reached when rig-check was skipped. An unknown value is
+                rejected here rather than at the submit call, which would be
+                billed and would report the mistake as a generic parameter error.
+                """
+                candidate = str(value).strip().lower()
+                if candidate not in RIG_TYPES:
+                    raise ValueError(
+                        f"rig_type={value!r} is not accepted. Use one of "
+                        f"{', '.join(sorted(RIG_TYPES))}, or drop "
+                        "skip_rig_check and let rig-check classify the mesh."
+                    )
+                return candidate
+
+            # A URL, because these endpoints fetch the mesh themselves. A local
+            # path is still read when one is given, so the model layer can key
+            # its cache on content rather than on the hosting URL.
+            mesh_url = str(inp.get("mesh_url") or "").strip()
+            if not mesh_url:
+                raise ValueError(
+                    "Cloud motion tasks need 'mesh_url' — a public http(s) "
+                    "link to the mesh. The provider downloads it server-side; "
+                    "there is no upload endpoint and a data: URI is rejected."
+                )
+            mesh_bytes: bytes | None = None
+            if inp.get("target_mesh_path") or inp.get("target_glb_path"):
+                target_mesh = self._target_mesh(inp)
+                mesh_bytes = target_mesh.read_bytes()
+                mesh_fmt = target_mesh.suffix
+            else:
+                mesh_fmt = "." + mesh_url.rsplit(".", 1)[-1].split("?")[0].lower()
+
+            out_format = str(inp.get("out_format", "glb")).lower().lstrip(".")
+
+            # Rig-check first, and honour it.
+            #
+            # Rig-check first, for two reasons: it says whether rigging will
+            # work, and it classifies the body plan so `rig_type` does not have
+            # to be guessed. Overriding a refusal is not a saving — the rigging
+            # call still succeeds, still bills, and returns a skeleton that no
+            # preset clip can drive.
+            if self.rig_check_model is not None and not inp.get("skip_rig_check"):
+                import json as _json
+
+                check_result = check_riggable(
+                    mesh_url, self.rig_check_model,
+                    mesh_bytes=mesh_bytes, mesh_format=mesh_fmt,
+                )
+                check_path = outputs["rig_check_path"]
+                check_path.parent.mkdir(parents=True, exist_ok=True)
+                check_path.write_text(
+                    _json.dumps(check_result["raw"], indent=2), encoding="utf-8"
+                )
+                if not check_result["riggable"]:
+                    if check_result.get("unclassified"):
+                        detail = (
+                            "the mesh has no recognised body plan (rig_type="
+                            f"{UNCLASSIFIED!r}), so there is no topology to rig "
+                            "it as"
+                        )
+                    else:
+                        detail = (
+                            "the mesh was classified as "
+                            f"{check_result['rig_type']!r} but still refused"
+                        )
+                    raise RuntimeError(
+                        f"Rig-check refused this mesh: {detail}. Rigging it "
+                        "anyway is billed and returns a skeleton whose joints "
+                        "are mostly unnamed, which no preset clip can drive. "
+                        "Supply a different mesh, or set skip_rig_check=true to "
+                        "override deliberately."
+                    )
+                # Prefer the service's classification over any task guess.
+                rig_type = check_result["rig_type"]
+            else:
+                rig_type = _validated_rig_type(inp.get("rig_type", "biped"))
+
+            if self.cloud_rig_model is None:
+                raise RuntimeError(
+                    "task_type='cloud_rig' and 'cloud_humanoid' require a "
+                    "cloud_rig_model. Pass TripoRiggingModel() to the operator."
+                )
+
+            # A rig that will be animated must use the tripo naming spec: the
+            # retarget step refuses mixamo-named skeletons outright.
+            rig_spec = str(inp.get("rig_spec", "tripo"))
+            if task_type == "cloud_humanoid" and rig_spec != ANIMATABLE_SPEC:
+                raise ValueError(
+                    f"rig_spec={rig_spec!r} cannot be animated — the retarget "
+                    f"step only accepts {ANIMATABLE_SPEC!r}. Use task_type="
+                    "'cloud_rig' for a mixamo-named rig, or switch the spec."
+                )
+
+            cloud_rig_result = rig_mesh(
+                mesh_url, self.cloud_rig_model,
+                mesh_bytes=mesh_bytes, mesh_format=mesh_fmt,
+                rig_type=rig_type,
+                rig_spec=rig_spec,
+                out_format=out_format,
+                seed=seed,
+                # Rigging is non-deterministic, so more than one attempt is how
+                # a usable skeleton is obtained. Each is billed; default is 1.
+                attempts=int(inp.get("rig_attempts", 1)),
+            )
+            rigged_path = _with_ext(outputs["rigged_glb_path"], out_format)
+            rigged_path.parent.mkdir(parents=True, exist_ok=True)
+            rigged_path.write_bytes(_artifact_bytes(cloud_rig_result))
+            outputs["rigged_glb_path"] = rigged_path
+
+            # Written beside the rig: bone count alone does not tell a rig that
+            # will animate from one that will not.
+            rig_report = cloud_rig_result.get("rig_report")
+            if rig_report:
+                import json as _json
+
+                from models.gen_motion.tripo_rigging_model import (
+                    EXPECTED_LIMBS,
+                    rig_quality_note,
+                )
+
+                report_path = outputs["rig_report_path"]
+                report_path.parent.mkdir(parents=True, exist_ok=True)
+                report_path.write_text(
+                    _json.dumps({
+                        "rig_type": rig_type,
+                        "attempts": cloud_rig_result.get("rig_attempts"),
+                        "expected_limbs": EXPECTED_LIMBS.get(rig_type.lower(), 0),
+                        **rig_report,
+                    }, indent=2),
+                    encoding="utf-8")
+                logger.info("[gen_motion] rig: %s",
+                            rig_quality_note(rig_report, rig_type))
+
+            if task_type == "cloud_humanoid":
+                if self.cloud_animation_model is None:
+                    raise RuntimeError(
+                        "task_type='cloud_humanoid' requires cloud_animation_model."
+                        " Pass TripoAnimationModel() to the operator."
+                    )
+                # Chained by task id, not by file: the skeleton lives
+                # server-side against the rigging task and expires after 24h.
+                rig_task_id = str(cloud_rig_result.get("task_id") or "").strip()
+                if not rig_task_id:
+                    raise RuntimeError(
+                        "The rigging step returned no task_id, so the animation "
+                        "step has nothing to chain from. A cached rigging "
+                        f"result cannot be animated; the file is at {rigged_path}."
+                    )
+                # The preset must match the rig's topology; the default is
+                # derived from rig_type so the pair cannot drift.
+                animation = str(
+                    inp.get("animation") or default_preset(rig_type)
+                )
+                cloud_anim_result = animate_rigged(
+                    rig_task_id,
+                    self.cloud_animation_model,
+                    animation,
+                    out_format=out_format,
+                    animate_in_place=bool(inp.get("animate_in_place", False)),
+                    seed=seed,
+                )
+                anim_path = _with_ext(outputs["animated_glb_path"], out_format)
+                anim_path.parent.mkdir(parents=True, exist_ok=True)
+                anim_path.write_bytes(_artifact_bytes(cloud_anim_result))
+                outputs["animated_glb_path"] = anim_path
+
+                # Check the clip landed on the skeleton rather than inverting on
+                # it. A near-180 deg first frame points a bone backwards and
+                # shears the skin across it — visible on screen, absent from the
+                # status, the bone count and the clip duration alike. Reported,
+                # not raised: the file is already paid for and the rest of the
+                # body may still be usable.
+                if out_format == "glb":
+                    import json as _json
+
+                    from models.gen_motion.tripo_rigging_model import (
+                        inspect_animation,
+                    )
+
+                    anim_report = inspect_animation(anim_path.read_bytes())
+                    outputs["anim_report_path"].parent.mkdir(
+                        parents=True, exist_ok=True)
+                    outputs["anim_report_path"].write_text(
+                        _json.dumps(anim_report, indent=2), encoding="utf-8")
+                    if anim_report["flipped"]:
+                        logger.warning(
+                            "[gen_motion] retarget inverted %d joint(s) — the "
+                            "mesh will be sheared around %s. Worst deviation "
+                            "%.1f deg.",
+                            len(anim_report["flipped"]),
+                            ", ".join(n for n, _ in anim_report["flipped"][:3]),
+                            anim_report["worst"])
+                    else:
+                        logger.info(
+                            "[gen_motion] clip %s drives %d/%d joints, worst "
+                            "first-frame deviation %.1f deg",
+                            anim_report["clip"], anim_report["moving"],
+                            anim_report["joints"], anim_report["worst"])
+
         elapsed = time.time() - t0
         result = {
             "task_id": task_id,
@@ -421,6 +679,15 @@ class GenMotionOperator:
             ),
             "joints_npy_path": _existing_path(outputs["joints_npy_path"]),
             "preview_mp4_path": _existing_path(outputs["preview_mp4_path"]),
+            # Cloud backend artifacts. Always present as keys (None when the
+            # local backend ran) — never remove or repurpose a returned key.
+            "rigged_glb_path": _existing_path(outputs["rigged_glb_path"]),
+            "animated_glb_path": _existing_path(outputs["animated_glb_path"]),
+            "rig_check_path": _existing_path(outputs["rig_check_path"]),
+            "rig_report_path": _existing_path(outputs["rig_report_path"]),
+            "anim_report_path": _existing_path(outputs["anim_report_path"]),
+            "rig_task_id": (cloud_rig_result or {}).get("task_id"),
+            "animation_task_id": (cloud_anim_result or {}).get("task_id"),
             "elapsed_sec": round(elapsed, 2),
             "game_id": game_id,
             "task_kind": TASK_KIND,
@@ -490,6 +757,21 @@ def _write_bytes(path: Path, value: Any, label: str) -> None:
 
 def _existing_path(path: Path) -> str | None:
     return str(path) if path.is_file() and path.stat().st_size > 0 else None
+
+
+def _with_ext(path: Path, ext: str) -> Path:
+    """Re-suffix an artifact to match the container actually returned.
+
+    The stem is fixed (`rigged`, `animated`) but the container is the task's
+    choice, and a mismatched suffix is only reported later, by an importer.
+    """
+    return path.with_suffix(f".{ext.lstrip('.').lower()}")
+
+
+def _artifact_bytes(result: dict[str, Any]) -> bytes:
+    """The file content a cloud stage produced, under either returned key."""
+    payload = result.get("file_bytes") or result.get("glb_bytes")
+    return bytes(payload)  # type: ignore[arg-type]
 
 
 def _artifact_path(
