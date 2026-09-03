@@ -16,6 +16,7 @@ from .config import DEFAULT_API_VERSION, UnityClientConfig
 from .observe import UnityObserveClient
 from .project import UnityProjectClient
 from .plugin import UnityPluginClient
+from .playtest import UnityPlaytestClient
 from .reflection import UnityReflectionClient
 from .runtime import UnityRuntimeClient
 from .testing import UnityTestingClient
@@ -85,6 +86,7 @@ class UnityClient:
             self._config,
             transport,
         )
+        self.playtest = UnityPlaytestClient(self._config)
 
     @property
     def api_version(self) -> str:
