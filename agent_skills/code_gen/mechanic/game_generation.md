@@ -37,6 +37,8 @@ No analogous Example is required.
    bar requires current/maximum health state; a victory screen requires victory
    state/event; a restart button requires a restart command.
 4. Read the matching Engine API and the minimum useful Example references.
+   If the task includes audio, video CG, animation CG, or VFX triggers, use the
+   matching Engine API's **Media Director** section.
 5. Design a task-appropriate, internally modular architecture without using or
    modifying framework adapter internals.
 6. Consume generated inputs only through supplied descriptors.
@@ -122,6 +124,10 @@ appear successful.
 - Treat task inputs, descriptors, Skills, Prompts, Engine Context, Examples,
   and finalized upstream artifacts as read-only.
 - Use only public APIs documented by the selected Engine API.
+- For media integration, use the canonical `media_director` /
+  `A3GameMediaDirector` naming contract and keep native file naming
+  conventions; do not create parallel `MediaManager` or `CutsceneManager`
+  surfaces.
 - Do not import, copy, or modify adapter internals; invent asset paths; bypass
   descriptors; inherit Example gameplay classes; copy Example gameplay; or
   depend on Example plugins at runtime.

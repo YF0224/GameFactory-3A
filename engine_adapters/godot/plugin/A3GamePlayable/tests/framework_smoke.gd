@@ -54,6 +54,16 @@ func _run() -> void:
 	)
 	_check(scene_loader.instantiate_scene("../escape.tscn", parent).get("ok") == false, "scene loader accepted traversal")
 
+	var media_director = load(ROOT + "media_director.gd").new()
+	parent.add_child(media_director)
+	await process_frame
+	var audio_stream := AudioStreamWAV.new()
+	_check(media_director.register_audio("smoke_audio", audio_stream).get("ok") == true, "media director audio registration failed")
+	var media_event: Dictionary = media_director.trigger_audio("smoke_audio", "framework_smoke")
+	_check(media_event.get("playback_call_issued") == true, "media director audio trigger failed")
+	_check(media_director.get_event_log().size() == 1, "media director did not record its event")
+	media_director.queue_free()
+
 	var animation_director = load(ROOT + "animation_director.gd")
 	_check(animation_director.play(parent, &"missing").get("ok") == false, "missing animation did not fail")
 	var collision_probe = load(ROOT + "collision_probe.gd")
@@ -81,7 +91,7 @@ func _run() -> void:
 		push_error("A3GAME_FRAMEWORK_SMOKE_FAIL: " + "; ".join(failures))
 		quit(1)
 		return
-	print("A3GAME_FRAMEWORK_SMOKE_OK capabilities=9")
+	print("A3GAME_FRAMEWORK_SMOKE_OK capabilities=10")
 	quit(0)
 
 

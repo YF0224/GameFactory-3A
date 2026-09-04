@@ -27,10 +27,20 @@ A3GameRuntime/
 │   ├── A3GameRuntimeEntityComponent.cs # Entity MonoBehaviour
 │   ├── A3GameRuntimeSubsystem.cs     # Runtime coordinator singleton
 │   ├── A3GameWorldSessionSubsystem.cs # Session state owner singleton
-│   └── A3GameRuntimeInputReceiver.cs # UDP input receiver (port 30030)
+│   ├── A3GameRuntimeInputReceiver.cs # UDP input receiver (port 30030)
+│   └── A3GameMediaDirector.cs       # Native audio/video CG/VFX bridge
 └── Tests/
     └── A3GameRuntime.Tests.asmdef    # Test assembly definition
 ```
+
+## Media director naming
+
+The cross-engine logical component is `media_director`. Unity keeps the native
+C# convention `A3GameMediaDirector.cs` with the public type
+`A3GameMediaDirector`; do not rename it to `media_director.cs`, because the
+MonoBehaviour file and class name should remain aligned. See the **Unity Media
+Director** section in `<REPO_PATH>/agent_skills/engine_context/unity3d_api.md`
+for the naming, ownership, pause, and evidence contract.
 
 ## Key Design Decisions
 
