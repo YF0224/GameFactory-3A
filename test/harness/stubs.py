@@ -249,6 +249,148 @@ def make_textured_glb(size: float = 1.0, texture_size: int = 64) -> bytes:
     return _pack_glb(doc, bin_blob)
 
 
+def make_rigged_glb(limbs: int = 4, segments: int = 2, anonymous: int = 6,
+                    rig_type: str = "quadruped") -> bytes:
+    """
+    A skinned GLB with the generic joint names this service gives a non-biped.
+
+    Tripo emits resolved structure as ``tripo::0_Left_Limb_0`` and falls back to
+    ``bone_N`` otherwise. See `make_humanoid_glb` for the biped scheme.
+
+    Args:
+        limbs:     Named limb chains, as ``N_Left`` / ``N_Right`` pairs.
+        segments:  Joints per limb chain.
+        anonymous: Extra ``bone_N`` joints, for unresolved structure.
+    """
+    joint_names = ["tripo::Root", "tripo::Spine_0", "tripo::Head_0"]
+    for index in range(limbs):
+        side = "Left" if index % 2 == 0 else "Right"
+        pair = index // 2
+        for segment in range(segments):
+            joint_names.append(f"tripo::{pair}_{side}_Limb_{segment}")
+    joint_names += [f"bone_{i}" for i in range(anonymous)]
+    return _skinned_glb(joint_names)
+
+
+def make_humanoid_glb(anonymous: int = 0) -> bytes:
+    """
+    A skinned GLB with the anatomical bone names this service gives a biped.
+
+    The biped rigger does not use the ``tripo::`` prefix; it emits ``L_Thigh``,
+    ``R_Forearm``, ``Spine01`` and so on.
+    """
+    names = [
+        "Root", "Hip", "Spine01", "Spine02", "Neck", "Head",
+        "L_Clavicle", "L_Upperarm", "L_Forearm", "L_Hand",
+        "R_Clavicle", "R_Upperarm", "R_Forearm", "R_Hand",
+        "L_Thigh", "L_Calf", "L_Foot", "L_ToeBase",
+        "R_Thigh", "R_Calf", "R_Foot", "R_ToeBase",
+    ] + [f"bone_{i}" for i in range(anonymous)]
+    return _skinned_glb(names)
+
+
+def make_animated_glb(first_frame_degrees: float = 0.0,
+                      joint: str = "L_Forearm") -> bytes:
+    """
+    A skinned GLB carrying one clip that starts a given angle from rest.
+
+    `first_frame_degrees` is the deviation between the joint's rest orientation
+    and the clip's first key.
+    """
+    import math
+    import struct
+
+    names = ["Root", "Hip", "Spine01", "Head",
+             "L_Upperarm", "L_Forearm", "R_Upperarm", "R_Forearm",
+             "L_Thigh", "L_Calf", "R_Thigh", "R_Calf"]
+    target = names.index(joint)
+
+    # Rest is identity, so a rotation of `first_frame_degrees` about X sits
+    # exactly that far from it.
+    half = math.radians(first_frame_degrees) / 2
+    keys = [(math.sin(half), 0.0, 0.0, math.cos(half)),
+            (math.sin(half), 0.0, 0.0, math.cos(half))]
+    times = [0.0, 1.0]
+
+    time_blob = struct.pack("<2f", *times)
+    quat_blob = struct.pack("<8f", *[c for key in keys for c in key])
+    return _skinned_glb(names, animation=(target, time_blob, quat_blob))
+
+
+def _skinned_glb(joint_names, animation=None) -> bytes:
+    """Assemble a one-triangle skinned GLB over the given joint names."""
+    import struct
+
+    positions = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+    pos_blob = struct.pack("<9f", *positions)
+    joint_blob = struct.pack("<12H", *([0, 0, 0, 0] * 3))
+    weight_blob = struct.pack("<12f", *([1.0, 0.0, 0.0, 0.0] * 3))
+    identity = [1.0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 1.0]
+    ibm_blob = struct.pack(f"<{16 * len(joint_names)}f",
+                           *(identity * len(joint_names)))
+
+    blobs = [(pos_blob, 34962), (joint_blob, 34962), (weight_blob, 34962),
+             (ibm_blob, None)]
+    if animation is not None:
+        _, time_blob, quat_blob = animation
+        blobs += [(time_blob, None), (quat_blob, None)]
+
+    views, offset, binary = [], 0, b""
+    for blob, target in blobs:
+        view = {"buffer": 0, "byteOffset": offset, "byteLength": len(blob)}
+        if target:
+            view["target"] = target
+        views.append(view)
+        offset += len(blob)
+        binary += blob
+
+    nodes = [{"name": name, "translation": [0.0, 0.1 * i, 0.0]}
+             for i, name in enumerate(joint_names)]
+    mesh_node = len(nodes)
+    nodes.append({"name": "stub_mesh", "mesh": 0, "skin": 0})
+    armature = len(nodes)
+    nodes.append({"name": "Armature", "children": [0, mesh_node]})
+
+    accessors = [
+        {"bufferView": 0, "componentType": 5126, "count": 3, "type": "VEC3",
+         "min": [0.0, 0.0, 0.0], "max": [1.0, 1.0, 0.0]},
+        {"bufferView": 1, "componentType": 5123, "count": 3, "type": "VEC4"},
+        {"bufferView": 2, "componentType": 5126, "count": 3, "type": "VEC4"},
+        {"bufferView": 3, "componentType": 5126, "count": len(joint_names),
+         "type": "MAT4"},
+    ]
+    doc = {
+        "asset": {"version": "2.0", "generator": "3AGameFactory test harness stub"},
+        "scene": 0,
+        "scenes": [{"nodes": [armature]}],
+        "nodes": nodes,
+        "meshes": [{"name": "stub_mesh", "primitives": [{
+            "attributes": {"POSITION": 0, "JOINTS_0": 1, "WEIGHTS_0": 2},
+            "mode": 4}]}],
+        "skins": [{"joints": list(range(len(joint_names))),
+                   "inverseBindMatrices": 3}],
+        "buffers": [{"byteLength": len(binary)}],
+        "bufferViews": views,
+        "accessors": accessors,
+    }
+
+    if animation is not None:
+        target_node, time_blob, _ = animation
+        accessors += [
+            {"bufferView": 4, "componentType": 5126, "count": 2,
+             "type": "SCALAR", "min": [0.0], "max": [1.0]},
+            {"bufferView": 5, "componentType": 5126, "count": 2, "type": "VEC4"},
+        ]
+        doc["animations"] = [{
+            "name": "preset:walk",
+            "samplers": [{"input": 4, "output": 5, "interpolation": "LINEAR"}],
+            "channels": [{"sampler": 0,
+                          "target": {"node": target_node, "path": "rotation"}}],
+        }]
+
+    return _pack_glb(doc, binary)
+
+
 # ── Base ──────────────────────────────────────────────────────────────────────
 
 
@@ -436,6 +578,166 @@ class StubPuppeteerModel(_StubBase):
             "skin_vertex_count": 3,
             "seed": seed,
         }
+
+
+class StubTripoRigCheckModel(_StubBase):
+    """Mimics `models.gen_motion.tripo_rigging_model.TripoRigCheckModel`.
+
+    Performs no network I/O, per the R9 stub checklist.
+    """
+
+    def __init__(self, model_path: str = "tripo-3d-rigging-check",
+                 device: str = "cpu", *, riggable: bool = True,
+                 rig_type: str = "biped", **kw):
+        super().__init__(model_path=model_path, device=device, **kw)
+        self._riggable = riggable
+        self._rig_type = rig_type
+        self.last_call_info: dict = {}
+
+    def infer(self, mesh=None, mesh_format: str = ".glb",
+              seed: int = 42, *, mesh_url: str = "", **kw) -> dict:
+        _require_mesh_url(mesh_url)
+        self.calls.append({"op": "infer", "mesh_url": mesh_url,
+                           "mesh_bytes": len(mesh) if mesh else 0,
+                           "mesh_format": mesh_format, **kw})
+        self.last_call_info = {"task_id": f"stub_check_{len(self.calls):03d}",
+                               "elapsed_sec": 0.0, "cached": False}
+        return {"riggable": self._riggable,
+                "rig_type": self._rig_type,
+                "unclassified": self._rig_type == "others",
+                "raw": {"status": "completed",
+                        "output": {"riggable": self._riggable,
+                                   "rig_type": self._rig_type}}}
+
+
+def _require_mesh_url(mesh_url: str) -> str:
+    """Reject a missing URL exactly as the real wrapper does."""
+    if not mesh_url or not str(mesh_url).startswith(("http://", "https://")):
+        raise ValueError(
+            "This endpoint fetches the mesh itself, so it needs a public URL "
+            f"(mesh_url=...), got {mesh_url!r}"
+        )
+    return str(mesh_url)
+
+
+class StubTripoRiggingModel(_StubBase):
+    """Mimics `TripoRiggingModel` — returns a rigged mesh, no network.
+
+    Reproduces the provider's non-determinism: the first call yields a skeleton
+    with one named limb chain and later calls a complete one.
+    ``limbs_per_attempt`` scripts the sequence.
+    """
+
+    def __init__(self, model_path: str = "tripo-3d-rigging",
+                 device: str = "cpu", *,
+                 limbs_per_attempt: tuple[int, ...] = (1, 4), **kw):
+        super().__init__(model_path=model_path, device=device, **kw)
+        self.last_call_info: dict = {}
+        self._limbs = limbs_per_attempt
+        self._attempt = 0
+
+    def infer(self, mesh=None, mesh_format: str = ".glb", seed: int = 42,
+              *, mesh_url: str = "", rig_type: str = "biped",
+              rig_spec: str = "tripo", out_format: str = "glb",
+              post_filter: bool = True, **kw) -> dict:
+        _require_mesh_url(mesh_url)
+        self.calls.append({"op": "infer", "mesh_url": mesh_url,
+                           "mesh_bytes": len(mesh) if mesh else 0,
+                           "rig_type": rig_type, "rig_spec": rig_spec,
+                           "out_format": out_format, "seed": seed, **kw})
+        limbs = self._limbs[min(self._attempt, len(self._limbs) - 1)]
+        self._attempt += 1
+
+        data = (make_rigged_glb(limbs=limbs, rig_type=rig_type)
+                if out_format == "glb"
+                else make_stub_fbx(marker=b"rigged"))
+        self.last_call_info = {"task_id": f"stub_rig_{len(self.calls):03d}",
+                               "elapsed_sec": 0.0, "cached": False,
+                               "output_bytes": len(data)}
+        return {"file_bytes": data,
+                "output_format": out_format,
+                "glb_bytes": data if out_format == "glb" else None,
+                # A plausible URL, since the animation stage chains off it.
+                "model_url": f"https://stub.invalid/rigged_{len(self.calls):03d}.{out_format}",
+                "task_id": self.last_call_info["task_id"],
+                "elapsed_sec": 0.0}
+
+
+class StubTripoAnimationModel(_StubBase):
+    """Mimics `TripoAnimationModel` — retargets a preset clip, no network.
+
+    Rejects what the real endpoint rejects: a missing rigging task id, and
+    anything that is not a ``preset:`` name.
+    """
+
+    def __init__(self, model_path: str = "tripo-3d-animation",
+                 device: str = "cpu", **kw):
+        super().__init__(model_path=model_path, device=device, **kw)
+        self.last_call_info: dict = {}
+
+    def infer(self, rig_task_id: str = "", animation: str = "", seed: int = 42,
+              *, out_format: str = "glb", animate_in_place: bool = False,
+              export_with_geometry: bool = True, **kw) -> dict:
+        if not str(rig_task_id).strip():
+            raise ValueError(
+                "rig_task_id is required: the animation endpoint works against "
+                "the skeleton held server-side for a completed rigging task."
+            )
+        if not str(animation).strip().startswith("preset:"):
+            raise ValueError(
+                f"animation={animation!r} is not a preset identifier; this "
+                "endpoint retargets a fixed library, e.g. 'preset:walk'."
+            )
+        self.calls.append({"op": "infer", "rig_task_id": rig_task_id,
+                           "animation": animation, "seed": seed,
+                           "out_format": out_format,
+                           "animate_in_place": animate_in_place, **kw})
+        data = (make_minimal_glb(triangles=6) if out_format == "glb"
+                else make_stub_fbx(marker=b"animated"))
+        self.last_call_info = {"task_id": f"stub_anim_{len(self.calls):03d}",
+                               "elapsed_sec": 0.0, "cached": False,
+                               "output_bytes": len(data)}
+        return {"file_bytes": data,
+                "output_format": out_format,
+                "glb_bytes": data if out_format == "glb" else None,
+                "model_url": f"https://stub.invalid/animated_{len(self.calls):03d}.{out_format}",
+                "fps": 30,
+                "task_id": self.last_call_info["task_id"],
+                "elapsed_sec": 0.0}
+
+
+class StubTripoFormatModel(_StubBase):
+    """Mimics `TripoFormatModel` — returns bytes in the requested container."""
+
+    def __init__(self, model_path: str = "tripo-3d-format",
+                 device: str = "cpu", **kw):
+        super().__init__(model_path=model_path, device=device, **kw)
+        self.last_call_info: dict = {}
+
+    def infer(self, mesh=None, mesh_format: str = ".glb", seed: int = 42,
+              *, mesh_url: str = "", output_format: str = "fbx", **kw) -> dict:
+        _require_mesh_url(mesh_url)
+        self.calls.append({"op": "infer", "mesh_url": mesh_url,
+                           "mesh_bytes": len(mesh) if mesh else 0,
+                           "output_format": output_format, **kw})
+        data = (make_minimal_glb(triangles=2) if output_format == "glb"
+                else make_stub_fbx(marker=b"converted"))
+        self.last_call_info = {"task_id": f"stub_fmt_{len(self.calls):03d}",
+                               "elapsed_sec": 0.0, "cached": False}
+        return {"file_bytes": data, "output_format": output_format,
+                "task_id": self.last_call_info["task_id"], "elapsed_sec": 0.0}
+
+
+def make_stub_fbx(marker: bytes = b"stub", pad_to: int = 2048) -> bytes:
+    """
+    Bytes that open as a binary FBX header and nothing more.
+
+    The magic string is real, so a reader can tell an FBX from a GLB. `marker`
+    keeps two stages from producing identical files. Carries no geometry.
+    """
+    header = b"Kaydara FBX Binary  \x00\x1a\x00"
+    body = b"; stub FBX (" + marker + b")\n"
+    return header + body + b"\x00" * max(0, pad_to - len(header) - len(body))
 
 
 class StubMoMaskModel(_StubBase):
@@ -831,6 +1133,12 @@ STUB_OPERATOR_KWARGS: dict[str, Any] = {
         "puppeteer_model": StubPuppeteerModel(),
         "momask_model": StubMoMaskModel(),
         "retarget_fn": stub_retarget_motion,
+        # Cloud-backend stubs — wired in alongside the local stubs so that the
+        # smoke run exercises the cloud task types too without any network I/O.
+        "rig_check_model": StubTripoRigCheckModel(),
+        "cloud_rig_model": StubTripoRiggingModel(),
+        "cloud_animation_model": StubTripoAnimationModel(),
+        "cloud_format_model": StubTripoFormatModel(),
     },
     "3d_object": lambda model_key=None: {
         "model": STUB_BACKENDS["3d_object"][model_key or "trellis2"]()},

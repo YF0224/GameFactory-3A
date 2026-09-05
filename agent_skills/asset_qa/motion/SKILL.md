@@ -59,6 +59,33 @@ So for any real game deliverable, **download a clip first and prefer Mixamo**:
 Do not scrape login-gated sources; that violates the licence and the fetcher
 refuses it on purpose. Always record provenance either way.
 
+## Cloud route (Tripo) — same verdict on quality
+
+`task_type=cloud_rig` / `cloud_humanoid` runs rigging and animation on the
+TokenHub / Tripo backend: no weights, no Blender, no BVH step.
+Code: `<REPO_PATH>/operators/gen_motion/funcs/cloud_rig_animate.py`,
+`<REPO_PATH>/models/gen_motion/tripo_rigging_model.py`.
+
+**Tripo output is also only average.** Rigging is not deterministic — the same
+mesh and parameters can come back with one named limb chain or with four — and
+motion comes from a fixed `preset:` library, so there is no control over
+timing, style or foot contact. Treat it like MoMask: fine for a placeholder,
+not a substitute for a downloaded Mixamo clip on a real deliverable.
+
+Constraints to plan around:
+
+- `input` takes a **public http(s) URL** only; no upload endpoint, `data:` URIs
+  are rejected.
+- Animation chains off the rigging **task id** (expires in 24 h), not the file.
+- `spec="mixamo"` cannot be animated — animate with `spec="tripo"`.
+- `rig_type` (biped / quadruped / hexapod / octopod / avian / serpentine /
+  aquatic) should come from a `rig-check` call; the preset must match it.
+- Every call is billed, including refused meshes and extra `attempts`.
+
+Gate the result before shipping: `inspect_rig` (limb chains resolved) and
+`inspect_animation` (joints not flipped past 150°). Both are in
+`tripo_rigging_model.py`; the operator writes them next to the artifact.
+
 ## When To Run
 
 - A task asks for a humanoid character that moves (walk, attack, idle, …).
@@ -97,6 +124,8 @@ path — do not bypass with a hand-rolled Blender script that never lands in
 | `text_to_motion` | text prompt | `motion.bvh` (+ raw/ik/preview) |
 | `retarget` | source clip + mesh + rig | `retargeted.fbx`, `animation.fbx`, `mapping.json` |
 | `humanoid` | mesh + prompt | all of the above, chained |
+| `cloud_rig` | `mesh_url` | rigged mesh + `rig_report.json` |
+| `cloud_humanoid` | `mesh_url` + preset | rigged + animated mesh + reports |
 
 CLI demo (single task). Load the runtime first and pass the explicit model
 arguments shown in [Runtime Environment](#6-runtime-environment)::
