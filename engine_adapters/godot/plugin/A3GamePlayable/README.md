@@ -35,6 +35,7 @@ second adapter abstraction would only weaken its contract.
 | Controllable entity | `A3GameRuntimeEntity` | Group registration, identity configuration, normalized-input signal, rejected-input signal, snapshot and explicit clear hook |
 | Scene loader | `A3GameSceneLoader.instantiate_scene()` | Only non-traversing `res://` `PackedScene` paths; missing/wrong resources return `{ok=false}` without attaching a node |
 | Animation director | `A3GameAnimationDirector` | Finds an `AnimationPlayer`; missing clips, invalid blend, or zero/non-finite speed fail explicitly |
+| Media director | `media_director.gd` / `A3GameMediaDirector` | Native audio, video CG, animation CG, and VFX triggers; emits `gameplay_pause_changed` for an interruptive CG |
 | Collision probe | `A3GameCollisionProbe` | Ray and sphere-overlap queries over the caller's `World3D`; invalid World/radius/result limits fail explicitly |
 | HUD telemetry | `A3GameHudLayer` | Lightweight title/sorted status surface; generated UI remains game-owned |
 | Material and lighting kit | `A3GameVisualKit` | Bounded PBR values plus shadowed sun/fill helpers; returns native Godot resources/nodes |
@@ -44,6 +45,14 @@ second adapter abstraction would only weaken its contract.
 
 `capabilities.json` is the machine-readable form of this table. Every referenced
 file is a real implementation exercised by the native framework smoke test.
+
+## Media director naming
+
+The cross-engine logical component is `media_director`. This Godot adapter keeps
+the native file spelling `media_director.gd` and exposes the public type
+`A3GameMediaDirector`; see the **Godot Media Director** section in
+`<REPO_PATH>/agent_skills/engine_context/godot_api.md` for the
+naming, ownership, pause, and evidence contract.
 
 ## Runtime wire contract
 
@@ -142,7 +151,7 @@ godot4 --headless --path /projects/MyGame \
   --script res://addons/a3game_playable/tests/framework_smoke.gd
 ```
 
-Success prints `A3GAME_FRAMEWORK_SMOKE_OK capabilities=9`. The script loads and
+Success prints `A3GAME_FRAMEWORK_SMOKE_OK capabilities=10`. The script loads and
 executes every helper, checks negative/failure paths, instantiates a real
 `PackedScene`, builds native UI/material/light objects, and exits nonzero on any
 failed assertion.

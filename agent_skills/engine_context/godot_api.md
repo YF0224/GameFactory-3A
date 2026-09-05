@@ -14,6 +14,10 @@ Do not import `engine_adapters.godot._internal`, call adapter-owned GDScript
 directly, edit `.a3game` state, construct generated-output paths, or make a
 generated game depend on `engine_adapters/godot/examples/` at runtime.
 
+> Gameplay-triggered audio, video CG, animation CG, and VFX are documented in
+> the **Media Director** section below. Use that section together with the
+> public Python API when a task includes runtime media.
+
 ## 1. Discover, install, and validate Godot before project work
 
 An agent must establish a verified Godot executable before creating a project,
@@ -248,6 +252,84 @@ means control detached, not entity destruction.
 | --- | --- | --- | --- |
 | `godot.reflection.inspect_artifact(artifact_id, *, live=True, timeout=60.0)` | Returns registry metadata; live mode asks Godot for resource class, PackedScene nodes, skeletons, skins, animations/tracks and load evidence | Unknown artifact, bad registry, timeout, unloadable/corrupt/wrong resource or malformed native report fails | E8 |
 | `godot.observe.check_status(*, timeout=5.0, check_runtime=False)` | Reports project/executable/version and optional UDP runtime readiness | Invalid environment or requested runtime failure is explicit; no mutation | E8 |
+
+## Godot Media Director: audio, video CG, animation CG, and VFX
+
+Use the engine-native `A3GameMediaDirector` component for media that is
+triggered by gameplay. The cross-engine logical component name is
+`media_director`, but Godot source follows GDScript conventions:
+
+```text
+media_director.gd
+class_name A3GameMediaDirector
+```
+
+The Mechanic owns **when** a gameplay event occurs and supplies a stable
+snake_case event key such as `hit_confirmed` or `ultimate_cg`. The Media
+Director owns Godot playback objects and media evidence. It must not own damage
+rules, attack timing, UI layout, Pipeline orchestration, Browser Play
+transport, or benchmark scoring.
+
+### Public operations
+
+| Operation | Purpose | Native binding |
+|---|---|---|
+| `register_audio(event_key, stream, volume_db=0.0, pitch_scale=1.0)` | Register a Godot `AudioStream` and create an `AudioStreamPlayer` | `AudioStreamPlayer.play()` |
+| `trigger_audio(event_key, trigger_source="gameplay", metadata={})` | Play a registered audio event and return an evidence record | `AudioStreamPlayer` |
+| `register_cg(event_key, stream, loop=false)` | Register a `VideoStream` and create a hidden `VideoStreamPlayer` | `VideoStreamPlayer` |
+| `trigger_cg(event_key, trigger_source="gameplay", metadata={})` | Show and play a video CG; acquire the gameplay pause lock when accepted | `VideoStreamPlayer.play()` |
+| `stop_cg(event_key)` | Stop and hide a CG and release the gameplay pause lock | `VideoStreamPlayer.stop()` |
+| `register_animation(event_key, player, animation_name)` | Bind an existing `AnimationPlayer` animation | `AnimationPlayer.play()` |
+| `trigger_animation(event_key, trigger_source="gameplay", metadata={})` | Play a registered animation CG | `AnimationPlayer` |
+| `register_vfx(event_key, effect_node)` | Bind a node exposing native `restart()` or `play()` | VFX node method |
+| `trigger_vfx(event_key, trigger_source="gameplay", metadata={})` | Restart or play the registered VFX node | `restart()` preferred, then `play()` |
+| `stop_vfx(event_key)` | Stop a registered VFX node when it exposes `stop()` | VFX node method |
+| `get_event_log()` | Return a defensive copy of media runtime records | In-memory evidence |
+
+Registration validates event keys and native resource/node types. Trigger
+operations return `playback_call_issued=false` when a binding is missing or
+invalid; do not treat a successful registration or method return as proof that
+media was visible or audible in a running game.
+
+### Pause and completion contract
+
+`gameplay_pause_changed(paused: bool)` is emitted when an interruptive CG
+acquires or releases the combat-only pause lock. `gameplay_paused` exposes the
+current lock state.
+
+- On an accepted `trigger_cg`, the director emits `gameplay_pause_changed(true)`.
+- Game-owned Mechanic code must disable combat actions and damage while the lock
+  is held. It should not use `Time.time_scale = 0` merely to pause combat,
+  because video and audio must continue.
+- The director releases the lock on normal video completion, `stop_cg`, or the
+  game's explicit error/fallback cleanup path, then emits
+  `gameplay_pause_changed(false)`.
+- The director cannot infer the correct hit window, projectile release, or
+  animation transition; those remain game-owned and require native playtest
+  verification.
+
+### Runtime evidence
+
+Every trigger record uses schema `gamefactory3a.media_runtime_event.v1` and
+contains, at minimum:
+
+```json
+{
+  "schema_version": "gamefactory3a.media_runtime_event.v1",
+  "seq": 1,
+  "t_monotonic_ms": 1234,
+  "event_type": "audio_triggered|cg_triggered|cg_animation_triggered|vfx_triggered",
+  "event_key": "ultimate_cg",
+  "trigger_source": "gameplay",
+  "playback_call_issued": true,
+  "metadata": {}
+}
+```
+
+The record distinguishes the requested event, trigger source, native playback
+call, monotonic runtime ordering, and caller metadata. Keep the event log with
+the native playtest trace; visual/audio success still requires observing the
+running Godot project.
 
 ## 4. Runnable call patterns
 

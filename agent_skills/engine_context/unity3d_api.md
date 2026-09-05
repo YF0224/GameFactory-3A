@@ -8,6 +8,10 @@ This file is a compact index of implemented public capabilities. It lists
 public names and their functions only. Read the current source when exact
 parameters or result payload fields are required.
 
+> Gameplay-triggered audio, video CG, animation CG, and VFX are documented in
+> the **Media Director** section below. Use that section together with the
+> public Python API when a task includes runtime media.
+
 ## Hard API Boundary
 
 The only supported Python entry point is:
@@ -188,6 +192,89 @@ The game-generation Agent must not invoke this namespace.
 Runtime sessions are game-neutral and do not define Fighter, FPS, or Racing
 commands. Native Editor and Player sessions use the runtime bridge; Unity WebGL
 sessions receive keyboard and pointer input through the browser canvas.
+
+## Unity Media Director: audio, video CG, animation CG, and VFX
+
+Use the engine-native `A3GameMediaDirector` component for media that is
+triggered by gameplay. The cross-engine logical component name is
+`media_director`, while Unity/C# uses the class-aligned file and public type:
+
+```text
+A3GameMediaDirector.cs
+public sealed class A3GameMediaDirector : MonoBehaviour
+```
+
+Do **not** rename the Unity file to `media_director.cs`; keeping the
+MonoBehaviour file and public class aligned is the stable Unity convention.
+The Mechanic owns **when** a gameplay event occurs and supplies a stable
+snake_case event key such as `hit_confirmed` or `ultimate_cg`. The Media
+Director owns Unity playback objects and media evidence. It must not own damage
+rules, attack timing, UI layout, Pipeline orchestration, Browser Play
+transport, or benchmark scoring.
+
+### Public operations
+
+| Operation | Purpose | Native binding |
+|---|---|---|
+| `RegisterAudio(eventKey, clip)` | Register a Unity `AudioClip` | `AudioSource.PlayOneShot()` |
+| `TriggerAudio(eventKey, triggerSource="gameplay")` | Play a registered audio event and return an evidence record | `AudioSource` |
+| `RegisterCG(eventKey, videoUrl)` | Register a local/accessible video URL | `VideoPlayer` + `RenderTexture` |
+| `TriggerCG(eventKey, triggerSource="gameplay")` | Set the URL, play video CG, and acquire the gameplay pause lock | `VideoPlayer.Play()` |
+| `StopCG(eventKey, triggerSource="gameplay")` | Stop CG and release the gameplay pause lock | `VideoPlayer.Stop()` |
+| `NotifyCGFinished(success)` | Release the pause lock from a `loopPointReached` or error callback | `VideoPlayer` callback |
+| `RegisterAnimation(eventKey, animator, stateName, layer=0)` | Bind an Animator state | `Animator.Play()` |
+| `TriggerAnimation(eventKey, triggerSource="gameplay")` | Play a registered animation CG | `Animator` |
+| `RegisterVFX(eventKey, effect)` | Bind a `ParticleSystem` | `ParticleSystem` |
+| `TriggerVFX(eventKey, triggerSource="gameplay")` | Restart and play the registered VFX | `ParticleSystem.Play()` |
+| `StopVFX(eventKey, triggerSource="gameplay")` | Stop and clear the registered VFX | `ParticleSystem.Stop()` |
+| `GetEventLog()` | Return the media runtime records | In-memory evidence |
+
+Registration returns `false` for empty keys, null assets, or invalid bindings.
+Trigger operations return a `MediaEvent` with
+`playback_call_issued=false` when a binding or native player is unavailable;
+do not treat a successful method return as proof that media was visible or
+audible in a running game.
+
+### Pause and completion contract
+
+`GameplayPauseChanged` is raised when an interruptive CG acquires or releases
+the combat-only pause lock; `IsGameplayPaused` exposes the current lock state.
+
+- On an accepted `TriggerCG`, the director raises `GameplayPauseChanged(true)`.
+- Game-owned Mechanic code must disable combat actions and damage while the lock
+  is held. It should not use `Time.timeScale = 0` merely to pause combat,
+  because video and audio must continue.
+- The director releases the lock through `NotifyCGFinished`, `StopCG`, or the
+  game's explicit error/fallback cleanup path, then raises
+  `GameplayPauseChanged(false)`.
+- The director cannot infer the correct hit window, projectile release, or
+  animation transition; those remain game-owned and require native playtest
+  verification.
+
+### Runtime evidence
+
+Every trigger returns a `MediaEvent` with schema
+`gamefactory3a.media_runtime_event.v1` and fields equivalent to:
+
+```json
+{
+  "schema_version": "gamefactory3a.media_runtime_event.v1",
+  "seq": 1,
+  "t_monotonic_ms": 1234,
+  "event_type": "audio_triggered|cg_triggered|cg_animation_triggered|vfx_triggered",
+  "event_key": "ultimate_cg",
+  "trigger_source": "gameplay",
+  "playback_call_issued": true,
+  "asset_path": "Assets/Media/ultimate.mp4"
+}
+```
+
+The record distinguishes the requested event, trigger source, native playback
+call, monotonic runtime ordering, and the registered clip/video/effect
+identity. Keep the event log with the native playtest trace; visual/audio
+success still requires observing the running Unity project. Unity game code
+should depend only on this public component surface, never on adapter-private
+registries, transports, editor scripts, or generated-output paths.
 
 ## Reflection
 

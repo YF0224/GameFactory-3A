@@ -8,6 +8,7 @@
     "runtime_entity": "runtime_entity.gd",
     "scene_loading": "scene_loader.gd",
     "animation_dispatch": "animation_director.gd",
+    "media_director": "media_director.gd",
     "collision_queries": "collision_probe.gd",
     "hud_telemetry": "hud_layer.gd",
     "pbr_material_and_lighting": "visual_kit.gd"
