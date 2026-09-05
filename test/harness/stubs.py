@@ -255,8 +255,7 @@ def make_rigged_glb(limbs: int = 4, segments: int = 2, anonymous: int = 6,
     A skinned GLB with the generic joint names this service gives a non-biped.
 
     Tripo emits resolved structure as ``tripo::0_Left_Limb_0`` and falls back to
-    ``bone_N`` otherwise, and only the named joints are driven by a preset clip.
-    See `make_humanoid_glb` for the biped scheme.
+    ``bone_N`` otherwise. See `make_humanoid_glb` for the biped scheme.
 
     Args:
         limbs:     Named limb chains, as ``N_Left`` / ``N_Right`` pairs.
@@ -278,8 +277,7 @@ def make_humanoid_glb(anonymous: int = 0) -> bytes:
     A skinned GLB with the anatomical bone names this service gives a biped.
 
     The biped rigger does not use the ``tripo::`` prefix; it emits ``L_Thigh``,
-    ``R_Forearm``, ``Spine01`` and so on. `inspect_rig` has to read this scheme
-    as well, or a complete humanoid rig scores zero named joints.
+    ``R_Forearm``, ``Spine01`` and so on.
     """
     names = [
         "Root", "Hip", "Spine01", "Spine02", "Neck", "Head",
@@ -297,8 +295,7 @@ def make_animated_glb(first_frame_degrees: float = 0.0,
     A skinned GLB carrying one clip that starts a given angle from rest.
 
     `first_frame_degrees` is the deviation between the joint's rest orientation
-    and the clip's first key — the signal that separates a retarget which landed
-    from one that inverted the bone.
+    and the clip's first key.
     """
     import math
     import struct
@@ -586,8 +583,7 @@ class StubPuppeteerModel(_StubBase):
 class StubTripoRigCheckModel(_StubBase):
     """Mimics `models.gen_motion.tripo_rigging_model.TripoRigCheckModel`.
 
-    Performs no network I/O — that is the point of the R9 stub checklist: the
-    smoke run must work with no key and no socket.
+    Performs no network I/O, per the R9 stub checklist.
     """
 
     def __init__(self, model_path: str = "tripo-3d-rigging-check",
@@ -615,11 +611,7 @@ class StubTripoRigCheckModel(_StubBase):
 
 
 def _require_mesh_url(mesh_url: str) -> str:
-    """Reject a missing URL exactly as the real wrapper does.
-
-    The stub has no use for the URL, but must not accept more than the real
-    endpoint or the smoke run would pass on a call that cannot work.
-    """
+    """Reject a missing URL exactly as the real wrapper does."""
     if not mesh_url or not str(mesh_url).startswith(("http://", "https://")):
         raise ValueError(
             "This endpoint fetches the mesh itself, so it needs a public URL "
@@ -632,8 +624,8 @@ class StubTripoRiggingModel(_StubBase):
     """Mimics `TripoRiggingModel` — returns a rigged mesh, no network.
 
     Reproduces the provider's non-determinism: the first call yields a skeleton
-    with one named limb chain and later calls a complete one, so the retry logic
-    is actually exercised. Set ``limbs_per_attempt`` to script it.
+    with one named limb chain and later calls a complete one.
+    ``limbs_per_attempt`` scripts the sequence.
     """
 
     def __init__(self, model_path: str = "tripo-3d-rigging",
@@ -665,8 +657,7 @@ class StubTripoRiggingModel(_StubBase):
         return {"file_bytes": data,
                 "output_format": out_format,
                 "glb_bytes": data if out_format == "glb" else None,
-                # A plausible URL, so a caller that chains off it is not tripped
-                # up by a None the real backend would not return.
+                # A plausible URL, since the animation stage chains off it.
                 "model_url": f"https://stub.invalid/rigged_{len(self.calls):03d}.{out_format}",
                 "task_id": self.last_call_info["task_id"],
                 "elapsed_sec": 0.0}
@@ -741,11 +732,8 @@ def make_stub_fbx(marker: bytes = b"stub", pad_to: int = 2048) -> bytes:
     """
     Bytes that open as a binary FBX header and nothing more.
 
-    The magic string is real so a reader can tell an FBX apart from a GLB, and
-    `marker` keeps two stages from producing identical files — a test asserting
-    that animation changed something would otherwise pass on a no-op. It carries
-    no geometry: a caller that needs a parseable FBX is running an integration
-    test, not a smoke run.
+    The magic string is real, so a reader can tell an FBX from a GLB. `marker`
+    keeps two stages from producing identical files. Carries no geometry.
     """
     header = b"Kaydara FBX Binary  \x00\x1a\x00"
     body = b"; stub FBX (" + marker + b")\n"

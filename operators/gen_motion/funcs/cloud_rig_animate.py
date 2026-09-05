@@ -6,10 +6,9 @@ Cloud rigging + animation, for the TokenHub / Tripo backend.
 Separate from `rig_character` and `generate_motion` because the pipeline shape
 differs. The local stack splits the work three ways — Puppeteer predicts a
 skeleton, MoMask generates a BVH clip, a Blender pass retargets one onto the
-other. The cloud stack does not: `tripo-3d-rigging` returns a rigged mesh and
-`tripo-3d-animation` retargets a preset clip onto the skeleton that same task
-produced. There is no intermediate BVH and no mapping file, so routing this
-through `retarget_motion` would mean exporting a BVH the provider never made.
+other. The cloud stack has no intermediate BVH and no mapping file:
+`tripo-3d-rigging` returns a rigged mesh and `tripo-3d-animation` retargets a
+preset clip onto the skeleton that same task produced.
 
 API constraints these helpers encode:
 
@@ -19,9 +18,7 @@ API constraints these helpers encode:
     The skeleton lives server-side against that task and expires after 24 hours.
   * `spec="mixamo"` cannot be animated. Rigging for animation must use
     `spec="tripo"`; mixamo output is for DCC import only.
-  * Motion comes from a fixed preset library, not from a text description. This
-    is the substantive difference from MoMask, and `animate_rigged` will not
-    accept a description in place of a preset name.
+  * Motion comes from a fixed preset library, not from a text description.
 """
 from __future__ import annotations
 
@@ -39,12 +36,7 @@ def check_riggable(
     Ask whether this mesh can be rigged, and as what topology.
 
     Returns ``{"riggable": bool, "rig_type": str, "unclassified": bool,
-    "raw": dict}``. The ``rig_type`` should be passed on to `rig_mesh` rather
-    than guessed.
-
-    Worth its own call and worth honouring: rigging a mesh this rejects still
-    succeeds and is still billed, but yields a skeleton whose joints are mostly
-    unnamed, which no preset clip can drive.
+    "raw": dict}``. Pass the returned ``rig_type`` to `rig_mesh`.
     """
     return check_model.infer(
         mesh_bytes, mesh_format=mesh_format, mesh_url=mesh_url
@@ -68,13 +60,9 @@ def rig_mesh(
     Rig one mesh in the cloud, optionally retrying for a usable skeleton.
 
     Rigging is not deterministic: the same mesh and parameters can yield a
-    skeleton with one named limb chain or with four, both reported `completed`
-    with clean skin weights. Only the named joints are driven by a preset clip,
-    so the difference decides whether the animation reads as motion or as the
-    mesh folding up, and nothing in the response distinguishes them.
-
-    With ``attempts > 1`` each result is inspected and the best kept, stopping
-    early once one has every limb chain its topology calls for.
+    skeleton with one named limb chain or with four. With ``attempts > 1`` each
+    result is inspected and the best kept, stopping early once one has every
+    limb chain its topology calls for.
 
     Returns the wrapper's dict, plus:
         rig_report (dict)  — `inspect_rig` output for the kept attempt
@@ -105,8 +93,7 @@ def rig_mesh(
         )
         _require_bytes(result, "Rigging")
 
-        # Only GLB can be inspected here, so `attempts` is a no-op for FBX
-        # output: rig in GLB and convert afterwards if the retry matters.
+        # Only GLB can be inspected, so `attempts` is a no-op for FBX output.
         payload = result.get("glb_bytes")
         report = inspect_rig(payload) if payload else {
             "bones": 0, "named": 0, "anonymous": 0, "limbs": 0,
@@ -184,9 +171,8 @@ def _require_bytes(result: dict[str, Any], stage: str) -> None:
     """
     Fail on an empty artifact before it is written to disk.
 
-    Both key names are accepted: ``file_bytes`` is what every cloud stage
-    returns, ``glb_bytes`` is what the local backend's callers already read. A
-    zero-byte file on disk looks like success until something tries to open it.
+    Accepts either key: ``file_bytes`` from the cloud stages, ``glb_bytes``
+    from the local backend.
     """
     payload = result.get("file_bytes") or result.get("glb_bytes")
     if not isinstance(payload, (bytes, bytearray)) or not payload:

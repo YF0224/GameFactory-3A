@@ -18,6 +18,7 @@ SUPPORTED_TASK_TYPES = {
     "cloud_rig", "cloud_humanoid",
 }
 
+#: Artifact key -> filename, one directory per task.
 _PER_GAME_NAMES = {
     "rig_path": "rig.txt",
     "skeleton_path": "skeleton.txt",
@@ -31,21 +32,16 @@ _PER_GAME_NAMES = {
     "anim_only_fbx_path": "animation.fbx",
     "mapping_path": "mapping.json",
     "retarget_info_path": "retarget_info.json",
-    # Cloud backend: a rigged GLB and an animated GLB, plus the check verdict.
-    # Named for what they are rather than for which provider made them, so a
-    # consumer does not have to know which backend ran.
     "rigged_glb_path": "rigged.glb",
     "animated_glb_path": "animated.glb",
     "rig_check_path": "rig_check.json",
-    # What the rig actually came out as: named vs anonymous joints, and how many
-    # limb chains. A bone count does not separate a rig that animates from one
-    # that does not, and rigging is not deterministic.
     "rig_report_path": "rig_report.json",
-    # How the clip landed on that rig: joints driven, and any the retarget
-    # inverted. A flipped joint shears the mesh and shows up nowhere else.
     "anim_report_path": "anim_report.json",
     "converted_path": "converted.fbx",
 }
+
+#: The same artifacts under the flat layout, where one directory holds several
+#: tasks and the filename carries the task id.
 _LEGACY_SUFFIXES = {
     "rig_path": "_rig.txt",
     "skeleton_path": "_skeleton.txt",
@@ -416,8 +412,7 @@ class GenMotionOperator:
             )
         elif task_type == "humanoid":
             # The generated clip and the rig just written, not anything the
-            # task named: a humanoid task's whole point is that the three
-            # stages agree, and reading them back off disk is what proves it.
+            # task named: the three stages have to agree.
             source_motion = outputs["motion_bvh_path"]
             target_rig = outputs["rig_path"]
             retarget_artifacts = self._retarget(
@@ -483,13 +478,8 @@ class GenMotionOperator:
 
             out_format = str(inp.get("out_format", "glb")).lower().lstrip(".")
 
-            # Rig-check first, and honour it.
-            #
-            # Rig-check first, for two reasons: it says whether rigging will
-            # work, and it classifies the body plan so `rig_type` does not have
-            # to be guessed. Overriding a refusal is not a saving — the rigging
-            # call still succeeds, still bills, and returns a skeleton that no
-            # preset clip can drive.
+            # Rig-check first: it reports whether the mesh can be rigged and
+            # classifies its body plan into a `rig_type`.
             if self.rig_check_model is not None and not inp.get("skip_rig_check"):
                 import json as _json
 
@@ -549,8 +539,8 @@ class GenMotionOperator:
                 rig_spec=rig_spec,
                 out_format=out_format,
                 seed=seed,
-                # Rigging is non-deterministic, so more than one attempt is how
-                # a usable skeleton is obtained. Each is billed; default is 1.
+                # Retried because rigging is non-deterministic. Each attempt is
+                # billed, so the default is 1.
                 attempts=int(inp.get("rig_attempts", 1)),
             )
             rigged_path = _with_ext(outputs["rigged_glb_path"], out_format)
@@ -558,8 +548,8 @@ class GenMotionOperator:
             rigged_path.write_bytes(_artifact_bytes(cloud_rig_result))
             outputs["rigged_glb_path"] = rigged_path
 
-            # Written beside the rig: bone count alone does not tell a rig that
-            # will animate from one that will not.
+            # Written beside the rig: named vs unresolved joints and the
+            # limb-chain count.
             rig_report = cloud_rig_result.get("rig_report")
             if rig_report:
                 import json as _json
@@ -615,12 +605,8 @@ class GenMotionOperator:
                 anim_path.write_bytes(_artifact_bytes(cloud_anim_result))
                 outputs["animated_glb_path"] = anim_path
 
-                # Check the clip landed on the skeleton rather than inverting on
-                # it. A near-180 deg first frame points a bone backwards and
-                # shears the skin across it — visible on screen, absent from the
-                # status, the bone count and the clip duration alike. Reported,
-                # not raised: the file is already paid for and the rest of the
-                # body may still be usable.
+                # Logged rather than raised: a flipped joint shears one limb
+                # and leaves the rest of the body usable.
                 if out_format == "glb":
                     import json as _json
 

@@ -193,9 +193,7 @@ def test_free_text_motion_is_refused(op, task: dict) -> None:
     """
     A motion *description* must be refused, not approximated.
 
-    This endpoint retargets a fixed preset library; it is not MoMask. Silently
-    accepting "walk forward casually" would bill a call and return whatever the
-    default happened to be.
+    This endpoint retargets a fixed preset library; it is not MoMask.
     """
     print("\na free-text motion description is refused")
     try:
@@ -228,9 +226,9 @@ def test_rig_inspection(op, task: dict) -> None:
     """
     `inspect_rig` must separate a usable skeleton from an unusable one.
 
-    Bone count cannot: two rigs of the same mesh can carry the same bone count
-    and the same clean weights, differing only in how many joints are named —
-    which is what decides whether a preset clip drives the whole body.
+    Two rigs of the same mesh can carry the same bone count and the same clean
+    weights, differing only in how many joints are named — and only named
+    joints are driven by a preset clip.
     """
     print("\nrig inspection separates a named skeleton from an anonymous one")
     from models.gen_motion.tripo_rigging_model import inspect_rig
@@ -293,8 +291,7 @@ def test_rig_check_classification_is_parsed(op, task: dict) -> None:
     The rig type must be read from a refusal as well as from a pass.
 
     A refusal arrives as ``status: failed`` with the classification only in
-    ``error.message``. Losing it means losing the one useful thing the call
-    returned, and `others` must never be forwarded as a `rig_type`.
+    ``error.message``, and `others` must never be forwarded as a `rig_type`.
     """
     print("\nrig-check classification is parsed from both a pass and a refusal")
     from models.gen_motion.tripo_rigging_model import (
@@ -405,8 +402,8 @@ def test_rig_inspection_reads_both_naming_schemes(op, task: dict) -> None:
     `inspect_rig` must understand both skeletons this service emits.
 
     Non-bipeds come back as ``tripo::0_Left_Limb_0``, bipeds as ``L_Thigh`` /
-    ``R_Forearm``. Recognising only the prefixed form scores a complete humanoid
-    rig as zero named joints, which would send a good rig to be retried.
+    ``R_Forearm``. Recognising only the prefixed form scores a complete
+    humanoid rig as zero named joints.
     """
     print("\nrig inspection reads the generic and humanoid naming schemes")
     from models.gen_motion.tripo_rigging_model import inspect_rig
@@ -436,10 +433,9 @@ def test_flipped_joints_are_detected(op, task: dict) -> None:
     """
     `inspect_animation` must flag joints the retarget inverted.
 
-    A clip whose first frame sits ~180 deg from a joint's rest orientation points
-    that bone backwards and shears the skin across it. The rig passes every check
-    — named joints, all limbs, clean weights — and the clip has a plausible name
-    and duration, so this is the only signal.
+    A clip whose first frame sits ~180 deg from a joint's rest orientation
+    points that bone backwards and shears the skin across it. The rig itself
+    passes every check, so the clip is where this has to be caught.
     """
     print("\nan inverted retarget is detected, a large pose is not")
     from models.gen_motion.tripo_rigging_model import (
@@ -557,7 +553,7 @@ def main() -> int:
     test_mixamo_cannot_be_animated(op, task)
     if not args.real:
         # These need a scripted sequence of rig qualities and classifications,
-        # which only the stub can provide; live they would just burn credits.
+        # which only the stub can provide.
         test_rig_check_classification_is_parsed(op, task)
         test_rig_type_from_check_is_used(op, task)
         test_preset_follows_rig_type(op, task)

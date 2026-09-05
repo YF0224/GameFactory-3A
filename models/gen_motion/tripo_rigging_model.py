@@ -127,9 +127,7 @@ def _api_base() -> str:
 
 
 def resolve_mesh_url(mesh_url: Optional[str], mesh: Optional[bytes]) -> str:
-    """
-    Validate the mesh reference, or explain what is needed instead of bytes.
-    """
+    """Validate the mesh reference and return it as an http(s) URL."""
     if mesh_url:
         url = str(mesh_url).strip()
         if not url.startswith(("http://", "https://")):
@@ -149,11 +147,10 @@ def resolve_mesh_url(mesh_url: Optional[str], mesh: Optional[bytes]) -> str:
 
 
 def _cache_seed(mesh_url: str, mesh: Optional[bytes]) -> bytes:
-    """
-    Cache-key material for one input mesh.
+    """Cache-key material for one input mesh.
 
-    Bytes are hashed when available so the cache survives re-hosting: the same
-    mesh under a new URL is still a hit, and a hit is not billed.
+    Bytes are hashed when available, so the same mesh under a new URL is still
+    a cache hit.
     """
     if mesh:
         return hashlib.sha256(mesh).digest()
@@ -297,8 +294,7 @@ class _TripoCloudBase:
                         task_id)
         data = self._poll(task_id, body["model"])
         # The URL is kept alongside the bytes so a caller can hand the
-        # provider-hosted result to something else. It is short-lived, so the
-        # bytes are downloaded here regardless.
+        # provider-hosted result to something else. It is short-lived.
         url = self._result_url(data)
         file_bytes = self.client.download(url)
         elapsed = round(time.time() - t0, 2)
@@ -365,9 +361,8 @@ class TripoRigCheckModel(_TripoCloudBase):
         body = {"model": self.model_path, "input": url}
         t0 = time.time()
         task_id = self._submit(body)
-        # A "not riggable" verdict arrives as a *failed* task, and the rig type it
-        # inferred is only in the error message. Letting the exception through
-        # would throw away the one useful thing the call returned.
+        # A "not riggable" verdict arrives as a *failed* task, carrying the
+        # inferred rig type only in the error message.
         try:
             data = self._poll(task_id, self.model_path)
         except cloud_api.CloudTaskFailed as exc:
@@ -392,8 +387,8 @@ def _check_format(mesh_format: str) -> str:
     return ext
 
 
-#: What rig-check reports for a mesh whose body plan it could not classify. Not a
-#: value `rig_type` accepts, so it must not be forwarded to the rigging call.
+#: What rig-check reports for a mesh whose body plan it could not classify.
+#: Not a value `rig_type` accepts.
 UNCLASSIFIED = "others"
 
 
@@ -401,14 +396,11 @@ def _parse_check(data: dict) -> dict[str, Any]:
     """
     Read the verdict out of a rig-check response, pass or fail.
 
-    A refusal comes back as ``status: failed`` with the classification buried in
-    ``error.message`` ("model is not riggable, rig_type=others"), while a pass
-    puts it in ``output``. Both carry the same useful fact, so both are parsed:
-    the rig type is what a caller needs either to proceed or to understand the
-    refusal.
+    A pass carries the rig type in ``output``; a refusal comes back as
+    ``status: failed`` with it in ``error.message`` ("model is not riggable,
+    rig_type=others"). Both forms are parsed.
 
-    A missing flag reads as not riggable, so an unexpected response shape stops
-    the caller before the billed rigging call rather than after it.
+    A missing flag reads as not riggable.
     """
     import re
 
@@ -425,15 +417,14 @@ def _parse_check(data: dict) -> dict[str, Any]:
     return {
         "riggable": riggable,
         "rig_type": rig_type or "biped",
-        # True when the mesh has no recognised body plan. Distinct from a plain
-        # refusal: there is no rig_type to retry with, so retrying is pointless.
+        # True when the mesh has no recognised body plan, so there is no
+        # rig_type to retry with.
         "unclassified": rig_type == UNCLASSIFIED,
         "raw": data,
     }
 
 
-#: Named limb chains each topology should yield. A rig with fewer has not
-#: resolved the whole body.
+#: Named limb chains each topology should yield.
 EXPECTED_LIMBS = {
     "biped": 4,        # two arms, two legs
     "quadruped": 4,
@@ -449,16 +440,14 @@ def inspect_rig(glb_bytes: bytes) -> dict[str, Any]:
     """
     Report how much of a rigged GLB's skeleton is anatomically named.
 
-    Two naming schemes come out of this service, and both are meaningful:
+    Two naming schemes come out of this service:
 
       * generic  — ``tripo::0_Left_Limb_0``, used for quadrupeds, birds and
         anything else described only as numbered limb chains.
       * humanoid — ``L_Thigh``, ``R_Forearm``, ``Spine01``, used for bipeds.
 
-    Anything else (``bone_N``) is structure the rigger did not resolve. Only
-    named joints are retargeted onto by a preset clip, so a rig whose joints are
-    mostly anonymous animates almost nothing and leaves the body in bind pose.
-    Bone count does not show this; naming does.
+    Anything else (``bone_N``) is structure the rigger did not resolve. A
+    preset clip only drives named joints.
 
     Returns:
         bones (int)         — total joints
@@ -542,7 +531,7 @@ def inspect_rig(glb_bytes: bytes) -> dict[str, Any]:
 
 
 def rig_quality_note(report: dict[str, Any], rig_type: str) -> str:
-    """One line describing whether a rig is fit to animate, and why."""
+    """Summarise a rig report in one line."""
     expected = EXPECTED_LIMBS.get(str(rig_type).lower(), 0)
     if report["bones"] == 0:
         return "no skeleton at all"
@@ -557,11 +546,8 @@ def rig_quality_note(report: dict[str, Any], rig_type: str) -> str:
     return ", ".join(parts[:4]) + ("  " + parts[4] if len(parts) > 4 else "")
 
 
-#: Degrees of first-frame deviation from a joint's rest orientation that indicate
-#: a failed retarget rather than a pose. A clip legitimately starts mid-stride,
-#: and deviations past 100 deg were seen on a horse that animated correctly; a
-#: near-180 deg flip is a bone pointing the wrong way, which shears the mesh
-#: bound to it.
+#: Degrees of first-frame deviation from a joint's rest orientation that mark a
+#: failed retarget. Set above a normal mid-stride pose and below a 180 deg flip.
 FLIPPED_JOINT_DEGREES = 150.0
 
 
@@ -570,11 +556,8 @@ def inspect_animation(glb_bytes: bytes) -> dict[str, Any]:
     Check an animated GLB for joints the retarget flipped.
 
     A clip whose first frame sits ~180 deg from a joint's rest orientation has
-    not been retargeted onto that joint, it has been inverted on it: the bone
-    points backwards and the skin stretched across it shears into spikes. This
-    is visible on screen but not in any status field, bone count or clip
-    duration, and the geometry's overall bounds stay plausible — the tearing is
-    local to the affected limb.
+    been inverted on that joint: the bone points backwards and the skin across
+    it shears. The tearing is local to the affected limb.
 
     Returns:
         clip (str)          — name of the longest clip
@@ -730,14 +713,10 @@ class TripoAnimationModel(_TripoCloudBase):
     """
     Drive a rigged mesh with a preset animation. Stands in for MoMaskModel.
 
-    Not a free-text motion model: MoMask generates a clip from a description,
-    this endpoint retargets one of a fixed library onto a skeleton the rigging
-    step produced. `animation` takes a `preset:` identifier; `PRESET_ANIMATIONS`
-    lists what exists.
-
-    Its input is the *rigging task id*, not a mesh or a URL — the animation runs
-    against the skeleton the provider still holds for that task, which expires
-    after 24 hours.
+    Takes a `preset:` identifier from `PRESET_ANIMATIONS`, not a text
+    description, and the *rigging task id* rather than a mesh or a URL — the
+    animation runs against the skeleton the provider holds for that task, which
+    expires after 24 hours.
 
     Return dict keys (parallel to MoMaskModel):
         file_bytes (bytes)
