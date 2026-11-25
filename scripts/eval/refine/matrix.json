@@ -1,0 +1,161 @@
+{
+  "schema": "stage3.refine-matrix.v1",
+  "bench_root": "../..",
+  "base_config": "test_data/outputs/game_refine/glm_sol_stage3_repair10_hf_20261102/configuration.json",
+  "base_config_sha256": "9e6de1a1f7fe6a94b0f6b893e99b60ce13113a51c4de1abcdcb8c20874d67896",
+  "source_inventory": "test_data/outputs/game_refine/glm_sol_stage3_repair10_hf_20261102/inventory.json",
+  "source_inventory_sha256": "98b6a83e98bfce80300f8d9dd2ed8d65db66b16a0ec48824d03ac836402905dc",
+  "games": [
+    "G003_gggame_courtyard_rps",
+    "G008_dock_beacon_cs",
+    "G015_garden_revival",
+    "G020_tidal_glyphs",
+    "G025_broken_continent_rts",
+    "G030_polar_night_td",
+    "G035_rift_expedition",
+    "G040_endurance_race",
+    "G045_daily_street_lightlane",
+    "G050_aftermath_holdout",
+    "G055_inner_court_investigation",
+    "G058_pitch_dreams_football",
+    "G060_volcano_stunt_route"
+  ],
+  "models": {
+    "astra": {
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "executable": "codex"
+    },
+    "sol": {
+      "provider": "codex",
+      "model": "gpt-6.1-sol",
+      "executable": "codex"
+    },
+    "glm": {
+      "provider": "zcode",
+      "model": "glm-5.3",
+      "executable": "{python}",
+      "args": [
+        "{bench}/scripts/run_zcode_agent.py",
+        "--provider-config",
+        "{home}/.zcode/v2/provider_config.json",
+        "--expected-model",
+        "glm-5.3",
+        "--mode",
+        "yolo"
+      ]
+    },
+    "opus": {
+      "provider": "claude",
+      "model": "claude-opus-5-5",
+      "executable": "claude"
+    },
+    "kimi": {
+      "provider": "kimi",
+      "model": "kimi-k3",
+      "executable": "{bench}/.tools/stage3-kimi/node_modules/.bin/kimi",
+      "home": "~/.kimi-code"
+    }
+  },
+  "collect_sources": {
+    "initial": {
+      "path": "test_data/outputs/game_refine/repair_initgame_collect.jsonl",
+      "sha256": "7ba40ecc9161a7a21d311760ac0efd4b8327640ae2196a9fe4f3d29a9e25437f"
+    },
+    "repair": {
+      "path": "test_data/outputs/game_refine/repair_selected200_simple_v2_collect.jsonl",
+      "sha256": "25fc08201b1caac39c50df088f8a1f38b06a2c78db4952dc410678d881329745"
+    },
+    "simple": {
+      "path": "test_data/outputs/game_refine/repair_import_simple_collect.json",
+      "sha256": "47c1f2ef3d0d87edd70c3628c35ff1e88773b39fb3eaa90930a2ea44842635e6"
+    },
+    "detailed": {
+      "path": "test_data/outputs/game_refine/repair_import_collect.json",
+      "sha256": "eddc663212e97941fefc31407f64000db386a9e45aa9886cc3b69caac8addd12"
+    },
+    "vfx": {
+      "path": "test_data/outputs/game_refine/repair_vfx_collect.jsonl",
+      "sha256": "cf7f24ab213a0e7d8a13a3b5a887c0a4ea47501de4abda5557a6ca55654c17aa"
+    }
+  },
+  "project_sources": {
+    "G003_gggame_courtyard_rps": "6209ca74370addde3d247f9861e4f5b123f129108fa294c06e20a5264a8fbcba",
+    "G008_dock_beacon_cs": "265733be46c60a93632d3af521a6453871d3d4889f941fc39fc3ac991e9104d0",
+    "G015_garden_revival": "fcec52b1907f9c8e016830b47673c123383c5807363fddc892b6fb583b7bdf59",
+    "G020_tidal_glyphs": "f3ae12c47ddefd0bb3f51a4f6b896c93e4c97f4e39549baba3c493fdd2b651c4",
+    "G025_broken_continent_rts": "8ed79c3c832de3df135e991d0bf50626cac87b1781f836605a863b5148726b9f",
+    "G030_polar_night_td": "21016d3d290870e8f61731715675d7712edac97808aab7f51c739bbacc38c18c",
+    "G035_rift_expedition": "dc95e19a4ff1ca6ceb9b3a981e66f404beacc7f3a05fe98faf780373f6c11374",
+    "G040_endurance_race": "3ba92be08b77533db852cd0217182b9e03c0b379a628ed89b93b9254ed6536f0",
+    "G045_daily_street_lightlane": "ec8b4d18233966433d1816eea09316ebdd6bf314f29c0e4cb94b36abce94d4c7",
+    "G050_aftermath_holdout": "1a04bcf0ccb113df70e6e94a33e87a0bf574c9b46318dbc0d8f7195e122160d7",
+    "G055_inner_court_investigation": "46263486cf6899c0eb84c6495f939787aa5a1cb31efac54b3c2ec7f338388e7a",
+    "G058_pitch_dreams_football": "4467eb316fe78540f366864f575a8a0e3a981468e45e8571071aff90b77408af",
+    "G060_volcano_stunt_route": "87c93949dfa1d061e7cfbfdc64cdc859ee6a5693686d63b749a66dd7b34ced79"
+  },
+  "motion_sources": {
+    "contract": {
+      "path": "test_data/outputs/game_refine/glm_sol_stage3_repair10_hf_20261102/motion_handoff/contract.json",
+      "sha256": "58515ed6277eea9ad2f17f48568584d3cf3fd1b707e564ac4896b9c0d3d0a3eb"
+    },
+    "decoded_contract": {
+      "path": "test_data/outputs/game_refine/glm_sol_stage3_repair10_hf_20261102/motion_handoff/decoded_contract.json",
+      "sha256": "89da723d1f9206abef6751cd004b1ff4457e8bd637f42b1055c2738e32ce13d5"
+    }
+  },
+  "case_inputs": {
+    "G003_gggame_courtyard_rps": {
+      "path": "test_data/outputs/playtest/g3/refine.json",
+      "sha256": "cf7c806bc1b51f96ac2707124b24df569a137487b3bfaad4206fbd4c547a8136"
+    },
+    "G008_dock_beacon_cs": {
+      "path": "test_data/outputs/playtest/g8/refine.json",
+      "sha256": "17dc83e866af392ae14c568acf18f323c7f2985b269e9d6055bca33bd3379809"
+    },
+    "G015_garden_revival": {
+      "path": "test_data/outputs/playtest/g15/refine.json",
+      "sha256": "9d3fc752d00f2152e23b9622ed9c574b6eea49873dd4a1c3ede384b813529891"
+    },
+    "G020_tidal_glyphs": {
+      "path": "test_data/outputs/playtest/g20/refine.json",
+      "sha256": "7a51015500d1105793d7e5f6529c246c995d4168c35f75667a044aad29578456"
+    },
+    "G025_broken_continent_rts": {
+      "path": "test_data/outputs/playtest/g25/refine.json",
+      "sha256": "efe705c68779edbd06e05a35eb8e5cedcdf51a9cdf80b39da483930e20014491"
+    },
+    "G030_polar_night_td": {
+      "path": "test_data/outputs/playtest/g30/refine.json",
+      "sha256": "a083ee2080583a31dad910742b52b406d3b30012c0b33c785d68db18970c6a32"
+    },
+    "G035_rift_expedition": {
+      "path": "test_data/outputs/playtest/g35/refine.json",
+      "sha256": "4358c91ba4ff193a5398e6e739308c63dae3c7d945ad7dd28d5167cc8b932d69"
+    },
+    "G040_endurance_race": {
+      "path": "test_data/outputs/playtest/g40/refine.json",
+      "sha256": "2284653846f04c8b3ddc224ba5b9f843a22ed68c40a534cefbad958da0b64d95"
+    },
+    "G045_daily_street_lightlane": {
+      "path": "test_data/outputs/playtest/g45/refine.json",
+      "sha256": "52ec8f24c01b0e7f370d028615e501a6f3548152e121980b65782ae9586799ec"
+    },
+    "G050_aftermath_holdout": {
+      "path": "test_data/outputs/playtest/g50/refine.json",
+      "sha256": "58b00bf27045fc625c9762426d95ad4279fb2583c57f93c3667edb16180a6394"
+    },
+    "G055_inner_court_investigation": {
+      "path": "test_data/outputs/playtest/g55/refine.json",
+      "sha256": "4afac6e6feb334b875fcb4b201cdea9a148b90b7600cc92bc827e6c8b96dfbe3"
+    },
+    "G058_pitch_dreams_football": {
+      "path": "test_data/outputs/playtest/g58/refine.json",
+      "sha256": "f20a930bf6ea7a4a610fd84d769bcdb0a26872897325ae1cdf336dc52e41b823"
+    },
+    "G060_volcano_stunt_route": {
+      "path": "test_data/outputs/playtest/g60/refine.json",
+      "sha256": "a9189b0cc9abd74567f72d8cbf9ab124b9eb5fff18e342dcd1ed37c3d181e958"
+    }
+  }
+}

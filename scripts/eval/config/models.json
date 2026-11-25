@@ -1,0 +1,11 @@
+{
+  "_comment": "Short model id -> generation agent. method_dir must match pipeline/eval/stage1/paths.py MODEL_DIRS. cli: codex | claude | zcode | kimi. notes are appended to the round-1 prompt (same as the historical runners). Optional: executable (CLI path), env (extra environment, e.g. KIMI_CODE_HOME). GLM's model comes from the ZCode personal provider config; kimi's model is a config.toml alias.",
+  "sol":   {"method_dir": "gpt_sol6p1",    "cli": "codex",  "model": "gpt-6.1-sol"},
+  "astra": {"method_dir": "gpt_astra6",    "cli": "codex",  "model": "gpt-6-astra"},
+  "opus":  {"method_dir": "claude_ops5p5", "cli": "claude", "model": "claude-opus-5-5",
+            "notes": ["scripts/agent_notes/engine_env.md"]},
+  "glm":   {"method_dir": "glm_5p3",       "cli": "zcode",  "model": "glm-5.3",
+            "notes": ["scripts/agent_notes/engine_env.md"]},
+  "kimi":  {"method_dir": "kimi_k3",       "cli": "kimi",   "model": "kimi-k3",
+            "notes": ["scripts/agent_notes/engine_env.md"]}
+}
