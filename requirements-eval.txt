@@ -1,0 +1,6 @@
+requests
+Pillow
+numpy
+PyYAML
+pytest
+tomli; python_version < "3.11"

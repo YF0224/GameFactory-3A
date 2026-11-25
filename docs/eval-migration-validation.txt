@@ -1,0 +1,125 @@
+Command: python3 -m pytest -q test/test_stage1_*.py test/test_eval_pipeline_migration.py test/test_independent_ue_pair.py
+
+.......................................sF.....F..................... [ 10%]
+....F................................................................... [ 21%]
+.s...................F.................................................. [ 32%]
+........................................................................ [ 43%]
+........................................................................ [ 54%]
+........................................................................ [ 65%]
+........................................................................ [ 76%]
+........................................................................ [ 87%]
+........................................................................ [ 98%]
+..........                                                               [100%]
+=================================== FAILURES ===================================
+________________________ test_real_frozen_source_review ________________________
+
+    def test_real_frozen_source_review():
+        profile = m.read_profiles(MODULE_ROOT/'dual_client_kimi_profiles.json', reader=m.read_json)['kimi_g043']
+>       assert m.review_target(profile['target']) == profile
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test/test_stage1_dual_client_kimi.py:63:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/eval/stage1/dual_client_kimi.py:94: in review_target
+    if scope.resolve() != Path(profile['scope_path']).resolve() or sha256(scope) != profile['scope_sha256']:
+                                                                   ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('/Users/yifanyang/Desktop/GameFactory-3A-eval-migration/test_data/outputs/eval/whitebox/_playable_retest/engineering/kimi_all_20261109/full60_v1/targets.json')
+
+    def sha256(path: Path) -> str:
+        h = hashlib.sha256()
+>       with open(path, 'rb') as f:
+             ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/yifanyang/Desktop/GameFactory-3A-eval-migration/test_data/outputs/eval/whitebox/_playable_retest/engineering/kimi_all_20261109/full60_v1/targets.json'
+
+pipeline/eval/stage1/paths.py:41: FileNotFoundError
+________________________ test_scope_relocation_rejected ________________________
+
+tmp_path = PosixPath('/private/var/folders/zg/lpkj55wn3yg0w9f4hm6wpzdc0000gn/T/pytest-of-yifanyang/pytest-1908/test_scope_relocation_rejected0')
+
+    def test_scope_relocation_rejected(tmp_path):
+        profile = m.read_profiles(MODULE_ROOT/'dual_client_kimi_profiles.json', reader=m.read_json)['kimi_g043']
+        copied = tmp_path/'targets.json'
+>       copied.write_bytes(Path(profile['scope_path']).read_bytes())
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test/test_stage1_dual_client_kimi.py:76:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/pathlib/__init__.py:976: in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = PosixPath('/Users/yifanyang/Desktop/GameFactory-3A-eval-migration/test_data/outputs/eval/whitebox/_playable_retest/engineering/kimi_all_20261109/full60_v1/targets.json')
+mode = 'rb', buffering = 0, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/yifanyang/Desktop/GameFactory-3A-eval-migration/test_data/outputs/eval/whitebox/_playable_retest/engineering/kimi_all_20261109/full60_v1/targets.json'
+
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/pathlib/__init__.py:970: FileNotFoundError
+____________ test_four_gap_receipts_are_static_and_two_client_only _____________
+
+    def test_four_gap_receipts_are_static_and_two_client_only():
+        for case in ('G003','G008','G014','G038'):
+>           r=json.loads((DRAFT/'source_gaps'/f'{case}.json').read_text())
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test/test_stage1_dual_client_kimi.py:268:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/pathlib/__init__.py:986: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = PosixPath('/Users/yifanyang/Desktop/GameFactory-3A-eval-migration/test_data/outputs/eval/whitebox/_playable_retest/engineering/kimi_all_20261109/dual_G043_draft/source_gaps/G003.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/yifanyang/Desktop/GameFactory-3A-eval-migration/test_data/outputs/eval/whitebox/_playable_retest/engineering/kimi_all_20261109/dual_G043_draft/source_gaps/G003.json'
+
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/pathlib/__init__.py:970: FileNotFoundError
+__________________ test_original_profile_bindings_are_current __________________
+
+    def test_original_profile_bindings_are_current():
+        for model,profile in u.read_json(u.PROFILES).items():
+            for name,digest in profile['reviewed_sha256'].items():
+>               assert u.sha256(Path(profile['project'])/name)==digest
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test/test_stage1_dual_client_unity_bounded.py:138:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('test_data/outputs/initial_game_gen/gpt_sol6p1/G014_dual_zone_waterworks/gamefactory_G014_dual_zone_waterworks_20261017_094035/pipeline/G014_dual_zone_waterworks_whitebox/Assets/G014/Presentation/NetworkSession.cs')
+
+    def sha256(path: Path) -> str:
+        h = hashlib.sha256()
+>       with open(path, 'rb') as f:
+             ^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'test_data/outputs/initial_game_gen/gpt_sol6p1/G014_dual_zone_waterworks/gamefactory_G014_dual_zone_waterworks_20261017_094035/pipeline/G014_dual_zone_waterworks_whitebox/Assets/G014/Presentation/NetworkSession.cs'
+
+pipeline/eval/stage1/paths.py:41: FileNotFoundError
+=========================== short test summary info ============================
+FAILED test/test_stage1_dual_client_kimi.py::test_real_frozen_source_review
+FAILED test/test_stage1_dual_client_kimi.py::test_scope_relocation_rejected
+FAILED test/test_stage1_dual_client_kimi.py::test_four_gap_receipts_are_static_and_two_client_only
+FAILED test/test_stage1_dual_client_unity_bounded.py::test_original_profile_bindings_are_current
+4 failed, 648 passed, 2 skipped, 4 subtests passed in 29.44s

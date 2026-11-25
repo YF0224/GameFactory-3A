@@ -3,8 +3,8 @@
 Only verified publications supply scores. Existing historical bytes outside the
 owned markers are retained. Both publisher locks, archive and atomic merge apply.
 """
-from pipeline.eval.stage1.paths import DATA_ROOT
 from __future__ import annotations
+from pipeline.eval.stage1.paths import DATA_ROOT
 import argparse
 from contextlib import ExitStack
 import fcntl
