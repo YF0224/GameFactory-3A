@@ -1,0 +1,38 @@
+{
+  "opus_g043": {
+    "project": "test_data/outputs/initial_game_gen/claude_ops5p5/G043_airship_kitchen/gamefactory_G043_airship_kitchen_20261018_084500/pipeline/G043_airship_kitchen_whitebox",
+    "reviewed_sha256": {
+      "game/main.gd": "c231f137e114eaea43beb6ea2866c5cf736531b633345d579a41929e76201baa",
+      "ui/hud.gd": "bee08d4575ca34eae23f50319441a15c1f04f6320a4e997d8bf0a643cb46f2fc",
+      "mechanics/kitchen_sim.gd": "65f2a6b0cacd24ca28afb42b4ebbdccce9a94eaf096d2ddd71188aad5596a92c"
+    },
+    "source": "whitebox_eval_godot_threejs_5models_20261023_retry/recovery_runs/Opus__G043_airship_kitchen__source_replan_recovery_v1/attempt_manifest.json"
+  },
+  "sol_g043": {
+    "project": "test_data/outputs/initial_game_gen/gpt_sol6p1/G043_airship_kitchen/manual_20261014_203525/pipeline/G043_airship_kitchen_whitebox/GodotProject",
+    "reviewed_sha256": {
+      "scripts/kitchen_game.gd": "afd2a7f49c5359ce9329f5a92446d7cde2221544d104f739b647a41c44216044",
+      "scripts/kitchen_ui.gd": "15631f14462aecf3b9a70932ed75df08264555b1206038be1b9e8c62f6c26b47",
+      "scripts/kitchen_rules.gd": "7fc0d0a602246199c74e6216f66d446f8288bd2a2cfaf295b07c7d49117c5ced"
+    },
+    "source": "whitebox_eval_godot_threejs_5models_20261023_retry/runs/Sol__G043_airship_kitchen/attempt_manifest.json"
+  },
+  "astra_g043": {
+    "project": "test_data/outputs/initial_game_gen/gpt_astra6/G043_airship_kitchen/gamefactory_G043_airship_kitchen_20261016_205823/pipeline/G043_airship_kitchen_whitebox",
+    "reviewed_sha256": {
+      "main.gd": "f08ae2bb62181ba2f410b0fde615a88f89746bf2d8d890b0383ab806aa18b170",
+      "network.gd": "94bb9d2a22403e4fa8f6cb4ca3f47047c7a2627d5dd5b6b8433d16db2947aa17",
+      "presentation/kitchen_ui.gd": "70336f9fb54b810f1d9376c9f95ff9a526f9ee4a47ec2b826de34fffe03c7279",
+      "mechanics/kitchen.gd": "53525608793e307ddcd3e8556dd2ed7e64fc389b50c99e81586fd22ec2193138"
+    },
+    "source": "whitebox_eval_godot_threejs_5models_20261023_retry/runs/Astra__G043_airship_kitchen/attempt_manifest.json"
+  },
+  "glm_g043": {
+    "project": "test_data/outputs/initial_game_gen/glm_5p3/G043_airship_kitchen/gamefactory_G043_airship_kitchen_20261017_120000/pipeline/G043_airship_kitchen_whitebox",
+    "reviewed_sha256": {
+      "main.gd": "5a0b25203bac636ea61a75e842442b7dff680e9f8f010c4f12ece59f58f7ffde",
+      "kitchen_rules.gd": "d6328c1d5d9969740396357276fe2a28d6351d615566083477307a87ff8ddc84"
+    },
+    "source": "test_data/outputs/eval/whitebox/_playable_retest/engineering/20261109_180256_include_latest_15/selection_receipt.json#GLM:G043"
+  }
+}

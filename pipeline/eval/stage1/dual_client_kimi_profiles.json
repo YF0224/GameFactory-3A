@@ -1,0 +1,38 @@
+{
+  "kimi_g043": {
+    "schema": "stage1-kimi-g043-profile.v1",
+    "target": {
+      "model": "Kimi",
+      "case": "G043",
+      "game_id": "G043_airship_kitchen",
+      "engine": "godot",
+      "project": "test_data/outputs/initial_game_gen/kimi_k3/G043_airship_kitchen/gamefactory_G043_airship_kitchen_20261021_015524/pipeline/G043_airship_kitchen_whitebox",
+      "entry": "project.godot",
+      "source": "test_data/outputs/eval/whitebox/_playable_retest/engineering/kimi_all_20261109/full60_v1/selections/G043.json",
+      "required_real_clients": 2
+    },
+    "scope_path": "test_data/outputs/eval/whitebox/_playable_retest/engineering/kimi_all_20261109/full60_v1/targets.json",
+    "scope_sha256": "d482ec268038a8a19bfa20f961fa2c7f83c38d9f7227431b21e8923047c2ab60",
+    "selection_sha256": "90b0eb2c8629c04133cea2879f55d09d510ca9f4396a720f60a350fb5423d302",
+    "source_manifest": {
+      "path": "test_data/outputs/eval/whitebox/_playable_retest/engineering/kimi_all_20261109/full60_v1/source_manifests/G043.json",
+      "sha256": "072dc05791b6e9e05d95c7622b85eb24d15cfa256afb3183d7f3281c0257aeab"
+    },
+    "requirement": {
+      "path": "test_data/test_samples/G043_airship_kitchen/general_requirement.txt",
+      "sha256": "1a93b51806ea661b780850525237fd32a0a4837192c2db3d2ca07f6b17a5fb25"
+    },
+    "project": "test_data/outputs/initial_game_gen/kimi_k3/G043_airship_kitchen/gamefactory_G043_airship_kitchen_20261021_015524/pipeline/G043_airship_kitchen_whitebox",
+    "reviewed_sha256": {
+      "project.godot": "ccecfcc1a786a8807a4328ab45d7161de710c457d10378c469ddd028b87f877f",
+      "main.tscn": "10494c8724c151311ec1ef705bc0b6a92288ee7d3c4d1aaf305d214935a05398",
+      "game/main.gd": "c17ddb0ab426cf40b1b5528f5b77631034fe433e5a962e665ec5941d4a4878f5",
+      "net/net.gd": "d9b0f8fd1e02f00591ba6e4a4cd599fc6bb64ace592b3f379437b7effce0d70c",
+      "ui/hud.gd": "d94fd0c7f27b84c3c11c56aad4984b0dd70531d023b30848a30a8c8fa3188a56",
+      "mechanics/kitchen_sim.gd": "fb6e0272174e88351d58b252400dccb536e1b295e16f6dbc84ed239f53c32fda",
+      "mechanics/kitchen_rules.gd": "859d92fe55e033da226e4602aac13c8c466e4a516c6c6641f366af965f809a63"
+    },
+    "native_calls": 0,
+    "qualification": "source-reviewed candidate; native acceptance pending"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "Sol": {
+    "project": "test_data/outputs/initial_game_gen/gpt_sol6p1/G014_dual_zone_waterworks/gamefactory_G014_dual_zone_waterworks_20261017_094035/pipeline/G014_dual_zone_waterworks_whitebox",
+    "scene": "Assets/Scenes/Waterworks.unity",
+    "reviewed_sha256": {
+      "Assets/G014/Presentation/NetworkSession.cs": "2eb2046c6d139808523090508509c14c93c6ef2fbc632223caddfe77baaaa75e",
+      "Assets/G014/Presentation/WaterworksRuntime.cs": "2fce7e64ce87f51c2e68eccbdf1e6865df37efda91cba29bf813f94c2dbeda67",
+      "Assets/G014/Mechanic/WaterworksSimulation.cs": "e00ca9b895d067b85e711b2ef34c562f385e204349c51eb8f9385cb7cfedf23b",
+      "Assets/Scenes/Waterworks.unity": "dc8240d131e9c3ea1fdd2f8b4bbe4aa730ed79166308d15f997da143d6a82480",
+      "ProjectSettings/ProjectVersion.txt": "add0609351955f044b19cd0883158510856e88ce16cae08997278e83f356505f"
+    },
+    "networking": "authored TCP host plus independent A/B clients; --ww-host / --ww-client A|B; normal mode",
+    "source_reviewed_at": "2026-11-09",
+    "controls": "Enter readies both clients; A/D move; W/Space jump; S crouch; E interact; Q ping; Escape pause. No gameplay or networking methods invoked by harness."
+  },
+  "Astra": {
+    "project": "test_data/outputs/initial_game_gen/gpt_astra6/G014_dual_zone_waterworks/gamefactory_G014_dual_zone_waterworks_20261016_171050/pipeline/G014_dual_zone_waterworks_whitebox/project",
+    "scene": "Assets/Scenes/Acceptance.unity",
+    "reviewed_sha256": {
+      "Assets/Mechanics/WaterworksRuntimeAdapter.cs": "267d598de804d3485f890a1f52e3d9c8e433976733f07d7b71819d6db32f0374",
+      "Assets/Mechanics/WaterworksModel.cs": "348b38503685a2603ff9d771244c9724c09833de24f800a4169c399bc7e1f108",
+      "Assets/Presentation/WaterworksHUD.cs": "9a49279edb196160de4615f5f51e3702e88c2124ec0fd712017a50a1447f7330",
+      "Assets/Presentation/WhiteboxWorld.cs": "12e5e3f8b9bb1c6aa1415c575daac884b48dce5528ecd25e36b11ec19f107903",
+      "Assets/Scenes/Acceptance.unity": "d51785c13903c89912a4e364ef7173c6caa54f34ef83487370a6b3bf2912bcd6",
+      "ProjectSettings/ProjectVersion.txt": "b51164d22c4d2716ba8aee7f0b59d6b7dd0efa8552fd1db2a8c3b123fae3a1ec"
+    },
+    "networking": "authored TCP host plus independent A/B clients; --role host|A|B; --autoconnect; no replay",
+    "source_reviewed_at": "2026-11-09",
+    "controls": "Enter readies both clients; A/D move; W/Space jump; S crouch; E interact; Q ping; Escape pause. No gameplay or networking methods invoked by harness."
+  }
+}

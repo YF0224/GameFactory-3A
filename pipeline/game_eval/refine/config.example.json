@@ -1,0 +1,43 @@
+{
+  "bench_root": ".",
+  "collect_dir": "test_data/outputs/game_refine",
+  "games": [],
+  "project_overrides": {
+    "G050_aftermath_holdout": {
+      "engine": "UE5",
+      "project_root": "test_data/outputs/initial_game_gen/gpt_sol6p1/G050_aftermath_holdout/gamefactory_G050_aftermath_holdout_20261023_120741/pipeline/G050_aftermath_holdout_whitebox/project",
+      "launch_entry": "test_data/outputs/initial_game_gen/gpt_sol6p1/G050_aftermath_holdout/gamefactory_G050_aftermath_holdout_20261023_120741/pipeline/G050_aftermath_holdout_whitebox/project/Aftermath.uproject"
+    }
+  },
+  "asset_map": {},
+  "asset_roots": [],
+  "agent": {
+    "provider": "codex",
+    "executable": "codex",
+    "args": [],
+    "timeout_seconds": 7200
+  },
+  "sol": {
+    "model": null,
+    "executable": "codex",
+    "timeouts": {
+      "static": 900,
+      "plan": 1800,
+      "judge": 900
+    }
+  },
+  "unity": {
+    "adapter_root": "GameFactory-3A",
+    "control_root": "workspaces/native_harness_20261024",
+    "editor_acceptance": null
+  },
+  "renderer": {
+    "node": "node",
+    "playwright_root": ".tools/playwright-root",
+    "browser": null,
+    "timeout_seconds": 180
+  },
+  "recording_ms": 180000,
+  "judge_tasks_per_call": 8,
+  "consecutive_error_limit": 2
+}
