@@ -36,6 +36,7 @@ what actually happened rather than assuming either is available.
 from __future__ import annotations
 
 import json
+import math
 import ctypes
 import os
 import shutil
@@ -46,6 +47,7 @@ from typing import Any
 
 from ..config import UEClientConfig
 from ..contracts import UEOperationResult
+from engine_adapters.action_provenance import action_metadata
 
 _OPERATION = "playtest.record"
 _REPORT_SCHEMA = "gamefactory3a.ue5.playtest_report.v1"
@@ -55,7 +57,8 @@ _RECORDER = Path(__file__).with_name("recorder.py")
 #: Godot/Unity adapters so scenarios stay portable across engines.
 ALLOWED_ACTIONS = frozenset({
     "move", "look", "jump", "attack", "interact",
-    "dash", "pause", "restart", "wait",
+    "dash", "pause", "restart", "wait", "key",
+    "mouse_move", "mouse_down", "mouse_up", "mouse_click",
 })
 
 DEFAULT_KEY_BINDINGS = {
@@ -141,6 +144,23 @@ class UE5PlaytestClient:
     def __init__(self, config: UEClientConfig) -> None:
         self._config = config
 
+    def admit_native(self, *, output_dir: str | Path, timeout: float = 1200,
+                     dry_run: bool = False, install_recorder: bool = False,
+                     validation_source: str | Path | None = None) -> dict[str, Any]:
+        """Build/pin this candidate's delivered key relay and formal recorder.
+
+        The result is pending actual native acceptance; this never starts UE.
+        install_recorder requires a source-bound independent validation copy.
+        """
+        from .native_record import admit_existing
+        try:
+            admitted = admit_existing(self._config, output_dir, timeout=timeout, dry_run=dry_run,
+                                      install_recorder=install_recorder, validation_source=validation_source)
+            return UEOperationResult.success('playtest.admit_native', payload=admitted).to_dict()
+        except (ValueError, OSError, KeyError, RuntimeError) as exc:
+            return UEOperationResult.failure('playtest.admit_native',
+                                             f'{type(exc).__name__}: {exc}').to_dict()
+
     def record(
         self,
         *,
@@ -154,6 +174,8 @@ class UE5PlaytestClient:
         timeout: float | None = None,
         ffmpeg: str | Path | None = None,
         dry_run: bool = False,
+        native_client_only: bool = False,
+        native_admission: dict[str, Any] | str | Path | None = None,
     ) -> dict[str, Any]:
         """Record one playtest into ``output_dir``.
 
@@ -168,7 +190,29 @@ class UE5PlaytestClient:
             timeout: Maximum seconds for the whole take after PIE starts.
             ffmpeg: Optional ffmpeg binary for encoding ``video.mp4``.
             dry_run: Validate and print the plan without running.
+            native_client_only: Use the formal pinned native key/viewport backend.
+            native_admission: Candidate admission dict/JSON from the formal native
+                backend. Requires its native viewport hook and rebuilt recorder;
+                unsupported mouse coordinates fail before launch.
         """
+        if (native_client_only or self._config.native_client_only
+                or os.environ.get('A3GAME_NATIVE_INPUT_ONLY') == '1'):
+            from . import native_client
+            try:
+                if not all(math.isfinite(v) for v in (duration, fps, warmup)):
+                    raise ValueError("Native duration/fps/warmup must be finite")
+                if duration <= 0 or fps <= 0 or warmup < 0:
+                    raise ValueError("Native duration/fps must be positive and warmup nonnegative")
+                actions, error = self._load_actions(scenario, action_plan)
+                if error:
+                    return self._fail(error)
+                return native_client.record(
+                    self._config, output_dir=output_dir,
+                    admission=native_admission or os.environ.get('A3GAME_UE_NATIVE_ADMISSION'),
+                    actions=actions, bindings=DEFAULT_KEY_BINDINGS, duration=duration, fps=fps,
+                    warmup=warmup, timeout=timeout, map_path=map_path, dry_run=dry_run)
+            except (ValueError, OSError, KeyError, TypeError, RuntimeError) as exc:
+                return self._fail(f"{type(exc).__name__}: {exc}")
         ue_root = self._config.ue_root
         project_file = self._config.project_file
         if ue_root is None:
@@ -261,7 +305,7 @@ class UE5PlaytestClient:
             "action_count": len(actions),
             "actions": actions,
             "events": [
-                {"t_ms": event[0], "phase": event[1], "key": event[2]}
+                {key: value for key, value in event.items() if key != "index"}
                 for event in events
             ],
             "command": command,
@@ -396,7 +440,7 @@ class UE5PlaytestClient:
         map_path: str,
         output_dir: Path,
         actions: list[dict[str, Any]],
-        events: list[tuple[int, str, str]],
+        events: list[dict[str, Any]],
         duration: float,
         fps: int,
         warmup: float,
@@ -426,7 +470,11 @@ class UE5PlaytestClient:
             "fps": fps,
             "warmup": warmup,
             "actions": actions,
-            "input_transport": "windows_sendinput" if os.name == "nt" else "trace_only",
+            "input_transport": (
+                "windows_sendinput" if os.name == "nt" else
+                "macos_system_events" if sys_platform() == "Darwin" else
+                "trace_only"
+            ),
             "native_capture": True,
         }
         command = [str(game_binary)]
@@ -594,19 +642,62 @@ class UE5PlaytestClient:
                 or duration_ms <= 0
             ):
                 return None, f"invalid action plan: action {index} duration_ms must be a positive integer"
+            if action.get("action") == "key":
+                import re
+                if not re.fullmatch(r"(?:[a-z0-9]|space|enter|return|escape|leftshift|left_arrow|right_arrow|up_arrow|down_arrow|tab|lmb|rmb)(?:\+(?:[a-z0-9]|space|enter|return|escape|leftshift|left_arrow|right_arrow|up_arrow|down_arrow|tab)){0,2}", str(action.get("key", "")).lower()):
+                    return None, "invalid physical key action"
+            if action.get("action") in {"mouse_move", "mouse_down", "mouse_up", "mouse_click"}:
+                if str(action.get("button", "left")).lower() not in {"left", "right", "lmb", "rmb"}:
+                    return None, f"invalid mouse button in action {index}"
+                for coordinate in ("x", "y"):
+                    value = action.get(coordinate)
+                    if isinstance(value, bool):
+                        return None, f"mouse {coordinate} must be numeric"
+                    try:
+                        if not 0.0 <= float(value) <= 1.0:
+                            return None, f"mouse {coordinate} must be in [0, 1]"
+                    except (TypeError, ValueError):
+                        return None, f"mouse {coordinate} must be numeric"
         if not actions:
             return None, "action plan must not be empty"
         return actions, None
 
     @staticmethod
-    def _timeline(actions: list[dict[str, Any]]) -> list[tuple[int, str, str]]:
-        """Expand actions into ``(t_ms, phase, key)`` key events."""
-        events: list[tuple[int, str, str]] = []
+    def _timeline(actions: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        """Expand keyboard and normalized-coordinate mouse actions."""
+        events: list[dict[str, Any]] = []
         t_ms = 0
-        for action in actions:
+        for index, action in enumerate(actions):
             name = str(action.get("action", ""))
             duration_ms = int(action.get("duration_ms", 100))
             if name == "wait":
+                t_ms += duration_ms
+                continue
+            if name == "key":
+                for key in str(action.get("key", "")).lower().split("+"):
+                    if not key:
+                        raise ValueError("empty physical key")
+                    if key.lower() in {"lmb", "rmb"}:
+                        mouse = {"action": "mouse_click", "index": index,
+                                 "button": "left" if key == "lmb" else "right", "x": 0.5, "y": 0.5}
+                        events.append({**mouse, "t_ms": t_ms, "phase": "down"})
+                        events.append({**mouse, "t_ms": t_ms + min(duration_ms, 80), "phase": "up"})
+                    else:
+                        events.append({"t_ms": t_ms, "phase": "down", "key": key, "action": name, "index": index})
+                        events.append({"t_ms": t_ms + max(duration_ms, 100), "phase": "up", "key": key, "action": name, "index": index})
+                t_ms += max(duration_ms, 100)
+                continue
+            if name in {"mouse_move", "mouse_down", "mouse_up", "mouse_click"}:
+                button = str(action.get("button", "left")).lower()
+                button = {"lmb": "left", "rmb": "right"}.get(button, button)
+                mouse = {"action": name, "index": index, "button": button,
+                         "x": float(action["x"]), "y": float(action["y"])}
+                if name == "mouse_click":
+                    events.append({**mouse, "t_ms": t_ms, "phase": "down"})
+                    events.append({**mouse, "t_ms": t_ms + min(duration_ms, 80), "phase": "up"})
+                else:
+                    phase = "move" if name == "mouse_move" else name.removeprefix("mouse_")
+                    events.append({**mouse, "t_ms": t_ms, "phase": phase})
                 t_ms += duration_ms
                 continue
             if name == "move":
@@ -618,25 +709,27 @@ class UE5PlaytestClient:
                 if y:
                     keys.append(_MOVE_KEYS["+y" if y > 0 else "-y"])
                 for key in keys:
-                    events.append((t_ms, "down", key))
+                    events.append({"t_ms": t_ms, "phase": "down", "key": key, "action": name, "index": index})
                 for key in keys:
-                    events.append((t_ms + max(duration_ms, 100), "up", key))
+                    events.append({"t_ms": t_ms + max(duration_ms, 100), "phase": "up", "key": key, "action": name, "index": index})
                 t_ms += max(duration_ms, 100)
                 continue
             if name == "look":
                 yaw = int(action.get("yaw_delta", 0) or 0)
                 pitch = int(action.get("pitch_delta", 0) or 0)
                 if yaw:
-                    events.append((t_ms, "tap", _LOOK_KEYS["+yaw" if yaw > 0 else "-yaw"]))
+                    events.append({"t_ms": t_ms, "phase": "tap", "key": _LOOK_KEYS["+yaw" if yaw > 0 else "-yaw"], "action": name, "index": index})
                 if pitch:
-                    events.append((t_ms, "tap", _LOOK_KEYS["+pitch" if pitch > 0 else "-pitch"]))
+                    events.append({"t_ms": t_ms, "phase": "tap", "key": _LOOK_KEYS["+pitch" if pitch > 0 else "-pitch"], "action": name, "index": index})
                 t_ms += max(duration_ms, 100)
                 continue
             key = str(DEFAULT_KEY_BINDINGS.get(name, ""))
             if key:
-                events.append((t_ms, "tap", key))
+                events.append({"t_ms": t_ms, "phase": "tap", "key": key, "action": name, "index": index})
             t_ms += max(duration_ms, 100)
-        events.sort(key=lambda item: item[0])
+        for event in events:
+            event.update(action_metadata(actions[event['index']]))
+        events.sort(key=lambda item: item["t_ms"])
         return events
 
     # ── Editor lifecycle ───────────────────────────────────────────────────
@@ -765,7 +858,7 @@ class UE5PlaytestClient:
     @staticmethod
     def _drive_events(
         process_id: int,
-        events: list[tuple[int, str, str]],
+        events: list[dict[str, Any]],
         started: float,
         out: Path,
         warmup: float,
@@ -773,39 +866,75 @@ class UE5PlaytestClient:
         """Post key events on schedule; return non-fatal warnings."""
         warnings: list[str] = []
         actions_path = out / "actions.jsonl"
-        held: set[str] = set()
+        held: set[tuple[str, str]] = set()
+        last_mouse = (0.5, 0.5)
         seq = 0
         with actions_path.open("w", encoding="utf-8") as handle:
             try:
-                for t_ms, phase, key in events:
+                for event in events:
+                    t_ms = int(event["t_ms"])
+                    phase = str(event["phase"])
+                    action_name = str(event.get("action", "key"))
+                    key = str(event.get("key", ""))
+                    is_mouse = action_name.startswith("mouse_")
+                    button = str(event.get("button", "left"))
+                    held_buttons = sorted(value for kind, value in held if kind == "mouse")
+                    if is_mouse and phase == "move" and held_buttons:
+                        phase = "drag"
+                        button = button if button in held_buttons else held_buttons[0]
                     target = started + warmup + t_ms / 1000.0
                     remaining = target - time.monotonic()
                     if remaining > 0:
                         time.sleep(remaining)
-                    ok, error = _key_event(process_id, key, phase)
+                    if is_mouse:
+                        ok, error = _mouse_event(process_id, event["x"], event["y"], button, phase)
+                    else:
+                        ok, error = _key_event(process_id, key, phase)
                     seq += 1
                     if not ok:
-                        warnings.append(f"key event failed: {error}")
+                        warnings.append(f"mouse event failed: {error}" if is_mouse else f"key event failed: {error}")
                     entry = {
+                        **action_metadata(event),
                         "seq": seq,
                         "t_monotonic_ms": int((time.monotonic() - started) * 1000),
+                        "t_ms": int((time.monotonic() - started) * 1000),
                         "phase": phase,
-                        "key": key,
+                        "index": event.get("index"),
+                        "planned_t_ms": int(warmup * 1000) + t_ms,
+                        "key": key or None,
+                        "action": action_name,
+                        "button": button if is_mouse else None,
+                        "x": event.get("x") if is_mouse else None,
+                        "y": event.get("y") if is_mouse else None,
                         "ok": ok,
+                        "sent": bool(ok),
                     }
                     if not ok:
                         entry["error"] = error
                     handle.write(json.dumps(entry) + "\n")
+                    if is_mouse and ok:
+                        last_mouse = (float(event["x"]), float(event["y"]))
                     if phase == "down" and ok:
-                        held.add(key)
-                    elif phase == "up":
-                        held.discard(key)
+                        held.add(("mouse" if is_mouse else "key", event.get("button", "left") if is_mouse else key))
+                    elif phase == "up" and ok:
+                        held.discard(("mouse" if is_mouse else "key", event.get("button", "left") if is_mouse else key))
             finally:
                 # Never leave a key pressed in the Editor session.
-                for key in sorted(held):
-                    ok, error = _key_event(process_id, key, "up")
+                for kind, value in sorted(held):
+                    if kind == "mouse":
+                        ok, error = _mouse_event(process_id, *last_mouse, value, "up")
+                    else:
+                        ok, error = _key_event(process_id, value, "up")
                     if not ok:
-                        warnings.append(f"key event failed: cleanup {key} up: {error}")
+                        warnings.append(f"{kind} event failed: cleanup {value} up: {error}")
+                    handle.write(json.dumps({"phase": "up", "key": value if kind == "key" else None,
+                        "button": value if kind == "mouse" else None,
+                        "action": "mouse_up" if kind == "mouse" else "key", "sent": bool(ok),
+                        "t_ms": int((time.monotonic() - started) * 1000),
+                        "x": last_mouse[0] if kind == "mouse" else None,
+                        "y": last_mouse[1] if kind == "mouse" else None,
+                        "cleanup_release": True, "error": error or None}) + "\n")
+                handle.flush()
         return warnings
 
     @staticmethod
@@ -835,7 +964,7 @@ def _osascript(script: str) -> tuple[bool, str]:
 
 def _input_failures(warnings: list[str]) -> list[str]:
     """Extract input-delivery failures from host-side warnings."""
-    return [warning for warning in warnings if warning.startswith("key event failed:")]
+    return [warning for warning in warnings if warning.startswith(("key event failed:", "mouse event failed:"))]
 
 
 def _bundled_ffmpeg() -> str | None:
@@ -875,16 +1004,29 @@ def _key_event(process_id: int, key: str, phase: str) -> tuple[bool, str]:
         "set frontmost of (first application process whose unix id is "
         f"{int(process_id)}) to true"
     )
-    if key in _KEY_CODES:
-        lines.append(f"key code {int(_KEY_CODES[key])}")
-    elif phase == "down":
-        lines.append(f'key down "{key}"')
-    elif phase == "up":
-        lines.append(f'key up "{key}"')
-    else:
-        lines.append(f'keystroke "{key}"')
     lines.append("end tell")
-    return _osascript("\n".join(lines))
+    focused, error = _osascript("\n".join(lines))
+    if not focused:
+        return False, error
+    from engine_adapters.macos_input import post_key_edge
+    return post_key_edge(process_id, key, phase)
+
+
+def _mouse_event(process_id: int, x: float, y: float, button: str, phase: str) -> tuple[bool, str]:
+    """Post one normalized-coordinate mouse event to the target process."""
+    if sys_platform() == "Windows":
+        return False, "Windows mouse transport is not implemented"
+    lines = ['tell application "System Events"']
+    lines.append(
+        "set frontmost of (first application process whose unix id is "
+        f"{int(process_id)}) to true"
+    )
+    lines.append("end tell")
+    focused, error = _osascript("\n".join(lines))
+    if not focused:
+        return False, error
+    from engine_adapters.macos_input import post_mouse_edge
+    return post_mouse_edge(process_id, x, y, button, phase)
 
 
 def _windows_key_event(process_id: int, key: str, phase: str) -> tuple[bool, str]:

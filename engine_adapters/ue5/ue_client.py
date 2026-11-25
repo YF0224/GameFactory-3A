@@ -31,6 +31,12 @@ class UEClient:
     Agent code must construct UEClient from `engine_adapters.ue5` and use its
     public namespace clients. Internal modules are version-specific and are
     not part of the API contract.
+
+    For a leased local Editor, ``python_transport="remote_control"`` uses
+    HTTP Python with an exact .uproject identity check on every command.
+    Enable bEnableRemotePythonExecution in the project's RemoteControl
+    settings before launch. This explicit option avoids UDP discovery;
+    it does not automatically retry failed remote_execution commands.
     """
 
     def __init__(
@@ -45,6 +51,8 @@ class UEClient:
         runtime_port: int | None = None,
         python_transport: str | None = None,
         python_plugin_path: str | Path | None = None,
+        native_client_only: bool = False,
+        python_command_port: int | None = None,
     ) -> None:
         self._config = UEClientConfig.resolve(
             project_path=project_path,
@@ -56,6 +64,8 @@ class UEClient:
             runtime_port=runtime_port,
             python_transport=python_transport,
             python_plugin_path=python_plugin_path,
+            native_client_only=native_client_only,
+            python_command_port=python_command_port,
         )
         remote_control = RemoteControlClient(
             self._config.remote_url

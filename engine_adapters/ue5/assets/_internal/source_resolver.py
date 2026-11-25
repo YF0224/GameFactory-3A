@@ -22,6 +22,9 @@ ASSET_TYPE_TASK_KIND = {
     "scene": "3d_scene",
     "motion": "motion",
     "audio": "audio",
+    "video": "cg_video",
+    "media": "cg_video",
+    "cg_video": "cg_video",
 }
 
 

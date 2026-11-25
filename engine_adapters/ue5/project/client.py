@@ -29,12 +29,22 @@ def _project_paths(
 
 
 def _editor_binary(ue_root: Path) -> Path:
-    relative = (
-        "Engine/Binaries/Win64/UnrealEditor.exe"
-        if os.name == "nt"
-        else "Engine/Binaries/Linux/UnrealEditor"
-    )
+    if os.name == "nt":
+        relative = "Engine/Binaries/Win64/UnrealEditor.exe"
+    elif sys_platform() == "Darwin":
+        relative = (
+            "Engine/Binaries/Mac/UnrealEditor.app"
+            "/Contents/MacOS/UnrealEditor"
+        )
+    else:
+        relative = "Engine/Binaries/Linux/UnrealEditor"
     return ue_root / relative
+
+
+def sys_platform() -> str:
+    import platform
+
+    return platform.system()
 
 
 def _validate_project_name(project_name: str) -> None:

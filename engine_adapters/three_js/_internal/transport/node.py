@@ -21,6 +21,7 @@ class NodeCommandResult:
     stderr: str = ""
     timed_out: bool = False
     environment: dict[str, str] = field(default_factory=dict)
+    process_receipt: dict[str, Any] = field(default_factory=dict)
 
     @property
     def ok(self) -> bool:
@@ -45,6 +46,7 @@ class NodeCommandResult:
             "stdout": self.stdout,
             "stderr": self.stderr,
             "timed_out": self.timed_out,
+            "process_receipt": self.process_receipt,
         }
 
 
@@ -135,6 +137,7 @@ class NodeToolchain:
         extra_args: Sequence[str] = (),
         timeout: float | None = None,
         environment: dict[str, str] | None = None,
+        supervise_process: bool = False,
     ) -> NodeCommandResult:
         """Run one Node script file."""
 
@@ -151,6 +154,7 @@ class NodeToolchain:
             cwd=cwd,
             timeout=timeout,
             environment=environment,
+            supervise_process=supervise_process,
         )
 
     def run(
@@ -160,6 +164,7 @@ class NodeToolchain:
         cwd: Path,
         timeout: float | None = None,
         environment: dict[str, str] | None = None,
+        supervise_process: bool = False,
     ) -> NodeCommandResult:
         resolved = tuple(str(item) for item in command)
         merged = dict(os.environ)
@@ -169,6 +174,46 @@ class NodeToolchain:
                 for key, value in (environment or {}).items()
             }
         )
+        if supervise_process:
+            import signal
+            process = subprocess.Popen(list(resolved), cwd=str(cwd), stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE, text=True, env=merged, start_new_session=True)
+            timed_out = False
+            interventions = []
+            try:
+                stdout, stderr = process.communicate(timeout=timeout)
+            except subprocess.TimeoutExpired:
+                timed_out = True
+                os.killpg(process.pid, signal.SIGTERM)
+                interventions.append('owned_process_group_SIGTERM_after_timeout')
+                try:
+                    stdout, stderr = process.communicate(timeout=5)
+                except subprocess.TimeoutExpired:
+                    os.killpg(process.pid, signal.SIGKILL)
+                    interventions.append('owned_process_group_SIGKILL_after_timeout')
+                    stdout, stderr = process.communicate(timeout=5)
+            def group_alive():
+                try:os.killpg(process.pid, 0);return True
+                except ProcessLookupError:return False
+            if group_alive():
+                os.killpg(process.pid, signal.SIGTERM)
+                interventions.append('owned_descendants_SIGTERM_after_recorder_exit')
+                import time
+                deadline = time.monotonic()+5
+                while group_alive() and time.monotonic()<deadline:time.sleep(.05)
+                if group_alive():
+                    os.killpg(process.pid, signal.SIGKILL)
+                    interventions.append('owned_descendants_SIGKILL_after_recorder_exit')
+                    deadline = time.monotonic()+5
+                    while group_alive() and time.monotonic()<deadline:time.sleep(.05)
+            alive = group_alive()
+            return NodeCommandResult(command=resolved, cwd=str(cwd),
+                returncode=124 if timed_out else process.returncode,
+                stdout=stdout, stderr=stderr, timed_out=timed_out,
+                environment=dict(environment or {}),
+                process_receipt={'pid':process.pid,'pgid':process.pid,
+                    'returncode':process.returncode,'group_alive':alive,
+                    'process_cleanup':not alive,'interventions':interventions})
         try:
             completed = subprocess.run(
                 list(resolved),

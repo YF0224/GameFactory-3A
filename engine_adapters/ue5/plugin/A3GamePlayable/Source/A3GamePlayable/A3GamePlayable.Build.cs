@@ -11,14 +11,20 @@ public class A3GamePlayable : ModuleRules
             "Core",
             "CoreUObject",
             "Engine",
+            "InputCore",
             "MediaAssets"
         });
 
         PrivateDependencyModuleNames.AddRange(new[]
         {
+            "ApplicationCore",
+            "AudioMixer",
             "Json",
+            "RenderCore",
             "Networking",
-            "Sockets"
+            "Sockets",
+            "Slate",
+            "SlateCore"
         });
     }
 }

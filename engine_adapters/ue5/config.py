@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import os
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 
@@ -98,6 +98,46 @@ class UEClientConfig:
     python_transport: str = DEFAULT_PYTHON_TRANSPORT
     python_plugin_path: Path | None = None
 
+    native_client_only: bool = False
+    python_command_port: int | None = None
+    repair_project_root: Path | None = field(default=None, init=False)
+
+    def __post_init__(self):
+        # Freeze the lease when the client is constructed. A later environment
+        # change must never redirect an existing client's discovery or input.
+        isolated = os.environ.get("A3GAME_REPAIR_PROJECT_ROOT")
+        if not isolated:
+            if self.python_command_port is not None and not 1 <= self.python_command_port <= 65535:
+                raise ValueError("UE Python command port must be between 1 and 65535")
+            return
+        root = Path(isolated).expanduser()
+        if not root.is_absolute():
+            raise ValueError("Repair candidate must be an absolute path")
+        root = root.resolve()
+        project = self.project_file
+        if project is None or project.parent.resolve() != root:
+            raise ValueError("UE client must target the leased repair candidate")
+        for actual, key in ((self.port, "A3GAME_UE_PORT"),
+                            (self.runtime_port, "A3GAME_UE_RUNTIME_PORT")):
+            if str(actual) != os.environ.get(key):
+                raise ValueError("UE client cannot override the leased repair ports")
+        try:
+            command_port = int(os.environ["A3GAME_UE_COMMAND_PORT"])
+        except (KeyError, ValueError) as exc:
+            raise ValueError("Isolated UE repair requires a leased Python command port") from exc
+        ports = (self.port, self.runtime_port, command_port)
+        if any(not 1 <= p <= 65535 for p in ports) or len(set(ports)) != 3:
+            raise ValueError("Isolated UE repair requires three distinct valid leased ports")
+        if self.python_command_port not in (None, command_port):
+            raise ValueError("UE client cannot override the leased Python command port")
+        if self.host != "127.0.0.1" or self.runtime_host != "127.0.0.1":
+            raise ValueError("Isolated UE repair requires local endpoints")
+        if self.python_transport not in {"remote_execution", "remote_control"}:
+            raise ValueError("Isolated UE repair requires an exact-project Python transport")
+        object.__setattr__(self, "repair_project_root", root)
+        object.__setattr__(self, "python_command_port", command_port)
+        object.__setattr__(self, "native_client_only", True)
+
     @classmethod
     def resolve(
         cls,
@@ -111,6 +151,8 @@ class UEClientConfig:
         runtime_port: int | None = None,
         python_transport: str | None = None,
         python_plugin_path: str | Path | None = None,
+        native_client_only: bool = False,
+        python_command_port: int | None = None,
     ) -> "UEClientConfig":
         version = str(api_version or "").strip()
         if version not in SUPPORTED_API_VERSIONS:
@@ -212,6 +254,8 @@ class UEClientConfig:
             runtime_port=int(resolved_runtime_port),
             python_transport=resolved_transport,
             python_plugin_path=resolved_python_path,
+            native_client_only=native_client_only or os.environ.get("A3GAME_NATIVE_INPUT_ONLY") == "1",
+            python_command_port=python_command_port,
         )
 
     @property

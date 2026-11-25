@@ -52,6 +52,22 @@ def _remote_node_sort_key(
     )
 
 
+def _isolated_nodes(nodes, project_file):
+    if project_file is None or not project_file.is_absolute():
+        raise RuntimeError("Isolated remote execution requires an exact absolute project")
+    expected = project_file.parent.resolve()
+    matched = []
+    for node in nodes:
+        raw_root = str(node.get("project_root") or "").strip()
+        root = Path(raw_root).expanduser()
+        # Never resolve relative discovery metadata against our working directory.
+        if (raw_root and root.is_absolute() and root.resolve() == expected
+                and str(node.get("project_name") or "") == project_file.stem
+                and node.get("node_id")):
+            matched.append(node)
+    return matched
+
+
 class PythonRPCTransport:
     def __init__(
         self,
@@ -70,11 +86,52 @@ class PythonRPCTransport:
         timeout: int = 120,
     ) -> dict[str, Any]:
         if self.config.python_transport == "remote_control":
+            if self.config.repair_project_root is not None or self.config.native_client_only:
+                return self._execute_project_http(script, timeout)
             return self.remote_control.execute_python(
                 script,
                 timeout=min(timeout, 10),
             )
         return self._execute_remote(script, timeout)
+
+    def _execute_project_http(
+        self,
+        script: str,
+        timeout: int,
+    ) -> dict[str, Any]:
+        """Execute through the leased HTTP endpoint with an in-editor identity guard.
+
+        Check on every call, in the same Python command as the requested script:
+        a port reused by another Editor must never receive the requested work.
+        Discovery and an earlier readiness response are not identity guarantees.
+        """
+        project = self.config.project_file
+        if project is None or not project.is_absolute() or not project.is_file():
+            raise RuntimeError("Isolated HTTP Python requires an exact existing project")
+        if self.config.host != "127.0.0.1":
+            raise RuntimeError("Isolated HTTP Python requires a local leased endpoint")
+        expected = str(project.resolve())
+        guarded = textwrap.dedent(
+            f"""\
+            import os as _a3_rpc_os
+            import unreal as _a3_rpc_unreal
+            _a3_rpc_project = _a3_rpc_unreal.Paths.get_project_file_path()
+            _a3_rpc_project = _a3_rpc_unreal.Paths.convert_relative_path_to_full(_a3_rpc_project)
+            if _a3_rpc_os.path.realpath(_a3_rpc_project) != {expected!r}:
+                raise RuntimeError("UEClient HTTP Python project mismatch; requested script refused")
+            exec(compile({script!r}, "<UEClient exact-project HTTP>", "exec"), globals(), globals())
+            """
+        )
+        response = self.remote_control.execute_python(
+            guarded,
+            timeout=max(1, timeout),
+        )
+        if not isinstance(response, dict) or response.get("ReturnValue") is not True:
+            raise RuntimeError(
+                "UE HTTP Python command failed or lacked acknowledgement; "
+                "check editor Python log and exact project identity"
+            )
+        return response
 
     def execute_json(
         self,
@@ -124,12 +181,21 @@ class PythonRPCTransport:
 
         import remote_execution
 
-        remote = remote_execution.RemoteExecution()
+        isolated = self.config.repair_project_root is not None or self.config.native_client_only
+        if isolated:
+            if self.config.python_command_port is None:
+                raise RuntimeError("Native-only Python execution requires a leased command port")
+            remote_config = remote_execution.RemoteExecutionConfig()
+            remote_config.command_endpoint = ("127.0.0.1", self.config.python_command_port)
+            remote = remote_execution.RemoteExecution(remote_config)
+        else:
+            remote = remote_execution.RemoteExecution()
         remote.start()
         try:
             deadline = time.time() + timeout
             while (
-                not remote.remote_nodes
+                not (_isolated_nodes(remote.remote_nodes, self.config.project_file)
+                     if isolated else remote.remote_nodes)
                 and time.time() < deadline
             ):
                 time.sleep(0.1)
@@ -145,12 +211,15 @@ class PythonRPCTransport:
                 )
             )
             nodes = sorted(
-                remote.remote_nodes,
+                (_isolated_nodes(remote.remote_nodes, self.config.project_file)
+                 if isolated else remote.remote_nodes),
                 key=lambda node: _remote_node_sort_key(
                     node,
                     self.config.project_file,
                 ),
             )
+            if not nodes:
+                raise RuntimeError('No exact repair project node discovered; foreign nodes refused')
             errors: list[str] = []
             for node in nodes:
                 node_id = str(node.get("node_id") or "")

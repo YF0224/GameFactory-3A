@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import platform
 import re
 import subprocess
 from pathlib import Path
@@ -31,11 +32,15 @@ _STATE_BY_NUMBER = {
 
 
 def _editor_command_binary(ue_root: Path) -> Path:
-    relative = (
-        "Engine/Binaries/Win64/UnrealEditor-Cmd.exe"
-        if os.name == "nt"
-        else "Engine/Binaries/Linux/UnrealEditor-Cmd"
-    )
+    if os.name == "nt":
+        relative = "Engine/Binaries/Win64/UnrealEditor-Cmd.exe"
+    elif platform.system() == "Darwin":
+        relative = (
+            "Engine/Binaries/Mac/UnrealEditor.app"
+            "/Contents/MacOS/UnrealEditor"
+        )
+    else:
+        relative = "Engine/Binaries/Linux/UnrealEditor-Cmd"
     return ue_root / relative
 
 

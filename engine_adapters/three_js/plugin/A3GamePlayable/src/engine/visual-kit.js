@@ -21,9 +21,9 @@
  */
 
 import * as THREE from 'three';
-import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { Reflector } from 'three/addons/objects/Reflector.js';
-import { Refractor } from 'three/addons/objects/Refractor.js';
+import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
+import { Reflector } from 'three/examples/jsm/objects/Reflector.js';
+import { Refractor } from 'three/examples/jsm/objects/Refractor.js';
 
 /**
  * Physically plausible starting points for the materials a game needs.

@@ -8,15 +8,21 @@ from engine_adapters.ue5._internal.transport import Transport
 from .importers import AvatarImporter, BaseImporter, GenericImporter, MotionImporter, SceneImporter
 
 
+from .importers.media import MediaImporter
+
+
 class UEImportDispatcher:
     def __init__(self, transport: Transport | None = None) -> None:
         self.transport = transport
+        self._media = MediaImporter(transport=transport)
         self._avatar = AvatarImporter(transport=transport)
         self._motion = MotionImporter(transport=transport)
         self._scene = SceneImporter(transport=transport)
         self._generic_by_type: dict[str, GenericImporter] = {}
 
     def importer_for(self, request: ImportRequest) -> BaseImporter:
+        if request.asset_type == AssetType.VIDEO:
+            return self._media
         if request.asset_type == AssetType.AVATAR:
             return self._avatar
         if request.asset_type == AssetType.MOTION:

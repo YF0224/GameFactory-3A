@@ -12,6 +12,7 @@ from engine_adapters.ue5.assets._internal.ue.registry import UEAssetRegistry
 
 class UEImportedAssetPostProcessor:
     PRIMARY_CLASSES = {
+        "video": {"FileMediaSource"},
         "avatar": {"SkeletalMesh"},
         "motion": {"AnimSequence"},
         "prop": {"StaticMesh", "SkeletalMesh"},
