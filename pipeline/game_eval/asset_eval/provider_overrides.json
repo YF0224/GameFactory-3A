@@ -1,0 +1,11 @@
+{
+  "G001_port_guard_arena/G001_scene_001": {
+    "provider": "marble",
+    "attribution_source": "user_confirmation",
+    "user_statement": "这个scene是mable的",
+    "alias": "mable -> marble",
+    "archive_filename": "G001_Godot_Project.zip",
+    "member": "art/G001_scene_001/scene.glb",
+    "notes": "Provider supplied by user; input archive/meta is unchanged. Package selection/GLB member verified locally; no independent generation-service verification."
+  }
+}
