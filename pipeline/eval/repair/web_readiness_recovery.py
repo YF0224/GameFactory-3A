@@ -532,7 +532,7 @@ def execute(out):
                  'environment_sha256': sha256(lineage/'environment.json'),
                  'production_boundaries': tree(lineage/'production_boundaries'),
                  'source_archive_files': tree(lineage/'source_archive'),
-                 'parent_diagnostics_preserved': True, 'scoring_entry': 'pipeline.eval.stage1.pipeline.run_playable'}
+                 'parent_diagnostics_preserved': True, 'scoring_entry': 'pipeline.eval.whitebox.pipeline.run_playable'}
         write_json(lineage/'finalization.json', final)
         write_json(lineage/'replacement.json', {'schema': VERSION, 'child': str(child.relative_to(out)),
                     'finalization_sha256': sha256(lineage/'finalization.json'),

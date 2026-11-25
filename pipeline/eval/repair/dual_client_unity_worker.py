@@ -27,8 +27,8 @@ def main(request):
     from pipeline.game_eval.whitebox_eval import multiclient
     # NOTE: requires bench environment (not migrated to public repo)
     from pipeline.game_eval.whitebox_eval.unity_native_pair_worker import RecordingPaths
-    from pipeline.eval.stage1 import dual_client_unity as pair
-    from pipeline.eval.stage1.paths import read_json, write_json
+    from pipeline.eval.whitebox import dual_client_unity as pair
+    from pipeline.eval.whitebox.paths import read_json, write_json
 
     spec = read_json(Path(request))
     pair.verify_production(spec['production'])

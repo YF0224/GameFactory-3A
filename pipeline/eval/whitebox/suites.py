@@ -7,7 +7,7 @@ its suite name in ``manifest.json`` and every step resolves it from there.
 
 * ``stage1`` — whitebox eight metrics, equal-weight total
 * ``stage3`` — refine tasks (mechanic / gamefeel / vfx / import), per-dimension
-  S_c and Cov_c, no total (``pipeline.eval.stage3``)
+  S_c and Cov_c, no total (``pipeline.eval.refinement``)
 """
 from __future__ import annotations
 

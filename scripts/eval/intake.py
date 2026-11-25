@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 from _common import common, parse_models, select_cases
-from pipeline.eval.stage1.delivery import validate
+from pipeline.eval.whitebox.delivery import validate
 
 
 def iter_runs(stage: str, models: list[str], cases: list[str]):

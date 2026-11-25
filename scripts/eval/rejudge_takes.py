@@ -33,8 +33,8 @@ from pathlib import Path
 BENCH = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BENCH / 'GameFactory-3A'))
 
-from pipeline.eval.stage1 import evidence, judge, llm, pipeline, standards  # noqa: E402
-from pipeline.eval.stage1.paths import read_json, write_json  # noqa: E402
+from pipeline.eval.whitebox import evidence, judge, llm, pipeline, standards  # noqa: E402
+from pipeline.eval.whitebox.paths import read_json, write_json  # noqa: E402
 
 TAKE_FILES = ('plan.json', 'plan_coverage.json', 'record/actions.jsonl', 'record/frame_index.jsonl',
               'record/event_frame_index.jsonl', 'record/event_trace.jsonl', 'record/state_trace.jsonl',
@@ -119,7 +119,7 @@ def main() -> int:
     crit = read_json(out / 'input' / 'criteria.json')
     rows = crit['criteria']
     frozen = standards.load(suite, crit['version'], manifest['game_id'], rows)      # refuses edited standards
-    metrics = __import__('pipeline.eval.stage1.suites', fromlist=['get']).get(suite).metrics
+    metrics = __import__('pipeline.eval.whitebox.suites', fromlist=['get']).get(suite).metrics
     targets = {k: read_json(out / 'takes' / str(k) / 'plan_coverage.json')['targets'] for k in takes}
     before = input_hashes(out, takes)
     code = {f: sha(BENCH / 'GameFactory-3A' / f) for f in JUDGE_CODE}

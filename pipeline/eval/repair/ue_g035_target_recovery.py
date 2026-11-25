@@ -267,7 +267,7 @@ def channel_proof(capture, native, name, *, expected_none=False):
 
 
 def native_proof(child, take, *, expected_empty=(), allow_slate=False):
-    from pipeline.eval.stage1.sparse_evidence import audit_capture
+    from pipeline.eval.whitebox.sparse_evidence import audit_capture
     capture = child / f'takes/{take}/record'
     native = capture / 'native/take'
     result = read_json(capture / 'record_result.json')

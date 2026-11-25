@@ -136,7 +136,7 @@ def input_proof(native, executable, launch, ready):
 
 
 def native_proof(child, take=2):
-    from pipeline.eval.stage1.sparse_evidence import audit_capture
+    from pipeline.eval.whitebox.sparse_evidence import audit_capture
     capture = child / f'takes/{take}/record'
     native = capture / 'native/take'
     result = read_json(capture / 'record_result.json')

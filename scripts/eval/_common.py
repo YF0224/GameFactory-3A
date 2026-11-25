@@ -12,7 +12,7 @@ FRAMEWORK = REPO                   # pipeline/ lives directly under REPO
 if str(FRAMEWORK) not in sys.path:
     sys.path.insert(0, str(FRAMEWORK))
 
-from pipeline.eval.stage1 import paths as common  # noqa: E402
+from pipeline.eval.whitebox import paths as common  # noqa: E402
 
 MODELS = json.loads((HERE / 'config' / 'models.json').read_text(encoding='utf-8'))
 MODELS.pop('_comment', None)

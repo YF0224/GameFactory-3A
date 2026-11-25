@@ -23,10 +23,10 @@ from pathlib import Path
 
 from _common import common, parse_models, select_cases
 from pipeline.eval import assets
-from pipeline.eval.stage1 import pipeline, prepare, suites
-from pipeline.eval.stage1.delivery import validate
-from pipeline.eval.stage1.paths import read_json
-from pipeline.eval.stage1.llm import HarnessError
+from pipeline.eval.whitebox import pipeline, prepare, suites
+from pipeline.eval.whitebox.delivery import validate
+from pipeline.eval.whitebox.paths import read_json
+from pipeline.eval.whitebox.llm import HarnessError
 from pipeline.eval.model_config import EVALUATION_PLANNER_MODEL, CLI_JUDGE_MODEL
 
 STAGE_SUITE = {'1': 'stage1', '3': 'stage3'}
@@ -119,7 +119,7 @@ def main(argv=None) -> int:
     if args.metrics:
         if suite != 'stage3' or args.static_only or args.plan_only or args.source_only:
             p.error('--metrics requires a normal stage 3 runtime evaluation')
-        from pipeline.eval.stage3 import selected
+        from pipeline.eval.refinement import selected
         dims = tuple(args.metrics.split(','))
         if not dims or set(dims) - set(selected.ALLOWED):
             p.error('selected dimensions must be mechanic,gamefeel')

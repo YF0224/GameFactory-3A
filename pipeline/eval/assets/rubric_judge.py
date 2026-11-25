@@ -47,7 +47,7 @@ def active_api_processes():
             pid, ppid, command = line.strip().split(None, 2); args = shlex.split(command)
         except ValueError:
             continue
-        if 'pipeline.eval.stage1.batch' in args:
+        if 'pipeline.eval.whitebox.batch' in args:
             whitebox.append(int(pid))
         if 'exec' in args and '--model' in args and MODEL in args and any('codex' in Path(a).name for a in args[:2]):
             sol.append({'pid': int(pid), 'ppid': int(ppid)})

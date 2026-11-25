@@ -15,8 +15,8 @@ from pathlib import Path
 
 from ..stage1 import budgets, evidence, judge, plan, prepare, standards
 from ..stage1 import pipeline, record, suites
-from ..stage1.llm import HarnessError
-from ..stage1.paths import read_json, sha256, write_json
+from ..whitebox.llm import HarnessError
+from ..whitebox.paths import read_json, sha256, write_json
 
 ALLOWED = ('mechanic', 'gamefeel')
 

@@ -532,7 +532,7 @@ def finalize(out, expected_review):
                  'retained_evidence': retained_files(child), 'cache_files': cache_files,
                  'cache_bytes': sum((child / k).stat().st_size for k in cache_files),
                  'native_calls': 0, 'model_calls': 0,
-                 'scoring_entry': 'pipeline.eval.stage1.pipeline.run_playable',
+                 'scoring_entry': 'pipeline.eval.whitebox.pipeline.run_playable',
                  'parent_diagnostics_preserved': True}
         exclusive_json(lineage / 'finalization.json', final)
         replacement = {'schema': REPLACEMENT_SCHEMA, 'status': 'QUALIFIED_REPLACEMENT',
@@ -579,7 +579,7 @@ def _qualified_replacement_score(out):
     require(final['schema'] == FINALIZATION_SCHEMA and final['parent'] == str(out)
             and final['child'] == str(child) and final['review_sha256'] == replacement['review_sha256']
             and final['source_sha256'] == SOURCE_SHA and final['native_calls'] == final['model_calls'] == 0
-            and final['scoring_entry'] == 'pipeline.eval.stage1.pipeline.run_playable'
+            and final['scoring_entry'] == 'pipeline.eval.whitebox.pipeline.run_playable'
             and final['parent_diagnostics_preserved'] is True
             and final['prepared_sha256'] == sha256(lineage / 'prepared.json')
             and final['ready_sha256'] == sha256(lineage / 'ready_for_review.json'),

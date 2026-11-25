@@ -17,7 +17,7 @@ import json
 import os
 from pathlib import Path
 
-from ..stage1.paths import OUTPUTS, read_json, sha256
+from ..whitebox.paths import OUTPUTS, read_json, sha256
 
 VERSION = 'stage3-criteria.v3'          # v3: asset_id on import/texture rows -> in-engine 4-view VIEW evidence
 INPUTS = OUTPUTS / 'game_refine' / 'inputs'

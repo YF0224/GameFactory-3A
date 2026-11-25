@@ -24,7 +24,7 @@ def process_snapshot():
             args = shlex.split(command)
         except ValueError:
             continue
-        if 'pipeline.eval.stage1.batch' in args or any(a.endswith('/whitebox_eval/batch.py') for a in args):
+        if 'pipeline.eval.whitebox.batch' in args or any(a.endswith('/whitebox_eval/batch.py') for a in args):
             batches.append({'pid': int(pid), 'ppid': int(ppid)})
         if ('exec' in args and '--model' in args and 'gpt-6.1-sol' in args
                 and any('codex' in Path(a).name for a in args[:2])):

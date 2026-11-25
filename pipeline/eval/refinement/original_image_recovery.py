@@ -16,8 +16,8 @@ import shutil
 import time
 
 from ..stage1 import evidence, judge, prepare, standards
-from ..stage1.llm import HarnessError
-from ..stage1.paths import read_json, sha256, write_json
+from ..whitebox.llm import HarnessError
+from ..whitebox.paths import read_json, sha256, write_json
 from . import selected
 
 VERSION = 'stage3-original-image-rejudge.v1'

@@ -103,7 +103,7 @@ def main() -> int:
         ap.error('--missing-only requires --metrics and --reuse-root')
     if dims:
         from _common import common
-        from pipeline.eval.stage3.selected import eligible_prior
+        from pipeline.eval.refinement.selected import eligible_prior
     if a.replay_plans and not (dims and a.reuse_root):
         ap.error('--replay-plans requires --metrics and --reuse-root')
     skipped = []

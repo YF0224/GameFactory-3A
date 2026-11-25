@@ -22,8 +22,8 @@ import time
 from pathlib import Path
 
 from ..stage1 import asset_views
-from ..stage1.llm import call_model
-from ..stage1.paths import OUTPUTS, read_json, sha256, write_json
+from ..whitebox.llm import call_model
+from ..whitebox.paths import OUTPUTS, read_json, sha256, write_json
 
 VERSION = 'stage3-texture-ingame.v1'
 REFERENCE = OUTPUTS / 'eval' / 'refine' / '_reference_renderer'
@@ -119,7 +119,7 @@ def render_originals(game_id: str, asset_ids: list[str], folder: Path) -> dict:
         shutil.copy2(asset_views.HERE / 'GameFactory3AAssetViews.cs', script_dir / 'GameFactory3AAssetViews.cs')
         job = folder / 'unity_job.json'
         write_json(job, {'output_dir': str(raw.resolve()), 'size': 640, 'jobs': jobs})
-        from ..stage1.record import engine_lock   # A3GAME_EXCLUSIVE_ENGINE: one engine process on the machine
+        from ..whitebox.record import engine_lock   # A3GAME_EXCLUSIVE_ENGINE: one engine process on the machine
         try:
             with engine_lock():
                 subprocess.run([unity, '-batchmode', '-projectPath', str(project), '-executeMethod',

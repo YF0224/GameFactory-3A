@@ -18,8 +18,8 @@ from pathlib import Path
 
 from _common import common  # noqa: F401  (sets sys.path)
 
-from pipeline.eval.stage1 import judge, pipeline, standards  # noqa: E402
-from pipeline.eval.stage1.paths import read_json, write_json  # noqa: E402
+from pipeline.eval.whitebox import judge, pipeline, standards  # noqa: E402
+from pipeline.eval.whitebox.paths import read_json, write_json  # noqa: E402
 
 
 def _standards(out: Path, manifest: dict, rows: list[dict]) -> dict:

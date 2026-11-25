@@ -18,10 +18,10 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
-from ..stage1.llm import B
-from ..stage1.metrics import gameness as _gameness
-from ..stage1.metrics import mechanic as _mechanic
-from ..stage1.metrics._formats import SOURCE_SUFFIXES, tiered_credit, tiered_schema
+from ..whitebox.llm import B
+from ..whitebox.metrics import gameness as _gameness
+from ..whitebox.metrics import mechanic as _mechanic
+from ..whitebox.metrics._formats import SOURCE_SUFFIXES, tiered_credit, tiered_schema
 
 VERSION = 'stage3-refine-dimensions.v2'   # v2: import/texture judged on in-engine VIEW renders
 ORDER = ('mechanic', 'gamefeel', 'vfx', 'import', 'texture')

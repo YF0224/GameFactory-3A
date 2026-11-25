@@ -12,8 +12,8 @@ FRAMEWORK = BENCH / 'GameFactory-3A'
 sys.path.insert(0, str(FRAMEWORK))
 sys.path.insert(0, str(BENCH / 'scripts'))
 
-from pipeline.eval.stage3 import selected as _stage3  # refine batch normalize, run, exclusive
-from pipeline.eval.stage3 import criteria as _stage3  # refine common read
+from pipeline.eval.refinement import selected as _stage3  # refine batch normalize, run, exclusive
+from pipeline.eval.refinement import criteria as _stage3  # refine common read
 
 
 def main(argv=None):

@@ -62,7 +62,7 @@ def manual(job, module):
 def finalize(job, module, rounds):
     """Close a manually driven job: verify the original and write delivery.json."""
     if module is stage1:
-        from pipeline.eval.stage1.delivery import validate
+        from pipeline.eval.whitebox.delivery import validate
         problems = validate(job.root)
         if problems:
             return f'FAILED {job.model} {job.game_id} {job.run_id}: delivery.json {problems}'

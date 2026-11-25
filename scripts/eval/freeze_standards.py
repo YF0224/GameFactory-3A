@@ -20,14 +20,14 @@ from concurrent.futures import ThreadPoolExecutor
 
 from _common import common, select_cases  # noqa: F401  (sets sys.path)
 
-from pipeline.eval.stage1 import standards, suites  # noqa: E402
+from pipeline.eval.whitebox import standards, suites  # noqa: E402
 
 SUITES = {'1': 'stage1', '3': 'stage3'}
 
 
 def _cases(stage: str, games: str | None) -> list[str]:
     if stage == '3':
-        from pipeline.eval.stage3.criteria import INPUTS
+        from pipeline.eval.refinement.criteria import INPUTS
         have = sorted(p.name for p in INPUTS.iterdir() if p.is_dir() and p.name[:1] == 'G')
         if not games:
             return have

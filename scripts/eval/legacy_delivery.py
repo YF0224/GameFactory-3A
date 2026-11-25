@@ -17,8 +17,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from _common import common
-from pipeline.eval.stage1.delivery import validate
-from pipeline.eval.stage1.paths import DELIVERY_SCHEMA, write_json
+from pipeline.eval.whitebox.delivery import validate
+from pipeline.eval.whitebox.paths import DELIVERY_SCHEMA, write_json
 
 SHIM_ROOT = common.OUTPUTS / 'legacy_deliveries'
 
@@ -36,7 +36,7 @@ def main(argv=None) -> int:
     p.add_argument('--rounds', type=int, default=0, help='stage 3: rounds used, if known')
     args = p.parse_args(argv)
 
-    from pipeline.eval.stage1.delivery import case_engine
+    from pipeline.eval.whitebox.delivery import case_engine
     project = args.project.resolve()
     run = SHIM_ROOT / f'stage{args.stage}' / common.model_dir(args.model) / args.game / args.run_id
     data = {'schema': DELIVERY_SCHEMA, 'stage': f'stage{args.stage}', 'model': args.model, 'game_id': args.game,

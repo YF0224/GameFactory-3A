@@ -31,8 +31,8 @@ BENCH = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BENCH / 'GameFactory-3A'))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from pipeline.eval.stage1 import budgets, evidence, judge, pipeline, plan, prepare, record, standards  # noqa: E402
-from pipeline.eval.stage1.paths import read_json, write_json  # noqa: E402
+from pipeline.eval.whitebox import budgets, evidence, judge, pipeline, plan, prepare, record, standards  # noqa: E402
+from pipeline.eval.whitebox.paths import read_json, write_json  # noqa: E402
 from rejudge_takes import credits, input_hashes, sha, JUDGE_CODE, git_rev  # noqa: E402
 
 
@@ -66,7 +66,7 @@ def main() -> int:
     if new_dir.exists():
         print(f'refusing: {new_dir} exists'); return 2
     frozen = standards.load(suite, crit['version'], manifest['game_id'], rows)
-    metrics = __import__('pipeline.eval.stage1.suites', fromlist=['get']).get(suite).metrics
+    metrics = __import__('pipeline.eval.whitebox.suites', fromlist=['get']).get(suite).metrics
     verdicts = pipeline.final_verdicts(out, upto=pipeline.BATCH_MAX_TAKES)
     feedback = pipeline._feedback(out, k, ids, verdicts)
     print(f'{out.parent.name}/{out.name}: take {k} for {len(ids)} checks: {ids}')

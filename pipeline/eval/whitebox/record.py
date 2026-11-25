@@ -28,7 +28,8 @@ from pathlib import Path
 
 from .llm import HarnessError
 from .paths import FRAMEWORK, read_json, sha256, write_json
-from . import capture, unity_editor, unity_input
+from . import capture
+from engine_adapters.unity3d.playtest import unity_editor, unity_input
 from .plan import native_actions, take_dir
 
 VERSION = 'stage1-record.v1'
@@ -421,7 +422,7 @@ def _native(client, engine: str, project: Path, plan: dict, native: Path, budget
         os.environ.update(entry_env)
         try:
             from .unity_authored_builder import record_scene
-            from . import unity_natural_entry
+            from engine_adapters.unity3d.playtest import unity_natural_entry
             if unity_natural_entry.context(project.parent.parent) is not None:
                 entry_args = unity_natural_entry.record_binding(project, plan, native.parent)
             else:
@@ -809,7 +810,7 @@ def _record(out: Path, manifest: dict, plan: dict, take: int = 1) -> dict:
             write_json(runtime / 'unity_input_migration.json', migration)
             # Injected audio observers require the selected editor's built-in module,
             # even when the author's game does not use audio. Only the eval copy is changed.
-            from pipeline.eval.stage1.unity_runtime_dependencies import prepare as prepare_observer_dependencies
+            from pipeline.eval.whitebox.unity_runtime_dependencies import prepare as prepare_observer_dependencies
             try:
                 prepare_observer_dependencies(project, binary, runtime / 'observer_runtime_dependencies.json')
             except (ValueError, OSError) as exc:
