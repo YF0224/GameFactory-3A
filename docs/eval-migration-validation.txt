@@ -1,3 +1,5 @@
+Historical validation before package consolidation; paths and timings reflect the split layout. Current layout and rerun results: docs/eval-migration.md.
+
 Command: python3 -m pytest -q test/test_stage1_*.py test/test_eval_pipeline_migration.py test/test_independent_ue_pair.py
 
 .......................................sF.....F..................... [ 10%]

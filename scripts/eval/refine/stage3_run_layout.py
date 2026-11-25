@@ -5,7 +5,7 @@ from datetime import datetime
 from pathlib import Path
 import re
 
-from pipeline.game_eval.refine.common import dump
+from pipeline.eval.refine.common import dump
 
 
 def candidate_location(game, folder, config):

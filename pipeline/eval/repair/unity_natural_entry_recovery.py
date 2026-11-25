@@ -55,7 +55,7 @@ def producer():
     paths = [Path(__file__).with_name(name + '.py') for name in names]
     paths += [FRAMEWORK / 'engine_adapters' / name for name in
               ('_input_capabilities.py', '_mouse_plan.py', 'action_provenance.py')]
-    paths += [FRAMEWORK / 'pipeline/game_eval/whitebox_eval/unity_runtime_dependencies.py',
+    paths += [FRAMEWORK / 'pipeline/eval/stage1/unity_runtime_dependencies.py',
               FRAMEWORK / 'pipeline/eval/model_config.py',
               FRAMEWORK / 'engine_adapters/unity3d/playtest/resources/GameFactoryInput.provenance.json']
     for directory, suffixes in (('engine_adapters/common', ('.py', '.json')),

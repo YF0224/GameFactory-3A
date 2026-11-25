@@ -135,7 +135,7 @@ def test_client_dispatches_explicit_stage1_only(completed, monkeypatch, stage1):
     if stage1: schedule['audit_protocol'] = capture.AUDIT_PROTOCOL
     write_json(runtime / 'capture_schedule.json', schedule)
     write_json(folder / 'capture_schedule.json', schedule)
-    from pipeline.game_eval.whitebox_eval import sparse_evidence
+    from pipeline.eval.stage1 import sparse_evidence
     calls = []
     monkeypatch.setattr(sparse_evidence, 'audit_capture', lambda *a: calls.append('legacy') or {'legacy': True})
     report = read_json(folder / 'report.json')

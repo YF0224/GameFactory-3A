@@ -72,8 +72,8 @@ def plan_actions(actions, bindings):
 def record(config, *, output_dir, admission, actions, bindings, duration, fps,
            warmup, timeout, map_path, dry_run):
     from ..contracts import UEOperationResult
-    from pipeline.game_eval.refine.common import sha
-    from pipeline.game_eval.whitebox_eval.endpoint_sparse import CAPTURE_VERSION
+    from pipeline.eval.refine.common import sha
+    from pipeline.eval.stage1.endpoint_sparse import CAPTURE_VERSION
 
     if not admission:
         raise ValueError('Native recording requires native_admission (formal candidate pin/relay/build); '

@@ -506,7 +506,7 @@ class ThreePlaytestClient:
                 if schedule.get("audit_protocol") == "stage1-action-anchored.v1":
                     from pipeline.eval.stage1.capture import audit_capture
                 else:
-                    from pipeline.game_eval.whitebox_eval.sparse_evidence import audit_capture
+                    from pipeline.eval.stage1.sparse_evidence import audit_capture
                 if report.get("sparse_capture") is not True or report.get("clock") != "realtime" or report.get("fixed_tick") is not False:
                     raise ValueError("Sparse capture lacks its native clock binding")
                 if report.get("sampling_complete") is not True or report.get("wallclock_seconds", 0) < duration:

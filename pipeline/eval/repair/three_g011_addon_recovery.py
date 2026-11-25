@@ -301,8 +301,8 @@ def relevant(values):
             'web_readiness_recovery', 'vite_build_only_recovery', 'three_g011_addon_recovery'}
     prefixes = ('engine_adapters/three_js/', 'engine_adapters/common/',
                 'pipeline/common/',
-                'pipeline/game_eval/whitebox_eval/sparse_evidence',
-                'pipeline/game_eval/whitebox_eval/sparse_capture')
+                'pipeline/eval/stage1/sparse_evidence',
+                'pipeline/eval/stage1/sparse_capture')
     stage = 'pipeline/eval/repair/'
     return {k: v for k, v in values.items() if k.startswith(prefixes)
             or (k.startswith(stage) and Path(k).stem in core)

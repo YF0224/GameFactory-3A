@@ -15,9 +15,9 @@ from pathlib import Path
 
 BENCH = Path(__file__).resolve().parents[3]
 sys.path[:0] = [str(BENCH / 'scripts/eval'), str(BENCH)]
-from pipeline.game_eval.refine.common import read, sha, resolve
-from pipeline.game_eval.refine.batch import normalize, code_identity
-from pipeline.game_eval.refine import repair_budget as budget
+from pipeline.eval.refine.common import read, sha, resolve
+from pipeline.eval.refine.batch import normalize, code_identity
+from pipeline.eval.refine import repair_budget as budget
 from refine import recovery
 
 
@@ -85,8 +85,8 @@ def _implementation_sidecar(output, matrix_record, active_ref, job, runtime, ent
 
 def _budget_preflight(folder, config, entry, authorization):
     """Mirror revision prerequisites without creating its checkpoint or journal."""
-    from pipeline.game_eval.refine.rounds import validate_budget, verify_original
-    from pipeline.game_eval.refine.session import inventory
+    from pipeline.eval.refine.rounds import validate_budget, verify_original
+    from pipeline.eval.refine.session import inventory
     limit = validate_budget(config)
     verify_original(folder)
     # Also validates the candidate's actual bytes and rejects unsafe symlinks.
@@ -202,7 +202,7 @@ def validate_plan(plan_path, *, probe=None):
     overrides = plan.get('runtime_overrides', {})
     if (set(overrides) - set(models) or any(set(v) - {'provider_runtime_policy'} for v in overrides.values())):
         raise ValueError('Only explicit provider runtime settings may supplement frozen config')
-    from pipeline.game_eval.refine.providers import validate_runtime_policy
+    from pipeline.eval.refine.providers import validate_runtime_policy
     probes = plan.get('provider_probes', {})
     if set(probes) != set(models):
         raise ValueError('Both active lanes require source-bound successful provider probes')
@@ -287,7 +287,7 @@ def apply_plan(plan_path, *, probe=None):
     ready = validate_plan(plan_path, probe=probe)
     output, plan = ready['output'], ready['plan']
     # Re-read references/candidate bytes after preflight and immediately before mutation.
-    from pipeline.game_eval.refine.session import inventory
+    from pipeline.eval.refine.session import inventory
     for ref in ready['read_set']:
         _ref(ref)
     for entry in ready['jobs'].values():

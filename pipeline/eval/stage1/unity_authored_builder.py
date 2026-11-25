@@ -92,7 +92,7 @@ def producer():
               if p.is_file() and p.suffix in ('.py', '.json')]
     paths += [FRAMEWORK / 'engine_adapters/_input_capabilities.py',
               FRAMEWORK / 'engine_adapters/_mouse_plan.py',
-              FRAMEWORK / 'pipeline/game_eval/whitebox_eval/unity_runtime_dependencies.py']
+              FRAMEWORK / 'pipeline/eval/stage1/unity_runtime_dependencies.py']
     paths += [p for p in (FRAMEWORK / 'engine_adapters/unity3d').rglob('*')
               if p.suffix in ('.py', '.cs')]
     paths += [FRAMEWORK / 'engine_adapters/action_provenance.py',

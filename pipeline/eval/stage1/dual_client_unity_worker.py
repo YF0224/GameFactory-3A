@@ -23,8 +23,8 @@ def main(request):
     from engine_adapters.unity3d.playtest import client, background_record as backend
     from engine_adapters.unity3d._internal.transport import unity_editor as transport
     from engine_adapters.unity3d.config import UnityClientConfig
-    from pipeline.game_eval.whitebox_eval import multiclient
-    from pipeline.game_eval.whitebox_eval.unity_native_pair_worker import RecordingPaths
+    from pipeline.eval.stage1 import multiclient
+    from pipeline.eval.stage1.unity_native_pair_worker import RecordingPaths
     from pipeline.eval.stage1 import dual_client_unity as pair
     from pipeline.eval.stage1.paths import read_json, write_json
 

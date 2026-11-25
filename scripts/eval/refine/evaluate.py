@@ -12,8 +12,8 @@ FRAMEWORK = BENCH
 sys.path.insert(0, str(FRAMEWORK))
 sys.path.insert(0, str(BENCH / 'scripts/eval'))
 
-from pipeline.game_eval.refine.batch import normalize, run, exclusive
-from pipeline.game_eval.refine.common import read
+from pipeline.eval.refine.batch import normalize, run, exclusive
+from pipeline.eval.refine.common import read
 
 
 def main(argv=None):

@@ -43,7 +43,7 @@ def synthetic_pair(folder):
 
 
 def test_action_budget_and_independent_routing():
-    from pipeline.game_eval.whitebox_eval.multiclient import split_actions
+    from pipeline.eval.stage1.multiclient import split_actions
     from engine_adapters.unity3d.playtest.client import UnityPlaytestClient
     actions=u.actions_for(plan())
     assert sum(a['duration_ms'] for a in actions)==75000

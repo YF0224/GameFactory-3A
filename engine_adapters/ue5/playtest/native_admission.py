@@ -5,7 +5,7 @@ import os
 import shutil
 from pathlib import Path
 
-from pipeline.game_eval.refine.common import dump, sha
+from pipeline.eval.refine.common import dump, sha
 
 DEPENDENCIES = ('ApplicationCore', 'AudioMixer', 'InputCore', 'Json', 'Networking', 'RenderCore', 'Sockets', 'Slate', 'SlateCore')
 SKIP = {'Binaries', 'Intermediate', 'Saved', 'DerivedDataCache', '.git', '__pycache__'}

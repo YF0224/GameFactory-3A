@@ -17,9 +17,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 BENCH = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(BENCH))
 sys.path.insert(0, str(BENCH / 'scripts/eval'))
-from pipeline.game_eval.refine.common import dump, read, resolve, sha
-from pipeline.game_eval.refine.batch import exclusive
-from pipeline.game_eval.refine.providers import POLICY, preflight, validate
+from pipeline.eval.refine.common import dump, read, resolve, sha
+from pipeline.eval.refine.batch import exclusive
+from pipeline.eval.refine.providers import POLICY, preflight, validate
 import run_stage3_refine as single
 
 DEFAULT_MANIFEST = Path(__file__).with_name('matrix.json')
@@ -99,10 +99,10 @@ def load_manifest(path):
 
 def verify_inputs(base):
     if base.get('case_inputs'):
-        from pipeline.game_eval.refine.case_inputs import load as load_cases
+        from pipeline.eval.refine.case_inputs import load as load_cases
         load_cases(base, list(base['case_inputs']))
     if base.get('motion_sources'):
-        from pipeline.game_eval.refine.motion_delivery import load_sources
+        from pipeline.eval.refine.motion_delivery import load_sources
         load_sources(base)
     for ref in base['frozen_collect_sources'].values():
         if sha(ref['path']) != ref['sha256']:
@@ -225,13 +225,13 @@ def status(job, state, root, roots, base):
     folder = job['output'] / 'games' / job['game']
     summary = folder / 'repair_rounds/summary.json'
     if summary.exists() and read(summary).get('status') == 'REPAIRED':
-        from pipeline.game_eval.refine.fresh_sessions import validate as validate_closed
+        from pipeline.eval.refine.fresh_sessions import validate as validate_closed
         result = validate_closed(folder, job['config'])
         return {'status': 'REPAIRED', 'summary': str(summary),
                 'rounds_attempted': result['rounds_attempted'],
                 'stop_reason': result['stop_reason'], 'evaluation_started': False}
     if job.get('migration') and not job.get('fresh_migration'):
-        from pipeline.game_eval.refine.repair_budget import verify_recovery
+        from pipeline.eval.refine.repair_budget import verify_recovery
         try:
             budget = verify_recovery(folder, job['config'])
         except (ValueError, OSError, RuntimeError) as exc:
@@ -260,7 +260,7 @@ def historical_attempts(output, model):
 def attempts_after_probe(attempts, probe):
     if not probe:
         return attempts
-    from pipeline.game_eval.refine.repair_budget import diagnose
+    from pipeline.eval.refine.repair_budget import diagnose
     # A pre-probe claim whose failure arrived later must still trip the circuit.
     return [path for path in attempts if any(Path(ref['path']).stat().st_mtime > probe['completed_unix']
                 for ref in diagnose(path)['sources'])]
@@ -302,7 +302,7 @@ def execute(manifest_path, output, selected=None, *, mode='check', runner=run_ch
             raise ValueError('Restart authorization must bind exact output, manifest and selected jobs')
         base['authorized_new_experiment'] = {'path': str(receipt_path), 'sha256': sha(receipt_path)}
     if project_isolation and not migration_record:
-        from pipeline.game_eval.whitebox_eval.repair_execution import VERSION
+        from pipeline.eval.stage1.repair_execution import VERSION
         base['repair_execution_policy'] = {'version': VERSION, 'input': 'native_client', 'capture': 'native_viewport'}
     jobs = make_jobs(manifest, base, output, selected)
     if migration_record:
@@ -337,7 +337,7 @@ def execute(manifest_path, output, selected=None, *, mode='check', runner=run_ch
         circuits_path = output / 'matrix_provider_lanes.json'
         lane_faults = read(circuits_path) if circuits_path.exists() else {}
         lane_attempts = {}
-        from pipeline.game_eval.refine.repair_budget import provider_circuit_state
+        from pipeline.eval.refine.repair_budget import provider_circuit_state
         for model in selected:
             probe = None
             if migration_record and model in migration_record.get('provider_probes', {}):
@@ -362,7 +362,7 @@ def execute(manifest_path, output, selected=None, *, mode='check', runner=run_ch
             dump(circuits_path, lane_faults)
 
         def saved_fault(job, previous_rounds):
-            from pipeline.game_eval.refine.repair_budget import provider_circuit_state
+            from pipeline.eval.refine.repair_budget import provider_circuit_state
             folder = job['output'] / 'games' / job['game'] / 'repair_rounds'
             new_rounds = sorted(path for path in folder.glob('round_*')
                                 if path not in previous_rounds and (path / 'claim.json').is_file())
@@ -394,7 +394,7 @@ def execute(manifest_path, output, selected=None, *, mode='check', runner=run_ch
                     row = {**snapshot.get(job['id'], {}), 'provider_fault': fault, 'status': 'BLOCKED_PROVIDER_LANE'}
                 if row['status'] == 'READY':
                     if mode != 'check' or job['game'] not in checked_sources:
-                        from pipeline.game_eval.refine.session import inventory, inventory_digest
+                        from pipeline.eval.refine.session import inventory, inventory_digest
                         source = base['project_overrides'][job['game']]['project_root']
                         if inventory_digest(inventory(source)) != base['frozen_project_sources'][job['game']]:
                             raise ValueError('Frozen source project changed: ' + source)
@@ -416,7 +416,7 @@ def execute(manifest_path, output, selected=None, *, mode='check', runner=run_ch
                             freeze(job['config_path'], old_config)
                             from refine.recovery import verify_migration
                             verify_migration(migration, output)
-                            from pipeline.game_eval.refine.repair_budget import verify_recovery
+                            from pipeline.eval.refine.repair_budget import verify_recovery
                             if not job.get('fresh_migration') and verify_recovery(job['output'] / 'games' / job['game'], job['config']).get('ready') is not True:
                                 raise ValueError('Recovery authorization already consumed or no longer ready')
                         else:

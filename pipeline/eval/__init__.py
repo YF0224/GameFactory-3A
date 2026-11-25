@@ -1,10 +1,13 @@
-"""Self-contained evaluation for the three benchmark stages.
+"""Evaluation pipeline for all benchmark stages.
 
-    stage1/   whitebox: all eight metrics in one run (prepare -> judge -> plan ->
-              record -> evidence -> judge -> score); per-metric formats in stage1/metrics/
-    stage3/   refine: reuses stage1 directly
-    assets/   asset quality / usability
+stage1/       Whitebox preparation, runtime, verification, judging and scoring.
+stage3/       Refinement criteria and metrics, reusing stage1.
+assets/       Public asset evaluation bridge.
+asset_eval/   Asset metric and rubric implementation.
+refine/       Retained refinement runtime for legacy launchers.
+preparation/  Shared requirement helpers.
+priority_assets/ Renderer runtime dependencies.
 
-Engine adapters are shared. The assets bridge and sparse evidence helpers reuse
-selected pipeline.game_eval modules; the separate eval-branch entrypoint is not required.
+Engine adapters are shared through engine_adapters. Evaluation implementation
+and support modules live under this package.
 """

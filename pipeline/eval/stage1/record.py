@@ -809,7 +809,7 @@ def _record(out: Path, manifest: dict, plan: dict, take: int = 1) -> dict:
             write_json(runtime / 'unity_input_migration.json', migration)
             # Injected audio observers require the selected editor's built-in module,
             # even when the author's game does not use audio. Only the eval copy is changed.
-            from pipeline.game_eval.whitebox_eval.unity_runtime_dependencies import prepare as prepare_observer_dependencies
+            from pipeline.eval.stage1.unity_runtime_dependencies import prepare as prepare_observer_dependencies
             try:
                 prepare_observer_dependencies(project, binary, runtime / 'observer_runtime_dependencies.json')
             except (ValueError, OSError) as exc:

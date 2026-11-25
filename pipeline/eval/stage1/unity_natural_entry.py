@@ -238,7 +238,7 @@ def _expected_runtime(out, record_dir):
     differences are not silently accepted; they require explicit review.
     """
     from . import unity_input
-    from pipeline.game_eval.whitebox_eval import unity_runtime_dependencies
+    from pipeline.eval.stage1 import unity_runtime_dependencies
     out, record_dir = Path(out), Path(record_dir)
     editor = read_json(record_dir / 'unity_editor.json')['editor']['binary']
     actual_migration = read_json(record_dir / 'unity_input_migration.json')

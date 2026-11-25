@@ -307,8 +307,7 @@ def _make_blender_client(project_path: Path) -> Any:
 #: canonical engine → client factory (``factory(project_path)``). The client
 #: owns launch, input injection and recording through
 #: ``client.playtest.record(...)`` — nothing here re-implements engine
-#: behavior. ``pipeline.game_eval.run`` re-exports this same dict object as its
-#: ``ENGINE_CLIENTS``, so monkeypatching either name affects both.
+#: behavior. Factories are shared by playtest callers through this registry.
 ENGINE_CLIENTS: dict[str, Callable[[Path], Any]] = {
     "godot": _make_godot_client,
     "unity3d": _make_unity_client,

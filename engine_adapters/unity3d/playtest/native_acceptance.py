@@ -110,7 +110,7 @@ def main():
             args+=['--observer-contract',str((preserved/'functional_observer_contract.json').resolve())]
         if (preserved/'take/capture_schedule.json').exists():
             args+=['--capture-schedule',str((preserved/'take/capture_schedule.json').resolve())]
-        from pipeline.game_eval.whitebox_eval import unity_disk_guard as disk
+        from pipeline.eval.stage1 import unity_disk_guard as disk
         disk.check(out,'native_acceptance',preserved/'project')
         disk.check(out,'capture',preserved/'project',duration=duration,frames=duration*10,width=960,height=540)
         code=rec.main(args,validation_pin=pin)
@@ -137,7 +137,7 @@ def main():
                   '--control-root',str(a.control_root.resolve()),'--unity',str(a.editor.resolve()),
                   '--project',str(source),'--scene',binding['source'],'--runtime-entry',str(entry_path),
                   '--actions',str(action_file),'--duration',str(duration),'--output',str(destination)]
-            from pipeline.game_eval.whitebox_eval import unity_disk_guard as disk
+            from pipeline.eval.stage1 import unity_disk_guard as disk
             disk.check(out,'native_acceptance',source)
             disk.check(out,'capture',source,duration=duration,frames=duration*10,width=960,height=540)
             code=rec.main(args,validation_pin=pin)

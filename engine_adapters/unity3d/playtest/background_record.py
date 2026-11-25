@@ -259,7 +259,7 @@ def verify_capture(output, result, launches, samples, violations, snapshot, dura
         'launches_in_verified_group': bool(launches) and all(row['pid'] == cleanup.get('pid') for row in launches),
     }
     if (take / 'capture_schedule.json').is_file():
-        from pipeline.game_eval.whitebox_eval.sparse_evidence import audit_capture
+        from pipeline.eval.stage1.sparse_evidence import audit_capture
         sparse_audit = audit_capture(take)
         checks.pop('continuous_frames')
         checks.pop('video_present')
@@ -386,7 +386,7 @@ def main(argv=None, *, validation_pin=None):
     from engine_adapters.unity3d.playtest import client
     from engine_adapters.unity3d.config import UnityClientConfig
     from engine_adapters.unity3d._internal.transport import unity_editor as transport
-    from pipeline.game_eval.whitebox_eval import runtime
+    from pipeline.eval.stage1 import runtime
     if not Path(client.__file__).resolve().is_relative_to(candidate): raise ValueError('Wrong adapter import path')
     _, action_error = client.UnityPlaytestClient._load_actions(None, None, actions)
     if action_error: raise ValueError(action_error)
@@ -448,7 +448,7 @@ def main(argv=None, *, validation_pin=None):
                 runtime_kwargs['runtime_entry'] = output/'take/runtime_initializer_entry.json'
             result = client.UnityPlaytestClient(config).record(output_dir=output / 'take', scene=scene, action_plan=actions, duration=args.duration, fps=args.fps, warmup=args.warmup, timeout=args.duration + args.warmup + 30, input_transport='internal', **runtime_kwargs)
         if all(action.get('action_id') for action in actions):
-            from pipeline.game_eval.whitebox_eval.action_links import write_links
+            from pipeline.eval.stage1.action_links import write_links
             links=write_links(output / 'take')
             dump(output / 'action_provenance_verification.json', {
                 'version':links['version'], 'actions':len(links['links']),

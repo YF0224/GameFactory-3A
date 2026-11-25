@@ -1,6 +1,6 @@
 # scripts_new — 三阶段生成与评估的统一入口
 
-新入口层,和旧的 `scripts/`、`pipeline/game_eval/` 并存,**不修改任何旧文件**。
+入口位于 `scripts/eval/`；评估实现统一位于 `pipeline/eval/`。
 旧流程（正在跑的测评、Stage3 direct-refine 等）照常使用旧入口。
 
 ## 入口
@@ -39,7 +39,7 @@ python scripts_new/evaluate.py --stage assets -- --scope obj --games G001
 
 ## 评估实现在哪
 
-`GameFactory-3A/pipeline/eval/`，自包含，不 import 旧的 `pipeline/game_eval`；引擎适配器直接用。
+`GameFactory-3A/pipeline/eval/`，统一包含 Stage1 白膜测评、Stage3、资产评估及 refine 模块，并复用仓库内的引擎适配器。
 
 一次运行同时测全部八个 metric（`stage1/pipeline.py`）：
 

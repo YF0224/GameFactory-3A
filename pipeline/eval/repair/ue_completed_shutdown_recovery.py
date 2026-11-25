@@ -22,8 +22,8 @@ from ..stage1.llm import HarnessError
 from ..stage1.paths import FRAMEWORK, read_json, sha256, write_json
 from engine_adapters.ue5.playtest import native_client, native_record
 from engine_adapters.ue5.playtest.isolation import process_table
-from pipeline.game_eval.whitebox_eval.action_links import build_links
-from pipeline.game_eval.whitebox_eval.sparse_evidence import audit_capture
+from pipeline.eval.stage1.action_links import build_links
+from pipeline.eval.stage1.sparse_evidence import audit_capture
 
 VERSION = 'stage3-ue-completed-shutdown-recovery.v1'
 

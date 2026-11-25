@@ -142,7 +142,7 @@ def production_binding():
     files.update((FRAMEWORK / 'engine_adapters/unity3d').rglob('*.cs'))
     files.update((FRAMEWORK / 'engine_adapters/unity3d').rglob('*.json'))
     files.update((FRAMEWORK / 'engine_adapters').glob('_*.py'))
-    formal = FRAMEWORK / 'pipeline/game_eval/whitebox_eval'
+    formal = FRAMEWORK / 'pipeline/eval/stage1'
     files.update(formal / n for n in ('unity_native_pair_record.py', 'unity_native_pair_admission.py',
         'unity_native_pair_sources.py', 'unity_native_pair_worker.py', 'multiclient.py',
         'runtime.py', 'batch.py', 'sparse_evidence.py'))
@@ -184,7 +184,7 @@ def arguments(model, role, port, session, output, stop):
 def native_locks():
     """All Stage1 slots AND formal Unity locks; never bypass another session."""
     from engine_adapters.unity3d.playtest import background_record as backend
-    from pipeline.game_eval.whitebox_eval import runtime
+    from pipeline.eval.stage1 import runtime
     control = control_root()
     base = Path(tempfile.gettempdir()) / 'gamefactory-sol-whitebox-gui.lock'
     count = max(1, int(os.environ.get('A3GAME_GUI_SLOTS', '1')))
@@ -274,7 +274,7 @@ def make_plan(out, project, profile, model, take, feedback=None):
 
 
 def _rows(path):
-    from pipeline.game_eval.whitebox_eval.unity_native_pair_admission import read_rows
+    from pipeline.eval.stage1.unity_native_pair_admission import read_rows
     return read_rows(path)
 
 
@@ -394,7 +394,7 @@ def observe_owned(ownership, proc, observed):
 
 
 def record_pair(project, folder, *, model, profile, plan, editor, production, hashes, lineage=None, plan_folder=None):
-    from pipeline.game_eval.whitebox_eval import unity_native_pair_record as ownership
+    from pipeline.eval.stage1 import unity_native_pair_record as ownership
     processes, observed, streams, editor_observed = {}, {}, {}, {'A': {}, 'B': {}}
     stop = folder / 'STOP_OWNED_PAIR'
     session = 'stage1-' + uuid.uuid4().hex
@@ -577,7 +577,7 @@ def evidence_bindings(folder):
 
 
 def verify_receipt(out, score, *, require_qualified=True):
-    from pipeline.game_eval.whitebox_eval.unity_native_pair_sources import bound_path
+    from pipeline.eval.stage1.unity_native_pair_sources import bound_path
     if Path(score['pair_evidence_receipt']).is_absolute():
         raise llm.HarnessError('Pair receipt must be relative to output')
     path = bound_path(out, score['pair_evidence_receipt'])

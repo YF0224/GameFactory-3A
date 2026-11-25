@@ -19,7 +19,7 @@ import uuid
 
 BENCH = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(BENCH))
-from pipeline.game_eval.refine.common import read, sha
+from pipeline.eval.refine.common import read, sha
 
 
 def write_receipt(path, value):
@@ -212,12 +212,12 @@ def terminate_stopped_parent(boundary, completion, receipt_path, *, probe=proces
 def production_sources():
     """Bind current implementation, including helpers outside the refine package."""
     paths = set((BENCH / 'scripts/refine').glob('*.py'))
-    paths.update((BENCH / 'GameFactory-3A/pipeline/game_eval/refine').glob('*.py'))
+    paths.update((BENCH / 'GameFactory-3A/pipeline/eval/refine').glob('*.py'))
     for suffix in ('*.py', '*.cpp', '*.h', '*.cs', '*.uplugin'):
         paths.update((BENCH / 'GameFactory-3A/engine_adapters/ue5').rglob(suffix))
     paths.update(BENCH / 'scripts' / name for name in
                  ('refine_game.py', 'run_stage3_refine.py', 'resume_stage3_refine.py', 'stage3_run_layout.py'))
-    paths.update(BENCH / 'GameFactory-3A/pipeline/game_eval/whitebox_eval' / name
+    paths.update(BENCH / 'GameFactory-3A/pipeline/eval/stage1' / name
                  for name in ('repair_execution.py', 'unity_safety.py'))
     return sorted(p for p in paths if p.is_file())
 
@@ -402,7 +402,7 @@ def verify_migration(path, output, *, require_active=True, probe=process_table):
     if (set(overrides) - set(record['models'])
             or any(set(v) - {'provider_runtime_policy'} for v in overrides.values())):
         raise ValueError('Only explicit provider runtime settings may supplement frozen config')
-    from pipeline.game_eval.refine.providers import validate_runtime_policy
+    from pipeline.eval.refine.providers import validate_runtime_policy
     for model, overlay in overrides.items():
         cfg = next(v for k, v in record['original_configs'].items() if k.split('/')[0] == model)
         validate_runtime_policy(cfg['agent'], overlay.get('provider_runtime_policy'))

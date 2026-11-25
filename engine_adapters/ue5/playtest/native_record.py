@@ -15,7 +15,7 @@ import socket
 import subprocess
 import time
 import uuid
-from pipeline.game_eval.refine.common import dump, read, sha, jsonl
+from pipeline.eval.refine.common import dump, read, sha, jsonl
 from .isolation import OwnedProcessTree, native_take_lease
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -88,7 +88,7 @@ def append(path, value):
 
 
 def prepare(folder, config):
-    from pipeline.game_eval.refine.session import snapshot
+    from pipeline.eval.refine.session import snapshot
     folder = Path(folder)
     original = folder/'input/project'
     project = folder/'background_record/project'
@@ -754,8 +754,8 @@ def _record(admitted, actions, schedule, destination, duration_ms, port,
         append(destination/'event_trace.jsonl', {**event,'source_t_ms':event['t_ms'],
                'source_clock':'world_time_ms','source_physical_line':line,
                't_ms':closest['t_ms'],'clock_mapping_uncertainty_ms':uncertainty})
-    from pipeline.game_eval.whitebox_eval.sparse_evidence import audit_capture
-    from pipeline.game_eval.whitebox_eval.action_links import build_links
+    from pipeline.eval.stage1.sparse_evidence import audit_capture
+    from pipeline.eval.stage1.action_links import build_links
     ui_frame_count = _validate_ui_frame_sources(destination) if formal_relay else None
     audit = audit_capture(destination,schedule)
     missing = audit['missing_slots_ms']

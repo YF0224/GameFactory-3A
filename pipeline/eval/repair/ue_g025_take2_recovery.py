@@ -137,7 +137,7 @@ def input_proof(native, executable, launch, ready):
 
 
 def native_proof(child, take=2):
-    from pipeline.game_eval.whitebox_eval.sparse_evidence import audit_capture
+    from pipeline.eval.stage1.sparse_evidence import audit_capture
     capture = child / f'takes/{take}/record'
     native = capture / 'native/take'
     result = read_json(capture / 'record_result.json')
@@ -476,8 +476,8 @@ def completion_payload(out):
     # Additional unrelated modules do not invalidate a sealed historical run.
     prefixes = ('pipeline/eval/repair/',
                 'engine_adapters/ue5/',
-                'pipeline/game_eval/whitebox_eval/',
-                'pipeline/game_eval/refine/')
+                'pipeline/eval/stage1/',
+                'pipeline/eval/refine/')
     for rel, value in start.items():
         if rel.startswith(prefixes) or rel == 'pipeline/eval/stage1/recovery_support.py':
             require(sha256(plain(BENCH / rel)) == value, 'verification producer changed: ' + rel)

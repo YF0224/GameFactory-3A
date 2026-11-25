@@ -13,7 +13,7 @@ def digest(path):
     return sha256(Path(path).read_bytes()).hexdigest()
 
 def _facts(attempt):
-    from pipeline.game_eval.whitebox_eval import batch, unity_native_entry
+    from pipeline.eval.stage1 import batch, unity_native_entry
     root = Path(attempt).resolve()
     batch.verify_inputs(root)
     manifest = batch.read(root/'input_manifest.json')
@@ -23,7 +23,7 @@ def _facts(attempt):
     return root, manifest, facts
 
 def write(attempt, output):
-    from pipeline.game_eval.whitebox_eval.protocol import dump
+    from pipeline.eval.stage1.protocol import dump
     root, manifest, facts = _facts(attempt)
     entry = facts['runtime_initializer_entry']
     value = {'version':VERSION,'attempt':str(root),
@@ -35,7 +35,7 @@ def write(attempt, output):
     return value
 
 def _binding(path):
-    from pipeline.game_eval.whitebox_eval import batch
+    from pipeline.eval.stage1 import batch
     value = json.loads(Path(path).read_text())
     if not isinstance(value,dict) or set(value) != FIELDS or value.get('version') != VERSION:
         raise ValueError('Unknown runtime recorder entry binding')
@@ -61,7 +61,7 @@ def load(path, project):
     if isinstance(value, dict) and value.get('version') == 'stage1-unity-runtime-initializer-record-entry.v1':
         from pipeline.eval.stage1.unity_natural_entry import load_record_binding
         return load_record_binding(path, project)
-    from pipeline.game_eval.whitebox_eval import batch
+    from pipeline.eval.stage1 import batch
     value, root, manifest = _binding(path)
     project = Path(project).resolve()
     expected = dict(manifest['snapshot_hashes'])
@@ -114,7 +114,7 @@ def verify_recording(take):
     recorder helpers and serializes metadata before this postcapture gate.
     """
     from . import project_snapshot
-    from pipeline.game_eval.whitebox_eval import batch
+    from pipeline.eval.stage1 import batch
     take = Path(take).resolve()
     value, root, manifest = _binding(take/'runtime_initializer_entry.json')
     snapshot = json.loads((take.parent/'source_snapshot.json').read_text())

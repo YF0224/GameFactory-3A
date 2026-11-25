@@ -16,10 +16,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from stage3_run_layout import bind_candidate_run
 
-from pipeline.game_eval.refine.batch import normalize, run, exclusive
-from pipeline.game_eval.refine.rounds import completion_prompt as _task_status_prompt
-from pipeline.game_eval.refine.common import read
-from pipeline.game_eval.refine.providers import POLICY as MULTI_PROVIDER_POLICY
+from pipeline.eval.refine.batch import normalize, run, exclusive
+from pipeline.eval.refine.rounds import completion_prompt as _task_status_prompt
+from pipeline.eval.refine.common import read
+from pipeline.eval.refine.providers import POLICY as MULTI_PROVIDER_POLICY
 
 SETTING_OVERVIEW = FRAMEWORK / 'agent_skills/setting_overview.md'
 MAX_INTERACTION_SECONDS = 30 * 60
@@ -38,7 +38,7 @@ def _interaction_timeout(config):
 
 
 def _validate_generation_budget(config):
-    from pipeline.game_eval.refine.rounds import validate_budget
+    from pipeline.eval.refine.rounds import validate_budget
     limit = validate_budget(config)
     prior = config.get('explicit_restart', {}).get('prior_counted_attempts', 0)
     if type(prior) is not int or prior < 0 or prior + limit > MAX_REPAIR_ATTEMPTS:
@@ -98,7 +98,7 @@ def _task_document(game, payloads):
 
 
 def _write_task_document(game, workspace, payloads):
-    from pipeline.game_eval.refine.common import dump, sha
+    from pipeline.eval.refine.common import dump, sha
     workspace = Path(workspace)
     document = _task_document(game, payloads)
     requirements = game.get('requirement_binding')
@@ -162,8 +162,8 @@ def _completion_prompt(game, number, limit, timeout_seconds=MAX_INTERACTION_SECO
 def _prepare_project(game, folder, config):
     """Prepare one candidate and its immutable source/task bindings; no model call."""
     import shutil
-    from pipeline.game_eval.refine.session import snapshot, snapshot_required_bytes, CACHE_DIRS, inventory, inventory_digest
-    from pipeline.game_eval.refine.common import dump, sha
+    from pipeline.eval.refine.session import snapshot, snapshot_required_bytes, CACHE_DIRS, inventory, inventory_digest
+    from pipeline.eval.refine.common import dump, sha
     limit = _validate_generation_budget(config)
     timeout_seconds = _interaction_timeout(config)
     settings = config['agent']
@@ -230,10 +230,10 @@ def _repair_first(game, folder, config):
     import shutil
     from pipeline.data_collection.runtime.live_runner import AgentRunner
     from pipeline.data_collection.core.artifact_store import ArtifactStore
-    from pipeline.game_eval.refine.zcode import ZCodeAdapter
-    from pipeline.game_eval.refine.session import inventory, snapshot, snapshot_required_bytes, CACHE_DIRS
-    from pipeline.game_eval.refine.rounds import verify_original
-    from pipeline.game_eval.refine.common import dump, sha
+    from pipeline.eval.refine.zcode import ZCodeAdapter
+    from pipeline.eval.refine.session import inventory, snapshot, snapshot_required_bytes, CACHE_DIRS
+    from pipeline.eval.refine.rounds import verify_original
+    from pipeline.eval.refine.common import dump, sha
 
     _prepare_project(game, folder, config)
     limit = _validate_generation_budget(config)
@@ -276,10 +276,10 @@ def _continue_turn(game, folder, config, number, previous):
     """Continue the same ZCode session with the same playtest contract."""
     from pipeline.data_collection.runtime.live_runner import AgentRunner
     from pipeline.data_collection.core.artifact_store import ArtifactStore
-    from pipeline.game_eval.refine.zcode import ZCodeAdapter
-    from pipeline.game_eval.refine.rounds import turn_location, verify_original
-    from pipeline.game_eval.refine.session import inventory
-    from pipeline.game_eval.refine.common import dump, sha, read
+    from pipeline.eval.refine.zcode import ZCodeAdapter
+    from pipeline.eval.refine.rounds import turn_location, verify_original
+    from pipeline.eval.refine.session import inventory
+    from pipeline.eval.refine.common import dump, sha, read
     import shutil
 
     limit = _validate_generation_budget(config)
@@ -349,7 +349,7 @@ def _continue_turn(game, folder, config, number, previous):
                 'evaluation_started': False, 'runtime_verdict': None}
     finally:
         verify_original(folder)
-        from pipeline.game_eval.whitebox_eval import unity_safety
+        from pipeline.eval.stage1 import unity_safety
         cleanup = unity_safety.locks_clear(config['unity'], check_external=True)
         dump(root / 'cleanup.json', {'locks_clear': cleanup})
 
@@ -357,14 +357,14 @@ def _continue_turn(game, folder, config, number, previous):
 @contextmanager
 def _generation_dispatch(policy=LEGACY_INTERACTION_POLICY):
     """Use the new prompt dispatch only within this CLI; frozen legacy code stays intact."""
-    from pipeline.game_eval.refine import rounds
+    from pipeline.eval.refine import rounds
     original_first, original_continue = rounds.repair, rounds.continue_turn
     original_project = rounds.repair_project
     try:
         rounds.repair = _repair_first
         rounds.continue_turn = _continue_turn
         if policy in (INTERACTION_POLICY, MULTI_PROVIDER_POLICY):
-            from pipeline.game_eval.refine.fresh_sessions import repair_project
+            from pipeline.eval.refine.fresh_sessions import repair_project
             rounds.repair_project = lambda game, folder, config: repair_project(
                 game, folder, config, prepare=_prepare_project,
                 instructions=lambda g: _ue54_prompt(g), overview=SETTING_OVERVIEW)
@@ -411,7 +411,7 @@ def main(argv=None):
     if not SETTING_OVERVIEW.is_file():
         parser.error(f'Missing required agent workflow instructions: {SETTING_OVERVIEW}')
     output = args.output.expanduser().resolve()
-    from pipeline.game_eval.refine.common import dump, sha
+    from pipeline.eval.refine.common import dump, sha
     prompt_identity = output / 'stage3_prompt_identity.json'
     current_identity = {'script_sha256': sha(Path(__file__)),
                         'setting_overview_sha256': sha(SETTING_OVERVIEW),
@@ -425,8 +425,8 @@ def main(argv=None):
             previous_identity = read(prompt_identity)
             if any(previous_identity[k] != current_identity[k] for k in current_identity if k != 'script_sha256'):
                 raise ValueError('Migration cannot change frozen prompt semantics or layout')
-            from pipeline.game_eval.refine.migration import verify_runtime_config
-            from pipeline.game_eval.refine.batch import code_identity
+            from pipeline.eval.refine.migration import verify_runtime_config
+            from pipeline.eval.refine.batch import code_identity
             verify_runtime_config(output, config, code_identity())
             migration = read(output / 'implementation_migration.json')
             old_script = migration['from_prompt_script']
@@ -449,7 +449,7 @@ if __name__ == '__main__':
     def stop(signum, frame):
         raise KeyboardInterrupt
     signal.signal(signal.SIGTERM, stop)
-    from pipeline.game_eval.whitebox_eval.unity_safety import SafetyStop
+    from pipeline.eval.stage1.unity_safety import SafetyStop
     try:
         raise SystemExit(main())
     except (BlockingIOError, SafetyStop) as exc:

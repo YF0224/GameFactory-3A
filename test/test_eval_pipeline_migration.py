@@ -59,6 +59,24 @@ def test_selected_requirement_drives_snapshot_engine_and_budget(bound_delivery, 
         prepare.verify(out)
 
 
+def test_unified_stage1_preserves_both_budget_contracts(bound_delivery, tmp_path, monkeypatch):
+    from pipeline.eval.stage1 import batch, integrity, runtime_budgets
+    run, requirement, d = bound_delivery
+    # Preparation pins the manifest envelope; runtime retains its versioned
+    # tier policy. A same-name import collision would silently mix these APIs.
+    assert budgets.budget_for(d['game_id'], requirement)['gameplay_ms'] == 180000
+    entry = {'id': 'fixture', 'case_id': d['game_id'], 'tier': 'M',
+             'actual_engine': 'three_js', 'requirement': str(requirement)}
+    out = tmp_path / 'runtime_attempt'
+    monkeypatch.setattr(batch, '_prepare', lambda *args, **kwargs: 'prepared')
+    assert batch.prepare(tmp_path / 'batch', entry, out) == 'prepared'
+    pinned = json.loads((out / 'attempt_manifest.json').read_text())['budget']
+    assert pinned['version'] == runtime_budgets.TIERED_VERSION
+    assert pinned['gameplay_ms'] == 600000
+    bindings = integrity.validator_bindings()
+    assert bindings['runtime_budgets.py'] == sha256(Path(runtime_budgets.__file__))
+
+
 @pytest.mark.parametrize('tamper', ['requirement', 'engine', 'job'])
 def test_selected_requirement_binding_fails_closed(bound_delivery, tamper):
     run, requirement, d = bound_delivery
@@ -167,7 +185,7 @@ def test_stage3_delivery_binds_new_layout_to_generation_job(playtest, tmp_path, 
 
 def test_assets_bridge_forwards_arguments(monkeypatch):
     from pipeline.eval import assets
-    from pipeline.game_eval.asset_eval import run
+    from pipeline.eval.asset_eval import run
     calls = []
     monkeypatch.setattr(run, 'main', lambda argv: calls.append(argv) or 7)
     args = ['--scope', 'obj', '--mode', 'preflight', '--games', 'G001', '--no-sol']
@@ -182,7 +200,7 @@ def test_data_root_and_relative_profiles_ignore_cwd(tmp_path):
     code = '''
 import json
 from pipeline.eval.stage1.paths import DATA_ROOT, OUTPUTS, SAMPLES, resolve_input
-from pipeline.game_eval.asset_eval.common import OUTPUTS as ASSET_OUTPUTS
+from pipeline.eval.asset_eval.common import OUTPUTS as ASSET_OUTPUTS
 from pipeline.eval.model_config import PLANNER_MODEL, JUDGE_MODEL
 print(json.dumps([str(DATA_ROOT), str(OUTPUTS), str(SAMPLES), str(ASSET_OUTPUTS),
                   str(resolve_input('test_data/inputs.json')), PLANNER_MODEL, JUDGE_MODEL]))

@@ -224,7 +224,7 @@ def ready(case, monkeypatch):
     plan = {'engine': 'unity3d', 'launch_source': entry.source, 'launch_scene': ''}
     write_json(folder.parent / 'plan.json', plan)
     from pipeline.eval.stage1 import llm, unity_input
-    from pipeline.game_eval.whitebox_eval import unity_runtime_dependencies as deps
+    from pipeline.eval.stage1 import unity_runtime_dependencies as deps
     editor = out / 'fake-editor/Contents/MacOS/Unity'
     put(editor, '')
     put(editor.parent.parent / 'Resources/PackageManager/BuiltInPackages' / deps.AUDIO / 'package.json',
@@ -710,7 +710,7 @@ def generated_input_lock(ready, monkeypatch, request):
     """Synthetic resolver output after the real official input migration."""
     out, project, folder, plan = ready
     from pipeline.eval.stage1 import unity_input
-    from pipeline.game_eval.whitebox_eval import unity_runtime_dependencies as deps
+    from pipeline.eval.stage1 import unity_runtime_dependencies as deps
     original = __import__('pathlib').Path(read_json(out / 'manifest.json')['project_source'])
     package = out / 'package-cache/com.unity.inputsystem@1.7.0'
     write_json(package / 'package.json', {'name': 'com.unity.inputsystem', 'version': '1.7.0',

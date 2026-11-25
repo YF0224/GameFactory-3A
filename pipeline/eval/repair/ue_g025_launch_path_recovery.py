@@ -32,7 +32,7 @@ SOURCE_KEYS = ('delivery', 'delivery_dir', 'project_source', 'project_digest', '
 # Only read/execute current formal imports. Their historical SHA must still match;
 # unrelated newly installed modules do not invalidate a sealed completion.
 VERIFY_PREFIXES = ('pipeline/eval/repair/', 'engine_adapters/ue5/',
-                   'pipeline/game_eval/whitebox_eval/', 'pipeline/game_eval/refine/')
+                   'pipeline/eval/stage1/', 'pipeline/eval/refine/')
 require, read_json, sha256 = old.require, old.read_json, old.sha256
 
 
