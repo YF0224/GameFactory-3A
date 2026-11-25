@@ -26,6 +26,7 @@ class PrimaryAssetRule:
     name = "primary_asset"
 
     EXPECTED_CLASSES = {
+        "video": {"FileMediaSource"},
         "avatar": {"SkeletalMesh"},
         "motion": {"AnimSequence"},
         "prop": {"StaticMesh", "SkeletalMesh"},

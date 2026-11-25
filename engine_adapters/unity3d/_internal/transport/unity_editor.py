@@ -12,9 +12,11 @@ This transport uses the ``-batchmode -quit -executeMethod`` CLI pattern:
 from __future__ import annotations
 
 import glob
+import hashlib
 import json
 import os
 import platform
+import re
 import subprocess
 import tempfile
 import time
@@ -23,6 +25,26 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from ...config import UnityClientConfig
+
+
+def has_injected_compilation_error(log: str) -> bool:
+    """Attribute compiler diagnostics from harness-owned C# files to the harness.
+
+    Test the diagnostic source path, not the missing type in its message: a
+    delivered script mentioning a recorder type is still a product diagnostic.
+    """
+    sources = (
+        "GameFactory3AInputDriver", "GameFactory3APlayTestRecorder",
+        "GameFactory3AFrameTap", "GameFactory3AAudioTap",
+    )
+    for line in log.splitlines():
+        if not re.search(r"\berror CS\d+", line, re.IGNORECASE):
+            continue
+        source = re.split(r"\(\d+\s*,|:\d+[:(]", line, maxsplit=1)[0]
+        if re.search(r"(?:^|[/\\])(?:" + "|".join(sources) + r")\.cs$",
+                     source.strip(), re.IGNORECASE):
+            return True
+    return False
 
 
 def find_unity_binary(
@@ -75,6 +97,110 @@ def _unity_binary_candidates(root: Path) -> list[Path]:
     ]
 
 
+def playtest_recorder_files() -> list[tuple[Path, Path]]:
+    """Bundled observers in isolated assemblies, never a game's Editor asmdef.
+
+    The recorder observes game providers through reflection. Its sole static
+    runtime dependency is the read-only AudioTap, with an explicit assembly
+    reference. No game assembly definition is modified.
+    """
+    root = Path(__file__).resolve().parents[2]
+    base = Path("Assets/GameFactory3AEvaluation")
+    return [
+        (root / "import_generated/GameFactory3APlayTestRecorder.cs",
+         base / "Editor/GameFactory3APlayTestRecorder.cs"),
+        (root / "import_generated/GameFactory3ARuntimeInitializerRecorder.cs",
+         base / "Editor/GameFactory3ARuntimeInitializerRecorder.cs"),
+        (root / "import_generated/GameFactory3A.Evaluation.Editor.asmdef",
+         base / "Editor/GameFactory3A.Evaluation.Editor.asmdef"),
+        (root / "import_generated/GameFactory3AInputDriver.cs",
+         base / "Editor/GameFactory3AInputDriver.cs"),
+        (root / "runtime_generated/GameFactory3AFrameTap.cs",
+         base / "Runtime/GameFactory3AFrameTap.cs"),
+        (root / "runtime_generated/GameFactory3AAudioTap.cs",
+         base / "Runtime/GameFactory3AAudioTap.cs"),
+        (root / "runtime_generated/GameFactory3A.Evaluation.Runtime.asmdef",
+         base / "Runtime/GameFactory3A.Evaluation.Runtime.asmdef"),
+    ]
+
+
+def _install_playtest_recorder(project_path: Path) -> list[Path]:
+    """Install observers, updating only files whose ownership is attested.
+
+    A reserved-looking directory alone is not ownership: validate *all* file
+    collisions before any write or legacy cleanup. A journal permits future
+    upgrades only while installed bytes still match our previous installation.
+    """
+    project_path = Path(project_path).resolve()
+    files = [(source, project_path / relative)
+             for source, relative in playtest_recorder_files()]
+    journal = project_path / "Assets/GameFactory3AEvaluation/installation.json"
+    legacy = project_path / "Assets/Editor/GameFactory3APlayTestRecorder.cs"
+    legacy_meta = legacy.with_suffix(".cs.meta")
+    allowed = {str(dest.relative_to(project_path)) for _, dest in files} | {str(legacy.relative_to(project_path))}
+    # A symlinked destination (including any parent) is not our isolated copy.
+    for target in [journal, legacy, legacy_meta] + [d for _, d in files]:
+        for part in [target] + list(target.parents):
+            if part == project_path: break
+            if part.is_symlink():
+                raise RuntimeError(f"evaluation observer collision; refusing symlink: {part}")
+    owned = {}
+    if journal.exists():
+        try:
+            previous = json.loads(journal.read_text(encoding="utf-8"))
+            owned = previous["files"]
+            if (previous.get("schema") != "unity-observer-installation.v1" or
+                not isinstance(owned, dict) or not set(owned).issubset(allowed) or
+                any(not isinstance(v, str) or not re.fullmatch(r"[0-9a-f]{64}", v) for v in owned.values())):
+                raise ValueError("invalid ownership schema/path/digest")
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            raise RuntimeError(f"invalid observer installation journal; refusing overwrite: {journal}") from error
+    digest = lambda data: hashlib.sha256(data).hexdigest()
+    # Complete preflight, including the old single-file path, before ANY write.
+    for source, destination in files:
+        if destination.exists():
+            current = destination.read_bytes()
+            relative = str(destination.relative_to(project_path))
+            if current != source.read_bytes() and owned.get(relative) != digest(current):
+                raise RuntimeError(f"evaluation observer collision; refusing overwrite: {destination}")
+    migration = None
+    if legacy.exists():
+        data = legacy.read_bytes()
+        recorder = next((source for source, dest in files if dest.name == legacy.name), None)
+        if not ((recorder is not None and data == recorder.read_bytes()) or
+                owned.get(str(legacy.relative_to(project_path))) == digest(data)):
+            raise RuntimeError(f"unattested legacy observer; refusing overwrite or duplicate class: {legacy}")
+        migration = {"source": str(legacy.relative_to(project_path)), "sha256": digest(data)}
+        archive = project_path / "Library/GameFactory3A/observer_migrations" / digest(data)
+        # No unverified gameplay source is ever deleted. Exact owned bytes and
+        # associated Unity metadata are preserved before removing the old class.
+        archive.mkdir(parents=True, exist_ok=True)
+        for old in [legacy, legacy_meta]:
+            if old.exists():
+                archived = archive / old.name
+                if archived.exists() and archived.read_bytes() != old.read_bytes():
+                    raise RuntimeError(f"legacy observer archive collision: {archived}")
+                archived.write_bytes(old.read_bytes())
+        migration["archive"] = str(archive.relative_to(project_path))
+    for source, destination in files:
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        data = source.read_bytes()
+        if not destination.is_file() or destination.read_bytes() != data:
+            temporary = destination.with_name(destination.name + ".install.tmp")
+            temporary.write_bytes(data)
+            temporary.replace(destination)
+    if migration is not None:
+        for old in [legacy, legacy_meta]:
+            if old.exists(): old.unlink()
+    record = {"schema": "unity-observer-installation.v1",
+              "files": {str(dest.relative_to(project_path)): digest(source.read_bytes()) for source, dest in files}}
+    if migration is not None: record["legacy_migration"] = migration
+    temporary = journal.with_suffix(".json.tmp")
+    temporary.write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
+    temporary.replace(journal)
+    return [destination for _, destination in files]
+
+
 def install_editor_script(
     project_path: Path | None,
     class_method: str,
@@ -85,6 +211,8 @@ def install_editor_script(
     class_name = str(class_method or "").split(".", 1)[0].strip()
     if not class_name:
         return None
+    if class_name == "GameFactory3APlayTestRecorder":
+        return _install_playtest_recorder(project_path)[0]
     source = (
         Path(__file__).resolve().parents[2]
         / "import_generated"
@@ -106,6 +234,9 @@ def install_editor_scripts(
 ) -> list[Path]:
     """Install an Editor entry point and its bundled Unity-native helpers."""
     installed: list[Path] = []
+    if (project_path is not None and project_path.is_dir()
+            and str(class_method or "").split(".", 1)[0].strip() in {"GameFactory3APlayTestRecorder", "GameFactory3ARuntimeInitializerRecorder"}):
+        return _install_playtest_recorder(project_path)
     entry = install_editor_script(project_path, class_method)
     if entry is not None:
         installed.append(entry)
@@ -719,10 +850,15 @@ class UnityEditorTransport:
             str(project_log),
         ]
         resolved_extra_args = [str(arg) for arg in (extra_args or [])]
+        if os.environ.get("GAMEFACTORY_UNITY_CAPTURE_POLICY") == "graphics_batch_render_v2":
+            if "-nographics" in resolved_extra_args:
+                raise RuntimeError("background rendering requires a graphics device")
+            if "-batchmode" not in resolved_extra_args:
+                resolved_extra_args.insert(0, "-batchmode")
         if "-executeMethod" in resolved_extra_args:
             index = resolved_extra_args.index("-executeMethod")
             if index + 1 < len(resolved_extra_args):
-                install_editor_script(
+                install_editor_scripts(
                     project_path,
                     resolved_extra_args[index + 1],
                 )

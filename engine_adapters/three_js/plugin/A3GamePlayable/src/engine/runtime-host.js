@@ -8,10 +8,10 @@
  */
 
 import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { Sky } from 'three/addons/objects/Sky.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
+import { Sky } from 'three/examples/jsm/objects/Sky.js';
 import { createSkyGradient } from './visual-kit.js';
 import { A3GameWindField } from './wind-field.js';
 

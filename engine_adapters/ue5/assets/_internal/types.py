@@ -19,12 +19,15 @@ class AssetType(str, Enum):
     TEXTURE = "texture"
     EFFECT = "effect"
     AUDIO = "audio"
+    VIDEO = "video"
 
 
-SUPPORTED_IMPORT_ASSET_TYPE_NAMES = ("avatar", "motion", "scene", "environment", "static_mesh", "effect", "material", "texture", "prop", "weapon", "object")
+SUPPORTED_IMPORT_ASSET_TYPE_NAMES = ("avatar", "motion", "scene", "environment", "static_mesh", "effect", "material", "texture", "prop", "weapon", "object", "video")
 ASSET_GROUP_TYPE_NAMES = ("avatar", "skeleton", "motion", "environment", "effect", "prop")
 
 _ASSET_TYPE_ALIASES = {
+    "media": "video",
+    "cg_video": "video",
     "avatars": "avatar",
     "skeletalmesh": "avatar",
     "skeletons": "skeleton",

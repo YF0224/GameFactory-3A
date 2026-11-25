@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import platform
 import subprocess
 from pathlib import Path
 from typing import Any, Sequence
@@ -15,11 +16,15 @@ from .sessions import UERuntimeSessionsClient
 
 
 def _editor_binary(ue_root: Path) -> Path:
-    relative = (
-        "Engine/Binaries/Win64/UnrealEditor.exe"
-        if os.name == "nt"
-        else "Engine/Binaries/Linux/UnrealEditor"
-    )
+    if os.name == "nt":
+        relative = "Engine/Binaries/Win64/UnrealEditor.exe"
+    elif platform.system() == "Darwin":
+        relative = (
+            "Engine/Binaries/Mac/UnrealEditor.app"
+            "/Contents/MacOS/UnrealEditor"
+        )
+    else:
+        relative = "Engine/Binaries/Linux/UnrealEditor"
     return ue_root / relative
 
 

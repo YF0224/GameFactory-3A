@@ -1,0 +1,6 @@
+{
+  "source": "workspaces/native_harness_20261024/validation/endpoint_sparse_impl_20261027/native_fixture_v3/project/Assets/GameFactoryInput.cs",
+  "sha256": "e451bc378e2c4392b7108d09e573b161bc208a71ecea551506aafff3d99c9895",
+  "policy": "Preserved native-device input compatibility shim; no gameplay invocation",
+  "source_root": "bench"
+}

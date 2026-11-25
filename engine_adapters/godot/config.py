@@ -92,6 +92,9 @@ class GodotClientConfig:
     editor_timeout: int = DEFAULT_EDITOR_TIMEOUT
     import_timeout: int = DEFAULT_IMPORT_TIMEOUT
     project_path_input: Path | None = None
+    # rubric input_bindings forwarded to the recorder so verb→key mapping
+    # matches the game's actual bindings (e.g. interact=Enter vs the default H)
+    input_bindings: dict | None = None
 
     @classmethod
     def resolve(

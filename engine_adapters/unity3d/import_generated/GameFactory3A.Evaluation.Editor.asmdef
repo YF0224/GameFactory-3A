@@ -1,0 +1,13 @@
+{
+  "name": "GameFactory3A.Evaluation.Editor",
+  "rootNamespace": "",
+  "references": ["GameFactory3A.Evaluation.Runtime"],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

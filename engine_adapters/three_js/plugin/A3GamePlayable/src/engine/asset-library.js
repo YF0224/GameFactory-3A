@@ -8,14 +8,14 @@
  */
 
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import { KTX2Loader } from 'three/addons/loaders/KTX2Loader.js';
-import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
-import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
-import { STLLoader } from 'three/addons/loaders/STLLoader.js';
-import { HDRLoader } from 'three/addons/loaders/HDRLoader.js';
-import { clone as cloneSkinned } from 'three/addons/utils/SkeletonUtils.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader.js';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
+import { HDRLoader } from 'three/examples/jsm/loaders/HDRLoader.js';
+import { clone as cloneSkinned } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { createTilingTexture, orientModel, prepareModel } from './visual-kit.js';
 
 export class A3GameAssetLibrary {

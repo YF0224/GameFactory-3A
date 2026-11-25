@@ -15,6 +15,7 @@ from .config import (
 )
 
 ASSET_TYPE_DEFAULT_DESTS = {
+    "video": "/Game/Imported/Media",
     "avatar": DEFAULT_AVATAR_DEST,
     "motion": DEFAULT_MOTION_DEST,
     "scene": DEFAULT_SCENE_DEST,
@@ -27,6 +28,7 @@ ASSET_TYPE_DEFAULT_DESTS = {
 }
 
 ASSET_TYPE_CLASSES = {
+    "video": ("FileMediaSource",),
     "avatar": ("SkeletalMesh",),
     "skeleton": ("Skeleton",),
     "motion": ("AnimSequence",),
@@ -40,6 +42,8 @@ ASSET_TYPE_CLASSES = {
 }
 
 ASSET_TYPE_ALIASES = {
+    "media": "video",
+    "cg_video": "video",
     "avatars": "avatar",
     "skeletalmesh": "avatar",
     "staticmesh": "prop",
@@ -98,6 +102,7 @@ MESH_IMPORT_SUFFIXES = (
 TEXTURE_IMPORT_SUFFIXES = (".png", ".jpg", ".jpeg", ".tga", ".exr", ".hdr", ".bmp", ".tif", ".tiff")
 
 ASSET_TYPE_SUFFIXES = {
+    "video": (".mp4", ".mov", ".m4v", ".webm", ".avi", ".wmv"),
     "avatar": (".fbx", ".glb", ".gltf"),
     "motion": (".fbx",),
     "scene": (

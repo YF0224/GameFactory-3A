@@ -11,7 +11,7 @@
 import * as THREE from 'three';
 import { createTilingTexture, createWaterSurface } from './visual-kit.js';
 import { disposeObject3D } from './runtime-host.js';
-import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
+import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib.js';
 
 const LIGHT_FACTORIES = {
   AmbientLight: (spec) =>

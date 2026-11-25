@@ -25,6 +25,7 @@ REPRESENTATION_BY_BACKEND_CLASS = {
     "FileMediaSource": "media",
 }
 PRIMARY_BACKEND_CLASSES = {
+    "video": ("FileMediaSource",),
     "avatar": ("SkeletalMesh",),
     "motion": ("AnimSequence",),
     "prop": ("StaticMesh", "SkeletalMesh"),
