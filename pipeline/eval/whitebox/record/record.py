@@ -26,11 +26,11 @@ import tempfile
 import time
 from pathlib import Path
 
-from .llm import HarnessError
-from .paths import FRAMEWORK, read_json, sha256, write_json
+from ..core.llm import HarnessError
+from ..core.paths import FRAMEWORK, read_json, sha256, write_json
 from . import capture
 from engine_adapters.unity3d.playtest import unity_editor, unity_input
-from .plan import native_actions, take_dir
+from ..plan.plan import native_actions, take_dir
 
 VERSION = 'stage1-record.v1'
 GUI_LOCK = Path(tempfile.gettempdir()) / 'gamefactory-sol-whitebox-gui.lock'
@@ -111,6 +111,8 @@ EXTRA_FILES = ('video.mp4', 'play_started.json', 'input_view_cleanup.json', 'bro
                'process_cleanup.json', 'editor_cleanup.json', 'engine.log', 'execution.json',
                'launch_diagnostics.json', 'capture_schedule.json')
 from .native_log import godot_product_errors
+from ..evidence import asset_views
+from ..core import prepare
 
 
 # --- engine clients ----------------------------------------------------------
@@ -509,7 +511,7 @@ def _unity_asset_shot_plan(out: Path, runtime: Path) -> Path | None:
     if os.environ.get('A3GAME_ASSET_SHOTS', '1') != '1' or read_json(out / 'manifest.json').get('suite') != 'stage3':
         return None
     from ..stage3 import import_presence
-    from . import asset_views
+    from ..evidence import asset_views
     pres = import_presence.evaluate(out)
     assets = []
     for asset_id, a in pres['assets'].items():
@@ -626,7 +628,7 @@ def _ue_admission(client, project: Path, out: Path, deadline: float) -> dict:
     runtime/project is rebuilt from the frozen input snapshot (admission requires an
     authored-identical copy), and the candidate is admitted again."""
     from engine_adapters.ue5.playtest.native_record import verify_pin
-    from .prepare import IGNORE
+    from ..core.prepare import IGNORE
     from ..repair import ue_compile_compat
     compatibility = ue_compile_compat.selection(out)
     folder = out / 'runtime' / 'ue_admission'
@@ -946,7 +948,6 @@ def record(out: Path, manifest: dict, plan: dict, take: int = 1) -> dict:
 
 def _recover_completed_threejs(out: Path, manifest: dict, plan: dict, take: int) -> dict:
     """Recover only the known post-native KeyError; never invoke an engine or score."""
-    from . import prepare
     out = Path(out).resolve()
     runtime = take_dir(out, take) / 'record'
     native = runtime / 'native'

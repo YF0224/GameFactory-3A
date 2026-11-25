@@ -16,7 +16,7 @@ folder of a call gets ``accepted_response.json`` pointing at the reply used.
 """
 from __future__ import annotations
 
-from ..model_config import JUDGE_MODEL
+from ...model_config import JUDGE_MODEL
 
 import hashlib
 from contextlib import ExitStack
@@ -287,7 +287,7 @@ def call_model(calls_dir: Path, *, name: str, prompt: str, schema: dict, cwd: Pa
                                             for p in images])
         submitted_images = images
         if images and not claude and os.environ.get('A3GAME_LOSSLESS_IMAGES') == '1':
-            from .image_transport import lossless_images
+            from ..evidence.image_transport import lossless_images
             submitted_images = lossless_images(folder, images)
         output = folder / 'response.json'
         if claude:
@@ -334,7 +334,7 @@ def call_model(calls_dir: Path, *, name: str, prompt: str, schema: dict, cwd: Pa
         else:
             with ExitStack() as stack, (folder / 'events.jsonl').open('w') as out, (folder / 'stderr.log').open('w') as err:
                 if not claude and images and os.environ.get('A3GAME_GZIP_REQUESTS') == '1':
-                    from .request_transport import configured_upstream, gzip_proxy
+                    from ..evidence.request_transport import configured_upstream, gzip_proxy
                     provider, upstream = configured_upstream(env)
                     local = stack.enter_context(gzip_proxy(folder / 'http_transport', upstream=upstream, timeout=remaining))
                     cmd[1:1] = ['-c', f'model_providers.{provider}.base_url=' + json.dumps(local)]

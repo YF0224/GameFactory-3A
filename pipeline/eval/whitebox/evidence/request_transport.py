@@ -13,7 +13,7 @@ from urllib.parse import urlsplit
 
 import requests
 
-from .paths import write_json
+from ..core.paths import write_json
 
 
 def compressed_request(raw: bytes) -> tuple[bytes, dict]:

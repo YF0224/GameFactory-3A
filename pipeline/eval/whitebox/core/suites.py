@@ -27,7 +27,7 @@ class Suite:
 def get(name: str) -> Suite:
     if name == 'stage1':
         from . import criteria
-        from .metrics import BY_KEY, score_case
+        from ..metrics import BY_KEY, score_case
         return Suite('stage1', criteria.build, BY_KEY, score_case, 'stage1_v1')
     if name == 'stage3':
         from ..stage3 import SUITE

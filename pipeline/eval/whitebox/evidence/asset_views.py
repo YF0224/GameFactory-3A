@@ -18,7 +18,7 @@ import subprocess
 import time
 from pathlib import Path
 
-from .paths import read_json, sha256, write_json
+from ..core.paths import read_json, sha256, write_json
 
 VERSION = 'stage1-asset-views.v1'
 HERE = Path(__file__).resolve().parent / 'asset_views_engine'
@@ -175,7 +175,7 @@ def render_unity(out: Path, binary: str, rows: list[dict], timeout_s: float = 18
         write_json(job, {'output_dir': str(raw), 'size': TILE, 'jobs': jobs})
         log = folder / 'unity_views.log'
         started = time.monotonic()
-        from .record import engine_lock          # A3GAME_EXCLUSIVE_ENGINE: one engine process on the machine
+        from ..record.record import engine_lock          # A3GAME_EXCLUSIVE_ENGINE: one engine process on the machine
         try:
             with engine_lock():
                 proc = subprocess.run([binary, '-batchmode', '-projectPath', str(project),
@@ -274,7 +274,7 @@ def render_source_unity(out: Path, binary: str, timeout_s: float = 1800) -> dict
         shutil.copy2(src, script_dir / src.name)
         job = folder / 'unity_job.json'
         write_json(job, {'output_dir': str(raw), 'size': TILE, 'jobs': jobs})
-        from .record import engine_lock          # A3GAME_EXCLUSIVE_ENGINE: one engine process on the machine
+        from ..record.record import engine_lock          # A3GAME_EXCLUSIVE_ENGINE: one engine process on the machine
         try:
             with engine_lock():
                 proc = subprocess.run([binary, '-batchmode', '-projectPath', str(project),

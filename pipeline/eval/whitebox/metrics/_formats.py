@@ -1,7 +1,7 @@
 """Shared verdict formats used by the metric modules."""
 from __future__ import annotations
 
-from ..llm import B, S, arr, enum, obj
+from ..core.llm import B, S, arr, enum, obj
 
 REF = obj({'id': S, 'line_start': {'type': 'integer'}, 'line_end': {'type': 'integer'}, 'observation': S})
 EVIDENCE = arr(REF)

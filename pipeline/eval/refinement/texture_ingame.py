@@ -22,8 +22,8 @@ import time
 from pathlib import Path
 
 from ..stage1 import asset_views
-from ..whitebox.llm import call_model
-from ..whitebox.paths import OUTPUTS, read_json, sha256, write_json
+from ..whitebox.core.llm import call_model
+from ..whitebox.core.paths import OUTPUTS, read_json, sha256, write_json
 
 VERSION = 'stage3-texture-ingame.v1'
 REFERENCE = OUTPUTS / 'eval' / 'refine' / '_reference_renderer'

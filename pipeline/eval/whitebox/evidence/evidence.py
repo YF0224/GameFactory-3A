@@ -23,7 +23,7 @@ import json
 import re
 from pathlib import Path
 
-from .paths import OUTPUTS, read_json, sha256, write_json
+from ..core.paths import OUTPUTS, read_json, sha256, write_json
 
 VERSION = 'stage1-evidence.v1'
 SOURCE_SUFFIXES = {'.gd', '.tscn', '.godot', '.cs', '.unity', '.scene', '.prefab', '.asset', '.cpp', '.h',
@@ -487,7 +487,7 @@ def video_endpoint_frames(runtime: Path, frames: list[dict], channels: list[dict
 
 def _take_evidence(out: Path, take: int, cache_name: str = 'evidence.json', delivery_name: str | None = None) -> dict:
     """Channels, frame sheets and action links of one recorded take (cached per take)."""
-    from .plan import take_dir
+    from ..plan.plan import take_dir
     folder = take_dir(out, take)
     cached = folder / cache_name
     if cached.is_file():

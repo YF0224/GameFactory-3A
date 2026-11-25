@@ -9,7 +9,7 @@ Score = mean of the three group means (each 100 * mean credits).
 """
 from collections import defaultdict
 
-from ..llm import B
+from ..core.llm import B
 from ._formats import tiered_credit, tiered_schema
 
 KEY = 'gameness'

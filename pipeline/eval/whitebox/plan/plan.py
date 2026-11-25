@@ -24,8 +24,9 @@ from engine_adapters._input_capabilities import (MAX_PROBES, MAX_STEP_MS, MAX_ST
                                                  canonical_chord, capability_record, key_pattern)
 from engine_adapters._mouse_plan import MOUSE_KINDS, UE_MOUSE_KINDS, UNITY_MOUSE_KINDS, mouse_step_schema, validate_mouse_step
 
-from .llm import N, S, arr, call_model, enum, obj
-from .paths import read_json, write_json
+from ..core.llm import N, S, arr, call_model, enum, obj
+from ..core.paths import read_json, write_json
+from ..record import state_entry, state_entry
 
 VERSION = 'stage1-plan.v1'
 STARTUP_WAIT_MS = 1800
@@ -293,14 +294,14 @@ def validate(plan: dict, manifest: dict, project: Path) -> None:
         raise ValueError(f'launch_source {plan["launch_source"]} does not exist in the project')
     if engine == 'unity3d' and plan['launch_source'].endswith('.scene'):
         from . import unity_authored_scene
-        from .llm import HarnessError
+        from ..core.llm import HarnessError
         try:
             unity_authored_scene.validate_plan(Path(project).parent.parent, plan)
         except (HarnessError, OSError, KeyError, RuntimeError) as exc:
             raise ValueError(str(exc)) from exc
     if engine == 'unity3d' and plan['launch_source'].endswith('.cs'):
         from . import unity_authored_builder, unity_natural_entry
-        from .llm import HarnessError
+        from ..core.llm import HarnessError
         try:
             out = Path(project).parent.parent
             provider = unity_natural_entry if unity_natural_entry.context(out) is not None else unity_authored_builder
@@ -432,7 +433,7 @@ def make_plan(out: Path, manifest: dict, take: int = 1, target_ids: list[str] | 
     entry, name, plan = None, f'plan_t{take}', None
     if manifest['engine'] == 'unity3d':
         from . import unity_authored_builder, unity_natural_entry, unity_authored_scene
-        from .llm import accepted_response
+        from ..core.llm import accepted_response
         provider, suffix = unity_authored_scene, 'authored_scene_v1'
         entry = provider.context(out)
         if entry is None:
@@ -461,7 +462,7 @@ def make_plan(out: Path, manifest: dict, take: int = 1, target_ids: list[str] | 
             sch['required'].append('trigger_signals')
             text += SIGNAL_NOTE
         if (state_conditioned or direct) and ids:
-            from . import state_entry
+            from ..record import state_entry
             sch['properties']['state_entry'] = state_entry.schema(ids, direct=direct)
             sch['required'].append('state_entry')
             # the normal-play rule "never call game functions" does not apply to these takes
@@ -482,7 +483,7 @@ def make_plan(out: Path, manifest: dict, take: int = 1, target_ids: list[str] | 
             if full and ids:
                 keep_real_signals(p, project)
             if (state_conditioned or direct) and ids:
-                from . import state_entry
+                from ..record import state_entry
                 if direct and not p['state_entry'].get('calls'):
                     raise ValueError('state_entry.calls is empty: this is a DIRECT TRIGGER take - call the game\'s own '
                                      'functions for the TARGETS (input handler first, then the feature entry). Earlier '

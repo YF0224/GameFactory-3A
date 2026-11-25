@@ -26,11 +26,12 @@ import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import asset_views, budgets, evidence, playable_rules, judge, plan, prepare, record, standards, state_entry
+from . import budgets, prepare, standards
 from .llm import HarnessError
-from ..model_config import EVALUATION_PLANNER_MODEL, JUDGE_MODEL
+from ...model_config import EVALUATION_PLANNER_MODEL, JUDGE_MODEL
 from . import suites
 from .paths import read_json, write_json
+from ..plan import plan  # used at module level in function signatures
 
 VERSION = 'stage1-pipeline.v1'
 STEPS = ('prepare', 'static_judge', 'standards', 'plan_tN', 'record_tN', 'evidence_tN', 'evidence_judge_tN', 'score')
@@ -401,6 +402,10 @@ STATE_PLAN_TIMEOUT_S = int(os.environ.get('A3GAME_STATE_PLAN_TIMEOUT_S', 3000))
 
 
 from .paths import write_json as _write_json
+from ..evidence import asset_views, evidence
+from ..plan import playable_rules, plan
+from ..judge import judge
+from ..record import record, state_entry
 
 
 def _state_book(path: Path) -> dict:

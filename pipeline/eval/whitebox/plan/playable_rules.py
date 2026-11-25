@@ -22,7 +22,7 @@ import json
 import re
 from pathlib import Path
 
-from .paths import read_json, write_json
+from ..core.paths import read_json, write_json
 
 VERSION = 'stage1-playable-rules.v1'
 IDS = ('play.import', 'play.launch', 'play.operate')
@@ -87,7 +87,7 @@ def _import(out: Path, engine: str, takes: list[Path]) -> dict | None:
                 r = read_json(res)
                 if r.get('timeout'):
                     return None
-                from .native_log import godot_product_errors
+                from ..record.native_log import godot_product_errors
                 log = record / 'import.log'
                 parsed_errors = (engine == 'godot' and log.is_file()
                                  and godot_product_errors(log.read_text(errors='replace')))

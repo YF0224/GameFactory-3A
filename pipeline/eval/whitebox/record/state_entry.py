@@ -17,7 +17,7 @@ import json
 import re
 from pathlib import Path
 
-from .llm import S, arr, enum, obj
+from ..core.llm import S, arr, enum, obj
 
 VERSION = 'stage3-state-entry.v1'
 ENV = {'unity3d': 'GAMEFACTORY_UNITY_STATE_ENTRY', 'ue5': 'A3GAME_UE_STATE_ENTRY'}

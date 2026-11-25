@@ -47,7 +47,7 @@ def supported(engine: str, plan: dict) -> bool:
 
 def godot_actions(plan: dict) -> list[dict]:
     """Planned timeline of a condition-free Godot plan (the recorder runs it after the startup wait)."""
-    from .plan import STARTUP_WAIT_MS
+    from ..plan.plan import STARTUP_WAIT_MS
     t, rows = STARTUP_WAIT_MS, []
     for probe in plan['probes']:
         for step in probe['steps']:
@@ -117,7 +117,7 @@ def audit_capture(folder, expected: dict) -> dict:
     """
     import math
     from pathlib import Path
-    from .paths import read_json, sha256
+    from ..core.paths import read_json, sha256
     import json
 
     folder = Path(folder).resolve()

@@ -24,9 +24,9 @@ import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-from .llm import S, accepted_response, arr, call_model, obj
-from . import suites
-from .paths import read_json, write_json
+from ..core.llm import S, accepted_response, arr, call_model, obj
+from ..core.paths import read_json, write_json
+from ..core import suites
 
 VERSION = 'stage1-judge.v1'
 SHARD_SIZE = {'binary': 40, 'tiered': 8}   # rows per call; tiered verdicts are long (output-token bound)
@@ -306,7 +306,7 @@ def shard_images(evidence: dict, root: Path, shard_ids: set, delivered: dict):
     else:
         # Own frames do not fit natively: keep native 2x2 sheets while the rest still fits as compact 3x3
         # grids (tiles downscaled, raw frames kept on disk) - every own frame reaches the judge.
-        from .evidence import _grid_sheets
+        from ..evidence.evidence import _grid_sheets
         import hashlib
         frame_items = {it['id']: it for it in evidence['items'] if it['type'] == 'frame'}
         frames_of = {sh: [i for i, it in frame_items.items() if it['sheet'] == sh] for sh in own_sheets}

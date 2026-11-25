@@ -18,8 +18,8 @@ import json
 import re
 from pathlib import Path
 
-from ..whitebox.asset_views import SOURCE_ASSETS
-from ..whitebox.paths import read_json, write_json
+from ..whitebox.evidence.asset_views import SOURCE_ASSETS
+from ..whitebox.core.paths import read_json, write_json
 from .criteria import INPUTS
 
 VERSION = 'stage3-import-presence.v1'

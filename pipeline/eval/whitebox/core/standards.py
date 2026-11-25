@@ -21,7 +21,7 @@ from pathlib import Path
 
 from .llm import S, arr, call_model, enum, obj, validate_schema
 from . import suites
-from .metrics._formats import TRIGGER_MODES
+from ..metrics._formats import TRIGGER_MODES
 from .paths import read_json, sha256, write_json
 
 VERSION = 'outcome_frame_v1'

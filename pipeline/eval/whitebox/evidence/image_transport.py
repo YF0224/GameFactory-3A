@@ -8,7 +8,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from .paths import sha256, write_json
+from ..core.paths import sha256, write_json
 
 
 def lossless_images(folder: Path, images: tuple[Path, ...]) -> tuple[Path, ...]:

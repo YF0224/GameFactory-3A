@@ -9,7 +9,7 @@ Exact timing / distances / numbers are diagnostics only, never tier gates.
 """
 from collections import defaultdict
 
-from ..llm import B
+from ..core.llm import B
 from ._formats import tiered_credit, tiered_schema
 
 KEY = 'mechanic'

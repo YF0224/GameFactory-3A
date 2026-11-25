@@ -13,8 +13,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from ..whitebox.llm import call_model
-from ..whitebox.paths import read_json, write_json
+from ..whitebox.core.llm import call_model
+from ..whitebox.core.paths import read_json, write_json
 
 VERSION = 'stage3-texture-binary.v1'
 PROMPT = '''For each ASSET below you get two four-view renders made with the same engine, lights and camera angles:
