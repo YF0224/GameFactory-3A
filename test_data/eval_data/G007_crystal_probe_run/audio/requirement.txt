@@ -1,0 +1,15 @@
+# G007_crystal_probe_run / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- graze_tick: Short glassy energy scan tick, bright and clean crystal shaver sound, suitable for rapid repeated playback without smearing
+- focus_mode_on: Soft descending electronic confirmation blip with engine throttle-down feel, single clean tone
+- hit_shatter: Crystal shattering impact: glassy crack burst with low sub thump, brief and harsh
+- respawn_shield: Energy shield recharge hum, rising barrier tone with subtle shimmer tail
+- clear_pulse_blast: Resonance pulse blast: deep low-frequency shockwave boom with glassy harmonic overtone, wide stereo surge
+- clear_denied: Short dry negative buzz, low double click, clearly distinct from all success sounds
+- charge_gain_chime: Rising two-note confirmation chime with glassy bell tone, rewarding and short
+- victory_chime: Bright victory fanfare of three ascending glass bell notes with soft synth pad tail
+- defeat_low: Low descending defeat tone with muffled crystal debris fading out, somber and short
+- crystal_ambience: Deep crystal cavern ambience: slow low-frequency resonance hum with faint crystalline shimmer overtones and distant sub-creaks, seamless loop, no melody

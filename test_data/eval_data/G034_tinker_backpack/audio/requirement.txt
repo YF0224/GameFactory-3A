@@ -1,0 +1,26 @@
+# G034_tinker_backpack / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- item_pickup: Metal tool clinking as it is picked up, no music, no voice
+- item_place: Satisfying click of an item snapping into a grid slot, no music, no voice
+- item_rotate: Small ratchet click, no music, no voice
+- place_reject: Dull buzz with a soft rattle, no music, no voice
+- adjacency_bonus: Bright gear-meshing chime, no music, no voice
+- card_play: Card slap with a metal tick, no music, no voice
+- wrench_hit: Wrench clanging on metal, no music, no voice
+- hammer_smash: Heavy hammer smash on scrap, no music, no voice
+- lantern_flash: Bright flash with a whooshing hum, no music, no voice
+- tape_snap: Tape measure snapping back, no music, no voice
+- pouch_block: Thick canvas absorbing an impact, no music, no voice
+- enemy_hit_metal: Robot taking a hit, metal crunch, no music, no voice
+- queen_buff: Mechanical buzzing intensifying with a reactor hum, no music, no voice
+- victory_sting: Cheerful clockwork music box flourish, no music, no voice
+- defeat_sting: Machinery winding down to a stop, no music, no voice
+- junkyard_ambience: Junkyard wind with creaking metal and distant clanks, no music, no voice
+- 阿铆·试炼开始: A cheerful young tinker voice, confident
+- 守卫·拦路: A flat robotic guard voice with metallic distortion
+- 阿铆·蜂后情报: A young tinker voice, focused
+- 阿铆·试炼完成: A young tinker voice, proud and happy
+- 阿铆·再来一次: A young tinker voice, frustrated but not giving up

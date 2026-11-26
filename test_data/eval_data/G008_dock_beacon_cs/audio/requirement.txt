@@ -1,0 +1,22 @@
+# G008_dock_beacon_cs / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- pistol_shot: Sharp compact pistol shot with brass ejection tick tail, distinct crack
+- smg_shot: Fast light submachine gun burst with metallic bolt chatter
+- rifle_shot: Full assault rifle report with clear mid-body punch and casing tinkle
+- shotgun_blast: Deep close-range shotgun blast with heavy wet-air thump
+- sniper_shot: Long heavy sniper crack with echoing rain-field report
+- lmg_shot: Sustained light machine gun hammering loop burst, belt-feed rattle
+- hit_confirm: Dry body-hit confirmation tick, short and neutral
+- headshot_ping: Bright headshot ping, clearly distinct from body tick
+- penetration_thud: Muffled through-material penetration thud with debris crunch
+- kill_confirm: Low satisfying kill confirmation stamp
+- reload_sequence: Three-stage reload: mag release clack, rounds rattle, charging handle rack
+- flashbang_blast: Flashbang bang into a long high tinnitus whine holding then fading
+- footsteps_wetmetal: Wet steel and grate footsteps with puddle splashes, three movement states layerable (run, silent walk, crouch)
+- beacon_alarm: Beacon alarm chirp and electronic plant/defuse progress beeps, 30m audible
+- round_sting: Two-tone round win/lose sting, victory rising, defeat falling
+- rain_loop: Heavy sustained rainstorm ambience over wet steel and water, distant thunder rolls, seamless loop, no music
+- dock_creak_loop: Dockyard metal creak and mooring rope groan under wind, sparse and low, seamless loop

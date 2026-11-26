@@ -1,0 +1,8 @@
+# G041_frontier_market / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G041_cg_001: 灰岩隘口晨光、驮队剪影入集、米色雨棚展开、四排货架陈列亮起、摊主挂出价签，无 UI、无文字、无剪辑
+- G041_cg_002: 隘口步道涌入旅人人群、货架快速空出、柜台前排起长队、沙漏图标亮起，无 UI、无文字
+- G041_cg_003: 双意象共用条目：胜利＝雨棚亮灯、商队旗帜升起、金币入库；失败＝雨棚收起、旗帜降下、摊位清冷；无 UI、无文字

@@ -1,0 +1,7 @@
+# G010_orbital_extraction / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- patrol_guard: Front T-pose reference of the orbital patrol guard matching patrol_guard.jpg proportions
+- elite_guard: Front T-pose reference of the elite powered-armor guard matching elite_guard.png proportions

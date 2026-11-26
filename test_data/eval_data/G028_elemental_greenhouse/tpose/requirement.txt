@@ -1,0 +1,6 @@
+# G028_elemental_greenhouse / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- vine_walker: Front T-pose reference of the bipedal vine walker matching ref_vine_walker_tpose.png proportions, limbs separated, leaf cape clear of joints

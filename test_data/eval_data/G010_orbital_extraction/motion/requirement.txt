@@ -1,0 +1,12 @@
+# G010_orbital_extraction / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G010_mot_001: Calm security patrol walk with rifle held low, looping stride
+- G010_mot_002: Guard raises rifle to aim after spotting intruder, combat ready stance
+- G010_mot_003: Firing stance with recoil, shooting pose with muzzle discipline
+- G010_mot_004: Flinch from torso hit, brief stagger
+- G010_mot_005: Investigating a noise, turning head and scanning left and right with flashlight
+- G010_mot_006: Heavy armored guard advancing slowly with shoulder-mounted weapon, imposing gait
+- G010_mot_007: Heavy armored guard collapsing to the floor, defeat fall

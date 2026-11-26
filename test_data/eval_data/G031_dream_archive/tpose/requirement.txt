@@ -1,0 +1,7 @@
+# G031_dream_archive / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- archivist: Front T-pose reference of the archivist matching ref_archivist_tpose.png proportions, lantern clear of limbs
+- nightmare_shade: Front T-pose reference of the nightmare shade matching ref_nightmare_shade_tpose.png proportions, hulking silhouette, limbs separated

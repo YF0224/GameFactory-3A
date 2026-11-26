@@ -1,0 +1,7 @@
+# G003_gggame_courtyard_rps / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- gg_master: Front T-pose reference of the GG master matching 002_anime_front.png proportions
+- rail_tycoon: Front T-pose reference of the tycoon matching 007_identity_reference.png proportions

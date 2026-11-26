@@ -1,0 +1,9 @@
+# G028_elemental_greenhouse / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G028_mot_001: Bipedal vine walker heavy forward march loop with leaf cape sway, in-place
+- G028_mot_002: Vine walker two-arm lash attack, one-shot, in-place
+- G028_mot_003: Vine walker flinch from a hit with branch rattle, in-place
+- G028_mot_004: Vine walker collapse and wilt to the ground death, one-shot, in-place

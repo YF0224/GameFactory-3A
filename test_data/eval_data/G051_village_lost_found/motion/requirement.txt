@@ -1,0 +1,9 @@
+# G051_village_lost_found / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G051_mot_001: A young postman stands idle adjusting his satchel strap
+- G051_mot_002: A young postman walks along a village dirt road
+- G051_mot_003: A young postman jogs along a village path in a hurry
+- G051_mot_004: A young postman carefully hands a small item to someone

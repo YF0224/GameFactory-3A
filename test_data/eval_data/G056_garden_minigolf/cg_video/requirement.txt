@@ -1,0 +1,7 @@
+# G056_garden_minigolf / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G056_cg_001: A floating island garden above an evening cloud sea, paper lanterns light along a three-hole course, an apprentice gardener walks to the first tee with a putter, bright stylized look, cinematic, original design, no text
+- G056_cg_002: Three course lanterns light in sequence, paper lanterns rise forming a spring pattern, the gardener raises her putter to a cheering stand, cinematic, original design, no text

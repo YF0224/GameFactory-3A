@@ -1,0 +1,6 @@
+# G019_clockwork_clones / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- apprentice_clockmaker: Young clockmaker apprentice with rolled sleeves, brass goggles on forehead, leather apron, clean symmetrical T-pose, stylized semi-realistic, warm brass and walnut palette, original design

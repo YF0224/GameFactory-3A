@@ -1,0 +1,9 @@
+# G060_volcano_stunt_route / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G060_cg_001: Dawn on a dormant volcano, a certified rider takes a number plate from a patrol keeper, first jump ramp waiting beyond mixed snow and cinder, cinematic, original design, no text
+- G060_cg_002: Camera tops the big launch ramp looking down over a glowing lava pool, heat shimmer bending the view while the steady side path lights up far below, cinematic, original design, no text
+- G060_cg_003: At a patrol post lamp the rider brushes off snow and ash and rises, a checkpoint pennant snaps open in the wind, cinematic, original design, no text
+- G060_cg_004: A certification dais unfolds in crater dawn light; ending frame variant: gold, silver or bronze badge raised / grey badge with a retry banner, cinematic, original design, no text

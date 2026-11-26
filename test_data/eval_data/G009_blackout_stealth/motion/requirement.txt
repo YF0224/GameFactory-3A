@@ -1,0 +1,11 @@
+# G009_blackout_stealth / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G009_mot_001: Low crouch sneaking walk loop, weight-shifted silent steps
+- G009_mot_002: Upright stealth walking loop, shoulders low and cautious
+- G009_mot_003: Vaulting over a waist-high fence in one smooth motion
+- G009_mot_004: Silent takedown from behind, choke hold lowering an opponent to the ground
+- G009_mot_005: Carefully opening a case and lifting out a dossier with both hands
+- G009_mot_006: Flinch reaction to being struck, brief stagger

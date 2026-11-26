@@ -1,0 +1,7 @@
+# G025_broken_continent_rts / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- h01u_rescue_militia: Front T-pose of the rescue militia matching H01U_rescue_militia.png proportions, closed helmet intact, limbs separated, tool clear of joints
+- x01_observer: Front T-pose of the remote observer matching X01_observer.png proportions, sensor rack clear of shoulders

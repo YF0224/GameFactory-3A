@@ -1,0 +1,19 @@
+# G039_sky_ring_flight / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- wind_swell: Short wind swell on takeoff with canvas flutter and propeller spin-up tail
+- ring_pass_chime: Bright ring pass chime with a bell-like ping tail and soft airy pad
+- ring_miss_warning: Ring miss warning with two quick mid-tone notes and a slight flutter
+- stall_pre_warning: Pre-stall caution beep, single mid-frequency tone with soft repetition
+- stall_alarm: Stall alarm with urgent dual-tone siren pulses and rising wind noise bed
+- thermal_whoosh: Rising thermal whoosh with light particle sparkle textures and a lift swell
+- crash_impact: Aerial crash impact with wood creak, canvas tear and debris scatter
+- reset_woosh: Respawn transition whoosh with airy shimmer and a beacon ping tail
+- timeout_alarm: Time-out alarm with three descending urgent pulses and a low wind tail
+- victory_sting: Victory sting with bright sky-island bells and a warm rising finish
+- defeat_sting: Defeat sting with muted low bells and a cold wind fade
+- wind_loop: Seamless high-altitude wind ambience over a cloud sea, airy and clean, no voices or music
+- wind_zone_loop: Seamless wind-valley turbulence loop with gusty layers suitable for runtime intensity by distance to wind core
+- engine_loop: Seamless light courier glider engine loop with propeller hum suitable for runtime pitch modulation by speed

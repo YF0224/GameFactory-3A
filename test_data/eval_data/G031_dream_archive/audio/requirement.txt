@@ -1,0 +1,19 @@
+# G031_dream_archive / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- blade_swing: Carving knife swing with ink whoosh tail
+- crawler_hit: Ink splash impact on crawler with paper tear
+- shade_hit: Heavy ink impact on shade with low thud
+- crawler_death: Crawler dissolving into ink drips with light rattle
+- shade_death: Shade dissolving with deep ink swirl and paper sigh
+- player_hurt: Player hurt gasp with ink sting
+- room_clear: Room clear chime as reward choices appear
+- door_unlock: Wax seal cracking and door creak open
+- reward_heal: Healing crystal warm chime
+- reward_knife: Carving knife pick-up with sharp metallic ring
+- reward_pendulum: Silent pendulum pick-up with clockwork tick
+- victory_sting: Archive victory sting with lamps lighting one by one
+- defeat_sting: Defeat drone with ink swallowing fade
+- archive_ambience: Dream archive ambience loop with paper rustle, distant ink drips and clockwork ticks, seamless loop

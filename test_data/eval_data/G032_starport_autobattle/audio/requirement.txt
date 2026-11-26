@@ -1,0 +1,23 @@
+# G032_starport_autobattle / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- recruit: Digital purchase confirm with a short coin blip, no music, no voice
+- shop_refresh: Holographic panel shuffle swoosh, no music, no voice
+- unit_place: Magnetic boots clamp onto a deck tile, no music, no voice
+- merge_star: Rising sci-fi power-up chord with sparkle, no music, no voice
+- bond_active: Two-tone synth confirm, no music, no voice
+- battle_start: Klaxon blip and engines powering up, no music, no voice
+- baton_hit: Electric baton strike crackle, no music, no voice
+- shield_bash: Heavy metal shield bash clang, no music, no voice
+- rail_shot: Rail rifle charged shot with a sharp crack, no music, no voice
+- heal_beam: Soft rising healing beam tone, no music, no voice
+- armor_break: Hammer impact shattering metal plates, no music, no voice
+- bee_sting: Tiny buzzing dart and a sting zip, no music, no voice
+- unit_down: Armor clatter and power down whine, no music, no voice
+- round_win: Short upbeat synth sting, no music, no voice
+- round_lose: Short descending synth sting, no music, no voice
+- income: Several coins counting up digitally, no music, no voice
+- prep_tick: Soft countdown tick, no music, no voice
+- starport_ambience: Starport deck ambience with distant ship engines and announcements muffled, no music, no voice

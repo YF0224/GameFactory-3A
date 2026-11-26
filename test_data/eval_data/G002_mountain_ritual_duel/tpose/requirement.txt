@@ -1,0 +1,7 @@
+# G002_mountain_ritual_duel / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- duelist: Front T-pose reference of the challenger duelist matching duelist.jpg proportions
+- sentinel_swordsman: Front T-pose reference of the sentinel swordsman matching sentinel_swordsman.jpg proportions

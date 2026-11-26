@@ -1,0 +1,15 @@
+# G055_inner_court_investigation / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- paper_pick: Soft paper lift from a desk as evidence is taken
+- evidence_rise: Two-note ink-strength chime as evidence strengthens
+- disguise_rustle: Fabric layers rustling as a disguise is donned
+- notice_ping: Faint attention ping as a guard's gaze lingers
+- alert_drum: Low watch drum marking raised district alert
+- struggle_grunt: Muffled brief struggle sounds, non-lexical
+- jade_clink: Soft jade ornament clink as a relation shifts
+- chapter_swipe: Ink brush swipe with a short string swell
+- verdict_scroll: Scroll unrolling with a soft xiao flute phrase
+- palace_night_ambience: Palace night: watchman's clapper far away, wind through eaves, lantern flame hum

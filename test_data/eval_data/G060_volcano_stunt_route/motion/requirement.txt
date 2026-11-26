@@ -1,0 +1,8 @@
+# G060_volcano_stunt_route / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G060_mot_001: A rider cruises on a downhill board in a balanced tuck
+- G060_mot_002: A rider crouches then pops a jump off a ramp, board leveling
+- G060_mot_003: A rider grabs the board and spins a 360 in mid-air

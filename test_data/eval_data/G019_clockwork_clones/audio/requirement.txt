@@ -1,0 +1,13 @@
+# G019_clockwork_clones / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- windup_click: Clockwork winding click as recording starts
+- spring_release: Springs release as recording stops
+- echo_materialize: Soft ghostly shimmer as a time-echo duplicate fades in
+- gear_click: Brass gear click as a mechanism triggers
+- sync_harmony: Two glass tones align into a harmonious confirm chord
+- sync_reject: Dissonant short buzz when timing sync fails
+- empty_archive: Short double buzz for an empty recording archive
+- workshop_ambience: Ticking clocks, soft gear rumble and a pendulum sway in a night workshop, no music

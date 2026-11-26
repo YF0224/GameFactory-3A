@@ -1,0 +1,15 @@
+# G023_supply_line_rescue / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- dispatch_signal: Dispatch confirmation signal with engine rev and departure chirp
+- route_blocked_alert: Rockfall route-blocked alert with distant rumble
+- reroute_hint: Reroute hint swish as the alternate path unfolds
+- delivery_beacon: Warm delivery beacon chime as cargo unloads
+- return_restock: Light restock tick as surplus cargo returns to base ledger
+- deadlock_warning: Pulsing deadlock warning as the system begins reranking
+- supply_crisis_alarm: Urgent supply crisis alarm for a starved outpost
+- victory_horn: Victory horn as the rescue window closes with all outposts supplied
+- defeat_tone: Low defeat tone with closing wind for the failed supply line
+- mountain_wind_loop: High-mountain wind ambience loop with faint distant avalanche rumbles, no seam artifacts

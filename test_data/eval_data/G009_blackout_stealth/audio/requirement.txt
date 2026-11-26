@@ -1,0 +1,18 @@
+# G009_blackout_stealth / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- footstep_metal: Boot step on metal grating, clear metallic tap
+- footstep_carpet: Muffled boot step on carpet, soft thump
+- heartbeat_fast: Accelerating heartbeat pulses as recognition rises
+- alert_L1: Suspicion sting with low strings swell for L1 alert music switch
+- alert_L2: Full alarm tension track sting for L2 alert music switch
+- takedown_thud: Short scuffle then muffled body-drop thud for takedown
+- crouch_switch: Soft fabric rustle for instant crouch stance switch
+- archive_pickup: Case latch click and paper slide as dossier is taken
+- extract_complete: Hatch hiss and uplifting resolution tone on extraction
+- decoy_throw: Decoy device arming beep then landing clatter
+- body_spotted: Guard surprised gasp plus sharp alert call upon spotting a downed comrade
+- guard_wake: Dazed groan as a knocked-out guard wakes up
+- amb_blackout_hum: Blackout facility ambience, deep electric hum with faint wind through vents, seamless loop

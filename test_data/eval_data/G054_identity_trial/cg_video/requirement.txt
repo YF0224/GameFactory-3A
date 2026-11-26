@@ -1,0 +1,8 @@
+# G054_identity_trial / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G054_cg_001: Night frontier gate, six travelers line up under torchlight, a warden unrolls a roster, great hall doors open slowly, ink-brush semi-realistic, cinematic, original design, no text
+- G054_cg_002: Two dossier pages light side by side on the archive rack, red light crawls along an overlapping timeline, the warden sets down his tea, ink-brush semi-realistic, cinematic, original design, no text
+- G054_cg_003: A verdict scroll is stamped open; ending frame variant by faction outcome: gate order restored with travelers passing / a cargo cart rolling across the bridge into night, cinematic, original design, no text

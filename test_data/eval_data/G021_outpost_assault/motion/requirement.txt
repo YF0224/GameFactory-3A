@@ -1,0 +1,13 @@
+# G021_outpost_assault / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G021_mot_001: Readable in-place march loop for the sand gunner with rifle held, top-down readable, in-place
+- G021_mot_002: Rifle aim and fire recoil, one-shot, in-place
+- G021_mot_003: Flinch from a hit with brief stagger, in-place
+- G021_mot_004: Fall to the ground death, one-shot, in-place
+- G021_mot_005: Heavy march loop with shield up and hammer rested, in-place
+- G021_mot_006: Two-handed breaching hammer smash, one-shot, in-place
+- G021_mot_007: Armor-plate flinch from a hit, in-place
+- G021_mot_008: Heavy collapse death, one-shot, in-place

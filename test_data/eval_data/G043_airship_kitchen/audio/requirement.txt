@@ -1,0 +1,16 @@
+# G043_airship_kitchen / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- order_new: New order ticket bell with paper snap, bright brass ding suitable for kitchen pass rail
+- station_start: Station work start cue, short water splash / knife tap / griddle sizzle hybrid tick per station start
+- station_finish: Station step complete chime, bright double tick with small steam hiss tail
+- station_deny: Denied interaction cue with switchable profiles: busy-station soft knock, invalid-place low buzz, waste-drop thud
+- handoff_pass: Handoff pass whoosh with light ceramic clink as item travels between chefs
+- serve_complete: Serve complete: plate slide on brass hatch shelf with satisfying bell ding
+- order_timeout: Order timeout cue with alarm profile: sand-shatter hiss and low warning tone, urgent but short
+- victory_sting: Shift success sting, warm brass band rising with cloud-wind tail, celebratory but light
+- defeat_sting: Shift defeat sting, low brass and soft engine winding down, gentle disappointment
+- airship_engine_loop: Seamless airship engine hum with cloud-sea wind, steady low drone with occasional creak, no voices or music
+- kitchen_amb_loop: Seamless busy kitchen ambience: faint sizzle, bubbling pots and distant clatter layers, no distinct voices

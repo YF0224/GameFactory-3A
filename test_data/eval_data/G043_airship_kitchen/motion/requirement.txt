@@ -1,0 +1,11 @@
+# G043_airship_kitchen / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G043_mot_001: Chef briskly walking through a kitchen aisle while looking toward workstations, carrying-ready posture, in-place loopable gait
+- G043_mot_002: Chef washing vegetables at sink, hands scrubbing in basin with water motion, rhythmic and busy
+- G043_mot_003: Chef chopping vegetables then kneading dough on board, alternating steady knife work and pressing hands
+- G043_mot_004: Chef stirring pot and flipping flatbread on griddle at stove, quick wrist flips with slight lean
+- G043_mot_005: Chef plating a dish at counter then sliding it through serve hatch, precise one-hand plate placement
+- G043_mot_006: Chef handing over a half-done dish to a teammate with both hands, slight forward lean and release

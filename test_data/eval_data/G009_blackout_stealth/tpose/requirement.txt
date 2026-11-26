@@ -1,0 +1,7 @@
+# G009_blackout_stealth / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- infiltrator: Front T-pose reference of the infiltrator matching infiltrator.png proportions
+- patrol_guard: Archive facility security guard, clean symmetrical full-body T-pose, straight front view, arms fully extended horizontally, feet visible, plain light-gray studio background, one character only

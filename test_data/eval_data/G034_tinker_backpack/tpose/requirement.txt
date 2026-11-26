@@ -1,0 +1,7 @@
+# G034_tinker_backpack / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- tinker: A traveling tinker in a leather apron and goggles, rolled sleeves, a huge patched backpack, tools on the belt, T-pose, full body front view, plain gray background, game character concept art, original design
+- wasteland_guard: A humanoid wasteland guard robot with riveted iron plates, a shield arm and a spear arm, T-pose, full body front view, plain gray background, game character concept art, original design

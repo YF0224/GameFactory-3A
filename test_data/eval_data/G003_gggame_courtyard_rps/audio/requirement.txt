@@ -1,0 +1,19 @@
+# G003_gggame_courtyard_rps / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- select_confirm: Soft UI tap confirming a rock-paper-scissors selection
+- reveal_sting: Dramatic short reveal sting with a freeze-frame whoosh as gestures show
+- win_step_gain: Bright ascending step-gain chime for round winners
+- tie_tone: Neutral two-note tie tone prompting a re-throw
+- cut_comedy: Comedic cloth rip plus cartoon whoosh as pants fly off, clearly playful
+- grab_knife_sfx: Knife lift from a wooden stand with a light metallic ring
+- pants_swap_sfx: Cloth rustle as an outer pants marker is put on or removed
+- move_depart_sfx: Light departing footsteps on stone path, departure cue
+- eliminate_sting: Descending comedic eliminate sting, distinct from victory fanfare
+- victory_fanfare: Short festive courtyard victory fanfare with crowd cheer, final winner only
+- courtyard_ambient: Lazy afternoon courtyard ambience, breeze through potted plants, distant neighborhood chatter and occasional songbird, seamless loop, no music
+- opening_narration: Warm playful storyteller voice, courtyard league opener, brief
+- first_cut_narration: Amused storyteller voice reacting to the first comedic cut, brief
+- victory_narration: Triumphant storyteller announcement with crowd cheer behind, brief

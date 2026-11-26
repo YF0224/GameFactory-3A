@@ -1,0 +1,16 @@
+# G042_highland_seed_farm / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- seed_plant: Seed planting into furrow soil, soft dig and drop with earth settle
+- water_splash: Watering can splash on tilled soil, light splatter with soil darkening hiss
+- harvest_pickup: Harvest pickup, sickle cut through stalk then crisp produce lift
+- coin_chime: Sale coin chime, two bright coins on wood table with clean tail
+- order_alert: Order expired alert, two firm descending bell notes with muted thud end
+- order_complete: Order fulfilled chime, warm ascending two-note bell with cloth snap tail
+- day_advance: Day advance cue, soft morning wind chime and single wood tick for day banner
+- victory_sting: Season victory sting, bright highland strings and bells rising to clear-sky finish
+- defeat_sting: Season defeat sting, muted low strings with cold wind tail, dignified not dramatic
+- highland_wind_loop: Seamless highland plateau wind with distant bird calls and faint prayer-flag flutter, no voices or music
+- highland_rain_loop: Seamless soft highland rain on soil and wooden awning, gentle and steady, no thunder

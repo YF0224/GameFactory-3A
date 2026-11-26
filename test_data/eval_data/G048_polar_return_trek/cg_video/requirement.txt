@@ -1,0 +1,8 @@
+# G048_polar_return_trek / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G048_cg_001: Polar station window with storm clouds gathering, an observer packs data disks into a satchel, glances at an aurora photo, and pushes out into the wind, cinematic, original design, no text
+- G048_cg_002: A wall of wind and snow sweeps over the ridge swallowing visibility, the observer leans into the gale, a shelter's warm light flickers far ahead, cinematic, original design, no text
+- G048_cg_003: The gale eases, station lights turn on one by one, the observer hands over a data disk as faint aurora unfolds in the night sky, cinematic, original design, no text

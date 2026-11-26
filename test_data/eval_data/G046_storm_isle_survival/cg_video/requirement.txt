@@ -1,0 +1,8 @@
+# G046_storm_isle_survival / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G046_cg_001: Storm-night sea, a life ring washes onto a dark island beach, a shipwrecked crew member crawls ashore looking back at a sinking freighter, teal-dark palette with warm deck lights, cinematic, original design, no text
+- G046_cg_002: Sky slams dark, wind lines rake the sea, lightning outlines a half-built shelter, the survivor hugs a plank, cinematic, original design, no text
+- G046_cg_003: A flare climbs over the island, a rescue ship cuts through the last swell, its searchlight settles on the shelter and bonfire, the survivor waves, cinematic, original design, no text

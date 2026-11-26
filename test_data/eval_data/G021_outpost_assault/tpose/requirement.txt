@@ -1,0 +1,6 @@
+# G021_outpost_assault / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- sand_gunner: Front T-pose reference of the sand gunner matching generated_ref_02.png proportions, limbs separated, rifle clear of joints

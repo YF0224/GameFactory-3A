@@ -1,0 +1,7 @@
+# G022_isle_comm_nodes / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- sentry_guard: Front T-pose reference of the sentry guard matching generated_ref_01.png proportions, limbs separated, shield clear of joints
+- meadow_ranger: Front T-pose reference of the meadow ranger matching generated_ref_02.png proportions, limbs separated, bow clear of joints

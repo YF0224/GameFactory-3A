@@ -1,0 +1,8 @@
+# G057_rhythm_machine_hall / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G057_cg_001: A grand mechanical music hall glows at night, an apprentice tuner mounts the stage as four brass note tracks light up and the gear wall turns, cinematic, original design, no text
+- G057_cg_002: Stage lights blaze to full as the great clock core spins, dual reeds lift side by side for the finale chord, cinematic, original design, no text
+- G057_cg_003: The grand chime rings across the hall as light washes toward the sleeping city, the apprentice lowers her mallet amid applause, cinematic, original design, no text

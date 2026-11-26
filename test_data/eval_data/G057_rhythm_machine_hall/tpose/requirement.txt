@@ -1,0 +1,6 @@
+# G057_rhythm_machine_hall / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- tuner_ling: Apprentice tuner in brass-trimmed waistcoat with small mallet, clean symmetrical T-pose, stylized brass-and-walnut palette, original design

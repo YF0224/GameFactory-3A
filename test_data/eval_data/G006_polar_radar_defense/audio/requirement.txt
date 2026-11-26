@@ -1,0 +1,18 @@
+# G006_polar_radar_defense / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- rifle_shot: Cold sharp rifle shot with short mechanical action, arctic outdoor crack
+- shell_drop: Brass shell casing tinkling onto packed snow
+- hit_confirm: Dry click of confirmation for a body or limb hit, short tick
+- headshot_ping: Bright distinct headshot ping, clearly different from body hit tick
+- kill_confirm: Low satisfying kill thump with a faint crystalline shatter tail
+- reload_sequence: Three-stage reload: magazine release clack, rounds seating rattle, charging handle slam
+- dry_fire_click: Empty-chamber dry fire click
+- radar_sweep_ping: Sonar-like radar sweep ping with faint static tail, station scanner
+- alarm_warning: Two-tone urgent station alarm, core under attack or wave incoming
+- player_hurt_thud: Muffled bite of corrosion contact with a pained grunt underneath
+- victory_sting: Slow warm victory sting with faint aurora shimmer tone, dawn after the siege
+- defeat_sting: Low collapsing defeat tone with dying station drone
+- polar_windsnow_loop: Polar night windswept snowfield ambience, wind howl gusts with grain rattle and distant metal creak, seamless loop, no music

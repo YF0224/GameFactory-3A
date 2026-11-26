@@ -1,0 +1,6 @@
+# G004_desert_observatory / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- silent_technician: Front T-pose reference of the silent technician matching player.jpg proportions

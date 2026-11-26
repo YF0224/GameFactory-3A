@@ -1,0 +1,6 @@
+# G013_wind_tower_grapple / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- wind_inspector: Front T-pose reference of the canyon wind-tower inspector matching generated_ref_02.png proportions, limbs separated, grapple gauntlet clear of joints

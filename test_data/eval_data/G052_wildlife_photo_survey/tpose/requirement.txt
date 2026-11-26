@@ -1,0 +1,6 @@
+# G052_wildlife_photo_survey / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- wildlife_surveyor: Wildlife surveyor in field vest and wide-brim hat with camera, clean symmetrical T-pose, watercolor stylized, original design

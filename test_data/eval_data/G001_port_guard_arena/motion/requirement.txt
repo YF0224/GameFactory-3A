@@ -1,0 +1,12 @@
+# G001_port_guard_arena / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G001_mot_001: Quick straight jab with right fist, short boxing combination opener, in-place
+- G001_mot_002: Left cross punch following the jab, boxing two-hit chain, in-place
+- G001_mot_003: Heavy overhead hook finisher with body rotation, boxing third hit, in-place
+- G001_mot_004: Quick evasive roll forward 4 meters with tuck, in-place root motion
+- G001_mot_005: Flinch reaction to a heavy metal strike, stagger back half step
+- G001_mot_006: Mechanical guard winding up a heavy swing, shoulder hazard lamp glowing, charge telegraph pose
+- G001_mot_007: Mechanical guard collapsing face-forward with sparks, final defeat fall

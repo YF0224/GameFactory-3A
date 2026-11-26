@@ -1,0 +1,7 @@
+# G017_lighthouse_prism / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G017_cg_001: Dusk seascape, a letter blows through a lighthouse window, an apprentice keeper reads it and looks up at dark prism arrays, camera pushes toward the brass mirror ring, cinematic, original design, no text
+- G017_cg_002: Lighthouse beam sweeps alive layer by layer, light washes over dark waves, a distant ship answers with its horn, the apprentice waves from the gallery, cinematic, original design, no text

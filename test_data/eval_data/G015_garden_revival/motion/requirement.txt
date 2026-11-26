@@ -1,0 +1,12 @@
+# G015_garden_revival / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G015_mot_001: Readable side-view run loop for the researcher with backpack sway, in-place
+- G015_mot_002: Arc jump 0.8 second readable takeoff-air-landing with knee tuck, in-place root motion
+- G015_mot_003: Second jump triggered at apex with a spring twist, readable mid-air boost, in-place root motion
+- G015_mot_004: Fast forward dash with body lean and trail-ready pose, 4m burst, in-place root motion
+- G015_mot_005: Wall grab, slow slide, then kick-off jump to the opposite wall, readable contact poses, in-place root motion
+- G015_mot_006: Reach and press interaction with a terminal or pod, confirm nod, in-place
+- G015_mot_007: Recover from a fall: crouch at checkpoint then rise back to exploration stance, in-place

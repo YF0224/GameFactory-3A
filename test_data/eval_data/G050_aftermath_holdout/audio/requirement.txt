@@ -1,0 +1,14 @@
+# G050_aftermath_holdout / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- assign_paper: Pencil scratch on paper as a task is assigned
+- hammer_brace: Double hammer thud reinforcing the gate
+- meal_chatter: Warm bowls and soft grateful chatter around food
+- scavenge_rummage: Careful rummaging through shelves and debris
+- raid_alarm: Sharp rotating alarm for a night raid
+- loot_scuffle: Brief scuffle and grain sack dragged away
+- morning_bell: Muted morning chime for a new day
+- rescue_convoy: Distant convoy air-horn with crowd relief
+- ruin_courtyard_ambience: Quiet aftershock night: wind over rubble, distant dog bark, dying fire crackle

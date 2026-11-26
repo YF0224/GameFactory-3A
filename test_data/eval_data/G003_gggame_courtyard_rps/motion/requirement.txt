@@ -1,0 +1,11 @@
+# G003_gggame_courtyard_rps / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G003_mot_001: Anime boy winds up and throws a rock-paper-scissors pose with a confident grin, in-place
+- G003_mot_002: Anime boy picks up a ceremonial duel knife from a stand and raises it, in-place
+- G003_mot_003: Anime boy staggers comically as his pants fly off, covering himself and wobbling off balance, in-place
+- G003_mot_004: Portly tycoon shakes his fist three times then throws a rock-paper-scissors pose with flourish, in-place
+- G003_mot_005: Tycoon swings the ceremonial duel knife in a clearly playful exaggerated slash, no gore, in-place
+- G003_mot_006: Tycoon raises both fists and laughs in triumph on the reveal pedestal, in-place

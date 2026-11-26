@@ -1,0 +1,10 @@
+# G054_identity_trial / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- gate_warden: Broad-shouldered frontier gate warden in dark lacquered armor with tally visor, clean symmetrical T-pose, ink-brush semi-realistic, original design
+- merchant_shen: Heavyset traveling merchant in layered quilted vest and satchel scales, clean symmetrical T-pose, ink-brush semi-realistic, original design
+- herb_woman: Wiry herb woman in patched indigo garb with medicine basket, clean symmetrical T-pose, ink-brush semi-realistic, original design
+- vagrant_scholar: Gaunt vagrant scholar in ink-stained robe with worn book satchel, clean symmetrical T-pose, ink-brush semi-realistic, original design
+- courier_boy: Lean courier boy in short jacket with courier tablet and straw shoes, clean symmetrical T-pose, ink-brush semi-realistic, original design

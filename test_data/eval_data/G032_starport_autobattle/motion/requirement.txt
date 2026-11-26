@@ -1,0 +1,25 @@
+# G032_starport_autobattle / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G032_mot_001: A person stands in a ready combat stance.
+- G032_mot_002: A person walks forward steadily in a combat stance.
+- G032_mot_003: A person swings a baton horizontally at close range and returns to stance.
+- G032_mot_004: A person flinches from a hit and recovers.
+- G032_mot_005: A person collapses to the ground.
+- G032_mot_006: A person stands in a ready combat stance.
+- G032_mot_007: A person walks forward steadily in a combat stance.
+- G032_mot_008: A person bashes forward with a heavy shield and returns to stance.
+- G032_mot_009: A person flinches from a hit and recovers.
+- G032_mot_010: A person collapses to the ground.
+- G032_mot_011: A person stands in a ready combat stance.
+- G032_mot_012: A person walks forward steadily in a combat stance.
+- G032_mot_013: A person aims a long rifle and fires one shot with recoil and returns to stance.
+- G032_mot_014: A person flinches from a hit and recovers.
+- G032_mot_015: A person collapses to the ground.
+- G032_mot_016: A person stands in a ready combat stance.
+- G032_mot_017: A person walks forward steadily in a combat stance.
+- G032_mot_018: A person slams a heavy hammer down in front and returns to stance.
+- G032_mot_019: A person flinches from a hit and recovers.
+- G032_mot_020: A person collapses to the ground.

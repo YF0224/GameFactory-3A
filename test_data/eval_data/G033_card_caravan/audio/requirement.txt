@@ -1,0 +1,26 @@
+# G033_card_caravan / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- card_draw: Paper card sliding off a deck, no music, no voice
+- card_play: Card flicked onto a table with a whoosh, no music, no voice
+- shuffle: Deck of cards shuffling, no music, no voice
+- end_turn: Short wooden knock, no music, no voice
+- slash_hit: Blade slash hitting cloth and flesh, no music, no voice
+- heavy_hit: Heavy blunt impact with sand burst, no music, no voice
+- block_gain: Metal shield ring, no music, no voice
+- strength_up: Low power-up whoosh, no music, no voice
+- poison_apply: Bubbling liquid hiss, no music, no voice
+- vulnerable_apply: Cracking armor with a sand gust, no music, no voice
+- enemy_buff: Enemy war roar with drum hit, no music, no voice
+- relic_trigger: Bright magical chime, no music, no voice
+- reward_select: Satisfying card-in-deck slide and chime, no music, no voice
+- victory_sting: Short triumphant oud-like flourish played by synth, no music, no voice
+- defeat_sting: Wind blowing over sand with a low drone, no music, no voice
+- desert_ambience: Desert wind with distant caravan bells, no music, no voice
+- 商队长·出发: A steady caravan leader voice, warm and determined
+- 匪首·喊话: A deep menacing bandit chief voice, slow and threatening
+- 商队长·巨蛇警报: A caravan leader voice, startled
+- 商队长·抵达绿洲: A caravan leader voice, quiet and moved
+- 商队长·沙暴失败: A caravan leader voice fading under wind

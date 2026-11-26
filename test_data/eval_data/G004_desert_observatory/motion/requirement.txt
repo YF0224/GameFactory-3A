@@ -1,0 +1,10 @@
+# G004_desert_observatory / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G004_mot_001: Technician jogging across loose sand with slight lean, steady loopable gait
+- G004_mot_002: Quick one-handed swing of a heavy insulated gauntlet with body rotation, in-place
+- G004_mot_003: Evasive roll forward 4 meters through sand with dust kick-up, in-place root motion
+- G004_mot_004: Flinch from a heavy impact with a stagger step back, in-place
+- G004_mot_005: Technician drops to knees then falls forward into the sand, final defeat fall

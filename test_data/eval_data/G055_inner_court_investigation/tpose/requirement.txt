@@ -1,0 +1,6 @@
+# G055_inner_court_investigation / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- shen_zhiwei: Young court investigator in dark-teal commoner robe with wooden hair pin, clean symmetrical T-pose, stylized semi-realistic ancient court style, original design

@@ -1,0 +1,14 @@
+# G056_garden_minigolf / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- charge_tone: Rising soft tone while charging a putt
+- putt_tap: Clean wood-and-putter tap
+- roll_grass: Soft grass rolling hiss
+- board_bonk: Hollow wooden bumper bounce
+- out_bound_fall: Whistling fall into wind and a soft poof
+- hole_pop: Bright pop and a satisfying rattle as the ball drops
+- cap_limit: Low neutral chime as the 8-stroke cap applies
+- finish_fanfare: Light airy fanfare with paper-lantern shimmer
+- garden_ambience: Floating garden: soft wind over grass, cloud-sea hum, distant songbirds

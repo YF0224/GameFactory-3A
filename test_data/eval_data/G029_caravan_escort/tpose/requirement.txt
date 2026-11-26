@@ -1,0 +1,8 @@
+# G029_caravan_escort / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- plains_raider: Front T-pose reference of the plains raider matching ref_plains_raider_tpose.png proportions, limbs separated, blade clear of joints
+- escort_guard: Front T-pose reference of the escort guard in quilted desert garb with shield and spear held clear of the body, limbs separated
+- canyon_ambusher: Front T-pose reference of the canyon ambusher with hand crossboard slung on the back, limbs separated

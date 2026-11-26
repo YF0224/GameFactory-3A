@@ -1,0 +1,6 @@
+# G015_garden_revival / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- garden_researcher: Front T-pose reference of the garden maintenance researcher matching generated_ref_02.png proportions, limbs separated, backpack clear of joints

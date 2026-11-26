@@ -1,0 +1,9 @@
+# G047_oldtown_fire_rescue / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- volunteer_firefighter: Retro volunteer firefighter in canvas coat and brass helmet with back-mounted water tank, clean symmetrical T-pose, stylized semi-realistic, original design
+- watchmaker_elder: Frail watchmaker elder in shawl vest with pince-nez, clean symmetrical T-pose, stylized semi-realistic, original design
+- grocery_clerk: Middle-aged grocery clerk in rolled-sleeve apron with towel, clean symmetrical T-pose, stylized semi-realistic, original design
+- apprentice_boy: Teen apprentice boy in patched jacket with satchel, clean symmetrical T-pose, stylized semi-realistic, original design

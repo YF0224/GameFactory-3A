@@ -1,0 +1,14 @@
+# G018_portal_freight / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- portal_anchor: Energy anchoring hum as a portal snaps onto a wall panel
+- portal_transit: Whooshing rift transit sound with subtle reverse tail
+- pickup_lift: Hydraulic lift whir as a crate is hefted
+- drop_thud_s: Light metallic thud of a small crate landing
+- drop_thud_h: Heavy resonant thud of a heavy crate landing
+- plate_click: Mechanical click of a pressure plate engaging
+- deliver_beep: Confirming delivery beep when a crate reaches its matched berth
+- reject_buzz: Short negative buzz for mismatched berth or invalid action
+- station_ambience: Airlock low hum and ventilation hiss inside an orbital station bay, no music

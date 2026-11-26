@@ -1,0 +1,17 @@
+# G037_night_drift_yard / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- countdown_beep: Clean countdown beep, rising pitch per second with a faster urgent variant for the last 10 seconds
+- start_release: Start release chime with a low swell and rain-muted tail
+- combo_up: Short bright combo-up arpeggio, one note per multiplier step, dry mix above rain
+- drift_break: Drift break cue with two soft descending notes and a faint tire release tail
+- collision_crash: Heavy vehicle collision impact with metal crunch and glass tinkle over rain bed, no distortion
+- puddle_splash: Tire puddle splash with water fan whoosh and fine droplet patter
+- handbrake_click: Handbrake lever click with mechanical ratchet snap and soft rear-tire chirp
+- victory_sting: Victory sting with warm chords and a proud short fanfare over soft rain tail
+- defeat_sting: Defeat sting with muted low strings and a slow rain-heavy fade
+- rain_night_loop: Seamless steady night rain on concrete ambience with distant port machinery hum, no voices or music
+- drift_engine: Seamless rear-drive coupe engine loop at mid load suitable for runtime pitch modulation by speed and throttle, no manufacturer identity
+- tire_skid_loop: Seamless wet tire skid loop with rubber squeal layers suitable for runtime intensity modulation by slip angle

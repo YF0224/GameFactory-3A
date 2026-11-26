@@ -1,0 +1,17 @@
+# G041_frontier_market / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- customer_enter: Customer entering stall footsteps with soft cloth rustle on packed dirt, neutral friendly tone
+- coin_chime: Transaction coin chime, two bright metal coins landing on wood counter, satisfying clean tail
+- stockout_alert: Stock-out alert, soft two-note descending wood block tone, informational not harsh
+- queue_timeout: Patience timeout cue, hourglass shatter imitation with glass-sand hiss and low thud
+- door_close: Rolling shutter closing on wooden frame, slats clatter and final wooden thud
+- day_settle: Day settlement abacus rolling and ledger page turn, layered wooden clicks into a calm resolving tone
+- price_tick: Price tag tick, crisp paper-tag flick and small wooden peg click for price change
+- victory_sting: Victory sting, warm market-day strings and chimes rising to a proud finish with caravan-bell tail
+- defeat_sting: Defeat sting, muted low woodwind with dust-wind tail, dignified not dramatic
+- market_wind_loop: Seamless rocky-pass wind ambience with distant caravan bells and faint market murmur, no voices or music
+- market_crowd_loop: Seamless light market crowd ambience, scattered footsteps and cloth movement, no distinct words
+- queue_wait_loop: Low anxious waiting murmur loop with soft shuffling, layered only while waiting customers present

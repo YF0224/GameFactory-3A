@@ -1,0 +1,16 @@
+# G048_polar_return_trek / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- footstep_snow: Crunching snow footsteps at walking pace
+- footstep_ice: Lighter crisp footsteps on ice
+- flag_plant: Stake punching into packed snow
+- fire_ignite: Match flare then steady fuel-block flame
+- ice_crack: Sharp ice sheet crack and water splash
+- hypothermia_warn: Low pulsing device alarm for hypothermia
+- critical_alarm: Fast urgent device alarm for body failure
+- frostbite_alert: Long single alarm tone for frostbite
+- data_beep: Faint data-sensor beep as records take cold damage
+- station_bell: Muffled station bell through thinning wind
+- blizzard_ambience: Howling polar gale with gust swells and fine snow hiss

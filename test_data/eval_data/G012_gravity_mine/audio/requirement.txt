@@ -1,0 +1,15 @@
+# G012_gravity_mine / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- gravity_flip_hum: Low resonant gravity-flip hum with a metallic click of the two-state wrench
+- weightless_whoosh: Falling weightless whoosh while airborne between surfaces
+- land_thud: Heavy landing thud with dust puff tail on either surface
+- trap_hit_shriek: Sharp metallic trap-hit shriek, hazard contact
+- fall_reset_chime: Recovering two-note chime as the mechanic re-anchors at the checkpoint
+- hammer_warning: Rhythmic mechanical warning clunk as the ceiling hammer enters its danger second
+- steam_blast: Pressured steam blast hiss from a wall vent during its jet second
+- victory_sting: Rising industrial victory sting as the gravity core reboots
+- defeat_sting: Low collapsing defeat tone with a fading lamp hum
+- mine_ambient_loop: Deep mine ambience, low structural drone with water drips and distant creaks, seamless loop, no music

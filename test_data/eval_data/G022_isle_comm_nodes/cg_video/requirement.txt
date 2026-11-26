@@ -1,0 +1,8 @@
+# G022_isle_comm_nodes / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G022_cg_001: 浮岛链路全景：三座中继塔的信号灯逐一熄灭，守备队从双登陆翼登岛，镜头推向中央节点群；无剪辑、无 UI、无文字
+- G022_cg_002: 占点环满 5 段的瞬间，节点塔换旗、涟漪沿链路扩散到相邻节点，驻留单位举旗示意
+- G022_cg_003: 胜负双意象：胜利=三节点信号灯重联点亮、链路光带贯穿浮岛、守备队旗帜升起；失败=节点灯熄灭、静默波纹扩散、守备队收拢残旗

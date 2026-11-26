@@ -1,0 +1,6 @@
+# G053_field_investigation / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- field_researcher: Field researcher with short dark hair, teal jacket, sand pants, boots, satchel and brass compass, clean symmetrical T-pose, stylized semi-realistic, matching bound reference image

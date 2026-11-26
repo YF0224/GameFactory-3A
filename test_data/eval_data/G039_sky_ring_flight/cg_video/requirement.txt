@@ -1,0 +1,8 @@
+# G039_sky_ring_flight / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G039_cg_001: 云海日出、群岛灯塔依次亮起、信使邮翼机在起飞平台展开帆布翼，镜头自灯塔上空掠到平台正后方，无 UI、无文字、无剪辑
+- G039_cg_002: 机身被上升粒子托举、穿过风谷环门的脉冲光环、风线自侧方掠过镜头，无 UI、无文字
+- G039_cg_003: 双意象共用条目：胜利=终岛灯塔点亮、信封送达、邮翼机绕塔盘旋；失败=灯塔灯暗、信封被风卷走、机身停在检查点浮标旁；无 UI、无文字

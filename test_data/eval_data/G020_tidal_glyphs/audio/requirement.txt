@@ -1,0 +1,18 @@
+# G020_tidal_glyphs / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- stone_rub: Stone rubbing scrape as a clue is recorded
+- glyph_hum_low: Low resonant glyph tone when a symbol is tentatively assigned
+- glyph_hum_high: Brighter resonant glyph tone plus a soft chime on confirmation
+- mistranslate_thud: Dull stone-door refusal knock for a mistranslation
+- relock_swish: Paper swish as an assumption rolls back
+- combine_chime: Two artifacts click together with a stone chime
+- stone_gate: Heavy stone door grinding open with dust falls
+- watcher_rumble: Sub-bass pressure rumble rising under the tide
+- watcher_shriek: Sudden high frequency shriek cutting through silence
+- alcove_lamp: Small warm chime as alcove lamps ignite
+- seal_aria: Six-note ascending stone aria as seal slots align
+- tide_flood: Rushing tide surge flooding stone halls
+- ruin_ambience: Low tide wash inside a stone ruin, dripping water, distant hollow echoes, no music

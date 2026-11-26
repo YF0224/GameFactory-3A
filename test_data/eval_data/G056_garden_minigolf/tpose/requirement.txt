@@ -1,0 +1,6 @@
+# G056_garden_minigolf / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- gardener_mei: Apprentice gardener in petal-trimmed apron holding a putter, clean symmetrical T-pose, cheerful cartoon style, original design

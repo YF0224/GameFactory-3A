@@ -1,0 +1,9 @@
+# G053_field_investigation / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G053_mot_001: A field researcher stands idle, hand resting on satchel strap
+- G053_mot_002: A field researcher walks at survey pace
+- G053_mot_003: A field researcher runs forward in a hurry
+- G053_mot_004: A field researcher crouches into a stalking posture

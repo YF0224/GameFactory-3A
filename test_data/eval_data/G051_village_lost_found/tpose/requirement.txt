@@ -1,0 +1,9 @@
+# G051_village_lost_found / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- young_postman: Young village postman in green jacket and canvas satchel, clean symmetrical T-pose, watercolor stylized, original design
+- granny_lin: Kind elderly village granny in shawl and apron, clean symmetrical T-pose, watercolor stylized, original design
+- postmaster: Stout postmaster in green visor cap with rubber stamps at his counter, clean symmetrical T-pose, watercolor stylized, original design
+- traveler_wen: Lanky traveler with wide hat, dust cloak and sealed package, clean symmetrical T-pose, watercolor stylized, original design

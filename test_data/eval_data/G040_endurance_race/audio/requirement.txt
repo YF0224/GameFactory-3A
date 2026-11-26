@@ -1,0 +1,17 @@
+# G040_endurance_race / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- start_light_beep: Race start light beep sequence, one short tone per red lamp then a bright green release tone
+- lap_complete_chime: Lap complete chime with two quick bright notes and short tail
+- collision_crash: Car-to-car collision impact, mixed metal crunch and carbon shatter, short and punchy
+- penalty_beep: Penalty announcement beep, two firm descending tones for cut-track or unsafe overtake
+- radio_alert: Team radio alert ping with switchable tone profiles: safety car yellow flag, green flag release and pit call reminder
+- fuel_warning: Low fuel warning tone, soft amber two-pulse alert suitable for repeating every 5 seconds
+- pit_wrench: Pit stop mechanic loop-ready burst: impact wrench bursts, jack clunk and fuel rig hiss in one take
+- victory_sting: Championship victory sting, bright coastal horns with rising finish and sea-breeze tail
+- defeat_sting: Defeat sting, muted low brass with rain ambience tail, also used for retirement scene profile
+- engine_loop: Seamless endurance engine loop at mid load suitable for runtime pitch modulation by speed, no manufacturer identity
+- rain_loop: Seamless rain on tarmac ambience with distant sea surf, no thunder, no voices
+- tire_squeal_loop: Seamless tire squeal loop that ramps in during slides and hard cornering, peaks on loss-of-control events

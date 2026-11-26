@@ -1,0 +1,8 @@
+# G038_twin_truck_rescue / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G038_cg_001: 山脚营地晨雾、被困物资车闪着双闪停在峡谷、A 牵引车绞盘就位、B 清障车驶向落石区，镜头自垭口俯冲到双车汇合，无 UI、无文字、无剪辑
+- G038_cg_002: B 清障车凿开落石、碎石飞溅、警示带撤除，A 牵引车拖拽物资车从敞开的窄弯通过，无 UI、无文字
+- G038_cg_003: 双意象共用条目：胜利=交付站灯亮、物资箱入库、双车鸣笛；失败=山谷夜幕、营地灯暗、物资箱滞留原地；无 UI、无文字

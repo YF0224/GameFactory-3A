@@ -1,0 +1,7 @@
+# G056_garden_minigolf / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G056_mot_001: A young gardener stands idle, tapping her putter lightly
+- G056_mot_002: A young gardener swings a putter forward and follows through

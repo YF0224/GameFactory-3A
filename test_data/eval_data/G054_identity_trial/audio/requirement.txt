@@ -1,0 +1,15 @@
+# G054_identity_trial / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- paper_slide: Dossier page slid across wood as testimony is filed
+- card_flip: Card flipped onto the table with a snap
+- window_tick: Ticking countdown under the response window
+- contradiction_sting: Sharp dissonant sting as testimonies overlap suspiciously
+- consistent_page: Calm page-turn confirm for consistent testimonies
+- vote_gavel: Wooden gavel knock for each vote counted
+- reveal_gong: Low flat gong as an identity flips open
+- prestige_stamp: Heavy red seal stamp on the ledger
+- verdict_bell: Solemn verdict bell over the hall
+- gate_hall_ambience: Night frontier hall: torch crackle, wind through gate slats, distant watch drums

@@ -1,0 +1,10 @@
+# G055_inner_court_investigation / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G055_cg_001: Palace walls at night, lantern rows light one by one, an investigator stands with a lamp on an outer corridor of Jinsè courtyard, watch drums sound as a roster is secretly swapped, vermilion and indigo night palette, cinematic, original design, no text
+- G055_cg_002: Morning book corridor of the protocol bureau, a duty-rota page corner lifts, wet ink and a registry stamp beside it, lanterns dim into daylight, cinematic, original design, no text
+- G055_cg_003: Dusk at the abandoned cold palace, patched wall beside fresh mortar, a tattered archive page lifts in dust light, cinematic, original design, no text
+- G055_cg_004: Under imperial desk lamps a tampered page and the original roster lie side by side, the wax crack direction matches the seal, rain outside stops abruptly, cinematic, original design, no text
+- G055_cg_005: A verdict scroll unrolls; ending frame follows one of the six ending groups, palace and key figures as in-game, cinematic, original design, no text

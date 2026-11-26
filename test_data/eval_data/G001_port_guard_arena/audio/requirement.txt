@@ -1,0 +1,14 @@
+# G001_port_guard_arena / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- punch_swing: Short whoosh of a boxing swing through sea air
+- metal_impact: Crisp fist-on-metal clang with slight ring-off, layered over a low thud
+- deep_thud: Low frequency body impact thud for guard attacks hitting the player
+- charge_warning: Rising low-frequency mechanical charge-up hum during guard wind-up
+- guard_down: Heavy metal body collapse with mechanical failure whine and part clatter
+- victory_sting: Short uplifting victory sting for training completion
+- defeat_sting: Low somber defeat tone
+- heartbeat_low: Single low heartbeat pulse accent for player low-HP tension
+- ambient_sea_wind: Abandoned seaport ambience, steady sea wind with distant waves and gull calls, seamless loop

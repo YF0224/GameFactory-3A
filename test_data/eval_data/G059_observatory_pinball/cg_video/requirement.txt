@@ -1,0 +1,8 @@
+# G059_observatory_pinball / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G059_cg_001: A brass star-chart pinball table in a night observatory hall, camera glides along lit star-rail bands as a single pearl ball rolls onto the launch rail, deep-blue and brass, cinematic, original design, no text
+- G059_cg_002: Three comet targets link into a light trail, two new balls slide down from the star rail as the table lamps blaze to full, cinematic, original design, no text
+- G059_cg_003: Table lamp bands settle tier by tier to the final multiplier; achieved: a star chart unfolds above the playfield; failed: lamps dim warmly, cinematic, original design, no text

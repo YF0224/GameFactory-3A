@@ -1,0 +1,9 @@
+# G011_cloud_mail_runner / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G011_mot_001: Readable side-view run loop for the courier with mail satchel swaying, in-place
+- G011_mot_002: Arc jump with arms tucked, 0.9 second readable takeoff-air-landing, in-place root motion
+- G011_mot_003: Low slide with one hand on the deck under the low rail, 0.7 second, in-place root motion
+- G011_mot_004: Stumble from a crash then rise back to running stance, recover pose, in-place

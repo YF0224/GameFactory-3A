@@ -1,0 +1,7 @@
+# G001_port_guard_arena / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- guard_trainer: Front T-pose reference of the defender trainer matching player.jpg proportions
+- mechanical_guard: Front T-pose reference of the mechanical guard matching mechanical_guard.jpg proportions

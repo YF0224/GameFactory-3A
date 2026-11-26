@@ -1,0 +1,9 @@
+# G050_aftermath_holdout / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G050_cg_001: Dawn over an earthquake-cracked community lane, a group leader steps out of a damaged two-story shelter, four residents look up from a campfire, cinematic, original design, no text
+- G050_cg_002: Night rain stops over the courtyard, residents count a ransacked storeroom, looter silhouettes lurk far away as the gate lamp lights up, cinematic, original design, no text
+- G050_cg_003: Light drizzle at dawn, survivors gather at the barricade, the leader looks down the road out of town, cinematic, original design, no text
+- G050_cg_004: Convoy lights sweep into the community; ending frame variant: residents boarding trucks / wounded helped away / empty shelter with dying fire, cinematic, original design, no text

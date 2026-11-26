@@ -1,0 +1,7 @@
+# G027_dune_maze_td / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G027_cg_001: 荒漠正午：西缘蚁穴尘柱升起，沙蚁群自穴口涌出；镜头掠过空旷沙地与三座沙脊，停在东缘前哨基地的旗帜上；无 UI、无文字、无剪辑
+- G027_cg_002: 双意象共用条目：胜利=蚁群绕开绿洲远去、基地旗帜舒展、日光转暖；失败=沙蚁涌入基地、水脉断流、沙尘掩埋哨站；无 UI、无文字

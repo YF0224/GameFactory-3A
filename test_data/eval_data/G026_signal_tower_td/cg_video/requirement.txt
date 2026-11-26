@@ -1,0 +1,7 @@
+# G026_signal_tower_td / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G026_cg_001: 峡谷全景：信号塔灯光依次点亮、荒漠爬行者群自谷口涌入；镜头自风蚀岩掠过空置建造格，停在信号塔基地；无 UI、无文字、无剪辑
+- G026_cg_002: 双意象共用条目：胜利=信号光柱冲天、风暴过境、旗帜舒展；失败=信号熄灭、虫群漫过基地、灯光熄灭；无 UI、无文字

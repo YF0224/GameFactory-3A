@@ -1,0 +1,6 @@
+# G020_tidal_glyphs / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- glyph_scholar: Field epigrapher in a hooded rain cloak with lantern and satchel, clean symmetrical T-pose, stylized semi-realistic, cool teal and stone palette, original design

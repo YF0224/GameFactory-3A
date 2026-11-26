@@ -1,0 +1,16 @@
+# G047_oldtown_fire_rescue / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- hose_hiss: Pressurized water hiss through a hand nozzle
+- fire_out: Wet sizzle as flames extinguish
+- wood_crackle: Loud wood crackle as fire spreads to a new cell
+- demolish_thud: Double muffled hammer thuds breaking debris
+- collapse_creak: Ominous creaking beam warning before collapse
+- npc_calling: Distant worried human shouting for help, non-lexical vocal
+- npc_panic: Frightened short whimper, non-lexical vocal
+- rescue_confirm: Relieved two-note confirm as a resident reaches safety
+- route_blocked_alarm: Low urgent alarm signaling a blocked rescue route
+- evac_horn: All-clear fire bell fading into quiet rain
+- fire_street_ambience: Roaring house fire with rain patter, distant alarm bells, wind-fed crackle

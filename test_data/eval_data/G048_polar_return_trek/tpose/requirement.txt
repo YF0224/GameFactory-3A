@@ -1,0 +1,6 @@
+# G048_polar_return_trek / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- polar_observer: Polar observer in fur-lined parka with goggles and satchel, clean symmetrical T-pose, stylized semi-realistic, original design

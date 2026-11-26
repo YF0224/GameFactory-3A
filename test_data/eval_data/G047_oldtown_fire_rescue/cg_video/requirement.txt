@@ -1,0 +1,8 @@
+# G047_oldtown_fire_rescue / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G047_cg_001: Winter night old-town street, a timber shopfront bursts with fire tongues, a volunteer firefighter shoulders a water tank and dashes down the lane, cries for help from upper windows, cinematic, original design, no text
+- G047_cg_002: A rescued resident steps out to safety and turns to nod, the firefighter wipes his mask and heads back in, fire light on wet cobbles, cinematic, original design, no text
+- G047_cg_003: Three residents and the firefighter stand in the backyard exit watching the fire die down, bell turns to a calm town clock, night rain softens, cinematic, original design, no text

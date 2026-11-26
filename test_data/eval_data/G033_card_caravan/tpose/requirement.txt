@@ -1,0 +1,8 @@
+# G033_card_caravan / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- caravan_leader: A desert caravan leader in an indigo travel robe, sand goggles on the head, leather satchel of cards, curved short blade at the waist, T-pose, full body front view, plain gray background, game character concept art, original design
+- sand_bandit: A sand bandit in tan wraps with a curved dagger and a small buckler, T-pose, full body front view, plain gray background, game character concept art, original design
+- bandit_chief: A towering sand bandit chief in bronze scale armor with a heavy two-handed scimitar and war paint, T-pose, full body front view, plain gray background, game character concept art, original design

@@ -1,0 +1,30 @@
+# G030_polar_night_td / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- generator_hum: Steam generator steady hum with flywheel ticks
+- wire_spark: Power line disconnect crackle with dying hum
+- overload_alarm: Overload trip alarm with relay clack and warning tone
+- shredder_bite: Rodent bite into frozen wood pole with wire snap
+- pole_break: Power pole snapping and falling with wire whip
+- repair_weld: Welding torch repair loop with progress ticks
+- tower_shot: Sentry ballista release with cold bolt whoosh
+- predator_hit: Bolt impact into frost fur with ice crack
+- predator_growl: Frost predator growl with breath hiss
+- core_hit: Hearth core impact with ember burst and low boom
+- night_start: Night bell with rising wind and distant howl
+- day_start: Day chime with settling wind
+- tab_switch: Panel open tick with list shuffle
+- build_place: Building placement thunk into frozen ground
+- mine_cycle: Mining drill cycle with ore clink and steam puff
+- victory_sting: Sunrise victory sting with warm brass and wind settle
+- defeat_sting: Hearth dying drone with wind swallowing town
+- blizzard_ambience: Polar blizzard ambience loop with wind gusts, distant hearth hum and snow hiss, seamless loop
+- mayor_start: Resolute old mayor voice, gravelly and calm, Chinese, wind bed
+- mayor_night1: Mayor warning voice, tense, Chinese
+- mayor_night2: Mayor alarmed voice, quick pace, Chinese
+- mayor_night3: Mayor urgent command voice, strained, Chinese, storm bed
+- mayor_victory_full: Relieved warm mayor voice, Chinese, morning wind bed
+- mayor_victory_ember: Bittersweet low mayor voice, Chinese, morning wind bed
+- mayor_defeat: Grieving broken mayor voice, near whisper, Chinese

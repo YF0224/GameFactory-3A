@@ -1,0 +1,8 @@
+# G049_underwater_salvage / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G049_mot_001: A diver treads water in place, bubbles rising slowly
+- G049_mot_002: A diver swims forward with calm fin kicks
+- G049_mot_003: A diver braces against a hull and cranks a wrench repeatedly

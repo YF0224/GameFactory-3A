@@ -1,0 +1,8 @@
+# G051_village_lost_found / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G051_cg_001: Misty morning village, a young postman walks up the lane, three villagers wave from the post office porch, an old wooden sign sways, warm autumn watercolor palette, cinematic, original design, no text
+- G051_cg_002: By a riverside washing stone the postman lifts a silver thimble into morning light, geese crane their necks in the reeds, cinematic, original design, no text
+- G051_cg_003: Village lanterns light one by one, residents gather for a thank-you meal, granny wears her thimble, geese settle into pen, a package gets its stamps, cinematic, original design, no text

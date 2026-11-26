@@ -1,0 +1,16 @@
+# G022_isle_comm_nodes / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- turn_start: Bright turn-start chime with phase banner swell
+- move_confirm: Short step confirm tick as a move order lands
+- attack_hit: Impact hit with armor ring for ranged and melee attacks
+- heal_pulse: Warm green heal pulse chime
+- fog_reveal: Mist-part reveal shimmer as hidden units become visible
+- capture_ring_tick: Rising capture tick as the hold ring gains a segment
+- ownership_change: Triumphant node ownership change with relay power-up whine
+- unit_defeat: Soft defeat dissolve as a unit falls
+- match_end_victory: Victory horn as the relay link relights for the win banner
+- match_end_defeat: Low defeat tone with fading relay hum for the defeat banner
+- isle_surf_loop: Floating isle wind and distant surf ambience loop with reed rustle, no seam artifacts

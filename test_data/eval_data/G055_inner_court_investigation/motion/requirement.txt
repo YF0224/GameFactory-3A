@@ -1,0 +1,9 @@
+# G055_inner_court_investigation / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G055_mot_001: A court investigator stands idle, sleeve hand folded, lantern light swaying
+- G055_mot_002: A court investigator walks forward along a lamp-lit corridor
+- G055_mot_003: A court investigator crouches low, moving quietly behind a screen
+- G055_mot_004: A court investigator leans over a desk, carefully lifting a paper with both hands

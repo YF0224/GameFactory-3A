@@ -1,0 +1,13 @@
+# G051_village_lost_found / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- page_turn: Paper page turn as a quest is accepted
+- clue_ding: Light discovery ding as an environment clue registers
+- pickup_chime: Small item pickup chime
+- goose_honk: Single indignant goose honk
+- stamp_seal: Rubber stamp thump on a delivery receipt
+- refuse_polite: Soft polite refusal hum
+- coin_drop: Coin drop into a stamp tin
+- village_ambience: Autumn village morning: stream water, breeze through leaves, distant dog bark

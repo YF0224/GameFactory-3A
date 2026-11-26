@@ -1,0 +1,20 @@
+# G004_desert_observatory / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- weakpoint_ping: Bright metallic penetration ping rising in pitch, weak-point crit highlight
+- armor_ricochet: Dull muffled metal ricochet thud with debris clatter, armored hit
+- swing_whiff: Heavy gauntlet swing through dusty air, no impact
+- phase_roar: Deep sub-bass machine roar with cracking metal and collapsing plates, phase transition
+- hazard_warning: Urgent short warning beep with distinct pitch per hazard type, ground danger telegraph
+- beam_sweep: Sweeping energy beam howl with air sizzle, rotating light beam
+- player_hurt: Gritted breath with a low body impact thud, player takes damage
+- dodge_sand_roll: Cloth-and-sand tumble roll, quick dodge swish
+- respawn_chime: Warm rising chime as checkpoint light column revives the technician
+- victory_sting: Solemn uplifting sting with faint wind settling, boss core shutdown
+- defeat_sting: Low descending defeat tone with rising sandstorm hiss
+- sandstorm_ambient: Endless desert sandstorm ambience outside the dome, wind hiss and grain rattle, seamless loop
+- machine_hum_loop: Observatory machine idle hum, deep rotating mechanism drone with periodic mirror-disc clicks, seamless loop
+- opening_narration: Low resolute female wasteland narrator voice, wind behind, brief
+- victory_narration: Relieved quiet narrator voice over settling wind, brief

@@ -1,0 +1,12 @@
+# G017_lighthouse_prism / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- mirror_click: Fine brass gear click as a mirror rotates one 45-degree step
+- shutter_thunk: Heavy metal shutter opening or closing thunk with slight reverb
+- synth_chime: Two glass tones merging into one bright harmonic chime
+- receiver_on: Warm confirmation tone as a beacon receiver lights up
+- reject_buzz: Short low buzz when light color mismatches a receiver
+- group_fanfare: Small uplifting brass fanfare when a puzzle group completes
+- lighthouse_ambience: Waves against a lighthouse rock, distant fog horn every 45 seconds, night gulls, no music

@@ -1,0 +1,15 @@
+# G034_tinker_backpack / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G034_mot_001: A person stands with weight on one leg holding a wrench.
+- G034_mot_002: A person swings a wrench in a fast horizontal arc.
+- G034_mot_003: A person crouches and raises a bag defensively.
+- G034_mot_004: A person staggers back from a hit.
+- G034_mot_005: A person collapses forward onto the ground.
+- G034_mot_006: A person stands in a ready stance, shifting weight slightly, with a spear and shield.
+- G034_mot_007: A person thrusts a spear forward and returns to the ready stance.
+- G034_mot_008: A person flinches backward from a hit to the chest and recovers.
+- G034_mot_009: A person staggers, drops to the knees and collapses forward onto the ground.
+- G034_mot_010: A person raises a shield arm in front and braces.

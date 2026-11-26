@@ -1,0 +1,8 @@
+# G053_field_investigation / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G053_cg_001: Misty morning over a flower slope, a field researcher shoulders a satchel and steps from a research station, three domain outlines in the mist, matching bound art style, cinematic, original design, no text
+- G053_cg_002: A hill trail lights up as the researcher tops the ridge, the amber silhouette of a thunder crystal beast emerges from fog, matching bound reference, cinematic, original design, no text
+- G053_cg_003: Inside the research station a report cover is stamped, conclusion text follows the verified hypothesis, outside creatures roam at ease, matching bound art style, cinematic, original design, no text

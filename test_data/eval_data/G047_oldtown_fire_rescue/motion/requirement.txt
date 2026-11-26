@@ -1,0 +1,9 @@
+# G047_oldtown_fire_rescue / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G047_mot_001: A firefighter stands ready, one hand on hose reel
+- G047_mot_002: A firefighter runs forward in full gear
+- G047_mot_003: A firefighter carries a person on the shoulder walking forward
+- G047_mot_004: A firefighter swings a pry bar at a collapsed beam twice

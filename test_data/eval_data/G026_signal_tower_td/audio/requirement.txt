@@ -1,0 +1,17 @@
+# G026_signal_tower_td / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- arrow_shot: Wooden ballista release with bolt whoosh over canyon air
+- cannon_fire: Heavy counterweight launch thump with stone whistle and impact boom
+- slow_pulse: Cool mist pulse with glass chime and condensation hiss
+- tower_build: Construction placement thunk with sand settle
+- tower_sell: Deconstruct click with coin sweep
+- crawler_hit: Bolt impact into chitin with sand scatter tick
+- crawler_death: Beetle collapse into loose sand with dust puff
+- base_alarm: Two-tone signal station alarm with urgent second beat
+- wave_start: Wave banner horn with distant swarm chatter underneath
+- victory_sting: Warm victory sting with beacon hum and settling wind
+- defeat_sting: Low defeat drone with signal decay hiss
+- canyon_wind: Canyon wind ambience loop with faint grain hiss and distant rock whistle, seamless loop, no seam artifacts

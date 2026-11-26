@@ -1,0 +1,16 @@
+# G044_robot_workshop / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- place_part: Part placement thud with metallic snap-fit click, short and satisfying
+- delete_part: Part removal: ratchet unbolt and debris scatter, slightly longer than placement
+- assemble_step: Assembly step: brief mechanical press with grinding spark tail
+- assemble_complete: Assembly complete: crisp spring-release clunk with bright confirmation tick
+- deliver_tick: Delivery count tick: crate lands on slide rail with counting pylon beep
+- jam_alert: Jam alert: two urgent mid-tone pulses with low mechanical strain undertone, loopable every 5 seconds while jammed
+- recovery_flush: Recovery flush: pneumatic whoosh with items clearing and relay reset click, also used for line reset profile
+- victory_sting: Shift victory sting: bright industrial marimba and light machinery rhythm rising to proud finish
+- defeat_sting: Defeat sting: power-down low mechanical sigh with distant rain tail, also used for deadlock profile
+- workshop_amb_loop: Seamless workshop ambience: distant rain on windows, faint radio static and idle machinery hum, no voices or music
+- conveyor_hum_loop: Seamless conveyor hum loop with two load profiles: light empty roller rattle and heavier loaded rumble

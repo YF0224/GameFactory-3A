@@ -1,0 +1,9 @@
+# G058_pitch_dreams_football / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G058_cg_001: Top-down view of a small-town community pitch, eleven player silhouettes line up as six rival club flags rise, first whistle blows, bright stylized top-down look, cinematic, original design, no text
+- G058_cg_002: Top-down replay of a goal: the ball arcs into the net with a light trail, stands ripple in a wave, scoreboard ticks, cinematic, original design, no text
+- G058_cg_003: A league table settles on the final round, the rival's flag and ours hang side by side, stadium lights snap on for a night fixture, cinematic, original design, no text
+- G058_cg_004: The season table unfurls; ending frame variant: our flag rises onto the champion league board / the squad huddles waving to the stands, cinematic, original design, no text

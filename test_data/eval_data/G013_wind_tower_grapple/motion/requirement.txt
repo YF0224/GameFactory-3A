@@ -1,0 +1,11 @@
+# G013_wind_tower_grapple / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G013_mot_001: Readable third-person ground run loop for the inspector with rope spool bouncing, in-place
+- G013_mot_002: Grapple swing loop: arm raised gripping the rope, body arcing side to side with momentum, in-place root motion
+- G013_mot_003: Rope release into a projectile launch pose, arm sweeping back, one-shot airborne transition, in-place root motion
+- G013_mot_004: Mid-air steering adjustment: slight lean and arm sweep correcting course, looping while airborne, in-place
+- G013_mot_005: Landing with knee bend and forward lean absorbing impact, one-shot, in-place root motion
+- G013_mot_006: Recover stance after a fall reset: crouch at checkpoint then rise to standing, in-place

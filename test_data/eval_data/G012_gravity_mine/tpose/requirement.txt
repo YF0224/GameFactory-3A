@@ -1,0 +1,6 @@
+# G012_gravity_mine / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- mine_mechanic: Front T-pose reference of the mine mechanic matching generated_ref_02.png proportions

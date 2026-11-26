@@ -1,0 +1,16 @@
+# G057_rhythm_machine_hall / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- note_burst_perfect: Crisp bright chime burst with a warm tail, rhythm-game hit
+- note_burst_good: Softer round chime burst
+- miss_thud: Dull dropped-mallet thud with a faint detune
+- hold_complete: Clean sustained reed ring completing a hold note
+- combo_click: Light brass click as combo tiers rise
+- section_bell: Two-note turning bell as the song section changes
+- finale_warn: Single deep anticipatory bell for the finale cue
+- dual_pop: Twin simultaneous chime pop for a dual note
+- fail_wash: Detuned low wash as the performance fails
+- grand_clock_chord: Layered clock-chord swell as the grand chime rings
+- hall_ambience: Mechanical hall: gear rumble, faint steam hiss, distant audience murmur

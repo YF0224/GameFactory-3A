@@ -1,0 +1,15 @@
+# G053_field_investigation / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- scan_hum: Steady scanning hum for the 2-second scan beam
+- dex_register: Bright two-note register as a species first scans
+- alert_ping: Short warning ping as a creature becomes alert
+- clue_ding: Soft discovery ding as a field clue registers
+- hypothesis_seal: Deep confirming bell as a hypothesis is verified
+- hit_clang: Meaty impact clang with slight elemental shimmer
+- capture_melody: Warm rising melody as a companion is collected
+- zone_unlock: Uplifting chime as thunder crystal hill unlocks
+- meadow_ambience: Flower slope morning: songbirds, breeze through grass, distant creek
+- creek_ambience: Creek bay: running shallow water, reed rustle, occasional warble

@@ -1,0 +1,9 @@
+# G020_tidal_glyphs / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G020_cg_001: A reef ruin emerges from receding tide at dusk, an epigrapher steps in with a lantern, tide glyphs on frescoes begin to glow, cold teal and gold accents, cinematic, original design, no text
+- G020_cg_002: A tidal lock glyph ring rotates into place, a stone door rises revealing a moonlit inner chamber, cinematic, original design, no text
+- G020_cg_003: Descent along slick stone steps into a dark seal chamber, faint starry dome above, six-slot altar silhouette in black water reflections, cinematic, original design, no text
+- G020_cg_004: Six glyph light pillars converge, the seal curtain dissolves into rising tide-light, an epigrapher looks back with a lantern; ending frame variant by rating, cinematic, original design, no text

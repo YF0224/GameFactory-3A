@@ -1,0 +1,9 @@
+# G032_starport_autobattle / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- patrol_soldier: A starport patrol soldier in light navy armor with an energy baton and small shield, T-pose, full body front view, plain gray background, game character concept art, original design
+- armored_sentry: A bulky armored sentry in heavy teal plate armor with a tower shield, T-pose, full body front view, plain gray background, game character concept art, original design
+- sniper: A slim starport sniper in a hooded flight suit with a long rail rifle, T-pose, full body front view, plain gray background, game character concept art, original design
+- armor_breaker: A starport armor breaker in orange hazard gear with a large piston hammer, T-pose, full body front view, plain gray background, game character concept art, original design

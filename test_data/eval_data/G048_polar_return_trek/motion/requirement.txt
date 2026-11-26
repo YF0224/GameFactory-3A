@@ -1,0 +1,9 @@
+# G048_polar_return_trek / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G048_mot_001: An observer stands in wind, stamping feet against cold
+- G048_mot_002: An observer trudges forward through snow against wind
+- G048_mot_003: An observer runs forward through snow in urgency
+- G048_mot_004: An observer shivers hard, hugging arms against extreme cold

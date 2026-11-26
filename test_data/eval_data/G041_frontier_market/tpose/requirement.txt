@@ -1,0 +1,7 @@
+# G041_frontier_market / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- stall_vendor_tpose: Young frontier stall keeper in clean symmetrical T-pose, layered earth-tone trade coat with caravan-teal sash, coin pouch at belt, neutral expression, full body front view, plain background, no props in hands
+- market_customer_tpose: Borderland traveler customer in clean symmetrical T-pose, hooded dusty cloak over walking clothes, empty hands, full body front view, plain background

@@ -1,0 +1,9 @@
+# G035_rift_expedition / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G035_cg_001: An explorer in a teal exosuit rappels down into a vast alien rift, glowing fungi and floating rocks below, violet crystals pulsing in the depths, stylized alien sci-fi style, violet crystal and teal bioluminescence, cinematic, original design, no text
+- G035_cg_002: Deep in a cavern a huge crystal heart cracks open and a massive crystalline leviathan with many glowing eyes emerges, stylized alien sci-fi style, violet crystal and teal bioluminescence, cinematic, original design, no text
+- G035_cg_003: The explorer holds up a glowing core crystal as the rift calms, light rising toward the surface, stylized alien sci-fi style, violet crystal and teal bioluminescence, cinematic, original design, no text
+- G035_cg_004: The explorer climbs out of the rift holding the core crystal, but purple mist trails behind and seeps into the ground, stylized alien sci-fi style, violet crystal and teal bioluminescence, cinematic, original design, no text

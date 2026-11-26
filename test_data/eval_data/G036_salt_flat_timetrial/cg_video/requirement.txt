@@ -1,0 +1,8 @@
+# G036_salt_flat_timetrial / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G036_cg_001: 白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门，无 UI、无文字、无剪辑
+- G036_cg_002: 追车镜头贴地掠过盐板、试验车尾迹与尘雾拉长、外线酥松带反光一闪，无 UI、无文字
+- G036_cg_003: 双意象共用条目：胜利=冲线横幅、遥测站灯带全亮、纪录墙上墙；失败=超时暗角、车队纪录墙留空、车影停在盐面；无 UI、无文字

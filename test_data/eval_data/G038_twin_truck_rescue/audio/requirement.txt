@@ -1,0 +1,19 @@
+# G038_twin_truck_rescue / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- countdown_beep: Synchronized start countdown beep with a clear low tail for both clients
+- winch_cable_creak: Steel winch cable creak and ratchet clicks with layered tension variants from slack to critical
+- cable_snap: Cable snap with sharp whip crack and recoiling steel whip tail, no distortion
+- cargo_transfer: Cargo transfer whoosh with a soft landing thud in a truck bed
+- collision_crash: Heavy truck collision impact with rock crunch and cargo shift rattle
+- rockfall_rumble: Distant rockfall rumble with rolling scree patter, warning flavor for blocked zone approach
+- rock_clearing: Pneumatic rock drill bursts with debris clatter, loopable segments that rise with clearing progress
+- road_cleared: Road cleared confirmation with dust settle swish and a short bright resolve note
+- radio_chime: Two-tone radio chime with a soft static tail, non-verbal coordination cue
+- victory_sting: Victory sting with warm brass chords and a mountain-echo tail
+- defeat_sting: Defeat sting with muted low strings and a cold wind tail
+- engine_tractor_loop: Seamless heavy winch tractor engine loop at mid load suitable for runtime pitch modulation, no manufacturer identity
+- engine_recovery_loop: Seamless recovery truck engine loop slightly higher pitch character than the tractor, suitable for runtime modulation
+- mountain_wind_loop: Seamless mountain valley wind ambience with distant scree falls and bird-free rocky stillness, no voices or music

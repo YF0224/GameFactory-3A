@@ -1,0 +1,8 @@
+# G033_card_caravan / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G033_cg_001: A desert caravan of wagons crosses golden dunes at sunset carrying a glowing green crystal in an ornate chest, the leader in an indigo robe looks toward the horizon, stylized desert caravan adventure style, sand, terracotta and indigo cloth, cinematic, original design, no text
+- G033_cg_002: The sand ahead swirls and collapses, a colossal dune serpent with sandstone scales and a glowing gem crest rises roaring from the desert, stylized desert caravan adventure style, sand, terracotta and indigo cloth, cinematic, original design, no text
+- G033_cg_003: The caravan crests the final dune and a lush oasis appears below, palm trees and blue water, the green crystal glowing brightly, stylized desert caravan adventure style, sand, terracotta and indigo cloth, cinematic, original design, no text

@@ -1,0 +1,7 @@
+# G005_broken_realm_echo / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- echo_hunter: Front T-pose reference of the echo hunter matching player.png proportions
+- realm_commander: Front T-pose reference of the realm commander matching boss.png proportions

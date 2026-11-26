@@ -1,0 +1,7 @@
+# G043_airship_kitchen / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- chef_alan_tpose: Airship head chef, clean symmetrical full-body front-facing T-pose, arms fully extended horizontally, feet visible, empty hands, plain light-gray studio background, one character only
+- chef_cheng_tpose: Airship sous chef, clean symmetrical full-body front-facing T-pose, arms fully extended horizontally, feet visible, empty hands, plain light-gray studio background, one character only

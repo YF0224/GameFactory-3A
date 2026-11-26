@@ -1,0 +1,20 @@
+# G010_orbital_extraction / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- sfx_rifle_fire: Compact sci-fi rifle shot with tight punchy report
+- sfx_shell_drop: Brass shell casing dropping on metal deck
+- sfx_body_hit: Bullet impact on body armor, hit confirmation thock
+- sfx_headshot: Distinct higher-pitched headshot confirmation ding layered on impact
+- sfx_kill_confirm: Short kill confirmation tick
+- sfx_reload: Magazine eject, insert and charging handle cycling
+- sfx_empty_click: Dry fire empty magazine click
+- sfx_footstep_light: Light boot step on metal grating, low load
+- sfx_footstep_heavy: Heavier dragging boot step under high load
+- sfx_container_rummage: Rummaging through container contents, metallic scraping
+- sfx_loot_rare: Bright shimmering pickup chime for high-rarity loot
+- sfx_depressurize_alarm: Deep zone depressurization klaxon with hissing air vent
+- sfx_airlock_broadcast: Station PA broadcast chime and static announcement tone
+- sfx_countdown_tick: Urgent ticking beep for final 10 seconds of extraction countdown
+- amb_station_hum: Orbital station interior ambience, air circulation hum with faint electrical buzz, seamless loop

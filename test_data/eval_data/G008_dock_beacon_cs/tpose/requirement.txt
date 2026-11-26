@@ -1,0 +1,7 @@
+# G008_dock_beacon_cs / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- attacker_operator: Front T-pose reference of the attacker operator matching attacker_operator.jpg proportions
+- defender_operator: Front T-pose reference of the defender operator matching defender_operator.jpg proportions

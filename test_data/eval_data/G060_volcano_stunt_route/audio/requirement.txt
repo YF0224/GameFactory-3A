@@ -1,0 +1,18 @@
+# G060_volcano_stunt_route / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- carve_snow: Board carving packed snow, sustained slide
+- carve_ash: Looser gritty slide over cinder ash
+- launch_pop: Spring pop off a jump lip
+- trick_swoosh: Airy swoosh with a light body swish per aerial trick
+- chain_riser: Rising arpeggio as the combo chain tiers up
+- land_thud: Compressed landing thud with snow puff
+- qte_tick: Rapid soft ticks during the balance QTE
+- wipeout_roll: Heavy tumbling slide and a distant whistle
+- lava_sizzle: Angry lava sizzle and a short alarm tone
+- checkpoint_chime: Small patrol-post bell as a checkpoint logs
+- section_horn: Two-tone section horn at a segment gate
+- cert_fanfare: Earnest certification fanfare with drum accents
+- volcano_ambience: Dormant volcano: geothermal wind, rumbling fumaroles, distant rock falls

@@ -1,0 +1,8 @@
+# G034_tinker_backpack / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G034_cg_001: A traveling tinker packs tools into a huge patched backpack in a cluttered workshop, then steps out into a rusty wasteland junkyard toward a dark old power tower, stylized steampunk tinker style, brass, rust, leather and canvas, cinematic, original design, no text
+- G034_cg_002: Inside a dark power tower, a large mechanical queen bee awakens, its reactor core abdomen glowing, brass wings unfolding with sparks, stylized steampunk tinker style, brass, rust, leather and canvas, cinematic, original design, no text
+- G034_cg_003: The old power tower lights up from bottom to top, sparks flying, the tinker stands below with the backpack as lights spread across the junkyard at dusk, stylized steampunk tinker style, brass, rust, leather and canvas, cinematic, original design, no text

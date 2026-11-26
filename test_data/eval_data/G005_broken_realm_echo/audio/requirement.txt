@@ -1,0 +1,20 @@
+# G005_broken_realm_echo / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- light_slash: Crisp light sword slash with a thin resonance tail
+- heavy_slash: Deep heavy sword impact with body-weight crunch
+- block_clang: Metal-on-metal guard clang with short ring-off
+- parry_chime: Bright dedicated parry chime layered over the clang, clean and rewarding
+- broken_ping: Sharp guard-break ping with a rising can-pursue hint tail
+- shunpo_ghost: Air-slicing blink-step whoosh with faint echo shimmer
+- realm_release: Sweeping release surge, layered shimmer bloom as the realm-release aura bursts
+- anchor_spawn_sfx: Low crystalline stake-drive thump with rising hum as an anchor surfaces
+- anchor_break_sfx: Crystalline shatter as an anchor is pulled free and dissipates
+- chest_open: Stone seal release with warm chime as the chest grants crystals
+- heal_channel: Soft sustained restoration hum rising to a close chime over 1.2 seconds
+- victory_sting: Solemn victory sting with fading echo particles feel
+- defeat_sting: Low descending defeat tone, clearly distinct from victory
+- ruins_wind_loop: Shattered realm ruins ambience, hollow wind over debris with faint echo drips, seamless loop, no music
+- garden_chime_loop: Moonlit outer garden ambience, soft wind chimes and paper lantern creak with night hush, seamless loop, no music

@@ -1,0 +1,8 @@
+# G019_clockwork_clones / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G019_mot_001: A young apprentice stands idle, adjusting brass goggles with one hand
+- G019_mot_002: A young apprentice walks forward at a calm workroom pace
+- G019_mot_003: A young apprentice steps onto a floor pressure plate and holds it down with both feet

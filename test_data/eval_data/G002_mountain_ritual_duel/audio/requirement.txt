@@ -1,0 +1,16 @@
+# G002_mountain_ritual_duel / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- blade_swing: Sharp longblade swing through mountain air, thin whoosh with faint ring
+- metal_clang: Weapon-on-weapon parry clang with bright metallic ring-off
+- perfect_parry_chime: Crisp resonant chime layered over the clang for a perfect parry, bright and clean
+- hit_thud: Dull body impact thud when the player takes a slash
+- guard_break_hit: Heavy crushing blow with armor giving way, guard-break accent
+- heartbeat_ritual: Single strong heartbeat pulse, rising in intensity when looped over three ritual steps
+- flintlock_shot: Ceremonial flintlock discharge, sharp crack with echoing report across the peaks
+- stumble_step: Off-balance stumble with a scuff of boots on stone
+- victory_bell: Altar bell struck once, long solemn bronze resonance decaying over wind
+- defeat_wind: Low mournful mountain wind gust for defeat
+- mountain_wind_loop: High-altitude mountain wind ambience with distant cloud-sea hum, seamless loop, no music

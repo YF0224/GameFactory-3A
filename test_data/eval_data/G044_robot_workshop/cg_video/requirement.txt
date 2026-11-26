@@ -1,0 +1,8 @@
+# G044_robot_workshop / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G044_cg_001: 铆钉湾雨后清晨、车间吊灯依次亮起、墙上矿料滑槽落料、第一台组装台就位、订单板亮出「20 台躯干」，无 UI、无文字、无剪辑
+- G044_cg_002: 传送带物料堆积、红色高亮沿上游蔓延、工程师俯身改线、分流格落位后物料恢复流动，无 UI、无文字
+- G044_cg_003: 双意象共用条目：胜利＝传送带满载躯干列队出库、协会徽章点亮；失败＝吊灯熄灭、协会徽章收回、车间归于安静；无 UI、无文字

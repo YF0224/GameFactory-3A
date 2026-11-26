@@ -1,0 +1,19 @@
+# G013_wind_tower_grapple / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- detect_ping: Short soft ping as a candidate anchor enters 12m detection range
+- rope_tension: Taut rope twang as the grapple line pulls tight on connection
+- hook_clamp: Metal hook clamping bite onto a ring anchor
+- anchor_reject: Dry rebound click as an out-of-range or out-of-angle anchor request is refused
+- swing_whoosh: Swing wind howl that intensifies with speed, loopable slice for long pendulum arcs
+- release_detach: Hook detach pop with a rising slip of rope as the grapple releases
+- micro_adjust_wind: Short cloth-flap wind cut for mid-air steering adjustment
+- gust_roar: Gust roar swell as the inspector enters a wind band, dust-line texture
+- landing_thud: Muffled landing thud with a light gravel scatter
+- fall_slide_down: Descending fall slide as the inspector drops into the cloud-mist fall zone
+- signal_activate: Warm signal activation chord as a checkpoint lamp column lights up
+- victory_horn: Noble horn call as the tower-top beacon relights for victory
+- defeat_tone: Low sinking tone with desaturated wind as the run fails
+- canyon_wind_loop: Canyon wind ambience loop, constant low bed, slight rise inside gust zones, no seam artifacts

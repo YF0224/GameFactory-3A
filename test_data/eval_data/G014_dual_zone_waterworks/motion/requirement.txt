@@ -1,0 +1,10 @@
+# G014_dual_zone_waterworks / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G014_mot_001: Readable side-view run for the maintenance worker with tool sway, in-place
+- G014_mot_002: Arc jump with harness tug, 0.8 second readable takeoff-air-landing, in-place root motion
+- G014_mot_003: Crouch down and hold, collision height lowered to 1.0m, looping hold pose, in-place
+- G014_mot_004: Two-handed lever pull interaction: grab, pull back and hold, release returns, in-place
+- G014_mot_005: Respawn dissolve-in and stand-up recover after a fall, 2 second, in-place

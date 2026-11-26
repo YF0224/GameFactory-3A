@@ -1,0 +1,12 @@
+# G008_dock_beacon_cs / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G008_mot_001: Operator sprinting tactically with weapon up, splash steps through rain puddles, loopable
+- G008_mot_002: Three-stage rifle reload: magazine drop, fresh mag seating, charging handle rack, in-place
+- G008_mot_003: Operator kneels and plants the data-core beacon on a pedestal with a progress-paced two-hand mount, in-place
+- G008_mot_004: Short explosive sprint with shoulder charge against a door panel, in-place root motion
+- G008_mot_005: Slow silent walk with weight-shifted steps, weapon low, loopable
+- G008_mot_006: Operator kneels and defuses the mounted beacon with wire clippers in a progress-paced motion, in-place
+- G008_mot_007: Downed operator reaches out and calls for help while prone, weak struggling motion, in-place

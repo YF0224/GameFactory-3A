@@ -1,0 +1,24 @@
+# G028_elemental_greenhouse / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- frost_shot: Frost tower shot with crystal chime and mist hiss
+- flame_shot: Flame tower ignition burst with low whoosh
+- burn_tick: Short flame crackle tick for burn damage over time
+- brittle_trigger: Ice-and-fire interwoven shatter chime, dual-layer burst
+- crystal_shot: Crystal rock tower shot with stone percussion
+- immune_deflect: Dry deflect ping with particle dissipation tail, zero-damage feel
+- immune_wave_warning: Two-tone immunity wave warning with greenhouse alarm undertone
+- branch_upgrade: Rising transformation swell with glass chime finish
+- vine_death: Plant stalk snap and leaf scatter with wilting hiss
+- base_hit: Glass dome impact crack with alarm echo
+- wave_start: Wave banner horn with vine rustle underneath
+- victory_sting: Warm victory sting with sprouting chime and settling steam
+- defeat_sting: Low defeat drone with glass shatter tail
+- greenhouse_ambience: Greenhouse ambience loop with water mist hiss, distant mechanical hum and drips, seamless loop, no seam artifacts
+- dome_alert_start: Calm but urgent female AI voice over greenhouse PA, Chinese, clean synth tone, slight reverb
+- dome_alert_fire: Warning AI broadcast with falling intonation, Chinese, PA reverb
+- dome_alert_ice: Warning AI broadcast with falling intonation, Chinese, PA reverb
+- dome_victory: Relieved warm AI voice, Chinese, soft PA reverb
+- dome_defeat: Failing low-power AI voice with static decay, Chinese

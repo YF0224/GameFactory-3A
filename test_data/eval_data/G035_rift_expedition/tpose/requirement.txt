@@ -1,0 +1,8 @@
+# G035_rift_expedition / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- rift_explorer: A rift explorer in a sealed teal exosuit with a cracked visor, crystal-tipped staff and sample pouches, T-pose, full body front view, plain gray background, game character concept art, original design
+- rift_stalker: A tall bipedal alien rift stalker with violet crystal growths on its shoulders and blade-like forearms, T-pose, full body front view, plain gray background, game character concept art, original design
+- exchange_merchant: A hooded alien merchant with four arms, a trade satchel and crystal coins hanging from the belt, T-pose, full body front view, plain gray background, game character concept art, original design

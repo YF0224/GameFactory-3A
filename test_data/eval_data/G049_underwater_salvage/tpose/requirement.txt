@@ -1,0 +1,6 @@
+# G049_underwater_salvage / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- salvage_diver: Salvage diver in brass-rimmed suit with shoulder lamp and tool harness, clean symmetrical T-pose, stylized semi-realistic, original design

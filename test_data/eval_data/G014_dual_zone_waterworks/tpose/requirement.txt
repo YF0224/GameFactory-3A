@@ -1,0 +1,6 @@
+# G014_dual_zone_waterworks / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- maintenance_worker: Front T-pose reference of the waterworks maintenance worker matching generated_ref_02.png proportions, limbs separated, harness clear of joints

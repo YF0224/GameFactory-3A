@@ -1,0 +1,16 @@
+# G036_salt_flat_timetrial / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- countdown_beep: Clean electronic countdown beep, rising pitch per second, short decay
+- start_release: Race start release chime with a low engine-friendly tone and short swell
+- gate_pass: Checkpoint pass confirmation blip with a bright ping tail, telemetry flavor
+- gate_miss: Missed-gate warning tone, two quick descending notes with slight distortion
+- offroad_rumble: Loose salt crust rumble with granular scrape and low thud, vehicle leaving track
+- reset_woosh: Fast position reset whoosh with a soft teleport shimmer tail
+- timeout_alarm: Time-out alarm with three urgent pulses and a dark low tail
+- victory_sting: Victory sting with bright salt-flat airy chords and a rising finish
+- defeat_sting: Defeat sting with muted low strings and a soft distant wind tail
+- salt_flat_wind: Seamless dry salt-flat wind ambience with subtle distant telemetry hum, steady direction, no voices or music
+- prototype_engine: Seamless heavy prototype engine loop at mid load suitable for runtime pitch modulation by speed, no manufacturer identity

@@ -1,0 +1,16 @@
+# G035_rift_expedition / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G035_mot_001: A person stands holding a staff upright, breathing steadily.
+- G035_mot_002: A person thrusts a staff forward with both hands.
+- G035_mot_003: A person plants a staff in front and braces.
+- G035_mot_004: A person staggers back from a hit.
+- G035_mot_005: A person falls to the knees and collapses.
+- G035_mot_006: A person stands in a ready stance, shifting weight slightly, with blade-like arms raised.
+- G035_mot_007: A person slashes forward with both bladed forearms and returns to the ready stance.
+- G035_mot_008: A person flinches backward from a hit to the chest and recovers.
+- G035_mot_009: A person staggers, drops to the knees and collapses forward onto the ground.
+- G035_mot_010: A person stands gesturing invitingly with both hands.
+- G035_mot_011: A person bows slightly and hands over an object with both hands.

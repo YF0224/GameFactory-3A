@@ -1,0 +1,6 @@
+# G024_station_infection / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- eco_station_member: Front T-pose reference of the eco station member matching generated_ref_01.png proportions, limbs separated, satchel clear of joints

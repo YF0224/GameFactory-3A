@@ -1,0 +1,12 @@
+# G045_daily_street_lightlane / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- cat_resident_tpose: Cat-beastfolk resident, clean symmetrical full-body front-facing T-pose, arms fully extended horizontally, feet visible, empty hands, semi-realistic stylized character, plain light-gray studio background, one character only
+- npc_housekeeper_neighbor_tpose: Middle-aged neighbor in clean symmetrical T-pose, housework apron and cloth headwrap, empty hands, full body front view, plain background
+- npc_curious_neighbor_tpose: Young curious neighbor in clean symmetrical T-pose, round glasses and shoulder satchel, empty hands, full body front view, plain background
+- npc_stroll_partner_tpose: Retired strolling elder in clean symmetrical T-pose, light windbreaker and walking cane set aside, empty hands, full body front view, plain background
+- npc_illustrator_tpose: Young illustrator in clean symmetrical T-pose, beret and fingerless gloves, sketchbook set aside, empty hands, full body front view, plain background
+- npc_landlord_tpose: Landlord in clean symmetrical T-pose, buttoned vest and key ring at belt, ledger set aside, empty hands, full body front view, plain background
+- npc_store_clerk_tpose: Convenience store clerk in clean symmetrical T-pose, striped apron and name badge, empty hands, full body front view, plain background

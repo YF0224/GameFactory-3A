@@ -1,0 +1,8 @@
+# G019_clockwork_clones / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G019_cg_001: Clock tower workshop at night, a great clock's hands frozen, an apprentice takes a brass echo device from a drawer as gear walls turn slowly, warm brass palette, cinematic, original design, no text
+- G019_cg_002: A translucent teal echo duplicate presses one pressure plate while the apprentice presses the other, a gate lifts and the device dial flashes a joined scale, cinematic, original design, no text
+- G019_cg_003: The frozen clock tower hands start moving, bells ring across a sleeping town, the apprentice pushes the workshop door open into dawn light, cinematic, original design, no text

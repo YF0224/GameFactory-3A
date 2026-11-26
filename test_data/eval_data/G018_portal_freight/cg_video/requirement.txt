@@ -1,0 +1,8 @@
+# G018_portal_freight / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G018_cg_001: Orbital freight station at night through a viewport, robotic sorter arms spark and stall, a dispatcher picks up a paired rift device as seven berth lights blink, cool whites with orange-blue glow, cinematic, original design, no text
+- G018_cg_002: A cargo crate slides out of a glowing rift into its berth, berth light turns green, station PA chime, cinematic, original design, no text
+- G018_cg_003: Seven berth lights all green, cargo hold gate opens, a supply ship departs against stars, the dispatcher watches it go, cinematic, original design, no text

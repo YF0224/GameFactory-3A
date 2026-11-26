@@ -1,0 +1,16 @@
+# G045_daily_street_lightlane / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- footstep: Soft neighborhood footstep on asphalt, two light cloth-shoe taps suitable for alternating loop while moving
+- bicycle_bell: Classic bicycle bell ring, bright double ding with metal tail
+- cash_register: Convenience store checkout: register drawer pop with coin and receipt tick
+- door_open: Wooden street door open and soft latch close, two-stage friendly cue
+- pickup: Item pickup: light cloth-grab and small pouch rustle
+- task_complete: Task complete warm chime with journal page tick, also used for neighborhood remedy handling profile
+- notice_alert: Neighbor notice alert: soft surprised vocal-less gasp tone with rising attention ping
+- day_advance: Day settle cue: gentle night fade with morning bird tick, also used for rent settlement profile
+- street_day_loop: Seamless daytime street ambience: light market chatter murmur, distant scooters and shop clatter, no distinct words
+- street_dusk_loop: Seamless dusk ambience: lamp turn-on hum, evening crowd thinning with distant kitchen sounds
+- street_night_loop: Seamless night ambience: crickets, occasional distant car pass and lamp buzz

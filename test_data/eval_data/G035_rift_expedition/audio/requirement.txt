@@ -1,0 +1,26 @@
+# G035_rift_expedition / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- node_select: Soft holographic map ping, no music, no voice
+- gamble_win: Crystal shards cascading with a bright jingle, no music, no voice
+- gamble_lose: Crack collapsing with a painful rumble, no music, no voice
+- trade_confirm: Alien coins clinking and a short chime, no music, no voice
+- contamination: Ominous low drone with a toxic hiss, no music, no voice
+- save_stone: Resonant crystal hum confirming a save, no music, no voice
+- load_restore: Reverse whoosh and crystal ring, no music, no voice
+- card_play: Card swipe with a holographic blip, no music, no voice
+- staff_hit: Staff impact on chitin, no music, no voice
+- block_gain: Energy barrier forming, no music, no voice
+- poison_tick: Acidic sizzle, no music, no voice
+- boss_roar: Deep crystalline roar echoing in a cavern, no music, no voice
+- victory_sting: Uplifting synth arpeggio, no music, no voice
+- defeat_sting: Signal lost static with a low tone, no music, no voice
+- rift_ambience: Alien rift ambience with humming crystals and distant echoes, no music, no voice
+- 勘探员·日志开始: A calm explorer voice recording a log through a helmet radio
+- 交换商·交易: A raspy alien merchant voice, sly
+- 勘探员·紫雾警告: An explorer voice through a helmet radio, uneasy
+- 勘探员·核心苏醒: An explorer voice whispering
+- 勘探员·带回晶体: An explorer voice, relieved
+- 勘探员·紫雾随行: An explorer voice, uneasy and tired

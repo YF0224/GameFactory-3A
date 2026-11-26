@@ -1,0 +1,11 @@
+# G016_theater_sorting / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- wood_slide: Wooden crate sliding across worn stage boards, short dry creak, no music
+- confirm_ding: Bright small chime confirming a crate covers its goal marker
+- reject_buzz: Short low mechanical buzz for an illegal move rejection
+- undo_whoosh: Reversed-feeling short whoosh as a move is rolled back
+- victory_fanfare: Brief cheerful theater re-opening jingle with applause tail, no vocals
+- theater_ambience: Quiet empty theater at night, faint hall hum, distant stage rigging creaks, no music

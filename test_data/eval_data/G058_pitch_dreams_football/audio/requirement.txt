@@ -1,0 +1,15 @@
+# G058_pitch_dreams_football / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- kickoff_whistle: Standard football kickoff whistle, clear and dry
+- kick_punch: Firm boot-to-ball punch
+- goal_roar: Small-stadium goal roar with a short whistle tail
+- save_glove: Leather glove slap as the keeper saves
+- foul_whistle: Referee short-short-long foul whistle
+- half_whistle: Two calm half-time whistle notes
+- coin_ledger: Ledger page and coin drop for reward income
+- card_flip: Card pack flip with a wax-seal pop
+- contract_stamp: Firm contract stamp for a transfer
+- pitch_ambience: Community pitch ambience: crowd murmur, light wind over grass, distant traffic

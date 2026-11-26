@@ -1,0 +1,9 @@
+# G050_aftermath_holdout / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G050_mot_001: An old craftsman hammers a brace plank with steady swings
+- G050_mot_002: A lean scout walks forward briskly
+- G050_mot_003: A young laborer lifts and walks with a supply crate
+- G050_mot_004: An elderly woman sits by a cot, checking a bandage roll

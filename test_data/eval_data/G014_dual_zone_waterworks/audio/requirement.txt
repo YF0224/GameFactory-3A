@@ -1,0 +1,17 @@
+# G014_dual_zone_waterworks / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- plate_press: Heavy pressure plate sinking thunk with metal strain
+- lever_pull: Industrial lever ratchet pull with valve hiss
+- gate_open: Sluice gate rising with hydraulic whine and water release
+- gate_close: Gate falling back with a low clunk and brief water settle
+- ping_marker: Short bright ping as a teammate marker appears
+- respawn_dissolve: Soft dissolve-in shimmer with a rising resolve as a worker respawns
+- antipinch_alert: Brief urgent alert as the gate safely repositions a blocked player
+- joint_win_chime: Twin-lamp convergence chime for the joint win beacons
+- deadlock_alarm: Pulsing alarm for mechanism deadlock timeout
+- timeout_tone: Low descending tone as the 1200s repair window expires
+- discharge_water_loop: Discharge channel rushing water ambience loop, constant bed, no seam artifacts
+- pumphouse_hum_loop: Pump-house machinery low hum ambience loop with faint steam

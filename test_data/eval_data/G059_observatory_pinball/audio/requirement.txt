@@ -1,0 +1,16 @@
+# G059_observatory_pinball / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- plunger_wind: Ratcheting plunger wind-up
+- launch_spring: Spring launch pop
+- target_ding: Brass medallion ding on target hit
+- chain_step: Rising short chime as a chain progresses
+- multiplier_rise: Bright multiplier up-chime
+- multiball_choir: Layered starlight choir as two extra balls enter
+- lane_slide: Glissando down the return lane
+- drain_thud: Muffled drain drop under the table
+- drain_double: Two overlapped drain thuds with one settle tone
+- record_bell: Grand observatory record bell
+- hall_ambience: Quiet exhibit hall: machine hum, faint gallery reverb, night wind outside

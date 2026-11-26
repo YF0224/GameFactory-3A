@@ -1,0 +1,8 @@
+# G052_wildlife_photo_survey / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G052_mot_001: A surveyor stands idle scanning the marsh through cupped hands
+- G052_mot_002: A surveyor walks quietly along a wetland boardwalk
+- G052_mot_003: A surveyor crouches low and creeps forward behind reeds

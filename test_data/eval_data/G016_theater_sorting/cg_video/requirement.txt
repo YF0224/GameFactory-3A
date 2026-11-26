@@ -1,0 +1,7 @@
+# G016_theater_sorting / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G016_cg_001: Night interior of an old theater, house lights turn on one by one, a small boxy brass robot pushes a prop crate across the empty stage toward a glowing gold marker, warm wood and stage-red palette, cinematic, original design, no text
+- G016_cg_002: Theater fully relit: stage, backstage and auditorium light up in sequence, an opening banner drops, the small brass robot bows center stage under a spotlight, cinematic, original design, no text

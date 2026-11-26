@@ -1,0 +1,6 @@
+# G060_volcano_stunt_route / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- stunt_rider_yan: Volcano stunt rider in heat-vented jacket with goggles and board under arm, clean symmetrical T-pose, stylized semi-realistic, original design

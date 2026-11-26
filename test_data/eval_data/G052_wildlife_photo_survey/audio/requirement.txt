@@ -1,0 +1,14 @@
+# G052_wildlife_photo_survey / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- camera_open: Soft cloth snap as camera viewfinder raises
+- zoom_tick: Quiet zoom lens tick
+- focus_lock: Gentle focus-lock beep
+- shutter_soft: Muffled low-noise shutter click
+- archive_page: Paper slide as a photo archives
+- wings_burst: Sudden wing beats and a startled call
+- report_stamp: Ink stamp on a survey report cover
+- film_empty: Low double click of an exhausted shutter
+- wetland_ambience: Wetland dawn: insects, gentle water ripples, reed rustle, distant bird chorus

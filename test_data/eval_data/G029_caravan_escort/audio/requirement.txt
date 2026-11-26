@@ -1,0 +1,24 @@
+# G029_caravan_escort / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- deploy: Device deploy with wooden legs snapping open and dust settle
+- deploy_reject: Dull rejection thud, out-of-circle placement refused
+- recycle: Device pack-up click with coin sweep on top
+- arrow_shot: Portable ballista release with bolt whoosh
+- roadblock_hit: Enemy striking wooden roadblock with wood crack layers
+- raider_hit: Bolt impact into scrap armor with fabric tear
+- raider_death: Raider collapse with gear clatter and dust
+- heal_pulse: Warm water spring pulse chime for caravan repair
+- wagon_hit: Wooden wagon hull impact with splinter crack
+- encounter_warning: Scout horn warning with two rising notes
+- checkpoint: Checkpoin flag snap with relieved exhale tone
+- victory_sting: Warm victory sting with river wash and sail flap
+- defeat_sting: Low defeat drone with scattered seed taps
+- wagon_rolling: Wagon rolling ambience loop with creaking wheels, sail flutter and wind hiss, seamless loop
+- elder_start: Warm elder voice, resolute and slow, Chinese, slight outdoor wind bed
+- scout_canyon: Young scout voice, quick and tense, Chinese, distant echo
+- elder_ferry: Elder voice with urgency, Chinese, dusk wind bed
+- elder_victory: Relieved joyful elder voice, Chinese, river wash bed
+- elder_defeat: Grieving elder voice, low and broken, Chinese

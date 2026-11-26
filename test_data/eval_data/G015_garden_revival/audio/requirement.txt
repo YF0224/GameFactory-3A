@@ -1,0 +1,18 @@
+# G015_garden_revival / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- ability_unlock_bloom: Warm bloom chord as an ability pod opens and equipment bonds
+- gate_seal_hint: Muted seal chime hinting which ability a locked gate needs
+- dash_whoosh: Sharp wind-cut dash burst with dust tail
+- double_jump_spring: Springy double-jump pop with a light ring
+- wall_grab_cling: Glove cling grip on stone with a short scrape
+- collect_chime: Crisp crystal collect chime with a soft vine hum
+- shortcut_open_rumble: Mossy door slide with light-band shimmer reveal
+- save_confirm: Two-note terminal save confirmation
+- checkpoint_warmup: Warm rising checkpoint activation call
+- zone_reset_pulse: Low reset pulse with rebuilding shimmer as an interval resets
+- revival_wave_swell: Grand revival wave swell as the garden core restarts
+- garden_breath_loop: Underground garden breathing ambience loop, soft bioluminescent hum, no seam artifacts
+- water_drip_loop: Cavern water drip echo ambience loop, sparse and calm

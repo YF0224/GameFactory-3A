@@ -1,0 +1,14 @@
+# G002_mountain_ritual_duel / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G002_mot_001: Duelist draws the longblade from the hip sheath in one clean motion, in-place
+- G002_mot_002: Three-hit sword slash chain with clear wind-up telegraph on each swing, in-place
+- G002_mot_003: Duelist raises the blade into a directional guard stance, holding firm, in-place
+- G002_mot_004: Quick riposte thrust immediately after a guard, in-place
+- G002_mot_005: Back-to-back ritual pacing three slow steps then a sharp pivot drawing a flintlock and firing, in-place
+- G002_mot_006: Duelist lowers and sheathes the blade with a composed bow of the head, in-place
+- G002_mot_007: Sentinel raises the two-handed sword high with a readable 0.7 second telegraph then chops down, in-place
+- G002_mot_008: Swordsman loses balance and staggers forward off-guard, sword dipping, in-place
+- G002_mot_009: Defeated swordsman drops to one knee then falls flat, blade clattering beside, final defeat fall

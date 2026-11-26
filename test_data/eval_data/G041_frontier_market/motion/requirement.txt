@@ -1,0 +1,8 @@
+# G041_frontier_market / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G041_mot_001: Vendor standing behind counter, friendly greeting gesture then back to idle, subtle weight shifts, loopable
+- G041_mot_002: Customer leisurely walking and browsing shelves, head turning to goods, natural gait, in-place
+- G041_mot_003: Customer shaking head slightly then turning and walking away, disappointed but calm, in-place

@@ -1,0 +1,10 @@
+# G024_station_infection / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G024_mot_001: Calm patrol walk loop for the station member, in-place
+- G024_mot_002: Member standing still being scanned with arm raised slightly, in-place hold
+- G024_mot_003: Member falling down, one-shot, in-place
+- G024_mot_004: Hunched converted entity lunge with filament flare, one-shot, in-place root motion
+- G024_mot_005: Converted entity falling and dissolving under disposal beam, one-shot, in-place

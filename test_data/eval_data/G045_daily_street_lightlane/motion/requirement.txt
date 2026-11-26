@@ -1,0 +1,11 @@
+# G045_daily_street_lightlane / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G045_mot_001: Cat-beastfolk resident idle: relaxed standing with slight breathing, tail sway and occasional head look around, loopable
+- G045_mot_002: Casual neighborhood walking gait at 3 m/s pace, natural arm swing with tail counterbalance, in-place loopable
+- G045_mot_003: Light jogging run at 5 m/s pace, energetic forward lean, tail trailing, in-place loopable
+- G045_mot_004: Small standing jump about 0.8 meter apex with anticipation, air tuck and landing recovery, tail flick
+- G045_mot_005: Reaching out and interacting with an object: extend arm, small pick or press gesture, then settle back
+- G045_mot_006: Seated cycling pedal motion leaning slightly forward, hands on handlebar, tail flowing behind, in-place loopable

@@ -1,0 +1,15 @@
+# G046_storm_isle_survival / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- chop_wood: Dry woody chop of splitting a log block
+- crack_stone: Short brittle crack of breaking a stone block
+- place_thud: Soft muffled thud placing a block into world
+- craft_tap: Quick carpentry tap-tap as a recipe completes
+- storm_tick: Gust slap with rain hiss as a storm surge hits
+- shelter_done: Warm confirm chord as a shelter roof registers
+- beacon_crank: Rasping crank as the signal bonfire is lit
+- rescue_horn: Distant ship horn through clearing wind
+- island_day_ambience: Daytime island: gull calls, easy surf, leaves in breeze, no music
+- island_night_storm: Night storm: rising wind, heavier rain on leaves, distant thunder rolls

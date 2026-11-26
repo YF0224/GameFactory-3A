@@ -1,0 +1,29 @@
+# G025_broken_continent_rts / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G025_mot_001: Readable militia march loop with tool sway, in-place
+- G025_mot_002: Kneeling repair action with tool strokes, one-shot, in-place
+- G025_mot_003: Lifting a survivor to shoulder carry, one-shot, in-place
+- G025_mot_004: Militia falling to inactive state, one-shot, in-place
+- G025_mot_005: Smooth observer glide-walk loop with sensor rack steady, in-place
+- G025_mot_006: Observer field-cast attack with arm extension, one-shot, in-place
+- G025_mot_007: Observer flinch from a hit, in-place
+- G025_mot_008: Observer collapsing to inactive state, one-shot, in-place
+- G025_mot_009: Heavy titan stomp loop with mass shift, in-place
+- G025_mot_010: Titan overhead slam attack, one-shot, in-place
+- G025_mot_011: Titan body flinch from a hit, in-place
+- G025_mot_012: Titan heavy collapse, one-shot, in-place
+- G025_mot_013: Regal energy lord striding loop with cape sway, in-place
+- G025_mot_014: Energy lord two-handed field blast cast, one-shot, in-place
+- G025_mot_015: Energy lord stagger from a hit, in-place
+- G025_mot_016: Energy lord falling with field dissipation, one-shot, in-place
+- G025_mot_017: Hunched infected host shamble loop with fungal sway, in-place
+- G025_mot_018: Infected host claw lunge attack, one-shot, in-place
+- G025_mot_019: Infected host recoil from a hit, in-place
+- G025_mot_020: Infected host dissolving collapse, one-shot, in-place
+- G025_mot_021: Salvage infantry scavenger walk loop with plate rattle, in-place
+- G025_mot_022: Scrap rifle aim and fire, one-shot, in-place
+- G025_mot_023: Patchwork armor flinch, in-place
+- G025_mot_024: Salvage infantry collapse, one-shot, in-place

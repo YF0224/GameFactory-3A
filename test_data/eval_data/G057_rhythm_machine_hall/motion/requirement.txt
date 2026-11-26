@@ -1,0 +1,7 @@
+# G057_rhythm_machine_hall / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G057_mot_001: A tuner apprentice stands idle, tapping a mallet against her palm
+- G057_mot_002: A tuner apprentice swings a small mallet downward in a firm strike

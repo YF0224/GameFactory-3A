@@ -1,0 +1,8 @@
+# G042_highland_seed_farm / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G042_cg_001: 云脊高原晨雾、育种员走向 12 格空田、翻开垄土、种子站木屋炊烟升起、第一粒种子入土，无 UI、无文字、无剪辑
+- G042_cg_002: 云层过境、雨幕落下梯田、垄土吸水、苗芽顶土拔节、阶段图标依次点亮，无 UI、无文字
+- G042_cg_003: 双意象共用条目：胜利＝种子站挂牌亮灯、新种入库、云海放晴；失败＝试验田木牌摘下、田垄归于荒草、暮色沉降；无 UI、无文字

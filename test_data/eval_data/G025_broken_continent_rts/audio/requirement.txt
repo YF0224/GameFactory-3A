@@ -1,0 +1,17 @@
+# G025_broken_continent_rts / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- resource_gain_tick: Bright resource income tick with faction-neutral tone
+- technology_unlock_chime: Two-stage technology unlock chime with data shimmer
+- infection_alert: Uneasy infection alert with fungal undertone
+- disaster_warning: Deep disaster warning horn with ground rumble
+- rule_preview_notice: Global rule preview notice with ticking countdown
+- battle_hit_tick: Impact hit tick for combat damage with counter-match color ring
+- region_unlock_fanfare: Region unlock fanfare with terrain resolve
+- root_spread_rumble: Low root expansion rumble as the creep radius advances
+- strategic_win_horn: Grand strategic victory horn for the expedition objective
+- expedition_defeat_tone: Low expedition defeat tone with dust-down wind
+- continent_wind_loop: Broken continent wind ambience loop with faint dust storms, no seam artifacts
+- disaster_zone_loop: Disaster zone ambience loop: distant grinding and sub-bass pressure

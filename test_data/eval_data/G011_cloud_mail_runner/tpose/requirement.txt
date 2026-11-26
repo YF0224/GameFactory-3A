@@ -1,0 +1,6 @@
+# G011_cloud_mail_runner / tpose requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- mail_courier: Front T-pose reference of the cloud courier matching generated_ref_02.png proportions

@@ -1,0 +1,13 @@
+# G011_cloud_mail_runner / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- jump_whoosh: Bright wind-cutting whoosh for jump takeoff
+- slide_friction: Cloth-and-deck friction swish for the slide
+- collect_chime: Crisp envelope-ping chime as a light piece is collected
+- crash_thud: Muffled impact thud for hitting a barrier
+- checkpoint_upcall: Warm rising two-note call as a checkpoint beacon lights
+- updraft_wind: Rising updraft gust entering the storm-ridge upper route
+- victory_bell: Lighthouse bell ringing twice for a completed delivery run
+- defeat_tone: Low descending tone as the letters scatter into the clouds

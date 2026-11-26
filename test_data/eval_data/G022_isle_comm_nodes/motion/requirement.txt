@@ -1,0 +1,17 @@
+# G022_isle_comm_nodes / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G022_mot_001: March loop with shield forward, readable grid steps, in-place
+- G022_mot_002: Shield brace then spear thrust, one-shot, in-place
+- G022_mot_003: Shield flinch from a hit, in-place
+- G022_mot_004: Fall and dissolve defeat, one-shot, in-place
+- G022_mot_005: Light scout walk loop with bow slung, in-place
+- G022_mot_006: Bow draw and release aim, one-shot, in-place
+- G022_mot_007: Scout flinch from a hit, in-place
+- G022_mot_008: Fall and dissolve defeat, one-shot, in-place
+- G022_mot_009: Steady march loop with relay satchel sway, in-place
+- G022_mot_010: Beacon staff raise and green heal pulse cast, one-shot, in-place
+- G022_mot_011: Satchel flinch from a hit, in-place
+- G022_mot_012: Fall and dissolve defeat, one-shot, in-place

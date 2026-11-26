@@ -1,0 +1,21 @@
+# G033_card_caravan / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G033_mot_001: A person stands in a relaxed ready stance with one hand near the waist.
+- G033_mot_002: A person steps forward and slashes a short blade diagonally.
+- G033_mot_003: A person raises the forearm defensively and braces.
+- G033_mot_004: A person clenches both fists and tenses up powerfully.
+- G033_mot_005: A person staggers back from a hit to the chest.
+- G033_mot_006: A person falls to the knees and collapses forward.
+- G033_mot_007: A person stands in a ready stance, shifting weight slightly, holding a dagger.
+- G033_mot_008: A person lunges forward stabbing with a dagger and returns to the ready stance.
+- G033_mot_009: A person flinches backward from a hit to the chest and recovers.
+- G033_mot_010: A person staggers, drops to the knees and collapses forward onto the ground.
+- G033_mot_011: A person raises a small shield in front and crouches slightly.
+- G033_mot_012: A person stands in a ready stance, shifting weight slightly, holding a heavy sword with both hands.
+- G033_mot_013: A person swings a heavy two-handed sword in a wide arc and returns to the ready stance.
+- G033_mot_014: A person flinches backward from a hit to the chest and recovers.
+- G033_mot_015: A person staggers, drops to the knees and collapses forward onto the ground.
+- G033_mot_016: A person roars with both arms spread wide, powering up.

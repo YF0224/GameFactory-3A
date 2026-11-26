@@ -1,0 +1,8 @@
+# G032_starport_autobattle / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G032_cg_001: A starport candidate deck lights up before a rotation tournament, rows of mechanic squads entering, a commander pressing a candidate badge onto a command console, grandstands glowing, stylized sci-fi starport style, navy and teal palette, cinematic, original design, no text
+- G032_cg_002: Three identical mechanic soldiers walk into a beam of light and merge into one taller two-star unit, a star badge ignites above it, the squad salutes, stylized sci-fi starport style, navy and teal palette, cinematic, original design, no text
+- G032_cg_003: Dual-imagery ending: victory shows a formal flag handed over and defense lights igniting along the orbital windows; defeat shows the candidate badge taken back and the deck lights dimming, stylized sci-fi starport style, navy and teal palette, cinematic, original design, no text

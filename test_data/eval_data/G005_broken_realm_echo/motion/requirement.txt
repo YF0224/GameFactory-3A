@@ -1,0 +1,14 @@
+# G005_broken_realm_echo / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G005_mot_001: Quick horizontal sword slash, lean-in opener, in-place
+- G005_mot_002: Reverse follow-up slash from the other side, in-place
+- G005_mot_003: Heavy spinning finisher slash with full body rotation, in-place
+- G005_mot_004: Two-handed overhead heavy swing with wind-up and follow-through, in-place
+- G005_mot_005: Blink-step forward with a ghostly afterimage lean, fast displacement pose, in-place root motion
+- G005_mot_006: Blade-raised parry stance catch pose, one-hand reversal ready, in-place
+- G005_mot_007: Commander raises the greatsword high with a readable 0.65 second telegraph glow then chops down, in-place
+- G005_mot_008: Commander staggers off-balance with armor dimming, greatsword dipping, vulnerable wobble, in-place
+- G005_mot_009: Defeated commander kneels then slowly dissolves into rising echo particles while falling, final defeat fall

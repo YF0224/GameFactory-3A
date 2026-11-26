@@ -1,0 +1,7 @@
+# G052_wildlife_photo_survey / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G052_cg_001: Misty wetland at dawn, a surveyor walks a boardwalk with camera ready, an egret glides over shallows, an observation hut lamp glows, cinematic, original design, no text
+- G052_cg_002: Inside a survey station, sample photos spread across a desk, a report cover is stamped, outside the wetland wakes in gold light, cinematic, original design, no text

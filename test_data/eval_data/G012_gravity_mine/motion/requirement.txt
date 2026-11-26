@@ -1,0 +1,9 @@
+# G012_gravity_mine / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G012_mot_001: Readable side-view run loop for the mechanic on a mine tunnel floor, in-place
+- G012_mot_002: Mechanic pulls the two-state wrench and the body rotates to the flipped orientation within 0.2 seconds, camera stays level, in-place
+- G012_mot_003: Sharp flinch from a trap hit with a stagger, in-place
+- G012_mot_004: Mechanic rises from a crouch at a checkpoint anchor and readies the wrench, in-place

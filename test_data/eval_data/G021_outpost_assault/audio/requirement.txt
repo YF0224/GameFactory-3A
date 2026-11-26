@@ -1,0 +1,18 @@
+# G021_outpost_assault / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- place_defense: Heavy construction placement thunk with sand settle
+- sell_refund: Deconstruct refund click with coin sweep
+- tower_fire: Crisp rapid sentry tower shot with mechanical bolt cycle
+- unit_hit: Impact hit tick for unit damage with slight armor ring
+- trap_snap: Ground trap snapping shut with debris burst
+- loot_popup: Bright loot pop as salvage numbers rise
+- upgrade_pulse: Warm upgrade pulse with two rising ticks
+- wave_alert: Two-tone incoming wave alert with distant surf
+- keep_hit: Deep keep hit boom with stone crack
+- core_destroyed_burst: Grand core destruction burst with collapse rumble
+- victory_horn: Victory horn call for the captured enemy core
+- defeat_tone: Low defeat tone with falling wind for the fallen outpost
+- desert_coast_wind_loop: Desert coast wind and surf ambience loop with faint sand hiss, no seam artifacts

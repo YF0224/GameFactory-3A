@@ -1,0 +1,17 @@
+# G029_caravan_escort / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G029_mot_001: Raider sprint loop with blade raised, aggressive forward lean, in-place
+- G029_mot_002: Raider blade slash against the wagon hull, one-shot, in-place
+- G029_mot_003: Raider flinch from a bolt hit with stagger, in-place
+- G029_mot_004: Raider collapse death, one-shot, in-place
+- G029_mot_005: Escort guard walking beside the wagon loop with shield relaxed, in-place
+- G029_mot_006: Escort guard short spear thrust, one-shot, in-place
+- G029_mot_007: Escort guard shield flinch from a hit, in-place
+- G029_mot_008: Escort guard fall to the ground death, one-shot, in-place
+- G029_mot_009: Canyon ambusher bounding run loop with crossbow held low, in-place
+- G029_mot_010: Canyon ambusher crossbow bash melee strike, one-shot, in-place
+- G029_mot_011: Canyon ambusher flinch from a hit, in-place
+- G029_mot_012: Canyon ambusher collapse death, one-shot, in-place

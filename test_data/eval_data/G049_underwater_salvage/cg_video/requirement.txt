@@ -1,0 +1,8 @@
+# G049_underwater_salvage / cg_video requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G049_cg_001: Morning sea surface at a salvage barge, a crane lowers a diver into a blue water column, a sunken vessel silhouette appears below, cinematic, original design, no text
+- G049_cg_002: A dive lamp sweeps across a rusted core chamber, sealed doors and a faint air-post light in the dark, pressure rumble grows, cinematic, original design, no text
+- G049_cg_003: The last part breaks the surface and drops into the salvage crate, deck lights run on, the diver removes the mask looking at open sea, cinematic, original design, no text

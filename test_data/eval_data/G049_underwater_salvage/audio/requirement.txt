@@ -1,0 +1,16 @@
+# G049_underwater_salvage / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- metal_unscrew: Rhythmic underwater metal unscrewing strain
+- part_release: Muffled clunk as a part breaks free
+- order_reject: Short dull rejection clank for out-of-order dismantle
+- pickup_rasp: Soft fabric and metal rasp as a part is shouldered
+- refill_hiss: Two-second air hose refill hiss
+- o2_warn: Soft low-air warning tone
+- o2_alarm: Rapid urgent oxygen alarm
+- depth_alarm: Deep single-tone pressure warning
+- blackout_ring: Muffled tinnitus fading into surface splash
+- crated_drop: Metal part dropped into a salvage crate
+- underwater_ambience: Deep underwater ambience: pressure hum, slow bubbles, distant creaks

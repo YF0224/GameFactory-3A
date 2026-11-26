@@ -1,0 +1,16 @@
+# G024_station_infection / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- scan_sweep: Pathogen scanner sweep tone with result chirp
+- positive_detect: Two-note positive detection marker as an infection is confirmed
+- isolation_confirm: Sealed barrier hum as isolation completes
+- isolation_reject: Short denial buzz when the isolation bay is full
+- disposal_pulse_hit: Disposal beam pulse per discrete click, charge step
+- disposal_complete: Resolving chime as the converted entity dissolves after the third hit
+- convert_alarm: Rising conversion alarm as a member turns hostile
+- outbreak_limit_alarm: Severe outbreak alarm for the over-eight active infection failure
+- victory_chime: Clean victory chime as the shift ends with zero active infections
+- defeat_tone: Low containment-failure tone with station lockdown rumble
+- station_hum_loop: Closed ecological station ambience loop: ventilation hum, cultivation pump rhythm, faint plant rustle, no seam artifacts

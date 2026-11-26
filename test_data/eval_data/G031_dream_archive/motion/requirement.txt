@@ -1,0 +1,15 @@
+# G031_dream_archive / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G031_mot_001: Archivist idle breathing with lantern sway, in-place
+- G031_mot_002: Archivist run loop with satchel bounce, top-down readable, in-place
+- G031_mot_003: Archivist carving knife melee swing with ink arc, one-shot, in-place
+- G031_mot_004: Archivist flinch from a hit with lantern flicker, in-place
+- G031_mot_005: Archivist collapse into ink pool death, one-shot, in-place
+- G031_mot_006: Archivist reaches out to pick a reward, one-shot, in-place
+- G031_mot_007: Nightmare shade hulking walk loop with ink drip, in-place
+- G031_mot_008: Nightmare shade wind-up and ground slam with shockwave, one-shot, in-place
+- G031_mot_009: Nightmare shade flinch with ink splatter, in-place
+- G031_mot_010: Nightmare shade dissolve into ink mist death, one-shot, in-place

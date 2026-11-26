@@ -1,0 +1,8 @@
+# G020_tidal_glyphs / motion requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G020_mot_001: An epigrapher stands idle holding a storm lantern, cloak swaying slightly
+- G020_mot_002: An epigrapher walks forward carefully on wet stone
+- G020_mot_003: An epigrapher leans forward and presses a rubbing paper onto a carved wall

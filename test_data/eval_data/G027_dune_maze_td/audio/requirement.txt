@@ -1,0 +1,18 @@
+# G027_dune_maze_td / audio requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- arrow_shot: Dry wooden ballista release with bolt whoosh and desert air
+- barrier_place: Rammed sand plank wall slamming into sand with settle hiss
+- demolish_refund: Structure collapse into sand with coin sweep on top
+- placement_blocked: Dull rejection thud with brief sand puff, negative but soft
+- path_reroute: Short rising shimmer tick marking a recalculated route
+- ant_hit: Bolt impact into chitin with grain scatter tick
+- ant_death: Ant body collapsing into loose sand with dust puff
+- base_alarm: Two-tone desert outpost alarm with urgent second beat
+- wave_start: Wave banner horn with distant ant chatter underneath
+- dune_shift: Deep sand slide rumble with wind gust, slow decay
+- victory_sting: Warm victory sting with flag flap and settling wind
+- defeat_sting: Low defeat drone with sand swallowing hiss
+- desert_wind: Desert wind ambience loop with faint grain hiss and distant dune whistle, seamless loop, no seam artifacts
