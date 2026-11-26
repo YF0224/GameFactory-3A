@@ -544,14 +544,14 @@ print(describe())
 
 ### UE04 UE launch_source 路径不对
 
-**识别**：plan 里的 `launch_source` 指向的 `.uproject` 路径不存在，报 `launch_source xxx does not exist in the project`。
+**识别**：plan 里的 `launch_source` 指向的 `.uproject` 路径不存在，报 `launch_source <path> does not exist in the project`。
 
-**根因**：作者交付的项目目录结构与 plan 预期的入口路径不一致（如 `.uproject` 在子目录里）。
+**根因**：作者交付的项目目录结构与 plan 预期的入口路径不一致（如 `.uproject` 在子目录里而不是根目录）。
 
 **处置**：
 
-1. 确认 delivery 的实际 `.uproject` 位置
-2. 使用 `ue_g025_launch_path_recovery.py`，它只修改 plan 的 `launch_source` 字段为正确路径
+1. 确认 delivery 里实际的 `.uproject` 位置
+2. 使用 `ue_g025_launch_path_recovery.py`，只修改 plan 的 `launch_source` 字段为正确路径
 3. 绑定已失败的原始 plan SHA，不重新调用 planner
 
 **禁止**：不移动项目文件；不改游戏代码；不新增 planner 调用。
@@ -560,15 +560,15 @@ print(describe())
 
 ---
 
-### UE05 UE take1 失败后的 take2 续录
+### UE05 UE take1 工具故障后续跑 take2
 
-**识别**：take1 因工具故障（不是游戏崩溃）失败，有完整 plan，需要续跑 take2。
+**识别**：take1 因工具链故障失败（不是游戏崩溃），有完整 plan，需要续跑一次 take2。
 
 **根因**：take1 的失败来自 admission 或 capture 工具链问题，不是游戏本身的问题，原 plan 仍然有效。
 
 **处置**：
 
-1. 确认 take1 失败是工具链问题（不是游戏崩溃、UI 完全无响应）
+1. 确认 take1 失败原因是工具链问题（不是游戏崩溃、UI 完全无响应）
 2. 保留 take1 的全部材料（plan、失败 record、admission 材料）
 3. 使用 `ue_g025_take2_recovery.py`，只跑一次 take2，不重新调用 planner
 
@@ -578,16 +578,16 @@ print(describe())
 
 ---
 
-### UE06 UE editor target 配置问题
+### UE06 UE 缺少 Editor target 文件
 
-**识别**：UE admission 失败，报 `Editor target not found` 或 `xxxEditor.Target.cs missing`。
+**识别**：UE admission 失败，报 `Editor target not found` 或 `{ProjectName}Editor.Target.cs missing`。
 
 **根因**：作者未提供 Editor target 文件，UE 编译时找不到 Editor 入口。
 
 **处置**：
 
 1. 确认 `Source/` 下缺 `{ProjectName}Editor.Target.cs`
-2. 在评估副本里新增一个标准 Editor target 文件（引擎模板内容，不写游戏逻辑）
+2. 在评估副本里新增一个标准 Editor target 文件（引擎模板内容，不写任何游戏逻辑）
 3. 使用 `ue_g035_target_recovery.py`，绑定原 plan 和已有 admission 材料
 
 **禁止**：不改任何游戏代码；不改 `.umap`/`.uasset`；不改评分。
