@@ -1,233 +1,4962 @@
 {
   "game_id": "G056_garden_minigolf",
   "whitebox": {
-    "mechanic": [
-      {
-        "id": "G056_garden_minigolf.WB.TC2.01",
-        "col": "C2",
-        "text": "力度方向与物理（主机制）：有效操作与状态变化：按 G02 公式生成初速向量 → 球滚动/反弹"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.TC2.02",
-        "col": "C2",
-        "text": "力度方向与物理（主机制）：拒绝与边界：滚动中击球、全览模式击球 → 拒绝且不耗杆"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.TC2.03",
-        "col": "C2",
-        "text": "坡面反弹与摩擦：有效操作与状态变化：坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.TC2.04",
-        "col": "C2",
-        "text": "坡面反弹与摩擦：拒绝与边界：无碰撞则纯摩擦结算"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.TC2.05",
-        "col": "C2",
-        "text": "界外复位：有效操作与状态变化：回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.TC2.06",
-        "col": "C2",
-        "text": "杆数判定：有效操作与状态变化：本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.TC2.07",
-        "col": "C2",
-        "text": "杆数判定：拒绝与边界：高速掠过洞杯不判入洞（速度阈值）"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.TC2.08",
-        "col": "C2",
-        "text": "瞄准与轨迹反馈：有效操作与状态变化：瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）"
-      }
-    ],
-    "asset_slot": [
-      {
-        "id": "G056_garden_minigolf.WB.C3.01",
-        "col": "C3",
-        "text": "角色与物体接口"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C3.02",
-        "col": "C3",
-        "text": "动作占位接口；VFX占位接口"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C3.03",
-        "col": "C3",
-        "text": "声音占位接口"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C3.04",
-        "col": "C3",
-        "text": "演出占位接口；场景与地标接口"
-      }
-    ],
-    "gameness": [
-      {
-        "id": "G056_garden_minigolf.WB.C1.01",
-        "col": "C1",
-        "text": "玩家身份与当前任务；世界与时代背景"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C1.02",
-        "col": "C1",
-        "text": "失败代价与结局表达；故事表达方式"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C1.03",
-        "col": "C1",
-        "text": "叙事来源；场景所在地"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C2.01",
-        "col": "C2",
-        "text": "失败恢复入口；流程；与种子卡差异等5项关联规则"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C2.02",
-        "col": "C2",
-        "text": "球洞2（缓上坡＋单挡板折返，标准杆 4）；球洞3（阶梯坡＋双挡板，标准杆 5）；球洞1（直道平地，标准杆 3）"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C2.03",
-        "col": "C2",
-        "text": "暂停；总结算"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C2.04",
-        "col": "C2",
-        "text": "球杆次数与计分 / 物理与公式（本包冻结值）；统一刻度；杆数与罚则（本包冻结值）等4项关联规则"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C2.05",
-        "col": "C2",
-        "text": "瞄准预览与目标洞 / 键鼠；输入优先级；输入语义边界等6项关联规则"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C2.06",
-        "col": "C2",
-        "text": "冻结需求 vs 实现默认 vs 生成自由度；生成对象；球洞（seed=1056 冻结地形）"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C2.07",
-        "col": "C2",
-        "text": "蓄力方向与击球 / 力度方向与物理（主机制）；瞄准与轨迹反馈"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C2.08",
-        "col": "C2",
-        "text": "坡度反弹与摩擦 / 坡面反弹与摩擦；杆数判定"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C2.09",
-        "col": "C2",
-        "text": "越界复位与罚杆 / 界外复位"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C2.10",
-        "col": "C2",
-        "text": "persistent_state 生命周期；persistent_state"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C2.11",
-        "col": "C2",
-        "text": "软锁与不可达处理；失败条件；成功条件等4项关联规则"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C3.01",
-        "col": "C3",
-        "text": "角色与物体接口"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C3.02",
-        "col": "C3",
-        "text": "动作占位接口；VFX占位接口"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C3.03",
-        "col": "C3",
-        "text": "声音占位接口"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.C3.04",
-        "col": "C3",
-        "text": "演出占位接口；场景与地标接口"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.Q.01",
-        "col": "Q",
-        "text": "视角与镜头（冻结需求）；画面验收4；画面验收1等4项关联规则"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.Q.02",
-        "col": "Q",
-        "text": "关键操作镜头变化；环境常驻效果；VFX 信息性与遮挡约束等5项关联规则"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.Q.03",
-        "col": "Q",
-        "text": "屏幕震动；本测例当前无已绑定参考图"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.Q.04",
-        "col": "Q",
-        "text": "前端界面；画面验收3；画面验收2"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.G.01",
-        "col": "G",
-        "text": "UI 必须显示的状态；最低完整流程；目标物/交互物/场景/UI 对象"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.G.02",
-        "col": "G",
-        "text": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.G.03",
-        "col": "G",
-        "text": "VFX 信息性与遮挡约束；输入与延迟；瞄准与轨迹反馈（本包冻结值）等7项关联规则"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.G.04",
-        "col": "G",
-        "text": "音画同步；环境氛围与声音语言；关键音效清单"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.P.01",
-        "col": "P",
-        "text": "运行验收1"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.P.02",
-        "col": "P",
-        "text": "运行验收2"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.P.03",
-        "col": "P",
-        "text": "运行验收3"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.P.04",
-        "col": "P",
-        "text": "运行验收4"
-      },
-      {
-        "id": "G056_garden_minigolf.WB.CH.01",
-        "col": "CH",
-        "text": "代码健康诊断"
-      }
-    ]
+    "mechanic": {
+      "version": "tiered-core-v1",
+      "assertions": [
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C1.01",
+          "table_column": "C1",
+          "assertion": "玩家身份与当前任务；世界与时代背景",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0003",
+                "text": "- W03 玩家身份与当前任务：玩家是见习园艺师「芽衣」",
+                "requirement_ids": [
+                  "W03"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "玩家身份与当前任务"
+              },
+              {
+                "id": "C1.s0004",
+                "text": "当前任务：在推杆大会上以不超过标准杆的成绩完成三洞，取得正式园丁资格。",
+                "requirement_ids": [
+                  "W03"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "玩家身份与当前任务"
+              },
+              {
+                "id": "C1.s0001",
+                "text": "- W01 世界与时代背景：架空云海时代的「浮屿花园」——园艺师们在漂浮于云海的花屿上经营三洞试炼球场，庆祝春分的推杆大会今夜开杆。",
+                "requirement_ids": [
+                  "W01"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "世界与时代背景"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C1.02",
+          "table_column": "C1",
+          "assertion": "失败代价与结局表达；故事表达方式",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0005",
+                "text": "- W04 失败代价与结局表达：本作无失败态",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              },
+              {
+                "id": "C1.s0006",
+                "text": "超标准杆仅影响成绩表达",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              },
+              {
+                "id": "C1.s0007",
+                "text": "完成则 C02 呈现大会颁奖与花灯升空。",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              },
+              {
+                "id": "C1.s0011",
+                "text": "- W08 故事表达方式：开场视频（C01）交代浮屿与大会 → 三洞推进承载试炼节奏 → 结算视频（C02）收束颁奖",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              },
+              {
+                "id": "C1.s0012",
+                "text": "故事只做包装，不改变机制数值。",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C1.03",
+          "table_column": "C1",
+          "assertion": "叙事来源；场景所在地",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0008",
+                "text": "- W05 叙事来源：三洞＝园艺师资格考试的三个科目（直道基本功/坡度控球/复杂地形）",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0009",
+                "text": "旗杆与洞杯＝试炼花器",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0010",
+                "text": "云海边界＝浮屿边界（界外即坠云）。全部原创。",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0002",
+                "text": "- W02 场景所在地：浮屿花园的三座花洞——直道花径（洞1）、上坡藤架（洞2）、阶梯石台（洞3），云海在球场边缘流动。",
+                "requirement_ids": [
+                  "W02"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "场景所在地"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.TC2.01",
+          "table_column": "C2",
+          "assertion": "力度方向与物理（主机制）：有效操作与状态变化：按 G02 公式生成初速向量 → 球滚动/反弹",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.01",
+                "text": "按 G02 公式生成初速向量 → 球滚动/反弹",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "力度方向与物理（主机制）：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.TC2.02",
+          "table_column": "C2",
+          "assertion": "力度方向与物理（主机制）：拒绝与边界：滚动中击球、全览模式击球 → 拒绝且不耗杆",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.02",
+                "text": "滚动中击球、全览模式击球 → 拒绝且不耗杆",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "力度方向与物理（主机制）：拒绝与边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.TC2.03",
+          "table_column": "C2",
+          "assertion": "坡面反弹与摩擦：有效操作与状态变化：坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.03",
+                "text": "坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "坡面反弹与摩擦：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.TC2.04",
+          "table_column": "C2",
+          "assertion": "坡面反弹与摩擦：拒绝与边界：无碰撞则纯摩擦结算",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.04",
+                "text": "无碰撞则纯摩擦结算",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "坡面反弹与摩擦：拒绝与边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.TC2.05",
+          "table_column": "C2",
+          "assertion": "界外复位：有效操作与状态变化：回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.05",
+                "text": "回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "界外复位：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.TC2.06",
+          "table_column": "C2",
+          "assertion": "杆数判定：有效操作与状态变化：本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.06",
+                "text": "本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "杆数判定：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.TC2.07",
+          "table_column": "C2",
+          "assertion": "杆数判定：拒绝与边界：高速掠过洞杯不判入洞（速度阈值）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.07",
+                "text": "高速掠过洞杯不判入洞（速度阈值）",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "杆数判定：拒绝与边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.TC2.08",
+          "table_column": "C2",
+          "assertion": "瞄准与轨迹反馈：有效操作与状态变化：瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.08",
+                "text": "瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）",
+                "requirement_ids": [
+                  "M05"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "瞄准与轨迹反馈：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C3.01",
+          "table_column": "C3",
+          "assertion": "角色与物体接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0001",
+                "text": "3d_object/gardener_mei：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "W03"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0002",
+                "text": "3d_object/golf_ball：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0003",
+                "text": "3d_object/hole_flag：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C3.02",
+          "table_column": "C3",
+          "assertion": "动作占位接口；VFX占位接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0005",
+                "text": "motion/idle：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0006",
+                "text": "motion/putt_swing：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0018",
+                "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+                "requirement_ids": [
+                  "F05",
+                  "F07",
+                  "N06"
+                ],
+                "scoring_role": "scored",
+                "system": "vfx",
+                "topic": "VFX占位接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C3.03",
+          "table_column": "C3",
+          "assertion": "声音占位接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0007",
+                "text": "audio/charge_tone：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0008",
+                "text": "audio/putt_tap：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0009",
+                "text": "audio/roll_grass：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0010",
+                "text": "audio/board_bonk：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0011",
+                "text": "audio/out_bound_fall：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0012",
+                "text": "audio/hole_pop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0013",
+                "text": "audio/cap_limit：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0014",
+                "text": "audio/finish_fanfare：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0015",
+                "text": "audio/garden_ambience：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C3.04",
+          "table_column": "C3",
+          "assertion": "演出占位接口；场景与地标接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0016",
+                "text": "cg_video/开场花园：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C01"
+                ],
+                "scoring_role": "scored",
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0017",
+                "text": "cg_video/推杆大会结算：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C02"
+                ],
+                "scoring_role": "scored",
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0004",
+                "text": "3d_scene/G056_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L02"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_scene",
+                "topic": "场景与地标接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.Q.01",
+          "table_column": "Q",
+          "assertion": "视角与镜头（冻结需求）；画面验收4；画面验收1等4项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0004",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头（冻结需求）：默认击球视角＝发球/停球点后方第三人称（俯角 45°，距离 5 米），瞄准方向随鼠标旋转",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0005",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：球滚动时镜头平滑跟随球（0.2 秒插值，速度上限 12 米/秒避免甩镜）",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0006",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：球静止 1 秒后镜头回击球准备位",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0007",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：C 键切换「俯视全览」（整洞 60° 俯视，不参与击球）",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0008",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头边界＝球场外框外扩 10%",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0009",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：界外复位/换洞时镜头直接落位（无漂移）。",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0027",
+                "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收4",
+                "topic": "画面验收4"
+              },
+              {
+                "id": "Q.s0024",
+                "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收1",
+                "topic": "画面验收1"
+              },
+              {
+                "id": "Q.s0028",
+                "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "参考图辨识",
+                "topic": "参考图辨识"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.Q.02",
+          "table_column": "Q",
+          "assertion": "关键操作镜头变化；视觉风格与色彩材质；环境常驻效果等4项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0010",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：入洞瞬间镜头轻微推近洞杯 5%（0.5 秒）",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0011",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：出界瞬间镜头短暂拉高 10%（0.4 秒）",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0012",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：无慢动作。",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0001",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：明快风格化 3D 花园",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0002",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝草甸绿（#7CB26B 系）＋花瓣粉（#E8A0B8 系）＋云海白蓝（#C9DCE8 系）",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0003",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质以草坪、木挡板、石台为主，光线为春日暖光。",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0013",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：花瓣随风飘落（低频）、云海缓慢流动、旗杆旗面摆动",
+                "requirement_ids": [
+                  "F04"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "环境常驻效果"
+              },
+              {
+                "id": "Q.s0014",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：不遮挡瞄准线与洞杯。",
+                "requirement_ids": [
+                  "F04"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "环境常驻效果"
+              },
+              {
+                "id": "Q.s0015",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：花瓣与草浪粒子单帧 ≤ 35 且不遮挡瞄准线、洞杯与 HUD。",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.Q.03",
+          "table_column": "Q",
+          "assertion": "屏幕震动；本测例当前无已绑定参考图",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0016",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：入洞 0.1 秒小幅",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "Q.s0017",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：碰撞 0.05 秒微幅",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "Q.s0018",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：设置界面提供「镜头震动开/关」（关闭不影响判定）。",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "Q.s0022",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- 本测例当前无已绑定参考图",
+                "requirement_ids": [
+                  "A01"
+                ],
+                "scoring_role": "scored",
+                "system": "A:12. 参考图绑定 [A01]",
+                "topic": "本测例当前无已绑定参考图"
+              },
+              {
+                "id": "Q.s0023",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：规划的参考图（见习园艺师「芽衣」、高尔夫球与旗杆、三洞球场布局等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。",
+                "requirement_ids": [
+                  "A01"
+                ],
+                "scoring_role": "scored",
+                "system": "A:12. 参考图绑定 [A01]",
+                "topic": "本测例当前无已绑定参考图"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.Q.04",
+          "table_column": "Q",
+          "assertion": "前端界面；画面验收3；画面验收2",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0019",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F10 前端界面：标题（开始/设置/退出）→ HUD（洞号、杆数/上限、蓄力条数值、罚杆、镜头模式提示）→ 总结算（总杆数/对比标准杆 12/罚杆/重开/返回）→ 暂停面板（继续/本洞重打/返回标题/设置）",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "Q.s0020",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：关键状态附图标＋文字（镜头模式、界外提示），不只靠颜色区分",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "Q.s0021",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：窗口失焦自动暂停。",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "Q.s0026",
+                "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收3",
+                "topic": "画面验收3"
+              },
+              {
+                "id": "Q.s0025",
+                "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收2",
+                "topic": "画面验收2"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.G.01",
+          "table_column": "G",
+          "assertion": "UI 必须显示的状态；最低完整流程；目标物/交互物/场景/UI 对象",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0005",
+                "text": "- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示",
+                "requirement_ids": [
+                  "I06"
+                ],
+                "scoring_role": "scored",
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "UI 必须显示的状态"
+              },
+              {
+                "id": "G.s0006",
+                "text": "HUD 对照见 rubric。",
+                "requirement_ids": [
+                  "I06"
+                ],
+                "scoring_role": "scored",
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "UI 必须显示的状态"
+              },
+              {
+                "id": "G.s0001",
+                "text": "- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。",
+                "requirement_ids": [
+                  "S04"
+                ],
+                "scoring_role": "scored",
+                "system": "S:1. 定位与完整流程 [S01–S06]",
+                "topic": "最低完整流程"
+              },
+              {
+                "id": "G.s0007",
+                "text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入",
+                "requirement_ids": [
+                  "L03"
+                ],
+                "scoring_role": "scored",
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "目标物/交互物/场景/UI 对象"
+              },
+              {
+                "id": "G.s0008",
+                "text": "数量与属性以 L01/L02 与 G 系为准。",
+                "requirement_ids": [
+                  "L03"
+                ],
+                "scoring_role": "scored",
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "目标物/交互物/场景/UI 对象"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.G.02",
+          "table_column": "G",
+          "assertion": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）；VFX 信息性与遮挡约束；瞄准与轨迹反馈（本包冻结值）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0011",
+                "text": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0012",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 蓄力开始 | 蓄力条展开＋数值跳动 | 蓄力低鸣（按住循环，音调随力度升高） | 松开或取消 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0013",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 击球 | 球推出＋草地小尘环＋轨迹残影启动 | 击球脆响 | 残影 0.5s 渐隐 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0014",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 球滚动 | 轨迹残影跟随＋草浪压痕 | 滚动沙沙（滚动中循环） | 球停 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0015",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 碰撞挡板 | 火花小粒子＋球体挤压回弹 | 碰撞闷响 | 回弹完成 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0016",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 上坡减速 | 瞄准线透明度提示（击球前）/球速渐减 | 沙沙声减弱 | 坡段结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0017",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出界 | 球坠云＋镜头拉高＋「界外＋1 杆」提示 | 坠落风声 | 复位完成 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0018",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 入洞 | 球旋入洞杯＋旗杆亮灯＋花瓣迸溅 | 入洞清脆音 | 进入下一洞 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0019",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 达杆数上限 | 「本洞按 8 杆计」横幅 | 低提示音 | 推进下一洞 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0020",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 三洞完成 | 花灯升空粒子 | 结算上扬音 | 进入总结算 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0025",
+                "text": "- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "G.s0026",
+                "text": "轨迹残影承担落点复盘信息",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "G.s0002",
+                "text": "- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速",
+                "requirement_ids": [
+                  "G05"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "瞄准与轨迹反馈（本包冻结值）"
+              },
+              {
+                "id": "G.s0003",
+                "text": "蓄力条 0–100% 数值与当前蓄力同步",
+                "requirement_ids": [
+                  "G05"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "瞄准与轨迹反馈（本包冻结值）"
+              },
+              {
+                "id": "G.s0004",
+                "text": "球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。",
+                "requirement_ids": [
+                  "G05"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "瞄准与轨迹反馈（本包冻结值）"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.G.03",
+          "table_column": "G",
+          "assertion": "音画同步；环境氛围与声音语言；关键音效清单",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0027",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：击球脆响与击球帧同步",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0028",
+                "text": "碰撞闷响与接触帧同步",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0029",
+                "text": "入洞清脆音与入洞事件帧同步。",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0009",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：云海微风的春日花园——常驻风拂草浪与远处鸟鸣",
+                "requirement_ids": [
+                  "W07"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "环境氛围与声音语言"
+              },
+              {
+                "id": "G.s0010",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「击球脆响＋滚动沙沙＋碰撞闷响＋入洞清脆」，全部音效按 §9 F06 冻结清单交付。",
+                "requirement_ids": [
+                  "W07"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "环境氛围与声音语言"
+              },
+              {
+                "id": "G.s0021",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单：蓄力低鸣、击球脆响、滚动沙沙、碰撞闷响、坠落风声、入洞清脆音、低提示音、上扬音",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单"
+              },
+              {
+                "id": "G.s0022",
+                "text": "环境音：风拂草浪＋云海低鸣＋远处鸟鸣（常驻循环）",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单"
+              },
+              {
+                "id": "G.s0023",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：循环音开始/结束：滚动沙沙按滚动起止、蓄力低鸣按按住起止、环境声随球场载入开始、随结算淡出 0.5s",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单"
+              },
+              {
+                "id": "G.s0024",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：无配音需求。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.G.04",
+          "table_column": "G",
+          "assertion": "交互反馈4；交互反馈2；交互反馈3等4项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0033",
+                "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈4",
+                "topic": "交互反馈4"
+              },
+              {
+                "id": "G.s0031",
+                "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈2",
+                "topic": "交互反馈2"
+              },
+              {
+                "id": "G.s0032",
+                "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈3",
+                "topic": "交互反馈3"
+              },
+              {
+                "id": "G.s0030",
+                "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈1",
+                "topic": "交互反馈1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.P.01",
+          "table_column": "P",
+          "assertion": "运行验收1",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0001",
+                "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收1",
+                "topic": "运行验收1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.P.02",
+          "table_column": "P",
+          "assertion": "运行验收2",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0002",
+                "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收2",
+                "topic": "运行验收2"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.P.03",
+          "table_column": "P",
+          "assertion": "运行验收3",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0003",
+                "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收3",
+                "topic": "运行验收3"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.P.04",
+          "table_column": "P",
+          "assertion": "运行验收4",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0004",
+                "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收4",
+                "topic": "运行验收4"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.CH.01",
+          "table_column": "CH",
+          "assertion": "代码健康诊断",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "CH.s0001",
+                "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0002",
+                "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0003",
+                "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0004",
+                "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "asset_slot": {
+      "version": "core12-v1",
+      "assertions": [
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C1.01",
+          "table_column": "C1",
+          "assertion": "玩家身份与当前任务；世界与时代背景",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0003",
+                "text": "- W03 玩家身份与当前任务：玩家是见习园艺师「芽衣」",
+                "requirement_ids": [
+                  "W03"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "玩家身份与当前任务"
+              },
+              {
+                "id": "C1.s0004",
+                "text": "当前任务：在推杆大会上以不超过标准杆的成绩完成三洞，取得正式园丁资格。",
+                "requirement_ids": [
+                  "W03"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "玩家身份与当前任务"
+              },
+              {
+                "id": "C1.s0001",
+                "text": "- W01 世界与时代背景：架空云海时代的「浮屿花园」——园艺师们在漂浮于云海的花屿上经营三洞试炼球场，庆祝春分的推杆大会今夜开杆。",
+                "requirement_ids": [
+                  "W01"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "世界与时代背景"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C1.02",
+          "table_column": "C1",
+          "assertion": "失败代价与结局表达；故事表达方式",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0005",
+                "text": "- W04 失败代价与结局表达：本作无失败态",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              },
+              {
+                "id": "C1.s0006",
+                "text": "超标准杆仅影响成绩表达",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              },
+              {
+                "id": "C1.s0007",
+                "text": "完成则 C02 呈现大会颁奖与花灯升空。",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              },
+              {
+                "id": "C1.s0011",
+                "text": "- W08 故事表达方式：开场视频（C01）交代浮屿与大会 → 三洞推进承载试炼节奏 → 结算视频（C02）收束颁奖",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              },
+              {
+                "id": "C1.s0012",
+                "text": "故事只做包装，不改变机制数值。",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C1.03",
+          "table_column": "C1",
+          "assertion": "叙事来源；场景所在地",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0008",
+                "text": "- W05 叙事来源：三洞＝园艺师资格考试的三个科目（直道基本功/坡度控球/复杂地形）",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0009",
+                "text": "旗杆与洞杯＝试炼花器",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0010",
+                "text": "云海边界＝浮屿边界（界外即坠云）。全部原创。",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0002",
+                "text": "- W02 场景所在地：浮屿花园的三座花洞——直道花径（洞1）、上坡藤架（洞2）、阶梯石台（洞3），云海在球场边缘流动。",
+                "requirement_ids": [
+                  "W02"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "场景所在地"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.01",
+          "table_column": "C2",
+          "assertion": "力度方向与物理（主机制）：有效操作与状态变化：按 G02 公式生成初速向量 → 球滚动/反弹",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.01",
+                "text": "按 G02 公式生成初速向量 → 球滚动/反弹",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "力度方向与物理（主机制）：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.02",
+          "table_column": "C2",
+          "assertion": "力度方向与物理（主机制）：拒绝与边界：滚动中击球、全览模式击球 → 拒绝且不耗杆",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.02",
+                "text": "滚动中击球、全览模式击球 → 拒绝且不耗杆",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "力度方向与物理（主机制）：拒绝与边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.03",
+          "table_column": "C2",
+          "assertion": "坡面反弹与摩擦：有效操作与状态变化：坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.03",
+                "text": "坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "坡面反弹与摩擦：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.04",
+          "table_column": "C2",
+          "assertion": "坡面反弹与摩擦：拒绝与边界：无碰撞则纯摩擦结算",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.04",
+                "text": "无碰撞则纯摩擦结算",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "坡面反弹与摩擦：拒绝与边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.05",
+          "table_column": "C2",
+          "assertion": "界外复位：有效操作与状态变化：回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.05",
+                "text": "回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "界外复位：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.06",
+          "table_column": "C2",
+          "assertion": "杆数判定：有效操作与状态变化：本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.06",
+                "text": "本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "杆数判定：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.07",
+          "table_column": "C2",
+          "assertion": "杆数判定：拒绝与边界：高速掠过洞杯不判入洞（速度阈值）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.07",
+                "text": "高速掠过洞杯不判入洞（速度阈值）",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "杆数判定：拒绝与边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.08",
+          "table_column": "C2",
+          "assertion": "瞄准与轨迹反馈：有效操作与状态变化：瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.08",
+                "text": "瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）",
+                "requirement_ids": [
+                  "M05"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "瞄准与轨迹反馈：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.09",
+          "table_column": "C2",
+          "assertion": "暂停冻结与继续：暂停覆盖层打开；球、物理与蓄力冻结",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.09",
+                "text": "暂停覆盖层打开；球、物理与蓄力冻结",
+                "requirement_ids": [
+                  "S11"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "暂停冻结与继续"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.10",
+          "table_column": "C2",
+          "assertion": "成功终局：- V01 成功条件：完成三洞 → 总结算（显示总杆数、对比标准杆 12 与罚杆数）。",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.10",
+                "text": "- V01 成功条件：完成三洞 → 总结算（显示总杆数、对比标准杆 12 与罚杆数）。",
+                "requirement_ids": [
+                  "V01"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "成功终局"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.11",
+          "table_column": "C2",
+          "assertion": "失败或非失败边界：- V02 失败条件：无硬失败态；每洞 8 杆上限强制推进（记为上限完成）。",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.11",
+                "text": "- V02 失败条件：无硬失败态；每洞 8 杆上限强制推进（记为上限完成）。",
+                "requirement_ids": [
+                  "V02"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "失败或非失败边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.12",
+          "table_column": "C2",
+          "assertion": "原生恢复与重新开始：- V03 恢复语义：界外自动复位＋罚 1 杆；R 重打本洞（罚 1 杆、回发球点）；结算后一键重开。",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.12",
+                "text": "- V03 恢复语义：界外自动复位＋罚 1 杆；R 重打本洞（罚 1 杆、回发球点）；结算后一键重开。",
+                "requirement_ids": [
+                  "V03"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "原生恢复与重新开始"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C3.01",
+          "table_column": "C3",
+          "assertion": "角色与物体接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0001",
+                "text": "3d_object/gardener_mei：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "W03"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0002",
+                "text": "3d_object/golf_ball：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0003",
+                "text": "3d_object/hole_flag：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C3.02",
+          "table_column": "C3",
+          "assertion": "动作占位接口；VFX占位接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0005",
+                "text": "motion/idle：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0006",
+                "text": "motion/putt_swing：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0018",
+                "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+                "requirement_ids": [
+                  "F05",
+                  "F07",
+                  "N06"
+                ],
+                "scoring_role": "scored",
+                "system": "vfx",
+                "topic": "VFX占位接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C3.03",
+          "table_column": "C3",
+          "assertion": "声音占位接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0007",
+                "text": "audio/charge_tone：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0008",
+                "text": "audio/putt_tap：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0009",
+                "text": "audio/roll_grass：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0010",
+                "text": "audio/board_bonk：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0011",
+                "text": "audio/out_bound_fall：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0012",
+                "text": "audio/hole_pop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0013",
+                "text": "audio/cap_limit：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0014",
+                "text": "audio/finish_fanfare：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0015",
+                "text": "audio/garden_ambience：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C3.04",
+          "table_column": "C3",
+          "assertion": "演出占位接口；场景与地标接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0016",
+                "text": "cg_video/开场花园：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C01"
+                ],
+                "scoring_role": "scored",
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0017",
+                "text": "cg_video/推杆大会结算：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C02"
+                ],
+                "scoring_role": "scored",
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0004",
+                "text": "3d_scene/G056_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L02"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_scene",
+                "topic": "场景与地标接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.Q.01",
+          "table_column": "Q",
+          "assertion": "视角与镜头（冻结需求）；画面验收4；画面验收1等4项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0004",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头（冻结需求）：默认击球视角＝发球/停球点后方第三人称（俯角 45°，距离 5 米），瞄准方向随鼠标旋转",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0005",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：球滚动时镜头平滑跟随球（0.2 秒插值，速度上限 12 米/秒避免甩镜）",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0006",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：球静止 1 秒后镜头回击球准备位",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0007",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：C 键切换「俯视全览」（整洞 60° 俯视，不参与击球）",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0008",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头边界＝球场外框外扩 10%",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0009",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：界外复位/换洞时镜头直接落位（无漂移）。",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0027",
+                "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收4",
+                "topic": "画面验收4"
+              },
+              {
+                "id": "Q.s0024",
+                "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收1",
+                "topic": "画面验收1"
+              },
+              {
+                "id": "Q.s0028",
+                "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "参考图辨识",
+                "topic": "参考图辨识"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.Q.02",
+          "table_column": "Q",
+          "assertion": "关键操作镜头变化；视觉风格与色彩材质；环境常驻效果等4项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0010",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：入洞瞬间镜头轻微推近洞杯 5%（0.5 秒）",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0011",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：出界瞬间镜头短暂拉高 10%（0.4 秒）",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0012",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：无慢动作。",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0001",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：明快风格化 3D 花园",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0002",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝草甸绿（#7CB26B 系）＋花瓣粉（#E8A0B8 系）＋云海白蓝（#C9DCE8 系）",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0003",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质以草坪、木挡板、石台为主，光线为春日暖光。",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0013",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：花瓣随风飘落（低频）、云海缓慢流动、旗杆旗面摆动",
+                "requirement_ids": [
+                  "F04"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "环境常驻效果"
+              },
+              {
+                "id": "Q.s0014",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：不遮挡瞄准线与洞杯。",
+                "requirement_ids": [
+                  "F04"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "环境常驻效果"
+              },
+              {
+                "id": "Q.s0015",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：花瓣与草浪粒子单帧 ≤ 35 且不遮挡瞄准线、洞杯与 HUD。",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.Q.03",
+          "table_column": "Q",
+          "assertion": "屏幕震动；本测例当前无已绑定参考图",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0016",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：入洞 0.1 秒小幅",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "Q.s0017",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：碰撞 0.05 秒微幅",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "Q.s0018",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：设置界面提供「镜头震动开/关」（关闭不影响判定）。",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "Q.s0022",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- 本测例当前无已绑定参考图",
+                "requirement_ids": [
+                  "A01"
+                ],
+                "scoring_role": "scored",
+                "system": "A:12. 参考图绑定 [A01]",
+                "topic": "本测例当前无已绑定参考图"
+              },
+              {
+                "id": "Q.s0023",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：规划的参考图（见习园艺师「芽衣」、高尔夫球与旗杆、三洞球场布局等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。",
+                "requirement_ids": [
+                  "A01"
+                ],
+                "scoring_role": "scored",
+                "system": "A:12. 参考图绑定 [A01]",
+                "topic": "本测例当前无已绑定参考图"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.Q.04",
+          "table_column": "Q",
+          "assertion": "前端界面；画面验收3；画面验收2",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0019",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F10 前端界面：标题（开始/设置/退出）→ HUD（洞号、杆数/上限、蓄力条数值、罚杆、镜头模式提示）→ 总结算（总杆数/对比标准杆 12/罚杆/重开/返回）→ 暂停面板（继续/本洞重打/返回标题/设置）",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "Q.s0020",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：关键状态附图标＋文字（镜头模式、界外提示），不只靠颜色区分",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "Q.s0021",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：窗口失焦自动暂停。",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "Q.s0026",
+                "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收3",
+                "topic": "画面验收3"
+              },
+              {
+                "id": "Q.s0025",
+                "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收2",
+                "topic": "画面验收2"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.G.01",
+          "table_column": "G",
+          "assertion": "UI 必须显示的状态；最低完整流程；目标物/交互物/场景/UI 对象",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0005",
+                "text": "- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示",
+                "requirement_ids": [
+                  "I06"
+                ],
+                "scoring_role": "scored",
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "UI 必须显示的状态"
+              },
+              {
+                "id": "G.s0006",
+                "text": "HUD 对照见 rubric。",
+                "requirement_ids": [
+                  "I06"
+                ],
+                "scoring_role": "scored",
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "UI 必须显示的状态"
+              },
+              {
+                "id": "G.s0001",
+                "text": "- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。",
+                "requirement_ids": [
+                  "S04"
+                ],
+                "scoring_role": "scored",
+                "system": "S:1. 定位与完整流程 [S01–S06]",
+                "topic": "最低完整流程"
+              },
+              {
+                "id": "G.s0007",
+                "text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入",
+                "requirement_ids": [
+                  "L03"
+                ],
+                "scoring_role": "scored",
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "目标物/交互物/场景/UI 对象"
+              },
+              {
+                "id": "G.s0008",
+                "text": "数量与属性以 L01/L02 与 G 系为准。",
+                "requirement_ids": [
+                  "L03"
+                ],
+                "scoring_role": "scored",
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "目标物/交互物/场景/UI 对象"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.G.02",
+          "table_column": "G",
+          "assertion": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）；VFX 信息性与遮挡约束；瞄准与轨迹反馈（本包冻结值）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0011",
+                "text": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0012",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 蓄力开始 | 蓄力条展开＋数值跳动 | 蓄力低鸣（按住循环，音调随力度升高） | 松开或取消 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0013",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 击球 | 球推出＋草地小尘环＋轨迹残影启动 | 击球脆响 | 残影 0.5s 渐隐 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0014",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 球滚动 | 轨迹残影跟随＋草浪压痕 | 滚动沙沙（滚动中循环） | 球停 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0015",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 碰撞挡板 | 火花小粒子＋球体挤压回弹 | 碰撞闷响 | 回弹完成 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0016",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 上坡减速 | 瞄准线透明度提示（击球前）/球速渐减 | 沙沙声减弱 | 坡段结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0017",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出界 | 球坠云＋镜头拉高＋「界外＋1 杆」提示 | 坠落风声 | 复位完成 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0018",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 入洞 | 球旋入洞杯＋旗杆亮灯＋花瓣迸溅 | 入洞清脆音 | 进入下一洞 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0019",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 达杆数上限 | 「本洞按 8 杆计」横幅 | 低提示音 | 推进下一洞 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0020",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 三洞完成 | 花灯升空粒子 | 结算上扬音 | 进入总结算 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0025",
+                "text": "- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "G.s0026",
+                "text": "轨迹残影承担落点复盘信息",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "G.s0002",
+                "text": "- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速",
+                "requirement_ids": [
+                  "G05"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "瞄准与轨迹反馈（本包冻结值）"
+              },
+              {
+                "id": "G.s0003",
+                "text": "蓄力条 0–100% 数值与当前蓄力同步",
+                "requirement_ids": [
+                  "G05"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "瞄准与轨迹反馈（本包冻结值）"
+              },
+              {
+                "id": "G.s0004",
+                "text": "球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。",
+                "requirement_ids": [
+                  "G05"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "瞄准与轨迹反馈（本包冻结值）"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.G.03",
+          "table_column": "G",
+          "assertion": "音画同步；环境氛围与声音语言；关键音效清单",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0027",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：击球脆响与击球帧同步",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0028",
+                "text": "碰撞闷响与接触帧同步",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0029",
+                "text": "入洞清脆音与入洞事件帧同步。",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0009",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：云海微风的春日花园——常驻风拂草浪与远处鸟鸣",
+                "requirement_ids": [
+                  "W07"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "环境氛围与声音语言"
+              },
+              {
+                "id": "G.s0010",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「击球脆响＋滚动沙沙＋碰撞闷响＋入洞清脆」，全部音效按 §9 F06 冻结清单交付。",
+                "requirement_ids": [
+                  "W07"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "环境氛围与声音语言"
+              },
+              {
+                "id": "G.s0021",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单：蓄力低鸣、击球脆响、滚动沙沙、碰撞闷响、坠落风声、入洞清脆音、低提示音、上扬音",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单"
+              },
+              {
+                "id": "G.s0022",
+                "text": "环境音：风拂草浪＋云海低鸣＋远处鸟鸣（常驻循环）",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单"
+              },
+              {
+                "id": "G.s0023",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：循环音开始/结束：滚动沙沙按滚动起止、蓄力低鸣按按住起止、环境声随球场载入开始、随结算淡出 0.5s",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单"
+              },
+              {
+                "id": "G.s0024",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：无配音需求。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.G.04",
+          "table_column": "G",
+          "assertion": "交互反馈4；交互反馈2；交互反馈3等4项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0033",
+                "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈4",
+                "topic": "交互反馈4"
+              },
+              {
+                "id": "G.s0031",
+                "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈2",
+                "topic": "交互反馈2"
+              },
+              {
+                "id": "G.s0032",
+                "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈3",
+                "topic": "交互反馈3"
+              },
+              {
+                "id": "G.s0030",
+                "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈1",
+                "topic": "交互反馈1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.P.01",
+          "table_column": "P",
+          "assertion": "运行验收1",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0001",
+                "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收1",
+                "topic": "运行验收1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.P.02",
+          "table_column": "P",
+          "assertion": "运行验收2",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0002",
+                "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收2",
+                "topic": "运行验收2"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.P.03",
+          "table_column": "P",
+          "assertion": "运行验收3",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0003",
+                "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收3",
+                "topic": "运行验收3"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.P.04",
+          "table_column": "P",
+          "assertion": "运行验收4",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0004",
+                "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收4",
+                "topic": "运行验收4"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.CH.01",
+          "table_column": "CH",
+          "assertion": "代码健康诊断",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "CH.s0001",
+                "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0002",
+                "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0003",
+                "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0004",
+                "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "gameness": {
+      "version": "final",
+      "assertions": [
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C1.01",
+          "table_column": "C1",
+          "assertion": "玩家身份与当前任务；世界与时代背景",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0003",
+                "text": "- W03 玩家身份与当前任务：玩家是见习园艺师「芽衣」",
+                "requirement_ids": [
+                  "W03"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "玩家身份与当前任务"
+              },
+              {
+                "id": "C1.s0004",
+                "text": "当前任务：在推杆大会上以不超过标准杆的成绩完成三洞，取得正式园丁资格。",
+                "requirement_ids": [
+                  "W03"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "玩家身份与当前任务"
+              },
+              {
+                "id": "C1.s0001",
+                "text": "- W01 世界与时代背景：架空云海时代的「浮屿花园」——园艺师们在漂浮于云海的花屿上经营三洞试炼球场，庆祝春分的推杆大会今夜开杆。",
+                "requirement_ids": [
+                  "W01"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "世界与时代背景"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C1.02",
+          "table_column": "C1",
+          "assertion": "失败代价与结局表达；故事表达方式",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0005",
+                "text": "- W04 失败代价与结局表达：本作无失败态",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              },
+              {
+                "id": "C1.s0006",
+                "text": "超标准杆仅影响成绩表达",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              },
+              {
+                "id": "C1.s0007",
+                "text": "完成则 C02 呈现大会颁奖与花灯升空。",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              },
+              {
+                "id": "C1.s0011",
+                "text": "- W08 故事表达方式：开场视频（C01）交代浮屿与大会 → 三洞推进承载试炼节奏 → 结算视频（C02）收束颁奖",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              },
+              {
+                "id": "C1.s0012",
+                "text": "故事只做包装，不改变机制数值。",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C1.03",
+          "table_column": "C1",
+          "assertion": "叙事来源；场景所在地",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0008",
+                "text": "- W05 叙事来源：三洞＝园艺师资格考试的三个科目（直道基本功/坡度控球/复杂地形）",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0009",
+                "text": "旗杆与洞杯＝试炼花器",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0010",
+                "text": "云海边界＝浮屿边界（界外即坠云）。全部原创。",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0002",
+                "text": "- W02 场景所在地：浮屿花园的三座花洞——直道花径（洞1）、上坡藤架（洞2）、阶梯石台（洞3），云海在球场边缘流动。",
+                "requirement_ids": [
+                  "W02"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "场景所在地"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.01",
+          "table_column": "C2",
+          "assertion": "失败恢复入口；流程；与种子卡差异等5项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0005",
+                "text": "- S05 失败恢复入口：界外自动复位回上一杆位＋罚 1 杆",
+                "requirement_ids": [
+                  "S05"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S06]",
+                "topic": "失败恢复入口"
+              },
+              {
+                "id": "C2.s0006",
+                "text": "总结算界面一键重开",
+                "requirement_ids": [
+                  "S05"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S06]",
+                "topic": "失败恢复入口"
+              },
+              {
+                "id": "C2.s0007",
+                "text": "Esc 暂停。",
+                "requirement_ids": [
+                  "S05"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S06]",
+                "topic": "失败恢复入口"
+              },
+              {
+                "id": "C2.s0003",
+                "text": "- S03 流程：标题 → 球洞1 → 球洞2 → 球洞3 → 总结算（杆数对比标准杆）",
+                "requirement_ids": [
+                  "S03"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S06]",
+                "topic": "流程"
+              },
+              {
+                "id": "C2.s0004",
+                "text": "每洞自动开球。",
+                "requirement_ids": [
+                  "S03"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S06]",
+                "topic": "流程"
+              },
+              {
+                "id": "C2.s0008",
+                "text": "- S06 与种子卡差异：种子卡杆数为「规则化高尔夫全流程」",
+                "requirement_ids": [
+                  "S06"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S06]",
+                "topic": "与种子卡差异"
+              },
+              {
+                "id": "C2.s0009",
+                "text": "本包冻结为三洞切片（标准杆 12），P0 局内口径不变。",
+                "requirement_ids": [
+                  "S06"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S06]",
+                "topic": "与种子卡差异"
+              },
+              {
+                "id": "C2.s0002",
+                "text": "- S02 核心循环一句话：瞄定力度方向 → 击球 → 物理滚动 → 进洞或补杆 → 结算杆数。",
+                "requirement_ids": [
+                  "S02"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S06]",
+                "topic": "核心循环一句话"
+              },
+              {
+                "id": "C2.s0001",
+                "text": "- S01 类型：3D 俯视迷你高尔夫（单人杆数制）。本测例包含的能力：三洞冻结球场、蓄力击球物理、坡面反弹摩擦、瞄准线与轨迹残影反馈、界外复位与罚杆、双镜头模式、开场/结算视频。",
+                "requirement_ids": [
+                  "S01"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S06]",
+                "topic": "类型"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.02",
+          "table_column": "C2",
+          "assertion": "球洞2（缓上坡＋单挡板折返，标准杆 4）；球洞3（阶梯坡＋双挡板，标准杆 5）；球洞1（直道平地，标准杆 3）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0015",
+                "text": "input：同 S07（触发方：玩家）",
+                "requirement_ids": [
+                  "S08",
+                  "S09"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞2（缓上坡＋单挡板折返，标准杆 4）"
+              },
+              {
+                "id": "C2.s0016",
+                "text": "precondition：洞1 完成（入洞或达上限）",
+                "requirement_ids": [
+                  "S08"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞2（缓上坡＋单挡板折返，标准杆 4）"
+              },
+              {
+                "id": "C2.s0017",
+                "text": "state_change：载入洞2；坡面与挡板按 L02 冻结",
+                "requirement_ids": [
+                  "S08"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞2（缓上坡＋单挡板折返，标准杆 4）"
+              },
+              {
+                "id": "C2.s0018",
+                "text": "next_actions：入洞 →「球洞3」",
+                "requirement_ids": [
+                  "S08"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞2（缓上坡＋单挡板折返，标准杆 4）"
+              },
+              {
+                "id": "C2.s0019",
+                "text": "outcome：杆数累计",
+                "requirement_ids": [
+                  "S08"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞2（缓上坡＋单挡板折返，标准杆 4）"
+              },
+              {
+                "id": "C2.s0020",
+                "text": "precondition：洞2 完成",
+                "requirement_ids": [
+                  "S09"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞3（阶梯坡＋双挡板，标准杆 5）"
+              },
+              {
+                "id": "C2.s0021",
+                "text": "state_change：载入洞3；阶梯坡与双挡板生效",
+                "requirement_ids": [
+                  "S09"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞3（阶梯坡＋双挡板，标准杆 5）"
+              },
+              {
+                "id": "C2.s0022",
+                "text": "next_actions：入洞或达上限 →「总结算」（先播 C02）",
+                "requirement_ids": [
+                  "S09"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞3（阶梯坡＋双挡板，标准杆 5）"
+              },
+              {
+                "id": "C2.s0023",
+                "text": "outcome：按 V01 结算",
+                "requirement_ids": [
+                  "S09"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞3（阶梯坡＋双挡板，标准杆 5）"
+              },
+              {
+                "id": "C2.s0010",
+                "text": "input：鼠标瞄准、按住左键蓄力、松开击球、R 重打、C 镜头切换、Esc 暂停（触发方：玩家）",
+                "requirement_ids": [
+                  "S07"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞1（直道平地，标准杆 3）"
+              },
+              {
+                "id": "C2.s0011",
+                "text": "precondition：洞1 载入完成且球静止于发球点",
+                "requirement_ids": [
+                  "S07"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞1（直道平地，标准杆 3）"
+              },
+              {
+                "id": "C2.s0012",
+                "text": "state_change：击球按 G02 公式生成初速 → 物理结算",
+                "requirement_ids": [
+                  "S07"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞1（直道平地，标准杆 3）"
+              },
+              {
+                "id": "C2.s0013",
+                "text": "next_actions：入洞 →「球洞2」；8 杆上限 → 强制完成进下一洞",
+                "requirement_ids": [
+                  "S07"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞1（直道平地，标准杆 3）"
+              },
+              {
+                "id": "C2.s0014",
+                "text": "outcome：本洞杆数累计局内",
+                "requirement_ids": [
+                  "S07"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "球洞1（直道平地，标准杆 3）"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.03",
+          "table_column": "C2",
+          "assertion": "暂停；总结算",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0029",
+                "text": "input：Esc（触发方：玩家）",
+                "requirement_ids": [
+                  "S11"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "暂停"
+              },
+              {
+                "id": "C2.s0030",
+                "text": "precondition：处于任一洞",
+                "requirement_ids": [
+                  "S11"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "暂停"
+              },
+              {
+                "id": "C2.s0031",
+                "text": "state_change：暂停覆盖层打开；球、物理与蓄力冻结",
+                "requirement_ids": [
+                  "S11"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "暂停"
+              },
+              {
+                "id": "C2.s0032",
+                "text": "next_actions：Esc 或「继续」→ 恢复",
+                "requirement_ids": [
+                  "S11"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "暂停"
+              },
+              {
+                "id": "C2.s0033",
+                "text": "outcome：恢复后无状态漂移（G04）",
+                "requirement_ids": [
+                  "S11"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "暂停"
+              },
+              {
+                "id": "C2.s0024",
+                "text": "input：Enter＝重开 / Esc＝返回标题（触发方：玩家）",
+                "requirement_ids": [
+                  "S10"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "总结算"
+              },
+              {
+                "id": "C2.s0025",
+                "text": "precondition：三洞全部完成",
+                "requirement_ids": [
+                  "S10"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "总结算"
+              },
+              {
+                "id": "C2.s0026",
+                "text": "state_change：进入「总结算」状态",
+                "requirement_ids": [
+                  "S10"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "总结算"
+              },
+              {
+                "id": "C2.s0027",
+                "text": "next_actions：重开或返回",
+                "requirement_ids": [
+                  "S10"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "总结算"
+              },
+              {
+                "id": "C2.s0028",
+                "text": "outcome：无跨局写入",
+                "requirement_ids": [
+                  "S10"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+                "topic": "总结算"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.04",
+          "table_column": "C2",
+          "assertion": "球杆次数与计分 / 物理与公式（本包冻结值）；统一刻度；杆数与罚则（本包冻结值）等4项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0037",
+                "text": "- G02 物理与公式（本包冻结值）：击球初速 v＝蓄力比例 × 12 米/秒",
+                "requirement_ids": [
+                  "G02"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "物理与公式（本包冻结值）"
+              },
+              {
+                "id": "C2.s0038",
+                "text": "平地滚动摩擦减速度 1.5 米/秒²",
+                "requirement_ids": [
+                  "G02"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "物理与公式（本包冻结值）"
+              },
+              {
+                "id": "C2.s0039",
+                "text": "坡道沿坡向加速度分量 3.0 米/秒²",
+                "requirement_ids": [
+                  "G02"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "物理与公式（本包冻结值）"
+              },
+              {
+                "id": "C2.s0040",
+                "text": "碰撞恢复系数 0.6。独立 oracle 数例：平地直线满蓄力 50% 击球 v＝6 米/秒，纯滚动距离＝v²/(2×1.5)＝**12 米**",
+                "requirement_ids": [
+                  "G02"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "物理与公式（本包冻结值）"
+              },
+              {
+                "id": "C2.s0041",
+                "text": "蓄力 100% 为 48 米。",
+                "requirement_ids": [
+                  "G02"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "物理与公式（本包冻结值）"
+              },
+              {
+                "id": "C2.s0034",
+                "text": "- G01 统一刻度：距离米制",
+                "requirement_ids": [
+                  "G01"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "统一刻度"
+              },
+              {
+                "id": "C2.s0035",
+                "text": "力度为 0–100% 蓄力条（数值常显）",
+                "requirement_ids": [
+                  "G01"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "统一刻度"
+              },
+              {
+                "id": "C2.s0036",
+                "text": "杆数为整数。",
+                "requirement_ids": [
+                  "G01"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "统一刻度"
+              },
+              {
+                "id": "C2.s0042",
+                "text": "- G03 杆数与罚则（本包冻结值）：三洞标准杆 3/4/5（总标准杆 12）",
+                "requirement_ids": [
+                  "G03"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "杆数与罚则（本包冻结值）"
+              },
+              {
+                "id": "C2.s0043",
+                "text": "界外复位每次罚 1 杆",
+                "requirement_ids": [
+                  "G03"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "杆数与罚则（本包冻结值）"
+              },
+              {
+                "id": "C2.s0044",
+                "text": "每洞杆数上限 8 杆，达上限自动按 8 杆＋累计罚杆记入并进入下一洞（无硬失败）。",
+                "requirement_ids": [
+                  "G03"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "杆数与罚则（本包冻结值）"
+              },
+              {
+                "id": "C2.s0045",
+                "text": "- G04 暂停与随机：Esc 暂停冻结球与物理",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "暂停与随机"
+              },
+              {
+                "id": "C2.s0046",
+                "text": "窗口失焦自动暂停",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "暂停与随机"
+              },
+              {
+                "id": "C2.s0047",
+                "text": "fixed_seed=1056 冻结三洞地形布置",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "暂停与随机"
+              },
+              {
+                "id": "C2.s0048",
+                "text": "本作物理为确定公式，无概率判定。",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "暂停与随机"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.05",
+          "table_column": "C2",
+          "assertion": "瞄准预览与目标洞 / 键鼠；输入优先级；输入语义边界等6项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0049",
+                "text": "- I01 键鼠：鼠标移动＝瞄准方向",
+                "requirement_ids": [
+                  "I01"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "键鼠"
+              },
+              {
+                "id": "C2.s0050",
+                "text": "按住左键蓄力、松开击球",
+                "requirement_ids": [
+                  "I01"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "键鼠"
+              },
+              {
+                "id": "C2.s0051",
+                "text": "C＝俯视全览/击球视角切换",
+                "requirement_ids": [
+                  "I01"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "键鼠"
+              },
+              {
+                "id": "C2.s0052",
+                "text": "R＝本洞重打（罚 1 杆）",
+                "requirement_ids": [
+                  "I01"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "键鼠"
+              },
+              {
+                "id": "C2.s0053",
+                "text": "Esc＝暂停",
+                "requirement_ids": [
+                  "I01"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "键鼠"
+              },
+              {
+                "id": "C2.s0054",
+                "text": "结算界面 Enter＝重开。",
+                "requirement_ids": [
+                  "I01"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "键鼠"
+              },
+              {
+                "id": "C2.s0060",
+                "text": "- I04 输入优先级：暂停与结算状态阻断全部玩法输入",
+                "requirement_ids": [
+                  "I04"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入优先级"
+              },
+              {
+                "id": "C2.s0061",
+                "text": "俯视全览模式下击球无效（须切回击球视角）",
+                "requirement_ids": [
+                  "I04"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入优先级"
+              },
+              {
+                "id": "C2.s0062",
+                "text": "同帧多输入按瞄准→蓄力→击球顺序结算。",
+                "requirement_ids": [
+                  "I04"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入优先级"
+              },
+              {
+                "id": "C2.s0055",
+                "text": "- I02 输入语义边界：球滚动中击球无效",
+                "requirement_ids": [
+                  "I02"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入语义边界"
+              },
+              {
+                "id": "C2.s0056",
+                "text": "蓄力不足 5% 松开视为取消（不耗杆）",
+                "requirement_ids": [
+                  "I02"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入语义边界"
+              },
+              {
+                "id": "C2.s0057",
+                "text": "暂停/结算期间输入无效",
+                "requirement_ids": [
+                  "I02"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入语义边界"
+              },
+              {
+                "id": "C2.s0058",
+                "text": "被拒输入不产生杆数变化。",
+                "requirement_ids": [
+                  "I02"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入语义边界"
+              },
+              {
+                "id": "C2.s0063",
+                "text": "- I05 焦点与失焦规则：点击画布捕获输入焦点",
+                "requirement_ids": [
+                  "I05"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "焦点与失焦规则"
+              },
+              {
+                "id": "C2.s0064",
+                "text": "面板层阻断点击穿透",
+                "requirement_ids": [
+                  "I05"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "焦点与失焦规则"
+              },
+              {
+                "id": "C2.s0065",
+                "text": "窗口失焦自动暂停。",
+                "requirement_ids": [
+                  "I05"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "焦点与失焦规则"
+              },
+              {
+                "id": "C2.s0059",
+                "text": "- I03 无手柄需求。",
+                "requirement_ids": [
+                  "I03"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "无手柄需求。"
+              },
+              {
+                "id": "C2.s0066",
+                "text": "镜头切换 ≤ 150 毫秒。",
+                "requirement_ids": [
+                  "I07"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入延迟目标"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.06",
+          "table_column": "C2",
+          "assertion": "冻结需求 vs 实现默认 vs 生成自由度；生成对象；球洞（seed=1056 冻结地形）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0072",
+                "text": "- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求",
+                "requirement_ids": [
+                  "L04"
+                ],
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+              },
+              {
+                "id": "C2.s0073",
+                "text": "§9 未冻结的花园装饰与配色为生成自由度，不得评估为缺失",
+                "requirement_ids": [
+                  "L04"
+                ],
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+              },
+              {
+                "id": "C2.s0074",
+                "text": "实现默认值必须明确标注且符合核心机制。",
+                "requirement_ids": [
+                  "L04"
+                ],
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+              },
+              {
+                "id": "C2.s0067",
+                "text": "- L01 生成对象：高尔夫球 1、三洞（洞杯、旗杆、发球点）、坡面与挡板若干、瞄准线与蓄力条 UI、轨迹残影",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "生成对象"
+              },
+              {
+                "id": "C2.s0068",
+                "text": "花园装饰为表现层。",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "生成对象"
+              },
+              {
+                "id": "C2.s0069",
+                "text": "- L02 球洞（seed=1056 冻结地形）：洞1 直道平地 12 米（标准杆 3）",
+                "requirement_ids": [
+                  "L02"
+                ],
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "球洞（seed=1056 冻结地形）"
+              },
+              {
+                "id": "C2.s0070",
+                "text": "洞2 缓上坡＋单挡板折返（标准杆 4）",
+                "requirement_ids": [
+                  "L02"
+                ],
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "球洞（seed=1056 冻结地形）"
+              },
+              {
+                "id": "C2.s0071",
+                "text": "洞3 阶梯坡＋双挡板（标准杆 5）。",
+                "requirement_ids": [
+                  "L02"
+                ],
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "球洞（seed=1056 冻结地形）"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.07",
+          "table_column": "C2",
+          "assertion": "蓄力方向与击球 / 力度方向与物理（主机制）；瞄准与轨迹反馈",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0075",
+                "text": "input：瞄准＋蓄力击球",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "力度方向与物理（主机制）"
+              },
+              {
+                "id": "C2.s0076",
+                "text": "precondition：球静止且处于击球准备状态（非俯视全览）",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "力度方向与物理（主机制）"
+              },
+              {
+                "id": "C2.s0077",
+                "text": "state_change：按 G02 公式生成初速向量 → 球滚动/反弹",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "力度方向与物理（主机制）"
+              },
+              {
+                "id": "C2.s0078",
+                "text": "invalid_case：滚动中击球、全览模式击球 → 拒绝且不耗杆",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "力度方向与物理（主机制）"
+              },
+              {
+                "id": "C2.s0079",
+                "text": "recovery：球静止即恢复击球准备",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "力度方向与物理（主机制）"
+              },
+              {
+                "id": "C2.s0094",
+                "text": "input：瞄准移动／蓄力变化（玩家）",
+                "requirement_ids": [
+                  "M05"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "瞄准与轨迹反馈"
+              },
+              {
+                "id": "C2.s0095",
+                "text": "precondition：击球准备状态",
+                "requirement_ids": [
+                  "M05"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "瞄准与轨迹反馈"
+              },
+              {
+                "id": "C2.s0096",
+                "text": "state_change：瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）",
+                "requirement_ids": [
+                  "M05"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "瞄准与轨迹反馈"
+              },
+              {
+                "id": "C2.s0097",
+                "text": "invalid_case：全览模式不显示虚线（切回即恢复）",
+                "requirement_ids": [
+                  "M05"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "瞄准与轨迹反馈"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.08",
+          "table_column": "C2",
+          "assertion": "坡度反弹与摩擦 / 坡面反弹与摩擦；杆数判定",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0080",
+                "text": "input：地形接触（系统）",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "坡面反弹与摩擦"
+              },
+              {
+                "id": "C2.s0081",
+                "text": "precondition：球与坡面/挡板碰撞",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "坡面反弹与摩擦"
+              },
+              {
+                "id": "C2.s0082",
+                "text": "state_change：坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "坡面反弹与摩擦"
+              },
+              {
+                "id": "C2.s0083",
+                "text": "invalid_case：无碰撞则纯摩擦结算",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "坡面反弹与摩擦"
+              },
+              {
+                "id": "C2.s0084",
+                "text": "recovery：—",
+                "requirement_ids": [
+                  "M02",
+                  "M04",
+                  "M05"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "坡面反弹与摩擦"
+              },
+              {
+                "id": "C2.s0090",
+                "text": "input：球入洞（系统）/ 达上限（系统）",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "杆数判定"
+              },
+              {
+                "id": "C2.s0091",
+                "text": "precondition：球与洞杯判定重叠且速度低于阈值",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "杆数判定"
+              },
+              {
+                "id": "C2.s0092",
+                "text": "state_change：本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "杆数判定"
+              },
+              {
+                "id": "C2.s0093",
+                "text": "invalid_case：高速掠过洞杯不判入洞（速度阈值）",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "杆数判定"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.09",
+          "table_column": "C2",
+          "assertion": "越界复位与罚杆 / 界外复位",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0085",
+                "text": "input：球坠出球场边界（系统）",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "界外复位"
+              },
+              {
+                "id": "C2.s0086",
+                "text": "precondition：球越过 L02 边界",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "界外复位"
+              },
+              {
+                "id": "C2.s0087",
+                "text": "state_change：回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "界外复位"
+              },
+              {
+                "id": "C2.s0088",
+                "text": "invalid_case：贴边滚动不触发",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "界外复位"
+              },
+              {
+                "id": "C2.s0089",
+                "text": "recovery：复位即恢复击球",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "界外复位"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.10",
+          "table_column": "C2",
+          "assertion": "persistent_state 生命周期；persistent_state",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0106",
+                "text": "- V05 persistent_state 生命周期：当前动作级状态即时结算",
+                "requirement_ids": [
+                  "V05"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "persistent_state 生命周期"
+              },
+              {
+                "id": "C2.s0107",
+                "text": "当前局级状态（杆数/洞进度）局内保留、重开清空",
+                "requirement_ids": [
+                  "V05"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "persistent_state 生命周期"
+              },
+              {
+                "id": "C2.s0108",
+                "text": "无跨局保留状态。",
+                "requirement_ids": [
+                  "V05"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "persistent_state 生命周期"
+              },
+              {
+                "id": "C2.s0104",
+                "text": "- V04 persistent_state：无（重开全量清空",
+                "requirement_ids": [
+                  "V04"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "persistent_state"
+              },
+              {
+                "id": "C2.s0105",
+                "text": "累计杆数仅本局内保留）。",
+                "requirement_ids": [
+                  "V04"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "persistent_state"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C2.11",
+          "table_column": "C2",
+          "assertion": "软锁与不可达处理；失败条件；成功条件等4项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0109",
+                "text": "- V06 软锁与不可达处理：不设永久软锁——8 杆上限保证推进",
+                "requirement_ids": [
+                  "V06"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "软锁与不可达处理"
+              },
+              {
+                "id": "C2.s0110",
+                "text": "界外复位兜底",
+                "requirement_ids": [
+                  "V06"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "软锁与不可达处理"
+              },
+              {
+                "id": "C2.s0111",
+                "text": "任意洞可完成。",
+                "requirement_ids": [
+                  "V06"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "软锁与不可达处理"
+              },
+              {
+                "id": "C2.s0099",
+                "text": "- V02 失败条件：无硬失败态",
+                "requirement_ids": [
+                  "V02"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "失败条件"
+              },
+              {
+                "id": "C2.s0100",
+                "text": "每洞 8 杆上限强制推进（记为上限完成）。",
+                "requirement_ids": [
+                  "V02"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "失败条件"
+              },
+              {
+                "id": "C2.s0098",
+                "text": "- V01 成功条件：完成三洞 → 总结算（显示总杆数、对比标准杆 12 与罚杆数）。",
+                "requirement_ids": [
+                  "V01"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "成功条件"
+              },
+              {
+                "id": "C2.s0101",
+                "text": "- V03 恢复语义：界外自动复位＋罚 1 杆",
+                "requirement_ids": [
+                  "V03"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "恢复语义"
+              },
+              {
+                "id": "C2.s0102",
+                "text": "R 重打本洞（罚 1 杆、回发球点）",
+                "requirement_ids": [
+                  "V03"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "恢复语义"
+              },
+              {
+                "id": "C2.s0103",
+                "text": "结算后一键重开。",
+                "requirement_ids": [
+                  "V03"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V05]",
+                "topic": "恢复语义"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C3.01",
+          "table_column": "C3",
+          "assertion": "角色与物体接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0001",
+                "text": "3d_object/gardener_mei：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "W03"
+                ],
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0002",
+                "text": "3d_object/golf_ball：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0003",
+                "text": "3d_object/hole_flag：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C3.02",
+          "table_column": "C3",
+          "assertion": "动作占位接口；VFX占位接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0005",
+                "text": "motion/idle：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0006",
+                "text": "motion/putt_swing：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0018",
+                "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+                "requirement_ids": [
+                  "F05",
+                  "F07",
+                  "N06"
+                ],
+                "system": "vfx",
+                "topic": "VFX占位接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C3.03",
+          "table_column": "C3",
+          "assertion": "声音占位接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0007",
+                "text": "audio/charge_tone：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0008",
+                "text": "audio/putt_tap：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0009",
+                "text": "audio/roll_grass：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0010",
+                "text": "audio/board_bonk：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0011",
+                "text": "audio/out_bound_fall：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0012",
+                "text": "audio/hole_pop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0013",
+                "text": "audio/cap_limit：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0014",
+                "text": "audio/finish_fanfare：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0015",
+                "text": "audio/garden_ambience：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.C3.04",
+          "table_column": "C3",
+          "assertion": "演出占位接口；场景与地标接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0016",
+                "text": "cg_video/开场花园：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C01"
+                ],
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0017",
+                "text": "cg_video/推杆大会结算：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C02"
+                ],
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0004",
+                "text": "3d_scene/G056_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L02"
+                ],
+                "system": "3d_scene",
+                "topic": "场景与地标接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.Q.01",
+          "table_column": "Q",
+          "assertion": "视角与镜头（冻结需求）；画面验收4；画面验收1等4项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0005",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头（冻结需求）：默认击球视角＝发球/停球点后方第三人称（俯角 45°，距离 5 米），瞄准方向随鼠标旋转",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0006",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：球滚动时镜头平滑跟随球（0.2 秒插值，速度上限 12 米/秒避免甩镜）",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0007",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：球静止 1 秒后镜头回击球准备位",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0008",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：C 键切换「俯视全览」（整洞 60° 俯视，不参与击球）",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0009",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头边界＝球场外框外扩 10%",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0010",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：界外复位/换洞时镜头直接落位（无漂移）。",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头（冻结需求）"
+              },
+              {
+                "id": "Q.s0028",
+                "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "system": "画面验收4",
+                "topic": "画面验收4"
+              },
+              {
+                "id": "Q.s0025",
+                "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "system": "画面验收1",
+                "topic": "画面验收1"
+              },
+              {
+                "id": "Q.s0029",
+                "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "system": "参考图辨识",
+                "topic": "参考图辨识"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.Q.02",
+          "table_column": "Q",
+          "assertion": "关键操作镜头变化；环境常驻效果；VFX 信息性与遮挡约束等5项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0011",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：入洞瞬间镜头轻微推近洞杯 5%（0.5 秒）",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0012",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：出界瞬间镜头短暂拉高 10%（0.4 秒）",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0013",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：无慢动作。",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0014",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：花瓣随风飘落（低频）、云海缓慢流动、旗杆旗面摆动",
+                "requirement_ids": [
+                  "F04"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "环境常驻效果"
+              },
+              {
+                "id": "Q.s0015",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：不遮挡瞄准线与洞杯。",
+                "requirement_ids": [
+                  "F04"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "环境常驻效果"
+              },
+              {
+                "id": "Q.s0016",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：花瓣与草浪粒子单帧 ≤ 35 且不遮挡瞄准线、洞杯与 HUD。",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "Q.s0001",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- I07 输入延迟目标：蓄力/击球按键到画面反馈 ≤ 50 毫秒（手感关键）",
+                "requirement_ids": [
+                  "I07"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入延迟目标"
+              },
+              {
+                "id": "Q.s0002",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：明快风格化 3D 花园",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0003",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝草甸绿（#7CB26B 系）＋花瓣粉（#E8A0B8 系）＋云海白蓝（#C9DCE8 系）",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0004",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质以草坪、木挡板、石台为主，光线为春日暖光。",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.Q.03",
+          "table_column": "Q",
+          "assertion": "屏幕震动；本测例当前无已绑定参考图",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0017",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：入洞 0.1 秒小幅",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "Q.s0018",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：碰撞 0.05 秒微幅",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "Q.s0019",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：设置界面提供「镜头震动开/关」（关闭不影响判定）。",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "Q.s0023",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- 本测例当前无已绑定参考图",
+                "requirement_ids": [
+                  "A01"
+                ],
+                "system": "A:12. 参考图绑定 [A01]",
+                "topic": "本测例当前无已绑定参考图"
+              },
+              {
+                "id": "Q.s0024",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：规划的参考图（见习园艺师「芽衣」、高尔夫球与旗杆、三洞球场布局等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。",
+                "requirement_ids": [
+                  "A01"
+                ],
+                "system": "A:12. 参考图绑定 [A01]",
+                "topic": "本测例当前无已绑定参考图"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.Q.04",
+          "table_column": "Q",
+          "assertion": "前端界面；画面验收3；画面验收2",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0020",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F10 前端界面：标题（开始/设置/退出）→ HUD（洞号、杆数/上限、蓄力条数值、罚杆、镜头模式提示）→ 总结算（总杆数/对比标准杆 12/罚杆/重开/返回）→ 暂停面板（继续/本洞重打/返回标题/设置）",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "Q.s0021",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：关键状态附图标＋文字（镜头模式、界外提示），不只靠颜色区分",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "Q.s0022",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：窗口失焦自动暂停。",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "Q.s0027",
+                "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "system": "画面验收3",
+                "topic": "画面验收3"
+              },
+              {
+                "id": "Q.s0026",
+                "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "system": "画面验收2",
+                "topic": "画面验收2"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.G.01",
+          "table_column": "G",
+          "assertion": "UI 必须显示的状态；最低完整流程；目标物/交互物/场景/UI 对象",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0005",
+                "text": "- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示",
+                "requirement_ids": [
+                  "I06"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "UI 必须显示的状态"
+              },
+              {
+                "id": "G.s0006",
+                "text": "HUD 对照见 rubric。",
+                "requirement_ids": [
+                  "I06"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "UI 必须显示的状态"
+              },
+              {
+                "id": "G.s0001",
+                "text": "- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。",
+                "requirement_ids": [
+                  "S04"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S06]",
+                "topic": "最低完整流程"
+              },
+              {
+                "id": "G.s0007",
+                "text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入",
+                "requirement_ids": [
+                  "L03"
+                ],
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "目标物/交互物/场景/UI 对象"
+              },
+              {
+                "id": "G.s0008",
+                "text": "数量与属性以 L01/L02 与 G 系为准。",
+                "requirement_ids": [
+                  "L03"
+                ],
+                "system": "L:5. 关卡与内容清单 [L01–L04]",
+                "topic": "目标物/交互物/场景/UI 对象"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.G.02",
+          "table_column": "G",
+          "assertion": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0012",
+                "text": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0013",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 蓄力开始 | 蓄力条展开＋数值跳动 | 蓄力低鸣（按住循环，音调随力度升高） | 松开或取消 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0014",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 击球 | 球推出＋草地小尘环＋轨迹残影启动 | 击球脆响 | 残影 0.5s 渐隐 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0015",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 球滚动 | 轨迹残影跟随＋草浪压痕 | 滚动沙沙（滚动中循环） | 球停 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0016",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 碰撞挡板 | 火花小粒子＋球体挤压回弹 | 碰撞闷响 | 回弹完成 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0017",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 上坡减速 | 瞄准线透明度提示（击球前）/球速渐减 | 沙沙声减弱 | 坡段结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0018",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出界 | 球坠云＋镜头拉高＋「界外＋1 杆」提示 | 坠落风声 | 复位完成 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0019",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 入洞 | 球旋入洞杯＋旗杆亮灯＋花瓣迸溅 | 入洞清脆音 | 进入下一洞 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0020",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 达杆数上限 | 「本洞按 8 杆计」横幅 | 低提示音 | 推进下一洞 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              },
+              {
+                "id": "G.s0021",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 三洞完成 | 花灯升空粒子 | 结算上扬音 | 进入总结算 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.G.03",
+          "table_column": "G",
+          "assertion": "VFX 信息性与遮挡约束；输入与延迟；瞄准与轨迹反馈（本包冻结值）等7项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0026",
+                "text": "- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "G.s0027",
+                "text": "轨迹残影承担落点复盘信息",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "G.s0011",
+                "text": "- F03 输入与延迟：见 I07（击球手感为 S 档核心，≤50 毫秒）。",
+                "requirement_ids": [
+                  "F03"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "输入与延迟"
+              },
+              {
+                "id": "G.s0002",
+                "text": "- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速",
+                "requirement_ids": [
+                  "G05"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "瞄准与轨迹反馈（本包冻结值）"
+              },
+              {
+                "id": "G.s0003",
+                "text": "蓄力条 0–100% 数值与当前蓄力同步",
+                "requirement_ids": [
+                  "G05"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "瞄准与轨迹反馈（本包冻结值）"
+              },
+              {
+                "id": "G.s0004",
+                "text": "球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。",
+                "requirement_ids": [
+                  "G05"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G05]",
+                "topic": "瞄准与轨迹反馈（本包冻结值）"
+              },
+              {
+                "id": "G.s0034",
+                "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "system": "交互反馈4",
+                "topic": "交互反馈4"
+              },
+              {
+                "id": "G.s0032",
+                "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "system": "交互反馈2",
+                "topic": "交互反馈2"
+              },
+              {
+                "id": "G.s0033",
+                "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "system": "交互反馈3",
+                "topic": "交互反馈3"
+              },
+              {
+                "id": "G.s0031",
+                "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "system": "交互反馈1",
+                "topic": "交互反馈1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.G.04",
+          "table_column": "G",
+          "assertion": "音画同步；环境氛围与声音语言；关键音效清单",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0028",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：击球脆响与击球帧同步",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0029",
+                "text": "碰撞闷响与接触帧同步",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0030",
+                "text": "入洞清脆音与入洞事件帧同步。",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0009",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：云海微风的春日花园——常驻风拂草浪与远处鸟鸣",
+                "requirement_ids": [
+                  "W07"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "环境氛围与声音语言"
+              },
+              {
+                "id": "G.s0010",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「击球脆响＋滚动沙沙＋碰撞闷响＋入洞清脆」，全部音效按 §9 F06 冻结清单交付。",
+                "requirement_ids": [
+                  "W07"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "环境氛围与声音语言"
+              },
+              {
+                "id": "G.s0022",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单：蓄力低鸣、击球脆响、滚动沙沙、碰撞闷响、坠落风声、入洞清脆音、低提示音、上扬音",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单"
+              },
+              {
+                "id": "G.s0023",
+                "text": "环境音：风拂草浪＋云海低鸣＋远处鸟鸣（常驻循环）",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单"
+              },
+              {
+                "id": "G.s0024",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：循环音开始/结束：滚动沙沙按滚动起止、蓄力低鸣按按住起止、环境声随球场载入开始、随结算淡出 0.5s",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单"
+              },
+              {
+                "id": "G.s0025",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：无配音需求。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.P.01",
+          "table_column": "P",
+          "assertion": "运行验收1",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0001",
+                "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "system": "运行验收1",
+                "topic": "运行验收1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.P.02",
+          "table_column": "P",
+          "assertion": "运行验收2",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0002",
+                "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "system": "运行验收2",
+                "topic": "运行验收2"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.P.03",
+          "table_column": "P",
+          "assertion": "运行验收3",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0003",
+                "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "system": "运行验收3",
+                "topic": "运行验收3"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.P.04",
+          "table_column": "P",
+          "assertion": "运行验收4",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0004",
+                "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "system": "运行验收4",
+                "topic": "运行验收4"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G056_garden_minigolf.WB.CH.01",
+          "table_column": "CH",
+          "assertion": "代码健康诊断",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "CH.s0001",
+                "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0002",
+                "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0003",
+                "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0004",
+                "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              }
+            ]
+          }
+        }
+      ]
+    }
   },
   "assets": {
-    "G056_cg_001": [],
-    "G056_cg_002": [],
-    "G056_garden_minigolf_obj_002": [],
-    "G056_garden_minigolf_obj_003": [],
-    "G056_scene_001": []
+    "G056_cg_001": {
+      "assertions": []
+    },
+    "G056_cg_002": {
+      "assertions": []
+    },
+    "G056_garden_minigolf_obj_002": {
+      "assertions": []
+    },
+    "G056_garden_minigolf_obj_003": {
+      "assertions": []
+    },
+    "G056_scene_001": {
+      "assertions": []
+    }
   }
 }

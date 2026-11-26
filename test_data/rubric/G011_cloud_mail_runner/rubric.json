@@ -1,235 +1,5263 @@
 {
   "game_id": "G011_cloud_mail_runner",
   "whitebox": {
-    "mechanic": [
-      {
-        "id": "G011_cloud_mail_runner.WB.TC2.01",
-        "col": "C2",
-        "text": "三类障碍应对（主机制）：有效操作与状态变化：高障（1.6 米级）需跳跃越过；低障（1.2 米以上横杆）需滑铲穿过；连续障（高-低-高、中心间距 9 米）需「跳-铲-跳」节奏链；应对错误 → 碰撞（M04）"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.TC2.02",
-        "col": "C2",
-        "text": "三类障碍应对（主机制）：拒绝与边界：动作未结束时重复按键不叠加；暂停/结算期间输入被拒绝且无副作用"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.TC2.03",
-        "col": "C2",
-        "text": "三类障碍应对（主机制）：局内恢复：碰撞走 M04 复位；结算界面重开为最终出路"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.TC2.04",
-        "col": "C2",
-        "text": "收集物与结算：有效操作与状态变化：接触即收集，唯一 ID 计入集合、计数 +1；碰撞复位不撤销已拾取物、不重复计分；终点按 G03 公式结算（距离按 G01 取整口径）"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.TC2.05",
-        "col": "C2",
-        "text": "收集物与结算：拒绝与边界：已收集 ID 再次接触不重复计分"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.TC2.06",
-        "col": "C2",
-        "text": "固定种子复现：有效操作与状态变化：路段拼接序列确定化（障碍/收集/检查点布局）"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.TC2.07",
-        "col": "C2",
-        "text": "碰撞与检查点复位：有效操作与状态变化：碰撞计数 +1 → 角色回最近已越过检查点并获得 1 模拟秒无敌（只抑制重复受击、不重置碰撞计数、不撤销已拾取收集）；碰撞计数达 4 → 判负结算"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.TC2.08",
-        "col": "C2",
-        "text": "碰撞与检查点复位：拒绝与边界：无敌期内接触障碍不再累计碰撞"
-      }
-    ],
-    "asset_slot": [
-      {
-        "id": "G011_cloud_mail_runner.WB.C3.01",
-        "col": "C3",
-        "text": "角色与物体接口"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C3.02",
-        "col": "C3",
-        "text": "动作占位接口；VFX占位接口"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C3.03",
-        "col": "C3",
-        "text": "声音占位接口"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C3.04",
-        "col": "C3",
-        "text": "演出占位接口；场景与地标接口"
-      }
-    ],
-    "gameness": [
-      {
-        "id": "G011_cloud_mail_runner.WB.C1.01",
-        "col": "C1",
-        "text": "玩家身份与当前任务动机；世界与时代背景"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C1.02",
-        "col": "C1",
-        "text": "叙事来源；场景所在地"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C1.03",
-        "col": "C1",
-        "text": "故事表达方式；失败代价与结局表达"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C2.01",
-        "col": "C2",
-        "text": "流程；最低完整流程；核心循环一句话等5项关联规则"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C2.02",
-        "col": "C2",
-        "text": "失败结算；胜利结算；启动与标题"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C2.03",
-        "col": "C2",
-        "text": "暂停；邮路奔跑"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C2.04",
-        "col": "C2",
-        "text": "统一刻度；结算公式"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C2.05",
-        "col": "C2",
-        "text": "种子布局与路线 / 固定种子复现"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C2.06",
-        "col": "C2",
-        "text": "碰撞坠落与检查点 / 碰撞、检查点与同帧裁决；移动参数"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C2.07",
-        "col": "C2",
-        "text": "输入语义边界；输入优先级；键位等5项关联规则"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C2.08",
-        "col": "C2",
-        "text": "生成对象；路段（代码块冻结口径）；冻结需求 vs 实现默认 vs 生成自由度"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C2.09",
-        "col": "C2",
-        "text": "碰撞坠落与检查点 / 收集物与结算；碰撞与检查点复位"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C2.10",
-        "col": "C2",
-        "text": "跑跳滑铲与障碍 / 胜负与重开；三类障碍应对（主机制）"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C2.11",
-        "col": "C2",
-        "text": "恢复语义；失败条件；成功条件等6项关联规则"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C3.01",
-        "col": "C3",
-        "text": "角色与物体接口"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C3.02",
-        "col": "C3",
-        "text": "动作占位接口；VFX占位接口"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C3.03",
-        "col": "C3",
-        "text": "声音占位接口"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.C3.04",
-        "col": "C3",
-        "text": "演出占位接口；场景与地标接口"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.Q.01",
-        "col": "Q",
-        "text": "视角与镜头；屏幕震动；输入延迟目标等5项关联规则"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.Q.02",
-        "col": "Q",
-        "text": "关键操作镜头变化；视觉风格与色彩材质"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.Q.03",
-        "col": "Q",
-        "text": "VFX 信息性与遮挡约束；环境常驻效果"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.Q.04",
-        "col": "Q",
-        "text": "`images/generated_ref_02.png` → 邮差角色 image-to；`images/generated_ref_01.png` → 高障模块 image-to；参考图辨识等5项关联规则"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.G.01",
-        "col": "G",
-        "text": "障碍布局（zkx 裁决冻结）"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.G.02",
-        "col": "G",
-        "text": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.G.03",
-        "col": "G",
-        "text": "音画同步；环境氛围与声音语言；关键音效清单（one_shot 8 条，全部冻结需求）"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.G.04",
-        "col": "G",
-        "text": "前端界面；UI 必显状态；目标物/交互物/场景/UI 对象等9项关联规则"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.P.01",
-        "col": "P",
-        "text": "运行验收1"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.P.02",
-        "col": "P",
-        "text": "运行验收2"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.P.03",
-        "col": "P",
-        "text": "运行验收3"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.P.04",
-        "col": "P",
-        "text": "运行验收4"
-      },
-      {
-        "id": "G011_cloud_mail_runner.WB.CH.01",
-        "col": "CH",
-        "text": "代码健康诊断"
-      }
-    ]
+    "mechanic": {
+      "version": "tiered-core-v1",
+      "assertions": [
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C1.01",
+          "table_column": "C1",
+          "assertion": "玩家身份与当前任务动机；世界与时代背景",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0004",
+                "text": "- W03 玩家身份与当前任务动机：玩家是最后一位云端邮差，背着最后一批急件",
+                "requirement_ids": [
+                  "W03"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "玩家身份与当前任务动机"
+              },
+              {
+                "id": "C1.s0005",
+                "text": "动机是在邮路被暴风吞没前，把每一件光件（邮路信标）安全送到灯塔。",
+                "requirement_ids": [
+                  "W03"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "玩家身份与当前任务动机"
+              },
+              {
+                "id": "C1.s0001",
+                "text": "- W01 世界与时代背景：云端邮路的最后一班信——暴风云带正在吞没这条悬于天际的邮路，这是云邮时代结束前的最后一次投递。",
+                "requirement_ids": [
+                  "W01"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "世界与时代背景"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C1.02",
+          "table_column": "C1",
+          "assertion": "叙事来源；场景所在地",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0008",
+                "text": "- W05 叙事来源：光件=邮路信标件（收集目标）",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0009",
+                "text": "高障/低障/连续障=暴风卷起的云岩与断裂横梁",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0010",
+                "text": "检查点=沿途补给灯站",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0011",
+                "text": "上层通道=邮路的暴风脊线（高风险高收益）。全部原创，不使用商业作品命名或造型。",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0002",
+                "text": "- W02 场景所在地：500 米悬空邮路，云海在其下翻涌",
+                "requirement_ids": [
+                  "W02"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "场景所在地"
+              },
+              {
+                "id": "C1.s0003",
+                "text": "上层 3 米高的暴风脊线通道（高收集密度）与下层云面稳妥栈道并行，尽头是云端灯塔。",
+                "requirement_ids": [
+                  "W02"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "场景所在地"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C1.03",
+          "table_column": "C1",
+          "assertion": "故事表达方式；失败代价与结局表达",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0012",
+                "text": "- W08 故事表达方式：开场视频（C01）交代最后班信与灯塔目标 → 路线视频（C02）承载上下层取舍的过程叙事 → 结算视频（C03）收束",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              },
+              {
+                "id": "C1.s0013",
+                "text": "叙事提示不阻断控制、不改变数值",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              },
+              {
+                "id": "C1.s0014",
+                "text": "提前失败允许直接进入失败结局。",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              },
+              {
+                "id": "C1.s0006",
+                "text": "- W04 失败代价与结局表达：失败=第四次碰撞后急件散落云海（C03 失败意象）",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              },
+              {
+                "id": "C1.s0007",
+                "text": "胜利=灯塔点亮、送达完成（C03 胜利意象）。",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.TC2.01",
+          "table_column": "C2",
+          "assertion": "三类障碍应对（主机制）：有效操作与状态变化：高障（1.6 米级）需跳跃越过；低障（1.2 米以上横杆）需滑铲穿过；连续障（高-低-高、中心间距 9 米）需「跳-铲-跳」节奏链；应对错误 → 碰撞（M04）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.01",
+                "text": "高障（1.6 米级）需跳跃越过；低障（1.2 米以上横杆）需滑铲穿过；连续障（高-低-高、中心间距 9 米）需「跳-铲-跳」节奏链；应对错误 → 碰撞（M04）",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "三类障碍应对（主机制）：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.TC2.02",
+          "table_column": "C2",
+          "assertion": "三类障碍应对（主机制）：拒绝与边界：动作未结束时重复按键不叠加；暂停/结算期间输入被拒绝且无副作用",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.02",
+                "text": "动作未结束时重复按键不叠加；暂停/结算期间输入被拒绝且无副作用",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "三类障碍应对（主机制）：拒绝与边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.TC2.03",
+          "table_column": "C2",
+          "assertion": "三类障碍应对（主机制）：局内恢复：碰撞走 M04 复位；结算界面重开为最终出路",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.03",
+                "text": "碰撞走 M04 复位；结算界面重开为最终出路",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "三类障碍应对（主机制）：局内恢复"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.TC2.04",
+          "table_column": "C2",
+          "assertion": "收集物与结算：有效操作与状态变化：接触即收集，唯一 ID 计入集合、计数 +1；碰撞复位不撤销已拾取物、不重复计分；终点按 G03 公式结算（距离按 G01 取整口径）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.04",
+                "text": "接触即收集，唯一 ID 计入集合、计数 +1；碰撞复位不撤销已拾取物、不重复计分；终点按 G03 公式结算（距离按 G01 取整口径）",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "收集物与结算：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.TC2.05",
+          "table_column": "C2",
+          "assertion": "收集物与结算：拒绝与边界：已收集 ID 再次接触不重复计分",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.05",
+                "text": "已收集 ID 再次接触不重复计分",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "收集物与结算：拒绝与边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.TC2.06",
+          "table_column": "C2",
+          "assertion": "固定种子复现：有效操作与状态变化：路段拼接序列确定化（障碍/收集/检查点布局）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.06",
+                "text": "路段拼接序列确定化（障碍/收集/检查点布局）",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "固定种子复现：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.TC2.07",
+          "table_column": "C2",
+          "assertion": "碰撞与检查点复位：有效操作与状态变化：碰撞计数 +1 → 角色回最近已越过检查点并获得 1 模拟秒无敌（只抑制重复受击、不重置碰撞计数、不撤销已拾取收集）；碰撞计数达 4 → 判负结算",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.07",
+                "text": "碰撞计数 +1 → 角色回最近已越过检查点并获得 1 模拟秒无敌（只抑制重复受击、不重置碰撞计数、不撤销已拾取收集）；碰撞计数达 4 → 判负结算",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "碰撞与检查点复位：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.TC2.08",
+          "table_column": "C2",
+          "assertion": "碰撞与检查点复位：拒绝与边界：无敌期内接触障碍不再累计碰撞",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.tiered.08",
+                "text": "无敌期内接触障碍不再累计碰撞",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "scoring_role": "scored",
+                "system": "tiered-core-v1",
+                "topic": "碰撞与检查点复位：拒绝与边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C3.01",
+          "table_column": "C3",
+          "assertion": "角色与物体接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0001",
+                "text": "3d_object/mail_courier：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "W03"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0002",
+                "text": "3d_object/high_barrier：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0003",
+                "text": "3d_object/low_barrier_rail：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0004",
+                "text": "3d_object/relay_step：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0005",
+                "text": "3d_object/light_pickup：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0006",
+                "text": "3d_object/checkpoint_beacon_post：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "G06"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0007",
+                "text": "3d_object/finish_lighthouse_gate：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "W02"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C3.02",
+          "table_column": "C3",
+          "assertion": "动作占位接口；VFX占位接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0009",
+                "text": "motion/run：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0010",
+                "text": "motion/jump：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0011",
+                "text": "motion/slide：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0012",
+                "text": "motion/crash_recover：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0024",
+                "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+                "requirement_ids": [
+                  "L04",
+                  "F07",
+                  "F09",
+                  "N06"
+                ],
+                "scoring_role": "scored",
+                "system": "vfx",
+                "topic": "VFX占位接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C3.03",
+          "table_column": "C3",
+          "assertion": "声音占位接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0013",
+                "text": "audio/jump_whoosh：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0014",
+                "text": "audio/slide_friction：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0015",
+                "text": "audio/collect_chime：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0016",
+                "text": "audio/crash_thud：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0017",
+                "text": "audio/checkpoint_upcall：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0018",
+                "text": "audio/updraft_wind：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0019",
+                "text": "audio/victory_bell：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0020",
+                "text": "audio/defeat_tone：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C3.04",
+          "table_column": "C3",
+          "assertion": "演出占位接口；场景与地标接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0021",
+                "text": "cg_video/最后一班信：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C01"
+                ],
+                "scoring_role": "scored",
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0022",
+                "text": "cg_video/暴风脊线：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C02"
+                ],
+                "scoring_role": "scored",
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0023",
+                "text": "cg_video/灯塔送达：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C03"
+                ],
+                "scoring_role": "scored",
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0008",
+                "text": "3d_scene/G011_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L02"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_scene",
+                "topic": "场景与地标接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.Q.01",
+          "table_column": "Q",
+          "assertion": "视角与镜头；画面验收3；画面验收2",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0004",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：2.5D 侧视跟随相机",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0005",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：前视安全区 ≥ 屏宽 35%（后方 ≥10%）",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0006",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：跳跃/滑铲不改变 FOV",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0007",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头仅短促 0.06 秒轻微抖动（碰撞）",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0008",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头重置仅在明确切场/复位时。",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0023",
+                "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收3",
+                "topic": "画面验收3"
+              },
+              {
+                "id": "Q.s0022",
+                "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收2",
+                "topic": "画面验收2"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.Q.02",
+          "table_column": "Q",
+          "assertion": "关键操作镜头变化；屏幕震动；环境常驻效果",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0009",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：碰撞 0.06s 轻微抖动（幅度 ≤ 画面高度 1.5%）",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0010",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：收集不震屏",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0011",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：胜利镜头缓推灯塔。设置提供「镜头震动开/关」与「减少动态效果」（关闭抖动与剧烈旋转、保留状态提示",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0012",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：关闭不影响判定与数值）。",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0018",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：仅碰撞 0.06 秒轻微抖动（≤ 画面高度 1.5%）",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "Q.s0013",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：云海流动、远方云柱、检查点灯标呼吸光。纯表现层，不参与判定。",
+                "requirement_ids": [
+                  "F04"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "环境常驻效果"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.Q.03",
+          "table_column": "Q",
+          "assertion": "VFX 信息性与遮挡约束；视觉风格与色彩材质",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0014",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F07 VFX 信息性与遮挡约束：检查点灯标与终点灯塔为信息类 VFX，必须清晰可辨",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "Q.s0015",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：碰撞闪白 ≤0.1 秒不遮挡后续判定输入",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "Q.s0016",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：非结算单个全屏遮挡 ≤0.5 秒",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "Q.s0017",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：粒子不遮挡 HUD 与障碍轮廓。",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "Q.s0001",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：明快手绘感的云海世界",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0002",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色=云白 #EAF2F8、信件金 #E8C559、暴风灰蓝 #6E8FA3、灯塔橙 #E4762C、光件青 #7FD8E8",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0003",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质为云岩、木质栈道、帆布邮包。",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.Q.04",
+          "table_column": "Q",
+          "assertion": "`images/generated_ref_02.png` → 邮差角色 image-to；`images/generated_ref_01.png` → 高障模块 image-to；参考图辨识等5项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0020",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A02 `images/generated_ref_02.png` → 邮差角色 image-to-3D 输入与 T-pose 参考。",
+                "requirement_ids": [
+                  "A02"
+                ],
+                "scoring_role": "scored",
+                "system": "A:12. 参考图绑定 [A01–A02]",
+                "topic": "`images/generated_ref_02.png` → 邮差角色 image-to"
+              },
+              {
+                "id": "Q.s0019",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A01 `images/generated_ref_01.png` → 高障模块 image-to-3D 输入与障碍外观参考。",
+                "requirement_ids": [
+                  "A01"
+                ],
+                "scoring_role": "scored",
+                "system": "A:12. 参考图绑定 [A01–A02]",
+                "topic": "`images/generated_ref_01.png` → 高障模块 image-to"
+              },
+              {
+                "id": "Q.s0025",
+                "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "参考图辨识",
+                "topic": "参考图辨识"
+              },
+              {
+                "id": "Q.s0024",
+                "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收4",
+                "topic": "画面验收4"
+              },
+              {
+                "id": "Q.s0021",
+                "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收1",
+                "topic": "画面验收1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.G.01",
+          "table_column": "G",
+          "assertion": "障碍布局（zkx 裁决冻结）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0001",
+                "text": "- G04 障碍布局（zkx 裁决冻结）：连续障组按「高-低-高」实例化，中心间距 **9 米**，沿跑向碰撞宽 0.8 米（原 2.2 米间距短于 0.9 秒不可打断跳跃的实际位移，予以废止）",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              },
+              {
+                "id": "G.s0002",
+                "text": "三类障碍共 20 处（高障 8、低障 8、连续障 4 组×3 个）",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              },
+              {
+                "id": "G.s0003",
+                "text": "上层通道为高度 3 米的平台段，入口必须设 1.5 米中继台阶（每次垂直上升 ≤2.2 米）",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              },
+              {
+                "id": "G.s0004",
+                "text": "前 50 米为无障碍教学段（仅光件）",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              },
+              {
+                "id": "G.s0005",
+                "text": "冻结布局须提供至少一条有效输入轨迹。",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.G.02",
+          "table_column": "G",
+          "assertion": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0012",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0013",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 跳跃起跳 | 起跳尘土＋跳跃轨迹残影（jump_trail） | 跳跃风切音 | 0.9 秒动作结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0014",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 滑铲 | 滑铲尘土（slide_dust） | 滑铲摩擦音 | 0.7 秒动作结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0015",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 收集光件 | 收集火花（collect_spark）＋计数跳动 | 收集叮响 | 火花 0.2s 消散 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0016",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 碰撞 | 全屏短闪白（crash_flash）＋0.06s 镜头抖动 | 碰撞闷响 | 闪白 0.1s 结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0017",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 检查点复位 | 检查点灯标点亮（checkpoint_beacon）＋角色入场淡入 | 检查点上扬音 | 玩家可控即停 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0018",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 无敌期 | 角色半透明闪烁 | 无 | 1 秒结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0019",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 进入上层通道 | 通道入口光柱（C02 触发点） | 上升风声 | — |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0020",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 抵达终点 | 终点绽放（finish_burst）＋灯塔点亮 | 胜利钟声 | 进入结算 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0021",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 判负 | 急件散落演出 | 低沉失败音 | 进入结算 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.G.03",
+          "table_column": "G",
+          "assertion": "音画同步；环境氛围与声音语言；关键音效清单（one_shot 8 条，全部冻结需求）等4项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0024",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：收集叮响与火花同帧",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0025",
+                "text": "碰撞闷响与闪白同帧",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0026",
+                "text": "检查点音与灯标点亮同帧。",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0009",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：风声与云层低鸣为底",
+                "requirement_ids": [
+                  "W07"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "环境氛围与声音语言"
+              },
+              {
+                "id": "G.s0010",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「跳跃风切+滑铲摩擦+收集叮响+碰撞闷响+灯塔钟声」，全部音效按 §9 F06 冻结清单交付。",
+                "requirement_ids": [
+                  "W07"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "环境氛围与声音语言"
+              },
+              {
+                "id": "G.s0022",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单（one_shot 8 条，全部冻结需求）：跳跃风切、滑铲摩擦、收集叮响、碰撞闷响、检查点上扬音、上升风声、胜利钟声、失败低音。无配音需求（叙事以文本呈现）。震动事件（jump_takeoff/slide_start/collect_tick/crash_impact/checkpoint_reset/finish）到调度日志 ≤50ms，日志含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单（one_shot 8 条，全部冻结需求）"
+              },
+              {
+                "id": "G.s0023",
+                "text": "无震动硬件时验证调度与禁用行为，不声称物理马达已震动。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单（one_shot 8 条，全部冻结需求）"
+              },
+              {
+                "id": "G.s0011",
+                "text": "顿帧不改变计时口径。",
+                "requirement_ids": [
+                  "F03"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "输入与延迟"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.G.04",
+          "table_column": "G",
+          "assertion": "前端界面；UI 必显状态；目标物/交互物/场景/UI 对象等8项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0029",
+                "text": "- F10 前端界面：标题（开始/设置/退出）→ 跑酷 HUD（I06 全项）→ 结算面板（收集/距离/碰撞/总分/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "G.s0030",
+                "text": "关键状态图标+文字并用",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "G.s0031",
+                "text": "窗口失焦自动暂停",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "G.s0032",
+                "text": "叙事节拍提示不阻断控制。",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "G.s0006",
+                "text": "- I06 UI 必显状态：距离（米）、收集数、碰撞计数（0–3）、当前检查点编号、总分实时值。",
+                "requirement_ids": [
+                  "I06"
+                ],
+                "scoring_role": "scored",
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "UI 必显状态"
+              },
+              {
+                "id": "G.s0007",
+                "text": "- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（光件、检查点、终点）逐类存在且运行时可进入",
+                "requirement_ids": [
+                  "L03"
+                ],
+                "scoring_role": "scored",
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "目标物/交互物/场景/UI 对象"
+              },
+              {
+                "id": "G.s0008",
+                "text": "数量与属性以对应 G·M 条目为准。",
+                "requirement_ids": [
+                  "L03"
+                ],
+                "scoring_role": "scored",
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "目标物/交互物/场景/UI 对象"
+              },
+              {
+                "id": "G.s0027",
+                "text": "暂停/结算/重开取消未结束的震动与特效，不影响碰撞判定",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "G.s0028",
+                "text": "设置可关闭。",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "G.s0036",
+                "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈4",
+                "topic": "交互反馈4"
+              },
+              {
+                "id": "G.s0034",
+                "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈2",
+                "topic": "交互反馈2"
+              },
+              {
+                "id": "G.s0035",
+                "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈3",
+                "topic": "交互反馈3"
+              },
+              {
+                "id": "G.s0033",
+                "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈1",
+                "topic": "交互反馈1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.P.01",
+          "table_column": "P",
+          "assertion": "运行验收1",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0001",
+                "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收1",
+                "topic": "运行验收1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.P.02",
+          "table_column": "P",
+          "assertion": "运行验收2",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0002",
+                "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收2",
+                "topic": "运行验收2"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.P.03",
+          "table_column": "P",
+          "assertion": "运行验收3",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0003",
+                "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收3",
+                "topic": "运行验收3"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.P.04",
+          "table_column": "P",
+          "assertion": "运行验收4",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0004",
+                "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收4",
+                "topic": "运行验收4"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.CH.01",
+          "table_column": "CH",
+          "assertion": "代码健康诊断",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "CH.s0001",
+                "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0002",
+                "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0003",
+                "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0004",
+                "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "asset_slot": {
+      "version": "core12-v1",
+      "assertions": [
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C1.01",
+          "table_column": "C1",
+          "assertion": "玩家身份与当前任务动机；世界与时代背景",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0004",
+                "text": "- W03 玩家身份与当前任务动机：玩家是最后一位云端邮差，背着最后一批急件",
+                "requirement_ids": [
+                  "W03"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "玩家身份与当前任务动机"
+              },
+              {
+                "id": "C1.s0005",
+                "text": "动机是在邮路被暴风吞没前，把每一件光件（邮路信标）安全送到灯塔。",
+                "requirement_ids": [
+                  "W03"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "玩家身份与当前任务动机"
+              },
+              {
+                "id": "C1.s0001",
+                "text": "- W01 世界与时代背景：云端邮路的最后一班信——暴风云带正在吞没这条悬于天际的邮路，这是云邮时代结束前的最后一次投递。",
+                "requirement_ids": [
+                  "W01"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "世界与时代背景"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C1.02",
+          "table_column": "C1",
+          "assertion": "叙事来源；场景所在地",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0008",
+                "text": "- W05 叙事来源：光件=邮路信标件（收集目标）",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0009",
+                "text": "高障/低障/连续障=暴风卷起的云岩与断裂横梁",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0010",
+                "text": "检查点=沿途补给灯站",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0011",
+                "text": "上层通道=邮路的暴风脊线（高风险高收益）。全部原创，不使用商业作品命名或造型。",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0002",
+                "text": "- W02 场景所在地：500 米悬空邮路，云海在其下翻涌",
+                "requirement_ids": [
+                  "W02"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "场景所在地"
+              },
+              {
+                "id": "C1.s0003",
+                "text": "上层 3 米高的暴风脊线通道（高收集密度）与下层云面稳妥栈道并行，尽头是云端灯塔。",
+                "requirement_ids": [
+                  "W02"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "场景所在地"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C1.03",
+          "table_column": "C1",
+          "assertion": "故事表达方式；失败代价与结局表达",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0012",
+                "text": "- W08 故事表达方式：开场视频（C01）交代最后班信与灯塔目标 → 路线视频（C02）承载上下层取舍的过程叙事 → 结算视频（C03）收束",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              },
+              {
+                "id": "C1.s0013",
+                "text": "叙事提示不阻断控制、不改变数值",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              },
+              {
+                "id": "C1.s0014",
+                "text": "提前失败允许直接进入失败结局。",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              },
+              {
+                "id": "C1.s0006",
+                "text": "- W04 失败代价与结局表达：失败=第四次碰撞后急件散落云海（C03 失败意象）",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              },
+              {
+                "id": "C1.s0007",
+                "text": "胜利=灯塔点亮、送达完成（C03 胜利意象）。",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.01",
+          "table_column": "C2",
+          "assertion": "三类障碍应对（主机制）：有效操作与状态变化：高障（1.6 米级）需跳跃越过；低障（1.2 米以上横杆）需滑铲穿过；连续障（高-低-高、中心间距 9 米）需「跳-铲-跳」节奏链；应对错误 → 碰撞（M04）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.01",
+                "text": "高障（1.6 米级）需跳跃越过；低障（1.2 米以上横杆）需滑铲穿过；连续障（高-低-高、中心间距 9 米）需「跳-铲-跳」节奏链；应对错误 → 碰撞（M04）",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "三类障碍应对（主机制）：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.02",
+          "table_column": "C2",
+          "assertion": "三类障碍应对（主机制）：拒绝与边界：动作未结束时重复按键不叠加；暂停/结算期间输入被拒绝且无副作用",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.02",
+                "text": "动作未结束时重复按键不叠加；暂停/结算期间输入被拒绝且无副作用",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "三类障碍应对（主机制）：拒绝与边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.03",
+          "table_column": "C2",
+          "assertion": "三类障碍应对（主机制）：局内恢复：碰撞走 M04 复位；结算界面重开为最终出路",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.03",
+                "text": "碰撞走 M04 复位；结算界面重开为最终出路",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "三类障碍应对（主机制）：局内恢复"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.04",
+          "table_column": "C2",
+          "assertion": "收集物与结算：有效操作与状态变化：接触即收集，唯一 ID 计入集合、计数 +1；碰撞复位不撤销已拾取物、不重复计分；终点按 G03 公式结算（距离按 G01 取整口径）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.04",
+                "text": "接触即收集，唯一 ID 计入集合、计数 +1；碰撞复位不撤销已拾取物、不重复计分；终点按 G03 公式结算（距离按 G01 取整口径）",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "收集物与结算：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.05",
+          "table_column": "C2",
+          "assertion": "收集物与结算：拒绝与边界：已收集 ID 再次接触不重复计分",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.05",
+                "text": "已收集 ID 再次接触不重复计分",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "收集物与结算：拒绝与边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.06",
+          "table_column": "C2",
+          "assertion": "固定种子复现：有效操作与状态变化：路段拼接序列确定化（障碍/收集/检查点布局）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.06",
+                "text": "路段拼接序列确定化（障碍/收集/检查点布局）",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "固定种子复现：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.07",
+          "table_column": "C2",
+          "assertion": "碰撞与检查点复位：有效操作与状态变化：碰撞计数 +1 → 角色回最近已越过检查点并获得 1 模拟秒无敌（只抑制重复受击、不重置碰撞计数、不撤销已拾取收集）；碰撞计数达 4 → 判负结算",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.07",
+                "text": "碰撞计数 +1 → 角色回最近已越过检查点并获得 1 模拟秒无敌（只抑制重复受击、不重置碰撞计数、不撤销已拾取收集）；碰撞计数达 4 → 判负结算",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "碰撞与检查点复位：有效操作与状态变化"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.08",
+          "table_column": "C2",
+          "assertion": "碰撞与检查点复位：拒绝与边界：无敌期内接触障碍不再累计碰撞",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.08",
+                "text": "无敌期内接触障碍不再累计碰撞",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "碰撞与检查点复位：拒绝与边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.09",
+          "table_column": "C2",
+          "assertion": "暂停冻结与继续：暂停覆盖层打开，前进、计时与输入冻结",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.09",
+                "text": "暂停覆盖层打开，前进、计时与输入冻结",
+                "requirement_ids": [
+                  "S10"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "暂停冻结与继续"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.10",
+          "table_column": "C2",
+          "assertion": "成功终局：- V01 成功条件：抵达 500 米终点 → 结算（收集数、完赛距离、碰撞数、总分）。",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.10",
+                "text": "- V01 成功条件：抵达 500 米终点 → 结算（收集数、完赛距离、碰撞数、总分）。",
+                "requirement_ids": [
+                  "V01"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "成功终局"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.11",
+          "table_column": "C2",
+          "assertion": "失败或非失败边界：- V02 失败条件：第 4 次碰撞 → 判负结算（注明「碰撞超限」）；与终点同帧按 G06 判负优先。",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.11",
+                "text": "- V02 失败条件：第 4 次碰撞 → 判负结算（注明「碰撞超限」）；与终点同帧按 G06 判负优先。",
+                "requirement_ids": [
+                  "V02"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "失败或非失败边界"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.12",
+          "table_column": "C2",
+          "assertion": "原生恢复与重新开始：- V03 恢复语义：单次碰撞回最近检查点继续（碰撞计数保留、收集保留）；判负/结算后一键重开；重开后路段序列、收集、碰撞全量按 seed 重置。",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.core12.12",
+                "text": "- V03 恢复语义：单次碰撞回最近检查点继续（碰撞计数保留、收集保留）；判负/结算后一键重开；重开后路段序列、收集、碰撞全量按 seed 重置。",
+                "requirement_ids": [
+                  "V03"
+                ],
+                "scoring_role": "scored",
+                "system": "core12",
+                "topic": "原生恢复与重新开始"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C3.01",
+          "table_column": "C3",
+          "assertion": "角色与物体接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0001",
+                "text": "3d_object/mail_courier：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "W03"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0002",
+                "text": "3d_object/high_barrier：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0003",
+                "text": "3d_object/low_barrier_rail：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0004",
+                "text": "3d_object/relay_step：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0005",
+                "text": "3d_object/light_pickup：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "W05"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0006",
+                "text": "3d_object/checkpoint_beacon_post：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "G06"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0007",
+                "text": "3d_object/finish_lighthouse_gate：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "W02"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C3.02",
+          "table_column": "C3",
+          "assertion": "动作占位接口；VFX占位接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0009",
+                "text": "motion/run：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0010",
+                "text": "motion/jump：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0011",
+                "text": "motion/slide：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0012",
+                "text": "motion/crash_recover：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "scoring_role": "scored",
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0024",
+                "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+                "requirement_ids": [
+                  "L04",
+                  "F07",
+                  "F09",
+                  "N06"
+                ],
+                "scoring_role": "scored",
+                "system": "vfx",
+                "topic": "VFX占位接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C3.03",
+          "table_column": "C3",
+          "assertion": "声音占位接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0013",
+                "text": "audio/jump_whoosh：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0014",
+                "text": "audio/slide_friction：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0015",
+                "text": "audio/collect_chime：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0016",
+                "text": "audio/crash_thud：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0017",
+                "text": "audio/checkpoint_upcall：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0018",
+                "text": "audio/updraft_wind：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0019",
+                "text": "audio/victory_bell：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0020",
+                "text": "audio/defeat_tone：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "audio",
+                "topic": "声音占位接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C3.04",
+          "table_column": "C3",
+          "assertion": "演出占位接口；场景与地标接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0021",
+                "text": "cg_video/最后一班信：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C01"
+                ],
+                "scoring_role": "scored",
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0022",
+                "text": "cg_video/暴风脊线：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C02"
+                ],
+                "scoring_role": "scored",
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0023",
+                "text": "cg_video/灯塔送达：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C03"
+                ],
+                "scoring_role": "scored",
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0008",
+                "text": "3d_scene/G011_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L02"
+                ],
+                "scoring_role": "scored",
+                "system": "3d_scene",
+                "topic": "场景与地标接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.Q.01",
+          "table_column": "Q",
+          "assertion": "视角与镜头；画面验收3；画面验收2",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0004",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：2.5D 侧视跟随相机",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0005",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：前视安全区 ≥ 屏宽 35%（后方 ≥10%）",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0006",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：跳跃/滑铲不改变 FOV",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0007",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头仅短促 0.06 秒轻微抖动（碰撞）",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0008",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头重置仅在明确切场/复位时。",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0023",
+                "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收3",
+                "topic": "画面验收3"
+              },
+              {
+                "id": "Q.s0022",
+                "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收2",
+                "topic": "画面验收2"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.Q.02",
+          "table_column": "Q",
+          "assertion": "关键操作镜头变化；屏幕震动；环境常驻效果",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0009",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：碰撞 0.06s 轻微抖动（幅度 ≤ 画面高度 1.5%）",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0010",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：收集不震屏",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0011",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：胜利镜头缓推灯塔。设置提供「镜头震动开/关」与「减少动态效果」（关闭抖动与剧烈旋转、保留状态提示",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0012",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：关闭不影响判定与数值）。",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0018",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：仅碰撞 0.06 秒轻微抖动（≤ 画面高度 1.5%）",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "Q.s0013",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：云海流动、远方云柱、检查点灯标呼吸光。纯表现层，不参与判定。",
+                "requirement_ids": [
+                  "F04"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "环境常驻效果"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.Q.03",
+          "table_column": "Q",
+          "assertion": "VFX 信息性与遮挡约束；视觉风格与色彩材质",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0014",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F07 VFX 信息性与遮挡约束：检查点灯标与终点灯塔为信息类 VFX，必须清晰可辨",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "Q.s0015",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：碰撞闪白 ≤0.1 秒不遮挡后续判定输入",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "Q.s0016",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：非结算单个全屏遮挡 ≤0.5 秒",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "Q.s0017",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：粒子不遮挡 HUD 与障碍轮廓。",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "Q.s0001",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：明快手绘感的云海世界",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0002",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色=云白 #EAF2F8、信件金 #E8C559、暴风灰蓝 #6E8FA3、灯塔橙 #E4762C、光件青 #7FD8E8",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0003",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质为云岩、木质栈道、帆布邮包。",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.Q.04",
+          "table_column": "Q",
+          "assertion": "`images/generated_ref_02.png` → 邮差角色 image-to；`images/generated_ref_01.png` → 高障模块 image-to；参考图辨识等5项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0020",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A02 `images/generated_ref_02.png` → 邮差角色 image-to-3D 输入与 T-pose 参考。",
+                "requirement_ids": [
+                  "A02"
+                ],
+                "scoring_role": "scored",
+                "system": "A:12. 参考图绑定 [A01–A02]",
+                "topic": "`images/generated_ref_02.png` → 邮差角色 image-to"
+              },
+              {
+                "id": "Q.s0019",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A01 `images/generated_ref_01.png` → 高障模块 image-to-3D 输入与障碍外观参考。",
+                "requirement_ids": [
+                  "A01"
+                ],
+                "scoring_role": "scored",
+                "system": "A:12. 参考图绑定 [A01–A02]",
+                "topic": "`images/generated_ref_01.png` → 高障模块 image-to"
+              },
+              {
+                "id": "Q.s0025",
+                "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "参考图辨识",
+                "topic": "参考图辨识"
+              },
+              {
+                "id": "Q.s0024",
+                "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收4",
+                "topic": "画面验收4"
+              },
+              {
+                "id": "Q.s0021",
+                "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "scoring_role": "scored",
+                "system": "画面验收1",
+                "topic": "画面验收1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.G.01",
+          "table_column": "G",
+          "assertion": "障碍布局（zkx 裁决冻结）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0001",
+                "text": "- G04 障碍布局（zkx 裁决冻结）：连续障组按「高-低-高」实例化，中心间距 **9 米**，沿跑向碰撞宽 0.8 米（原 2.2 米间距短于 0.9 秒不可打断跳跃的实际位移，予以废止）",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              },
+              {
+                "id": "G.s0002",
+                "text": "三类障碍共 20 处（高障 8、低障 8、连续障 4 组×3 个）",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              },
+              {
+                "id": "G.s0003",
+                "text": "上层通道为高度 3 米的平台段，入口必须设 1.5 米中继台阶（每次垂直上升 ≤2.2 米）",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              },
+              {
+                "id": "G.s0004",
+                "text": "前 50 米为无障碍教学段（仅光件）",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              },
+              {
+                "id": "G.s0005",
+                "text": "冻结布局须提供至少一条有效输入轨迹。",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "scoring_role": "scored",
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.G.02",
+          "table_column": "G",
+          "assertion": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0012",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0013",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 跳跃起跳 | 起跳尘土＋跳跃轨迹残影（jump_trail） | 跳跃风切音 | 0.9 秒动作结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0014",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 滑铲 | 滑铲尘土（slide_dust） | 滑铲摩擦音 | 0.7 秒动作结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0015",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 收集光件 | 收集火花（collect_spark）＋计数跳动 | 收集叮响 | 火花 0.2s 消散 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0016",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 碰撞 | 全屏短闪白（crash_flash）＋0.06s 镜头抖动 | 碰撞闷响 | 闪白 0.1s 结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0017",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 检查点复位 | 检查点灯标点亮（checkpoint_beacon）＋角色入场淡入 | 检查点上扬音 | 玩家可控即停 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0018",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 无敌期 | 角色半透明闪烁 | 无 | 1 秒结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0019",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 进入上层通道 | 通道入口光柱（C02 触发点） | 上升风声 | — |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0020",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 抵达终点 | 终点绽放（finish_burst）＋灯塔点亮 | 胜利钟声 | 进入结算 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0021",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 判负 | 急件散落演出 | 低沉失败音 | 进入结算 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.G.03",
+          "table_column": "G",
+          "assertion": "音画同步；环境氛围与声音语言；关键音效清单（one_shot 8 条，全部冻结需求）等4项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0024",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：收集叮响与火花同帧",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0025",
+                "text": "碰撞闷响与闪白同帧",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0026",
+                "text": "检查点音与灯标点亮同帧。",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0009",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：风声与云层低鸣为底",
+                "requirement_ids": [
+                  "W07"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "环境氛围与声音语言"
+              },
+              {
+                "id": "G.s0010",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「跳跃风切+滑铲摩擦+收集叮响+碰撞闷响+灯塔钟声」，全部音效按 §9 F06 冻结清单交付。",
+                "requirement_ids": [
+                  "W07"
+                ],
+                "scoring_role": "scored",
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "环境氛围与声音语言"
+              },
+              {
+                "id": "G.s0022",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单（one_shot 8 条，全部冻结需求）：跳跃风切、滑铲摩擦、收集叮响、碰撞闷响、检查点上扬音、上升风声、胜利钟声、失败低音。无配音需求（叙事以文本呈现）。震动事件（jump_takeoff/slide_start/collect_tick/crash_impact/checkpoint_reset/finish）到调度日志 ≤50ms，日志含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单（one_shot 8 条，全部冻结需求）"
+              },
+              {
+                "id": "G.s0023",
+                "text": "无震动硬件时验证调度与禁用行为，不声称物理马达已震动。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单（one_shot 8 条，全部冻结需求）"
+              },
+              {
+                "id": "G.s0011",
+                "text": "顿帧不改变计时口径。",
+                "requirement_ids": [
+                  "F03"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "输入与延迟"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.G.04",
+          "table_column": "G",
+          "assertion": "前端界面；UI 必显状态；目标物/交互物/场景/UI 对象等8项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0029",
+                "text": "- F10 前端界面：标题（开始/设置/退出）→ 跑酷 HUD（I06 全项）→ 结算面板（收集/距离/碰撞/总分/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "G.s0030",
+                "text": "关键状态图标+文字并用",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "G.s0031",
+                "text": "窗口失焦自动暂停",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "G.s0032",
+                "text": "叙事节拍提示不阻断控制。",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "G.s0006",
+                "text": "- I06 UI 必显状态：距离（米）、收集数、碰撞计数（0–3）、当前检查点编号、总分实时值。",
+                "requirement_ids": [
+                  "I06"
+                ],
+                "scoring_role": "scored",
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "UI 必显状态"
+              },
+              {
+                "id": "G.s0007",
+                "text": "- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（光件、检查点、终点）逐类存在且运行时可进入",
+                "requirement_ids": [
+                  "L03"
+                ],
+                "scoring_role": "scored",
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "目标物/交互物/场景/UI 对象"
+              },
+              {
+                "id": "G.s0008",
+                "text": "数量与属性以对应 G·M 条目为准。",
+                "requirement_ids": [
+                  "L03"
+                ],
+                "scoring_role": "scored",
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "目标物/交互物/场景/UI 对象"
+              },
+              {
+                "id": "G.s0027",
+                "text": "暂停/结算/重开取消未结束的震动与特效，不影响碰撞判定",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "G.s0028",
+                "text": "设置可关闭。",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "scoring_role": "scored",
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "G.s0036",
+                "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈4",
+                "topic": "交互反馈4"
+              },
+              {
+                "id": "G.s0034",
+                "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈2",
+                "topic": "交互反馈2"
+              },
+              {
+                "id": "G.s0035",
+                "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈3",
+                "topic": "交互反馈3"
+              },
+              {
+                "id": "G.s0033",
+                "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "scoring_role": "scored",
+                "system": "交互反馈1",
+                "topic": "交互反馈1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.P.01",
+          "table_column": "P",
+          "assertion": "运行验收1",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0001",
+                "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收1",
+                "topic": "运行验收1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.P.02",
+          "table_column": "P",
+          "assertion": "运行验收2",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0002",
+                "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收2",
+                "topic": "运行验收2"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.P.03",
+          "table_column": "P",
+          "assertion": "运行验收3",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0003",
+                "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收3",
+                "topic": "运行验收3"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.P.04",
+          "table_column": "P",
+          "assertion": "运行验收4",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0004",
+                "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "scoring_role": "scored",
+                "system": "运行验收4",
+                "topic": "运行验收4"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.CH.01",
+          "table_column": "CH",
+          "assertion": "代码健康诊断",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "CH.s0001",
+                "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0002",
+                "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0003",
+                "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0004",
+                "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "scoring_role": "scored",
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "gameness": {
+      "version": "final",
+      "assertions": [
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C1.01",
+          "table_column": "C1",
+          "assertion": "玩家身份与当前任务动机；世界与时代背景",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0004",
+                "text": "- W03 玩家身份与当前任务动机：玩家是最后一位云端邮差，背着最后一批急件",
+                "requirement_ids": [
+                  "W03"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "玩家身份与当前任务动机"
+              },
+              {
+                "id": "C1.s0005",
+                "text": "动机是在邮路被暴风吞没前，把每一件光件（邮路信标）安全送到灯塔。",
+                "requirement_ids": [
+                  "W03"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "玩家身份与当前任务动机"
+              },
+              {
+                "id": "C1.s0001",
+                "text": "- W01 世界与时代背景：云端邮路的最后一班信——暴风云带正在吞没这条悬于天际的邮路，这是云邮时代结束前的最后一次投递。",
+                "requirement_ids": [
+                  "W01"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "世界与时代背景"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C1.02",
+          "table_column": "C1",
+          "assertion": "叙事来源；场景所在地",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0008",
+                "text": "- W05 叙事来源：光件=邮路信标件（收集目标）",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0009",
+                "text": "高障/低障/连续障=暴风卷起的云岩与断裂横梁",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0010",
+                "text": "检查点=沿途补给灯站",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0011",
+                "text": "上层通道=邮路的暴风脊线（高风险高收益）。全部原创，不使用商业作品命名或造型。",
+                "requirement_ids": [
+                  "W05"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "叙事来源"
+              },
+              {
+                "id": "C1.s0002",
+                "text": "- W02 场景所在地：500 米悬空邮路，云海在其下翻涌",
+                "requirement_ids": [
+                  "W02"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "场景所在地"
+              },
+              {
+                "id": "C1.s0003",
+                "text": "上层 3 米高的暴风脊线通道（高收集密度）与下层云面稳妥栈道并行，尽头是云端灯塔。",
+                "requirement_ids": [
+                  "W02"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "场景所在地"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C1.03",
+          "table_column": "C1",
+          "assertion": "故事表达方式；失败代价与结局表达",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C1.s0012",
+                "text": "- W08 故事表达方式：开场视频（C01）交代最后班信与灯塔目标 → 路线视频（C02）承载上下层取舍的过程叙事 → 结算视频（C03）收束",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              },
+              {
+                "id": "C1.s0013",
+                "text": "叙事提示不阻断控制、不改变数值",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              },
+              {
+                "id": "C1.s0014",
+                "text": "提前失败允许直接进入失败结局。",
+                "requirement_ids": [
+                  "W08"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "故事表达方式"
+              },
+              {
+                "id": "C1.s0006",
+                "text": "- W04 失败代价与结局表达：失败=第四次碰撞后急件散落云海（C03 失败意象）",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              },
+              {
+                "id": "C1.s0007",
+                "text": "胜利=灯塔点亮、送达完成（C03 胜利意象）。",
+                "requirement_ids": [
+                  "W04"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "失败代价与结局表达"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.01",
+          "table_column": "C2",
+          "assertion": "流程；最低完整流程；核心循环一句话等5项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0003",
+                "text": "- S03 流程：开始界面 → 进入邮路（首次进入前播 C01）→ 500 米有限路段（可选上层 3m 通道）→ 抵达终点 → 结算（收集、距离、碰撞、总分",
+                "requirement_ids": [
+                  "S03"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S05]",
+                "topic": "流程"
+              },
+              {
+                "id": "C2.s0004",
+                "text": "面板前播 C03）→ 重开或返回。",
+                "requirement_ids": [
+                  "S03"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S05]",
+                "topic": "流程"
+              },
+              {
+                "id": "C2.s0005",
+                "text": "- S04 最低完整流程：开始界面、可操作奔跑、结算界面、重开必须全部存在且有真实入口。",
+                "requirement_ids": [
+                  "S04"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S05]",
+                "topic": "最低完整流程"
+              },
+              {
+                "id": "C2.s0002",
+                "text": "- S02 核心循环一句话：自动前进 → 跳跃/滑铲过障 → 双路线取舍收集 → 抵达终点结算。",
+                "requirement_ids": [
+                  "S02"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S05]",
+                "topic": "核心循环一句话"
+              },
+              {
+                "id": "C2.s0001",
+                "text": "- S01 类型：2.5D 侧视自动前进跑酷，单人单局，有限路段（500 米）。本测例包含的能力：跳跃/滑铲过障、上层高收益与下层稳妥双路线、收集与唯一 ID 去重、碰撞-检查点复位、终点结算、开场/路线/结算视频、跑酷手感演出层。",
+                "requirement_ids": [
+                  "S01"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S05]",
+                "topic": "类型"
+              },
+              {
+                "id": "C2.s0006",
+                "text": "- S05 失败恢复入口：碰撞后自动回最近检查点继续（1 秒无敌只抑制重复受击）",
+                "requirement_ids": [
+                  "S05"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S05]",
+                "topic": "失败恢复入口"
+              },
+              {
+                "id": "C2.s0007",
+                "text": "第 4 次碰撞判负",
+                "requirement_ids": [
+                  "S05"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S05]",
+                "topic": "失败恢复入口"
+              },
+              {
+                "id": "C2.s0008",
+                "text": "结算界面一键重开",
+                "requirement_ids": [
+                  "S05"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S05]",
+                "topic": "失败恢复入口"
+              },
+              {
+                "id": "C2.s0009",
+                "text": "游玩中 Esc 暂停。",
+                "requirement_ids": [
+                  "S05"
+                ],
+                "system": "S:1. 定位与完整流程 [S01–S05]",
+                "topic": "失败恢复入口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.02",
+          "table_column": "C2",
+          "assertion": "失败结算；胜利结算；启动与标题",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0024",
+                "text": "precondition：V02 成立（第 4 次碰撞，注明碰撞超限）",
+                "requirement_ids": [
+                  "S09"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "失败结算"
+              },
+              {
+                "id": "C2.s0025",
+                "text": "state_change：进入「失败结算」；面板出现前按 §10 C03 播放结算视频的失败意象（每局一次）",
+                "requirement_ids": [
+                  "S09"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "失败结算"
+              },
+              {
+                "id": "C2.s0026",
+                "text": "next_actions：重开本局",
+                "requirement_ids": [
+                  "S09"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "失败结算"
+              },
+              {
+                "id": "C2.s0027",
+                "text": "outcome：全量重置",
+                "requirement_ids": [
+                  "S09"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "失败结算"
+              },
+              {
+                "id": "C2.s0020",
+                "text": "input：Enter=重开 / Esc=返回（触发方：玩家）",
+                "requirement_ids": [
+                  "S08",
+                  "S09"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "胜利结算"
+              },
+              {
+                "id": "C2.s0021",
+                "text": "precondition：V01 成立（抵达终点）",
+                "requirement_ids": [
+                  "S08"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "胜利结算"
+              },
+              {
+                "id": "C2.s0022",
+                "text": "state_change：进入「胜利结算」；面板出现前按 §10 C03 播放结算视频（每局一次）",
+                "requirement_ids": [
+                  "S08"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "胜利结算"
+              },
+              {
+                "id": "C2.s0023",
+                "text": "next_actions：重开（全量重置）或返回标题",
+                "requirement_ids": [
+                  "S08"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "胜利结算"
+              },
+              {
+                "id": "C2.s0010",
+                "text": "input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」",
+                "requirement_ids": [
+                  "S06"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "启动与标题"
+              },
+              {
+                "id": "C2.s0011",
+                "text": "precondition：构建可启动且资源加载完成",
+                "requirement_ids": [
+                  "S06"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "启动与标题"
+              },
+              {
+                "id": "C2.s0012",
+                "text": "state_change：进入「标题」状态；首次开始时按 §10 C01 触发开场视频",
+                "requirement_ids": [
+                  "S06"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "启动与标题"
+              },
+              {
+                "id": "C2.s0013",
+                "text": "next_actions：进入「邮路奔跑」",
+                "requirement_ids": [
+                  "S06"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "启动与标题"
+              },
+              {
+                "id": "C2.s0014",
+                "text": "outcome：无跨局状态写入",
+                "requirement_ids": [
+                  "S06",
+                  "S08"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "启动与标题"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.03",
+          "table_column": "C2",
+          "assertion": "暂停；邮路奔跑",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0028",
+                "text": "input：Esc（触发方：玩家）；窗口失焦自动触发（触发方：系统）",
+                "requirement_ids": [
+                  "S10"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "暂停"
+              },
+              {
+                "id": "C2.s0029",
+                "text": "precondition：处于奔跑状态",
+                "requirement_ids": [
+                  "S10",
+                  "M04"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "暂停"
+              },
+              {
+                "id": "C2.s0030",
+                "text": "state_change：暂停覆盖层打开，前进、计时与输入冻结",
+                "requirement_ids": [
+                  "S10"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "暂停"
+              },
+              {
+                "id": "C2.s0031",
+                "text": "next_actions：Esc 或「继续」→ 回到奔跑",
+                "requirement_ids": [
+                  "S10"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "暂停"
+              },
+              {
+                "id": "C2.s0032",
+                "text": "outcome：恢复后状态与暂停前逐字段一致",
+                "requirement_ids": [
+                  "S10"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "暂停"
+              },
+              {
+                "id": "C2.s0015",
+                "text": "input：Space/W/↑＝跳跃、S/↓＝滑铲、Esc＝暂停（触发方：玩家）；自动前进与路段内容由 seed 驱动（触发方：系统）",
+                "requirement_ids": [
+                  "S07"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "邮路奔跑"
+              },
+              {
+                "id": "C2.s0016",
+                "text": "precondition：处于奔跑状态且非暂停/结算/视频",
+                "requirement_ids": [
+                  "S07"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "邮路奔跑"
+              },
+              {
+                "id": "C2.s0017",
+                "text": "state_change：按 §6 M01–M05 结算每次输入；距离、收集集合、碰撞计数、检查点实时更新",
+                "requirement_ids": [
+                  "S07"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "邮路奔跑"
+              },
+              {
+                "id": "C2.s0018",
+                "text": "next_actions：抵达 500 米 →「胜利结算」；第 4 次碰撞 →「失败结算」",
+                "requirement_ids": [
+                  "S07"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "邮路奔跑"
+              },
+              {
+                "id": "C2.s0019",
+                "text": "outcome：按 §7 V01/V02 判定，同帧裁决按 G06",
+                "requirement_ids": [
+                  "S07"
+                ],
+                "system": "S:2. 完整核心循环与阶段 [S06–S10]",
+                "topic": "邮路奔跑"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.04",
+          "table_column": "C2",
+          "assertion": "统一刻度；结算公式",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0033",
+                "text": "- G01 统一刻度：距离单位为米",
+                "requirement_ids": [
+                  "G01"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "统一刻度"
+              },
+              {
+                "id": "C2.s0034",
+                "text": "总分与计数为整数",
+                "requirement_ids": [
+                  "G01"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "统一刻度"
+              },
+              {
+                "id": "C2.s0035",
+                "text": "时间采用游戏模拟秒（暂停冻结）",
+                "requirement_ids": [
+                  "G01"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "统一刻度"
+              },
+              {
+                "id": "C2.s0036",
+                "text": "距离取最大已到达进度向下取整并钳制 0–500（结算距离口径）。",
+                "requirement_ids": [
+                  "G01"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "统一刻度"
+              },
+              {
+                "id": "C2.s0041",
+                "text": "- G03 结算公式：总分 = 收集光件数 × 50 ＋ 完赛距离（米）× 2 − 碰撞次数 × 100。独立 oracle 数例：满收集（40）零碰撞完赛 = 40×50+500×2 = **3000**",
+                "requirement_ids": [
+                  "G03"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "结算公式"
+              },
+              {
+                "id": "C2.s0042",
+                "text": "32 收集、1 碰撞完赛 = 32×50+500×2−100 = **2500**。",
+                "requirement_ids": [
+                  "G03"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "结算公式"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.05",
+          "table_column": "C2",
+          "assertion": "种子布局与路线 / 固定种子复现",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0043",
+                "text": "- G05 固定种子复现：路段拼接序列由 fixed_seed=1011 唯一确定",
+                "requirement_ids": [
+                  "G05"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "固定种子复现"
+              },
+              {
+                "id": "C2.s0044",
+                "text": "同版本构建、同 seed 下两次完整跑动，路段障碍/收集/检查点序列逐项 diff=0",
+                "requirement_ids": [
+                  "G05"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "固定种子复现"
+              },
+              {
+                "id": "C2.s0045",
+                "text": "玩家操作差异只改变角色轨迹，不改变路段内容。",
+                "requirement_ids": [
+                  "G05"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "固定种子复现"
+              },
+              {
+                "id": "C2.s0088",
+                "text": "input：seed=1011（局开始）（触发方：系统）",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "固定种子复现"
+              },
+              {
+                "id": "C2.s0089",
+                "text": "precondition：新局开始",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "固定种子复现"
+              },
+              {
+                "id": "C2.s0090",
+                "text": "state_change：路段拼接序列确定化（障碍/收集/检查点布局）",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "固定种子复现"
+              },
+              {
+                "id": "C2.s0091",
+                "text": "invalid_case：运行中不得重排路段内容",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "固定种子复现"
+              },
+              {
+                "id": "C2.s0092",
+                "text": "recovery：重开回同 seed 初始状态",
+                "requirement_ids": [
+                  "M03"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "固定种子复现"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.06",
+          "table_column": "C2",
+          "assertion": "碰撞坠落与检查点 / 碰撞、检查点与同帧裁决；移动参数",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0046",
+                "text": "- G06 碰撞、检查点与同帧裁决：碰撞上限 3 次（第 4 次碰撞判负）",
+                "requirement_ids": [
+                  "G06"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "碰撞、检查点与同帧裁决"
+              },
+              {
+                "id": "C2.s0047",
+                "text": "检查点每 100 米一个（0/100/200/300/400 米，共 5 个）",
+                "requirement_ids": [
+                  "G06"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "碰撞、检查点与同帧裁决"
+              },
+              {
+                "id": "C2.s0048",
+                "text": "碰撞后角色回最近已越过的检查点并获得 1 模拟秒无敌（只抑制重复受击，不重置碰撞计数），碰撞计数保留",
+                "requirement_ids": [
+                  "G06"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "碰撞、检查点与同帧裁决"
+              },
+              {
+                "id": "C2.s0049",
+                "text": "碰撞复位不撤销已拾取的收集、不重复计分。同帧裁决：抵达终点与第 4 次碰撞同帧 → 判负优先（先失败后成功）。",
+                "requirement_ids": [
+                  "G06"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "碰撞、检查点与同帧裁决"
+              },
+              {
+                "id": "C2.s0050",
+                "text": "Esc 暂停冻结前进、计时与输入。",
+                "requirement_ids": [
+                  "G06"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "碰撞、检查点与同帧裁决"
+              },
+              {
+                "id": "C2.s0037",
+                "text": "- G02 移动参数：角色自动前进 8 米/秒",
+                "requirement_ids": [
+                  "G02"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "移动参数"
+              },
+              {
+                "id": "C2.s0038",
+                "text": "跳跃历时 0.9 秒、峰值高度 2.2 米（可越过 1.6 米以下高障）",
+                "requirement_ids": [
+                  "G02"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "移动参数"
+              },
+              {
+                "id": "C2.s0039",
+                "text": "滑铲历时 0.7 秒、通过高度 1.0 米（可穿过 1.2 米以上低障）",
+                "requirement_ids": [
+                  "G02"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "移动参数"
+              },
+              {
+                "id": "C2.s0040",
+                "text": "跳跃与滑铲在动作结束前不可打断，落地/起身后方可接下一动作。",
+                "requirement_ids": [
+                  "G02"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "移动参数"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.07",
+          "table_column": "C2",
+          "assertion": "输入语义边界；输入优先级；键位等5项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0055",
+                "text": "- I02 输入语义边界：动作未结束时重复按键不产生叠加（无二段跳、无连滑）",
+                "requirement_ids": [
+                  "I02"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入语义边界"
+              },
+              {
+                "id": "C2.s0056",
+                "text": "暂停/结算/视频期间玩法键无效",
+                "requirement_ids": [
+                  "I02"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入语义边界"
+              },
+              {
+                "id": "C2.s0057",
+                "text": "被拒绝输入不产生任何状态变化。",
+                "requirement_ids": [
+                  "I02"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入语义边界"
+              },
+              {
+                "id": "C2.s0060",
+                "text": "- I04 输入优先级：暂停与结算状态阻断全部玩法输入",
+                "requirement_ids": [
+                  "I04"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入优先级"
+              },
+              {
+                "id": "C2.s0061",
+                "text": "同帧互斥动作按 I01 列举顺序取首个。",
+                "requirement_ids": [
+                  "I04"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入优先级"
+              },
+              {
+                "id": "C2.s0051",
+                "text": "- I01 键位：Space 或 W/↑＝跳跃",
+                "requirement_ids": [
+                  "I01"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "键位"
+              },
+              {
+                "id": "C2.s0052",
+                "text": "S/↓＝滑铲",
+                "requirement_ids": [
+                  "I01"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "键位"
+              },
+              {
+                "id": "C2.s0053",
+                "text": "Esc＝暂停/继续",
+                "requirement_ids": [
+                  "I01"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "键位"
+              },
+              {
+                "id": "C2.s0054",
+                "text": "结算界面 Enter＝重开。",
+                "requirement_ids": [
+                  "I01"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "键位"
+              },
+              {
+                "id": "C2.s0062",
+                "text": "- I05 焦点与失焦：点击画布捕获输入焦点",
+                "requirement_ids": [
+                  "I05"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "焦点与失焦"
+              },
+              {
+                "id": "C2.s0063",
+                "text": "窗口失焦自动暂停。",
+                "requirement_ids": [
+                  "I05"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "焦点与失焦"
+              },
+              {
+                "id": "C2.s0058",
+                "text": "- I03 键盘为完整输入方式",
+                "requirement_ids": [
+                  "I03"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "键盘为完整输入方式"
+              },
+              {
+                "id": "C2.s0059",
+                "text": "菜单可仅用键盘操作。",
+                "requirement_ids": [
+                  "I03"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "键盘为完整输入方式"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.08",
+          "table_column": "C2",
+          "assertion": "生成对象；路段（代码块冻结口径）；冻结需求 vs 实现默认 vs 生成自由度",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0064",
+                "text": "- L01 生成对象：邮差角色 1（原创造型，按 A02 参考图）",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "生成对象"
+              },
+              {
+                "id": "C2.s0065",
+                "text": "障碍三类共 20 处（高障 8、低障 8、连续障 4 组×3 个）",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "生成对象"
+              },
+              {
+                "id": "C2.s0066",
+                "text": "光件 40（上层通道 24、下层 16，唯一 ID）",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "生成对象"
+              },
+              {
+                "id": "C2.s0067",
+                "text": "检查点灯标 5（含 0 米起点）",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "生成对象"
+              },
+              {
+                "id": "C2.s0068",
+                "text": "终点灯塔门框 1",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "生成对象"
+              },
+              {
+                "id": "C2.s0069",
+                "text": "中继台阶若干（上层通道入口）",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "生成对象"
+              },
+              {
+                "id": "C2.s0070",
+                "text": "云层装饰为表现层。",
+                "requirement_ids": [
+                  "L01"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "生成对象"
+              },
+              {
+                "id": "C2.s0071",
+                "text": "- L02 路段（代码块冻结口径）：",
+                "requirement_ids": [
+                  "L02"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "路段（代码块冻结口径）"
+              },
+              {
+                "id": "C2.s0072",
+                "text": "```text\n单条 500 米有限路段，由 seed=1011 拼接\n前 50 米：无障碍教学段（仅光件）\n上层通道：高度 3 米平台段，入口 1.5 米中继台阶，每次垂直上升 ≤2.2 米\n连续障组：高-低-高实例化，中心间距 9 米，沿跑向碰撞宽 0.8 米\n检查点：0/100/200/300/400 米共 5 个\n冻结布局须提供至少一条有效输入轨迹（可通关性证明随 layout_manifest 交付）\n```",
+                "requirement_ids": [
+                  "L02"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "路段（代码块冻结口径）"
+              },
+              {
+                "id": "C2.s0073",
+                "text": "- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求",
+                "requirement_ids": [
+                  "L04"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+              },
+              {
+                "id": "C2.s0074",
+                "text": "未给数值的装饰造型、配色、粒子参数与音色为生成自由度，不得评估为缺失",
+                "requirement_ids": [
+                  "L04"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+              },
+              {
+                "id": "C2.s0075",
+                "text": "实现默认值必须明确标注且符合核心机制。按 zkx 裁决交付 layout_manifest.json（实例 ID、坐标、碰撞体、通行关系、seed 与 hash",
+                "requirement_ids": [
+                  "L04"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+              },
+              {
+                "id": "C2.s0076",
+                "text": "同版本同 seed 重开 diff=0",
+                "requirement_ids": [
+                  "L04"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+              },
+              {
+                "id": "C2.s0077",
+                "text": "装饰 scene.glb 不替代数值关卡与碰撞体）。",
+                "requirement_ids": [
+                  "L04"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.09",
+          "table_column": "C2",
+          "assertion": "碰撞坠落与检查点 / 收集物与结算；碰撞与检查点复位",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0083",
+                "text": "input：路线接触光件（触发方：系统）",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "收集物与结算"
+              },
+              {
+                "id": "C2.s0084",
+                "text": "precondition：处于奔跑状态；该光件唯一 ID 尚未进入本局收集集合",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "收集物与结算"
+              },
+              {
+                "id": "C2.s0085",
+                "text": "state_change：接触即收集，唯一 ID 计入集合、计数 +1；碰撞复位不撤销已拾取物、不重复计分；终点按 G03 公式结算（距离按 G01 取整口径）",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "收集物与结算"
+              },
+              {
+                "id": "C2.s0086",
+                "text": "invalid_case：已收集 ID 再次接触不重复计分",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "收集物与结算"
+              },
+              {
+                "id": "C2.s0087",
+                "text": "recovery：重开后收集集合清空",
+                "requirement_ids": [
+                  "M02"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "收集物与结算"
+              },
+              {
+                "id": "C2.s0093",
+                "text": "input：错误应对撞上障碍（触发方：系统）",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "碰撞与检查点复位"
+              },
+              {
+                "id": "C2.s0094",
+                "text": "state_change：碰撞计数 +1 → 角色回最近已越过检查点并获得 1 模拟秒无敌（只抑制重复受击、不重置碰撞计数、不撤销已拾取收集）；碰撞计数达 4 → 判负结算",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "碰撞与检查点复位"
+              },
+              {
+                "id": "C2.s0095",
+                "text": "invalid_case：无敌期内接触障碍不再累计碰撞",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "碰撞与检查点复位"
+              },
+              {
+                "id": "C2.s0096",
+                "text": "recovery：复位后继续奔跑；判负走 V02",
+                "requirement_ids": [
+                  "M04"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "碰撞与检查点复位"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.10",
+          "table_column": "C2",
+          "assertion": "跑跳滑铲与障碍 / 胜负与重开；三类障碍应对（主机制）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0097",
+                "text": "input：抵达 500 米终点 / 第 4 次碰撞 / 结算界面（触发方：系统判定/玩家）",
+                "requirement_ids": [
+                  "M05"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "胜负与重开"
+              },
+              {
+                "id": "C2.s0098",
+                "text": "precondition：处于奔跑状态或结算状态",
+                "requirement_ids": [
+                  "M05"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "胜负与重开"
+              },
+              {
+                "id": "C2.s0099",
+                "text": "state_change：抵终点 → 胜利结算；第 4 次碰撞 → 失败结算（注明原因）；结算后奔跑冻结；同帧裁决按 G06（判负优先）",
+                "requirement_ids": [
+                  "M05"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "胜负与重开"
+              },
+              {
+                "id": "C2.s0100",
+                "text": "invalid_case：结算后再触发判定被拒绝（每局一次）",
+                "requirement_ids": [
+                  "M05"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "胜负与重开"
+              },
+              {
+                "id": "C2.s0101",
+                "text": "recovery：重开=全量重置（距离/收集/碰撞/路段按 seed 复现）",
+                "requirement_ids": [
+                  "M05"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "胜负与重开"
+              },
+              {
+                "id": "C2.s0078",
+                "text": "input：跳跃/滑铲键（触发方：玩家）",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "三类障碍应对（主机制）"
+              },
+              {
+                "id": "C2.s0079",
+                "text": "precondition：处于奔跑状态且非暂停/结算/视频；当前无未完成的跳跃/滑铲动作",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "三类障碍应对（主机制）"
+              },
+              {
+                "id": "C2.s0080",
+                "text": "state_change：高障（1.6 米级）需跳跃越过；低障（1.2 米以上横杆）需滑铲穿过；连续障（高-低-高、中心间距 9 米）需「跳-铲-跳」节奏链；应对错误 → 碰撞（M04）",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "三类障碍应对（主机制）"
+              },
+              {
+                "id": "C2.s0081",
+                "text": "invalid_case：动作未结束时重复按键不叠加；暂停/结算期间输入被拒绝且无副作用",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "三类障碍应对（主机制）"
+              },
+              {
+                "id": "C2.s0082",
+                "text": "recovery：碰撞走 M04 复位；结算界面重开为最终出路",
+                "requirement_ids": [
+                  "M01"
+                ],
+                "system": "M:6. 机制系统 [M01–M05]",
+                "topic": "三类障碍应对（主机制）"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C2.11",
+          "table_column": "C2",
+          "assertion": "恢复语义；失败条件；成功条件等6项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C2.s0105",
+                "text": "- V03 恢复语义：单次碰撞回最近检查点继续（碰撞计数保留、收集保留）",
+                "requirement_ids": [
+                  "V03"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "恢复语义"
+              },
+              {
+                "id": "C2.s0106",
+                "text": "判负/结算后一键重开",
+                "requirement_ids": [
+                  "V03"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "恢复语义"
+              },
+              {
+                "id": "C2.s0107",
+                "text": "重开后路段序列、收集、碰撞全量按 seed 重置。",
+                "requirement_ids": [
+                  "V03"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "恢复语义"
+              },
+              {
+                "id": "C2.s0103",
+                "text": "- V02 失败条件：第 4 次碰撞 → 判负结算（注明「碰撞超限」）",
+                "requirement_ids": [
+                  "V02"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "失败条件"
+              },
+              {
+                "id": "C2.s0104",
+                "text": "与终点同帧按 G06 判负优先。",
+                "requirement_ids": [
+                  "V02"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "失败条件"
+              },
+              {
+                "id": "C2.s0102",
+                "text": "- V01 成功条件：抵达 500 米终点 → 结算（收集数、完赛距离、碰撞数、总分）。",
+                "requirement_ids": [
+                  "V01"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "成功条件"
+              },
+              {
+                "id": "C2.s0113",
+                "text": "- V06 软锁与不可达处理：不设永久软锁——冻结布局保证至少一条有效输入轨迹",
+                "requirement_ids": [
+                  "V06"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "软锁与不可达处理"
+              },
+              {
+                "id": "C2.s0114",
+                "text": "判定不可达时按 V02 失败语义结算而非无限等待",
+                "requirement_ids": [
+                  "V06"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "软锁与不可达处理"
+              },
+              {
+                "id": "C2.s0115",
+                "text": "结算界面重开为最终恢复出路。",
+                "requirement_ids": [
+                  "V06"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "软锁与不可达处理"
+              },
+              {
+                "id": "C2.s0110",
+                "text": "- V05 persistent_state 生命周期：动作级即时结算",
+                "requirement_ids": [
+                  "V05"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "persistent_state 生命周期"
+              },
+              {
+                "id": "C2.s0111",
+                "text": "局内状态（距离/收集/碰撞）局内保留、重开清空",
+                "requirement_ids": [
+                  "V05"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "persistent_state 生命周期"
+              },
+              {
+                "id": "C2.s0112",
+                "text": "无跨局保留。",
+                "requirement_ids": [
+                  "V05"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "persistent_state 生命周期"
+              },
+              {
+                "id": "C2.s0108",
+                "text": "- V04 persistent_state：无（重开全量清空",
+                "requirement_ids": [
+                  "V04"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "persistent_state"
+              },
+              {
+                "id": "C2.s0109",
+                "text": "最好成绩可作展示但不作为验收需求、不要求跨会话保存）。",
+                "requirement_ids": [
+                  "V04"
+                ],
+                "system": "V:7. 成功、失败与恢复 [V01–V06]",
+                "topic": "persistent_state"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C3.01",
+          "table_column": "C3",
+          "assertion": "角色与物体接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0001",
+                "text": "3d_object/mail_courier：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "W03"
+                ],
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0002",
+                "text": "3d_object/high_barrier：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "G04"
+                ],
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0003",
+                "text": "3d_object/low_barrier_rail：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "G04"
+                ],
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0004",
+                "text": "3d_object/relay_step：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "G04"
+                ],
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0005",
+                "text": "3d_object/light_pickup：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "W05"
+                ],
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0006",
+                "text": "3d_object/checkpoint_beacon_post：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "G06"
+                ],
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              },
+              {
+                "id": "C3.s0007",
+                "text": "3d_object/finish_lighthouse_gate：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L01",
+                  "W02"
+                ],
+                "system": "3d_object",
+                "topic": "角色与物体接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C3.02",
+          "table_column": "C3",
+          "assertion": "动作占位接口；VFX占位接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0009",
+                "text": "motion/run：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0010",
+                "text": "motion/jump：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0011",
+                "text": "motion/slide：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0012",
+                "text": "motion/crash_recover：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05",
+                  "L01"
+                ],
+                "system": "motion",
+                "topic": "动作占位接口"
+              },
+              {
+                "id": "C3.s0024",
+                "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+                "requirement_ids": [
+                  "L04",
+                  "F07",
+                  "F09",
+                  "N06"
+                ],
+                "system": "vfx",
+                "topic": "VFX占位接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C3.03",
+          "table_column": "C3",
+          "assertion": "声音占位接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0013",
+                "text": "audio/jump_whoosh：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0014",
+                "text": "audio/slide_friction：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0015",
+                "text": "audio/collect_chime：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0016",
+                "text": "audio/crash_thud：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0017",
+                "text": "audio/checkpoint_upcall：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0018",
+                "text": "audio/updraft_wind：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0019",
+                "text": "audio/victory_bell：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              },
+              {
+                "id": "C3.s0020",
+                "text": "audio/defeat_tone：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "audio",
+                "topic": "声音占位接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.C3.04",
+          "table_column": "C3",
+          "assertion": "演出占位接口；场景与地标接口",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "C3.s0021",
+                "text": "cg_video/最后一班信：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C01"
+                ],
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0022",
+                "text": "cg_video/暴风脊线：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C02"
+                ],
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0023",
+                "text": "cg_video/灯塔送达：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "C03"
+                ],
+                "system": "cg_video",
+                "topic": "演出占位接口"
+              },
+              {
+                "id": "C3.s0008",
+                "text": "3d_scene/G011_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+                "requirement_ids": [
+                  "L02"
+                ],
+                "system": "3d_scene",
+                "topic": "场景与地标接口"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.Q.01",
+          "table_column": "Q",
+          "assertion": "视角与镜头；屏幕震动；输入延迟目标等5项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0005",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：2.5D 侧视跟随相机",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0006",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：前视安全区 ≥ 屏宽 35%（后方 ≥10%）",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0007",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：跳跃/滑铲不改变 FOV",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0008",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头仅短促 0.06 秒轻微抖动（碰撞）",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0009",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头重置仅在明确切场/复位时。",
+                "requirement_ids": [
+                  "F01"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "视角与镜头"
+              },
+              {
+                "id": "Q.s0019",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：仅碰撞 0.06 秒轻微抖动（≤ 画面高度 1.5%）",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "Q.s0001",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- I07 输入延迟目标：按键到画面反馈 ≤100 毫秒（P95，≥30 次采样/类别）。",
+                "requirement_ids": [
+                  "I07"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "输入延迟目标"
+              },
+              {
+                "id": "Q.s0024",
+                "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "system": "画面验收3",
+                "topic": "画面验收3"
+              },
+              {
+                "id": "Q.s0023",
+                "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "system": "画面验收2",
+                "topic": "画面验收2"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.Q.02",
+          "table_column": "Q",
+          "assertion": "关键操作镜头变化；视觉风格与色彩材质",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0010",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：碰撞 0.06s 轻微抖动（幅度 ≤ 画面高度 1.5%）",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0011",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：收集不震屏",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0012",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：胜利镜头缓推灯塔。设置提供「镜头震动开/关」与「减少动态效果」（关闭抖动与剧烈旋转、保留状态提示",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0013",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：关闭不影响判定与数值）。",
+                "requirement_ids": [
+                  "F02"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键操作镜头变化"
+              },
+              {
+                "id": "Q.s0002",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：明快手绘感的云海世界",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0003",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色=云白 #EAF2F8、信件金 #E8C559、暴风灰蓝 #6E8FA3、灯塔橙 #E4762C、光件青 #7FD8E8",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              },
+              {
+                "id": "Q.s0004",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质为云岩、木质栈道、帆布邮包。",
+                "requirement_ids": [
+                  "W06"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "视觉风格与色彩材质"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.Q.03",
+          "table_column": "Q",
+          "assertion": "VFX 信息性与遮挡约束；环境常驻效果",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0015",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F07 VFX 信息性与遮挡约束：检查点灯标与终点灯塔为信息类 VFX，必须清晰可辨",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "Q.s0016",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：碰撞闪白 ≤0.1 秒不遮挡后续判定输入",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "Q.s0017",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：非结算单个全屏遮挡 ≤0.5 秒",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "Q.s0018",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：粒子不遮挡 HUD 与障碍轮廓。",
+                "requirement_ids": [
+                  "F07"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "VFX 信息性与遮挡约束"
+              },
+              {
+                "id": "Q.s0014",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：云海流动、远方云柱、检查点灯标呼吸光。纯表现层，不参与判定。",
+                "requirement_ids": [
+                  "F04"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "环境常驻效果"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.Q.04",
+          "table_column": "Q",
+          "assertion": "`images/generated_ref_02.png` → 邮差角色 image-to；`images/generated_ref_01.png` → 高障模块 image-to；参考图辨识等5项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "Q.s0021",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A02 `images/generated_ref_02.png` → 邮差角色 image-to-3D 输入与 T-pose 参考。",
+                "requirement_ids": [
+                  "A02"
+                ],
+                "system": "A:12. 参考图绑定 [A01–A02]",
+                "topic": "`images/generated_ref_02.png` → 邮差角色 image-to"
+              },
+              {
+                "id": "Q.s0020",
+                "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A01 `images/generated_ref_01.png` → 高障模块 image-to-3D 输入与障碍外观参考。",
+                "requirement_ids": [
+                  "A01"
+                ],
+                "system": "A:12. 参考图绑定 [A01–A02]",
+                "topic": "`images/generated_ref_01.png` → 高障模块 image-to"
+              },
+              {
+                "id": "Q.s0026",
+                "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "system": "参考图辨识",
+                "topic": "参考图辨识"
+              },
+              {
+                "id": "Q.s0025",
+                "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "system": "画面验收4",
+                "topic": "画面验收4"
+              },
+              {
+                "id": "Q.s0022",
+                "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#Q"
+                ],
+                "system": "画面验收1",
+                "topic": "画面验收1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.G.01",
+          "table_column": "G",
+          "assertion": "障碍布局（zkx 裁决冻结）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0001",
+                "text": "- G04 障碍布局（zkx 裁决冻结）：连续障组按「高-低-高」实例化，中心间距 **9 米**，沿跑向碰撞宽 0.8 米（原 2.2 米间距短于 0.9 秒不可打断跳跃的实际位移，予以废止）",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              },
+              {
+                "id": "G.s0002",
+                "text": "三类障碍共 20 处（高障 8、低障 8、连续障 4 组×3 个）",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              },
+              {
+                "id": "G.s0003",
+                "text": "上层通道为高度 3 米的平台段，入口必须设 1.5 米中继台阶（每次垂直上升 ≤2.2 米）",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              },
+              {
+                "id": "G.s0004",
+                "text": "前 50 米为无障碍教学段（仅光件）",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              },
+              {
+                "id": "G.s0005",
+                "text": "冻结布局须提供至少一条有效输入轨迹。",
+                "requirement_ids": [
+                  "G04"
+                ],
+                "system": "G:3. 数值口径与全局规则 [G01–G06]",
+                "topic": "障碍布局（zkx 裁决冻结）"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.G.02",
+          "table_column": "G",
+          "assertion": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0013",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0014",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 跳跃起跳 | 起跳尘土＋跳跃轨迹残影（jump_trail） | 跳跃风切音 | 0.9 秒动作结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0015",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 滑铲 | 滑铲尘土（slide_dust） | 滑铲摩擦音 | 0.7 秒动作结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0016",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 收集光件 | 收集火花（collect_spark）＋计数跳动 | 收集叮响 | 火花 0.2s 消散 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0017",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 碰撞 | 全屏短闪白（crash_flash）＋0.06s 镜头抖动 | 碰撞闷响 | 闪白 0.1s 结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0018",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 检查点复位 | 检查点灯标点亮（checkpoint_beacon）＋角色入场淡入 | 检查点上扬音 | 玩家可控即停 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0019",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 无敌期 | 角色半透明闪烁 | 无 | 1 秒结束 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0020",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 进入上层通道 | 通道入口光柱（C02 触发点） | 上升风声 | — |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0021",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 抵达终点 | 终点绽放（finish_burst）＋灯塔点亮 | 胜利钟声 | 进入结算 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              },
+              {
+                "id": "G.s0022",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 判负 | 急件散落演出 | 低沉失败音 | 进入结算 |",
+                "requirement_ids": [
+                  "F05"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.G.03",
+          "table_column": "G",
+          "assertion": "音画同步；环境氛围与声音语言；关键音效清单（one_shot 8 条，全部冻结需求）",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0025",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：收集叮响与火花同帧",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0026",
+                "text": "碰撞闷响与闪白同帧",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0027",
+                "text": "检查点音与灯标点亮同帧。",
+                "requirement_ids": [
+                  "F08"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "音画同步"
+              },
+              {
+                "id": "G.s0009",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：风声与云层低鸣为底",
+                "requirement_ids": [
+                  "W07"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "环境氛围与声音语言"
+              },
+              {
+                "id": "G.s0010",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「跳跃风切+滑铲摩擦+收集叮响+碰撞闷响+灯塔钟声」，全部音效按 §9 F06 冻结清单交付。",
+                "requirement_ids": [
+                  "W07"
+                ],
+                "system": "W:8. 世界设定与创作基线 [W01–W08]",
+                "topic": "环境氛围与声音语言"
+              },
+              {
+                "id": "G.s0023",
+                "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单（one_shot 8 条，全部冻结需求）：跳跃风切、滑铲摩擦、收集叮响、碰撞闷响、检查点上扬音、上升风声、胜利钟声、失败低音。无配音需求（叙事以文本呈现）。震动事件（jump_takeoff/slide_start/collect_tick/crash_impact/checkpoint_reset/finish）到调度日志 ≤50ms，日志含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单（one_shot 8 条，全部冻结需求）"
+              },
+              {
+                "id": "G.s0024",
+                "text": "无震动硬件时验证调度与禁用行为，不声称物理马达已震动。",
+                "requirement_ids": [
+                  "F06"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "关键音效清单（one_shot 8 条，全部冻结需求）"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.G.04",
+          "table_column": "G",
+          "assertion": "前端界面；UI 必显状态；目标物/交互物/场景/UI 对象等9项关联规则",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "G.s0030",
+                "text": "- F10 前端界面：标题（开始/设置/退出）→ 跑酷 HUD（I06 全项）→ 结算面板（收集/距离/碰撞/总分/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "G.s0031",
+                "text": "关键状态图标+文字并用",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "G.s0032",
+                "text": "窗口失焦自动暂停",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "G.s0033",
+                "text": "叙事节拍提示不阻断控制。",
+                "requirement_ids": [
+                  "F10"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "前端界面"
+              },
+              {
+                "id": "G.s0006",
+                "text": "- I06 UI 必显状态：距离（米）、收集数、碰撞计数（0–3）、当前检查点编号、总分实时值。",
+                "requirement_ids": [
+                  "I06"
+                ],
+                "system": "I:4. 操作与输入 [I01–I07]",
+                "topic": "UI 必显状态"
+              },
+              {
+                "id": "G.s0007",
+                "text": "- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（光件、检查点、终点）逐类存在且运行时可进入",
+                "requirement_ids": [
+                  "L03"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "目标物/交互物/场景/UI 对象"
+              },
+              {
+                "id": "G.s0008",
+                "text": "数量与属性以对应 G·M 条目为准。",
+                "requirement_ids": [
+                  "L03"
+                ],
+                "system": "L:5. 路段与内容清单 [L01–L04]",
+                "topic": "目标物/交互物/场景/UI 对象"
+              },
+              {
+                "id": "G.s0011",
+                "text": "- F03 输入与延迟：见 I07（≤100ms P95）",
+                "requirement_ids": [
+                  "F03"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "输入与延迟"
+              },
+              {
+                "id": "G.s0012",
+                "text": "顿帧不改变计时口径。",
+                "requirement_ids": [
+                  "F03"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "输入与延迟"
+              },
+              {
+                "id": "G.s0028",
+                "text": "暂停/结算/重开取消未结束的震动与特效，不影响碰撞判定",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "G.s0029",
+                "text": "设置可关闭。",
+                "requirement_ids": [
+                  "F09"
+                ],
+                "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+                "topic": "屏幕震动"
+              },
+              {
+                "id": "G.s0037",
+                "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "system": "交互反馈4",
+                "topic": "交互反馈4"
+              },
+              {
+                "id": "G.s0035",
+                "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "system": "交互反馈2",
+                "topic": "交互反馈2"
+              },
+              {
+                "id": "G.s0036",
+                "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "system": "交互反馈3",
+                "topic": "交互反馈3"
+              },
+              {
+                "id": "G.s0034",
+                "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#G"
+                ],
+                "system": "交互反馈1",
+                "topic": "交互反馈1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.P.01",
+          "table_column": "P",
+          "assertion": "运行验收1",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0001",
+                "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "system": "运行验收1",
+                "topic": "运行验收1"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.P.02",
+          "table_column": "P",
+          "assertion": "运行验收2",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0002",
+                "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "system": "运行验收2",
+                "topic": "运行验收2"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.P.03",
+          "table_column": "P",
+          "assertion": "运行验收3",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0003",
+                "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "system": "运行验收3",
+                "topic": "运行验收3"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.P.04",
+          "table_column": "P",
+          "assertion": "运行验收4",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "P.s0004",
+                "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#P"
+                ],
+                "system": "运行验收4",
+                "topic": "运行验收4"
+              }
+            ]
+          }
+        },
+        {
+          "assertion_id": "G011_cloud_mail_runner.WB.CH.01",
+          "table_column": "CH",
+          "assertion": "代码健康诊断",
+          "binding": {
+            "subchecks": [
+              {
+                "id": "CH.s0001",
+                "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0002",
+                "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0003",
+                "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              },
+              {
+                "id": "CH.s0004",
+                "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+                "requirement_ids": [
+                  "evaluation_plan_table.md#CH"
+                ],
+                "system": "代码健康诊断",
+                "topic": "代码健康诊断"
+              }
+            ]
+          }
+        }
+      ]
+    }
   },
   "assets": {
-    "G011_cg_001": [],
-    "G011_cg_002": [],
-    "G011_cg_003": [],
-    "G011_cloud_mail_runner_obj_004": [],
-    "G011_cloud_mail_runner_obj_005": [],
-    "G011_cloud_mail_runner_obj_006": [],
-    "G011_scene_001": []
+    "G011_cg_001": {
+      "assertions": []
+    },
+    "G011_cg_002": {
+      "assertions": []
+    },
+    "G011_cg_003": {
+      "assertions": []
+    },
+    "G011_cloud_mail_runner_obj_004": {
+      "assertions": []
+    },
+    "G011_cloud_mail_runner_obj_005": {
+      "assertions": []
+    },
+    "G011_cloud_mail_runner_obj_006": {
+      "assertions": []
+    },
+    "G011_scene_001": {
+      "assertions": []
+    }
   }
 }
