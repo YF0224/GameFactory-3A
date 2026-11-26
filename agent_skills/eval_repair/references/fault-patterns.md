@@ -486,6 +486,116 @@ print(describe())
 
 ---
 
+## 九、UE5 特有故障
+
+### UE01 录制完成后 shutdown 超时
+
+**识别**：UE take 录制期间完整观察窗口和全部输入都已完成，但关闭引擎时 media component teardown 超时，`record_error.json` 显示 shutdown 相关错误。
+
+**根因**：UE 关闭时 media/audio component teardown 耗时超出预算，不是录制本身的故障。
+
+**处置**：
+
+- 核查 take 是否确实完成：全部计划输入都已送达（有回执）、完整观察窗口已经过、exit 请求在全部观察之后
+- 如果以上全部满足，使用 `ue_completed_shutdown_recovery.py` 资格化这个 take
+- 保留所有原始 record 材料不动，不重录，不改评分
+
+**禁止**：录制不完整（游戏崩溃、startup 失败）时不能用此方案；不删 shutdown 失败证据。
+
+**脚本**：`pipeline/eval/repair/ue_completed_shutdown_recovery.py`
+
+---
+
+### UE02 UE 编译/配置兼容问题
+
+**识别**：UE native admission 失败，`build.json` 显示 C++ 编译错误，或 `unreal.log` 有 `error` 级别编译失败。常见场景：引擎版本升级导致 API 改名、缺 `#include`、`const`/`override` 修饰符不匹配。
+
+**根因**：作者用旧引擎版本写的代码在新版引擎编译失败，不是游戏逻辑问题。
+
+**处置**：
+
+1. 读 `build.json` 找第一条 `error` 行，确认是编译兼容问题（不是缺资产、缺模块）
+2. 在评估副本里做最小修改：缺 `#include`、API 改名用等价新 API、类型转换、`const`/`override`
+3. 设置 `A3GAME_UE_COMPILE_COMPAT_PLAN` 环境变量指向 SHA 绑定的修复计划，使用 `ue_compile_compat.py`
+
+**禁止**：改任何游戏逻辑、改 `.uasset`/`.umap`、删作者代码、改评分。
+
+**脚本**：`pipeline/eval/repair/ue_compile_compat.py`
+
+---
+
+### UE03 UE 录制插件缺失（missing recorder）
+
+**识别**：UE admission 失败，报 `recorder not found`、`A3GamePlayable plugin not loaded` 或类似插件缺失错误。
+
+**根因**：作者提交的 `.uproject` 里没有声明 `A3GamePlayable` 插件依赖，或插件路径不对。
+
+**处置**：
+
+1. 核查 `.uproject` 的 `Plugins` 数组，确认缺失 `A3GamePlayable` 条目
+2. 在评估副本的 `.uproject` 里补上插件声明
+3. 使用 admission recovery 脚本，绑定原 plan 和已有 admission 材料，不重新 plan
+
+**禁止**：不改 `Source/` 下任何游戏代码；不删已有 admission 材料；不改评分。
+
+**脚本**：`pipeline/eval/repair/ue_g020_admission_recovery.py`
+
+---
+
+### UE04 UE launch_source 路径不对
+
+**识别**：plan 里的 `launch_source` 指向的 `.uproject` 路径不存在，报 `launch_source xxx does not exist in the project`。
+
+**根因**：作者交付的项目目录结构与 plan 预期的入口路径不一致（如 `.uproject` 在子目录里）。
+
+**处置**：
+
+1. 确认 delivery 的实际 `.uproject` 位置
+2. 使用 `ue_g025_launch_path_recovery.py`，它只修改 plan 的 `launch_source` 字段为正确路径
+3. 绑定已失败的原始 plan SHA，不重新调用 planner
+
+**禁止**：不移动项目文件；不改游戏代码；不新增 planner 调用。
+
+**脚本**：`pipeline/eval/repair/ue_g025_launch_path_recovery.py`
+
+---
+
+### UE05 UE take1 失败后的 take2 续录
+
+**识别**：take1 因工具故障（不是游戏崩溃）失败，有完整 plan，需要续跑 take2。
+
+**根因**：take1 的失败来自 admission 或 capture 工具链问题，不是游戏本身的问题，原 plan 仍然有效。
+
+**处置**：
+
+1. 确认 take1 失败是工具链问题（不是游戏崩溃、UI 完全无响应）
+2. 保留 take1 的全部材料（plan、失败 record、admission 材料）
+3. 使用 `ue_g025_take2_recovery.py`，只跑一次 take2，不重新调用 planner
+
+**禁止**：不删 take1 材料；不改评分；take2 失败后不再重试。
+
+**脚本**：`pipeline/eval/repair/ue_g025_take2_recovery.py`
+
+---
+
+### UE06 UE editor target 配置问题
+
+**识别**：UE admission 失败，报 `Editor target not found` 或 `xxxEditor.Target.cs missing`。
+
+**根因**：作者未提供 Editor target 文件，UE 编译时找不到 Editor 入口。
+
+**处置**：
+
+1. 确认 `Source/` 下缺 `{ProjectName}Editor.Target.cs`
+2. 在评估副本里新增一个标准 Editor target 文件（引擎模板内容，不写游戏逻辑）
+3. 使用 `ue_g035_target_recovery.py`，绑定原 plan 和已有 admission 材料
+
+**禁止**：不改任何游戏代码；不改 `.umap`/`.uasset`；不改评分。
+
+**脚本**：`pipeline/eval/repair/ue_g035_target_recovery.py`
+
+---
+
 ## 八、发现新故障时的流程
 
 1. 确认不是已有 `pipeline/eval/repair/` 脚本能处理的故障
