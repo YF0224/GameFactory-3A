@@ -22,7 +22,7 @@ from _common import common, select_cases  # noqa: F401  (sets sys.path)
 
 from pipeline.eval.whitebox.core import standards, suites  # noqa: E402
 
-SUITES = {'1': 'stage1', '3': 'stage3'}
+SUITES = {'1': 'whitebox', '3': 'refinement'}
 
 
 def _cases(stage: str, games: str | None) -> list[str]:
@@ -72,8 +72,11 @@ def main() -> int:
             sys.path.insert(0, str(common.BENCH / 'scripts_new'))
             from gen.stage3 import source_project
             baseline = source_project(game)['root']
+        req = common.EVAL_DATA / game / 'general_requirement.txt'
+        if not req.exists():
+            req = common.SAMPLES / game / 'general_requirement.txt'
         result = standards.draft(game, crit['criteria'], suite=suite, criteria_version=crit['version'],
-                                 requirement=common.SAMPLES / game / 'general_requirement.txt',
+                                 requirement=req,
                                  model=args.model, baseline=baseline)
         folder = standards.bench_dir(suite, crit['version'], game)
         print(f'{game}: generated {result["generated"]} failed {result["failed"]}\n  review: {folder / "review.md"}',

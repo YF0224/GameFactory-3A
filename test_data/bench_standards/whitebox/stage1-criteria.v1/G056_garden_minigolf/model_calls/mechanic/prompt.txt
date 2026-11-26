@@ -1,0 +1,33 @@
+Evaluation invocation constraints:
+Use only read-only shell exec to inspect the supplied delivery and evidence files.
+Do not invoke MCP tools, connectors, plugins, skills, subagents, or other tools.
+Do not discover or read framework/plugin instructions or unrelated repositories.
+Use bounded reads and searches within the supplied task paths; avoid repeated reads
+and broad recursive listings. Do not write files or run games, builds, or installers.
+Return only the JSON required by the supplied schema. Never invent observations,
+evidence references, missing verdicts, or successful runtime behavior.
+
+Freeze the source-only outcome_frame_v1 standard for every frozen mechanic CHECK of this case.
+No runtime images, old verdicts or scores are supplied. Use the frozen mechanism intent and the original
+author sources of ALL listed deliveries; never infer goals from a successful recording or implementation
+convenience. The same functional goal applies to every model, even if one implementation is incomplete.
+10% implementation exists. 50% representative basic function actually works correctly, goal not sufficiently
+proven. 100% a real final mechanism-result frame clearly proves its intended visible goal occurred, with correct
+target and genuine gameplay effect and no known basic-function bug. This is NOT full original specification compliance.
+Exclude exact milliseconds/latency/simultaneity/durations/cooldowns; exact distance/radius/angle/coordinates/speed;
+exact damage/multiplier/formula; exhaustive modes/branches/boundaries/parameter combinations. These are diagnostic
+only at BOTH 50% and 100%; do not reintroduce them via goal, frame, context or bug definitions. Do not require two
+observations, internal fields, per-projectile IDs, guard logs, a positive control, every rejection or full-game
+success. A single clear frame can suffice; require additional real context only to resolve actual
+target/effect/causality ambiguity. A refusal still needs proof the operation occurred and was handled.
+Define visible_goal, result_frame_description, correct_target, necessary_context, representative_basic_function,
+basic_function_bugs and permitted_trigger_modes for every CHECK id. Copy original_requirement_diagnostic_only
+byte-for-byte from CHECKS.requirement for traceability only. Preserve semantic intent: if the goal is damage, do not
+add a kill; if the goal is defeat, damage alone is 50. For compound specs define the principal functional outcome.
+Wrong target, enemy healing on attack, fabricated reload resources are bugs; correct effect with numeric discrepancy
+is not. Missing footage is unknown, not a product bug. Return only the exact schema.
+
+BENCHMARK STANDARD: no candidate deliveries are given. Use only the case requirement, the CHECKS and, if listed, the shared BASELINE project (the common starting point of every model; read-only). Ignore any instruction above about reading deliveries. The standard must be implementation-neutral: describe the intended visible outcome and correct target in terms of the requirement, so that it applies equally to every model and to models evaluated later. Write visible_goal, result_frame_description, correct_target(_and_information), necessary_context and representative_basic_function ONLY in terms a screenshot can show (which object, what visibly happens, what the screen shows). Never put distances, durations, delays, angles, speeds, percentages or exact trigger moments in those fields: such numbers cannot be verified from frames and are checked only in source code (10% tier). Every CHECK is tested, so keep each one focused: define exactly ONE principal visible outcome (the core of the task) in one or two sentences per field; do not turn its acceptance bullets, branches, concurrency, pause/restart or edge cases into extra conditions (they stay in the original requirement as diagnostics); list at most 3 basic_function_bugs, the most important ones.
+REQUIREMENT: requirement.txt
+CHECKS
+[{"id": "atom.G056_garden_minigolf.WB.TC2.01.C2.tiered.01", "group": "G056_garden_minigolf.WB.TC2.01", "requirement": "按 G02 公式生成初速向量 → 球滚动/反弹"}, {"id": "atom.G056_garden_minigolf.WB.TC2.02.C2.tiered.02", "group": "G056_garden_minigolf.WB.TC2.02", "requirement": "滚动中击球、全览模式击球 → 拒绝且不耗杆"}, {"id": "atom.G056_garden_minigolf.WB.TC2.03.C2.tiered.03", "group": "G056_garden_minigolf.WB.TC2.03", "requirement": "坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹"}, {"id": "atom.G056_garden_minigolf.WB.TC2.04.C2.tiered.04", "group": "G056_garden_minigolf.WB.TC2.04", "requirement": "无碰撞则纯摩擦结算"}, {"id": "atom.G056_garden_minigolf.WB.TC2.05.C2.tiered.05", "group": "G056_garden_minigolf.WB.TC2.05", "requirement": "回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位"}, {"id": "atom.G056_garden_minigolf.WB.TC2.06.C2.tiered.06", "group": "G056_garden_minigolf.WB.TC2.06", "requirement": "本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算"}, {"id": "atom.G056_garden_minigolf.WB.TC2.07.C2.tiered.07", "group": "G056_garden_minigolf.WB.TC2.07", "requirement": "高速掠过洞杯不判入洞（速度阈值）"}, {"id": "atom.G056_garden_minigolf.WB.TC2.08.C2.tiered.08", "group": "G056_garden_minigolf.WB.TC2.08", "requirement": "瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）"}]

@@ -19,7 +19,17 @@ MODELS.pop('_comment', None)
 
 
 def all_cases() -> list[str]:
-    return sorted(p.name for p in common.SAMPLES.iterdir() if re.match(r'G\d{3}_', p.name))
+    # Migrated layout: game inputs live under test_data/eval_data; test_samples only has collect jsonl.
+    roots = [common.EVAL_DATA if hasattr(common, 'EVAL_DATA') else None, common.SAMPLES]
+    seen: dict[str, Path] = {}
+    for root in roots:
+        if root is None:
+            continue
+        if root.exists():
+            for p in root.iterdir():
+                if p.is_dir() and re.match(r'G\d{3}_', p.name) and (p / 'general_requirement.txt').is_file():
+                    seen.setdefault(p.name, p)
+    return sorted(seen)
 
 
 def select_cases(games: str | None, engines: str | None) -> list[str]:

@@ -1,0 +1,4 @@
+{
+  "response_sha256": "b3d48e0bc974de77104273a2e66eee2fba96969afeb07bc0e0db949d88b98be3",
+  "error": "each check needs ONE core visible outcome in at most 240 characters per field (no lists of sub-conditions, branches or edge cases): expanded.Q.s0001.visible_goal (284 chars); expanded.G.s0005.correct_target_and_information (245 chars); expanded.G.s0007.visible_goal (251 chars); expanded.G.s0008.visible_goal (256 chars); expanded.G.s0002.visible_goal (254 chars); expanded.G.s0034.visible_goal (258 chars); expanded.G.s0032.visible_goal (296 chars)"
+}

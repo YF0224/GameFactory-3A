@@ -1,0 +1,4 @@
+{
+  "response_sha256": "51b7509e2457a9da3423dfb19757be490299b896792c1bcec07a49ac1ad671b1",
+  "error": "each check needs ONE core visible outcome in at most 240 characters per field (no lists of sub-conditions, branches or edge cases): atom.G056_garden_minigolf.WB.TC2.01.C2.tiered.01.necessary_context (266 chars); atom.G056_garden_minigolf.WB.TC2.02.C2.tiered.02.result_frame_description (266 chars); atom.G056_garden_minigolf.WB.TC2.02.C2.tiered.02.necessary_context (250 chars); atom.G056_garden_minigolf.WB.TC2.03.C2.tiered.03.result_frame_description (250 chars); atom.G056_garden_minigolf.WB.TC2.06.C2.tiered.06.visible_goal (260 chars); atom.G056_garden_minigolf.WB.TC2.06.C2.tiered.06.result_frame_description (264 chars); atom.G056_garden_minigolf.WB.TC2.08.C2.tiered.08.necessary_context (244 chars)"
+}
