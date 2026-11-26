@@ -18,9 +18,9 @@ import traceback
 
 os.environ.setdefault('A3GAME_GUI_SLOTS', '2')
 os.environ.setdefault('A3GAME_CODEX_INLINE_SCHEMA', '1')
-from ..stage1 import pipeline, plan, playable_rules, prepare
-from ..stage1.llm import accepted_response
-from ..stage1.paths import BENCH, read_json, sha256
+from pipeline.eval.whitebox.core import pipeline, plan, playable_rules, prepare
+from pipeline.eval.whitebox.core.llm import accepted_response
+from pipeline.eval.whitebox.core.paths import BENCH, read_json, sha256
 
 VERSION = 'stage1-kimi-g020-admission-recovery.v1'
 REL = Path('recovery/ue_missing_recorder_v1')

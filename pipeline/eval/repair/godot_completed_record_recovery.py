@@ -11,8 +11,8 @@ from pathlib import Path
 import subprocess
 from datetime import datetime, timezone
 
-from ..stage1.paths import FRAMEWORK, read_json, sha256, write_json
-from ..stage1.llm import HarnessError
+from pipeline.eval.whitebox.core.paths import FRAMEWORK, read_json, sha256, write_json
+from pipeline.eval.whitebox.core.llm import HarnessError
 
 VERSION = 'stage1-godot-completed-record-recovery.v1'
 
@@ -44,7 +44,7 @@ def _process_audit(project, native):
 def recover(out: Path, manifest: dict, plan: dict, take: int):
     """Called with the take's postprocessing lock held by record.record."""
     from PIL import Image
-    from ..stage1 import prepare, record
+    from pipeline.eval.whitebox.core import prepare, record
 
     out = Path(out).resolve()
     runtime = out / 'takes' / str(take) / 'record'

@@ -16,11 +16,11 @@ import tempfile
 import time
 from pathlib import Path
 
-from ..stage1 import capture, prepare, record
-from ..stage1.llm import HarnessError
-from ..stage1.paths import FRAMEWORK, read_json, sha256, write_json
+from pipeline.eval.whitebox.core import capture, prepare, record
+from pipeline.eval.whitebox.core.llm import HarnessError
+from pipeline.eval.whitebox.core.paths import FRAMEWORK, read_json, sha256, write_json
 from ..stage1.plan import native_actions, take_dir
-from ..stage1.record import VERSION, _collect, three_js_plan
+from pipeline.eval.whitebox.record import VERSION, _collect, three_js_plan
 
 RECOVERY_VERSION = 'stage1-threejs-local-plugin-completed-recovery.v1'
 PLUGIN = FRAMEWORK / 'engine_adapters/three_js/plugin/A3GamePlayable'

@@ -6,9 +6,9 @@ from contextlib import ExitStack
 import fcntl
 from pathlib import Path
 
-from ..stage1 import playable_rules, prepare
-from ..stage1.native_log import godot_product_errors
-from ..stage1.paths import read_json, sha256, write_json
+from pipeline.eval.whitebox.core import playable_rules, prepare
+from pipeline.eval.whitebox.record import godot_product_errors
+from pipeline.eval.whitebox.core.paths import read_json, sha256, write_json
 
 RELATIVE = Path('recovery/godot_import_log_v1')
 

@@ -11,8 +11,8 @@ import tempfile
 import shutil
 
 from . import godot_duration_recovery as duration
-from ..stage1 import playable_rules
-from ..stage1.paths import read_json, write_json, sha256
+from pipeline.eval.whitebox.core import playable_rules
+from pipeline.eval.whitebox.core.paths import read_json, write_json, sha256
 
 VERSION = 'stage1-godot-existing-window.v1'
 LINEAGE = Path('recovery/godot_existing_window_v1')

@@ -21,9 +21,9 @@ os.environ.setdefault('A3GAME_GUI_SLOTS', '2')
 os.environ.setdefault('A3GAME_CODEX_INLINE_SCHEMA', '1')
 os.environ.setdefault('GAMEFACTORY_UNITY_IMGUI_FORWARD', '1')
 
-from ..stage1 import prepare, plan, pipeline, playable_rules, unity_authored_scene as entry
-from ..stage1.llm import READ_ONLY_INSTRUCTIONS, accepted_response, call_model, validate_schema
-from ..stage1.paths import BENCH, FRAMEWORK, read_json, sha256, write_json
+from pipeline.eval.whitebox.core import prepare, plan, pipeline, playable_rules, unity_authored_scene as entry
+from pipeline.eval.whitebox.core.llm import READ_ONLY_INSTRUCTIONS, accepted_response, call_model, validate_schema
+from pipeline.eval.whitebox.core.paths import BENCH, FRAMEWORK, read_json, sha256, write_json
 
 VERSION = 'stage1-g004-authored-scene-recovery.v1'
 REL = Path('recovery/tuanjie_scene_v1')

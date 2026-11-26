@@ -11,10 +11,10 @@ import shutil
 import tempfile
 
 from . import godot_duration_recovery as d
-from ..stage1 import playable_rules
+from pipeline.eval.whitebox.core import playable_rules
 from . import godot_duration_metadata_recovery as previous
 from . import godot_duration_batch as scoped
-from ..stage1.paths import read_json, write_json, sha256
+from pipeline.eval.whitebox.core.paths import read_json, write_json, sha256
 
 VERSION = 'stage1-godot-duration-wav-metadata.v1'
 RELATIVE = d.LINEAGE/'audio_metadata_finalization_v1'

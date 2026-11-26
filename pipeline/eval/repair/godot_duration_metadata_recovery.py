@@ -11,8 +11,8 @@ import shutil
 import tempfile
 
 from . import godot_duration_recovery as d
-from ..stage1 import playable_rules
-from ..stage1.paths import read_json, write_json, sha256
+from pipeline.eval.whitebox.core import playable_rules
+from pipeline.eval.whitebox.core.paths import read_json, write_json, sha256
 
 VERSION = 'stage1-godot-duration-import-metadata.v1'
 RELATIVE = d.LINEAGE/'metadata_finalization_v1'

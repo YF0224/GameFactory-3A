@@ -25,12 +25,12 @@ class Suite:
 
 
 def get(name: str) -> Suite:
-    if name == 'stage1':
+    if name in ('stage1', 'whitebox'):
         from . import criteria
         from ..metrics import BY_KEY, score_case
-        return Suite('stage1', criteria.build, BY_KEY, score_case, 'stage1_v1')
-    if name == 'stage3':
-        from ..stage3 import SUITE
+        return Suite('whitebox', criteria.build, BY_KEY, score_case, 'stage1_v1')
+    if name in ('stage3', 'refinement'):
+        from ...refinement import SUITE
         return SUITE
     raise KeyError(f'unknown evaluation suite {name!r}')
 

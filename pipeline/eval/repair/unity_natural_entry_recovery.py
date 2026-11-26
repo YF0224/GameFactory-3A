@@ -18,9 +18,9 @@ from pathlib import Path
 import shutil
 import time
 
-from ..stage1 import prepare, unity_natural_entry as entry
-from ..stage1.llm import accepted_response
-from ..stage1.paths import FRAMEWORK, read_json, sha256, write_json
+from pipeline.eval.whitebox.core import prepare, unity_natural_entry as entry
+from pipeline.eval.whitebox.core.llm import accepted_response
+from pipeline.eval.whitebox.core.paths import FRAMEWORK, read_json, sha256, write_json
 
 VERSION = 'stage1-unity-natural-entry-recovery.v1'
 REL = entry.REL
@@ -168,7 +168,7 @@ def claim_plan(out, take):
 def execute(out):
     os.environ.setdefault('A3GAME_GUI_SLOTS', '2')
     os.environ.setdefault('A3GAME_CODEX_INLINE_SCHEMA', '1')
-    from ..stage1 import pipeline
+    from pipeline.eval.whitebox.core import pipeline
     out = Path(out).resolve()
     with locked(out):
         require(shutil.disk_usage(out).free >= RESERVE + 2 * 1024 ** 3,
@@ -265,7 +265,7 @@ def finish(out, result):
     verify_takes(out, result)
     # Recompute deterministic official rules from the existing recordings before
     # cleanup; the pipeline's canonical score must agree, not a hand-written score.
-    from ..stage1 import playable_rules
+    from pipeline.eval.whitebox.core import playable_rules
     checks = playable_rules.evaluate(out, read_json(out / 'manifest.json'), len(result['takes']))
     require(result['checks'] == {key: checks[key]['status'] for key in playable_rules.IDS}
             and result['playable'] == round(100 * sum(row['status'] == 'PASS' for row in checks.values()) / 3, 2),

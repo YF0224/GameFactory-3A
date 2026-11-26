@@ -11,7 +11,7 @@ from pathlib import Path
 import traceback
 
 from . import ue_g025_take2_recovery as old
-from ..stage1.llm import parse_strict, validate_schema
+from pipeline.eval.whitebox.core.llm import parse_strict, validate_schema
 
 VERSION = 'stage1-kimi-g025-launch-prefix-recovery.v1'
 SELF = 'GameFactory-3A/pipeline/eval/stage1/ue_g025_launch_path_recovery.py'

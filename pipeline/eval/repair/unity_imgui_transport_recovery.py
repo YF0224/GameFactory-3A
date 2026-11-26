@@ -22,8 +22,8 @@ import shutil
 import struct
 import time
 
-from ..stage1 import plan, prepare
-from ..stage1.paths import read_json, sha256, write_json
+from pipeline.eval.whitebox.core import plan, prepare
+from pipeline.eval.whitebox.core.paths import read_json, sha256, write_json
 
 VERSION = 'stage1-unity-imgui-transport-recovery.v1'
 LINEAGE = 'recovery/unity_imgui_forward_v1'
@@ -302,7 +302,7 @@ def execute(out, expected_review):
     are consumed directly. Parent publication and cleanup remain explicit review
     work; the old diagnostic score and qualification hold stay byte-identical.
     """
-    from ..stage1 import playable_rules, record
+    from pipeline.eval.whitebox.core import playable_rules, record
     out = Path(out).absolute()
     require(out.resolve() == out, 'parent path traverses a symlink')
     with ExitStack() as stack:
@@ -470,7 +470,7 @@ def finalize(out, expected_review):
     The parent runner may call its existing cleanup(child) after qualification.
     qualified_replacement_score supports either exact copies or that exact cleanup.
     """
-    from ..stage1 import pipeline
+    from pipeline.eval.whitebox.core import pipeline
     out = Path(out).absolute()
     require(out.resolve() == out, 'parent path traverses a symlink')
     lineage, child = out / LINEAGE, out / LINEAGE / 'run'

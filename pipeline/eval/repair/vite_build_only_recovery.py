@@ -18,8 +18,8 @@ import os
 from pathlib import Path
 import shutil
 
-from ..stage1 import prepare, plan
-from ..stage1.paths import read_json, sha256, write_json
+from pipeline.eval.whitebox.core import prepare, plan
+from pipeline.eval.whitebox.core.paths import read_json, sha256, write_json
 
 VERSION = 'stage1-vite-build-only-recovery.v1'
 LINEAGE = 'recovery/vite_build_only_v1'
@@ -278,7 +278,7 @@ def _verify_parent(out, prepared):
 
 
 def execute(out):
-    from ..stage1 import pipeline, playable_rules, record
+    from pipeline.eval.whitebox.core import pipeline, playable_rules, record
     out = Path(out).resolve(); lineage = out/LINEAGE
     with locked(out/'.vite-build-only-recovery.lock'):
         if (lineage/'replacement.json').exists():

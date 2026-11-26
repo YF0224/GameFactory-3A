@@ -1,0 +1,128 @@
+{
+  "status": "frozen",
+  "game_id": "DEMO_snake_unity3d",
+  "engine": "unity3d",
+  "provenance": "Locally authored synthetic example, not a benchmark sample.",
+  "assertions": [
+    {
+      "table_column": "C2",
+      "assertion_id": "move",
+      "assertion": "方向键或 WASD 可以改变蛇前进的方向。",
+      "binding": {
+        "subchecks": [
+          {
+            "id": "move",
+            "text": "方向键或 WASD 可以改变蛇前进的方向。",
+            "requirement_ids": [],
+            "scoring_role": "scored"
+          }
+        ]
+      }
+    },
+    {
+      "table_column": "C2",
+      "assertion_id": "food",
+      "assertion": "蛇碰到食物后会吃掉食物。",
+      "binding": {
+        "subchecks": [
+          {
+            "id": "food",
+            "text": "蛇碰到食物后会吃掉食物。",
+            "requirement_ids": [],
+            "scoring_role": "scored"
+          }
+        ]
+      }
+    },
+    {
+      "table_column": "C2",
+      "assertion_id": "grow",
+      "assertion": "吃到食物后蛇身增长。",
+      "binding": {
+        "subchecks": [
+          {
+            "id": "grow",
+            "text": "吃到食物后蛇身增长。",
+            "requirement_ids": [],
+            "scoring_role": "scored"
+          }
+        ]
+      }
+    },
+    {
+      "table_column": "C2",
+      "assertion_id": "wall",
+      "assertion": "撞到棋盘边界后游戏失败。",
+      "binding": {
+        "subchecks": [
+          {
+            "id": "wall",
+            "text": "撞到棋盘边界后游戏失败。",
+            "requirement_ids": [],
+            "scoring_role": "scored"
+          }
+        ]
+      }
+    },
+    {
+      "table_column": "C2",
+      "assertion_id": "self",
+      "assertion": "撞到自己的蛇身后游戏失败。",
+      "binding": {
+        "subchecks": [
+          {
+            "id": "self",
+            "text": "撞到自己的蛇身后游戏失败。",
+            "requirement_ids": [],
+            "scoring_role": "scored"
+          }
+        ]
+      }
+    },
+    {
+      "table_column": "C2",
+      "assertion_id": "win",
+      "assertion": "吃到三个食物后游戏胜利。",
+      "binding": {
+        "subchecks": [
+          {
+            "id": "win",
+            "text": "吃到三个食物后游戏胜利。",
+            "requirement_ids": [],
+            "scoring_role": "scored"
+          }
+        ]
+      }
+    },
+    {
+      "table_column": "C2",
+      "assertion_id": "restart",
+      "assertion": "按 R 可以从终局重新开始游戏。",
+      "binding": {
+        "subchecks": [
+          {
+            "id": "restart",
+            "text": "按 R 可以从终局重新开始游戏。",
+            "requirement_ids": [],
+            "scoring_role": "scored"
+          }
+        ]
+      }
+    },
+    {
+      "table_column": "C2",
+      "assertion_id": "pause",
+      "assertion": "空格可以暂停和继续游戏。",
+      "binding": {
+        "subchecks": [
+          {
+            "id": "pause",
+            "text": "空格可以暂停和继续游戏。",
+            "requirement_ids": [],
+            "scoring_role": "scored"
+          }
+        ]
+      }
+    }
+  ]
+}

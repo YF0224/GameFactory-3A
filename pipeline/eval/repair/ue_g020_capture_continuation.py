@@ -12,9 +12,9 @@ import shutil
 import traceback
 
 from . import ue_g020_admission_recovery as old
-from ..stage1 import pipeline, plan, prepare, playable_rules
-from ..stage1.llm import accepted_response
-from ..stage1.paths import BENCH, read_json, sha256
+from pipeline.eval.whitebox.core import pipeline, plan, prepare, playable_rules
+from pipeline.eval.whitebox.core.llm import accepted_response
+from pipeline.eval.whitebox.core.paths import BENCH, read_json, sha256
 
 VERSION = 'stage1-g020-ui-continuation.v1'
 REL = old.REL / 'continuation_v1'

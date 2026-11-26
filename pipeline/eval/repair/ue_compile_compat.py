@@ -15,8 +15,8 @@ import re
 import shutil
 from pathlib import Path
 
-from ..stage1.llm import HarnessError
-from ..stage1.paths import read_json, write_json
+from pipeline.eval.whitebox.core.llm import HarnessError
+from pipeline.eval.whitebox.core.paths import read_json, write_json
 
 VERSION = "stage3-ue-compile-compat.v1"
 ENV = "A3GAME_UE_COMPILE_COMPAT_PLAN"
@@ -107,7 +107,7 @@ def prepare(out, project, selected):
         raise HarnessError("Compile compatibility may only modify this evaluation runtime/project")
     if selected is None:
         return source, None
-    from ..stage1 import prepare as frozen
+    from pipeline.eval.whitebox.core import prepare as frozen
     from engine_adapters.ue5.playtest.native_admission import source_manifest
     manifest = frozen.verify(out)
     entry = selected["entry"]
@@ -243,7 +243,7 @@ def _recover_interrupted(out, project, selected, original):
 
 def validate_receipt(out, receipt, selected=None):
     """Verify the frozen input, pinned plan, receipt and independent reference."""
-    from ..stage1 import prepare as frozen
+    from pipeline.eval.whitebox.core import prepare as frozen
     from engine_adapters.ue5.playtest.native_admission import source_manifest
     out = Path(out).resolve()
     try:
@@ -429,7 +429,7 @@ def recover_before_client(out, project, selected):
     """Restore an interrupted source copy before a UE client resolves its entry."""
     if selected is None:
         return
-    from ..stage1 import prepare as frozen
+    from pipeline.eval.whitebox.core import prepare as frozen
     from engine_adapters.ue5.playtest.native_admission import source_manifest
     out, project = Path(out).resolve(), Path(project).resolve()
     if (out / "runtime/ue_admission").exists():

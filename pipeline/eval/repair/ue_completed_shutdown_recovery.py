@@ -17,9 +17,9 @@ import re
 import shutil
 import tempfile
 
-from ..stage1 import capture, prepare, record
-from ..stage1.llm import HarnessError
-from ..stage1.paths import FRAMEWORK, read_json, sha256, write_json
+from pipeline.eval.whitebox.core import capture, prepare, record
+from pipeline.eval.whitebox.core.llm import HarnessError
+from pipeline.eval.whitebox.core.paths import FRAMEWORK, read_json, sha256, write_json
 from engine_adapters.ue5.playtest import native_client, native_record
 from engine_adapters.ue5.playtest.isolation import process_table
 from pipeline.eval.whitebox.action_links import build_links

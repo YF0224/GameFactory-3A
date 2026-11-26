@@ -408,7 +408,7 @@ def score(out: Path, provisional: bool = False) -> dict:
     sc = state_summary(out, rows) if manifest.get('suite') == 'stage3' else None
     if sc:
         result['state_conditioned'] = sc
-    from ..repair import ue_compile_compat
+    from pipeline.eval.repair import ue_compile_compat
     repairs = ue_compile_compat.score_provenance(out)
     if repairs:
         result['launch_repairs'] = repairs  # per-take provenance only; no score/check changes

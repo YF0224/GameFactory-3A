@@ -19,9 +19,9 @@ import sys
 import tempfile
 import traceback
 
-from ..stage1 import pipeline, plan, playable_rules, prepare
-from ..stage1.llm import accepted_response
-from ..stage1.paths import BENCH, read_json, sha256
+from pipeline.eval.whitebox.core import pipeline, plan, playable_rules, prepare
+from pipeline.eval.whitebox.core.llm import accepted_response
+from pipeline.eval.whitebox.core.paths import BENCH, read_json, sha256
 from .web_readiness_recovery import pre_record_process_check, qualified_record
 
 VERSION = 'stage1-kimi-g011-addon-recovery.v1'

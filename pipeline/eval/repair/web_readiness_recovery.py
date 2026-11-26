@@ -19,8 +19,8 @@ import shutil
 import subprocess
 from urllib.parse import urlsplit
 
-from ..stage1 import prepare, plan
-from ..stage1.paths import read_json, sha256, write_json
+from pipeline.eval.whitebox.core import prepare, plan
+from pipeline.eval.whitebox.core.paths import read_json, sha256, write_json
 from .vite_build_only_recovery import (require, digest, tree, retained, production,
     locked, accepted, native_cleanup, check_space, ROOT)
 
@@ -452,7 +452,7 @@ def playable_manifest(manifest):
 
 
 def execute(out):
-    from ..stage1 import pipeline, playable_rules, record
+    from pipeline.eval.whitebox.core import pipeline, playable_rules, record
     out = Path(out).resolve(); lineage = out/LINEAGE
     with locked(out/'.web-readiness-recovery.lock'):
         if (lineage/'replacement.json').exists():

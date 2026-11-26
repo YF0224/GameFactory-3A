@@ -20,8 +20,8 @@ from pathlib import Path
 import shutil
 import subprocess
 
-from ..stage1 import prepare
-from ..stage1.paths import read_json, sha256, write_json
+from pipeline.eval.whitebox.core import prepare
+from pipeline.eval.whitebox.core.paths import read_json, sha256, write_json
 
 VERSION = 'stage1-godot-duration-recovery.v1'
 LINEAGE = Path('recovery/godot_duration_v1')
@@ -275,7 +275,7 @@ def evaluated_failure_score(out):
     """
     try:
         import tempfile
-        from ..stage1 import playable_rules
+        from pipeline.eval.whitebox.core import playable_rules
         from .godot_import_log_recovery import qualified_replacement_score as ansi_score
         score = ansi_score(out) or read_json(out/'playable_score.json')
         require(score.get('complete') is True, 'no complete existing score')
@@ -515,7 +515,7 @@ def prepare_child(out):
 
 
 def _score(out, verdicts, evidence):
-    from ..stage1 import playable_rules
+    from pipeline.eval.whitebox.core import playable_rules
     manifest = read_json(out/'manifest.json')
     checks = {k: verdicts.get(k,{}).get('status','HARNESS_ERROR') for k in playable_rules.IDS}
     require('HARNESS_ERROR' not in checks.values(), 'rules did not reach complete determinate outcome')
@@ -577,7 +577,7 @@ def execute(out):
         child = target/'child'
         require(not (child/'takes/1/record').exists(), 'partial child record exists; no retry')
         process, space = process_check(out), check_space(out,256*1024**2)
-        from ..stage1 import record, playable_rules
+        from pipeline.eval.whitebox.core import record, playable_rules
         # This module is invoked in a fresh process; pin disk producer at dispatch.
         producer = production()
         archive(producer,ROOT,target/'production_dispatch')
@@ -632,7 +632,7 @@ def qualified_replacement_score(out):
         require(proof == read_json(target/'native_proof.json'), 'native proof changed')
         # Re-run unchanged deterministic rules in temporary output, never child/parent.
         import tempfile
-        from ..stage1 import playable_rules
+        from pipeline.eval.whitebox.core import playable_rules
         with tempfile.TemporaryDirectory(prefix='godot-duration-verify-') as temp:
             verdicts = playable_rules.evaluate(child,read_json(child/'manifest.json'),1,report_dir=Path(temp))
             for name in ('verdicts_playable_rules.json','playable_rules.json'):

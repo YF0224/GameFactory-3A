@@ -17,9 +17,9 @@ import sys
 import tempfile
 import traceback
 
-from ..stage1 import pipeline, plan, playable_rules, prepare, record
-from ..stage1.llm import accepted_response
-from ..stage1.paths import BENCH, read_json, sha256
+from pipeline.eval.whitebox.core import pipeline, plan, playable_rules, prepare, record
+from pipeline.eval.whitebox.core.llm import accepted_response
+from pipeline.eval.whitebox.core.paths import BENCH, read_json, sha256
 
 VERSION = 'stage1-kimi-g025-ui-take2-recovery.v1'
 REL = Path('recovery/ue_ui_take2_v1')

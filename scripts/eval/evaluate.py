@@ -23,10 +23,10 @@ from pathlib import Path
 
 from _common import common, parse_models, select_cases
 from pipeline.eval import assets
-from pipeline.eval.whitebox import pipeline, prepare, suites
-from pipeline.eval.whitebox.delivery import validate
-from pipeline.eval.whitebox.paths import read_json
-from pipeline.eval.whitebox.llm import HarnessError
+from pipeline.eval.whitebox.core import pipeline, prepare, suites
+from pipeline.eval.whitebox.core.delivery import validate
+from pipeline.eval.whitebox.core.paths import read_json
+from pipeline.eval.whitebox.core.llm import HarnessError
 from pipeline.eval.model_config import EVALUATION_PLANNER_MODEL, CLI_JUDGE_MODEL
 
 STAGE_SUITE = {'1': 'whitebox', '3': 'refinement'}
@@ -87,12 +87,20 @@ def main(argv=None) -> int:
 
     if args.stage == 'assets':
         return assets.run([])
-    stage, suite = 'stage' + args.stage, STAGE_SUITE[args.stage]
+    stage, suite = ('whitebox' if args.stage == '1' else 'refinement'), STAGE_SUITE[args.stage]
 
     if args.run_dir:
         names = {v: k for k, v in common.MODEL_DIRS.items()}
         runs = [r.resolve() for r in args.run_dir]
-        todo = [(names.get(r.parents[1].name, r.parents[1].name), r.parent.name, r) for r in runs]
+        # Support both:
+        # 1. Standard layout: <model_dir>/<GameID>/<run_id>  -> parents[1] is model_dir
+        # 2. Direct game dir: <GameID>  -> fall back to 'sol' as default model slot
+        todo = []
+        for r in runs:
+            model_candidate = names.get(r.parents[1].name, r.parents[1].name)
+            if model_candidate not in common.MODEL_DIRS:
+                model_candidate = 'sol'
+            todo.append((model_candidate, r.parent.name, r))
     else:
         todo = list(deliveries(stage, parse_models(args.models), select_cases(args.games, args.engines), args.run_id))
     # One eval tree per (suite version, judge model): verdicts and frozen standards never mix judges.

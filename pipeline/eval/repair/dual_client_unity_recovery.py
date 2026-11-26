@@ -3,8 +3,8 @@ import os
 import json
 import re
 from pathlib import Path
-from ..stage1 import llm
-from ..stage1.paths import read_json, sha256
+from pipeline.eval.whitebox.core import llm
+from pipeline.eval.whitebox.core.paths import read_json, sha256
 
 RECOVERY = 'import_recovery_1'
 INPUT = 'pipeline/eval/stage1/unity_input.py'

@@ -1,0 +1,15 @@
+[
+  "/opt/miniconda3/bin/python3",
+  "/Users/yifanyang/Desktop/GameFactory-3A-game-bench/scripts/eval/evaluate.py",
+  "--stage",
+  "1",
+  "--run-dir",
+  "/Users/yifanyang/Desktop/GameFactory-3A-game-bench/examples/cross_engine_snake/out-stage1-standard/deliveries/sol/DEMO_snake_three_js/authored_v1",
+  "/Users/yifanyang/Desktop/GameFactory-3A-game-bench/examples/cross_engine_snake/out-stage1-standard/deliveries/sol/DEMO_snake_unity3d/authored_v2",
+  "/Users/yifanyang/Desktop/GameFactory-3A-game-bench/examples/cross_engine_snake/out-stage1-standard/deliveries/sol/DEMO_snake_ue5/authored_v1",
+  "/Users/yifanyang/Desktop/GameFactory-3A-game-bench/examples/cross_engine_snake/out-stage1-standard/deliveries/sol/DEMO_snake_godot/authored_v1",
+  "--planner",
+  "gpt-6.1-sol",
+  "--judge",
+  "gpt-6.1-sol"
+]

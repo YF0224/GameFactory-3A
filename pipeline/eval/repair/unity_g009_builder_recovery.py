@@ -21,9 +21,9 @@ os.environ.setdefault('A3GAME_GUI_SLOTS', '2')
 os.environ.setdefault('A3GAME_CODEX_INLINE_SCHEMA', '1')
 os.environ.setdefault('GAMEFACTORY_UNITY_IMGUI_FORWARD', '1')
 
-from ..stage1 import plan, prepare, pipeline, playable_rules, record, unity_input, unity_editor
-from ..stage1.llm import accepted_response, validate_schema, READ_ONLY_INSTRUCTIONS
-from ..stage1.paths import BENCH, FRAMEWORK, read_json, sha256, write_json
+from pipeline.eval.whitebox.core import plan, prepare, pipeline, playable_rules, record, unity_input, unity_editor
+from pipeline.eval.whitebox.core.llm import accepted_response, validate_schema, READ_ONLY_INSTRUCTIONS
+from pipeline.eval.whitebox.core.paths import BENCH, FRAMEWORK, read_json, sha256, write_json
 
 VERSION = 'stage1-kimi-g009-handler-builder-recovery.v1'
 REL = Path('recovery/kimi_builder_v1')

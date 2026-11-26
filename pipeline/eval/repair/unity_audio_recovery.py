@@ -11,9 +11,9 @@ import json
 from pathlib import Path
 import shutil
 
-from ..stage1 import prepare
-from ..stage1.llm import HarnessError
-from ..stage1.paths import read_json, write_json, sha256
+from pipeline.eval.whitebox.core import prepare
+from pipeline.eval.whitebox.core.llm import HarnessError
+from pipeline.eval.whitebox.core.paths import read_json, write_json, sha256
 
 VERSION = 'stage1-unity-audio-import-recovery.v1'
 ALLOWED_NATIVE = {'_scenario.json', 'capture_schedule.json', 'editor_cleanup.json',

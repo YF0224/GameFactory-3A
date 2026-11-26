@@ -13,7 +13,7 @@ import sys
 from . import godot_duration_recovery as d
 from . import godot_duration_metadata_recovery as metadata
 from . import godot_existing_window_recovery as existing
-from ..stage1.paths import read_json,write_json,sha256
+from pipeline.eval.whitebox.core.paths import read_json,write_json,sha256
 
 BENCH = d.ROOT.parent
 RUNNER = BENCH/'scripts_new/playable_retest.py'

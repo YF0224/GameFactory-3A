@@ -31,8 +31,8 @@ import subprocess
 import time
 from pathlib import Path
 
-from ..stage1.llm import HarnessError, call_model
-from ..stage1.paths import read_json, write_json
+from pipeline.eval.whitebox.core.llm import HarnessError, call_model
+from pipeline.eval.whitebox.core.paths import read_json, write_json
 
 ENABLED = os.environ.get('A3GAME_LAUNCH_REPAIR') == '1'
 MAX_REPAIRS = int(os.environ.get('A3GAME_LAUNCH_REPAIRS', '2'))

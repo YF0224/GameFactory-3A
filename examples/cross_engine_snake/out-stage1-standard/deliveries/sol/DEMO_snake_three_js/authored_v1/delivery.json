@@ -1,0 +1,18 @@
+{
+  "schema": "bench.delivery.v1",
+  "stage": "stage1",
+  "model": "sol",
+  "game_id": "DEMO_snake_three_js",
+  "run_id": "authored_v1",
+  "engine": "three_js",
+  "project_root": "project",
+  "entry": "index.html",
+  "created_at": "2026-11-26T05:57:07.142833+00:00",
+  "generator": {
+    "kind": "external_agent",
+    "agent": "Codex local example author",
+    "framework_used": true
+  },
+  "provenance_note": "Synthetic example. sol is the contract routing slot, not attribution to a benchmark model.",
+  "demo_only": true
+}

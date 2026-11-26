@@ -1,0 +1,90 @@
+{
+  "version": "outcome_frame_v1",
+  "suite": "whitebox",
+  "criteria_version": "stage1-criteria.v1",
+  "game_id": "DEMO_snake_ue5",
+  "metric": "gameness",
+  "author": "example fixture author",
+  "criteria_ids": [
+    "game.layout.hierarchy",
+    "game.layout.readable",
+    "game.guidance.controls",
+    "expanded.end"
+  ],
+  "standard": {
+    "revision": "outcome_frame_v1",
+    "summary": "Synthetic Snake example draft. Human approval is still required.",
+    "diagnostic_only_categories": [
+      "exact_timing",
+      "exact_space_motion",
+      "exact_numeric_formula",
+      "exhaustive_branches_boundaries"
+    ],
+    "checks": {
+      "game.layout.hierarchy": {
+        "visible_goal": "实际UI信息层级清楚，主要状态与次要信息可区分。",
+        "result_frame_description": "实际UI信息层级清楚，主要状态与次要信息可区分。",
+        "necessary_context": "游戏棋盘和相关状态信息可见。",
+        "representative_basic_function": "实际UI信息层级清楚，主要状态与次要信息可区分。",
+        "basic_function_bugs": [
+          "对应功能没有可见响应。",
+          "可见结果作用于错误的对象。"
+        ],
+        "permitted_trigger_modes": [
+          "input",
+          "automatic"
+        ],
+        "original_requirement_diagnostic_only": "实际UI信息层级清楚，主要状态与次要信息可区分。",
+        "correct_target_and_information": "贪吃蛇游戏中的蛇、食物或相应状态信息。"
+      },
+      "game.layout.readable": {
+        "visible_goal": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。",
+        "result_frame_description": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。",
+        "necessary_context": "游戏棋盘和相关状态信息可见。",
+        "representative_basic_function": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。",
+        "basic_function_bugs": [
+          "对应功能没有可见响应。",
+          "可见结果作用于错误的对象。"
+        ],
+        "permitted_trigger_modes": [
+          "input",
+          "automatic"
+        ],
+        "original_requirement_diagnostic_only": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。",
+        "correct_target_and_information": "贪吃蛇游戏中的蛇、食物或相应状态信息。"
+      },
+      "game.guidance.controls": {
+        "visible_goal": "实际游戏展示或清楚传达必要操作方法。",
+        "result_frame_description": "实际游戏展示或清楚传达必要操作方法。",
+        "necessary_context": "游戏棋盘和相关状态信息可见。",
+        "representative_basic_function": "实际游戏展示或清楚传达必要操作方法。",
+        "basic_function_bugs": [
+          "对应功能没有可见响应。",
+          "可见结果作用于错误的对象。"
+        ],
+        "permitted_trigger_modes": [
+          "input",
+          "automatic"
+        ],
+        "original_requirement_diagnostic_only": "实际游戏展示或清楚传达必要操作方法。",
+        "correct_target_and_information": "贪吃蛇游戏中的蛇、食物或相应状态信息。"
+      },
+      "expanded.end": {
+        "visible_goal": "终局提供清楚的成功、失败或拒绝反馈。",
+        "result_frame_description": "终局提供清楚的成功、失败或拒绝反馈。",
+        "necessary_context": "游戏棋盘和相关状态信息可见。",
+        "representative_basic_function": "终局提供清楚的成功、失败或拒绝反馈。",
+        "basic_function_bugs": [
+          "对应功能没有可见响应。",
+          "可见结果作用于错误的对象。"
+        ],
+        "permitted_trigger_modes": [
+          "input",
+          "automatic"
+        ],
+        "original_requirement_diagnostic_only": "终局提供清楚的成功、失败或拒绝反馈。",
+        "correct_target_and_information": "贪吃蛇游戏中的蛇、食物或相应状态信息。"
+      }
+    }
+  }
+}

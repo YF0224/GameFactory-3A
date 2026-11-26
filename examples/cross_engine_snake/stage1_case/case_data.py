@@ -49,8 +49,8 @@ def assertion(column: str, ident: str, text: str, **extra) -> dict:
 
 
 def install(engine: str) -> tuple[str, Path]:
-    from pipeline.eval.stage1 import criteria, standards, suites
-    from pipeline.eval.stage1.paths import SAMPLES
+    from pipeline.eval.whitebox.core import criteria, standards, suites
+    from pipeline.eval.whitebox.core.paths import SAMPLES
 
     game_id = 'DEMO_snake_' + engine
     fixture = HERE / 'cases' / game_id
@@ -87,10 +87,10 @@ def install(engine: str) -> tuple[str, Path]:
 
     built = criteria.build(game_id)
     rows = built['criteria']
-    folder = standards.bench_dir('stage1', built['version'], game_id)
-    metrics = suites.get('stage1').metrics
+    folder = standards.bench_dir('whitebox', built['version'], game_id)
+    metrics = suites.get('whitebox').metrics
     outcomes = {f'atom.{key}.{key}': outcome for key, _, outcome in MECHANICS}
-    for metric in suites.tiered(suites.get('stage1')):
+    for metric in suites.tiered(suites.get('whitebox')):
         mine = [row for row in rows if row['metric'] == metric]
         if not mine:
             continue
@@ -113,11 +113,11 @@ def install(engine: str) -> tuple[str, Path]:
                     'summary': 'Synthetic Snake example draft. Human approval is still required.',
                     'diagnostic_only_categories': list(standards.DIAGNOSTIC), 'checks': checks}
         standards.validate(metric, mine, standard, metrics)
-        document = {'version': standards.VERSION, 'suite': 'stage1', 'criteria_version': built['version'],
+        document = {'version': standards.VERSION, 'suite': 'whitebox', 'criteria_version': built['version'],
                     'game_id': game_id, 'metric': metric, 'author': 'example fixture author',
                     'criteria_ids': [row['id'] for row in mine], 'standard': standard}
         content = json_bytes(document)
         write_once(fixture / 'standards' / f'{metric}.json', content)
         write_once(folder / f'{metric}.json', content)
-    standards.write_review(folder, rows, 'stage1')
+    standards.write_review(folder, rows, 'whitebox')
     return game_id, folder

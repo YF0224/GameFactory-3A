@@ -1,0 +1,158 @@
+{
+  "version": "outcome_frame_v1",
+  "suite": "whitebox",
+  "criteria_version": "stage1-criteria.v1",
+  "game_id": "DEMO_snake_godot",
+  "metric": "mechanic",
+  "author": "example fixture author",
+  "criteria_ids": [
+    "atom.move.move",
+    "atom.food.food",
+    "atom.grow.grow",
+    "atom.wall.wall",
+    "atom.self.self",
+    "atom.win.win",
+    "atom.restart.restart",
+    "atom.pause.pause"
+  ],
+  "standard": {
+    "revision": "outcome_frame_v1",
+    "summary": "Synthetic Snake example draft. Human approval is still required.",
+    "diagnostic_only_categories": [
+      "exact_timing",
+      "exact_space_motion",
+      "exact_numeric_formula",
+      "exhaustive_branches_boundaries"
+    ],
+    "checks": {
+      "atom.move.move": {
+        "visible_goal": "蛇在棋盘上沿玩家选择的方向移动。",
+        "result_frame_description": "蛇在棋盘上沿玩家选择的方向移动。",
+        "necessary_context": "游戏棋盘和相关状态信息可见。",
+        "representative_basic_function": "蛇在棋盘上沿玩家选择的方向移动。",
+        "basic_function_bugs": [
+          "对应功能没有可见响应。",
+          "可见结果作用于错误的对象。"
+        ],
+        "permitted_trigger_modes": [
+          "input",
+          "automatic"
+        ],
+        "original_requirement_diagnostic_only": "方向键或 WASD 可以改变蛇前进的方向。",
+        "correct_target": "贪吃蛇游戏中的蛇、食物或相应状态信息。"
+      },
+      "atom.food.food": {
+        "visible_goal": "蛇已经到达食物所在的位置并吃掉食物。",
+        "result_frame_description": "蛇已经到达食物所在的位置并吃掉食物。",
+        "necessary_context": "游戏棋盘和相关状态信息可见。",
+        "representative_basic_function": "蛇已经到达食物所在的位置并吃掉食物。",
+        "basic_function_bugs": [
+          "对应功能没有可见响应。",
+          "可见结果作用于错误的对象。"
+        ],
+        "permitted_trigger_modes": [
+          "input",
+          "automatic"
+        ],
+        "original_requirement_diagnostic_only": "蛇碰到食物后会吃掉食物。",
+        "correct_target": "贪吃蛇游戏中的蛇、食物或相应状态信息。"
+      },
+      "atom.grow.grow": {
+        "visible_goal": "蛇吃到食物后出现增长的蛇身。",
+        "result_frame_description": "蛇吃到食物后出现增长的蛇身。",
+        "necessary_context": "游戏棋盘和相关状态信息可见。",
+        "representative_basic_function": "蛇吃到食物后出现增长的蛇身。",
+        "basic_function_bugs": [
+          "对应功能没有可见响应。",
+          "可见结果作用于错误的对象。"
+        ],
+        "permitted_trigger_modes": [
+          "input",
+          "automatic"
+        ],
+        "original_requirement_diagnostic_only": "吃到食物后蛇身增长。",
+        "correct_target": "贪吃蛇游戏中的蛇、食物或相应状态信息。"
+      },
+      "atom.wall.wall": {
+        "visible_goal": "蛇碰到棋盘边界后画面显示失败状态。",
+        "result_frame_description": "蛇碰到棋盘边界后画面显示失败状态。",
+        "necessary_context": "游戏棋盘和相关状态信息可见。",
+        "representative_basic_function": "蛇碰到棋盘边界后画面显示失败状态。",
+        "basic_function_bugs": [
+          "对应功能没有可见响应。",
+          "可见结果作用于错误的对象。"
+        ],
+        "permitted_trigger_modes": [
+          "input",
+          "automatic"
+        ],
+        "original_requirement_diagnostic_only": "撞到棋盘边界后游戏失败。",
+        "correct_target": "贪吃蛇游戏中的蛇、食物或相应状态信息。"
+      },
+      "atom.self.self": {
+        "visible_goal": "蛇碰到自身后画面显示失败状态。",
+        "result_frame_description": "蛇碰到自身后画面显示失败状态。",
+        "necessary_context": "游戏棋盘和相关状态信息可见。",
+        "representative_basic_function": "蛇碰到自身后画面显示失败状态。",
+        "basic_function_bugs": [
+          "对应功能没有可见响应。",
+          "可见结果作用于错误的对象。"
+        ],
+        "permitted_trigger_modes": [
+          "input",
+          "automatic"
+        ],
+        "original_requirement_diagnostic_only": "撞到自己的蛇身后游戏失败。",
+        "correct_target": "贪吃蛇游戏中的蛇、食物或相应状态信息。"
+      },
+      "atom.win.win": {
+        "visible_goal": "完成食物目标后画面显示胜利状态。",
+        "result_frame_description": "完成食物目标后画面显示胜利状态。",
+        "necessary_context": "游戏棋盘和相关状态信息可见。",
+        "representative_basic_function": "完成食物目标后画面显示胜利状态。",
+        "basic_function_bugs": [
+          "对应功能没有可见响应。",
+          "可见结果作用于错误的对象。"
+        ],
+        "permitted_trigger_modes": [
+          "input",
+          "automatic"
+        ],
+        "original_requirement_diagnostic_only": "吃到三个食物后游戏胜利。",
+        "correct_target": "贪吃蛇游戏中的蛇、食物或相应状态信息。"
+      },
+      "atom.restart.restart": {
+        "visible_goal": "重新开始后棋盘上出现可继续游玩的初始蛇和食物。",
+        "result_frame_description": "重新开始后棋盘上出现可继续游玩的初始蛇和食物。",
+        "necessary_context": "游戏棋盘和相关状态信息可见。",
+        "representative_basic_function": "重新开始后棋盘上出现可继续游玩的初始蛇和食物。",
+        "basic_function_bugs": [
+          "对应功能没有可见响应。",
+          "可见结果作用于错误的对象。"
+        ],
+        "permitted_trigger_modes": [
+          "input",
+          "automatic"
+        ],
+        "original_requirement_diagnostic_only": "按 R 可以从终局重新开始游戏。",
+        "correct_target": "贪吃蛇游戏中的蛇、食物或相应状态信息。"
+      },
+      "atom.pause.pause": {
+        "visible_goal": "游戏画面能够显示暂停状态。",
+        "result_frame_description": "游戏画面能够显示暂停状态。",
+        "necessary_context": "游戏棋盘和相关状态信息可见。",
+        "representative_basic_function": "游戏画面能够显示暂停状态。",
+        "basic_function_bugs": [
+          "对应功能没有可见响应。",
+          "可见结果作用于错误的对象。"
+        ],
+        "permitted_trigger_modes": [
+          "input",
+          "automatic"
+        ],
+        "original_requirement_diagnostic_only": "空格可以暂停和继续游戏。",
+        "correct_target": "贪吃蛇游戏中的蛇、食物或相应状态信息。"
+      }
+    }
+  }
+}

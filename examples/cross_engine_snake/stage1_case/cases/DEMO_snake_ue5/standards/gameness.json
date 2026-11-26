@@ -1,6 +1,6 @@
 {
   "version": "outcome_frame_v1",
-  "suite": "stage1",
+  "suite": "whitebox",
   "criteria_version": "stage1-criteria.v1",
   "game_id": "DEMO_snake_ue5",
   "metric": "gameness",

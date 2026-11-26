@@ -8,9 +8,9 @@ import fcntl
 from pathlib import Path
 import shutil
 
-from ..stage1 import prepare, unity_input
-from ..stage1.llm import HarnessError
-from ..stage1.paths import read_json, write_json, sha256
+from pipeline.eval.whitebox.core import prepare, unity_input
+from pipeline.eval.whitebox.core.llm import HarnessError
+from pipeline.eval.whitebox.core.paths import read_json, write_json, sha256
 
 VERSION = 'stage1-unity-input-import-recovery.v1'
 OLD_PACKAGE = 'com.unity.inputsystem@1.14.0'
