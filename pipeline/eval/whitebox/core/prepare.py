@@ -22,7 +22,16 @@ from pathlib import Path
 
 from . import budgets, suites
 from .delivery import validate as validate_delivery
-from .paths import DELIVERY_FILE, SAMPLES, read_json, sha256, write_json
+from .paths import DELIVERY_FILE, EVAL_DATA, SAMPLES, read_json, sha256, write_json
+
+
+def case_dir(game_id: str) -> Path:
+    """Case inputs live under test_data/eval_data (migrated); fall back to test_samples."""
+    for root in (EVAL_DATA, SAMPLES):
+        d = root / game_id
+        if (d / 'general_requirement.txt').is_file():
+            return d
+    return SAMPLES / game_id
 
 VERSION = 'stage1-prepare.v1'
 IGNORE = shutil.ignore_patterns('.git', '.godot', '.import', 'Library', 'Temp', 'obj', 'Logs',
@@ -66,9 +75,15 @@ def prepare(run_dir: Path, out: Path, *, models: dict, suite: str = 'stage1', pl
         raise ValueError(f'{run_dir}: delivery not admissible: {problems}')
     if (out / 'manifest.json').exists():
         return read_json(out / 'manifest.json')            # already prepared: never re-snapshot
+    # Clean up any partial previous prepare (e.g. copytree interrupted)
+    import shutil as _shutil
+    for stale in ('input', 'runtime'):
+        stale_dir = out / stale
+        if stale_dir.exists():
+            _shutil.rmtree(stale_dir)
     delivery = read_json(run_dir / DELIVERY_FILE)
     game_id, project = delivery['game_id'], (run_dir / delivery['project_root']).resolve()
-    case = SAMPLES / game_id
+    case = case_dir(game_id)
 
     before = tree_hashes(project)
     inputs = out / 'input'

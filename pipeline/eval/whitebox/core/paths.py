@@ -8,6 +8,8 @@ from pathlib import Path
 FRAMEWORK = Path(__file__).resolve().parents[4]   # GameFactory-3A/
 OUTPUTS = FRAMEWORK / 'test_data' / 'outputs'
 SAMPLES = FRAMEWORK / 'test_data' / 'test_samples'
+EVAL_DATA = FRAMEWORK / 'test_data' / 'eval_data'   # general_requirement, mechanic, audio, etc.
+RUBRIC_ROOT = FRAMEWORK / 'test_data' / 'rubric'    # whitebox/rubric.json, asset/rubric.json
 BENCH = FRAMEWORK  # backwards-compat alias used by repair scripts
 
 STAGE_OUTPUT_ROOTS = {

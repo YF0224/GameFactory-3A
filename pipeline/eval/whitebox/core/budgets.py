@@ -33,7 +33,11 @@ CASE_OVERRIDES = {
 
 def case_tier(game_id: str) -> str:
     """Canonical tier from ``tier:`` in general_requirement.txt (S / M / L-Regular / L-Stress)."""
-    text = (SAMPLES / game_id / 'general_requirement.txt').read_text(encoding='utf-8')
+    from .paths import EVAL_DATA
+    req = EVAL_DATA / game_id / 'general_requirement.txt'
+    if not req.exists():
+        req = SAMPLES / game_id / 'general_requirement.txt'
+    text = req.read_text(encoding='utf-8')
     found = re.findall(r'(?m)^tier:\s*([^\s#]+)', text)
     if len(found) != 1:
         raise ValueError(f'{game_id}: general_requirement.txt must declare exactly one tier')

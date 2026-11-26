@@ -20,7 +20,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from _common import common, select_cases  # noqa: F401  (sets sys.path)
 
-from pipeline.eval.whitebox import standards, suites  # noqa: E402
+from pipeline.eval.whitebox.core import standards, suites  # noqa: E402
 
 SUITES = {'1': 'stage1', '3': 'stage3'}
 

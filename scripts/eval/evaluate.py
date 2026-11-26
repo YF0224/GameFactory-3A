@@ -38,6 +38,86 @@ os.environ.setdefault('GAMEFACTORY_UNITY_IMGUI_FORWARD', '1')
 os.environ.setdefault('A3GAME_UE_BACKGROUND_FOCUS', '1')
 DEFAULT_JUDGE = CLI_JUDGE_MODEL
 
+# Entry file per engine, used when auto-generating delivery.json from legacy run_meta.json
+_ENTRY_GLOB = {
+    'godot':    ('project.godot',),
+    'unity3d':  ('*.unity', 'Assets/*.unity'),
+    'ue5':      ('*.uproject',),
+    'three_js': ('index.html', 'index.js'),
+}
+
+
+def ensure_delivery(run_dir: Path) -> bool:
+    """Generate delivery.json from run_meta.json if it is missing.
+
+    Supports the legacy GameFactory run layout:
+      <run_dir>/run_meta.json
+      <run_dir>/pipeline/<game_id>_whitebox/   <- project sources
+
+    Returns True if delivery.json exists (either already or just created).
+    """
+    delivery = run_dir / 'delivery.json'
+    if delivery.exists():
+        return True
+    meta_path = run_dir / 'run_meta.json'
+    if not meta_path.exists():
+        return False
+    try:
+        meta = read_json(meta_path)
+        game_id = meta.get('game_id', '')
+        engine = meta.get('engine', '') or meta.get('stages', {}).get('whitebox', {}).get('engine', '')
+        run_id = meta.get('run_id', run_dir.name)
+        model_key = None
+        # derive model key from path: .../initial_game_gen/<model_dir>/...
+        for part in run_dir.parts:
+            if part in common.MODEL_DIRS.values():
+                model_key = {v: k for k, v in common.MODEL_DIRS.items()}[part]
+                break
+        if not model_key:
+            model_key = 'sol'  # fallback slot
+
+        # Locate project root (pipeline/<game_id>_whitebox or pipeline/<game_id>)
+        project_root = None
+        for candidate in (
+            run_dir / 'pipeline' / f'{game_id}_whitebox',
+            run_dir / 'pipeline' / game_id,
+            run_dir / 'project',
+        ):
+            if candidate.is_dir():
+                project_root = candidate
+                break
+        if project_root is None:
+            return False
+
+        # Find entry file
+        entry = None
+        for pattern in _ENTRY_GLOB.get(engine, ()):
+            matches = sorted(project_root.glob(pattern))
+            if matches:
+                entry = str(matches[0].relative_to(project_root))
+                break
+        if entry is None:
+            return False
+
+        from datetime import datetime, timezone
+        from pipeline.eval.whitebox.core.paths import DELIVERY_SCHEMA, write_json
+        write_json(delivery, {
+            'schema': DELIVERY_SCHEMA,
+            'stage': 'stage1',
+            'model': model_key,
+            'game_id': game_id,
+            'run_id': run_id,
+            'engine': engine,
+            'project_root': str(project_root),
+            'entry': entry,
+            'created_at': datetime.now(timezone.utc).isoformat(),
+            'generator': {'kind': 'legacy_shim', 'agent': model_key, 'framework_used': True,
+                          'original_location': str(project_root)},
+        })
+        return True
+    except Exception:  # noqa: BLE001
+        return False
+
 
 def deliveries(stage, models, cases, run_id):
     root = common.STAGE_OUTPUT_ROOTS[stage]
@@ -108,6 +188,8 @@ def main(argv=None) -> int:
     models = {'planner': args.planner, 'judge': args.judge}
     ready = []
     for model, case, run in todo:
+        if not (run / 'delivery.json').exists():
+            ensure_delivery(run)  # generate from run_meta.json for legacy layouts
         problems = validate(run)
         out = root / common.model_dir(model) / case / run.name
         if problems:

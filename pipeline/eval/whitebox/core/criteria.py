@@ -18,11 +18,11 @@ Every row: ``{id, metric, mode, group, requirement, requirement_ids, ...}``;
 """
 from __future__ import annotations
 
-from .paths import FRAMEWORK, SAMPLES, read_json, sha256
+from .paths import EVAL_DATA, FRAMEWORK, RUBRIC_ROOT, SAMPLES, read_json, sha256
 
-TIERED = 'rubric_whitebox_core/rubric.json'            # C2 mechanic (tiered-core-v1)
-RUBRIC = 'rubric_whitebox_core12/rubric.json'          # C3 assets
-CONTRACT_HISTORY = FRAMEWORK / 'eval' / 'rubric_design' / 'contract_history'  # Q/G visual
+TIERED = 'rubric_whitebox_core/rubric.json'            # C2 mechanic (tiered-core-v1) - legacy fallback
+RUBRIC = 'rubric_whitebox_core12/rubric.json'          # C3 assets - legacy fallback
+CONTRACT_HISTORY = FRAMEWORK / 'eval' / 'rubric_design' / 'contract_history'  # legacy fallback
 VERSION = 'stage1-criteria.v1'
 
 STORY, MECHANIC, ASSET, INPUT, QUALITY, GAMENESS, PLAYABLE, CODE = (
@@ -160,6 +160,14 @@ def _checked(path, game_id) -> dict:
     return rubric
 
 
+def _load_whitebox_rubric(game_id: str) -> dict | None:
+    """Load merged whitebox rubric from test_data/rubric/<GameID>/whitebox/rubric.json."""
+    p = RUBRIC_ROOT / game_id / 'whitebox' / 'rubric.json'
+    if p.exists():
+        return read_json(p)
+    return None
+
+
 def contract_path(game_id: str):
     """The single frozen scoring contract under eval/rubric_design/contract_history."""
     frozen = [p for p in sorted((CONTRACT_HISTORY / game_id).glob('*/rubric.json'))
@@ -171,12 +179,30 @@ def contract_path(game_id: str):
 
 def build(game_id: str) -> dict:
     """Return the frozen criteria set for one case (all eight metrics)."""
-    core12_path, tiered_path, contract = (SAMPLES / game_id / RUBRIC, SAMPLES / game_id / TIERED,
-                                          contract_path(game_id))
-    core12, tiered, frozen = (_checked(core12_path, game_id), _checked(tiered_path, game_id),
-                              _checked(contract, game_id))
+    # Try new merged rubric first (test_data/rubric/<GameID>/whitebox/rubric.json)
+    wb = _load_whitebox_rubric(game_id)
+    if wb:
+        tiered = wb.get('mechanic', {})
+        core12 = wb.get('asset_slot', {})
+        frozen_rubric = wb.get('gameness', {})
+        # Build rows directly from merged rubric sections
+        tiered_rubric = {'assertions': tiered.get('assertions', []), 'status': 'frozen', 'game_id': game_id}
+        core12_rubric = {'assertions': core12.get('assertions', []), 'status': 'frozen', 'game_id': game_id}
+        frozen = {'assertions': frozen_rubric.get('assertions', []), 'status': 'frozen', 'game_id': game_id}
+    else:
+        # Fall back to legacy paths
+        core12_path = EVAL_DATA / game_id / RUBRIC
+        tiered_path = EVAL_DATA / game_id / TIERED
+        if not core12_path.exists():
+            core12_path = SAMPLES / game_id / RUBRIC
+        if not tiered_path.exists():
+            tiered_path = SAMPLES / game_id / TIERED
+        tiered_rubric = _checked(tiered_path, game_id)
+        core12_rubric = _checked(core12_path, game_id)
+        frozen = _checked(contract_path(game_id), game_id)
+
     visual, excluded = _visual(frozen)
-    rows = ([_row(*g) for g in GENERIC] + _mechanic(tiered) + _assets(core12) + visual)
+    rows = ([_row(*g) for g in GENERIC] + _mechanic(tiered_rubric) + _assets(core12_rubric) + visual)
     ids = [r['id'] for r in rows]
     if len(ids) != len(set(ids)):
         raise ValueError(f'{game_id}: duplicate criterion ids')
@@ -186,8 +212,5 @@ def build(game_id: str) -> dict:
         raise ValueError(f'{game_id}: no criteria for metrics {sorted(missing)}')
     if {r['group'] for r in rows if r['metric'] == GAMENESS} != {'layout', 'guidance', 'feedback'}:
         raise ValueError(f'{game_id}: Gameness must have layout, guidance and feedback groups')
-    return {'version': VERSION, 'game_id': game_id, 'engine': core12.get('engine'),
-            'sources': {'tiered': {'path': str(tiered_path), 'sha256': sha256(tiered_path)},
-                        'core12': {'path': str(core12_path), 'sha256': sha256(core12_path)},
-                        'contract': {'path': str(contract), 'sha256': sha256(contract)}},
+    return {'version': VERSION, 'game_id': game_id, 'engine': core12_rubric.get('engine'),
             'criteria': rows, 'excluded': excluded}
