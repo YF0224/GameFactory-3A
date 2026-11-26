@@ -234,7 +234,7 @@ def call_model(calls_dir: Path, *, name: str, prompt: str, schema: dict, cwd: Pa
     env = dict(os.environ) if claude else {   # codex: keep unrelated provider secrets out of the judge
         k: v for k, v in os.environ.items() if not any(w in k.upper() for w in SCRUBBED_ENV_WORDS)}
     deadline = time.monotonic() + timeout
-    inline_schema = not claude and os.environ.get('A3GAME_CODEX_INLINE_SCHEMA') == '1'
+    inline_schema = not claude and os.environ.get('A3GAME_CODEX_INLINE_SCHEMA', '1') == '1'
     image_instructions = ('The attached images are direct visual inputs: inspect their actual pixels. '
                           'The shell-only restriction applies to tool calls, not to viewing these attachments. '
                           'Do not infer a frame observation from captions or action expectations. '
@@ -303,7 +303,9 @@ def call_model(calls_dir: Path, *, name: str, prompt: str, schema: dict, cwd: Pa
                 executable = os.environ['A3GAME_CODEX_EXECUTABLE']     # pinned CLI (e.g. a known-good version)
             cmd = [executable, '--ask-for-approval', 'never', 'exec', '--model', model,
                    '-c', 'model_reasoning_effort=' + json.dumps(effort),
+                   '-c', 'model_max_tokens=32768',
                    '--sandbox', 'read-only', '--ephemeral', '--ignore-rules',
+                   '--skip-git-repo-check',
                    '-C', str(cwd), '--json', '--color', 'never',
                    '-o', str(output)]
             if not inline_schema:

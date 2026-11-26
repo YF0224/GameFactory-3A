@@ -1,14 +1,14 @@
 # Benchmark standard review — G056_garden_minigolf
 
-Directory: `/Users/yifanyang/Desktop/GameFactory-3A-game-bench/test_data/bench_standards/stage1/stage1-criteria.v1/G056_garden_minigolf`
+Directory: `/Users/yifanyang/Desktop/GameFactory-3A-game-bench/test_data/bench_standards/whitebox/stage1-criteria.v1/G056_garden_minigolf`
 
-Edit `<metric>.json` if needed, then approve with `python scripts_new/freeze_standards.py --stage 1 --approve G056_garden_minigolf`.
+Edit `<metric>.json` if needed, then approve with `python scripts_new/freeze_standards.py --stage x --approve G056_garden_minigolf`.
 
 ## gameness (28 checks)
 
 Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-garden mini golf), covering all 28 frozen CHECKS across the layout, guidance and event-feedback groups. Each check keeps its original criterion id, group and meaning and defines one principal visible outcome judged from native frames of the running build: recognisable white-box golf scene, complete and readable HUD, visible control and objective guidance, and the putt-event feedback chain (charge, strike, roll, barrier rebound, slope slowdown, out-of-bounds penalty with reset, hole-in celebration, stroke-cap banner, end-of-round lanterns into the summary). Timing, distances, ratios, coordinates and all branch/boundary behaviour remain source-level diagnostics carried verbatim in original_requirement_diagnostic_only and are not gates at the 50 or 100 tiers.
 
-### `game.layout.hierarchy` 
+### `game.layout.hierarchy` layout
 
 - **Requirement**: 实际UI信息层级清楚，主要状态与次要信息可区分。
 - **Visible goal**: In the in-game HUD the primary golf state — current hole, strokes used against the cap, and the charge value — reads as the visually dominant block, while the penalty count and camera-mode hint read as clearly subordinate secondary items.
@@ -19,7 +19,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: Every HUD item is drawn at the same weight and size, so primary and secondary information cannot be told apart.; HUD groups overlap or one group covers another, making the hierarchy unreadable.; The HUD shows debug or placeholder strings instead of the game's golf state.
 - **Trigger modes**: automatic
 
-### `game.layout.readable` 
+### `game.layout.readable` layout
 
 - **Requirement**: 实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。
 - **Visible goal**: Every visible HUD, menu and prompt text in the delivered frame is fully legible against its background, with no clipped labels, no overlapping strings and no text hidden behind scene geometry or effects.
@@ -30,7 +30,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: Labels are clipped or overflow their panel so words and digits are cut off.; Text is obscured by scene geometry, particles or another UI element.; Contrast or size is too poor to read the golf-state values.
 - **Trigger modes**: automatic
 
-### `game.guidance.controls` 
+### `game.guidance.controls` guidance
 
 - **Requirement**: 实际游戏展示或清楚传达必要操作方法。
 - **Visible goal**: A genuine game screen shows the player which inputs run the game — aiming, charging and releasing the putt, restarting the hole, switching camera mode and pausing — as an on-screen prompt or a clearly readable key legend.
@@ -41,7 +41,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: No control instructions appear on any in-game screen.; The displayed keys do not correspond to actions that work in this build.; Control guidance exists only outside the game, so the player never sees it while playing.
 - **Trigger modes**: automatic, input
 
-### `expanded.Q.s0001` 
+### `expanded.Q.s0001` feedback
 
 - **Requirement**: 白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- I07 输入延迟目标：蓄力/击球按键到画面反馈 ≤ 50 毫秒（手感关键） 仅评可视部分，声音不视为通过。
 - **Visible goal**: The white-box course reads as golf — ball, tee, cup with flag, ground, slope and barriers distinguishable by outline, proportion and colour — and the charge or putt input immediately changes the picture.
@@ -52,7 +52,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: Charge or putt input leaves the screen visually unchanged.; Ball, cup or flag cannot be identified on screen, so the scene does not read as a golf shot.; The visible reaction is not caused by the input: it plays before the press or without any player action.
 - **Trigger modes**: input, held
 
-### `expanded.G.s0005` 
+### `expanded.G.s0005` layout
 
 - **Requirement**: - I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示
 - **Visible goal**: During a hole the HUD shows the required readouts together: the current hole, strokes used against the per-hole cap, the charge value, the penalty count and the camera-mode indicator, each attached to the right quantity.
@@ -63,7 +63,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: One or more of the required readouts is missing from the HUD.; Values are attached to the wrong quantity, e.g. penalties shown as strokes or the cap shown as strokes used.; The camera-mode indicator is absent, so the player cannot tell which view is active.
 - **Trigger modes**: automatic
 
-### `expanded.G.s0006` 
+### `expanded.G.s0006` layout
 
 - **Requirement**: HUD 对照见 rubric。
 - **Visible goal**: The gameplay HUD appears as one organised golf panel whose items match the game's own HUD definition — hole, strokes against cap, charge value, penalties, camera mode and state or warning labels — rather than as ad-hoc floating text.
@@ -74,7 +74,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The defined HUD is missing and only scattered text or a debug overlay is shown.; HUD fields are thrown on screen with no grouping, so the panel cannot be read as the defined HUD.; HUD content is placeholder or editor text unrelated to the defined golf fields.
 - **Trigger modes**: automatic
 
-### `expanded.G.s0001` 
+### `expanded.G.s0001` feedback
 
 - **Requirement**: - S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。
 - **Visible goal**: The title screen, per-hole play with its stroke HUD, and the final summary are all real, reachable screens of the build, with a start entry on the title and a restart entry on the summary.
@@ -85,7 +85,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: Title or summary exists only as a non-interactive mock with no working entry.; No restart path exists, so the round cannot be replayed.; The final screen shows no round result at all.
 - **Trigger modes**: automatic, input, delayed
 
-### `expanded.G.s0007` 
+### `expanded.G.s0007` layout
 
 - **Requirement**: - L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入
 - **Visible goal**: Every referenced class exists in the running build — in the scene the ball, cup and flag, terrain, barriers, aim line and charge bar, and as overlays the title, HUD, summary, pause and video layer — each enterable during play.
@@ -96,7 +96,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: An entire referenced class is missing, e.g. no hole cup or flag in the scene.; A referenced object is replaced by an unrelated stand-in, so that class is not really present.; A UI layer is drawn but cannot be entered during play.
 - **Trigger modes**: automatic, input
 
-### `expanded.G.s0008` 
+### `expanded.G.s0008` layout
 
 - **Requirement**: 数量与属性以 L01/L02 与 G 系为准。
 - **Visible goal**: The hole carries its declared objects in the declared counts: one ball, a cup with flag and a tee at the hole, the terrain and barrier set that hole is declared to have, plus the aim line, charge bar and trail.
@@ -107,7 +107,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: A cup, flag or tee is missing at a hole.; Extra or duplicated objects appear, e.g. more than one ball in play.; A hole's declared terrain or barrier set is wrong, e.g. a flat hole built with a slope or a declared barrier absent.
 - **Trigger modes**: automatic, input
 
-### `expanded.G.s0013` 
+### `expanded.G.s0013` feedback
 
 - **Requirement**: 事件【蓄力开始】实际发生时可视表现为【蓄力条展开＋数值跳动】，结束条件【松开或取消】。仅评价可视投影，音频未评。未触发事件不能PASS。
 - **Visible goal**: While the player holds to charge, the charge bar visibly opens out and its value updates, so a mid-charge state looks clearly different from the resting state.
@@ -118,7 +118,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The charge bar never appears or does not change while charging.; The bar fills but its value stays frozen, so charge strength cannot be read.; Some generic effect expands instead of the charge indicator, with no link to the charge.
 - **Trigger modes**: held, input
 
-### `expanded.G.s0014` 
+### `expanded.G.s0014` feedback
 
 - **Requirement**: 事件【击球】实际发生时可视表现为【球推出＋草地小尘环＋轨迹残影启动】，结束条件【残影 0.5s 渐隐】。仅评价可视投影，音频未评。未触发事件不能PASS。
 - **Visible goal**: On release the ball is visibly pushed away from its spot and starts rolling, a small dust ring appears at the strike point on the ground, and the trajectory trail starts from the ball.
@@ -129,7 +129,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The ball does not move after release.; Trail or dust plays while the ball stays at rest.; Dust appears away from the strike point, unrelated to where the ball left.
 - **Trigger modes**: input
 
-### `expanded.G.s0015` 
+### `expanded.G.s0015` feedback
 
 - **Requirement**: 事件【球滚动】实际发生时可视表现为【轨迹残影跟随＋草浪压痕】，结束条件【球停】。仅评价可视投影，音频未评。未触发事件不能PASS。
 - **Visible goal**: While the ball is rolling, a trail follows it along the travelled path and the grass shows a pressed, flattened mark behind it.
@@ -140,7 +140,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The trail is detached from the ball or points away from its direction of travel.; No grass indentation appears while the ball rolls.; Trail or mark is drawn where the ball has not travelled.
 - **Trigger modes**: automatic
 
-### `expanded.G.s0016` 
+### `expanded.G.s0016` feedback
 
 - **Requirement**: 事件【碰撞挡板】实际发生时可视表现为【火花小粒子＋球体挤压回弹】，结束条件【回弹完成】。仅评价可视投影，音频未评。未触发事件不能PASS。
 - **Visible goal**: When the ball meets a barrier, a burst of small sparks shows at the contact and the ball visibly compresses and rebounds off the barrier.
@@ -151,7 +151,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The ball passes through the barrier without colliding.; Sparks play but the ball does not rebound off the barrier.; Sparks appear away from the meeting point of ball and wall.
 - **Trigger modes**: automatic
 
-### `expanded.G.s0017` 
+### `expanded.G.s0017` feedback
 
 - **Requirement**: 事件【上坡减速】实际发生时可视表现为【瞄准线透明度提示（击球前）/球速渐减】，结束条件【坡段结束】。仅评价可视投影，音频未评。未触发事件不能PASS。
 - **Visible goal**: On a sloped hole the aiming line is visibly fainter over the slope before the shot, and after the putt the ball visibly slows while climbing that slope instead of rolling at a steady pace.
@@ -162,7 +162,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The aiming line shows no slope indication over the uphill segment.; The ball does not slow at all on the climb.; The dimming or slowdown occurs on flat ground or the wrong segment of the course.
 - **Trigger modes**: input, held, automatic
 
-### `expanded.G.s0018` 
+### `expanded.G.s0018` feedback
 
 - **Requirement**: 事件【出界】实际发生时可视表现为【球坠云＋镜头拉高＋「界外＋1 杆」提示】，结束条件【复位完成】。仅评价可视投影，音频未评。未触发事件不能PASS。
 - **Visible goal**: When the ball leaves the course boundary it visibly drops away over the cloud below, the view rises to a higher vantage, and an on-screen notice says the shot went out of bounds and a penalty stroke was added.
@@ -173,7 +173,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The ball vanishes with no out-of-bounds indication at all.; The notice reports the wrong outcome, such as success or a hole completion, or omits the penalty stroke.; After the event the ball is never returned to a playable position.
 - **Trigger modes**: automatic, delayed
 
-### `expanded.G.s0019` 
+### `expanded.G.s0019` feedback
 
 - **Requirement**: 事件【入洞】实际发生时可视表现为【球旋入洞杯＋旗杆亮灯＋花瓣迸溅】，结束条件【进入下一洞】。仅评价可视投影，音频未评。未触发事件不能PASS。
 - **Visible goal**: When the ball reaches the cup it visibly sinks and spirals into the hole, the flag lights up and a petal burst plays, and the game then moves on to the next hole.
@@ -184,7 +184,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The ball reaches the cup but is not registered as holed, with no transition.; The celebration plays at a different cup or away from the hole.; The effect plays even though the ball missed the cup.
 - **Trigger modes**: automatic
 
-### `expanded.G.s0020` 
+### `expanded.G.s0020` feedback
 
 - **Requirement**: 事件【达杆数上限】实际发生时可视表现为【「本洞按 8 杆计」横幅】，结束条件【推进下一洞】。仅评价可视投影，音频未评。未触发事件不能PASS。
 - **Visible goal**: When the per-hole stroke cap is reached, a banner announces that the hole is scored at the cap, and the game then advances to the next hole without a hard failure.
@@ -195,7 +195,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: No banner or notice appears when the cap is reached.; The notice states a different outcome, such as failure or restart, or names the wrong hole.; Play stalls on the capped hole instead of advancing.
 - **Trigger modes**: delayed, automatic
 
-### `expanded.G.s0021` 
+### `expanded.G.s0021` feedback
 
 - **Requirement**: 事件【三洞完成】实际发生时可视表现为【花灯升空粒子】，结束条件【进入总结算】。仅评价可视投影，音频未评。未触发事件不能PASS。
 - **Visible goal**: After the last hole is completed, a celebration of rising lanterns plays over the course and leads into the round summary.
@@ -206,7 +206,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: Nothing plays at the end of the round; play cuts straight to the summary.; The celebration fires mid-hole, before the round is finished.; The celebration plays but no summary follows.
 - **Trigger modes**: delayed, automatic
 
-### `expanded.G.s0026` 
+### `expanded.G.s0026` feedback
 
 - **Requirement**: - F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息
 - **Visible goal**: The aiming line and the charge bar are the visible carriers of shot information — direction and reach from the line, power from the bar — and neither is covered by particles, decoration or other UI.
@@ -217,7 +217,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The aim line points somewhere unrelated to the aim direction.; The charge bar or aim line is covered by particles, decor or another UI element.; No aim line is shown while aiming, leaving the shot's direction unreadable.
 - **Trigger modes**: input, held
 
-### `expanded.G.s0027` 
+### `expanded.G.s0027` feedback
 
 - **Requirement**: 轨迹残影承担落点复盘信息
 - **Visible goal**: The trail left by the ball lets the player review the shot: it traces the path actually travelled, ends where the ball came to rest, and remains readable after the ball stops.
@@ -228,7 +228,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The trail does not follow the ball's path.; The trail ends somewhere other than where the ball stopped.; The trail is replaced by a fixed or pre-drawn line unrelated to this shot.
 - **Trigger modes**: automatic
 
-### `expanded.G.s0011` 
+### `expanded.G.s0011` feedback
 
 - **Requirement**: - F03 输入与延迟：见 I07（击球手感为 S 档核心，≤50 毫秒）。
 - **Visible goal**: Pressing to charge or releasing the putt produces its visible effect — the charge response or the ball launching — at the same instant, so the shot responds directly under the player's hand.
@@ -239,7 +239,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The charge or putt press shows no visible change on the input frame.; Only sound responds while the picture stays unchanged.; A canned animation plays on a fixed schedule regardless of when the player acts.
 - **Trigger modes**: input, held
 
-### `expanded.G.s0002` 
+### `expanded.G.s0002` feedback
 
 - **Requirement**: - G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速
 - **Visible goal**: While aiming, a dashed line runs from the ball along the aim direction and lengthens or shortens with the current charge, appearing fainter where it crosses sloped ground.
@@ -250,7 +250,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The dashed line's length does not respond to changes in charge.; The line continues past the predicted stop or draws bounce and post-slope continuation paths.; The slope stretch looks the same as the flat stretch, giving no slowdown hint.
 - **Trigger modes**: input, held
 
-### `expanded.G.s0003` 
+### `expanded.G.s0003` feedback
 
 - **Requirement**: 蓄力条 0–100% 数值与当前蓄力同步
 - **Visible goal**: The charge bar shows both a filled level and a numeric value, and the number agrees with the fill while the player charges.
@@ -261,7 +261,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The numeric value never changes while the bar fills.; The number and the fill contradict each other at the same moment.; The displayed value belongs to another quantity, such as the stroke count.
 - **Trigger modes**: held, input
 
-### `expanded.G.s0004` 
+### `expanded.G.s0004` feedback
 
 - **Requirement**: 球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。
 - **Visible goal**: While the ball rolls a trail follows it, the trail fades away after the ball stops, and only the most recent shot's trail is present at any time.
@@ -272,7 +272,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: No trail appears while the ball rolls.; The trail persists after the ball stops, or old trails pile up on the course.; A previous shot's trail is shown instead of the current one.
 - **Trigger modes**: automatic, delayed
 
-### `expanded.G.s0034` 
+### `expanded.G.s0034` guidance
 
 - **Requirement**: 冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。
 - **Visible goal**: Before a putt the screen shows the trade-off: the current power and the hole's route or terrain cues, such as a faint aim stretch over a slope or visible barriers, so risk and payoff can be weighed.
@@ -283,7 +283,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: No cue at all about slope or barriers while aiming.; Cues contradict the terrain, e.g. a slowdown hint on flat ground.; No power information is visible, so the player cannot judge how far the ball will travel.
 - **Trigger modes**: input, held
 
-### `expanded.G.s0032` 
+### `expanded.G.s0032` feedback
 
 - **Requirement**: 核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。
 - **Visible goal**: The core putt's outcomes read differently on screen: a holed ball shows its cup celebration, a ball leaving the course shows a penalty notice and reset, and a refused shot changes neither the ball nor the stroke count.
@@ -294,7 +294,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: All outcomes produce the same generic effect, so they cannot be told apart.; A refused shot still launches the ball or increments the stroke count.; An out-of-bounds event is presented as a success or a hole completion.
 - **Trigger modes**: input, automatic, rejection
 
-### `expanded.G.s0033` 
+### `expanded.G.s0033` feedback
 
 - **Requirement**: 目标进度、阶段变化与终局结果向玩家明确呈现。
 - **Visible goal**: The screen keeps the round's progress legible — the HUD shows which hole of the round is being played — and at the end the summary presents the round's result, including the total against par and the penalties.
@@ -305,7 +305,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 - **Basic bugs**: The HUD gives no indication of which hole is being played.; The summary omits the comparison against par or the penalties.; The summary shows fixed numbers regardless of how the round was played.
 - **Trigger modes**: automatic, delayed
 
-### `expanded.G.s0031` 
+### `expanded.G.s0031` guidance
 
 - **Requirement**: 玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。
 - **Visible goal**: Before acting, the player can learn the current aim of play and the next action from the game screen itself — an objective line naming the round's goal and a prompt or readable hint for the next putt step.
@@ -320,7 +320,7 @@ Frozen source-only Gameness v4 outcome_frame_v1 standard for G056 (floating-gard
 
 Source-only outcome standard for the three-hole floating-garden mini-golf putt mechanic (G056). Eight CHECKs each target one principal visible outcome of the putt loop: charge-and-release produces a rolling/rebounding ball, invalid strike attempts are rejected without spending a stroke, terrain (slope and bumper) alters the ball path, an unobstructed roll settles under friction alone, an out-of-bounds ball is restored to its last played position with one penalty stroke shown in the HUD, a sunk ball completes the hole and advances (to the next hole, or to the settlement panel after the last), a fast pass over the cup is not accepted as sunk, and the aiming line plus power readout track the charge while the shot leaves a trail. All fields describe only what a frame can show (which object, what visibly happens, which HUD/panel is on screen). Frozen numbers from G01-G05 (12 m/s at full charge, 1.5 m/s² flat friction, 3.0 m/s² along-slope, 0.6 restitution, 60% aim-line factor, 40% slope transparency drop, 0.5 s trail fade, 8-stroke cap, threshold speeds, camera degrees) are treated as diagnostic-only source evidence and are not restated as acceptance conditions.
 
-### `atom.G056_garden_minigolf.WB.TC2.01.C2.tiered.01` 
+### `atom.G056_garden_minigolf.WB.TC2.01.C2.tiered.01` G056_garden_minigolf.WB.TC2.01
 
 - **Requirement**: 按 G02 公式生成初速向量 → 球滚动/反弹
 - **Visible goal**: The player charges a putt in the striking view and releases it, and the golf ball visibly leaves its resting spot and travels across the course in the aimed direction instead of standing still or jumping at random.
@@ -331,7 +331,7 @@ Source-only outcome standard for the three-hole floating-garden mini-golf putt m
 - **Basic bugs**: Releasing the charged shot leaves the ball motionless at its resting spot, so no stroke visibly happens.; The ball launches but travels opposite to or far off the displayed aim direction.; The ball passes through the bumper or slope geometry without any rebound or deflection along its route.
 - **Trigger modes**: input, automatic
 
-### `atom.G056_garden_minigolf.WB.TC2.02.C2.tiered.02` 
+### `atom.G056_garden_minigolf.WB.TC2.02.C2.tiered.02` G056_garden_minigolf.WB.TC2.02
 
 - **Requirement**: 滚动中击球、全览模式击球 → 拒绝且不耗杆
 - **Visible goal**: An attempt to strike the ball while it is still rolling, or while the overview camera mode is active, is refused: no new shot is launched and the displayed stroke count does not increase.
@@ -342,7 +342,7 @@ Source-only outcome standard for the three-hole floating-garden mini-golf putt m
 - **Basic bugs**: The refused attempt launches a fresh shot and the stroke counter increases.; The rolling ball visibly changes direction or restarts mid-roll in response to the attempt.; A shot is actually launched while the whole-hole overview camera is active.
 - **Trigger modes**: rejection
 
-### `atom.G056_garden_minigolf.WB.TC2.03.C2.tiered.03` 
+### `atom.G056_garden_minigolf.WB.TC2.03.C2.tiered.03` G056_garden_minigolf.WB.TC2.03
 
 - **Requirement**: 坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹
 - **Visible goal**: The ball's path is visibly altered by the course terrain: crossing a sloped section bends and speeds or slows its travel along the slope, and striking a wooden bumper sends it back off the bumper instead of continuing straight.
@@ -353,7 +353,7 @@ Source-only outcome standard for the three-hole floating-garden mini-golf putt m
 - **Basic bugs**: The ball passes through or clips inside the bumper and emerges on the far side without rebounding.; The ball keeps a straight, unchanged path across the sloped section as if the ground were flat.; On contact the ball is redirected along or into the obstacle rather than away from its face, or is stopped dead and left embedded in it.
 - **Trigger modes**: input, automatic
 
-### `atom.G056_garden_minigolf.WB.TC2.04.C2.tiered.04` 
+### `atom.G056_garden_minigolf.WB.TC2.04.C2.tiered.04` G056_garden_minigolf.WB.TC2.04
 
 - **Requirement**: 无碰撞则纯摩擦结算
 - **Visible goal**: A ball struck across open flat fairway with no bumper or slope in its path slows down and visibly comes to rest on the green by itself, without being deflected or teleported.
@@ -364,7 +364,7 @@ Source-only outcome standard for the three-hole floating-garden mini-golf putt m
 - **Basic bugs**: The ball keeps rolling indefinitely and never comes to rest.; The ball visibly bends or reverses on empty fairway as if it hit an invisible obstacle.; The ball rolls on a clear straight shot but sinks below the ground or off the visible course surface instead of stopping on it.
 - **Trigger modes**: input, automatic
 
-### `atom.G056_garden_minigolf.WB.TC2.05.C2.tiered.05` 
+### `atom.G056_garden_minigolf.WB.TC2.05.C2.tiered.05` G056_garden_minigolf.WB.TC2.05
 
 - **Requirement**: 回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位
 - **Visible goal**: When the ball leaves the course and drops into the cloud sea, it is put back at the spot it was last struck from and the HUD shows one additional penalty stroke.
@@ -375,7 +375,7 @@ Source-only outcome standard for the three-hole floating-garden mini-golf putt m
 - **Basic bugs**: The ball is left outside the course or stays falling, never returning to a playable position.; The ball returns to the course but the HUD stroke or penalty count stays the same, so no penalty is charged.; The ball reappears somewhere other than the position of its last stroke, such as the tee of the current or next hole.
 - **Trigger modes**: automatic, delayed
 
-### `atom.G056_garden_minigolf.WB.TC2.06.C2.tiered.06` 
+### `atom.G056_garden_minigolf.WB.TC2.06.C2.tiered.06` G056_garden_minigolf.WB.TC2.06
 
 - **Requirement**: 本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算
 - **Visible goal**: A ball resting in the cup completes the hole and play moves on: the view advances to a new hole, or, after the final hole, a settlement panel appears instead of play staying on the finished hole.
@@ -386,7 +386,7 @@ Source-only outcome standard for the three-hole floating-garden mini-golf putt m
 - **Basic bugs**: The ball rests in the cup with no hole-complete reaction, leaving play stuck on the same hole.; The hole advances but the HUD still shows the finished hole's number and stroke count instead of the new hole.; After the final hole the game returns to an earlier hole or the title screen with no settlement panel shown.
 - **Trigger modes**: automatic, input
 
-### `atom.G056_garden_minigolf.WB.TC2.07.C2.tiered.07` 
+### `atom.G056_garden_minigolf.WB.TC2.07.C2.tiered.07` G056_garden_minigolf.WB.TC2.07
 
 - **Requirement**: 高速掠过洞杯不判入洞（速度阈值）
 - **Visible goal**: A ball struck hard enough to speed across the cup does not drop: it carries on past the hole and the hole is not counted as completed.
@@ -397,7 +397,7 @@ Source-only outcome standard for the three-hole floating-garden mini-golf putt m
 - **Basic bugs**: The fast pass is registered as a hole-in, advancing the hole or opening the settlement panel.; The ball is visibly captured or snapped into the cup mouth and stopped there despite its speed.; The shot is discarded — the ball resets or the stroke is refunded — instead of the ball being allowed to continue past the cup.
 - **Trigger modes**: rejection, automatic
 
-### `atom.G056_garden_minigolf.WB.TC2.08.C2.tiered.08` 
+### `atom.G056_garden_minigolf.WB.TC2.08.C2.tiered.08` G056_garden_minigolf.WB.TC2.08
 
 - **Requirement**: 瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）
 - **Visible goal**: While the player holds and varies the charge, the dashed aiming line and the on-screen power value visibly track the charge level, and once the shot is released the ball leaves a fading trail along the path it travels.
