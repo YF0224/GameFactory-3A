@@ -1,0 +1,11 @@
+# G039_sky_ring_flight / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- sky_glider: Light twin-wing courier glider per reference image, canvas wings with postal red trim, light wood fuselage, brass propeller cowl, clear forward axis with origin at fuselage center of gravity, game-ready PBR, Y-up
+- ring_gate_kit: Floating sky-island ring gate per reference image, brass-framed torus with beacon lamps on rim and hanging pennants, decorative shell only for 12 instanced rings at radius 6 and 4, game-ready PBR, Y-up, pivot at ring center
+- thermal_column_marker: Semi-transparent rising air column marker with layered shimmer rings and small floating motes, cyan glow readable from distance, radius 10 zone visual, single object, Y-up
+- checkpoint_beacon: Sky rescue checkpoint buoy with breathing beacon lamp, small canvas pennant and brass chain, readable from flight distance, single object for 12 instanced beacons, Y-up
+- wind_stream_vane: Mast-mounted wind streamer array with thin pennant ribbons and a small brass anemometer cage, marks wind zone boundaries, single object, Y-up
+- takeoff_skydeck: Cliff-top takeoff deck for a courier glider with wooden launch rail, canvas windbreak and beacon post, light timber construction with brass fittings, single object, Y-up

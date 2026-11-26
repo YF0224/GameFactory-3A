@@ -1,0 +1,8 @@
+# G060_volcano_stunt_route / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- stunt_rider_yan: Original volcano-route stunt rider in a heat-vented charcoal jacket with ember-orange accent lines, armored gloves, goggles up, board under arm, stylized semi-realistic, rock-black and ember palette, T-pose, game-ready, PBR textures
+- big_launch_ramp: Steep heat-warped steel-and-basalt launch ramp with ember vents at the lip and guide stripes, stylized semi-realistic, game-ready, PBR textures
+- steadiness_gantry: Low training gantry rig of padded rollers, chime gates and score lamps along a stable side path, stylized semi-realistic, game-ready, PBR textures

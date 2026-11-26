@@ -1,0 +1,14 @@
+# G031_dream_archive / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- archivist: Dream archive archivist with ink-stained coat, lantern and satchel, reference image provided, single character, Y-up, pivot at feet
+- nightmare_shade: Nightmare shade giant formed of deleted paragraphs, hulking ink shadow with paper-white mask, reference image provided, single character, Y-up, pivot at feet
+- nightmare_crawler: Ink crawler swarm-beast with nib claws and dripping quill legs, reference image provided, single object, Y-up, pivot at base
+- healing_crystal: Dream reward healing crystal on a brass archive pedestal, warm paper-white glow, single object
+- sharp_carving_knife: Dream reward carving knife with ink-black blade and brass archive handle, single object
+- silent_pendulum: Dream reward silent pendulum in a glass archive vial, brass frame, single object
+- archive_door: Forbidden archive door with wax seal strips and brass frame, breakable seal, single object
+- swift_feather: Dream reward quill feather with drifting ink trail, brass clasp, single object
+- echo_charm: Dream reward echo charm amulet with ink-drop pendant and brass ring, single object

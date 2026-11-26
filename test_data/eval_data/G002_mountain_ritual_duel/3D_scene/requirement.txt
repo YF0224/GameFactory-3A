@@ -1,0 +1,6 @@
+# G002_mountain_ritual_duel / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G002_scene_001: High-post dueling ground above a sea of clouds, 16-meter diameter circular granite platform at origin with stone railing border, bronze altar bell at the north rim, six duel banners spaced evenly along the edge, morning light and drifting cloud sea below

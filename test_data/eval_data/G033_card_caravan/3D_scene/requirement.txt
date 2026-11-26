@@ -1,0 +1,6 @@
+# G033_card_caravan / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G033_scene_001: Desert caravan camp battle stage at sunset, side view framing, sand dunes, parked caravan wagons and cloth tents behind, open sand area in front for two combatants, game-ready 3D scene, original design

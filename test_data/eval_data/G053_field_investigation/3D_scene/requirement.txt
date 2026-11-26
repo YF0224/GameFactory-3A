@@ -1,0 +1,6 @@
+# G053_field_investigation / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G053_scene_001: Original three-domain field research landscape: flower slope meadow Z01 with sparse trees, creek bay Z02 with shallow water, wooden bridge and reed bank, thunder crystal hill Z03 with blue-grey rocks and amber crystals, central research station S01, matching bound reference art style, stylized semi-realistic, game-ready 3D scene

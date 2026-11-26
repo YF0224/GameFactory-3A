@@ -1,0 +1,20 @@
+# G028_elemental_greenhouse / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- frost_tower: Frost element tower with condenser mist vents and pale ice-blue crystal lattice, reference image provided, top-down readable silhouette, single object
+- flame_tower: Flame element tower with furnace vents and glowing ember core, reference image provided, top-down readable silhouette, single object
+- crystal_rock_tower: Crystal rock tower with clustered stone spikes, reference image provided, top-down readable silhouette, single object
+- vine_walker: Bipedal vine-walker plant guardian with bark-plated limbs and leaf cape, reference image provided, single character, Y-up, pivot at feet
+- greenhouse_core: Greenhouse seed-vault base with glass dome and seed rack silhouettes, reference image provided, single object
+- deep_chill_form: Frost tower deep-chill branch form with ringed cold aura vents and denser ice armor, variant of frost tower, single object
+- ice_spike_form: Frost tower ice-spike branch form with protruding crystalline spikes around the turret head, variant of frost tower, single object
+- magma_flow_form: Flame tower magma-flow branch form with molten channels and brighter core glow, variant of flame tower, single object
+- burst_form: Flame tower burst branch form with pressure ring vents and ember storm shroud, variant of flame tower, single object
+- crystal_spike_form: Crystal rock tower shatter-crystal branch form with sharper fractured crystal shards, variant of crystal rock tower, single object
+- piercing_form: Crystal rock tower piercing branch form with elongated drill-like rock lance aligned barrel, variant of crystal rock tower, single object
+- wave_gate: Broken greenhouse vent gate where vine walkers emerge, overgrown with creepers, marks the enemy spawn point, single object
+- build_pad: Greenhouse planter-box build pad with soil grid and metal corner brackets, one-grid build slot, single object
+- seed_vault_sprout: Young sprout in a reinforced glass seed capsule beside the vault, hopeful tiny plant, single object
+- greenhouse_duct: Industrial greenhouse air duct segment with frost on one end and heat glow on the other, environment prop, single object

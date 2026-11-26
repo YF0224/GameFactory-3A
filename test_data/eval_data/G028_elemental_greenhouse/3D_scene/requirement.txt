@@ -1,0 +1,6 @@
+# G028_elemental_greenhouse / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G028_scene_001: Underground greenhouse interior seen from above: S-shaped 18-tile path crossing a frost zone and a furnace zone, glass dome overhead with steam pipes, seed vault base at the far end, vine-covered vents, humid jungle light

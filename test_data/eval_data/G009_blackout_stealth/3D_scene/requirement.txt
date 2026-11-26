@@ -1,0 +1,6 @@
+# G009_blackout_stealth / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G009_scene_001: Blackout archive facility interior at night, front yard with fence and cover rows, grand archive hall with steel shelving aisles under emergency lamps, low-ceiling evacuation corridor ending at a hatch, red emergency lamps, moonlight clerestory windows

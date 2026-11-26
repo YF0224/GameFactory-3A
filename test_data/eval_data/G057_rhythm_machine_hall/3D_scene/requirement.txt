@@ -1,0 +1,6 @@
+# G057_rhythm_machine_hall / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G057_scene_001: Mechanical music hall interior: towering gear wall slowly turning, four brass note tracks descending to a chime reed judgement line on a walnut stage, steam vents and warm lamp sconces, brass-and-dark-walnut palette, stylized, game-ready 3D scene

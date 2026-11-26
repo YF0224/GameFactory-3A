@@ -1,0 +1,11 @@
+# G012_gravity_mine / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- mine_mechanic: Bipedal mine mechanic with heavy work belt and a two-state gravity wrench on the back, helmet lamp on the brow, sturdy boots for both floor and ceiling walking, reference image provided, single character, Y-up, pivot at feet
+- spike_trap: Single mine-floor spike trap module, rooted rusty iron spikes on a wet-rock base, always-on hazard for normal-gravity floor contact, reference image provided, single object
+- ceiling_hammer: Single ceiling stamp-hammer trap with an independently moving hammer head on a rail, dangerous for inverted-gravity ceiling contact, 4-second cycle poseable, single object
+- steam_vent: Single wall-mounted steam valve vent with a brass nozzle, jet made by runtime VFX only, 3-second cycle hazard, single object
+- dual_anchor_checkpoint: Single checkpoint pedestal base used as both floor and ceiling safety anchor, warm lamp ring state shown by material, same mesh instance on both surfaces, single object
+- gravity_core_console: Single interactive gravity-core maintenance console with a large two-state lever and warning lamps, level goal landmark, single object

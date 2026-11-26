@@ -1,0 +1,11 @@
+# G032_starport_autobattle / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- patrol_soldier: A starport patrol soldier in light navy armor with an energy baton and small shield, T-pose, stylized sci-fi starport style, slightly chunky proportions, navy and teal palette, clean silhouette, original design, game-ready, PBR textures
+- armored_sentry: A bulky armored sentry in heavy teal plate armor with a tower shield, T-pose, stylized sci-fi starport style, slightly chunky proportions, navy and teal palette, clean silhouette, original design, game-ready, PBR textures
+- sniper: A slim starport sniper in a hooded flight suit with a long rail rifle, T-pose, stylized sci-fi starport style, slightly chunky proportions, navy and teal palette, clean silhouette, original design, game-ready, PBR textures
+- armor_breaker: A starport armor breaker in orange hazard gear with a large piston hammer, T-pose, stylized sci-fi starport style, slightly chunky proportions, navy and teal palette, clean silhouette, original design, game-ready, PBR textures
+- medic_drone: Round medical drone with four rotors, a green cross light and a healing beam emitter, non-humanoid, stylized sci-fi starport style, slightly chunky proportions, navy and teal palette, clean silhouette, original design, game-ready, PBR textures
+- scout_bee: Small insect-shaped scout drone with translucent wings and a stinger probe, non-humanoid, stylized sci-fi starport style, slightly chunky proportions, navy and teal palette, clean silhouette, original design, game-ready, PBR textures

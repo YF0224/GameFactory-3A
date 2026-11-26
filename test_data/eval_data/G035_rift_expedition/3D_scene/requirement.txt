@@ -1,0 +1,8 @@
+# G035_rift_expedition / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G035_scene_001: Outer rift layer battle stage, alien canyon with teal glowing fungi and floating rocks, side view framing, game-ready 3D scene, original design
+- G035_scene_002: Elite fissure battle stage, narrow violet crystal fissure with pulsing light, side view framing, game-ready 3D scene, original design
+- G035_scene_003: Rift core boss arena, huge glowing crystal heart in a cavern, side view framing, game-ready 3D scene, original design

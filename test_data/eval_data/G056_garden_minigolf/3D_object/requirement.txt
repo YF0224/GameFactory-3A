@@ -1,0 +1,8 @@
+# G056_garden_minigolf / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- gardener_mei: Original apprentice gardener in a petal-trimmed work apron over a mint tunic, straw hat on back, putter in hand, cheerful cartoon style, meadow-green and petal-pink palette, T-pose, game-ready, PBR textures
+- golf_ball: Single dimpled golf ball with a soft pearl sheen, clean stylized, game-ready, PBR textures
+- hole_flag: Miniature golf hole cup with a slender striped pennant flag and a subtle glow rim, clean stylized, game-ready, PBR textures

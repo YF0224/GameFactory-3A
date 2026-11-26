@@ -1,0 +1,6 @@
+# G022_isle_comm_nodes / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G022_scene_001: Single floating-isle encounter map (24x24): two landing wings, central three communication relay nodes, tall-grass concealment clusters, bridge paths, drifting cloud sea below, bright meadow palette

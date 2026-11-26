@@ -1,0 +1,11 @@
+# G029_caravan_escort / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- sail_wagon: Migration sail wagon with canvas sail, wooden spoke wheels and cargo racks for seed bags and water barrels, reference image provided, single object
+- plains_raider: Plains raider scavenger with wrapped headscarf, light scrap armor and curved blade, reference image provided, single character, Y-up, pivot at feet
+- portable_arrow_tower: Portable wagon-mounted ballista tower with folding wooden tripod and bolt rack, deployable defense device, single object
+- roadblock: Sand-and-log cheval de frise roadblock blocking a one-grid lane, wooden stakes and lashed beams, single object
+- escort_guard: Caravan escort guard in quilted desert garb with round shield and short spear, walking companion character, single character, Y-up, pivot at feet
+- canyon_ambusher: Canyon ambusher raider in dark rust wraps with hand crossbow and climbing harness straps, canyon-segment enemy tint, single character, Y-up, pivot at feet

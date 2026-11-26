@@ -1,0 +1,6 @@
+# G004_desert_observatory / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G004_scene_001: Desert observatory circular main hall, 40-meter diameter chamber centered on a raised bronze-ring pedestal, six massive concrete pillars evenly spaced on an inner ring at 12 meters radius, a 4-meter outer walkway, dome skylight shafts with drifting sand, weathered concrete and brass surfaces

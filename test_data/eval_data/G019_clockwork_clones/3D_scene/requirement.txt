@@ -1,0 +1,6 @@
+# G019_clockwork_clones / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G019_scene_001: Cozy clockwork workshop experiment room at night, brass gear walls slowly turning, wooden workbenches, pressure plates and timing switches on plank floor, hanging pendulums, warm brass palette, stylized semi-realistic, game-ready 3D scene

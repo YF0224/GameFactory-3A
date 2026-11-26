@@ -1,0 +1,11 @@
+# G002_mountain_ritual_duel / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- duelist: Challenger duelist in layered travel robes over light lamellar, deep sash of ritual red, single shoulder-guard, carries a straight longblade at the hip and a ceremonial flintlock holstered at the back, reference image provided, single character, Y-up, pivot at feet
+- sentinel_swordsman: Veteran high-post sentinel swordsman, wind-worn granite-grey armor with cold-gold trim, tall plume-less helm, heavy two-handed straight sword, weathered cape, reference image provided, single character, Y-up, pivot at feet
+- ritual_flintlock: Ceremonial flintlock pistol with brass barrel, cold-gold filigree and worn walnut grip, single object, no text
+- altar_bell: Large bronze altar bell on a weathered granite frame, engraved mountain motifs, dark patina, single object, no text
+- duel_banner: Tall ritual duel banner of rough linen in ritual red with cold-gold pole and tassel, cloth hanging loose, single object, no text on cloth
+- spare_longblade: Straight ceremonial longblade resting on a low sword stand, cold-steel edge with gold-wrapped hilt, single object

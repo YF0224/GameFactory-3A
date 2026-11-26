@@ -1,0 +1,14 @@
+# G026_signal_tower_td / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- arrow_tower: Wooden ballista tower on a rock ledge footing with copper wire spool, reference image provided, top-down readable silhouette, single object
+- canyon_crawler: Desert canyon crawler beetle with ridged chitin and sand-grain texture, reference image provided, single object, Y-up, pivot at base
+- signal_tower_base: Canyon signal relay station with antenna mast, beacon lamp and stone base, reference image provided, single object
+- cannon_tower: Counterweight trebuchet-style cannon tower with stone sling arm and sandbag ring, top-down readable silhouette, single object
+- slow_tower: Condensing mist lattice tower with frost vents and pale blue glow, top-down readable silhouette, single object
+- build_pad: Flat rock build pad with corner brackets and etched grid mark, one-grid build slot, single object
+- arrow_bolt: Single heavy crossbow bolt with fletching and copper tip, projectile prop, single object
+- cannon_shell: Round stone cannon shell with crack lines, projectile prop, single object
+- wave_gate: Canyon gorge entrance arch with warning totems marking the enemy spawn point, single object

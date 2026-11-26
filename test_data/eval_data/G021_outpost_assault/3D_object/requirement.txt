@@ -1,0 +1,13 @@
+# G021_outpost_assault / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- outpost_keep: Single desert-coast outpost keep with flag mast, sandstone base and reinforced gate, top-down readable silhouette, reference image provided, single object
+- sentry_tower: Single rapid-fire sentry tower with rotating turret head and sand-camouflage plating, readable from top view, single object
+- ground_trap: Single desert ground pit trap with hinged cover plates and warning stakes, one-shot consumed state readable, single object
+- enemy_core: Single enemy coastal core structure with armored dome and pulsing power vents, top-down readable, single object
+- outer_bastion: Single fortified outer bastion block with sandbag ring and metal frame, destructible fortification, single object
+- rock_armor_car: Single heavy rock-armored assault car, plated hull with ram prow, six wheels, top-down readable, single object
+- sand_gunner: Bipedal sand gunner with long rifle, desert scarf and light armor, readable top-down silhouette, reference image provided, single character, Y-up, pivot at feet
+- wall_breaker: Bipedal wall-breaker trooper with heavy breaching hammer and shield arm, thick plating, readable top-down silhouette, single character, Y-up, pivot at feet

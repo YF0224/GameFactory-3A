@@ -1,0 +1,11 @@
+# G024_station_infection / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- eco_station_member: Bipedal ecological station member in clean jumpsuit with badge and sample satchel, calm neutral posture, readable from management view, reference image provided, single character, Y-up, pivot at feet
+- isolation_pod: Single negative-pressure isolation pod with glass quarantine shell and soft interior light, six-slot rack readable, reference image provided, single object
+- pathogen_scanner: Single handheld pathogen scanner device with projection cone emitter and result lens, sci-fi medical tool, single object
+- infected_converted_entity: Single infected converted entity: humanoid silhouette overgrown with bioluminescent filaments, hunched aggressive stance, distinct from healthy member silhouette, no gore, single character, Y-up, pivot at feet
+- station_alarm_column: Single station alarm column with stacked pulse lamps and clean housing, alarm state readable from management view, single object
+- disposal_projector: Single wall-mounted security disposal projector with targeting lens and three-step charge ring, disposal beam emitter, single object

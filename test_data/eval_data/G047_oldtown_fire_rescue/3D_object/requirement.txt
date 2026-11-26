@@ -1,0 +1,10 @@
+# G047_oldtown_fire_rescue / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- volunteer_firefighter: Retro volunteer firefighter in canvas coat, brass helmet with neck flap, back-mounted water tank and hose reel, stylized semi-realistic night palette, original design, T-pose, game-ready, PBR textures
+- watchmaker_elder: Frail watchmaker elder in shawl vest with pince-nez, worried expression, stylized semi-realistic, original design, T-pose, game-ready, PBR textures
+- grocery_clerk: Middle-aged grocery clerk in rolled-sleeve apron with towel, worried expression, stylized semi-realistic, original design, T-pose, game-ready, PBR textures
+- apprentice_boy: Teen apprentice boy in patched jacket with satchel, worried expression, stylized semi-realistic, original design, T-pose, game-ready, PBR textures
+- collapsed_beam: Charred collapsed roof beam wedged across a doorway with sparks and broken tiles, stylized semi-realistic, game-ready, PBR textures

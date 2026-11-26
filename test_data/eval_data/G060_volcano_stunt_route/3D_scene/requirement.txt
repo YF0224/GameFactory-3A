@@ -1,0 +1,6 @@
+# G060_volcano_stunt_route / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G060_scene_001: Dormant volcano stunt route in three sections: ash-snow mixed gentle slope, cinder jump belt with glowing lava pools and warning markers, and a wide crater band with strong heat shimmer, rock-black and ember palette, stylized semi-realistic, game-ready 3D scene

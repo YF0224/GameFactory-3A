@@ -1,0 +1,8 @@
+# G040_endurance_race / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G040_scene_001: Stage 1 city street circuit, dry sunny afternoon, 2 km closed loop with 12 corner sections, barriers and tire walls, old-town facades and grandstand, white pit lane entry, visual shell only
+- G040_scene_002: Stage 2 coastal boulevard circuit, after-rain overcast with wet reflective asphalt, 2 km closed loop with 12 corner sections, sea-side guardrails, gull flocks, visual shell only
+- G040_scene_003: Stage 3 night harbor circuit, night rain with standing water reflections, 2 km closed loop with 12 corner sections, container cranes silhouettes, dock lights and warehouses, visual shell only

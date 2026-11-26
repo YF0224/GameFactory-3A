@@ -1,0 +1,6 @@
+# G014_dual_zone_waterworks / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G014_scene_001: Split hydro facility in a high mountain: upstream sluice zone with two pressure plates, discharge channel and gate A1; downstream pump-house zone with lever station and two doors; convergence terminal zone with joint-goal platform; wet concrete, steel rails and water light bands, industrial palette

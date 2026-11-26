@@ -1,0 +1,6 @@
+# G050_aftermath_holdout / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G050_scene_001: Earthquake-damaged small community courtyard at dusk: two-story brick shelter with tarped roof, campfire, sandbag gate, ration shelves and a communal dining table, dust-grey palette with firelight, stylized semi-realistic, game-ready 3D scene

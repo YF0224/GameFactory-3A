@@ -1,0 +1,6 @@
+# G007_crystal_probe_run / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G007_scene_001: Interior of a giant translucent crystal seen at micro scale: vast indigo crystal cavern with layered floating hexagonal pillars along both sides, glowing cyan energy veins running through floor and walls, drifting luminous dust motes, a clean open vertical corridor in the center for bullet-hell gameplay, deep parallax fading to dark blue, stylized sci-fi mood consistent with the reference image; no text

@@ -1,0 +1,6 @@
+# G027_dune_maze_td / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G027_scene_001: Open 20x20 desert sand field seen from above, west-edge ant burrow mound and east-edge oasis outpost base, three wind-driven sand ridges, dune grass and bleached rocks along the border, harsh noon light

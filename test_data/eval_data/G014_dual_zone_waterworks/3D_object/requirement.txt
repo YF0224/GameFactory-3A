@@ -1,0 +1,12 @@
+# G014_dual_zone_waterworks / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- maintenance_worker: Bipedal waterworks maintenance worker with helmet, safety harness and tool belt, hi-vis orange-and-teal workwear, readable silhouette from side view, reference image provided, single character, Y-up, pivot at feet
+- pressure_plate: Single heavy industrial pressure plate on a grid deck, riveted steel with amber glow ring, visibly sinks when stood on, reference image provided, single object
+- valve_lever: Single tall industrial valve lever on a brass base, handle grip sized for both hands, pulls back visibly, single object
+- linked_gate: Single vertical sluice gate with waterline light band and hydraulic rails, opens upward, readable open/closed states, single object
+- shared_checkpoint_lamp: Single inspection checkpoint lamp post with a shared-progress lamp column that lights up when passed, state shown by material, single object
+- rush_riverbank_module: Single rush-rapids riverbank module with jagged wet concrete edge and hazard-yellow rail, fall-zone boundary prop, single object
+- convergence_goal_platform: Single convergence goal platform with twin beacon lamps that light together for joint win, joint-goal landmark, single object

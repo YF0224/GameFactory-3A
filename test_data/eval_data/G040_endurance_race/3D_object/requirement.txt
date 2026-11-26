@@ -1,0 +1,14 @@
+# G040_endurance_race / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- endurance_car_player: 07 number endurance prototype race car, clean side three-quarter profile, deep teal livery with white sail stripe, enclosed canopy LMP silhouette, four separate wheels with visible axle centers and realistic wheel clearance, no intersecting geometry, single centered vehicle on plain studio background, game-ready PBR, Y-up, pivot at base
+- endurance_car_red_kite: Aggressive endurance race car in crimson red with black kite emblem livery, sharp nose and high rear wing, four separate wheels, same body type as player endurance prototype, game-ready PBR, Y-up, pivot at base
+- endurance_car_albatross: Conservative endurance race car in white-grey with wide albatross wing emblem livery, rounded engine cover and modest rear wing, four separate wheels, same body type as player endurance prototype, game-ready PBR, Y-up, pivot at base
+- endurance_car_gull: Balanced endurance race car in slate blue-grey with white gull emblem livery, mid-height rear wing, four separate wheels, same body type as player endurance prototype, game-ready PBR, Y-up, pivot at base
+- safety_car_lemon: Lemon-yellow race officials safety car per reference image with roof light bar and caution stripes, sturdy sedan silhouette, four separate wheels, game-ready PBR, single object, Y-up, pivot at base
+- pit_building_kit: Coastal pit lane building kit per reference image: modular pit garages with canvas awnings, tire barrier walls and stack, weathered white-steel panels with teal trim, single modular kit, game-ready PBR, Y-up
+- pit_equipment_set: Pit stop equipment set: floor jack, fuel rig with hose, spare tire stack on rack and impact wrench on stand, weathered steel and rubber, game-ready PBR, single kit, Y-up
+- start_light_gantry: Start line light gantry with five red lamp housings on a graphite steel frame, blank lamp panels for runtime material control, game-ready PBR, single object, Y-up
+- podium_stage: Race podium stage with three stepped platforms, sponsor-free blank panels, gold accent trim and confetti-ready top surface, game-ready PBR, single object, Y-up

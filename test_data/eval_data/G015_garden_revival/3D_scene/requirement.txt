@@ -1,0 +1,6 @@
+# G015_garden_revival / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G015_scene_001: Three connected underground garden layers: bright ground-level flower platforms, hanging vine walkways with light wells, dark root-depth caverns with a glowing core; seal gates, glowing crystals, checkpoint lamps and save terminals along the route, bioluminescent palette

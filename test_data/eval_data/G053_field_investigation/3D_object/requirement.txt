@@ -1,0 +1,12 @@
+# G053_field_investigation / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- field_researcher: Original field researcher matching the bound reference image: short dark hair, teal field jacket, sand work pants, brown hiking boots, canvas satchel and brass compass, stylized semi-realistic, T-pose, game-ready, PBR textures
+- ember_tail_fox: Original ember-tail fox matching the bound reference image: layered leaf-flame tail, warm orange and cream body, dark brown paws, restrained tail-tip glow, stylized semi-realistic, game-ready, PBR textures
+- ripple_otter_c03: Original ripple otter matching the bound reference image: paddle tail with ripple grooves, fin-like cheek tufts, river blue and pale teal body with light water droplets, stylized semi-realistic, game-ready, PBR textures
+- thunder_crystal_beast: Original thunder crystal beast matching the bound reference image: low-slung quadruped build, blue-grey crystal rock armor, amber crystal growths, controlled arcing sparks, stylized semi-realistic, game-ready, PBR textures
+- sprout_ear_spirit: Original sprout-eared spirit: small green sprite-like mammal with leaf-bud ears, mossy cape fur, same art style as bound set, distinguishable silhouette at default camera distance, stylized semi-realistic, game-ready, PBR textures
+- cloud_puff_chick: Original cloud-puff chick: round fluffy grey-white hatchling with a small storm-grey crest, same art style as bound set, distinguishable silhouette, stylized semi-realistic, game-ready, PBR textures
+- star_antler_deer: Original star-antler deer: slender electric-affinity deer with faint star-tipped antlers, dusk coat with pale dots, same art style as bound set, stylized semi-realistic, game-ready, PBR textures

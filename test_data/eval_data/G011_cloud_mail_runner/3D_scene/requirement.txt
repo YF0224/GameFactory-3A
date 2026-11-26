@@ -1,0 +1,6 @@
+# G011_cloud_mail_runner / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G011_scene_001: 500-meter finite side-view sky mail route with upper 3m storm-ridge platform route, lower safe cloud-deck route, five checkpoint beacons and a distant lighthouse, drifting sea of clouds below, hand-painted bright palette

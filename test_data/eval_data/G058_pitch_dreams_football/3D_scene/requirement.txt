@@ -1,0 +1,6 @@
+# G058_pitch_dreams_football / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G058_scene_001: Top-down stylized 5v5 community football pitch environment with penalty boxes, center circle, sidelines, bench zone and simple surrounding grass, one coherent game-ready 3D scene, no UI, labels or text

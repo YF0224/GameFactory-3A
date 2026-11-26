@@ -1,0 +1,7 @@
+# G046_storm_isle_survival / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- stone_axe: Primitive stone hand-axe with lashed grey flint head and driftwood handle, stylized cartoon voxel-era look, game-ready, PBR textures
+- signal_bonfire: Driftwood signal bonfire kit: stacked log star pyramid with dry kindling and a small orange signal banner, stylized cartoon, game-ready, PBR textures

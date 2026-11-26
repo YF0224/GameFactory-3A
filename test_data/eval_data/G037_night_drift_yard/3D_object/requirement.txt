@@ -1,0 +1,14 @@
+# G037_night_drift_yard / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- night_drift_car: Compact rear-wheel-drive drift coupe per reference image, dark teal body with amber safety markings, wide track, visible front steering clearance, rain-ready game vehicle, four separate wheels with clear axle centers, game-ready PBR, Y-up, pivot at base
+- freight_cargo_container: Single weathered steel freight cargo container, dark teal and rust panels, closed doors, isolated three-quarter studio view, one object only, no tires, no barriers, no extra props, game-ready PBR, Y-up
+- tire_stack_barrier: Single stack of three used racing tires bound as one tire barrier, isolated three-quarter studio view, plain background, one object only, no container, no concrete, game-ready PBR, Y-up
+- concrete_curb_barrier: Single low concrete road curb barrier with chipped edges and rust stains, isolated three-quarter studio view, one object only, no container, no tires, game-ready PBR, Y-up
+- metal_safety_rail: Single galvanized metal safety rail section with two posts and one horizontal beam, isolated three-quarter studio view, one object only, no container, no tires, game-ready PBR, Y-up
+- yard_street_lamp: Tall port sodium lamp with angled head and rain hood, weathered steel pole with orange-yellow lamp glow, readable silhouette from distance, single object, Y-up
+- yard_wall_section: Corrugated steel yard wall section with top rail and warning stripe, riveted panels with rust streaks, collision boundary piece, single object, Y-up
+- puddle_pool: Shallow rain puddle plane with soft edge falloff, translucent dark water surface with faint orange lamp reflections, flat decal-like mesh for a 4 meter radius zone, Y-up, pivot at center
+- drift_scoreboard: Freestanding yard scoreboard frame with blank magnetic panels and chalk tray, weathered steel and plastic, trackside prop with blank surfaces for runtime numbers, single object, Y-up

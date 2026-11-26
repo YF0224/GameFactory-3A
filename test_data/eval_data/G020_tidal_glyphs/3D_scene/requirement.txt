@@ -1,0 +1,6 @@
+# G020_tidal_glyphs / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G020_scene_001: Tidal ruin interior: a moon-tide antechamber with frescoed walls, a carved inner chamber with moon-phase dials and lamp niches, and a deep seal chamber under a starry domed ceiling, wet stone, faint tide-gold glyph glow, cold teal palette, stylized semi-realistic, game-ready 3D scene

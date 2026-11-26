@@ -1,0 +1,6 @@
+# G021_outpost_assault / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G021_scene_001: Two fixed top-down desert-coast maps: friendly outpost (32x20) with keep, 8 build pads, 6 trap pads; enemy target island (36x22) with core, 6 outer bastions, 2 defense lines and 3 landing points; sand dunes, sea mist and flags

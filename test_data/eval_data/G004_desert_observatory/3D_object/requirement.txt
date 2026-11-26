@@ -1,0 +1,15 @@
+# G004_desert_observatory / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- silent_technician: Wasteland silent technician, lean figure in sand-gold duster coat with rust-copper shoulder plates, weathered visor goggles pushed up, carrying a heavy insulated maintenance gauntlet on the right hand, reference image provided, single character, Y-up, pivot at feet
+- observatory_machine_p1: Colossal desert observatory machine in intact form, bronze mirrored telescope disc head on an armored rotating torso, warning-orange lamp bands, weathered concrete and brass plating, clearly readable silhouette, reference image provided, single object, Y-up, pivot at base
+- observatory_machine_p2: Same desert observatory machine after armor collapse, exposed turning pivot joint as the weak point, torn plating hanging loose, inner gear train visible, more skeletal silhouette than the intact form, reference image provided, single object, Y-up, pivot at base
+- floating_core_crystal: Overloaded floating reactor core crystal, faceted cyan glow shard held in a broken magnetic gimbal ring, emitting hot inner light, single object, no text
+- hall_pillar: Massive weathered concrete hall pillar with brass inlay bands and sand-scoured surface, 12 meters tall, blocks beam lines, single object
+- core_pedestal: Central observatory pedestal, raised bronze-ring platform with cable channels and heat vents, four meters radius, single object
+- armor_debris_plate: Fallen machine armor plate chunk with torn brackets and cooling fins, half-buried in drifted sand, prop for phase-transition debris, single object
+- broken_mirror_panel: Cracked bronze mirror panel from the observatory dome, cloudy reflective surface with sand scratches, leaning against a wall, single object
+- checkpoint_beacon: Small bronze checkpoint beacon pedestal with a cold-blue light column emitter ring, knee height, single object
+- water_well_talisman: Small carved talisman tablet of the oasis settlement wells, sandstone disc with etched wave glyphs, carried charm prop, single object

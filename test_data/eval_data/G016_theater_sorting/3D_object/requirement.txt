@@ -1,0 +1,8 @@
+# G016_theater_sorting / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- sorting_robot: Small boxy vintage warehouse-sorting robot with rounded brass shell, single amber eye lens, tread base, folded maintenance arms, stylized hand-painted low-poly, warm wood and brass palette, readable from top-down camera, original design, game-ready, PBR textures
+- prop_crate: Sturdy vintage theater prop crate with worn plywood panels, rope handles and faded stage labels, one square meter footprint, stylized hand-painted low-poly, warm palette, original design, game-ready, PBR textures
+- goal_marker: Flat brass floor inlay marker ring with a glowing warm-gold disc and stage-light housing, stylized hand-painted low-poly, original design, game-ready, PBR textures

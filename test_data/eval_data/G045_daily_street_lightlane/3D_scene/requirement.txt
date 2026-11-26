@@ -1,0 +1,6 @@
+# G045_daily_street_lightlane / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G045_scene_001: Lantern-lane old town street scene at dusk-to-night: low-poly cartoon residential street with apartment, convenience store, shopping street stalls, riverside park path, back alleys with crates and rooftops reachable by stairs, street lamps turning on one by one, warm evening light, visual shell only

@@ -1,0 +1,11 @@
+# G051_village_lost_found / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- young_postman: Young village postman in green work jacket with rolled canvas mail satchel, cycling cap, cloth shoes, watercolor stylized, warm autumn palette, original design, T-pose, game-ready, PBR textures
+- granny_lin: Kind elderly village granny in shawl and apron, watercolor stylized, warm autumn palette, original design, T-pose, game-ready, PBR textures
+- postmaster: Stout postmaster in green visor cap with rubber stamps at his counter, watercolor stylized, warm autumn palette, original design, T-pose, game-ready, PBR textures
+- traveler_wen: Lanky traveler with wide hat, dust cloak and sealed package, watercolor stylized, warm autumn palette, original design, T-pose, game-ready, PBR textures
+- goose_flock: Plump white village goose with orange bill and a small leg tag, waddling stance, watercolor stylized, original design, game-ready, PBR textures
+- silver_thimble: Worn silver thimble with tiny flower engravings and warm patina, watercolor stylized, original design, game-ready, PBR textures

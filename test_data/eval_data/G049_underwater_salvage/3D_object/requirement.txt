@@ -1,0 +1,10 @@
+# G049_underwater_salvage / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- salvage_diver: Deep-sea salvage diver in a brass-rimmed diving suit with shoulder lamp, tool harness with wrench, small weight belt, stylized semi-realistic, deep-blue palette, original design, T-pose, game-ready, PBR textures
+- support_beam: Corroded science-vessel hull support beam with rivet lines and barnacle crust, about 2 meters, stylized semi-realistic, game-ready, PBR textures
+- core_module: Sealed cylindrical core module with glass gauge window, cable stubs and warning plates, partially silted, stylized semi-realistic, game-ready, PBR textures
+- air_post: Seafloor emergency air post: anchored stand with hose coupler, pressure dial and soft glow marker lamp, stylized semi-realistic, game-ready, PBR textures
+- voyage_recorder: Sealed bronze voyage-recorder unit with a glass gauge window, coiled cable stubs, mounting brackets and barnacle traces, final salvage target P6 depending on P5, matching the bound reference image, stylized semi-realistic, game-ready, PBR textures

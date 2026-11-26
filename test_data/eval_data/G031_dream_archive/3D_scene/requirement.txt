@@ -1,0 +1,8 @@
+# G031_dream_archive / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G031_scene_001: Dream archive normal room seen from above: 10x8 m paper-and-ink reading hall with bookshelf walls, floating dust, brass lamps and scattered scrolls, entry door south and sealed exit north
+- G031_scene_002: Dream archive elite forbidden room seen from above: larger ink-stained reading vault with reinforced shelves, darker pools of ink, broken catalog cards
+- G031_scene_003: Dream archive final core library seen from above: grand central shelf spire with the first-dream scroll glow, ink floor ripples, brass latticework overhead

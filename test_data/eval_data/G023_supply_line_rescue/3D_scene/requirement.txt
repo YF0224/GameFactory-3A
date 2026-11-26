@@ -1,0 +1,6 @@
+# G023_supply_line_rescue / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G023_scene_001: Mountain supply network: base depot at the foot, three frontline outposts up the ridge, four cliffside single-lane segments (60/60/60/90m), two rockfall blockage spots, drifting snow and cloud mist, alpine palette

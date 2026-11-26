@@ -1,0 +1,14 @@
+# G030_polar_night_td / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- hearth_core: Settlement hearth core furnace with glowing ember heart, iron boiler shell and heat pipes, reference image provided, single object
+- generator: Polar settlement steam generator with flywheel and frost-caked exhaust, reference image provided, single object
+- frost_predator: Frost predator beast drawn to heat, shaggy ice-crusted fur and ember-reflecting eyes, reference image provided, single object, Y-up, pivot at base
+- power_pole: Frozen wooden power pole with copper line insulators and snow cap, grid relay prop with visible health, single object
+- arrow_tower: Polar sentry ballista tower with heated wind shield and bolt rack, powered turret, single object
+- slow_tower: Frost-rune slow tower with rime crystal emitters and frost mist vents, powered turret, single object
+- mining_rig: Frozen ore mining rig with drill head, ore hopper and steam vent, powered production device, single object
+- wire_shredder: Cable-shredding rodent swarm beast with gnawing jaws, hunched frost-furred body and copper-wire nest quills, single object, Y-up, pivot at base
+- repair_station: Small frozen repair station with welding tools, spare pole segments and lantern, environment prop, single object

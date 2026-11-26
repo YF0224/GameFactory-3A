@@ -1,0 +1,6 @@
+# G056_garden_minigolf / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G056_scene_001: Floating island garden golf course above a sea of clouds: meadow fairway with petal hedges, gentle slope ramp with a wooden bumper, stepped stone tiers with two boards, drifting cloud sea at the edges, bright spring palette, stylized cartoon, game-ready 3D scene

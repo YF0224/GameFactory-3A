@@ -1,0 +1,6 @@
+# G037_night_drift_yard / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G037_scene_001: Enclosed industrial freight yard at night in steady rain, wet reflective concrete ground, 8 tall sodium lamps cutting light pools, corrugated perimeter walls, scattered cargo containers and tire bundles shaping a 150 by 100 meter drift area, 3 shallow puddles, distant port cranes silhouette, visual shell only

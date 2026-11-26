@@ -1,0 +1,6 @@
+# G016_theater_sorting / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G016_scene_001: Vintage single-screen theater interior at night, empty stage with heavy red curtains, backstage storage corridor and auditorium seats visible in soft spotlight, warm wood and stage-red palette, stylized hand-painted, game-ready 3D scene

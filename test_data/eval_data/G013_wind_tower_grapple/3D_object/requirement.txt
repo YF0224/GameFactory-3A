@@ -1,0 +1,11 @@
+# G013_wind_tower_grapple / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- wind_inspector: Bipedal canyon wind-tower inspector with a compact grapple device on one gauntlet, harness and rope spool at the hip, wind-worn workwear, readable silhouette in third-person view, reference image provided, single character, Y-up, pivot at feet
+- grapple_anchor: Single fixed ring-shaped mechanical anchor for rope connection, weathered steel with a signal-orange rim, readable from 12m, reference image provided, single object
+- checkpoint_flag: Single inspection checkpoint signal post with a raised flag and a signal lamp that can light up when activated, state shown by material, single object
+- tower_top_platform: Single stable standable tower-top finish platform module with railing and a beacon socket, goal landmark at the end of the inspection line, single object
+- wind_gust_marker: Single ground marker band for a gust zone, wind-vane flags along a low rail with directional chevrons, readable wind direction, single object
+- wind_tower: Single tall canyon wind tower with rotor housing and signal lamps, steel-and-rock silhouette, anchor hooks along its maintenance bridge, single object

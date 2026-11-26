@@ -1,0 +1,9 @@
+# G018_portal_freight / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- crate_std: Standard 1x1x1 meter orbital freight crate with brown cargo straps and a large S stencil, sci-fi industrial clean lines, game-ready, PBR textures
+- crate_heavy: Reinforced 1x1x1 meter heavy cargo crate in dark grey armor plating with H stencil and warning stripes, sci-fi industrial, game-ready, PBR textures
+- crate_long: Long 2x1x1 meter blue orbital cargo container with L stencil, grid ribs and end caps, sci-fi industrial, game-ready, PBR textures
+- portal_device: Handheld paired-rift projector device, two elliptical rim pieces, glowing orange and blue energy rims, sci-fi industrial clean design, original, game-ready, PBR textures

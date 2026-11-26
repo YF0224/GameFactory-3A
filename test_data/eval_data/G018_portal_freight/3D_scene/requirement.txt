@@ -1,0 +1,6 @@
+# G018_portal_freight / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G018_scene_001: Orbital freight station cargo bay at night, three connected chambers with white portal-ready wall panels, a trench gap, cargo lift and glow strip lighting, cool white alloy palette with orange-blue accents, game-ready 3D scene

@@ -1,0 +1,8 @@
+# G007_crystal_probe_run / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- probe_craft: Compact micro-scale exploration probe craft based on the reference image: matte white alloy hull with thin gold accent lines, single forward sensor canopy, two small rear thruster nozzles, underside scanning emitter dish; clean sci-fi survey vessel paneling, strictly follow the reference image silhouette and proportions; single object, no text
+- crystal_pillar: Floating hexagonal crystal pillar for a deep indigo crystal-cavern background: translucent blue-violet crystalline material with glowing cyan energy veins, rough matte rock base rising into polished faceted top, subtle gold mineral inclusions; stylized sci-fi mineral, single object, no text
+- vein_pulse_node: Pulsing energy node embedded in crystal rock: rounded geode shell of deep blue crystal with a bright cyan glowing core orb and thin radiating energy filaments, soft emissive rim light, sci-fi mineral-mechanical look; single object, no text

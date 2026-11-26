@@ -1,0 +1,12 @@
+# G015_garden_revival / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- garden_researcher: Bipedal underground garden maintenance researcher with utility backpack, tool gloves and warm-lit helmet lamp, readable silhouette from side view, reference image provided, single character, Y-up, pivot at feet
+- ability_node_pod: Single sealed ability equipment pod with glowing seal ring and openable hatch, three pods recolor per ability, reference image provided, single object
+- sealed_gate_frame: Single tall seal gate frame with three distinct lock symbols (dash slit, double-jump riser, wall-grip claw) shown by relief material, single object
+- photo_crystal: Single floating photosynthesis crystal, glowing faceted gem with vine base, collectible with unique silhouette, single object
+- save_terminal: Single garden record save terminal with green confirm ring and holo panel socket, state shown by material, single object
+- garden_checkpoint_lamp: Single growth checkpoint lamp with plant-stem post and breathing growth light, lights when activated, single object
+- shortcut_door: Single hidden maintenance shortcut door in a mossy wall, slides open with a light band, state shown by geometry, single object

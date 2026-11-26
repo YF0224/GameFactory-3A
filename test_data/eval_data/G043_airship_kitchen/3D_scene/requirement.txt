@@ -1,0 +1,6 @@
+# G043_airship_kitchen / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G043_scene_001: Airship galley kitchen interior scene, 10x6 meter single room with five brass-and-oak workstations along side walls, central double-chef working aisle, porthole windows showing cloud sea and floating islands, warm lamp light, steam vents, visual shell only

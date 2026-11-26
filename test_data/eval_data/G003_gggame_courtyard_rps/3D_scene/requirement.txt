@@ -1,0 +1,6 @@
+# G003_gggame_courtyard_rps / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G003_scene_001: Anime-style courtyard league arena, a four-sided residential courtyard with independent player yards connected by stone paths, low brick walls, wooden benches and potted plants, a central reveal pedestal with rock-paper-scissors totem and lanterns, warm afternoon light, unified brick-red and tile-gray palette

@@ -1,0 +1,14 @@
+# G044_robot_workshop / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- conveyor_splitter_module: Single straight workshop conveyor splitter module: one conveyor belt segment with rollers and one clearly attached dual-output divert gate, isolated three-quarter top-down studio view, plain background, no robot, no loose pallets, no second conveyor, one object only, game-ready PBR, Y-up
+- raw_iron_scrap_chips: Single small pile of raw iron scrap chips on one pallet, isolated three-quarter studio view, no gear, bearing or robot torso, one object only, game-ready PBR, Y-up
+- finished_gear: Single finished steel gear on a small plain pallet, isolated three-quarter studio view, no scrap, bearing or robot torso, one object only, game-ready PBR, Y-up
+- bearing_ring: Single large steel bearing ring on a small plain pallet, isolated three-quarter studio view, no scrap, gear or robot torso, one object only, game-ready PBR, Y-up
+- robot_torso_chassis: Single completed repair-robot torso chassis on one pallet, isolated three-quarter studio view, no loose parts, no conveyor, one object only, game-ready PBR, Y-up
+- mine_chute_node: Wall-mounted ore chute mining node: hoppers with sliding feed channel exiting east onto the grid floor, warning stripes and falling-ore decal, single object, Y-up
+- assembly_bench_station: Workshop assembly bench: steel workbench with clamp arms, small tool rack, input buffer tray and output buffer slot on one side, safe-yellow edge, single object, Y-up
+- delivery_port_station: Workshop delivery port: floor dock with counting pylon, inbound slide rail and outbound crate stack, lit status lamp on pylon, single object, Y-up
+- workshop_order_board: Wall-hanging workshop order board with blank clip tickets on rails and a chalk ledge, association badge plate at top, single object, Y-up

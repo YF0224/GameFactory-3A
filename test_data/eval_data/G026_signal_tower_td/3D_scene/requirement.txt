@@ -1,0 +1,6 @@
+# G026_signal_tower_td / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G026_scene_001: Dry canyon with a single S-shaped wind-carved path (20 tiles) crossing the map, 12 rock build pads along the path, signal relay base at the end, gorge entrance at the start, harsh noon light and drifting sand

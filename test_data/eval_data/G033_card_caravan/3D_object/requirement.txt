@@ -1,0 +1,20 @@
+# G033_card_caravan / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- caravan_leader: Desert caravan leader in an indigo travel robe with sand goggles and a leather card satchel, T-pose, stylized desert caravan adventure style, sand, terracotta and indigo cloth, original design, game-ready, PBR textures
+- sand_bandit: Sand bandit in tan wraps with a curved dagger and small buckler, T-pose, stylized desert caravan adventure style, sand, terracotta and indigo cloth, original design, game-ready, PBR textures
+- bandit_chief: Towering sand bandit chief in bronze scale armor with a heavy two-handed scimitar, T-pose, stylized desert caravan adventure style, sand, terracotta and indigo cloth, original design, game-ready, PBR textures
+- dune_serpent: Colossal dune serpent rising from the sand, armored sandstone scales and a glowing gem crest, non-humanoid, stylized desert caravan adventure style, sand, terracotta and indigo cloth, original design, game-ready, PBR textures
+- card_strike: Single stylized game prop: a quick dagger slash, desert caravan adventure style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_defend: Single stylized game prop: a raised round buckler, desert caravan adventure style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_heavy_strike: Single stylized game prop: a heavy two-handed overhead blow, desert caravan adventure style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_charge_up: Single stylized game prop: a glowing clenched fist gathering power, desert caravan adventure style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_fire_bomb: Single stylized game prop: a thrown flaming clay bomb, desert caravan adventure style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_sandstorm: Single stylized game prop: a swirling sandstorm engulfing a foe, exposing weak spots, desert caravan adventure style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_poison_blade: Single stylized game prop: a dagger dripping green poison, desert caravan adventure style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_iron_wall: Single stylized game prop: a wall of iron shields, desert caravan adventure style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- relic_hourglass: Single stylized game prop: a brass hourglass with glowing sand, desert style, clean silhouette, no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- relic_waterskin: Single stylized game prop: a leather waterskin with turquoise stitching, desert style, clean silhouette, no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- relic_caravan_banner: Single stylized game prop: an indigo caravan banner on a short pole, desert style, clean silhouette, no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.

@@ -1,0 +1,6 @@
+# G050_aftermath_holdout / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- gate_barricade: Reinforced community gate barricade: sandbag line, timber brace frame and a hanging storm lamp, stylized semi-realistic, game-ready, PBR textures

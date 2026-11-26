@@ -1,0 +1,20 @@
+# G045_daily_street_lightlane / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- cat_resident_player: Cat-beastfolk resident player, light-beige fur, teal-green short jacket, deep-blue shorts and orange crossbody satchel, clean symmetrical full-body front-facing T-pose, semi-realistic stylized game character, arms extended, feet visible, plain studio background, one character only, humanoid rig ready, Y-up
+- street_bicycle: Neighborhood bicycle per reference image: orange low-step frame, two dark wheels with clear axle hierarchy, beige front basket and dark saddle, frame-and-wheels relationship readable, game-ready PBR, single object, Y-up, pivot at base
+- apartment_building: Two-story apartment building per reference image: grey-blue main block with exterior corridor and stairs, orange front door, laundry lines and shared garbage spot, collision-friendly blocky silhouette, game-ready PBR, Y-up
+- convenience_store: Neighborhood convenience store per reference image: teal-green awning sign, warm white doors and windows, visible shelves through glass, side parking spot, original branding-free facade, game-ready PBR, Y-up
+- maintenance_toolkit_set: Street maintenance and odd-job toolkit set per reference image: toolbox, broom, trash picker, folded crate and small lost-item pouch props, everyday readable silhouettes, single kit, game-ready PBR, Y-up
+- npc_housekeeper_neighbor: Friendly middle-aged neighbor with housework apron, cloth headwrap and small cleaning caddy in hand, sturdy everyday silhouette distinguishable from player, stylized low-poly, single character, Y-up, pivot at base, humanoid rig ready
+- npc_curious_neighbor: Young curious neighbor leaning slightly forward with round glasses and a shoulder satchel, energetic posture distinguishable from player, stylized low-poly, single character, Y-up, pivot at base, humanoid rig ready
+- npc_stroll_partner: Retired strolling elder with light windbreaker and walking cane, relaxed friendly posture distinguishable from player, stylized low-poly, single character, Y-up, pivot at base, humanoid rig ready
+- npc_illustrator: Young illustrator with beret, sketchbook under one arm and ink-stained fingerless gloves, thoughtful posture distinguishable from player, stylized low-poly, single character, Y-up, pivot at base, humanoid rig ready
+- npc_landlord: Stern but kind landlord with buttoned vest, ledger book in hand and key ring at belt, composed posture distinguishable from player, stylized low-poly, single character, Y-up, pivot at base, humanoid rig ready
+- npc_store_clerk: Convenience store clerk with striped apron, small name badge and handheld scanner pouch, welcoming posture distinguishable from player, stylized low-poly, single character, Y-up, pivot at base, humanoid rig ready
+- environment_delivery_car: Small old-town box delivery van with rounded cab, two visible axles and blank side panels, environment traffic only not player drivable, game-ready PBR, single object, Y-up, pivot at base
+- street_lamp_post: Old-style street lamp post with warm lantern head and blank runtime-lit panel, curved arm and cast base, night lane landmark, game-ready PBR, single object, Y-up
+- riverside_park_bench: Wooden riverside park bench with slat backrest and armrests on small stone pads, rest interaction landmark, game-ready PBR, single object, Y-up
+- street_vending_machine: Retro neighborhood vending machine with lit front panel, blank branding and coin slot, shopping street fixture, game-ready PBR, single object, Y-up

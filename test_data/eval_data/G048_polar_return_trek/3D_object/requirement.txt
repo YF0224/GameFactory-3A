@@ -1,0 +1,8 @@
+# G048_polar_return_trek / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- polar_observer: Polar station observer in a fur-lined expedition parka with storm hood down, goggles, canvas satchel of data disks, wind-burned cheeks, stylized semi-realistic, ice-white and amber palette, original design, T-pose, game-ready, PBR textures
+- route_flag: Slim expedition route flag: orange pennant on a wire-core stake with ice crusting, stylized semi-realistic, game-ready, PBR textures
+- emergency_shelter: Prefab arctic emergency shelter pod: rounded orange hull, small porch, roof beacon and frost vents, stylized semi-realistic, game-ready, PBR textures

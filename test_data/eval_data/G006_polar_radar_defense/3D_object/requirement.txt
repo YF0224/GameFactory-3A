@@ -1,0 +1,14 @@
+# G006_polar_radar_defense / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- corrosion_crawler: Hunched polar corrosion creature, frost-crusted biomechanical flesh with rusted growth plates, low wide stance, glowing pale-blue sensory cluster as the head hitbox, readable limb joints, reference image provided, single creature, Y-up, pivot at feet
+- charger_corrosion_sprinter: Lean sprinting corrosion creature variant, elongated forward-leaning body with elongated limbs for charging, lighter frost plating than the crawler, same pale-blue sensory head cluster and distinct limb hitboxes, single creature, Y-up, pivot at feet
+- radar_core_device: Polar radar station core device, central cylindrical reactor with cyan breathing light ring, frost-plated housing, exposed heat vents that attract corrosion creatures, reference image provided, single object, Y-up, pivot at base
+- service_rifle: Cold-weather service rifle with frost-proof coating, synthetic stock, mid-length barrel, snow-dusted iron sights, first-person usable weapon model, reference image provided, single object
+- ammo_mag_pickup: Standard rifle magazine pickup with faint warm glow ring at its base, half-buried in snow, single object
+- radar_antenna_mast: Rotating radar antenna mast, lattice tower with a slowly spinning radar dish head rimmed with frost, background landmark beyond the field, single object
+- snow_barrier_wall: Low corrugated steel snow barrier wall segment with packed drifts against its base, boundary decoration only, single object
+- guard_lamp_post: Freezing-metal warning lamp post with amber lens, knee-height marker posts around the station, single object
+- fp_gloved_hands: First-person gloved hands pair in arctic mittens with exposed trigger finger, frost-stained parka cuffs, rigged for weapon grip poses, Y-up

@@ -1,0 +1,7 @@
+# G005_broken_realm_echo / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G005_scene_001: Shattered realm ruins field, 52x52 fractured stone floor with 24 solid debris blocks, columns, a bridge with a chained gate, an amber chest, a cyan supply cairn, drifting echo particles and dusk-blue fog, low-poly stylized
+- G005_scene_002: Moonlit outer garden, night blue-purple palette with a moon and moonlight, columns and corridors, warm and cold paper lanterns, a red torii gate, drifting echo particles and a blue return portal, low-poly stylized

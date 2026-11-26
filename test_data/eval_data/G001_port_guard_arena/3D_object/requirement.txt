@@ -1,0 +1,11 @@
+# G001_port_guard_arena / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- guard_trainer: Territory defender trainer, muscular human fighter in worn leather guard uniform with rust-red scarf, reference image provided, single character, Y-up, pivot at feet
+- mechanical_guard: Awakened port defense automaton, heavy rusted steel mech guard with single amber optic lens and shoulder hazard lamp, reference image provided, single character, Y-up, pivot at feet
+- port_container: Weathered shipping container cover prop, rust-red steel panels with hazard stripes, 4m long, closed doors, no text on surfaces
+- dock_crane: Distant port gantry crane silhouette structure, navy-gray lattice steel frame with trolley, static landmark beyond the arena wall, no text
+- training_post: Round wooden training dummy post wrapped in frayed rope with strike marks, 1.6m tall, prop for the arena corner
+- warning_beacon: Industrial rotating warning beacon lamp on a steel pole, amber lens that can glow, 2.5m tall, no text

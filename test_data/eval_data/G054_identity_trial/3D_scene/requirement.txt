@@ -1,0 +1,6 @@
+# G054_identity_trial / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G054_scene_001: Frontier gate interrogation hall at night: round council table, iron braziers with torch light, paper lantern wall, dossier racks and a seal desk, stone-and-timber walls, ink-brush semi-realistic, game-ready 3D scene

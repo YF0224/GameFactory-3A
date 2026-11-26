@@ -1,0 +1,6 @@
+# G051_village_lost_found / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G051_scene_001: Misty morning mountain village: stone post office with wooden sign, dirt lanes, riverside washing stones, reed pond and hill path, warm autumn watercolor palette, stylized, game-ready 3D scene

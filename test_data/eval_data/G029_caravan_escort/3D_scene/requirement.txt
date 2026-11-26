@@ -1,0 +1,8 @@
+# G029_caravan_escort / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G029_scene_001: Plains migration route segment seen from above: open dry grassland with wheel-rut trail, scattered rocks and dried shrubs, light dust haze, morning light
+- G029_scene_002: Canyon migration route segment seen from above: narrow rock canyon with wind-carved walls, scattered boulders and ledge shadows, midday light
+- G029_scene_003: Ferry crossing route segment seen from above: gravel riverbank with drifting ice floes on the water, wooden ferry moored at shallow, dusk light

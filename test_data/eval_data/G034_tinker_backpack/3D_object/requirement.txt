@@ -1,0 +1,22 @@
+# G034_tinker_backpack / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- tinker: Traveling tinker in a leather apron and goggles with a huge patched backpack and tool belt, T-pose, stylized steampunk tinker style, brass, rust, leather and canvas, original design, game-ready, PBR textures
+- wasteland_guard: Humanoid wasteland guard robot with riveted iron plates, a shield arm and a spear arm, T-pose, stylized steampunk tinker style, brass, rust, leather and canvas, original design, game-ready, PBR textures
+- worn_scavenger: Small worn scavenger machine on rusty tracks with a claw arm and a scrap basket, non-humanoid, stylized steampunk tinker style, brass, rust, leather and canvas, original design, game-ready, PBR textures
+- core_queen: Large mechanical queen bee with a glowing reactor core abdomen and brass wings, non-humanoid, stylized steampunk tinker style, brass, rust, leather and canvas, original design, game-ready, PBR textures
+- item_wrench: Single stylized game prop: a steel wrench, vertical, steampunk tinker style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- item_hammer: Single stylized game prop: a claw hammer lying horizontally, steampunk tinker style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- item_lantern: Single stylized game prop: a brass oil lantern, steampunk tinker style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- item_tape_measure: Single stylized game prop: a small tape measure, steampunk tinker style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- item_cloth_pouch: Single stylized game prop: a patched cloth pouch, steampunk tinker style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- item_gear: Single stylized game prop: a brass gear, steampunk tinker style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- item_oil_can: Single stylized game prop: a small oil can with a long spout, steampunk tinker style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- item_battery: Single stylized game prop: a glowing glass battery cell, steampunk tinker style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_spin_strike: Single stylized game prop: a wrench spinning into an enemy, steampunk tinker style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_heavy_hammer: Single stylized game prop: a hammer smashing down, steampunk tinker style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_flash: Single stylized game prop: a lantern blasting blinding light, steampunk tinker style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_measure: Single stylized game prop: a tape measure whipping out, steampunk tinker style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_stow: Single stylized game prop: a pouch absorbing a blow, steampunk tinker style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.

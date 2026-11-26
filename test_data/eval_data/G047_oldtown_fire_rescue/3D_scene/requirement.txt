@@ -1,0 +1,6 @@
+# G047_oldtown_fire_rescue / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G047_scene_001: Rainy night old-town street with a burning two-story timber-and-brick shop house, cracked signboard, hydrant and wet cobblestones reflecting fire light, ember-orange against charcoal, stylized semi-realistic, game-ready 3D scene

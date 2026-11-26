@@ -1,0 +1,15 @@
+# G010_orbital_extraction / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- patrol_guard: Orbital station security patrol unit, white EVA-style pressure suit with dark visor and orange waist panels, reference image provided, single character, Y-up, pivot at feet, no flag or commercial markings
+- elite_guard: Heavy powered-armor elite guard, gunmetal black plating with glowing red visor, reference image provided, single character, Y-up, pivot at feet
+- core_vault_workbench: Single freestanding sci-fi industrial workbench: one rectangular brushed-metal top, four clearly separated cylindrical pylon legs, small cyan control ring, centered three-quarter studio view, plain background, no room, no walls, no floor layout, one object only
+- storage_cabinet: Orbital station storage locker cabinet, polymer gray-blue panel with warning stripe and sliding door, 2m tall, no text on surfaces
+- airlock_pod: Orbital airlock escape pod hatch with circular door frame, status lamps and handrails, industrial bulkhead style, no text
+- maintenance_well: Floor maintenance well extraction hatch with recessed ladder ring and amber caution ring, single mechanism object, no text
+- orbital_rifle: Compact sci-fi carbine rifle with holographic sight and polymer stock, first-person viewmodel proportions, no text
+- door_keycard: Slim keycard with chip window and frosted translucent shell, collectible pickup scale, blank surfaces without text
+- ammo_pickup: Magazine ammo pickup crate with open lid and brass rounds visible, small glowing rim, no text
+- sample_canister: Sealed sample canister with purple glowing core window and clamp brackets, tier-4 loot scale, no text

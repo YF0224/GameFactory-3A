@@ -1,0 +1,10 @@
+# G009_blackout_stealth / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- infiltrator: Archive infiltrator in matte-black tactical stealth suit with hood and face mask, utility belt pouches, reference image provided, single character, Y-up, pivot at feet
+- patrol_guard: Archive facility security guard in navy uniform and cap, utility belt, holstered flashlight, single full-body character, front-facing T-pose reference, plain studio background, no extra people, Y-up, pivot at feet
+- archive_case: Classified archive dossier case, brushed steel box with latch and frosted tag slot, blank surfaces without text, pickup scale
+- decoy_thrower: Compact noisemaker decoy device, palm-sized cylinder with timer button and speaker grille, no text
+- cover_cabinet_set: Row of tall steel archive cabinets serving as high cover, 2m tall with recessed handles and vent slits, no text

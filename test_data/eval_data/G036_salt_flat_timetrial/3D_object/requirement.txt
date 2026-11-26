@@ -1,0 +1,11 @@
+# G036_salt_flat_timetrial / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- salt_flat_prototype_car: Enclosed low-center-of-gravity salt-flat prototype test car, clean side three-quarter profile, graphite panels with restrained orange bands, four separate wheels outside the body with visible axle centers and clearance, wheels not intersecting chassis, single centered vehicle on plain studio background, game-ready PBR, Y-up, pivot at base
+- checkpoint_gate_kit: Modular telemetry checkpoint arch per reference image, graphite industrial frame with cyan lamp band and orange safety stripes, blank panel for runtime numbers, single arch module for 8 instanced gates, game-ready PBR, Y-up
+- telemetry_station: Tall survey telemetry tower with wind-load lattice mast, beacon lamp on top and instrument cabin at base, weathered graphite steel and pale panels, single object, Y-up, pivot at base
+- salt_crystal_rock: Crystallized salt rock formation with pale translucent crystal clusters on a weathered white base, low-poly readable silhouette as trackside landmark, single object, Y-up
+- wind_sock_set: Pole-mounted orange-and-white striped wind sock with pivot ring, simple cloth cone readable from distance, single object set of one pole and sock, Y-up
+- maintenance_shed: Small canvas maintenance shed with steel tube frame, tool rack and tire stack visible, weathered off-white fabric and graphite frame, single object, Y-up

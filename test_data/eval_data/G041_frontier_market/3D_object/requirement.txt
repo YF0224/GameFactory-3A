@@ -1,0 +1,14 @@
+# G041_frontier_market / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- frontier_market_stall_kit: Frontier market stall kit per reference image: four wooden display shelves, one wooden counter and a beige canvas awning, weathered timber with clay-orange trim and caravan-teal cloth, single modular kit, game-ready PBR, Y-up
+- frontier_herb_jars: Single wooden tray holding one small bundle of frontier herb jars, arranged as one compact prop, plain studio background, no pots, blankets, sacks, people or stall, one object only, game-ready PBR, Y-up
+- frontier_clay_pot: Single hand-painted frontier clay storage pot with lid, isolated three-quarter studio view, plain studio background, one object only, game-ready PBR, Y-up
+- frontier_wool_blanket: Single folded coarse-wool frontier blanket tied with one cord, isolated three-quarter studio view, plain studio background, one object only, game-ready PBR, Y-up
+- frontier_spice_sack: Single small frontier spice sack with stitched top and one hanging tag with no writing, isolated three-quarter studio view, plain studio background, one object only, game-ready PBR, Y-up
+- stall_vendor_character: Young frontier stall keeper, short dark hair with head scarf, layered earth-tone trade coat with caravan-teal sash, coin pouch at belt, friendly standing idle posture, stylized low-poly readable silhouette, single character, Y-up, pivot at base
+- market_customer_npc: Borderland traveler customer NPC, hooded dusty cloak over walking clothes with backpack frame, neutral browsing pose, same body type recolorable for crowd variants, stylized low-poly, single character, Y-up, pivot at base
+- frontier_signpost: Weathered wooden frontier pass signpost with blank arrow planks at two heights and carved rope motifs, marking the customer trail entrance, single object, Y-up
+- caravan_flag_pole: Pole-mounted caravan banner with teal pennant and tassel, cloth shape readable from top-down 45 degree view, raised and lowered states achievable via pivot, single object, Y-up

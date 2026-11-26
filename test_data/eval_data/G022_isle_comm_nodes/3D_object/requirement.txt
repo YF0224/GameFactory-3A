@@ -1,0 +1,10 @@
+# G022_isle_comm_nodes / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- sentry_guard: Bipedal link-sentry guard with tower shield and short spear, reed-woven armor over iron plating, readable top-down silhouette, reference image provided, single character, Y-up, pivot at feet
+- meadow_ranger: Bipedal meadow ranger scout with long bow and light cloak, woven grass accents, readable top-down silhouette, reference image provided, single character, Y-up, pivot at feet
+- signal_medic: Bipedal signal-field medic with relay satchel and beacon staff, light armor with glowing blue trim, readable top-down silhouette, single character, Y-up, pivot at feet
+- comm_relay_node: Single floating-island communication relay node: stone plinth with relay tower, beacon lamp and changeable faction flag, ownership readable from color, single object
+- tall_grass_tile: Single tall-grass concealment tile module, dense reed cluster on a rock base, readable boundary from top view, single object

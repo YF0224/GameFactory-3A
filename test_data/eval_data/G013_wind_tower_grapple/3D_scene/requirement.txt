@@ -1,0 +1,6 @@
+# G013_wind_tower_grapple / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G013_scene_001: Single canyon inspection line with three sections (teaching cliff, long-swing gust gap, precision-landing tower cluster), ring anchors between towers, four checkpoint signal posts, gust-zone ground markers, cloud-mist fall zone at the canyon bottom, realistic stylized palette

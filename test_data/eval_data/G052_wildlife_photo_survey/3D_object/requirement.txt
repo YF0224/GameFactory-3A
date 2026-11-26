@@ -1,0 +1,9 @@
+# G052_wildlife_photo_survey / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- wildlife_surveyor: Wildlife surveyor in olive field vest with lens pouch, wide-brim hat, camera with long strap, watercolor stylized, wetland green palette, original design, T-pose, game-ready, PBR textures
+- egret_heron: Slender white marsh egret with black leg line and yellow bill, alert foraging pose, stylized realistic, original design, game-ready, PBR textures
+- reed_warbler: Tiny warm-brown reed warbler perched gripping a reed stem, head tilted mid-song, stylized realistic, original design, game-ready, PBR textures
+- ripple_otter: Curious river otter with slick brown fur resting on a stone bank, whiskers raised, stylized realistic, original design, game-ready, PBR textures

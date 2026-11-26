@@ -1,0 +1,6 @@
+# G036_salt_flat_timetrial / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G036_scene_001: Bright daytime white salt-flat proving ground, 4 km closed loop of compacted salt板 main line with matte white sheen, a shorter loose salt-crystal outer line, 8 telemetry gate spots, survey tower and maintenance sheds on the horizon, low mountains far away, harsh noon light, visual shell only

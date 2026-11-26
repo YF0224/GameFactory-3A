@@ -1,0 +1,13 @@
+# G042_highland_seed_farm / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- highland_leafy_green_crop: Single mature highland leafy-green crop plant in a small soil plug, isolated three-quarter studio view, one plant only, no growth-stage sheet, no other crops, game-ready PBR, Y-up
+- highland_potato_crop: Single mature highland potato plant with visible soil mound and a few leaves, isolated three-quarter studio view, one plant only, no growth-stage sheet, no other crops, game-ready PBR, Y-up
+- highland_cold_flower_crop: Single mature hardy highland cold-flower plant in a small soil plug, isolated three-quarter studio view, one plant only, no growth-stage sheet, no other crops, game-ready PBR, Y-up
+- seed_station_counter: Wooden highland seed station counter per reference image with seed sack bins, hand watering can, small harvest sickle and cloth sacks, weathered timber with teal trim, game-ready PBR, Y-up
+- highland_soil_tile: Single highland furrow soil plot tile, moist brown tilled earth with ridge lines and small stone edging, flat readable from 45 degree view for grid tiling, game-ready PBR, Y-up
+- rain_water_barrel: Wooden highland rain collection barrel with ladle resting on rim and small tap, water source for manual watering, single object, Y-up
+- prayer_flag_line: Colored prayer flag line strung between two weathered wooden posts, five small cloth flags with simple nature motifs, ridge-line ambience kit, single kit, Y-up
+- harvest_basket: Woven highland harvest basket with carrying strap and a few loose produce pieces, delivery and sale container, single object, Y-up

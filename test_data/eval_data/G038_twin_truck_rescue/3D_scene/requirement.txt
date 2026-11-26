@@ -1,0 +1,6 @@
+# G038_twin_truck_rescue / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G038_scene_001: Mountain valley rescue route at overcast morning, staging camp at the foot with a stalled supply van, a long safe river road and a shorter narrow canyon shortcut with three fresh rockfall piles, checkpoint marker posts every 200 meters, delivery relay station over the pass, wind-carved rock walls, visual shell only

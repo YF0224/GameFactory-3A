@@ -1,0 +1,8 @@
+# G059_observatory_pinball / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- star_pinball: Chrome-and-pearl pinball with tiny embedded star flecks, clean brass-era look, game-ready, PBR textures
+- planet_target_bank: Brass pinball target bank of three domed planet medallions on a curved rail with lamp sockets, brass-and-starlight look, game-ready, PBR textures
+- brass_flipper_pair: Pair of brass-capped pinball flipper assemblies with pivot pins and spring mounts, brass-era look, game-ready, PBR textures

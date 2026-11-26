@@ -1,0 +1,6 @@
+# G024_station_infection / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G024_scene_001: Single-level closed ecological station: corridor spine plus public cultivation bay, six-slot isolation pod rack at one end, patrol walkways, ventilation glow and plant racks, clean lab palette with bioluminescent accents

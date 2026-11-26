@@ -1,0 +1,14 @@
+# G038_twin_truck_rescue / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- tractor_truck_a: Orange-white mountain rescue winch tractor per reference image, enclosed cab, heavy front bumper, rear winch drum and guide fairlead, no cargo bed, separate wheel nodes with clear axles, game-ready PBR, Y-up, pivot at base
+- recovery_truck_b: Yellow-grey mountain recovery truck per reference image, enclosed cab, open cargo bed with tie-down points, side-mounted rock drill rack and warning beacons, separate wheel nodes, game-ready PBR, Y-up, pivot at base
+- supply_crate_set: Rugged rescue supply crate per reference image, reinforced canvas wrap with corner protectors and stencil-free ID plate, one consistent crate for 8 instanced items, game-ready PBR, Y-up
+- trapped_supply_vehicle: Stalled mountain supply van with roof cargo rack and tilted flat tire, weathered blue-grey delivery body, tow hook points front and rear, single object, game-ready PBR, Y-up, pivot at base
+- winch_cable_unit: Heavy vehicle winch unit with steel drum, guide fairlead and hook latch, mount bracket at rear, industrial orange and graphite finish, single object, Y-up
+- rockfall_pile: Fresh rockfall pile blocking a mountain road, mixed fractured boulders and scree with dust patches, readable blocking silhouette for a road segment, single object, Y-up
+- delivery_station: Mountain pass delivery relay station with cargo ramp, lamp masts and covered intake desk, timber and steel construction with orange trim, single object, Y-up
+- checkpoint_marker: Roadside recovery checkpoint marker post with orange reflector band and small flag, lightweight steel pole, readable at distance, single object, Y-up
+- mountain_signpost: Bent steel mountain warning signpost with blank chevron panel and rockfall hazard plate, weathered yellow-black paint, single object, Y-up

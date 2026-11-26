@@ -1,0 +1,6 @@
+# G055_inner_court_investigation / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G055_scene_001: Original stylized ancient palace night quarter: vermilion columns, indigo eaves, paper lantern rows, screen corridors, rain slick courtyard stones and a secret passage mouth behind a wall panel, write-realist stylized, game-ready 3D scene

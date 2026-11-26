@@ -1,0 +1,6 @@
+# G010_orbital_extraction / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G010_scene_001: Orbital research station interior, linear three-section layout from airlock chamber through lab modules to the dim pressurized deep zone, portholes showing Earth, emergency red lights in deep zone, industrial corridors with frost pipes

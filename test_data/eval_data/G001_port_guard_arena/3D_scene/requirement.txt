@@ -1,0 +1,6 @@
+# G001_port_guard_arena / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G001_scene_001: Abandoned seaport training arena, 40x40 meter walled yard centered at origin, shipping container covers on four sides, gantry crane silhouettes beyond the walls, sea fog and dusk lighting

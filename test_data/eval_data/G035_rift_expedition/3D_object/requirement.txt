@@ -1,0 +1,27 @@
+# G035_rift_expedition / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- rift_explorer: Rift explorer in a sealed teal exosuit with a cracked visor and a crystal-tipped staff, T-pose, stylized alien sci-fi style, violet crystal and teal bioluminescence, original design, game-ready, PBR textures
+- rift_stalker: Tall bipedal alien rift stalker with violet crystal growths and blade-like forearms, T-pose, stylized alien sci-fi style, violet crystal and teal bioluminescence, original design, game-ready, PBR textures
+- exchange_merchant: Hooded four-armed alien merchant with a trade satchel and hanging crystal coins, T-pose, stylized alien sci-fi style, violet crystal and teal bioluminescence, original design, game-ready, PBR textures
+- rim_critter: Small spiky alien rim critter with a glowing teal shell, non-humanoid, stylized alien sci-fi style, violet crystal and teal bioluminescence, original design, game-ready, PBR textures
+- core_leviathan: Massive crystalline leviathan emerging from a rift core, many glowing eyes, non-humanoid, stylized alien sci-fi style, violet crystal and teal bioluminescence, original design, game-ready, PBR textures
+- save_stone: Glowing monolith save stone with rotating rune rings, stylized alien sci-fi style, violet crystal and teal bioluminescence, original design, game-ready, PBR textures
+- ore_crack: Glowing ore crack in the ground with violet crystal shards, stylized alien sci-fi style, violet crystal and teal bioluminescence, original design, game-ready, PBR textures
+- damaged_supply_cache: Damaged supply cache crate with leaking purple contamination, stylized alien sci-fi style, violet crystal and teal bioluminescence, original design, game-ready, PBR textures
+- card_strike: Single stylized game prop: a staff strike, alien sci-fi style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_defend: Single stylized game prop: a raised energy barrier, alien sci-fi style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_power_strike: Single stylized game prop: a crystal-charged smash, alien sci-fi style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_bulwark: Single stylized game prop: a thick crystal wall, alien sci-fi style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_energize: Single stylized game prop: energy surging into the explorer, alien sci-fi style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- card_burn_shell: Single stylized game prop: a burning shell leaving toxic fumes, alien sci-fi style no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- node_battle: Single stylized game prop: crossed blades, alien sci-fi style, round badge, clean silhouette, no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- node_battle_rich: Single stylized game prop: crossed blades with a gem, alien sci-fi style, round badge, clean silhouette, no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- node_gamble: Single stylized game prop: a glowing ore crack with dice, alien sci-fi style, round badge, clean silhouette, no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- node_elite: Single stylized game prop: a horned skull, alien sci-fi style, round badge, clean silhouette, no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- node_trader: Single stylized game prop: a merchant's balance, alien sci-fi style, round badge, clean silhouette, no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- node_supply: Single stylized game prop: a cracked crate with purple drip, alien sci-fi style, round badge, clean silhouette, no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- node_boss: Single stylized game prop: a large crystal eye, alien sci-fi style, round badge, clean silhouette, no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.
+- node_save_stone: Single stylized game prop: a monolith with runes, alien sci-fi style, round badge, clean silhouette, no text. One asset only, centered three-quarter studio view, no card frame, no UI, no labels, no text, game-ready PBR.

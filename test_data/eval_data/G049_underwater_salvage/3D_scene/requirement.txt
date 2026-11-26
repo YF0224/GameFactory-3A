@@ -1,0 +1,6 @@
+# G049_underwater_salvage / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G049_scene_001: Sunken science vessel wreck on a shallow shelf: broken outer hull, tilted mid cabin, deep power core chamber with amber lights, emergency air posts, drifting silt and god rays, deep-blue palette, stylized semi-realistic, game-ready 3D scene

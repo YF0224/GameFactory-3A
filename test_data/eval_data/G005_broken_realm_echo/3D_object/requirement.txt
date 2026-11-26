@@ -1,0 +1,20 @@
+# G005_broken_realm_echo / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- echo_hunter: Echo hunter with black hair strands, deep navy wide-sleeved garb, wine-red waistband, blue-grey shoulder wraps, dark legwear, long pale-blue straight blade, two arms two legs, simplified low-poly friendly silhouette, reference image provided, single character, Y-up, pivot at feet
+- melee_echofiend: Humanoid melee fiend in crimson body tones with pale head, four limbs, short straight blade, readable silhouette, reference image provided, single character, Y-up, pivot at feet
+- archer_echofiend: Humanoid archer fiend in blue body tones with pale head, four limbs, golden bow, simplified quiver on the back, reference image provided, single character, Y-up, pivot at feet
+- shield_echofiend: Broad grey humanoid guard with a grey helm and a blue-grey rectangular shield, two arms two legs, stocky silhouette distinct from the archer, reference image provided, single character, Y-up, pivot at feet
+- realm_commander: Larger-than-human commander in wine-red body tones with pale rectangular helm, wide pale-blue greatsword, humanoid four limbs, imposing readable silhouette, simplified armor layering acceptable, reference image provided, single character, Y-up, pivot at feet
+- echo_anchor: Floating purple resonance anchor, a crystal stake pinned into fractured ground with slow swirling shards around it, glowy interaction silhouette, single object
+- treasure_chest: Amber-glowing relic chest with stone shell and blue seal seams, one-time reward chest, single object
+- supply_cairn: Cyan-glowing supply cairn of stacked stones with a small vent light, refill point prop, single object
+- chain_gate: Heavy blue-grey chain stretched across a bridge gap, thick links anchored to stone posts, removable obstacle, single object
+- realm_blade: Long pale-blue straight blade with subtle glow edge and dark grip, player weapon prop, single object
+- bow_echo: Golden longbow with faint resonance string, archer fiend weapon prop, single object
+- shield_slab: Blue-grey rectangular tower shield slab with worn rim, shield fiend prop, single object
+- garden_lantern: Warm paper lantern hanging from a dark wood post, subtle warm-cold glow, courtyard ambience prop, single object
+- torii_gate: Red torii gate of simplified geometry, two pillars and double lintel, night-moon courtyard landmark, single object
+- return_portal: Blue glowing return portal disc set on stone floor, slow ripple ring, scene transition interaction point, single object

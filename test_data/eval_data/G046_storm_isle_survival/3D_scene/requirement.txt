@@ -1,0 +1,6 @@
+# G046_storm_isle_survival / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G046_scene_001: Top-down stylized cartoon voxel storm island environment with southern beach landing, central woodland, northern rock area and storm sea boundary, one coherent game-ready 3D scene, no text

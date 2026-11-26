@@ -1,0 +1,6 @@
+# G017_lighthouse_prism / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G017_scene_001: Top chamber of a seaside lighthouse at dusk, brass mirror arrays on a ring platform, foggy ocean through round windows, warm lamp glow against cool blue mist, stylized hand-painted, game-ready 3D scene

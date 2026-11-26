@@ -1,0 +1,6 @@
+# G052_wildlife_photo_survey / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G052_scene_001: Dawn wetland: reed belts, shallow forage flats, a slow water channel with otter bank dens, three observation blinds, morning mist, green and pale-gold palette, stylized realistic, game-ready 3D scene

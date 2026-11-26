@@ -1,0 +1,9 @@
+# G055_inner_court_investigation / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- shen_zhiwei: Original young court investigator Shen Zhiwei: understated dark-teal commoner robe with faint embroidery, hair in a plain bun with wooden pin, cloth shoes, sharp calm gaze, stylized semi-realistic ancient court style, vermilion-and-indigo palette, T-pose, game-ready, PBR textures
+- evidence_pouch_ash: Small scorched silk incense pouch with charred rim and faint residual ash, tied with a cut thread, ancient court stylized, game-ready, PBR textures
+- rota_manuscript: Hand-bound duty-rota manuscript copy with thread binding holes, brush annotations and half-page tear, ancient court stylized, game-ready, PBR textures
+- seal_wax_imprint: Wax seal imprint fragment on cracked paper with a clear directional fissure pattern and vermilion stamp edge, ancient court stylized, game-ready, PBR textures

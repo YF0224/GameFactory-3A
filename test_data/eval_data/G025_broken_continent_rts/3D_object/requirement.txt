@@ -1,0 +1,35 @@
+# G025_broken_continent_rts / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- h01u_rescue_militia: Rescue militia: full humanoid, rounded closed dark-grey helmet with horizontal amber visor, sand-toned coveralls with teal shoulder guards, dark trousers and boots, teal boxy backpack, dangling repair tool; no ranged weapon upgrade, reference image provided, single character, Y-up, pivot at feet
+- m01_quadruped: Quadruped base machine: low hexagonal pale armored torso, exactly four dark-grey jointed legs with wide triangular feet, single round teal sensor on the front, rectangular folded module on the back, no human face, four-legged silhouette preserved at higher marks, reference image provided, single object
+- x01_observer: Remote observer: slender pear-shaped deep-blue torso, two legs two arms, smooth featureless head with three vertical mint-green sensor dots, asymmetric copper arc sensor rack behind the left shoulder, standing pose only, no flight parts, reference image provided, single character, Y-up, pivot at feet
+- n07_armored_wolf: Swift armored wolf beast: four-legged wolf form with broad head, dark rust-red body, ivory layered mineral armor on shoulders and back, teal-glow flank markings, low long tail; not a bear, dog or mech, armor is appearance only, reference image provided, single object
+- n02_giantcatcher_fish: Giant-catcher aquatic predator fish: streamlined body with strong jaw for anti-titan duty, deep teal upper and pale belly, complete fins, water-movement only, reference image provided, single object
+- n04_swift_flyer: Swift single-headed two-winged flying predator, long wingspan, grey-green body with signal-orange wing tips, readable talons, reference image provided, single object
+- k01_ridge_disaster: Ridge disaster body: colossal moving landmass silhouette with rocky shell and crevasse patterns, teal-green fissure glow, no face and no unit details, collider authored in engine, reference image provided, single object
+- h06u_light_air_transport: Light single-person flight transport rig with sling-load structure, canvas-grey body with amber indicator lamps, no weapon mounts, reference image provided, single character, Y-up, pivot at feet
+- h07u_engineering_vehicle: Compact engineering vehicle with folded crane arm and tool rack, sand-toned armor with teal hatch, no weapon appearance, reference image provided, single object
+- g01_titan_biped_base: Tall bipedal titan base body with layered rock-plated hide and heavy shoulders, base mesh for G01-G05 family derivation via scale and attachments, single object
+- d01_energy_lord_base: Energy lord base humanoid with field-projector gauntlets and flowing cape of light, base mesh for D01-D10 lord family derivation, single character, Y-up, pivot at feet
+- p02_infected_host: Infected fusion base body: humanoid host overgrown with translucent fungal growths and bio-glow veins, hunched, base mesh for P02-P05 fusion family derivation, no gore, single object
+- p06_mycelium_web_tile: Mycelium web tile module: flat fungal network mat with glowing strands, tiling edge for network growth, single object
+- x07_sky_production_platform: Aerial production platform: floating disc base with hangar bays, lift rotors and sensor crown, strategic production structure, single object
+- b01_swarm_dragonfly_base: Swarm insect base unit: sleek chitinous bipedal-insect hybrid drone with thin wings folded at rest, readable low-poly silhouette for B01-B04 family derivation, single object
+- e01_world_editor_core: World editor core: floating faceted obelisk with orbiting terrain shards and energy seams, non-attackable abstract structure, no human features, single object
+- c02_life_exchange_carrier: Life-exchange device carried by C02: lantern-like apparatus with twin vitality chambers and amber conduits, attachable prop with visible charge state, single object
+- h03_field_generator_attachment: Field generator weapon attachment: shoulder-mounted ring emitter with energy coils, attachable to humanoid units, modular accessory, single object
+- s01_salvage_infantry_base: Salvage infantry base body in patchwork armor with mismatched plates and scavenged gear, base mesh for S01-S11 family derivation, single character, Y-up, pivot at feet
+- t02_root_segment: Creeping root segment: thick gnarled root piece with node joints and faint energy veins, extraction node readable, single object
+- m03_production_mother_core: Adaptive machine production mother core: massive immobile hexagonal reactor core with data spires and reconstruction seams, strategic target, single object
+- b05_city_node: Swarm city node: clustered hive spire with link-antenna crown and hanging pods, population-capacity structure, single object
+- t01_expansion_core: Root expansion core: colossal buried heart with concentric growth rings and radiating root crown, non-killable strategic object, single object
+- e02_response_node: Environmental response node: raised dais with sheltering canopy frame and signal lattice, resident-cover structure, single object
+- h11_detector_module: Companion detection module: compact sensor drone attachable to a hero slot, three-lens array with sweep light, modular accessory, single object
+- h03u_aa_launcher_attachment: Anti-air launcher attachment: shoulder-carried quad-tube launcher with radar stub, modular accessory for anti-air infantry, single object
+- h08u_rail_designator_attachment: Long-range rail designator attachment: slender railgun with stabilizer fins and scope, modular accessory for the long-range expert, single object
+- d04_lord_hammer_attachment: Lord heavy hammer attachment: oversized two-handed energy hammer with head capacitor, modular accessory for heavy-strike lords, single object
+- n08_lure_strain: Lure fungal strain: small immobile spore pod with lure-tendril crown and faint mist, abstract seduction effect only, no gore, single object
+- n09_sedentary_vine: Sedentary vine: rooted creeping vine cluster with thorned stems and area-hold posture, terrain-control flora, single object

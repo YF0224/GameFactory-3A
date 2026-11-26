@@ -1,0 +1,6 @@
+# G059_observatory_pinball / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G059_scene_001: Observatory exhibit hall at night housing a single brass star-chart pinball table: tilted playfield with star-rail lamp bands, comet lane and planet orbit targets, deep-blue and brass palette, stylized, game-ready 3D scene

@@ -1,0 +1,10 @@
+# G020_tidal_glyphs / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- glyph_scholar: Field epigrapher with a storm-oil lantern in hand, wide hooded rain cloak over layered expedition gear, satchel of rubbing papers, stylized semi-realistic, cool teal and stone palette, original design, T-pose, game-ready, PBR textures
+- echo_watcher: Tall gaunt humanoid warden silhouette carved of wet stone and faint tide-light, hollow kelp-draped shoulders, glowing tide-gold eyes, non-hostile eerie presence, stylized semi-realistic, original design, game-ready, PBR textures
+- rune_tablet: Rectangular damp stone tablet carved with six abstract tide-glyph slots around a central seal ring, faint golden etched glow, stylized semi-realistic, original design, game-ready, PBR textures
+- seal_altar: Circular deep-stone seal altar with six glyph keyholes, tide-gold channeling grooves and a low central pillar, stylized semi-realistic, original design, game-ready, PBR textures
+- tidal_compass: Antique brass tidal compass with concentric tide-ring engravings, a floating teal-and-gold needle and a moonstone cabochon at its center, matching the bound reference image, stylized semi-realistic, cool teal and tide-gold accents, original design, game-ready, PBR textures

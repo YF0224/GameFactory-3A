@@ -1,0 +1,14 @@
+# G008_dock_beacon_cs / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- attacker_operator: Attacker team operator in rain-soaked tactical gear, rust-orange container accents, compact plate carrier, hooded hardshell with beacon-cyan trim, readable silhouette for first-person and spectate views, reference image provided, single character, Y-up, pivot at feet
+- defender_operator: Defender team operator in anchorage guard gear, rain-night blue and warning-yellow accents, heavier vest with mooring hooks, helmet with short visor, readable silhouette distinct from the attacker, reference image provided, single character, Y-up, pivot at feet
+- data_core_beacon: Portable data-core beacon device, armored casing with a cyan indicator ring and keypad, mountable on objective pedestals, clearly readable interaction silhouette, reference image provided, single object, Y-up, pivot at base
+- pistol_sidearm: Compact service pistol with rain-proof slide serrations, first-person usable weapon model, single object
+- smg_carbine: Short submachine gun with folding grip and suppressor mount, high-rate close-quarters weapon, single object
+- rifle_standard: Standard assault rifle with rail handguard and mid-length barrel, all-round weapon, single object
+- shotgun_breacher: Pump-action shotgun with breaching choke and wide heat guard, close-range heavy impact weapon, single object
+- sniper_rifle: Long sniper rifle with mounted scope, bipod and rain-hooded lens, precision weapon with visible breath-sway when scoped, single object
+- lmg_sustained: Belt-fed light machine gun with deployable bipod and carrying handle, sustained-fire weapon, single object

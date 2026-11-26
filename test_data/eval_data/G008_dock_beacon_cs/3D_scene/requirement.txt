@@ -1,0 +1,6 @@
+# G008_dock_beacon_cs / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G008_scene_001: Storm-night dockyard combat environment with separated attacker and defender yards, three objective yards, central connector, container push lanes, water culvert, wet steel and floodlights; one coherent scene, no split panels, no labels, no text

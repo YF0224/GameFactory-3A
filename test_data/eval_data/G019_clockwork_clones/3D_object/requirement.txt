@@ -1,0 +1,7 @@
+# G019_clockwork_clones / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- apprentice_clockmaker: Young clockmaker apprentice with rolled sleeves, brass goggles on forehead, leather apron with tool loops, stylized semi-realistic, warm brass and walnut palette, original design, T-pose, game-ready, PBR textures
+- chrono_echo_device: Pocket-sized chronograph echo device with unfolding brass gears, glass dial and a faint teal ghost projection cone, stylized, original design, game-ready, PBR textures

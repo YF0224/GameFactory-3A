@@ -1,0 +1,6 @@
+# G032_starport_autobattle / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G032_scene_001: Starport landing deck at night seen from a 3/4 top-down angle, a 6x4 lit tile battle board split into two 3x4 halves, cargo containers and docked shuttles around the edges, neon teal lights, game-ready 3D scene, original design

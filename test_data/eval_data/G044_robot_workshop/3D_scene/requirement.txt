@@ -1,0 +1,6 @@
+# G044_robot_workshop / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G044_scene_001: Rivet-bay repair workshop scene, 12x8 grid floor with painted lane markings, two wall ore chutes on the left edge, hanging lamps, tool wall and rain-streak windows with small-town skyline beyond, clean readable engineering daylight, visual shell only

@@ -1,0 +1,6 @@
+# G039_sky_ring_flight / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G039_scene_001: Floating sky islands above a cloud sea at sunrise, twelve ring gates in three sections: low island-edge rings, a wind valley with drifting stream lines and two rising thermal columns, and narrow high-altitude rings near a lighthouse isle, takeoff deck on the first island cliff, bright painterly sky, visual shell only

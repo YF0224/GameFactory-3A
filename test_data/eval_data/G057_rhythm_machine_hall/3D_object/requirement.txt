@@ -1,0 +1,7 @@
+# G057_rhythm_machine_hall / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- tuner_ling: Original apprentice tuner in brass-trimmed waistcoat over a puffed shirt, gear-buckle shoes, small mallet in hand, stylized brass-and-walnut palette, T-pose, game-ready, PBR textures
+- chime_judgeline: Row of brass chime reeds mounted along a walnut stage lip with small spring hammers and lamp sockets, mechanical music-hall style, game-ready, PBR textures

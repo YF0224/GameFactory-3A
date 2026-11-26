@@ -1,0 +1,8 @@
+# G017_lighthouse_prism / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- brass_mirror: Freestanding brass calibration mirror on a gimbal stand with fine adjustment gears and a glowing swivel frame, stylized hand-painted low-poly, brass and teal palette, original design, game-ready, PBR textures
+- prism_node: Faceted crystal synthesis prism node on a bronze pedestal with two inlet rings and one outlet ring, soft inner glow, stylized hand-pained low-poly, original design, game-ready, PBR textures
+- receiver_lamp: Heavy brass beacon receiver lamp housing with colored glass ring and letter plaque, stylized hand-painted low-poly, original design, game-ready, PBR textures

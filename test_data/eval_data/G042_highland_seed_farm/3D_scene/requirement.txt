@@ -1,0 +1,6 @@
+# G042_highland_seed_farm / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G042_scene_001: Highland plateau seed farm scene, single-screen 4x3 furrow plot field on a terraced slope, wooden seed station counter at lower right, distant ridgeline with prayer-flag lines and sea of clouds, cool daylight, visual shell only

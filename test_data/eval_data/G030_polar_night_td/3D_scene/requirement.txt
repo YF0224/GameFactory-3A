@@ -1,0 +1,6 @@
+# G030_polar_night_td / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G030_scene_001: Polar night settlement seen from above: 24x16 frozen town grid with central glowing hearth core, wooden power lines crossing between buildings, four gate entrances at map edges, aurora band overhead, drifting snow

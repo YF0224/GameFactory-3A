@@ -1,0 +1,6 @@
+# G025_broken_continent_rts / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G025_scene_001: Broken continent RTS map: thirteen randomly stitched terrain regions (titan wastes, energy territory, machine zone, infection zone, disaster path, observation range, ecology zone, link zone, editor zone, exchange zone, dispatch zone, salvage zone, root zone) with faction bases, fog of war, seam conflict bands, drifting dust and disaster trails

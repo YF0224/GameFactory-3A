@@ -1,0 +1,6 @@
+# G006_polar_radar_defense / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G006_scene_001: Polar night defense field, 60x60 meter snowfield centered on a glowing cyan radar core device, four enemy spawn gates on the boundary edges, drifting snow particles, low amber station lamps and radar antenna silhouettes under a dark aurora sky

@@ -1,0 +1,6 @@
+# G041_frontier_market / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G041_scene_001: Frontier rock-pass market stall scene, single-screen layout with four shelf rows, wooden counter, beige awning, customer path from pass trail entrance through browsing area to counter and exit, warm dusty daylight, rocky cliff backdrop, visual shell only

@@ -1,0 +1,11 @@
+# G003_gggame_courtyard_rps / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- gg_master: Cheerful anime-style young man with brown short hair, green short tang-style jacket over cream inner shirt, red waistband with three rock-paper-scissors themed charms, dark wide trousers and brown boots, five-head anime proportions, reference image provided, single character, Y-up, pivot at feet
+- rail_tycoon: Portly well-off tycoon in anime style, curled mustache, black top hat, short tailcoat with pocket-watch chain, striped trousers, heavy rounded silhouette unified to the anime house style, reference image provided, single character, Y-up, pivot at feet
+- rail_gunner: Anime-style schoolgirl with tea-brown short hair and a side hair clip, beige knit vest over white short-sleeve shirt, dark-gray pleated skirt, brown shoes with white loose socks, no dark tights, sport shorts underneath, five-head anime proportions, single character, Y-up, pivot at feet
+- storm_mage: Anime-style wizard with black vertical hair and a beard, blue-and-gold robed outfit, lightning motifs as surface decoration only baked into cloth pattern, no electric effects on body geometry, five-head anime proportions, single character, Y-up, pivot at feet
+- duel_knife: Blunt ceremonial courtyard duel knife with wooden grip and cloth tassel, clearly a game prop rather than a weapon, single object
+- pants_layer_marker: Stylized oversized cartoon pants layer piece in brick-red cloth with white stitching, attachable outer marker for 0-3 pants count display, single object

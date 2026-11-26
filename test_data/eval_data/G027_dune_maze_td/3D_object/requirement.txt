@@ -1,0 +1,11 @@
+# G027_dune_maze_td / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- arrow_tower: Single wooden ballista tower on a sandstone footing, rotating bolt launcher head, desert-bleached planks, top-down readable silhouette, single object
+- sand_barrier: Single rammed-sand plank barrier wall with rope bindings and warning pennant, blocks a one-grid lane, top-down readable silhouette, single object
+- moving_dune: Single wind-driven sand ridge dune occupying one grid tile, crest lines and drifting sand grain flow, distinct from flat ground, single object
+- ant_burrow: Single desert ant burrow mound with dark entry hole and ring of excavated sand, marks the enemy spawn point on the west edge, single object
+- sand_ant: Large desert sand-walker ant with ridged chitin plates and grain-like texture, reference image provided, single object, Y-up, pivot at base
+- outpost_base: Desert oasis outpost base with flag mast, water-pipe inlet and stone footing, reference image provided, top-down readable silhouette, single object

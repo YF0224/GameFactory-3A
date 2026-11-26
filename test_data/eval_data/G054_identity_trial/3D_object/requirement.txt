@@ -1,0 +1,11 @@
+# G054_identity_trial / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- gate_warden: Broad-shouldered frontier gate warden in dark lacquered armor with tally visor, faction-neutral tired night look, ink-brush semi-realistic, torch-orange and stone-grey palette, original design, T-pose, game-ready, PBR textures
+- merchant_shen: Heavyset traveling merchant in layered quilted vest and satchel scales, faction-neutral tired night look, ink-brush semi-realistic, torch-orange and stone-grey palette, original design, T-pose, game-ready, PBR textures
+- herb_woman: Wiry herb woman in patched indigo garb with medicine basket, faction-neutral tired night look, ink-brush semi-realistic, torch-orange and stone-grey palette, original design, T-pose, game-ready, PBR textures
+- vagrant_scholar: Gaunt vagrant scholar in ink-stained robe with worn book satchel, faction-neutral tired night look, ink-brush semi-realistic, torch-orange and stone-grey palette, original design, T-pose, game-ready, PBR textures
+- courier_boy: Lean courier boy in short jacket with courier tablet and straw shoes, faction-neutral tired night look, ink-brush semi-realistic, torch-orange and stone-grey palette, original design, T-pose, game-ready, PBR textures
+- testimony_desk: Hardwood testimony archive desk with stacked dossier shelves, oil lamp and a red seal ink box, ink-brush semi-realistic, game-ready, PBR textures

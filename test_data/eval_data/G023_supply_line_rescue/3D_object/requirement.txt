@@ -1,0 +1,10 @@
+# G023_supply_line_rescue / 3D_object requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- supply_base_depot: Single modular mountain supply-depot building shell with one warehouse volume, one loading dock and one floodlight mast, isolated on a plain studio background, no surrounding landscape, no extra buildings, one object only
+- frontline_outpost: Single modular high-mountain outpost building shell with timber-plated walls, one lookout chimney and one beacon, isolated on a plain studio background, no surrounding landscape, no extra buildings, one object only
+- supply_truck: Single high-mountain supply truck with cargo bed, anti-slip chains and canvas cover, distinct loaded/empty silhouette, single object
+- single_lane_road: Single cliffside single-lane road segment module on retaining posts, one-truck width with passing signal lamp, single object
+- rockfall_blockage: Single rockfall-snow blockage module covering a road, rubble and snow chunks with warning stakes, single object

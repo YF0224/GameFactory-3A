@@ -1,0 +1,6 @@
+# G034_tinker_backpack / 3D_scene requirement
+
+Source of truth: ../general_requirement.txt
+
+Frozen task inputs:
+- G034_scene_001: Rusty wasteland junkyard battle stage, side view framing, piles of scrap and broken machines, a patched tent, dusty orange sky, game-ready 3D scene, original design
