@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """One-click evaluation: every metric of a stage in one run per delivery.
 
-    python scripts_new/evaluate.py --stage 1 --models sol --games 1-20 --engines godot,three_js
-    python scripts_new/evaluate.py --stage 1 --run-dir test_data/outputs/initial_game_gen/kimi_k3/G008_dock_beacon_cs/<run_id>
-    python scripts_new/evaluate.py --stage 1 --models sol --games 1 --list
-    python scripts_new/evaluate.py --stage 3 --models glm --games 8 --run-id <run_id>
+    python scripts/eval/evaluate.py --stage 1 --models sol --games 1-20 --engines godot,three_js
+    python scripts/eval/evaluate.py --stage 1 --run-dir test_data/outputs/initial_game_gen/kimi_k3/G008_dock_beacon_cs/<run_id>
+    python scripts/eval/evaluate.py --stage 1 --models sol --games 1 --list
+    python scripts/eval/evaluate.py --stage 3 --models glm --games 8 --run-id <run_id>
 
 Results: test_data/outputs/eval/{whitebox,refine}/<suite version>__judge-<judge model>/<model dir>/<GameID>/<run_id>/score.json
-Stage 1 scores eight metrics (+ equal-weight total); stage 3 scores mechanic / gamefeel / vfx /
-import as S_c and Cov_c per dimension, no total.
+Stage 1 (whitebox) scores eight metrics (+ equal-weight total); stage 3 (refinement) scores
+mechanic / gamefeel / vfx / import as S_c and Cov_c per dimension, no total.
 Only deliveries that pass the delivery.json contract are evaluated (see intake.py).
 --static-only stops after the source-only judge (no planning, no engine).
 """
@@ -29,7 +29,7 @@ from pipeline.eval.whitebox.paths import read_json
 from pipeline.eval.whitebox.llm import HarnessError
 from pipeline.eval.model_config import EVALUATION_PLANNER_MODEL, CLI_JUDGE_MODEL
 
-STAGE_SUITE = {'1': 'stage1', '3': 'stage3'}
+STAGE_SUITE = {'1': 'whitebox', '3': 'refinement'}
 # Unity OnGUI menus only receive the in-engine input driver's keys with IMGUI forwarding
 # (validated in the Playable re-test on Sol G005); harmless for non-OnGUI games.
 os.environ.setdefault('GAMEFACTORY_UNITY_IMGUI_FORWARD', '1')

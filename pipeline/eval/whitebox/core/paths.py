@@ -5,19 +5,19 @@ import hashlib
 import json
 from pathlib import Path
 
-FRAMEWORK = Path(__file__).resolve().parents[3]
-BENCH = FRAMEWORK.parent
-OUTPUTS = BENCH / 'test_data' / 'outputs'
-SAMPLES = BENCH / 'test_data' / 'test_samples'
+FRAMEWORK = Path(__file__).resolve().parents[4]   # GameFactory-3A/
+OUTPUTS = FRAMEWORK / 'test_data' / 'outputs'
+SAMPLES = FRAMEWORK / 'test_data' / 'test_samples'
+BENCH = FRAMEWORK  # backwards-compat alias used by repair scripts
 
 STAGE_OUTPUT_ROOTS = {
-    'stage1': OUTPUTS / 'initial_game_gen',
-    'stage3': OUTPUTS / 'game_refine',
+    'whitebox': OUTPUTS / 'initial_game_gen',
+    'refinement': OUTPUTS / 'game_refine',
 }
 STAGE3_INPUTS = OUTPUTS / 'game_refine' / 'inputs'
 EVAL_ROOTS = {
-    'stage1': OUTPUTS / 'eval' / 'whitebox',
-    'stage3': OUTPUTS / 'eval' / 'refine',
+    'whitebox': OUTPUTS / 'eval' / 'whitebox',
+    'refinement': OUTPUTS / 'eval' / 'refine',
     'assets': OUTPUTS / 'eval' / 'asset',
 }
 
@@ -49,7 +49,7 @@ def model_dir(model: str) -> str:
 
 
 def run_root(stage: str, model: str, game_id: str, run_id: str) -> Path:
-    """<stage root>/<model dir>/<GameID>/<run_id>/ for both stage1 and stage3."""
+    """<stage root>/<model dir>/<GameID>/<run_id>/ for whitebox and refinement."""
     return STAGE_OUTPUT_ROOTS[stage] / model_dir(model) / game_id / run_id
 
 

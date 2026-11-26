@@ -33,9 +33,47 @@ from . import suites
 from .paths import read_json, write_json
 from ..plan import plan  # used at module level in function signatures
 
-VERSION = 'stage1-pipeline.v1'
+VERSION = 'whitebox-pipeline.v1'
 STEPS = ('prepare', 'static_judge', 'standards', 'plan_tN', 'record_tN', 'evidence_tN', 'evidence_judge_tN', 'score')
 DEFAULT_MODELS = {'planner': EVALUATION_PLANNER_MODEL, 'judge': JUDGE_MODEL}
+REPAIR_ENABLED = os.environ.get('A3GAME_AUTO_REPAIR', '1') != '0'
+
+
+def _try_repair(out: Path, error_msg: str, manifest: dict) -> dict | None:
+    """Try registered repair scripts against a HARNESS_ERROR.
+
+    Returns the repair result dict if a script matched and reported ok=True,
+    or None if no script matched or all failed. Never raises.
+    """
+    if not REPAIR_ENABLED:
+        return None
+    try:
+        from pipeline.eval.repair import modules
+        for key, mod in modules().items():
+            patterns = getattr(mod, 'ERROR_PATTERNS', [])
+            if not any(p in error_msg for p in patterns):
+                continue
+            engines = getattr(mod, 'ENGINES', ['*'])
+            engine = manifest.get('engine', '')
+            if '*' not in engines and engine not in engines:
+                continue
+            try:
+                result = mod.apply(out, manifest=manifest, error=error_msg)
+                repair_log = out / 'repair_log.jsonl'
+                import json as _json
+                with repair_log.open('a', encoding='utf-8') as f:
+                    f.write(_json.dumps({
+                        'script': key,
+                        'error': error_msg[:200],
+                        'result': result,
+                    }, ensure_ascii=False) + '\n')
+                if result.get('ok'):
+                    return result
+            except Exception:  # noqa: BLE001
+                pass
+    except Exception:  # noqa: BLE001
+        pass
+    return None
 
 
 PROJECT_BUDGET_S = float(os.environ.get('A3GAME_PROJECT_BUDGET_S', 3600))
