@@ -1,0 +1,20 @@
+{
+  "game_id": "G043_airship_kitchen",
+  "assets": {
+    "G043_airship_kitchen_obj_011": {
+      "assertions": []
+    },
+    "G043_cg_001": {
+      "assertions": []
+    },
+    "G043_cg_002": {
+      "assertions": []
+    },
+    "G043_cg_003": {
+      "assertions": []
+    },
+    "G043_scene_001": {
+      "assertions": []
+    }
+  }
+}

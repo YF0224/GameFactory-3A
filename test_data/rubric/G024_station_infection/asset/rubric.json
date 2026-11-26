@@ -1,0 +1,23 @@
+{
+  "game_id": "G024_station_infection",
+  "assets": {
+    "G024_cg_001": {
+      "assertions": []
+    },
+    "G024_cg_002": {
+      "assertions": []
+    },
+    "G024_cg_003": {
+      "assertions": []
+    },
+    "G024_scene_001": {
+      "assertions": []
+    },
+    "G024_station_infection_obj_005": {
+      "assertions": []
+    },
+    "G024_station_infection_obj_006": {
+      "assertions": []
+    }
+  }
+}

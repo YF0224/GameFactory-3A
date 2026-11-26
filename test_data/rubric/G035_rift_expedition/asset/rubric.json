@@ -1,0 +1,143 @@
+{
+  "game_id": "G035_rift_expedition",
+  "assets": {
+    "G035_cg_001": {
+      "assertions": []
+    },
+    "G035_cg_002": {
+      "assertions": []
+    },
+    "G035_cg_003": {
+      "assertions": []
+    },
+    "G035_cg_004": {
+      "assertions": []
+    },
+    "G035_mot_001": {
+      "assertions": []
+    },
+    "G035_mot_002": {
+      "assertions": []
+    },
+    "G035_mot_003": {
+      "assertions": []
+    },
+    "G035_mot_004": {
+      "assertions": []
+    },
+    "G035_mot_005": {
+      "assertions": []
+    },
+    "G035_mot_006": {
+      "assertions": []
+    },
+    "G035_mot_007": {
+      "assertions": []
+    },
+    "G035_mot_008": {
+      "assertions": []
+    },
+    "G035_mot_009": {
+      "assertions": []
+    },
+    "G035_mot_010": {
+      "assertions": []
+    },
+    "G035_mot_011": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_009": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_010": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_011": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_012": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_013": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_014": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_015": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_016": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_017": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_018": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_019": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_020": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_021": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_022": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_023": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_024": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_025": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_026": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_027": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_028": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_029": {
+      "assertions": []
+    },
+    "G035_rift_expedition_obj_030": {
+      "assertions": []
+    },
+    "G035_scene_001": {
+      "assertions": []
+    },
+    "G035_scene_002": {
+      "assertions": []
+    },
+    "G035_scene_003": {
+      "assertions": []
+    },
+    "G035_vo_016": {
+      "assertions": []
+    },
+    "G035_vo_017": {
+      "assertions": []
+    },
+    "G035_vo_018": {
+      "assertions": []
+    },
+    "G035_vo_019": {
+      "assertions": []
+    },
+    "G035_vo_020": {
+      "assertions": []
+    },
+    "G035_vo_021": {
+      "assertions": []
+    }
+  }
+}

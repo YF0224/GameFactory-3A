@@ -1,0 +1,5401 @@
+{
+  "game_id": "G042_highland_seed_farm",
+  "mechanic": {
+    "version": "tiered-core-v1",
+    "assertions": [
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C1.01",
+        "table_column": "C1",
+        "assertion": "失败代价与结局表达；玩家身份与当前任务动机",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0006",
+              "text": "- W04 失败代价与结局表达：净利不足＝试验田的木牌被摘下、田垄归于荒草（C03 失败意象）",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            },
+            {
+              "id": "C1.s0007",
+              "text": "达标＝种子站挂牌亮灯、新种入库、云海放晴（C03 胜利意象）。",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            },
+            {
+              "id": "C1.s0005",
+              "text": "- W03 玩家身份与当前任务动机：玩家是种子站的年轻育种员，接手师父留下的一季试验田——在 10 个高原日内把净利做到 500 以上，证明试验田值得保留。",
+              "requirement_ids": [
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务动机"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C1.02",
+        "table_column": "C1",
+        "assertion": "叙事来源；世界与时代背景；场景所在地",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0008",
+              "text": "- W05 叙事来源：三种作物（速生叶菜/高原薯/耐寒花）＝山坳三代育种成果",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0009",
+              "text": "种子站＝师父手植的木架小屋",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0010",
+              "text": "订单＝山谷市集与药铺的预订。全部原创，不用商业作品命名。",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0001",
+              "text": "- W01 世界与时代背景：原创高原世界「云脊高原」——山民世代在陡坡垄田上育种，高原种子站保存着耐寒作物的火种",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            },
+            {
+              "id": "C1.s0002",
+              "text": "一个雨季的收成决定整个山坳的来年。",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            },
+            {
+              "id": "C1.s0003",
+              "text": "- W02 场景所在地：云脊高原半山种子站——12 格垄作梯田、木架种子站柜台、远山云海与经幡",
+              "requirement_ids": [
+                "W02"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "场景所在地"
+            },
+            {
+              "id": "C1.s0004",
+              "text": "雨季云层每日过境。",
+              "requirement_ids": [
+                "W02"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "场景所在地"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C1.03",
+        "table_column": "C1",
+        "assertion": "故事表达方式",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0011",
+              "text": "- W08 故事表达方式：C01 开季交代试验田与目标 → 过程中天气切换与生长阶段表现承载农事节奏 → C03 结算双意象收束",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            },
+            {
+              "id": "C1.s0012",
+              "text": "叙事只做包装不改数值。",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.TC2.01",
+        "table_column": "C2",
+        "assertion": "生长阶段（主机制）：有效操作与状态变化：按 G03 四阶段（含种子态）推进；缺水日停滞不倒退；成熟后停留可待收",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.01",
+              "text": "按 G03 四阶段（含种子态）推进；缺水日停滞不倒退；成熟后停留可待收",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "生长阶段（主机制）：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.TC2.02",
+        "table_column": "C2",
+        "assertion": "生长阶段（主机制）：拒绝与边界：空田浇水无效；同日重复浇水不重复推进；暂停/结算期间生长冻结",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.02",
+              "text": "空田浇水无效；同日重复浇水不重复推进；暂停/结算期间生长冻结",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "生长阶段（主机制）：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.TC2.03",
+        "table_column": "C2",
+        "assertion": "天气：有效操作与状态变化：雨日 → 全田自动视为浇灌并推进生长；晴日 → 需手动浇水",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.03",
+              "text": "雨日 → 全田自动视为浇灌并推进生长；晴日 → 需手动浇水",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "天气：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.TC2.04",
+        "table_column": "C2",
+        "assertion": "天气：拒绝与边界：天气不改作物参数（仅决定是否自动浇灌）；trace 与公布序列偏离即 FAIL",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.04",
+              "text": "天气不改作物参数（仅决定是否自动浇灌）；trace 与公布序列偏离即 FAIL",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "天气：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.TC2.05",
+        "table_column": "C2",
+        "assertion": "限时订单：有效操作与状态变化：按期交付 → 按售价 ×1.5 结算加款并关闭订单；逾期 → 罚 30 并关闭（G04）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.05",
+              "text": "按期交付 → 按售价 ×1.5 结算加款并关闭订单；逾期 → 罚 30 并关闭（G04）",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "限时订单：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.TC2.06",
+        "table_column": "C2",
+        "assertion": "限时订单：拒绝与边界：数量不足交付无效；过期后不可再交付；暂停期间订单计时冻结",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.06",
+              "text": "数量不足交付无效；过期后不可再交付；暂停期间订单计时冻结",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "限时订单：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.TC2.07",
+        "table_column": "C2",
+        "assertion": "出售与季末目标：有效操作与状态变化：出售按 G02 售价加款；季末按 G06 口径结算净利并判定 ≥500",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.07",
+              "text": "出售按 G02 售价加款；季末按 G06 口径结算净利并判定 ≥500",
+              "requirement_ids": [
+                "M04"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "出售与季末目标：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.TC2.08",
+        "table_column": "C2",
+        "assertion": "出售与季末目标：拒绝与边界：资金为负不可达（收入结算先于支出判定）；空背包出售无效",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.08",
+              "text": "资金为负不可达（收入结算先于支出判定）；空背包出售无效",
+              "requirement_ids": [
+                "M04"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "出售与季末目标：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C3.01",
+        "table_column": "C3",
+        "assertion": "角色与物体接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0001",
+              "text": "3d_object/highland_leafy_green_crop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G03"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0002",
+              "text": "3d_object/highland_potato_crop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G03"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0003",
+              "text": "3d_object/highland_cold_flower_crop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G03"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0004",
+              "text": "3d_object/seed_station_counter：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W02"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0005",
+              "text": "3d_object/highland_soil_tile：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "L02"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0006",
+              "text": "3d_object/rain_water_barrel：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "L02",
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0007",
+              "text": "3d_object/prayer_flag_line：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L02",
+                "W02",
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0008",
+              "text": "3d_object/harvest_basket：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "M04"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C3.02",
+        "table_column": "C3",
+        "assertion": "动作占位接口；场景与地标接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0010",
+              "text": "motion/plant_and_harvest：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "motion",
+              "topic": "动作占位接口"
+            },
+            {
+              "id": "C3.s0009",
+              "text": "3d_scene/G042_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L02",
+                "W02"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_scene",
+              "topic": "场景与地标接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C3.03",
+        "table_column": "C3",
+        "assertion": "声音占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0011",
+              "text": "audio/seed_plant：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0012",
+              "text": "audio/water_splash：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0013",
+              "text": "audio/harvest_pickup：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0014",
+              "text": "audio/coin_chime：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0015",
+              "text": "audio/order_alert：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0016",
+              "text": "audio/order_complete：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0017",
+              "text": "audio/day_advance：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0018",
+              "text": "audio/victory_sting：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0019",
+              "text": "audio/defeat_sting：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0020",
+              "text": "audio/highland_wind_loop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0021",
+              "text": "audio/highland_rain_loop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C3.04",
+        "table_column": "C3",
+        "assertion": "演出占位接口；VFX占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0022",
+              "text": "cg_video/开季开垦：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C01"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0023",
+              "text": "cg_video/雨日与生长阶段：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C02"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0024",
+              "text": "cg_video/收获与季末结算：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C03"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0025",
+              "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+              "requirement_ids": [
+                "L04",
+                "F07",
+                "N06"
+              ],
+              "scoring_role": "scored",
+              "system": "vfx",
+              "topic": "VFX占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.Q.01",
+        "table_column": "Q",
+        "assertion": "视角与镜头；画面验收3；画面验收2等4项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0004",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：固定 45° 俯视斜视角，单屏覆盖 12 格垄作区＋种子站柜台",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0005",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头不可旋转缩放",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0006",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：1920×1080 下格上阶段图标不互相遮挡，1280×720 保持可读（I06）。",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0024",
+              "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收3",
+              "topic": "画面验收3"
+            },
+            {
+              "id": "Q.s0023",
+              "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收2",
+              "topic": "画面验收2"
+            },
+            {
+              "id": "Q.s0011",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F07 VFX 信息性与遮挡约束：阶段图标、订单卡、日推进横幅为信息类 VFX，必须清晰可辨",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "Q.s0012",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：雨幕不得遮挡 12 格阶段图标与柜台",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "Q.s0013",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：非结算单个全屏遮挡 ≤0.5 秒。",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.Q.02",
+        "table_column": "Q",
+        "assertion": "环境常驻效果；关键操作镜头变化；视觉风格与色彩材质",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0009",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：高原云海飘移、经幡摆动、种子站炊烟、晴日光斑/雨日檐滴切换",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            },
+            {
+              "id": "Q.s0010",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：均为纯表现层。",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            },
+            {
+              "id": "Q.s0007",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：无镜头运动需求（固定机位）",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0008",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：被操作格子高亮 0.4 秒。",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0001",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：清冷高原农事风",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0002",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝云脊青 #4A7C6F、田垄褐 #7A6248、苗绿 #7FB069、经幡红 #C25B4A",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0003",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质为湿褐垄土、木架、粗布袋与耐寒花瓣。",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.Q.03",
+        "table_column": "Q",
+        "assertion": "绑定原则；参考图辨识；画面验收4等4项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0014",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束农田布局（12 格与柜台位置以本 spec L02 冻结为准）",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定原则"
+            },
+            {
+              "id": "Q.s0015",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定原则"
+            },
+            {
+              "id": "Q.s0026",
+              "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "参考图辨识",
+              "topic": "参考图辨识"
+            },
+            {
+              "id": "Q.s0025",
+              "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收4",
+              "topic": "画面验收4"
+            },
+            {
+              "id": "Q.s0022",
+              "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收1",
+              "topic": "画面验收1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.Q.04",
+        "table_column": "Q",
+        "assertion": "绑定表（文件 → 对象）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0016",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A02 绑定表（文件 → 对象）：",
+              "requirement_ids": [
+                "A02"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0017",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_crop_stage_sheet_sketch.png | 三种作物四阶段组图 | 3D_object image_to_3d |",
+              "requirement_ids": [
+                "A02"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0018",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_seed_station_sketch.png | 种子站柜台与工具组 | 3D_object image_to_3d |",
+              "requirement_ids": [
+                "A02"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0019",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_scene_highland_farm_sketch.png | 云脊高原农田场景 | 3D_scene image_to_scene |",
+              "requirement_ids": [
+                "A02"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0020",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：参考图为程序化概念草图（1024×1024，无文字",
+              "requirement_ids": [
+                "A02"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0021",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。",
+              "requirement_ids": [
+                "A02"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.G.01",
+        "table_column": "G",
+        "assertion": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）；关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）；屏幕震动",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0007",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0008",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 播种 | 格内扬土动画＋种子图标浮出 | seed_plant | 动画收束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0009",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 浇水 | 格内水光涟漪＋土色加深 | water_splash | 涟漪结束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0010",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 雨日开始 | 全屏雨幕＋檐滴 | highland_rain_loop | 雨日结束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0011",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 阶段推进 | 格上阶段图标切换弹跳 | day_advance（推进档） | 图标定格 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0012",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 作物成熟 | 格上成熟图标金框高亮 | harvest_ready | 玩家收获或日推进 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0013",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 收获 | 割取动画＋背包件数滚动 | harvest_pickup | 动画收束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0014",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出售 | 金币弹出＋资金滚动 | coin_chime | 金币动画收束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0015",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 订单按期交付 | 订单卡打勾＋金额结算滚动 | order_complete | 卡片定格 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0016",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 订单到期未交付 | 订单卡红框＋罚款金额滚动 | order_alert | 卡片关闭 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0017",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 日推进 | 「第 N 天·晴/雨」横幅 1.5 秒 | day_advance | 横幅收起 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0018",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 季末达标 | C03 胜利意象＋结算面板 | victory_sting | 进入结算面板 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0019",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 季末未达标 | C03 失败意象＋结算面板 | defeat_sting | 进入结算面板 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0020",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：seed_plant、water_splash、harvest_pickup、coin_chime、order_alert、order_complete、day_advance、victory_sting、defeat_sting",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）"
+            },
+            {
+              "id": "G.s0021",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：环境循环：highland_wind_loop（高原风与鸟鸣）、highland_rain_loop（雨日降雨）。无配音需求。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）"
+            },
+            {
+              "id": "G.s0027",
+              "text": "- F09 屏幕震动：本作无震动需求（农事固定机位）",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "G.s0028",
+              "text": "表现层自由，不设冻结项。",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.G.02",
+        "table_column": "G",
+        "assertion": "音画同步；环境氛围与声音语言",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0022",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：播种音与扬土同帧",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0023",
+              "text": "收获音与割取动画同帧",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0024",
+              "text": "金币音与资金滚动同帧",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0025",
+              "text": "日推进音与横幅同帧",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0026",
+              "text": "订单警报音与红框同帧。",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0003",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：高原风与远处鸟鸣为底",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0004",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言＝播种、浇水、降雨、收获、金币、订单提示、日推进（F06 冻结清单）",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0005",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：混音优先级：订单到期提醒 ＞ 收获/金币 ＞ 浇水/降雨 ＞ 风环境。",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.G.03",
+        "table_column": "G",
+        "assertion": "前端界面；UI 必须显示的状态；输入与延迟",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0029",
+              "text": "- F10 前端界面：标题（开始新季/设置/退出）→ 农事 HUD（I06 全项）→ 订单面板（数量/期限/交付钮）→ 暂停面板（继续/重开/返回）→ 季末结算面板（收入构成/订单达成/种子支出/净利与判定",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0030",
+              "text": "Enter 重开）",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0031",
+              "text": "关键状态图标＋文字并用",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0032",
+              "text": "窗口失焦自动暂停。",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0001",
+              "text": "- I06 UI 必须显示的状态：日期（x/10）、当日天气、资金、背包（按作物分类件数）、订单状态（数量/期限/达成标记）、每格作物阶段图标（种子/发芽/生长/成熟）、本季累计出售收入与种子支出、订单罚金累计。",
+              "requirement_ids": [
+                "I06"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0006",
+              "text": "顿帧不改变计时口径。",
+              "requirement_ids": [
+                "F03"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "输入与延迟"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.G.04",
+        "table_column": "G",
+        "assertion": "交互反馈3；目标物/交互物/场景/UI 对象；交互反馈1等5项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0035",
+              "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈3",
+              "topic": "交互反馈3"
+            },
+            {
+              "id": "G.s0002",
+              "text": "数量与属性以对应 G·M 条目为准。",
+              "requirement_ids": [
+                "L03"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 场景与内容清单 [L01–L04]",
+              "topic": "目标物/交互物/场景/UI 对象"
+            },
+            {
+              "id": "G.s0033",
+              "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈1",
+              "topic": "交互反馈1"
+            },
+            {
+              "id": "G.s0036",
+              "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈4",
+              "topic": "交互反馈4"
+            },
+            {
+              "id": "G.s0034",
+              "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈2",
+              "topic": "交互反馈2"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.P.01",
+        "table_column": "P",
+        "assertion": "运行验收1",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0001",
+              "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收1",
+              "topic": "运行验收1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.P.02",
+        "table_column": "P",
+        "assertion": "运行验收2",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0002",
+              "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收2",
+              "topic": "运行验收2"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.P.03",
+        "table_column": "P",
+        "assertion": "运行验收3",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0003",
+              "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收3",
+              "topic": "运行验收3"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.P.04",
+        "table_column": "P",
+        "assertion": "运行验收4",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0004",
+              "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收4",
+              "topic": "运行验收4"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.CH.01",
+        "table_column": "CH",
+        "assertion": "代码健康诊断",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "CH.s0001",
+              "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0002",
+              "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0003",
+              "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0004",
+              "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "asset_slot": {
+    "version": "core12-v1",
+    "assertions": [
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C1.01",
+        "table_column": "C1",
+        "assertion": "失败代价与结局表达；玩家身份与当前任务动机",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0006",
+              "text": "- W04 失败代价与结局表达：净利不足＝试验田的木牌被摘下、田垄归于荒草（C03 失败意象）",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            },
+            {
+              "id": "C1.s0007",
+              "text": "达标＝种子站挂牌亮灯、新种入库、云海放晴（C03 胜利意象）。",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            },
+            {
+              "id": "C1.s0005",
+              "text": "- W03 玩家身份与当前任务动机：玩家是种子站的年轻育种员，接手师父留下的一季试验田——在 10 个高原日内把净利做到 500 以上，证明试验田值得保留。",
+              "requirement_ids": [
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务动机"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C1.02",
+        "table_column": "C1",
+        "assertion": "叙事来源；世界与时代背景；场景所在地",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0008",
+              "text": "- W05 叙事来源：三种作物（速生叶菜/高原薯/耐寒花）＝山坳三代育种成果",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0009",
+              "text": "种子站＝师父手植的木架小屋",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0010",
+              "text": "订单＝山谷市集与药铺的预订。全部原创，不用商业作品命名。",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0001",
+              "text": "- W01 世界与时代背景：原创高原世界「云脊高原」——山民世代在陡坡垄田上育种，高原种子站保存着耐寒作物的火种",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            },
+            {
+              "id": "C1.s0002",
+              "text": "一个雨季的收成决定整个山坳的来年。",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            },
+            {
+              "id": "C1.s0003",
+              "text": "- W02 场景所在地：云脊高原半山种子站——12 格垄作梯田、木架种子站柜台、远山云海与经幡",
+              "requirement_ids": [
+                "W02"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "场景所在地"
+            },
+            {
+              "id": "C1.s0004",
+              "text": "雨季云层每日过境。",
+              "requirement_ids": [
+                "W02"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "场景所在地"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C1.03",
+        "table_column": "C1",
+        "assertion": "故事表达方式",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0011",
+              "text": "- W08 故事表达方式：C01 开季交代试验田与目标 → 过程中天气切换与生长阶段表现承载农事节奏 → C03 结算双意象收束",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            },
+            {
+              "id": "C1.s0012",
+              "text": "叙事只做包装不改数值。",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.01",
+        "table_column": "C2",
+        "assertion": "生长阶段（主机制）：有效操作与状态变化：按 G03 四阶段（含种子态）推进；缺水日停滞不倒退；成熟后停留可待收",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.01",
+              "text": "按 G03 四阶段（含种子态）推进；缺水日停滞不倒退；成熟后停留可待收",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "生长阶段（主机制）：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.02",
+        "table_column": "C2",
+        "assertion": "生长阶段（主机制）：拒绝与边界：空田浇水无效；同日重复浇水不重复推进；暂停/结算期间生长冻结",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.02",
+              "text": "空田浇水无效；同日重复浇水不重复推进；暂停/结算期间生长冻结",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "生长阶段（主机制）：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.03",
+        "table_column": "C2",
+        "assertion": "天气：有效操作与状态变化：雨日 → 全田自动视为浇灌并推进生长；晴日 → 需手动浇水",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.03",
+              "text": "雨日 → 全田自动视为浇灌并推进生长；晴日 → 需手动浇水",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "天气：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.04",
+        "table_column": "C2",
+        "assertion": "天气：拒绝与边界：天气不改作物参数（仅决定是否自动浇灌）；trace 与公布序列偏离即 FAIL",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.04",
+              "text": "天气不改作物参数（仅决定是否自动浇灌）；trace 与公布序列偏离即 FAIL",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "天气：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.05",
+        "table_column": "C2",
+        "assertion": "限时订单：有效操作与状态变化：按期交付 → 按售价 ×1.5 结算加款并关闭订单；逾期 → 罚 30 并关闭（G04）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.05",
+              "text": "按期交付 → 按售价 ×1.5 结算加款并关闭订单；逾期 → 罚 30 并关闭（G04）",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "限时订单：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.06",
+        "table_column": "C2",
+        "assertion": "限时订单：拒绝与边界：数量不足交付无效；过期后不可再交付；暂停期间订单计时冻结",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.06",
+              "text": "数量不足交付无效；过期后不可再交付；暂停期间订单计时冻结",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "限时订单：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.07",
+        "table_column": "C2",
+        "assertion": "出售与季末目标：有效操作与状态变化：出售按 G02 售价加款；季末按 G06 口径结算净利并判定 ≥500",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.07",
+              "text": "出售按 G02 售价加款；季末按 G06 口径结算净利并判定 ≥500",
+              "requirement_ids": [
+                "M04"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "出售与季末目标：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.08",
+        "table_column": "C2",
+        "assertion": "出售与季末目标：拒绝与边界：资金为负不可达（收入结算先于支出判定）；空背包出售无效",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.08",
+              "text": "资金为负不可达（收入结算先于支出判定）；空背包出售无效",
+              "requirement_ids": [
+                "M04"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "出售与季末目标：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.09",
+        "table_column": "C2",
+        "assertion": "暂停冻结与继续：- S05 失败恢复入口：季末未达标 → 结算显示失败并可一键重开新季（全量重置）；Esc 暂停（模拟冻结）。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.09",
+              "text": "- S05 失败恢复入口：季末未达标 → 结算显示失败并可一键重开新季（全量重置）；Esc 暂停（模拟冻结）。",
+              "requirement_ids": [
+                "S05"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "暂停冻结与继续"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.10",
+        "table_column": "C2",
+        "assertion": "成功终局：- V01 成功条件：第 10 天日终季末净利 ≥500 → 结算判胜（显示收入构成、订单达成、种子支出与净利）。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.10",
+              "text": "- V01 成功条件：第 10 天日终季末净利 ≥500 → 结算判胜（显示收入构成、订单达成、种子支出与净利）。",
+              "requirement_ids": [
+                "V01"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "成功终局"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.11",
+        "table_column": "C2",
+        "assertion": "失败或非失败边界：- V02 失败条件：季末净利 <500 → 结算显示失败（无中途硬失败；作物不腐坏）。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.11",
+              "text": "- V02 失败条件：季末净利 <500 → 结算显示失败（无中途硬失败；作物不腐坏）。",
+              "requirement_ids": [
+                "V02"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "失败或非失败边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.12",
+        "table_column": "C2",
+        "assertion": "原生恢复与重新开始：- V03 恢复语义：季末一键重开新季——农田、天气序列、订单、资金（回初始 200）、背包全部重置（seed 复现）。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.12",
+              "text": "- V03 恢复语义：季末一键重开新季——农田、天气序列、订单、资金（回初始 200）、背包全部重置（seed 复现）。",
+              "requirement_ids": [
+                "V03"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "原生恢复与重新开始"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C3.01",
+        "table_column": "C3",
+        "assertion": "角色与物体接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0001",
+              "text": "3d_object/highland_leafy_green_crop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G03"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0002",
+              "text": "3d_object/highland_potato_crop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G03"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0003",
+              "text": "3d_object/highland_cold_flower_crop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G03"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0004",
+              "text": "3d_object/seed_station_counter：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W02"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0005",
+              "text": "3d_object/highland_soil_tile：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "L02"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0006",
+              "text": "3d_object/rain_water_barrel：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "L02",
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0007",
+              "text": "3d_object/prayer_flag_line：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L02",
+                "W02",
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0008",
+              "text": "3d_object/harvest_basket：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "M04"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C3.02",
+        "table_column": "C3",
+        "assertion": "动作占位接口；场景与地标接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0010",
+              "text": "motion/plant_and_harvest：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "motion",
+              "topic": "动作占位接口"
+            },
+            {
+              "id": "C3.s0009",
+              "text": "3d_scene/G042_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L02",
+                "W02"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_scene",
+              "topic": "场景与地标接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C3.03",
+        "table_column": "C3",
+        "assertion": "声音占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0011",
+              "text": "audio/seed_plant：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0012",
+              "text": "audio/water_splash：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0013",
+              "text": "audio/harvest_pickup：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0014",
+              "text": "audio/coin_chime：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0015",
+              "text": "audio/order_alert：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0016",
+              "text": "audio/order_complete：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0017",
+              "text": "audio/day_advance：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0018",
+              "text": "audio/victory_sting：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0019",
+              "text": "audio/defeat_sting：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0020",
+              "text": "audio/highland_wind_loop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0021",
+              "text": "audio/highland_rain_loop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C3.04",
+        "table_column": "C3",
+        "assertion": "演出占位接口；VFX占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0022",
+              "text": "cg_video/开季开垦：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C01"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0023",
+              "text": "cg_video/雨日与生长阶段：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C02"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0024",
+              "text": "cg_video/收获与季末结算：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C03"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0025",
+              "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+              "requirement_ids": [
+                "L04",
+                "F07",
+                "N06"
+              ],
+              "scoring_role": "scored",
+              "system": "vfx",
+              "topic": "VFX占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.Q.01",
+        "table_column": "Q",
+        "assertion": "视角与镜头；画面验收3；画面验收2等4项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0004",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：固定 45° 俯视斜视角，单屏覆盖 12 格垄作区＋种子站柜台",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0005",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头不可旋转缩放",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0006",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：1920×1080 下格上阶段图标不互相遮挡，1280×720 保持可读（I06）。",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0024",
+              "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收3",
+              "topic": "画面验收3"
+            },
+            {
+              "id": "Q.s0023",
+              "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收2",
+              "topic": "画面验收2"
+            },
+            {
+              "id": "Q.s0011",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F07 VFX 信息性与遮挡约束：阶段图标、订单卡、日推进横幅为信息类 VFX，必须清晰可辨",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "Q.s0012",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：雨幕不得遮挡 12 格阶段图标与柜台",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "Q.s0013",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：非结算单个全屏遮挡 ≤0.5 秒。",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.Q.02",
+        "table_column": "Q",
+        "assertion": "环境常驻效果；关键操作镜头变化；视觉风格与色彩材质",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0009",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：高原云海飘移、经幡摆动、种子站炊烟、晴日光斑/雨日檐滴切换",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            },
+            {
+              "id": "Q.s0010",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：均为纯表现层。",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            },
+            {
+              "id": "Q.s0007",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：无镜头运动需求（固定机位）",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0008",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：被操作格子高亮 0.4 秒。",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0001",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：清冷高原农事风",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0002",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝云脊青 #4A7C6F、田垄褐 #7A6248、苗绿 #7FB069、经幡红 #C25B4A",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0003",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质为湿褐垄土、木架、粗布袋与耐寒花瓣。",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.Q.03",
+        "table_column": "Q",
+        "assertion": "绑定原则；参考图辨识；画面验收4等4项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0014",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束农田布局（12 格与柜台位置以本 spec L02 冻结为准）",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定原则"
+            },
+            {
+              "id": "Q.s0015",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定原则"
+            },
+            {
+              "id": "Q.s0026",
+              "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "参考图辨识",
+              "topic": "参考图辨识"
+            },
+            {
+              "id": "Q.s0025",
+              "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收4",
+              "topic": "画面验收4"
+            },
+            {
+              "id": "Q.s0022",
+              "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收1",
+              "topic": "画面验收1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.Q.04",
+        "table_column": "Q",
+        "assertion": "绑定表（文件 → 对象）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0016",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A02 绑定表（文件 → 对象）：",
+              "requirement_ids": [
+                "A02"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0017",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_crop_stage_sheet_sketch.png | 三种作物四阶段组图 | 3D_object image_to_3d |",
+              "requirement_ids": [
+                "A02"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0018",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_seed_station_sketch.png | 种子站柜台与工具组 | 3D_object image_to_3d |",
+              "requirement_ids": [
+                "A02"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0019",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_scene_highland_farm_sketch.png | 云脊高原农田场景 | 3D_scene image_to_scene |",
+              "requirement_ids": [
+                "A02"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0020",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：参考图为程序化概念草图（1024×1024，无文字",
+              "requirement_ids": [
+                "A02"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0021",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。",
+              "requirement_ids": [
+                "A02"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.G.01",
+        "table_column": "G",
+        "assertion": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）；关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）；屏幕震动",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0007",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0008",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 播种 | 格内扬土动画＋种子图标浮出 | seed_plant | 动画收束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0009",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 浇水 | 格内水光涟漪＋土色加深 | water_splash | 涟漪结束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0010",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 雨日开始 | 全屏雨幕＋檐滴 | highland_rain_loop | 雨日结束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0011",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 阶段推进 | 格上阶段图标切换弹跳 | day_advance（推进档） | 图标定格 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0012",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 作物成熟 | 格上成熟图标金框高亮 | harvest_ready | 玩家收获或日推进 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0013",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 收获 | 割取动画＋背包件数滚动 | harvest_pickup | 动画收束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0014",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出售 | 金币弹出＋资金滚动 | coin_chime | 金币动画收束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0015",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 订单按期交付 | 订单卡打勾＋金额结算滚动 | order_complete | 卡片定格 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0016",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 订单到期未交付 | 订单卡红框＋罚款金额滚动 | order_alert | 卡片关闭 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0017",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 日推进 | 「第 N 天·晴/雨」横幅 1.5 秒 | day_advance | 横幅收起 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0018",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 季末达标 | C03 胜利意象＋结算面板 | victory_sting | 进入结算面板 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0019",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 季末未达标 | C03 失败意象＋结算面板 | defeat_sting | 进入结算面板 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0020",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：seed_plant、water_splash、harvest_pickup、coin_chime、order_alert、order_complete、day_advance、victory_sting、defeat_sting",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）"
+            },
+            {
+              "id": "G.s0021",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：环境循环：highland_wind_loop（高原风与鸟鸣）、highland_rain_loop（雨日降雨）。无配音需求。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）"
+            },
+            {
+              "id": "G.s0027",
+              "text": "- F09 屏幕震动：本作无震动需求（农事固定机位）",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "G.s0028",
+              "text": "表现层自由，不设冻结项。",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.G.02",
+        "table_column": "G",
+        "assertion": "音画同步；环境氛围与声音语言",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0022",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：播种音与扬土同帧",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0023",
+              "text": "收获音与割取动画同帧",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0024",
+              "text": "金币音与资金滚动同帧",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0025",
+              "text": "日推进音与横幅同帧",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0026",
+              "text": "订单警报音与红框同帧。",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0003",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：高原风与远处鸟鸣为底",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0004",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言＝播种、浇水、降雨、收获、金币、订单提示、日推进（F06 冻结清单）",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0005",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：混音优先级：订单到期提醒 ＞ 收获/金币 ＞ 浇水/降雨 ＞ 风环境。",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.G.03",
+        "table_column": "G",
+        "assertion": "前端界面；UI 必须显示的状态；输入与延迟",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0029",
+              "text": "- F10 前端界面：标题（开始新季/设置/退出）→ 农事 HUD（I06 全项）→ 订单面板（数量/期限/交付钮）→ 暂停面板（继续/重开/返回）→ 季末结算面板（收入构成/订单达成/种子支出/净利与判定",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0030",
+              "text": "Enter 重开）",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0031",
+              "text": "关键状态图标＋文字并用",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0032",
+              "text": "窗口失焦自动暂停。",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0001",
+              "text": "- I06 UI 必须显示的状态：日期（x/10）、当日天气、资金、背包（按作物分类件数）、订单状态（数量/期限/达成标记）、每格作物阶段图标（种子/发芽/生长/成熟）、本季累计出售收入与种子支出、订单罚金累计。",
+              "requirement_ids": [
+                "I06"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0006",
+              "text": "顿帧不改变计时口径。",
+              "requirement_ids": [
+                "F03"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "输入与延迟"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.G.04",
+        "table_column": "G",
+        "assertion": "交互反馈3；目标物/交互物/场景/UI 对象；交互反馈1等5项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0035",
+              "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈3",
+              "topic": "交互反馈3"
+            },
+            {
+              "id": "G.s0002",
+              "text": "数量与属性以对应 G·M 条目为准。",
+              "requirement_ids": [
+                "L03"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 场景与内容清单 [L01–L04]",
+              "topic": "目标物/交互物/场景/UI 对象"
+            },
+            {
+              "id": "G.s0033",
+              "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈1",
+              "topic": "交互反馈1"
+            },
+            {
+              "id": "G.s0036",
+              "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈4",
+              "topic": "交互反馈4"
+            },
+            {
+              "id": "G.s0034",
+              "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈2",
+              "topic": "交互反馈2"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.P.01",
+        "table_column": "P",
+        "assertion": "运行验收1",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0001",
+              "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收1",
+              "topic": "运行验收1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.P.02",
+        "table_column": "P",
+        "assertion": "运行验收2",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0002",
+              "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收2",
+              "topic": "运行验收2"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.P.03",
+        "table_column": "P",
+        "assertion": "运行验收3",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0003",
+              "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收3",
+              "topic": "运行验收3"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.P.04",
+        "table_column": "P",
+        "assertion": "运行验收4",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0004",
+              "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收4",
+              "topic": "运行验收4"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.CH.01",
+        "table_column": "CH",
+        "assertion": "代码健康诊断",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "CH.s0001",
+              "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0002",
+              "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0003",
+              "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0004",
+              "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "gameness": {
+    "version": "final",
+    "assertions": [
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C1.01",
+        "table_column": "C1",
+        "assertion": "失败代价与结局表达；玩家身份与当前任务动机",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0006",
+              "text": "- W04 失败代价与结局表达：净利不足＝试验田的木牌被摘下、田垄归于荒草（C03 失败意象）",
+              "requirement_ids": [
+                "W04"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            },
+            {
+              "id": "C1.s0007",
+              "text": "达标＝种子站挂牌亮灯、新种入库、云海放晴（C03 胜利意象）。",
+              "requirement_ids": [
+                "W04"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            },
+            {
+              "id": "C1.s0005",
+              "text": "- W03 玩家身份与当前任务动机：玩家是种子站的年轻育种员，接手师父留下的一季试验田——在 10 个高原日内把净利做到 500 以上，证明试验田值得保留。",
+              "requirement_ids": [
+                "W03"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务动机"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C1.02",
+        "table_column": "C1",
+        "assertion": "叙事来源；世界与时代背景；场景所在地",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0008",
+              "text": "- W05 叙事来源：三种作物（速生叶菜/高原薯/耐寒花）＝山坳三代育种成果",
+              "requirement_ids": [
+                "W05"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0009",
+              "text": "种子站＝师父手植的木架小屋",
+              "requirement_ids": [
+                "W05"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0010",
+              "text": "订单＝山谷市集与药铺的预订。全部原创，不用商业作品命名。",
+              "requirement_ids": [
+                "W05"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0001",
+              "text": "- W01 世界与时代背景：原创高原世界「云脊高原」——山民世代在陡坡垄田上育种，高原种子站保存着耐寒作物的火种",
+              "requirement_ids": [
+                "W01"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            },
+            {
+              "id": "C1.s0002",
+              "text": "一个雨季的收成决定整个山坳的来年。",
+              "requirement_ids": [
+                "W01"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            },
+            {
+              "id": "C1.s0003",
+              "text": "- W02 场景所在地：云脊高原半山种子站——12 格垄作梯田、木架种子站柜台、远山云海与经幡",
+              "requirement_ids": [
+                "W02"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "场景所在地"
+            },
+            {
+              "id": "C1.s0004",
+              "text": "雨季云层每日过境。",
+              "requirement_ids": [
+                "W02"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "场景所在地"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C1.03",
+        "table_column": "C1",
+        "assertion": "故事表达方式",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0011",
+              "text": "- W08 故事表达方式：C01 开季交代试验田与目标 → 过程中天气切换与生长阶段表现承载农事节奏 → C03 结算双意象收束",
+              "requirement_ids": [
+                "W08"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            },
+            {
+              "id": "C1.s0012",
+              "text": "叙事只做包装不改数值。",
+              "requirement_ids": [
+                "W08"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.01",
+        "table_column": "C2",
+        "assertion": "季节时钟与目标 / 季节开始（第 1 天晨）；主菜单",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0012",
+              "text": "input：系统进入（C01 播完或跳过）",
+              "requirement_ids": [
+                "S07"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季节开始（第 1 天晨）"
+            },
+            {
+              "id": "C2.s0013",
+              "text": "precondition：主菜单已完成",
+              "requirement_ids": [
+                "S07"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季节开始（第 1 天晨）"
+            },
+            {
+              "id": "C2.s0014",
+              "text": "state_change：显示第 1 天（日期、天气晴）、12 格空田、种子站柜台与订单面板",
+              "requirement_ids": [
+                "S07"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季节开始（第 1 天晨）"
+            },
+            {
+              "id": "C2.s0015",
+              "text": "next_actions：进入 S08 农事操作",
+              "requirement_ids": [
+                "S07"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季节开始（第 1 天晨）"
+            },
+            {
+              "id": "C2.s0016",
+              "text": "outcome：季节计时（60 模拟秒/日）启动",
+              "requirement_ids": [
+                "S07"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季节开始（第 1 天晨）"
+            },
+            {
+              "id": "C2.s0007",
+              "text": "input：系统启动，玩家点击「开始新季」",
+              "requirement_ids": [
+                "S06"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "主菜单"
+            },
+            {
+              "id": "C2.s0008",
+              "text": "precondition：程序启动完成（C01 可在首次开局前播放）",
+              "requirement_ids": [
+                "S06"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "主菜单"
+            },
+            {
+              "id": "C2.s0009",
+              "text": "state_change：初始化季节状态（资金 200、第 1 天、天气取序列首日、订单 2 张激活、农田全空）",
+              "requirement_ids": [
+                "S06"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "主菜单"
+            },
+            {
+              "id": "C2.s0010",
+              "text": "next_actions：点击「开始新季」→ S07",
+              "requirement_ids": [
+                "S06"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "主菜单"
+            },
+            {
+              "id": "C2.s0011",
+              "text": "outcome：无状态副作用",
+              "requirement_ids": [
+                "S06"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "主菜单"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.02",
+        "table_column": "C2",
+        "assertion": "播种浇水与生长阶段 / 日推进；每日农事阶段（60 模拟秒/日）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0022",
+              "text": "input：系统（60 模拟秒到时自动）",
+              "requirement_ids": [
+                "S09"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "日推进"
+            },
+            {
+              "id": "C2.s0023",
+              "text": "precondition：当日农事阶段结束",
+              "requirement_ids": [
+                "S09"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "日推进"
+            },
+            {
+              "id": "C2.s0024",
+              "text": "state_change：按 G05 模拟步优先级结算——①日期 +1、天气切换为序列次日 ②雨天自动浇灌并推进各格作物生长 ③订单截止判定（到期未交付罚 30 并关闭）④进入次日农事操作窗口",
+              "requirement_ids": [
+                "S09"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "日推进"
+            },
+            {
+              "id": "C2.s0025",
+              "text": "next_actions：第 2–10 天 → S08；第 10 天日推进后 → S10",
+              "requirement_ids": [
+                "S09"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "日推进"
+            },
+            {
+              "id": "C2.s0026",
+              "text": "outcome：跨日农田/资金/订单状态保留（V04）",
+              "requirement_ids": [
+                "S09"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "日推进"
+            },
+            {
+              "id": "C2.s0017",
+              "text": "input：玩家点击农田格（按工具上下文播种/浇水/收获）、点击种子站买种、点击订单面板交付、点击出售钮（I01）",
+              "requirement_ids": [
+                "S08"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "每日农事阶段（60 模拟秒/日）"
+            },
+            {
+              "id": "C2.s0018",
+              "text": "precondition：当日天气与订单状态有效",
+              "requirement_ids": [
+                "S08"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "每日农事阶段（60 模拟秒/日）"
+            },
+            {
+              "id": "C2.s0019",
+              "text": "state_change：播种扣种子费、浇水当日有效、收获入背包、交付按期结算溢价、出售加款（G03/G04/M01–M04）",
+              "requirement_ids": [
+                "S08"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "每日农事阶段（60 模拟秒/日）"
+            },
+            {
+              "id": "C2.s0020",
+              "text": "next_actions：60 秒耗尽 → S09；Esc → 暂停",
+              "requirement_ids": [
+                "S08"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "每日农事阶段（60 模拟秒/日）"
+            },
+            {
+              "id": "C2.s0021",
+              "text": "outcome：当日操作流水与天气事件累积（G06）",
+              "requirement_ids": [
+                "S08"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "每日农事阶段（60 模拟秒/日）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.03",
+        "table_column": "C2",
+        "assertion": "季末（第 10 天日终）；季末结算；暂停",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0027",
+              "text": "input：系统结算",
+              "requirement_ids": [
+                "S10",
+                "S11"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季末（第 10 天日终）"
+            },
+            {
+              "id": "C2.s0028",
+              "text": "precondition：第 10 天日推进完成",
+              "requirement_ids": [
+                "S10"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季末（第 10 天日终）"
+            },
+            {
+              "id": "C2.s0029",
+              "text": "state_change：按 G06 口径结算季末净利＝累计销售收入（含溢价）−订单罚金−种子总支出",
+              "requirement_ids": [
+                "S10"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季末（第 10 天日终）"
+            },
+            {
+              "id": "C2.s0030",
+              "text": "next_actions：进入 S11",
+              "requirement_ids": [
+                "S10"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季末（第 10 天日终）"
+            },
+            {
+              "id": "C2.s0031",
+              "text": "outcome：季节数据冻结待判定",
+              "requirement_ids": [
+                "S10"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季末（第 10 天日终）"
+            },
+            {
+              "id": "C2.s0032",
+              "text": "precondition：季末对账完成",
+              "requirement_ids": [
+                "S11"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季末结算"
+            },
+            {
+              "id": "C2.s0033",
+              "text": "state_change：净利 ≥500 → V01 判胜结算；<500 → V02 判负结算（显示收入构成与订单达成）",
+              "requirement_ids": [
+                "S11"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季末结算"
+            },
+            {
+              "id": "C2.s0034",
+              "text": "next_actions：Enter 重开 → S06；返回菜单 → S06",
+              "requirement_ids": [
+                "S11"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季末结算"
+            },
+            {
+              "id": "C2.s0035",
+              "text": "outcome：按 V01/V02 判定并结算",
+              "requirement_ids": [
+                "S11"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "季末结算"
+            },
+            {
+              "id": "C2.s0036",
+              "text": "input：玩家按 Esc",
+              "requirement_ids": [
+                "S12"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "暂停"
+            },
+            {
+              "id": "C2.s0037",
+              "text": "precondition：处于 S07–S10 阶段",
+              "requirement_ids": [
+                "S12"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "暂停"
+            },
+            {
+              "id": "C2.s0038",
+              "text": "state_change：冻结天数推进、作物生长与订单计时（G07）",
+              "requirement_ids": [
+                "S12"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "暂停"
+            },
+            {
+              "id": "C2.s0039",
+              "text": "next_actions：Esc/继续 → 返回原阶段；重开 → S06",
+              "requirement_ids": [
+                "S12"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "暂停"
+            },
+            {
+              "id": "C2.s0040",
+              "text": "outcome：恢复后计时从冻结点连续累计，无漂移",
+              "requirement_ids": [
+                "S12"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S12]",
+              "topic": "暂停"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.04",
+        "table_column": "C2",
+        "assertion": "播种浇水与生长阶段 / 生长规则（本包冻结值，P0 修复；模拟步优先级（本包冻结值，P0 修复）；作物表（本包冻结值）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0049",
+              "text": "- G03 生长规则（本包冻结值，P0 修复：四阶段含种子态）：阶段＝种子态（播种即入）→发芽→生长→成熟",
+              "requirement_ids": [
+                "G03"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "生长规则（本包冻结值，P0 修复"
+            },
+            {
+              "id": "C2.s0050",
+              "text": "每过一个**有效浇灌日**推进一阶段（叶菜 3 日、薯 5 日、花 7 日成熟）",
+              "requirement_ids": [
+                "G03"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "生长规则（本包冻结值，P0 修复"
+            },
+            {
+              "id": "C2.s0051",
+              "text": "播种当日浇水计为第 1 个有效浇灌日",
+              "requirement_ids": [
+                "G03"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "生长规则（本包冻结值，P0 修复"
+            },
+            {
+              "id": "C2.s0052",
+              "text": "未浇当天生长停滞（不倒退）",
+              "requirement_ids": [
+                "G03"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "生长规则（本包冻结值，P0 修复"
+            },
+            {
+              "id": "C2.s0053",
+              "text": "雨天自动视为浇灌。状态转移 oracle：速生叶菜在第 1/2/3 个有效浇灌日依次到达 发芽→生长→成熟，成熟后不腐坏可待收",
+              "requirement_ids": [
+                "G03"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "生长规则（本包冻结值，P0 修复"
+            },
+            {
+              "id": "C2.s0054",
+              "text": "任何偏离即 FAIL。",
+              "requirement_ids": [
+                "G03"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "生长规则（本包冻结值，P0 修复"
+            },
+            {
+              "id": "C2.s0058",
+              "text": "- G05 模拟步优先级（本包冻结值，P0 修复）：每日 60 模拟秒耗尽时的日推进按固定顺序结算——①日期切换与天气事件 → ②雨天自动浇灌并推进全部作物生长 → ③订单截止判定（等于截止日的交付在当日农事窗口内先结算，日推进时才处理过期）→ ④进入次日操作窗口。同一模拟步内玩家操作不影响本步已结算的①②③。",
+              "requirement_ids": [
+                "G05"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "模拟步优先级（本包冻结值，P0 修复）"
+            },
+            {
+              "id": "C2.s0044",
+              "text": "- G02 作物表（本包冻结值）：三种作物——速生叶菜（3 个有效浇灌日成熟、售价 30、种子 12）",
+              "requirement_ids": [
+                "G02"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "作物表（本包冻结值）"
+            },
+            {
+              "id": "C2.s0045",
+              "text": "高原薯（5 个有效浇灌日、售价 60、种子 24）",
+              "requirement_ids": [
+                "G02"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "作物表（本包冻结值）"
+            },
+            {
+              "id": "C2.s0046",
+              "text": "耐寒花（7 个有效浇灌日、售价 120、种子 48）。农田 12 格",
+              "requirement_ids": [
+                "G02"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "作物表（本包冻结值）"
+            },
+            {
+              "id": "C2.s0047",
+              "text": "初始资金 200",
+              "requirement_ids": [
+                "G02"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "作物表（本包冻结值）"
+            },
+            {
+              "id": "C2.s0048",
+              "text": "种子只能当日播种当日扣费（不囤种）。",
+              "requirement_ids": [
+                "G02"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "作物表（本包冻结值）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.05",
+        "table_column": "C2",
+        "assertion": "天气影响与成熟 / 暂停与随机；统一刻度；天气与订单（本包冻结值，P0 修复等4项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0067",
+              "text": "- G07 暂停与随机：Esc 暂停冻结天数推进、作物生长与订单计时",
+              "requirement_ids": [
+                "G07"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "暂停与随机"
+            },
+            {
+              "id": "C2.s0068",
+              "text": "窗口失焦自动暂停",
+              "requirement_ids": [
+                "G07"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "暂停与随机"
+            },
+            {
+              "id": "C2.s0069",
+              "text": "季内不可跳天",
+              "requirement_ids": [
+                "G07"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "暂停与随机"
+            },
+            {
+              "id": "C2.s0070",
+              "text": "fixed_seed=1042 冻结天气序列",
+              "requirement_ids": [
+                "G07"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "暂停与随机"
+            },
+            {
+              "id": "C2.s0071",
+              "text": "**天气与农事全量 trace 可导出**（日期、天气事件、每格播种/浇水/阶段推进/收获、订单交付/逾期、出售逐笔）。",
+              "requirement_ids": [
+                "G07"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "暂停与随机"
+            },
+            {
+              "id": "C2.s0041",
+              "text": "- G01 统一刻度：天为推进单位（每日 60 模拟秒）",
+              "requirement_ids": [
+                "G01"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "统一刻度"
+            },
+            {
+              "id": "C2.s0042",
+              "text": "金币与件数为整数",
+              "requirement_ids": [
+                "G01"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "统一刻度"
+            },
+            {
+              "id": "C2.s0043",
+              "text": "时间为游戏模拟秒（暂停冻结）。",
+              "requirement_ids": [
+                "G01"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "统一刻度"
+            },
+            {
+              "id": "C2.s0055",
+              "text": "- G04 天气与订单（本包冻结值，P0 修复：序列公开）：季节 10 日天气由 seed=1042 冻结并**逐日公布于表**——第 1/2/4/6/7/9/10 天晴、第 3/5/8 天雨（共 3 个雨天）",
+              "requirement_ids": [
+                "G04"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "天气与订单（本包冻结值，P0 修复"
+            },
+            {
+              "id": "C2.s0056",
+              "text": "每日天气事件可导出。两张限时订单——第 3 天日终前交付 4 株速生叶菜（按期价 ×1.5）、第 7 天日终前交付 2 个高原薯（×1.5）",
+              "requirement_ids": [
+                "G04"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "天气与订单（本包冻结值，P0 修复"
+            },
+            {
+              "id": "C2.s0057",
+              "text": "逾期未交付罚款 30 并关闭订单。",
+              "requirement_ids": [
+                "G04"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "天气与订单（本包冻结值，P0 修复"
+            },
+            {
+              "id": "C2.s0059",
+              "text": "- G06 季末收入口径与判胜（本包冻结值，P0 修复）：**季末净利＝累计销售收入（含订单 ×1.5 溢价）−订单罚金 − 种子总支出**",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "季末收入口径与判胜（本包冻结值，P0 修复）"
+            },
+            {
+              "id": "C2.s0060",
+              "text": "季末净利 ≥500 判胜。普通策略 witness（需运行可达性验证，若复算不可达应修正规则而非放宽阈值）：第 1 天播 12 叶菜＋4 薯（支出 192）并浇水",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "季末收入口径与判胜（本包冻结值，P0 修复）"
+            },
+            {
+              "id": "C2.s0061",
+              "text": "第 2 天浇水",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "季末收入口径与判胜（本包冻结值，P0 修复）"
+            },
+            {
+              "id": "C2.s0062",
+              "text": "第 3 天雨自动成熟 12 叶菜 → 交付订单 1（4×45=180）并出售余 8 株（240）",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "季末收入口径与判胜（本包冻结值，P0 修复）"
+            },
+            {
+              "id": "C2.s0063",
+              "text": "第 4 天播 8 叶菜（96）并浇水",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "季末收入口径与判胜（本包冻结值，P0 修复）"
+            },
+            {
+              "id": "C2.s0064",
+              "text": "第 5 天雨（薯成熟，交付订单 2：2×90=180，出售 2 薯 120）",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "季末收入口径与判胜（本包冻结值，P0 修复）"
+            },
+            {
+              "id": "C2.s0065",
+              "text": "第 6 天新叶菜成熟出售（240）并播 4 叶菜（48）浇水",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "季末收入口径与判胜（本包冻结值，P0 修复）"
+            },
+            {
+              "id": "C2.s0066",
+              "text": "第 8 天雨（第 6 天播的成熟，出售 120）——累计收入 880、罚金 0、种子支出 336，**季末净利 544 ≥500**。",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G07]",
+              "topic": "季末收入口径与判胜（本包冻结值，P0 修复）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.06",
+        "table_column": "C2",
+        "assertion": "键鼠",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0072",
+              "text": "- I01 键鼠：点击农田格＝播种/浇水/收获（按当前工具上下文：空格+选种＝播种、水壶＝浇水、镰刀＝收获",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0073",
+              "text": "工具栏点击切换）",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0074",
+              "text": "点击种子站柜台＝买种",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0075",
+              "text": "点击订单面板「交付」＝按期交付",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0076",
+              "text": "点击出售钮＝出售背包成熟作物",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0077",
+              "text": "Tab＝订单与背包面板",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0078",
+              "text": "Esc＝暂停",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0079",
+              "text": "结算界面 Enter＝重开新季。",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "键鼠"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.07",
+        "table_column": "C2",
+        "assertion": "输入语义边界；输入优先级；焦点与点击穿透规则等4项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0080",
+              "text": "- I02 输入语义边界：资金不足播种无效",
+              "requirement_ids": [
+                "I02"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "输入语义边界"
+            },
+            {
+              "id": "C2.s0081",
+              "text": "非成熟作物点击收获无效",
+              "requirement_ids": [
+                "I02"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "输入语义边界"
+            },
+            {
+              "id": "C2.s0082",
+              "text": "空田浇水有效（无效消耗？——浇水对空田无效且不产生状态变化）",
+              "requirement_ids": [
+                "I02"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "输入语义边界"
+            },
+            {
+              "id": "C2.s0083",
+              "text": "面板打开时农田点击不串入",
+              "requirement_ids": [
+                "I02"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "输入语义边界"
+            },
+            {
+              "id": "C2.s0084",
+              "text": "暂停期间输入无效。",
+              "requirement_ids": [
+                "I02"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "输入语义边界"
+            },
+            {
+              "id": "C2.s0085",
+              "text": "- I03 输入优先级：暂停与结算状态阻断全部玩法输入",
+              "requirement_ids": [
+                "I03"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "输入优先级"
+            },
+            {
+              "id": "C2.s0086",
+              "text": "面板打开时玩法键不串入",
+              "requirement_ids": [
+                "I03"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "输入优先级"
+            },
+            {
+              "id": "C2.s0087",
+              "text": "同帧多输入按 §6 各机制声明的顺序结算。",
+              "requirement_ids": [
+                "I03"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "输入优先级"
+            },
+            {
+              "id": "C2.s0088",
+              "text": "- I04 焦点与点击穿透规则：点击画布捕获输入焦点",
+              "requirement_ids": [
+                "I04"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "焦点与点击穿透规则"
+            },
+            {
+              "id": "C2.s0089",
+              "text": "面板层阻断点击穿透",
+              "requirement_ids": [
+                "I04"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "焦点与点击穿透规则"
+            },
+            {
+              "id": "C2.s0090",
+              "text": "窗口失焦自动暂停（G07）。",
+              "requirement_ids": [
+                "I04"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "焦点与点击穿透规则"
+            },
+            {
+              "id": "C2.s0091",
+              "text": "- I05 无手柄需求",
+              "requirement_ids": [
+                "I05"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "无手柄需求"
+            },
+            {
+              "id": "C2.s0092",
+              "text": "触控为表现层扩展，不进入验收分母。",
+              "requirement_ids": [
+                "I05"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "无手柄需求"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.08",
+        "table_column": "C2",
+        "assertion": "季节时钟与目标 / 目标物/交互物/场景/UI 对象；生成对象；场景（冻结布局）等4项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0098",
+              "text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/订单面板/结算面板）与交互物（12 格判定体、种子站柜台、交付钮、出售钮）逐类存在且运行时可进入",
+              "requirement_ids": [
+                "L03"
+              ],
+              "system": "L:5. 场景与内容清单 [L01–L04]",
+              "topic": "目标物/交互物/场景/UI 对象"
+            },
+            {
+              "id": "C2.s0099",
+              "text": "生长推进由引擎日推进计时器驱动，装饰作物模型不得替代阶段状态机",
+              "requirement_ids": [
+                "L03"
+              ],
+              "system": "L:5. 场景与内容清单 [L01–L04]",
+              "topic": "目标物/交互物/场景/UI 对象"
+            },
+            {
+              "id": "C2.s0093",
+              "text": "- L01 生成对象：三种作物（各四阶段外观可区分：种子态/发芽/生长/成熟）、种子站柜台 1、水壶/镰刀工具组、浇灌水槽 1（手动浇水来源）、经幡线 1（W02/W06 氛围）、收获筐组（交付与出售容器）、订单面板、高原农田场景",
+              "requirement_ids": [
+                "L01"
+              ],
+              "system": "L:5. 场景与内容清单 [L01–L04]",
+              "topic": "生成对象"
+            },
+            {
+              "id": "C2.s0094",
+              "text": "装饰非冻结需求。",
+              "requirement_ids": [
+                "L01"
+              ],
+              "system": "L:5. 场景与内容清单 [L01–L04]",
+              "topic": "生成对象"
+            },
+            {
+              "id": "C2.s0095",
+              "text": "- L02 场景（冻结布局）：单屏高原农田（12 格垄作区 4×3 排列＋种子站柜台右下）",
+              "requirement_ids": [
+                "L02"
+              ],
+              "system": "L:5. 场景与内容清单 [L01–L04]",
+              "topic": "场景（冻结布局）"
+            },
+            {
+              "id": "C2.s0096",
+              "text": "天气与光照随每日事件切换（雨日有降雨表现）",
+              "requirement_ids": [
+                "L02"
+              ],
+              "system": "L:5. 场景与内容清单 [L01–L04]",
+              "topic": "场景（冻结布局）"
+            },
+            {
+              "id": "C2.s0097",
+              "text": "作物阶段图标在格上方悬浮显示。",
+              "requirement_ids": [
+                "L02"
+              ],
+              "system": "L:5. 场景与内容清单 [L01–L04]",
+              "topic": "场景（冻结布局）"
+            },
+            {
+              "id": "C2.s0100",
+              "text": "- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求",
+              "requirement_ids": [
+                "L04"
+              ],
+              "system": "L:5. 场景与内容清单 [L01–L04]",
+              "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+            },
+            {
+              "id": "C2.s0101",
+              "text": "未给数值的表现层（装饰造型、配色、粒子参数、音色）为生成自由度，不得评估为缺失",
+              "requirement_ids": [
+                "L04"
+              ],
+              "system": "L:5. 场景与内容清单 [L01–L04]",
+              "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+            },
+            {
+              "id": "C2.s0102",
+              "text": "实现默认值必须明确标注且符合核心机制。音效为冻结需求（F06 清单逐条交付，缺失按 FAIL 计）。",
+              "requirement_ids": [
+                "L04"
+              ],
+              "system": "L:5. 场景与内容清单 [L01–L04]",
+              "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.09",
+        "table_column": "C2",
+        "assertion": "播种浇水与生长阶段 / 天气；生长阶段（主机制）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0108",
+              "text": "input：系统按 seed 调度（G04 公布序列）",
+              "requirement_ids": [
+                "M02"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "天气"
+            },
+            {
+              "id": "C2.s0109",
+              "text": "precondition：日推进阶段（S09 ①）",
+              "requirement_ids": [
+                "M02"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "天气"
+            },
+            {
+              "id": "C2.s0110",
+              "text": "state_change：雨日 → 全田自动视为浇灌并推进生长；晴日 → 需手动浇水",
+              "requirement_ids": [
+                "M02"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "天气"
+            },
+            {
+              "id": "C2.s0111",
+              "text": "invalid_case：天气不改作物参数（仅决定是否自动浇灌）；trace 与公布序列偏离即 FAIL",
+              "requirement_ids": [
+                "M02"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "天气"
+            },
+            {
+              "id": "C2.s0112",
+              "text": "recovery：无回滚；下一日按序列继续",
+              "requirement_ids": [
+                "M02"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "天气"
+            },
+            {
+              "id": "C2.s0103",
+              "text": "input：每日浇灌（玩家）或雨天自动浇灌（系统）",
+              "requirement_ids": [
+                "M01"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "生长阶段（主机制）"
+            },
+            {
+              "id": "C2.s0104",
+              "text": "precondition：格内有作物且当日尚未推进（每日每格至多推进一阶段）",
+              "requirement_ids": [
+                "M01"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "生长阶段（主机制）"
+            },
+            {
+              "id": "C2.s0105",
+              "text": "state_change：按 G03 四阶段（含种子态）推进；缺水日停滞不倒退；成熟后停留可待收",
+              "requirement_ids": [
+                "M01"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "生长阶段（主机制）"
+            },
+            {
+              "id": "C2.s0106",
+              "text": "invalid_case：空田浇水无效；同日重复浇水不重复推进；暂停/结算期间生长冻结",
+              "requirement_ids": [
+                "M01"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "生长阶段（主机制）"
+            },
+            {
+              "id": "C2.s0107",
+              "text": "recovery：停滞日补浇后次一有效日恢复推进，无倒退惩罚",
+              "requirement_ids": [
+                "M01"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "生长阶段（主机制）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.10",
+        "table_column": "C2",
+        "assertion": "限时订单与交付 / 出售与季末目标；限时订单",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0118",
+              "text": "input：出售点击（玩家）／季末结算（系统）",
+              "requirement_ids": [
+                "M04"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "出售与季末目标"
+            },
+            {
+              "id": "C2.s0119",
+              "text": "precondition：背包有成熟作物（出售）；第 10 天日推进完成（结算）",
+              "requirement_ids": [
+                "M04"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "出售与季末目标"
+            },
+            {
+              "id": "C2.s0120",
+              "text": "state_change：出售按 G02 售价加款；季末按 G06 口径结算净利并判定 ≥500",
+              "requirement_ids": [
+                "M04"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "出售与季末目标"
+            },
+            {
+              "id": "C2.s0121",
+              "text": "invalid_case：资金为负不可达（收入结算先于支出判定）；空背包出售无效",
+              "requirement_ids": [
+                "M04"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "出售与季末目标"
+            },
+            {
+              "id": "C2.s0122",
+              "text": "recovery：季末一键重开新季全量重置（V03）",
+              "requirement_ids": [
+                "M04"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "出售与季末目标"
+            },
+            {
+              "id": "C2.s0113",
+              "text": "input：订单面板点击交付（玩家）",
+              "requirement_ids": [
+                "M03"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "限时订单"
+            },
+            {
+              "id": "C2.s0114",
+              "text": "precondition：背包有对应作物且在期限内（或已过期）",
+              "requirement_ids": [
+                "M03"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "限时订单"
+            },
+            {
+              "id": "C2.s0115",
+              "text": "state_change：按期交付 → 按售价 ×1.5 结算加款并关闭订单；逾期 → 罚 30 并关闭（G04）",
+              "requirement_ids": [
+                "M03"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "限时订单"
+            },
+            {
+              "id": "C2.s0116",
+              "text": "invalid_case：数量不足交付无效；过期后不可再交付；暂停期间订单计时冻结",
+              "requirement_ids": [
+                "M03"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "限时订单"
+            },
+            {
+              "id": "C2.s0117",
+              "text": "recovery：逾期罚款计入季末净利口径，不可补救（下一季重开重置）",
+              "requirement_ids": [
+                "M03"
+              ],
+              "system": "M:6. 机制系统 [M01–M04]",
+              "topic": "限时订单"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C2.11",
+        "table_column": "C2",
+        "assertion": "失败重开与状态清理 / persistent_state；恢复语义；失败条件等10项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0127",
+              "text": "- V04 persistent_state：无跨局持久",
+              "requirement_ids": [
+                "V04"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state"
+            },
+            {
+              "id": "C2.s0128",
+              "text": "局内农田/订单/资金/背包状态跨日保留（P1），重开清空。",
+              "requirement_ids": [
+                "V04"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state"
+            },
+            {
+              "id": "C2.s0126",
+              "text": "- V03 恢复语义：季末一键重开新季——农田、天气序列、订单、资金（回初始 200）、背包全部重置（seed 复现）。",
+              "requirement_ids": [
+                "V03"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "恢复语义"
+            },
+            {
+              "id": "C2.s0124",
+              "text": "- V02 失败条件：季末净利 <500 → 结算显示失败（无中途硬失败",
+              "requirement_ids": [
+                "V02"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "失败条件"
+            },
+            {
+              "id": "C2.s0125",
+              "text": "作物不腐坏）。",
+              "requirement_ids": [
+                "V02"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "失败条件"
+            },
+            {
+              "id": "C2.s0123",
+              "text": "- V01 成功条件：第 10 天日终季末净利 ≥500 → 结算判胜（显示收入构成、订单达成、种子支出与净利）。",
+              "requirement_ids": [
+                "V01"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "成功条件"
+            },
+            {
+              "id": "C2.s0129",
+              "text": "- V05 persistent_state 生命周期：当前动作级状态即时结算",
+              "requirement_ids": [
+                "V05"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state 生命周期"
+            },
+            {
+              "id": "C2.s0130",
+              "text": "当前局级状态（农田/订单/资金/背包）局内保留、重开清空",
+              "requirement_ids": [
+                "V05"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state 生命周期"
+            },
+            {
+              "id": "C2.s0131",
+              "text": "跨局状态无（S 档：重开全量清空）。",
+              "requirement_ids": [
+                "V05"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state 生命周期"
+            },
+            {
+              "id": "C2.s0005",
+              "text": "- S05 失败恢复入口：季末未达标 → 结算显示失败并可一键重开新季（全量重置）",
+              "requirement_ids": [
+                "S05"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S05]",
+              "topic": "失败恢复入口"
+            },
+            {
+              "id": "C2.s0006",
+              "text": "Esc 暂停（模拟冻结）。",
+              "requirement_ids": [
+                "S05"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S05]",
+              "topic": "失败恢复入口"
+            },
+            {
+              "id": "C2.s0004",
+              "text": "- S04 最低完整流程：种子站柜台、农田操作、订单面板、出售入口、季末结算、重开新季必须全部存在且有真实入口。",
+              "requirement_ids": [
+                "S04"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S05]",
+              "topic": "最低完整流程"
+            },
+            {
+              "id": "C2.s0003",
+              "text": "- S03 流程：主菜单 → 季节开始（第 1 天）→ 每日农事（播种/浇水/收获/交付/出售）→ 日推进 → 第 10 天日终 → 季末结算。",
+              "requirement_ids": [
+                "S03"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S05]",
+              "topic": "流程"
+            },
+            {
+              "id": "C2.s0001",
+              "text": "- S01 类型：单季节（10 日）农事经营切片。不是全年轮作、NPC 社交或农场扩张。",
+              "requirement_ids": [
+                "S01"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S05]",
+              "topic": "类型"
+            },
+            {
+              "id": "C2.s0002",
+              "text": "- S02 核心循环一句话：播种 → 浇水照料 → 生长推进（天气影响）→ 收获 → 出售/交付订单 → 季末净利目标。",
+              "requirement_ids": [
+                "S02"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S05]",
+              "topic": "核心循环一句话"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C3.01",
+        "table_column": "C3",
+        "assertion": "角色与物体接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0001",
+              "text": "3d_object/highland_leafy_green_crop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G03"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0002",
+              "text": "3d_object/highland_potato_crop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G03"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0003",
+              "text": "3d_object/highland_cold_flower_crop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G03"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0004",
+              "text": "3d_object/seed_station_counter：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W02"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0005",
+              "text": "3d_object/highland_soil_tile：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "L02"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0006",
+              "text": "3d_object/rain_water_barrel：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "L02",
+                "M01"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0007",
+              "text": "3d_object/prayer_flag_line：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L02",
+                "W02",
+                "W06"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0008",
+              "text": "3d_object/harvest_basket：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "M04"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C3.02",
+        "table_column": "C3",
+        "assertion": "动作占位接口；场景与地标接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0010",
+              "text": "motion/plant_and_harvest：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "system": "motion",
+              "topic": "动作占位接口"
+            },
+            {
+              "id": "C3.s0009",
+              "text": "3d_scene/G042_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L02",
+                "W02"
+              ],
+              "system": "3d_scene",
+              "topic": "场景与地标接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C3.03",
+        "table_column": "C3",
+        "assertion": "声音占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0011",
+              "text": "audio/seed_plant：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0012",
+              "text": "audio/water_splash：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0013",
+              "text": "audio/harvest_pickup：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0014",
+              "text": "audio/coin_chime：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0015",
+              "text": "audio/order_alert：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0016",
+              "text": "audio/order_complete：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0017",
+              "text": "audio/day_advance：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0018",
+              "text": "audio/victory_sting：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0019",
+              "text": "audio/defeat_sting：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0020",
+              "text": "audio/highland_wind_loop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0021",
+              "text": "audio/highland_rain_loop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.C3.04",
+        "table_column": "C3",
+        "assertion": "演出占位接口；VFX占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0022",
+              "text": "cg_video/开季开垦：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C01"
+              ],
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0023",
+              "text": "cg_video/雨日与生长阶段：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C02"
+              ],
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0024",
+              "text": "cg_video/收获与季末结算：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C03"
+              ],
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0025",
+              "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+              "requirement_ids": [
+                "L04",
+                "F07",
+                "N06"
+              ],
+              "system": "vfx",
+              "topic": "VFX占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.Q.01",
+        "table_column": "Q",
+        "assertion": "视角与镜头；画面验收3；画面验收2等4项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0004",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：固定 45° 俯视斜视角，单屏覆盖 12 格垄作区＋种子站柜台",
+              "requirement_ids": [
+                "F01"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0005",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头不可旋转缩放",
+              "requirement_ids": [
+                "F01"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0006",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：1920×1080 下格上阶段图标不互相遮挡，1280×720 保持可读（I06）。",
+              "requirement_ids": [
+                "F01"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0024",
+              "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "system": "画面验收3",
+              "topic": "画面验收3"
+            },
+            {
+              "id": "Q.s0023",
+              "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "system": "画面验收2",
+              "topic": "画面验收2"
+            },
+            {
+              "id": "Q.s0011",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F07 VFX 信息性与遮挡约束：阶段图标、订单卡、日推进横幅为信息类 VFX，必须清晰可辨",
+              "requirement_ids": [
+                "F07"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "Q.s0012",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：雨幕不得遮挡 12 格阶段图标与柜台",
+              "requirement_ids": [
+                "F07"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "Q.s0013",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：非结算单个全屏遮挡 ≤0.5 秒。",
+              "requirement_ids": [
+                "F07"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.Q.02",
+        "table_column": "Q",
+        "assertion": "环境常驻效果；关键操作镜头变化；视觉风格与色彩材质",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0009",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：高原云海飘移、经幡摆动、种子站炊烟、晴日光斑/雨日檐滴切换",
+              "requirement_ids": [
+                "F04"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            },
+            {
+              "id": "Q.s0010",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：均为纯表现层。",
+              "requirement_ids": [
+                "F04"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            },
+            {
+              "id": "Q.s0007",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：无镜头运动需求（固定机位）",
+              "requirement_ids": [
+                "F02"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0008",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：被操作格子高亮 0.4 秒。",
+              "requirement_ids": [
+                "F02"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0001",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：清冷高原农事风",
+              "requirement_ids": [
+                "W06"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0002",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝云脊青 #4A7C6F、田垄褐 #7A6248、苗绿 #7FB069、经幡红 #C25B4A",
+              "requirement_ids": [
+                "W06"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0003",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质为湿褐垄土、木架、粗布袋与耐寒花瓣。",
+              "requirement_ids": [
+                "W06"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.Q.03",
+        "table_column": "Q",
+        "assertion": "绑定原则；参考图辨识；画面验收4等4项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0014",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束农田布局（12 格与柜台位置以本 spec L02 冻结为准）",
+              "requirement_ids": [
+                "A01"
+              ],
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定原则"
+            },
+            {
+              "id": "Q.s0015",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。",
+              "requirement_ids": [
+                "A01"
+              ],
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定原则"
+            },
+            {
+              "id": "Q.s0026",
+              "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "system": "参考图辨识",
+              "topic": "参考图辨识"
+            },
+            {
+              "id": "Q.s0025",
+              "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "system": "画面验收4",
+              "topic": "画面验收4"
+            },
+            {
+              "id": "Q.s0022",
+              "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "system": "画面验收1",
+              "topic": "画面验收1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.Q.04",
+        "table_column": "Q",
+        "assertion": "绑定表（文件 → 对象）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0016",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A02 绑定表（文件 → 对象）：",
+              "requirement_ids": [
+                "A02"
+              ],
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0017",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_crop_stage_sheet_sketch.png | 三种作物四阶段组图 | 3D_object image_to_3d |",
+              "requirement_ids": [
+                "A02"
+              ],
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0018",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_seed_station_sketch.png | 种子站柜台与工具组 | 3D_object image_to_3d |",
+              "requirement_ids": [
+                "A02"
+              ],
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0019",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_scene_highland_farm_sketch.png | 云脊高原农田场景 | 3D_scene image_to_scene |",
+              "requirement_ids": [
+                "A02"
+              ],
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0020",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：参考图为程序化概念草图（1024×1024，无文字",
+              "requirement_ids": [
+                "A02"
+              ],
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            },
+            {
+              "id": "Q.s0021",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。",
+              "requirement_ids": [
+                "A02"
+              ],
+              "system": "A:12. 参考图绑定 [A01–A02]",
+              "topic": "绑定表（文件 → 对象）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.G.01",
+        "table_column": "G",
+        "assertion": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）；关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）；屏幕震动",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0008",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0009",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 播种 | 格内扬土动画＋种子图标浮出 | seed_plant | 动画收束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0010",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 浇水 | 格内水光涟漪＋土色加深 | water_splash | 涟漪结束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0011",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 雨日开始 | 全屏雨幕＋檐滴 | highland_rain_loop | 雨日结束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0012",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 阶段推进 | 格上阶段图标切换弹跳 | day_advance（推进档） | 图标定格 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0013",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 作物成熟 | 格上成熟图标金框高亮 | harvest_ready | 玩家收获或日推进 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0014",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 收获 | 割取动画＋背包件数滚动 | harvest_pickup | 动画收束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0015",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出售 | 金币弹出＋资金滚动 | coin_chime | 金币动画收束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0016",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 订单按期交付 | 订单卡打勾＋金额结算滚动 | order_complete | 卡片定格 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0017",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 订单到期未交付 | 订单卡红框＋罚款金额滚动 | order_alert | 卡片关闭 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0018",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 日推进 | 「第 N 天·晴/雨」横幅 1.5 秒 | day_advance | 横幅收起 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0019",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 季末达标 | C03 胜利意象＋结算面板 | victory_sting | 进入结算面板 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0020",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 季末未达标 | C03 失败意象＋结算面板 | defeat_sting | 进入结算面板 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+            },
+            {
+              "id": "G.s0021",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：seed_plant、water_splash、harvest_pickup、coin_chime、order_alert、order_complete、day_advance、victory_sting、defeat_sting",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）"
+            },
+            {
+              "id": "G.s0022",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：环境循环：highland_wind_loop（高原风与鸟鸣）、highland_rain_loop（雨日降雨）。无配音需求。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）"
+            },
+            {
+              "id": "G.s0028",
+              "text": "- F09 屏幕震动：本作无震动需求（农事固定机位）",
+              "requirement_ids": [
+                "F09"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "G.s0029",
+              "text": "表现层自由，不设冻结项。",
+              "requirement_ids": [
+                "F09"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.G.02",
+        "table_column": "G",
+        "assertion": "音画同步；环境氛围与声音语言",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0023",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：播种音与扬土同帧",
+              "requirement_ids": [
+                "F08"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0024",
+              "text": "收获音与割取动画同帧",
+              "requirement_ids": [
+                "F08"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0025",
+              "text": "金币音与资金滚动同帧",
+              "requirement_ids": [
+                "F08"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0026",
+              "text": "日推进音与横幅同帧",
+              "requirement_ids": [
+                "F08"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0027",
+              "text": "订单警报音与红框同帧。",
+              "requirement_ids": [
+                "F08"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0003",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：高原风与远处鸟鸣为底",
+              "requirement_ids": [
+                "W07"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0004",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言＝播种、浇水、降雨、收获、金币、订单提示、日推进（F06 冻结清单）",
+              "requirement_ids": [
+                "W07"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0005",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：混音优先级：订单到期提醒 ＞ 收获/金币 ＞ 浇水/降雨 ＞ 风环境。",
+              "requirement_ids": [
+                "W07"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.G.03",
+        "table_column": "G",
+        "assertion": "前端界面；UI 必须显示的状态；输入与延迟",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0030",
+              "text": "- F10 前端界面：标题（开始新季/设置/退出）→ 农事 HUD（I06 全项）→ 订单面板（数量/期限/交付钮）→ 暂停面板（继续/重开/返回）→ 季末结算面板（收入构成/订单达成/种子支出/净利与判定",
+              "requirement_ids": [
+                "F10"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0031",
+              "text": "Enter 重开）",
+              "requirement_ids": [
+                "F10"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0032",
+              "text": "关键状态图标＋文字并用",
+              "requirement_ids": [
+                "F10"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0033",
+              "text": "窗口失焦自动暂停。",
+              "requirement_ids": [
+                "F10"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0001",
+              "text": "- I06 UI 必须显示的状态：日期（x/10）、当日天气、资金、背包（按作物分类件数）、订单状态（数量/期限/达成标记）、每格作物阶段图标（种子/发芽/生长/成熟）、本季累计出售收入与种子支出、订单罚金累计。",
+              "requirement_ids": [
+                "I06"
+              ],
+              "system": "I:4. 操作与输入 [I01–I06]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0006",
+              "text": "- F03 输入与延迟：见 I06 延迟口径（点击到格子反馈 ≤100ms，桌面 P95）",
+              "requirement_ids": [
+                "F03"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "输入与延迟"
+            },
+            {
+              "id": "G.s0007",
+              "text": "顿帧不改变计时口径。",
+              "requirement_ids": [
+                "F03"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "输入与延迟"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.G.04",
+        "table_column": "G",
+        "assertion": "交互反馈3；目标物/交互物/场景/UI 对象；交互反馈1等5项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0036",
+              "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "system": "交互反馈3",
+              "topic": "交互反馈3"
+            },
+            {
+              "id": "G.s0002",
+              "text": "数量与属性以对应 G·M 条目为准。",
+              "requirement_ids": [
+                "L03"
+              ],
+              "system": "L:5. 场景与内容清单 [L01–L04]",
+              "topic": "目标物/交互物/场景/UI 对象"
+            },
+            {
+              "id": "G.s0034",
+              "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "system": "交互反馈1",
+              "topic": "交互反馈1"
+            },
+            {
+              "id": "G.s0037",
+              "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "system": "交互反馈4",
+              "topic": "交互反馈4"
+            },
+            {
+              "id": "G.s0035",
+              "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "system": "交互反馈2",
+              "topic": "交互反馈2"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.P.01",
+        "table_column": "P",
+        "assertion": "运行验收1",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0001",
+              "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "system": "运行验收1",
+              "topic": "运行验收1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.P.02",
+        "table_column": "P",
+        "assertion": "运行验收2",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0002",
+              "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "system": "运行验收2",
+              "topic": "运行验收2"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.P.03",
+        "table_column": "P",
+        "assertion": "运行验收3",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0003",
+              "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "system": "运行验收3",
+              "topic": "运行验收3"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.P.04",
+        "table_column": "P",
+        "assertion": "运行验收4",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0004",
+              "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "system": "运行验收4",
+              "topic": "运行验收4"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G042_highland_seed_farm.WB.CH.01",
+        "table_column": "CH",
+        "assertion": "代码健康诊断",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "CH.s0001",
+              "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0002",
+              "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0003",
+              "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0004",
+              "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

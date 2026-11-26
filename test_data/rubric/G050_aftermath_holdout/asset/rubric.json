@@ -1,0 +1,35 @@
+{
+  "game_id": "G050_aftermath_holdout",
+  "assets": {
+    "G050_aftermath_holdout_obj_001": {
+      "assertions": []
+    },
+    "G050_cg_001": {
+      "assertions": []
+    },
+    "G050_cg_002": {
+      "assertions": []
+    },
+    "G050_cg_003": {
+      "assertions": []
+    },
+    "G050_cg_004": {
+      "assertions": []
+    },
+    "G050_mot_001": {
+      "assertions": []
+    },
+    "G050_mot_002": {
+      "assertions": []
+    },
+    "G050_mot_003": {
+      "assertions": []
+    },
+    "G050_mot_004": {
+      "assertions": []
+    },
+    "G050_scene_001": {
+      "assertions": []
+    }
+  }
+}

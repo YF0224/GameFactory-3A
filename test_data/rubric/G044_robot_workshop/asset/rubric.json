@@ -1,0 +1,17 @@
+{
+  "game_id": "G044_robot_workshop",
+  "assets": {
+    "G044_cg_001": {
+      "assertions": []
+    },
+    "G044_cg_002": {
+      "assertions": []
+    },
+    "G044_cg_003": {
+      "assertions": []
+    },
+    "G044_scene_001": {
+      "assertions": []
+    }
+  }
+}

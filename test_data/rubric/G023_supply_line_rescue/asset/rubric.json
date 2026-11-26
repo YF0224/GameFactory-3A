@@ -1,0 +1,17 @@
+{
+  "game_id": "G023_supply_line_rescue",
+  "assets": {
+    "G023_cg_001": {
+      "assertions": []
+    },
+    "G023_cg_002": {
+      "assertions": []
+    },
+    "G023_cg_003": {
+      "assertions": []
+    },
+    "G023_scene_001": {
+      "assertions": []
+    }
+  }
+}

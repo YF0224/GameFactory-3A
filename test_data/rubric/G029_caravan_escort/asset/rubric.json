@@ -1,0 +1,44 @@
+{
+  "game_id": "G029_caravan_escort",
+  "assets": {
+    "G029_caravan_escort_obj_004": {
+      "assertions": []
+    },
+    "G029_cg_001": {
+      "assertions": []
+    },
+    "G029_cg_002": {
+      "assertions": []
+    },
+    "G029_cg_003": {
+      "assertions": []
+    },
+    "G029_cg_004": {
+      "assertions": []
+    },
+    "G029_scene_001": {
+      "assertions": []
+    },
+    "G029_scene_002": {
+      "assertions": []
+    },
+    "G029_scene_003": {
+      "assertions": []
+    },
+    "G029_vo_015": {
+      "assertions": []
+    },
+    "G029_vo_016": {
+      "assertions": []
+    },
+    "G029_vo_017": {
+      "assertions": []
+    },
+    "G029_vo_018": {
+      "assertions": []
+    },
+    "G029_vo_019": {
+      "assertions": []
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "game_id": "G028_elemental_greenhouse",
+  "assets": {
+    "G028_cg_001": {
+      "assertions": []
+    },
+    "G028_cg_002": {
+      "assertions": []
+    },
+    "G028_cg_003": {
+      "assertions": []
+    },
+    "G028_cg_004": {
+      "assertions": []
+    },
+    "G028_elemental_greenhouse_obj_012": {
+      "assertions": []
+    },
+    "G028_elemental_greenhouse_obj_013": {
+      "assertions": []
+    },
+    "G028_elemental_greenhouse_obj_014": {
+      "assertions": []
+    },
+    "G028_elemental_greenhouse_obj_015": {
+      "assertions": []
+    },
+    "G028_scene_001": {
+      "assertions": []
+    },
+    "G028_vo_015": {
+      "assertions": []
+    },
+    "G028_vo_016": {
+      "assertions": []
+    },
+    "G028_vo_017": {
+      "assertions": []
+    },
+    "G028_vo_018": {
+      "assertions": []
+    },
+    "G028_vo_019": {
+      "assertions": []
+    }
+  }
+}

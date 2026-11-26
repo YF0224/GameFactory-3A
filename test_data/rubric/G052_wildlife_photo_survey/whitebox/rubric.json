@@ -1,0 +1,5465 @@
+{
+  "game_id": "G052_wildlife_photo_survey",
+  "mechanic": {
+    "version": "tiered-core-v1",
+    "assertions": [
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C1.01",
+        "table_column": "C1",
+        "assertion": "失败代价与结局表达",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0006",
+              "text": "- W04 失败代价与结局表达：快门耗尽＝本季样张不足需重新布点（自动重开文案）",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            },
+            {
+              "id": "C1.s0007",
+              "text": "成功则 C02 呈现报告封页与结论递交场面。",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C1.02",
+        "table_column": "C1",
+        "assertion": "叙事来源；场景所在地；世界与时代背景",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0008",
+              "text": "- W05 叙事来源：三个物种即湿地的指示物种",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0009",
+              "text": "观测点＝保护站既设的蹲点位",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0010",
+              "text": "芦苇丛＝天然隐蔽掩体",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0011",
+              "text": "相机与长焦＝保护站调查装备。全部原创。",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0003",
+              "text": "- W02 场景所在地：芦鸣湿地——芦苇带、浅滩觅食区、水道獭巢三大观测点由步道串联。",
+              "requirement_ids": [
+                "W02"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "场景所在地"
+            },
+            {
+              "id": "C1.s0001",
+              "text": "- W01 世界与时代背景：现代生态保护时代",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            },
+            {
+              "id": "C1.s0002",
+              "text": "「芦鸣湿地」正处候鸟迁徙季，保护站需要在两周窗口内完成一份迁徙调查报告。",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C1.03",
+        "table_column": "C1",
+        "assertion": "故事表达方式；玩家身份与当前任务",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0012",
+              "text": "- W08 故事表达方式：开场视频（C01）交代调查任务 → 取景-入册-提交过程承载调查节奏 → 结算视频（C02）收束报告",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            },
+            {
+              "id": "C1.s0013",
+              "text": "故事只做包装，不改变机制数值。",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            },
+            {
+              "id": "C1.s0004",
+              "text": "- W03 玩家身份与当前任务：玩家是野生动物调查员「苇」",
+              "requirement_ids": [
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务"
+            },
+            {
+              "id": "C1.s0005",
+              "text": "当前任务：潜行拍摄白鹭、苇莺、水獭的行为证据，判断湿地是「迁徙停歇地」还是「过境通道」。",
+              "requirement_ids": [
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.TC2.01",
+        "table_column": "C2",
+        "assertion": "拍摄条件（主机制）：有效操作与状态变化：按 G02 判定表生成照片有效性 → 有效入册（G07 去重）/无效丢弃",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.01",
+              "text": "按 G02 判定表生成照片有效性 → 有效入册（G07 去重）/无效丢弃",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "拍摄条件（主机制）：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.TC2.02",
+        "table_column": "C2",
+        "assertion": "拍摄条件（主机制）：拒绝与边界：任一判定项不满足 → 无效；快门 0 → 拒绝",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.02",
+              "text": "任一判定项不满足 → 无效；快门 0 → 拒绝",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "拍摄条件（主机制）：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.TC2.03",
+        "table_column": "C2",
+        "assertion": "证据组合：有效操作与状态变化：按 G03 判定表评估证据集 → 成立/不成立",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.03",
+              "text": "按 G03 判定表评估证据集 → 成立/不成立",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "证据组合：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.TC2.04",
+        "table_column": "C2",
+        "assertion": "证据组合：拒绝与边界：组合不成立 → 提示缺项并允许续拍",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.04",
+              "text": "组合不成立 → 提示缺项并允许续拍",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "证据组合：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.TC2.05",
+        "table_column": "C2",
+        "assertion": "结论分支：有效操作与状态变化：按证据构成触发「迁徙停歇地」或「过境通道」结论 → 结算",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.05",
+              "text": "按证据构成触发「迁徙停歇地」或「过境通道」结论 → 结算",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "结论分支：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.TC2.06",
+        "table_column": "C2",
+        "assertion": "结论分支：拒绝与边界：证据构成与结论不匹配的提交 → 判不成立",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.06",
+              "text": "证据构成与结论不匹配的提交 → 判不成立",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "结论分支：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.TC2.07",
+        "table_column": "C2",
+        "assertion": "焦距与取景：有效操作与状态变化：视场 40°↔15° 切换；HUD 焦距与距离更新",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.07",
+              "text": "视场 40°↔15° 切换；HUD 焦距与距离更新",
+              "requirement_ids": [
+                "M04"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "焦距与取景：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.TC2.08",
+        "table_column": "C2",
+        "assertion": "惊扰与回归：有效操作与状态变化：行为中断 → 离开观测点 → 60 秒不回归该点；蹲伏芦苇丛内半径缩至 4 米",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.08",
+              "text": "行为中断 → 离开观测点 → 60 秒不回归该点；蹲伏芦苇丛内半径缩至 4 米",
+              "requirement_ids": [
+                "M05"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "惊扰与回归：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C3.01",
+        "table_column": "C3",
+        "assertion": "角色与物体接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0001",
+              "text": "3d_object/wildlife_surveyor：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0002",
+              "text": "3d_object/egret_heron：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G02",
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0003",
+              "text": "3d_object/reed_warbler：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G02",
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0004",
+              "text": "3d_object/ripple_otter：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G02",
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C3.02",
+        "table_column": "C3",
+        "assertion": "动作占位接口；VFX占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0006",
+              "text": "motion/idle：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "motion",
+              "topic": "动作占位接口"
+            },
+            {
+              "id": "C3.s0007",
+              "text": "motion/walk：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "motion",
+              "topic": "动作占位接口"
+            },
+            {
+              "id": "C3.s0008",
+              "text": "motion/crouch_sneak：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "motion",
+              "topic": "动作占位接口"
+            },
+            {
+              "id": "C3.s0020",
+              "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+              "requirement_ids": [
+                "F05",
+                "F07",
+                "N06"
+              ],
+              "scoring_role": "scored",
+              "system": "vfx",
+              "topic": "VFX占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C3.03",
+        "table_column": "C3",
+        "assertion": "声音占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0009",
+              "text": "audio/camera_open：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0010",
+              "text": "audio/zoom_tick：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0011",
+              "text": "audio/focus_lock：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0012",
+              "text": "audio/shutter_soft：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0013",
+              "text": "audio/archive_page：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0014",
+              "text": "audio/wings_burst：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0015",
+              "text": "audio/report_stamp：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0016",
+              "text": "audio/film_empty：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0017",
+              "text": "audio/wetland_ambience：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C3.04",
+        "table_column": "C3",
+        "assertion": "演出占位接口；场景与地标接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0018",
+              "text": "cg_video/开场调查：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C01"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0019",
+              "text": "cg_video/调查报告：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C02"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0005",
+              "text": "3d_scene/G052_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L02"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_scene",
+              "topic": "场景与地标接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.Q.01",
+        "table_column": "Q",
+        "assertion": "视角与镜头；画面验收3；画面验收2等6项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0006",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：第三人称跟随（距离 3.5 米、高度 2 米），平滑插值 0.08 秒",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0007",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：取景模式切换为相机取景框画面（保留肩后视角叠加）",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0008",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头边界＝湿地步道与可涉区外框",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0009",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：受惊失败时镜头短暂跟随惊飞方向 0.5 秒。",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0022",
+              "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收3",
+              "topic": "画面验收3"
+            },
+            {
+              "id": "Q.s0021",
+              "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收2",
+              "topic": "画面验收2"
+            },
+            {
+              "id": "Q.s0023",
+              "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收4",
+              "topic": "画面验收4"
+            },
+            {
+              "id": "Q.s0020",
+              "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收1",
+              "topic": "画面验收1"
+            },
+            {
+              "id": "Q.s0024",
+              "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "参考图辨识",
+              "topic": "参考图辨识"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.Q.02",
+        "table_column": "Q",
+        "assertion": "关键操作镜头变化；本测例当前无已绑定参考图",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0010",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：3× 焦距时取景画面轻微缩放稳定（减抖动 50%）",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0011",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：惊扰瞬间镜头轻微晃动 0.15 秒",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0012",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：无慢动作。",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0018",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- 本测例当前无已绑定参考图",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01]",
+              "topic": "本测例当前无已绑定参考图"
+            },
+            {
+              "id": "Q.s0019",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：规划的参考图（调查员「苇」、白鹭/苇莺/水獭三物种、相机、湿地观测点等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01]",
+              "topic": "本测例当前无已绑定参考图"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.Q.03",
+        "table_column": "Q",
+        "assertion": "VFX 信息性与遮挡约束；核心循环一句话；环境常驻效果",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0015",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：芦苇与晨雾粒子单帧 ≤ 40 且不遮挡取景判定框与动物。",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "Q.s0001",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- S02 核心循环一句话：观察行为 → 构图拍摄 → 证据入册 → 组合提交 → 结论分支。",
+              "requirement_ids": [
+                "S02"
+              ],
+              "scoring_role": "scored",
+              "system": "S:1. 定位与完整流程 [S01–S06]",
+              "topic": "核心循环一句话"
+            },
+            {
+              "id": "Q.s0013",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：芦苇风摆、水面涟漪与晨雾、玩家泥滩脚印（留痕 45 秒渐隐）、远处飞鸟剪影",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            },
+            {
+              "id": "Q.s0014",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：不遮挡取景判定框。",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.Q.04",
+        "table_column": "Q",
+        "assertion": "屏幕震动；焦距与取景（本包冻结值）；视觉风格与色彩材质",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0016",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：惊扰瞬间 0.15 秒小幅",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "Q.s0017",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：设置界面提供「镜头震动开/关」（关闭不影响判定）。",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "Q.s0002",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：焦距只改变取景画面与目标占比，有效性判定的距离上限仍为实际 15 米",
+              "requirement_ids": [
+                "G05"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "焦距与取景（本包冻结值）"
+            },
+            {
+              "id": "Q.s0003",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：风格化写实湿地",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0004",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝苇绿（#7FA05A 系）＋浅滩米（#D8CFA8 系）＋水色青蓝（#5C8FA3 系）",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0005",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质以芦苇、湿泥、羽色为主，光线为清晨柔光。",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.G.01",
+        "table_column": "G",
+        "assertion": "焦距与取景（本包冻结值）；惊扰与回归（本包冻结值）；交互反馈4等6项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0001",
+              "text": "- G05 焦距与取景（本包冻结值）：取景模式下滚轮切换焦距 2 档（1×/3×）",
+              "requirement_ids": [
+                "G05"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "焦距与取景（本包冻结值）"
+            },
+            {
+              "id": "G.s0002",
+              "text": "1× 视场 40°、3× 视场 15°",
+              "requirement_ids": [
+                "G05"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "焦距与取景（本包冻结值）"
+            },
+            {
+              "id": "G.s0003",
+              "text": "HUD 取景框旁显示当前焦距（图标＋文字「1×/3×」）与实际距离。",
+              "requirement_ids": [
+                "G05"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "焦距与取景（本包冻结值）"
+            },
+            {
+              "id": "G.s0004",
+              "text": "- G09 惊扰与回归（本包冻结值）：跑动进入动物 8 米范围 → 当次行为中断并离开当前观测点，被惊扰动物 60 秒不回归该点，HUD 提示「目标受惊，建议转移观测点」（图标＋文字）",
+              "requirement_ids": [
+                "G09"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "惊扰与回归（本包冻结值）"
+            },
+            {
+              "id": "G.s0005",
+              "text": "蹲伏移动本身不触发惊扰。",
+              "requirement_ids": [
+                "G09"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "惊扰与回归（本包冻结值）"
+            },
+            {
+              "id": "G.s0038",
+              "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈4",
+              "topic": "交互反馈4"
+            },
+            {
+              "id": "G.s0036",
+              "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈2",
+              "topic": "交互反馈2"
+            },
+            {
+              "id": "G.s0037",
+              "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈3",
+              "topic": "交互反馈3"
+            },
+            {
+              "id": "G.s0035",
+              "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈1",
+              "topic": "交互反馈1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+        "table_column": "G",
+        "assertion": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0010",
+              "text": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0011",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 进入取景 | 取景框展开＋焦距/距离显示 | 相机开镜声 | 退出取景 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0012",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 切换焦距 | 视场缩放动画 0.2s＋档位标签跳动 | 变焦轻响 | 完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0013",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 对焦锁定 | 目标描边微亮＋对焦标记 | 对焦提示音 | 目标离开或拍摄 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0014",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 拍摄有效 | 闪光禁用快照框＋照片飞入证据册＋质量徽标弹出 | 快门轻响＋入册叮声 | 完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0015",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 拍摄无效 | 灰色快照框＋失效原因文字（距离/遮挡/标签） | 快门轻响＋短促提示音 | 0.5s |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0016",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 重复样本 | 照片存档不入册＋「重复样本」提示 | 存档沙沙声 | 0.5s |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0017",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 惊扰触发 | 动物急速逃离＋羽毛/水花粒子＋HUD 受惊提示 | 惊飞振翅声＋动物鸣叫 | 离开视野 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0018",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 蹲伏隐蔽 | 角色压低姿态＋芦苇半掩描边＋「隐蔽」图标 | 衣料摩擦声 | 状态常驻 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0019",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 证据入册整理 | 条目卡片排布＋质量徽标高亮 | 纸页翻动声 | 完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0020",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 提交成立 | 报告页盖章＋结论字样弹出 | 盖章声＋上扬音 | 进入结算 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0021",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 提交不成立 | 报告页打回红标＋缺项提示 | 纸页回卷声 | 续拍开始 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0022",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 快门耗尽 | 相机下垂＋「样张不足」面板 | 低提示音 | 自动重开 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.G.03",
+        "table_column": "G",
+        "assertion": "音画同步；环境氛围与声音语言；关键音效清单",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0029",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：快门声与拍摄帧同步",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0030",
+              "text": "盖章声与提交成立帧同步",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0031",
+              "text": "振翅声与 flee 事件帧同步。",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0008",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：清晨湿地的生机——常驻虫鸣与水声、物种鸣叫（白鹭短唳/苇莺啭鸣/水獭低咕）",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0009",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「快门轻响＋对焦提示＋惊飞振翅」，全部音效按 §9 F06 冻结清单交付。",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0023",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单：开镜、变焦、对焦提示、快门轻响、入册叮、失效提示、存档沙沙、振翅、动物鸣叫（三种）、衣料摩擦、翻页、盖章、上扬音、回卷、低提示音",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0024",
+              "text": "环境音：虫鸣＋水声（常驻循环）＋晨风拂苇",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0025",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：循环音开始/结束：环境声随区域载入开始、随结算淡出 0.5s",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0026",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：无配音需求。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.G.04",
+        "table_column": "G",
+        "assertion": "前端界面；UI 必须显示的状态；VFX 信息性与遮挡约束",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0032",
+              "text": "- F10 前端界面：标题（任务简报/开始/设置/退出）→ HUD（快门余量、焦距、距离、惊扰提示、隐蔽图标）→ 取景 UI（取景框/标签选择/对焦标记）→ 证据册（条目/质量/去重提示）→ 提交界面（勾选/确认）→ 结算报告（结论/照片数/质量分布/重开/返回）→ 暂停面板（继续/重开/设置）",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0033",
+              "text": "关键状态附图标＋文字（焦距档、受惊、重复样本），不只靠颜色区分",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0034",
+              "text": "窗口失焦自动暂停。",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0006",
+              "text": "- I06 UI 必须显示的状态：快门余量、当前焦距与距离、取景框、行为标签选择、证据册条目与质量、惊扰提示",
+              "requirement_ids": [
+                "I06"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0007",
+              "text": "HUD 对照见 rubric。",
+              "requirement_ids": [
+                "I06"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0027",
+              "text": "- F07 VFX 信息性与遮挡约束：取景框、对焦标记与惊扰提示承担调查信息",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "G.s0028",
+              "text": "质量徽标承担证据信息",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.P.01",
+        "table_column": "P",
+        "assertion": "运行验收1",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0001",
+              "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收1",
+              "topic": "运行验收1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.P.02",
+        "table_column": "P",
+        "assertion": "运行验收2",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0002",
+              "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收2",
+              "topic": "运行验收2"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.P.03",
+        "table_column": "P",
+        "assertion": "运行验收3",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0003",
+              "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收3",
+              "topic": "运行验收3"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.P.04",
+        "table_column": "P",
+        "assertion": "运行验收4",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0004",
+              "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收4",
+              "topic": "运行验收4"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.CH.01",
+        "table_column": "CH",
+        "assertion": "代码健康诊断",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "CH.s0001",
+              "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0002",
+              "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0003",
+              "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0004",
+              "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "asset_slot": {
+    "version": "core12-v1",
+    "assertions": [
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C1.01",
+        "table_column": "C1",
+        "assertion": "失败代价与结局表达",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0006",
+              "text": "- W04 失败代价与结局表达：快门耗尽＝本季样张不足需重新布点（自动重开文案）",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            },
+            {
+              "id": "C1.s0007",
+              "text": "成功则 C02 呈现报告封页与结论递交场面。",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C1.02",
+        "table_column": "C1",
+        "assertion": "叙事来源；场景所在地；世界与时代背景",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0008",
+              "text": "- W05 叙事来源：三个物种即湿地的指示物种",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0009",
+              "text": "观测点＝保护站既设的蹲点位",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0010",
+              "text": "芦苇丛＝天然隐蔽掩体",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0011",
+              "text": "相机与长焦＝保护站调查装备。全部原创。",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0003",
+              "text": "- W02 场景所在地：芦鸣湿地——芦苇带、浅滩觅食区、水道獭巢三大观测点由步道串联。",
+              "requirement_ids": [
+                "W02"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "场景所在地"
+            },
+            {
+              "id": "C1.s0001",
+              "text": "- W01 世界与时代背景：现代生态保护时代",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            },
+            {
+              "id": "C1.s0002",
+              "text": "「芦鸣湿地」正处候鸟迁徙季，保护站需要在两周窗口内完成一份迁徙调查报告。",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C1.03",
+        "table_column": "C1",
+        "assertion": "故事表达方式；玩家身份与当前任务",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0012",
+              "text": "- W08 故事表达方式：开场视频（C01）交代调查任务 → 取景-入册-提交过程承载调查节奏 → 结算视频（C02）收束报告",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            },
+            {
+              "id": "C1.s0013",
+              "text": "故事只做包装，不改变机制数值。",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            },
+            {
+              "id": "C1.s0004",
+              "text": "- W03 玩家身份与当前任务：玩家是野生动物调查员「苇」",
+              "requirement_ids": [
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务"
+            },
+            {
+              "id": "C1.s0005",
+              "text": "当前任务：潜行拍摄白鹭、苇莺、水獭的行为证据，判断湿地是「迁徙停歇地」还是「过境通道」。",
+              "requirement_ids": [
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.01",
+        "table_column": "C2",
+        "assertion": "拍摄条件（主机制）：有效操作与状态变化：按 G02 判定表生成照片有效性 → 有效入册（G07 去重）/无效丢弃",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.01",
+              "text": "按 G02 判定表生成照片有效性 → 有效入册（G07 去重）/无效丢弃",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "拍摄条件（主机制）：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.02",
+        "table_column": "C2",
+        "assertion": "拍摄条件（主机制）：拒绝与边界：任一判定项不满足 → 无效；快门 0 → 拒绝",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.02",
+              "text": "任一判定项不满足 → 无效；快门 0 → 拒绝",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "拍摄条件（主机制）：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.03",
+        "table_column": "C2",
+        "assertion": "证据组合：有效操作与状态变化：按 G03 判定表评估证据集 → 成立/不成立",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.03",
+              "text": "按 G03 判定表评估证据集 → 成立/不成立",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "证据组合：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.04",
+        "table_column": "C2",
+        "assertion": "证据组合：拒绝与边界：组合不成立 → 提示缺项并允许续拍",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.04",
+              "text": "组合不成立 → 提示缺项并允许续拍",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "证据组合：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.05",
+        "table_column": "C2",
+        "assertion": "结论分支：有效操作与状态变化：按证据构成触发「迁徙停歇地」或「过境通道」结论 → 结算",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.05",
+              "text": "按证据构成触发「迁徙停歇地」或「过境通道」结论 → 结算",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "结论分支：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.06",
+        "table_column": "C2",
+        "assertion": "结论分支：拒绝与边界：证据构成与结论不匹配的提交 → 判不成立",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.06",
+              "text": "证据构成与结论不匹配的提交 → 判不成立",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "结论分支：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.07",
+        "table_column": "C2",
+        "assertion": "焦距与取景：有效操作与状态变化：视场 40°↔15° 切换；HUD 焦距与距离更新",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.07",
+              "text": "视场 40°↔15° 切换；HUD 焦距与距离更新",
+              "requirement_ids": [
+                "M04"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "焦距与取景：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.08",
+        "table_column": "C2",
+        "assertion": "惊扰与回归：有效操作与状态变化：行为中断 → 离开观测点 → 60 秒不回归该点；蹲伏芦苇丛内半径缩至 4 米",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.08",
+              "text": "行为中断 → 离开观测点 → 60 秒不回归该点；蹲伏芦苇丛内半径缩至 4 米",
+              "requirement_ids": [
+                "M05"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "惊扰与回归：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.09",
+        "table_column": "C2",
+        "assertion": "暂停冻结与继续：- G04 结果状态 oracle：给定输入状态（距离 12 米、无遮挡、白鹭处于觅食行为、标签选「觅食」）拍摄 → 照片必然入册为有效证据；同一局面但距离 20 米 → 必然无效且不入册；任何偏离即 FAIL。Esc 暂停冻结动物行为与快门；fixed_seed=1052 冻结动物初始位置与巡游路线及行为循环相位。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.09",
+              "text": "- G04 结果状态 oracle：给定输入状态（距离 12 米、无遮挡、白鹭处于觅食行为、标签选「觅食」）拍摄 → 照片必然入册为有效证据；同一局面但距离 20 米 → 必然无效且不入册；任何偏离即 FAIL。Esc 暂停冻结动物行为与快门；fixed_seed=1052 冻结动物初始位置与巡游路线及行为循环相位。",
+              "requirement_ids": [
+                "G04"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "暂停冻结与继续"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.10",
+        "table_column": "C2",
+        "assertion": "成功终局：- V01 成功条件：提交成立证据组合 → 结论分支结算（显示结论、有效照片数、质量分布、快门余量）。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.10",
+              "text": "- V01 成功条件：提交成立证据组合 → 结论分支结算（显示结论、有效照片数、质量分布、快门余量）。",
+              "requirement_ids": [
+                "V01"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "成功终局"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.11",
+        "table_column": "C2",
+        "assertion": "失败或非失败边界：- V02 失败条件：结论不成立（可续拍重提交）；快门耗尽自动重开；无角色死亡态。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.11",
+              "text": "- V02 失败条件：结论不成立（可续拍重提交）；快门耗尽自动重开；无角色死亡态。",
+              "requirement_ids": [
+                "V02"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "失败或非失败边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.12",
+        "table_column": "C2",
+        "assertion": "原生恢复与重新开始：- V03 恢复语义：不成立续拍时快门重置为 24、证据册保留；快门耗尽/手动重开 → 证据册与快门全量清空。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.12",
+              "text": "- V03 恢复语义：不成立续拍时快门重置为 24、证据册保留；快门耗尽/手动重开 → 证据册与快门全量清空。",
+              "requirement_ids": [
+                "V03"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "原生恢复与重新开始"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C3.01",
+        "table_column": "C3",
+        "assertion": "角色与物体接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0001",
+              "text": "3d_object/wildlife_surveyor：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0002",
+              "text": "3d_object/egret_heron：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G02",
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0003",
+              "text": "3d_object/reed_warbler：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G02",
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0004",
+              "text": "3d_object/ripple_otter：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G02",
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C3.02",
+        "table_column": "C3",
+        "assertion": "动作占位接口；VFX占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0006",
+              "text": "motion/idle：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "motion",
+              "topic": "动作占位接口"
+            },
+            {
+              "id": "C3.s0007",
+              "text": "motion/walk：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "motion",
+              "topic": "动作占位接口"
+            },
+            {
+              "id": "C3.s0008",
+              "text": "motion/crouch_sneak：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "motion",
+              "topic": "动作占位接口"
+            },
+            {
+              "id": "C3.s0020",
+              "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+              "requirement_ids": [
+                "F05",
+                "F07",
+                "N06"
+              ],
+              "scoring_role": "scored",
+              "system": "vfx",
+              "topic": "VFX占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C3.03",
+        "table_column": "C3",
+        "assertion": "声音占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0009",
+              "text": "audio/camera_open：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0010",
+              "text": "audio/zoom_tick：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0011",
+              "text": "audio/focus_lock：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0012",
+              "text": "audio/shutter_soft：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0013",
+              "text": "audio/archive_page：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0014",
+              "text": "audio/wings_burst：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0015",
+              "text": "audio/report_stamp：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0016",
+              "text": "audio/film_empty：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0017",
+              "text": "audio/wetland_ambience：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C3.04",
+        "table_column": "C3",
+        "assertion": "演出占位接口；场景与地标接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0018",
+              "text": "cg_video/开场调查：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C01"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0019",
+              "text": "cg_video/调查报告：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C02"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0005",
+              "text": "3d_scene/G052_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L02"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_scene",
+              "topic": "场景与地标接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.Q.01",
+        "table_column": "Q",
+        "assertion": "视角与镜头；画面验收3；画面验收2等6项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0006",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：第三人称跟随（距离 3.5 米、高度 2 米），平滑插值 0.08 秒",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0007",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：取景模式切换为相机取景框画面（保留肩后视角叠加）",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0008",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头边界＝湿地步道与可涉区外框",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0009",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：受惊失败时镜头短暂跟随惊飞方向 0.5 秒。",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0022",
+              "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收3",
+              "topic": "画面验收3"
+            },
+            {
+              "id": "Q.s0021",
+              "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收2",
+              "topic": "画面验收2"
+            },
+            {
+              "id": "Q.s0023",
+              "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收4",
+              "topic": "画面验收4"
+            },
+            {
+              "id": "Q.s0020",
+              "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收1",
+              "topic": "画面验收1"
+            },
+            {
+              "id": "Q.s0024",
+              "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "参考图辨识",
+              "topic": "参考图辨识"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.Q.02",
+        "table_column": "Q",
+        "assertion": "关键操作镜头变化；本测例当前无已绑定参考图",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0010",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：3× 焦距时取景画面轻微缩放稳定（减抖动 50%）",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0011",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：惊扰瞬间镜头轻微晃动 0.15 秒",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0012",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：无慢动作。",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0018",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- 本测例当前无已绑定参考图",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01]",
+              "topic": "本测例当前无已绑定参考图"
+            },
+            {
+              "id": "Q.s0019",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：规划的参考图（调查员「苇」、白鹭/苇莺/水獭三物种、相机、湿地观测点等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01]",
+              "topic": "本测例当前无已绑定参考图"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.Q.03",
+        "table_column": "Q",
+        "assertion": "VFX 信息性与遮挡约束；核心循环一句话；环境常驻效果",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0015",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：芦苇与晨雾粒子单帧 ≤ 40 且不遮挡取景判定框与动物。",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "Q.s0001",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- S02 核心循环一句话：观察行为 → 构图拍摄 → 证据入册 → 组合提交 → 结论分支。",
+              "requirement_ids": [
+                "S02"
+              ],
+              "scoring_role": "scored",
+              "system": "S:1. 定位与完整流程 [S01–S06]",
+              "topic": "核心循环一句话"
+            },
+            {
+              "id": "Q.s0013",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：芦苇风摆、水面涟漪与晨雾、玩家泥滩脚印（留痕 45 秒渐隐）、远处飞鸟剪影",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            },
+            {
+              "id": "Q.s0014",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：不遮挡取景判定框。",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.Q.04",
+        "table_column": "Q",
+        "assertion": "屏幕震动；焦距与取景（本包冻结值）；视觉风格与色彩材质",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0016",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：惊扰瞬间 0.15 秒小幅",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "Q.s0017",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：设置界面提供「镜头震动开/关」（关闭不影响判定）。",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "Q.s0002",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：焦距只改变取景画面与目标占比，有效性判定的距离上限仍为实际 15 米",
+              "requirement_ids": [
+                "G05"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "焦距与取景（本包冻结值）"
+            },
+            {
+              "id": "Q.s0003",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：风格化写实湿地",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0004",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝苇绿（#7FA05A 系）＋浅滩米（#D8CFA8 系）＋水色青蓝（#5C8FA3 系）",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0005",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质以芦苇、湿泥、羽色为主，光线为清晨柔光。",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.G.01",
+        "table_column": "G",
+        "assertion": "焦距与取景（本包冻结值）；惊扰与回归（本包冻结值）；交互反馈4等6项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0001",
+              "text": "- G05 焦距与取景（本包冻结值）：取景模式下滚轮切换焦距 2 档（1×/3×）",
+              "requirement_ids": [
+                "G05"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "焦距与取景（本包冻结值）"
+            },
+            {
+              "id": "G.s0002",
+              "text": "1× 视场 40°、3× 视场 15°",
+              "requirement_ids": [
+                "G05"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "焦距与取景（本包冻结值）"
+            },
+            {
+              "id": "G.s0003",
+              "text": "HUD 取景框旁显示当前焦距（图标＋文字「1×/3×」）与实际距离。",
+              "requirement_ids": [
+                "G05"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "焦距与取景（本包冻结值）"
+            },
+            {
+              "id": "G.s0004",
+              "text": "- G09 惊扰与回归（本包冻结值）：跑动进入动物 8 米范围 → 当次行为中断并离开当前观测点，被惊扰动物 60 秒不回归该点，HUD 提示「目标受惊，建议转移观测点」（图标＋文字）",
+              "requirement_ids": [
+                "G09"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "惊扰与回归（本包冻结值）"
+            },
+            {
+              "id": "G.s0005",
+              "text": "蹲伏移动本身不触发惊扰。",
+              "requirement_ids": [
+                "G09"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "惊扰与回归（本包冻结值）"
+            },
+            {
+              "id": "G.s0038",
+              "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈4",
+              "topic": "交互反馈4"
+            },
+            {
+              "id": "G.s0036",
+              "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈2",
+              "topic": "交互反馈2"
+            },
+            {
+              "id": "G.s0037",
+              "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈3",
+              "topic": "交互反馈3"
+            },
+            {
+              "id": "G.s0035",
+              "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈1",
+              "topic": "交互反馈1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+        "table_column": "G",
+        "assertion": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0010",
+              "text": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0011",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 进入取景 | 取景框展开＋焦距/距离显示 | 相机开镜声 | 退出取景 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0012",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 切换焦距 | 视场缩放动画 0.2s＋档位标签跳动 | 变焦轻响 | 完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0013",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 对焦锁定 | 目标描边微亮＋对焦标记 | 对焦提示音 | 目标离开或拍摄 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0014",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 拍摄有效 | 闪光禁用快照框＋照片飞入证据册＋质量徽标弹出 | 快门轻响＋入册叮声 | 完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0015",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 拍摄无效 | 灰色快照框＋失效原因文字（距离/遮挡/标签） | 快门轻响＋短促提示音 | 0.5s |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0016",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 重复样本 | 照片存档不入册＋「重复样本」提示 | 存档沙沙声 | 0.5s |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0017",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 惊扰触发 | 动物急速逃离＋羽毛/水花粒子＋HUD 受惊提示 | 惊飞振翅声＋动物鸣叫 | 离开视野 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0018",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 蹲伏隐蔽 | 角色压低姿态＋芦苇半掩描边＋「隐蔽」图标 | 衣料摩擦声 | 状态常驻 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0019",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 证据入册整理 | 条目卡片排布＋质量徽标高亮 | 纸页翻动声 | 完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0020",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 提交成立 | 报告页盖章＋结论字样弹出 | 盖章声＋上扬音 | 进入结算 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0021",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 提交不成立 | 报告页打回红标＋缺项提示 | 纸页回卷声 | 续拍开始 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0022",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 快门耗尽 | 相机下垂＋「样张不足」面板 | 低提示音 | 自动重开 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.G.03",
+        "table_column": "G",
+        "assertion": "音画同步；环境氛围与声音语言；关键音效清单",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0029",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：快门声与拍摄帧同步",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0030",
+              "text": "盖章声与提交成立帧同步",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0031",
+              "text": "振翅声与 flee 事件帧同步。",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0008",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：清晨湿地的生机——常驻虫鸣与水声、物种鸣叫（白鹭短唳/苇莺啭鸣/水獭低咕）",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0009",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「快门轻响＋对焦提示＋惊飞振翅」，全部音效按 §9 F06 冻结清单交付。",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0023",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单：开镜、变焦、对焦提示、快门轻响、入册叮、失效提示、存档沙沙、振翅、动物鸣叫（三种）、衣料摩擦、翻页、盖章、上扬音、回卷、低提示音",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0024",
+              "text": "环境音：虫鸣＋水声（常驻循环）＋晨风拂苇",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0025",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：循环音开始/结束：环境声随区域载入开始、随结算淡出 0.5s",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0026",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：无配音需求。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.G.04",
+        "table_column": "G",
+        "assertion": "前端界面；UI 必须显示的状态；VFX 信息性与遮挡约束",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0032",
+              "text": "- F10 前端界面：标题（任务简报/开始/设置/退出）→ HUD（快门余量、焦距、距离、惊扰提示、隐蔽图标）→ 取景 UI（取景框/标签选择/对焦标记）→ 证据册（条目/质量/去重提示）→ 提交界面（勾选/确认）→ 结算报告（结论/照片数/质量分布/重开/返回）→ 暂停面板（继续/重开/设置）",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0033",
+              "text": "关键状态附图标＋文字（焦距档、受惊、重复样本），不只靠颜色区分",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0034",
+              "text": "窗口失焦自动暂停。",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0006",
+              "text": "- I06 UI 必须显示的状态：快门余量、当前焦距与距离、取景框、行为标签选择、证据册条目与质量、惊扰提示",
+              "requirement_ids": [
+                "I06"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0007",
+              "text": "HUD 对照见 rubric。",
+              "requirement_ids": [
+                "I06"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0027",
+              "text": "- F07 VFX 信息性与遮挡约束：取景框、对焦标记与惊扰提示承担调查信息",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "G.s0028",
+              "text": "质量徽标承担证据信息",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.P.01",
+        "table_column": "P",
+        "assertion": "运行验收1",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0001",
+              "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收1",
+              "topic": "运行验收1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.P.02",
+        "table_column": "P",
+        "assertion": "运行验收2",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0002",
+              "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收2",
+              "topic": "运行验收2"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.P.03",
+        "table_column": "P",
+        "assertion": "运行验收3",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0003",
+              "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收3",
+              "topic": "运行验收3"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.P.04",
+        "table_column": "P",
+        "assertion": "运行验收4",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0004",
+              "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收4",
+              "topic": "运行验收4"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.CH.01",
+        "table_column": "CH",
+        "assertion": "代码健康诊断",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "CH.s0001",
+              "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0002",
+              "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0003",
+              "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0004",
+              "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "gameness": {
+    "version": "endpoints-v2-candidate",
+    "assertions": [
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C1.01",
+        "table_column": "C1",
+        "assertion": "失败代价与结局表达",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0006",
+              "text": "- W04 失败代价与结局表达：快门耗尽＝本季样张不足需重新布点（自动重开文案）",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            },
+            {
+              "id": "C1.s0007",
+              "text": "成功则 C02 呈现报告封页与结论递交场面。",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C1.02",
+        "table_column": "C1",
+        "assertion": "叙事来源；场景所在地；世界与时代背景",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0008",
+              "text": "- W05 叙事来源：三个物种即湿地的指示物种",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0009",
+              "text": "观测点＝保护站既设的蹲点位",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0010",
+              "text": "芦苇丛＝天然隐蔽掩体",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0011",
+              "text": "相机与长焦＝保护站调查装备。全部原创。",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0003",
+              "text": "- W02 场景所在地：芦鸣湿地——芦苇带、浅滩觅食区、水道獭巢三大观测点由步道串联。",
+              "requirement_ids": [
+                "W02"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "场景所在地"
+            },
+            {
+              "id": "C1.s0001",
+              "text": "- W01 世界与时代背景：现代生态保护时代",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            },
+            {
+              "id": "C1.s0002",
+              "text": "「芦鸣湿地」正处候鸟迁徙季，保护站需要在两周窗口内完成一份迁徙调查报告。",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C1.03",
+        "table_column": "C1",
+        "assertion": "故事表达方式；玩家身份与当前任务",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0012",
+              "text": "- W08 故事表达方式：开场视频（C01）交代调查任务 → 取景-入册-提交过程承载调查节奏 → 结算视频（C02）收束报告",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            },
+            {
+              "id": "C1.s0013",
+              "text": "故事只做包装，不改变机制数值。",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            },
+            {
+              "id": "C1.s0004",
+              "text": "- W03 玩家身份与当前任务：玩家是野生动物调查员「苇」",
+              "requirement_ids": [
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务"
+            },
+            {
+              "id": "C1.s0005",
+              "text": "当前任务：潜行拍摄白鹭、苇莺、水獭的行为证据，判断湿地是「迁徙停歇地」还是「过境通道」。",
+              "requirement_ids": [
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.01",
+        "table_column": "C2",
+        "assertion": "流程；类型；最低完整流程等5项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0002",
+              "text": "- S03 流程：进入湿地 → 蹲点观察 → 拍摄三个调查对象 → 证据入册 → 提交证据组合 → 结论分支结算。",
+              "requirement_ids": [
+                "S03"
+              ],
+              "scoring_role": "scored",
+              "system": "S:1. 定位与完整流程 [S01–S06]",
+              "topic": "流程"
+            },
+            {
+              "id": "C2.s0001",
+              "text": "- S01 类型：单区域观察拍摄＋证据判定调查。本测例包含的能力：三物种行为循环、双档焦距取景、拍摄有效性判定、照片质量分级、样本去重、潜行隐蔽、惊扰回归、证据组合与二选一结论、开场/结算视频。",
+              "requirement_ids": [
+                "S01"
+              ],
+              "scoring_role": "scored",
+              "system": "S:1. 定位与完整流程 [S01–S06]",
+              "topic": "类型"
+            },
+            {
+              "id": "C2.s0003",
+              "text": "- S04 最低完整流程：可探索湿地、取景拍摄、证据册界面、提交判定、结论结算、重开必须全部存在且有真实入口。",
+              "requirement_ids": [
+                "S04"
+              ],
+              "scoring_role": "scored",
+              "system": "S:1. 定位与完整流程 [S01–S06]",
+              "topic": "最低完整流程"
+            },
+            {
+              "id": "C2.s0007",
+              "text": "- S06 与种子卡差异：种子卡 persistent_state 为「证据册（区域内持久）」",
+              "requirement_ids": [
+                "S06"
+              ],
+              "scoring_role": "scored",
+              "system": "S:1. 定位与完整流程 [S01–S06]",
+              "topic": "与种子卡差异"
+            },
+            {
+              "id": "C2.s0008",
+              "text": "本包冻结为仅局内保留，重开全量清空（P0）。",
+              "requirement_ids": [
+                "S06"
+              ],
+              "scoring_role": "scored",
+              "system": "S:1. 定位与完整流程 [S01–S06]",
+              "topic": "与种子卡差异"
+            },
+            {
+              "id": "C2.s0004",
+              "text": "- S05 失败恢复入口：结论不成立可续拍再提交（快门重置）",
+              "requirement_ids": [
+                "S05"
+              ],
+              "scoring_role": "scored",
+              "system": "S:1. 定位与完整流程 [S01–S06]",
+              "topic": "失败恢复入口"
+            },
+            {
+              "id": "C2.s0005",
+              "text": "快门耗尽自动重开",
+              "requirement_ids": [
+                "S05",
+                "V02"
+              ],
+              "scoring_role": "scored",
+              "system": "S:1. 定位与完整流程 [S01–S06]",
+              "topic": "失败恢复入口"
+            },
+            {
+              "id": "C2.s0006",
+              "text": "结算界面一键重开。",
+              "requirement_ids": [
+                "S05"
+              ],
+              "scoring_role": "scored",
+              "system": "S:1. 定位与完整流程 [S01–S06]",
+              "topic": "失败恢复入口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.02",
+        "table_column": "C2",
+        "assertion": "变焦构图与取景 / 证据入册与整理；取景拍摄；提交判定",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0019",
+              "text": "input：Tab 打开证据册（触发方：玩家）",
+              "requirement_ids": [
+                "S09"
+              ],
+              "scoring_role": "gate",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "证据入册与整理"
+            },
+            {
+              "id": "C2.s0020",
+              "text": "precondition：存在至少一张有效照片",
+              "requirement_ids": [
+                "S09"
+              ],
+              "scoring_role": "gate",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "证据入册与整理"
+            },
+            {
+              "id": "C2.s0021",
+              "text": "state_change：证据册按「物种×行为」去重登记并显示质量档",
+              "requirement_ids": [
+                "S09"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "证据入册与整理"
+            },
+            {
+              "id": "C2.s0022",
+              "text": "next_actions：勾选组合 →「提交判定」",
+              "requirement_ids": [
+                "S09"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "证据入册与整理"
+            },
+            {
+              "id": "C2.s0023",
+              "text": "outcome：待提交组合确定",
+              "requirement_ids": [
+                "S09"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "证据入册与整理"
+            },
+            {
+              "id": "C2.s0014",
+              "text": "input：滚轮切换焦距、左键拍摄、行为标签选择（触发方：玩家）",
+              "requirement_ids": [
+                "S08"
+              ],
+              "scoring_role": "gate",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "取景拍摄"
+            },
+            {
+              "id": "C2.s0015",
+              "text": "precondition：处于取景模式且快门 >0",
+              "requirement_ids": [
+                "S08"
+              ],
+              "scoring_role": "gate",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "取景拍摄"
+            },
+            {
+              "id": "C2.s0016",
+              "text": "state_change：按 G02 判定表生成照片有效性 → 有效入册（去重）/无效丢弃",
+              "requirement_ids": [
+                "S08"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "取景拍摄"
+            },
+            {
+              "id": "C2.s0017",
+              "text": "next_actions：集齐目标组合进入「提交判定」",
+              "requirement_ids": [
+                "S08"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "取景拍摄"
+            },
+            {
+              "id": "C2.s0018",
+              "text": "outcome：证据册条目推进",
+              "requirement_ids": [
+                "S08"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "取景拍摄"
+            },
+            {
+              "id": "C2.s0024",
+              "text": "input：提交界面勾选＋确认（触发方：玩家）",
+              "requirement_ids": [
+                "S10"
+              ],
+              "scoring_role": "gate",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "提交判定"
+            },
+            {
+              "id": "C2.s0025",
+              "text": "precondition：证据组合已勾选",
+              "requirement_ids": [
+                "S10"
+              ],
+              "scoring_role": "gate",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "提交判定"
+            },
+            {
+              "id": "C2.s0026",
+              "text": "state_change：按 G03 判定表评估证据集 → 成立/不成立",
+              "requirement_ids": [
+                "S10",
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "提交判定"
+            },
+            {
+              "id": "C2.s0027",
+              "text": "next_actions：成立 →「结论结算」（先播 C02）；不成立 → 快门重置续拍",
+              "requirement_ids": [
+                "S10"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "提交判定"
+            },
+            {
+              "id": "C2.s0028",
+              "text": "outcome：按 V01 出分支",
+              "requirement_ids": [
+                "S10"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "提交判定"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.03",
+        "table_column": "C2",
+        "assertion": "调查结论与提交 / 结论结算；湿地探索与蹲点",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0029",
+              "text": "input：Enter＝重开 / Esc＝返回标题（触发方：玩家）",
+              "requirement_ids": [
+                "S11"
+              ],
+              "scoring_role": "gate",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "结论结算"
+            },
+            {
+              "id": "C2.s0030",
+              "text": "precondition：成立结论已触发",
+              "requirement_ids": [
+                "S11"
+              ],
+              "scoring_role": "gate",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "结论结算"
+            },
+            {
+              "id": "C2.s0031",
+              "text": "state_change：进入「结算」状态；区域冻结",
+              "requirement_ids": [
+                "S11"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "结论结算"
+            },
+            {
+              "id": "C2.s0032",
+              "text": "next_actions：重开或返回",
+              "requirement_ids": [
+                "S11"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "结论结算"
+            },
+            {
+              "id": "C2.s0033",
+              "text": "outcome：无跨局写入",
+              "requirement_ids": [
+                "S11"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "结论结算"
+            },
+            {
+              "id": "C2.s0009",
+              "text": "input：WASD 移动、Shift 蹲伏靠近、右键取景（触发方：玩家）",
+              "requirement_ids": [
+                "S07"
+              ],
+              "scoring_role": "gate",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "湿地探索与蹲点"
+            },
+            {
+              "id": "C2.s0010",
+              "text": "precondition：标题已完成",
+              "requirement_ids": [
+                "S07"
+              ],
+              "scoring_role": "gate",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "湿地探索与蹲点"
+            },
+            {
+              "id": "C2.s0011",
+              "text": "state_change：进入可操作探索；动物按行为时间表活动",
+              "requirement_ids": [
+                "S07"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "湿地探索与蹲点"
+            },
+            {
+              "id": "C2.s0012",
+              "text": "next_actions：接近目标并进入「取景拍摄」",
+              "requirement_ids": [
+                "S07"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "湿地探索与蹲点"
+            },
+            {
+              "id": "C2.s0013",
+              "text": "outcome：惊扰状态与位置结算",
+              "requirement_ids": [
+                "S07"
+              ],
+              "scoring_role": "scored",
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "湿地探索与蹲点"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.04",
+        "table_column": "C2",
+        "assertion": "证据组合与推理 / 照片质量档（本包冻结值）；统一刻度；样本去重（本包冻结值）等5项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0048",
+              "text": "- G06 照片质量档（本包冻结值）：有效照片分三档——高质量（距离 ≤8 米且目标占取景框 ≥60%）、合格（满足 G02 判定表）、无效",
+              "requirement_ids": [
+                "G06"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "照片质量档（本包冻结值）"
+            },
+            {
+              "id": "C2.s0049",
+              "text": "质量档写入证据册条目并显示于结算报告",
+              "requirement_ids": [
+                "G06"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "照片质量档（本包冻结值）"
+            },
+            {
+              "id": "C2.s0050",
+              "text": "质量不改变 G03 结论判定，仅作报告分级展示。",
+              "requirement_ids": [
+                "G06"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "照片质量档（本包冻结值）"
+            },
+            {
+              "id": "C2.s0034",
+              "text": "- G01 统一刻度：快门次数、有效照片数、证据编号为整数",
+              "requirement_ids": [
+                "G01"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "统一刻度"
+            },
+            {
+              "id": "C2.s0035",
+              "text": "距离为米。",
+              "requirement_ids": [
+                "G01"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "统一刻度"
+            },
+            {
+              "id": "C2.s0051",
+              "text": "- G07 样本去重（本包冻结值）：每种「物种×行为」组合的有效照片仅首张计入证据册条目",
+              "requirement_ids": [
+                "G07"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "样本去重（本包冻结值）"
+            },
+            {
+              "id": "C2.s0052",
+              "text": "后续同组合照片存档但不重复入册",
+              "requirement_ids": [
+                "G07"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "样本去重（本包冻结值）"
+            },
+            {
+              "id": "C2.s0053",
+              "text": "证据册条目数＝去重后的组合数（结算按条目数与质量分布展示）。",
+              "requirement_ids": [
+                "G07"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "样本去重（本包冻结值）"
+            },
+            {
+              "id": "C2.s0040",
+              "text": "- G03 证据组合与结论（本包冻结值）：结论分支二选一——「迁徙停歇地」需 ≥2 种行为证据（各 ≥1 张有效照片）",
+              "requirement_ids": [
+                "G03"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "证据组合与结论（本包冻结值）"
+            },
+            {
+              "id": "C2.s0041",
+              "text": "「过境通道」需 1 种行为证据＋1 张栖息环境照片。提交时按判定表出成立/不成立",
+              "requirement_ids": [
+                "G03"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "证据组合与结论（本包冻结值）"
+            },
+            {
+              "id": "C2.s0042",
+              "text": "不成立可续拍（快门重置）。",
+              "requirement_ids": [
+                "G03"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "证据组合与结论（本包冻结值）"
+            },
+            {
+              "id": "C2.s0059",
+              "text": "蹲伏且位于芦苇丛内 → 惊扰判定半径缩至 4 米",
+              "requirement_ids": [
+                "G09"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "惊扰与回归（本包冻结值）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.05",
+        "table_column": "C2",
+        "assertion": "动物行为时间表（本包冻结值）；拍摄与快门（本包冻结值）；结果状态 oracle",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0054",
+              "text": "- G08 动物行为时间表（本包冻结值）：白鹭＝觅食→梳理→起飞（每状态 20 秒循环）",
+              "requirement_ids": [
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "动物行为时间表（本包冻结值）"
+            },
+            {
+              "id": "C2.s0055",
+              "text": "苇莺＝停歇→鸣唱→隐蔽（每状态 15 秒循环）",
+              "requirement_ids": [
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "动物行为时间表（本包冻结值）"
+            },
+            {
+              "id": "C2.s0056",
+              "text": "水獭＝巡游→栖息→入水（每状态 25 秒循环）",
+              "requirement_ids": [
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "动物行为时间表（本包冻结值）"
+            },
+            {
+              "id": "C2.s0057",
+              "text": "行为循环相位由 seed=1052 冻结",
+              "requirement_ids": [
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "动物行为时间表（本包冻结值）"
+            },
+            {
+              "id": "C2.s0058",
+              "text": "标签必须与拍摄瞬间动物实际状态一致才算有效。",
+              "requirement_ids": [
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "动物行为时间表（本包冻结值）"
+            },
+            {
+              "id": "C2.s0036",
+              "text": "- G02 拍摄与快门（本包冻结值）：快门上限 **24 张**（提交失败续拍时重置）",
+              "requirement_ids": [
+                "G02"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "拍摄与快门（本包冻结值）"
+            },
+            {
+              "id": "C2.s0037",
+              "text": "三个调查对象——白鹭（觅食行为）、苇莺（停歇鸣唱）、水獭（巢穴栖息）",
+              "requirement_ids": [
+                "G02"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "拍摄与快门（本包冻结值）"
+            },
+            {
+              "id": "C2.s0038",
+              "text": "拍摄有效性判定表（本包冻结值）：距离 ≤15 米、目标在取景框内、无遮挡、行为状态与所选标签一致 → 照片有效",
+              "requirement_ids": [
+                "G02"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "拍摄与快门（本包冻结值）"
+            },
+            {
+              "id": "C2.s0039",
+              "text": "任一不满足 → 无效（耗快门但不入册）。",
+              "requirement_ids": [
+                "G02"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "拍摄与快门（本包冻结值）"
+            },
+            {
+              "id": "C2.s0043",
+              "text": "- G04 结果状态 oracle：给定输入状态（距离 12 米、无遮挡、白鹭处于觅食行为、标签选「觅食」）拍摄 → 照片必然入册为有效证据",
+              "requirement_ids": [
+                "G04"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "结果状态 oracle"
+            },
+            {
+              "id": "C2.s0044",
+              "text": "同一局面但距离 20 米 → 必然无效且不入册",
+              "requirement_ids": [
+                "G04"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "结果状态 oracle"
+            },
+            {
+              "id": "C2.s0045",
+              "text": "任何偏离即 FAIL。",
+              "requirement_ids": [
+                "G04"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "结果状态 oracle"
+            },
+            {
+              "id": "C2.s0046",
+              "text": "Esc 暂停冻结动物行为与快门",
+              "requirement_ids": [
+                "G04"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "结果状态 oracle"
+            },
+            {
+              "id": "C2.s0047",
+              "text": "fixed_seed=1052 冻结动物初始位置与巡游路线及行为循环相位。",
+              "requirement_ids": [
+                "G04"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "结果状态 oracle"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.06",
+        "table_column": "C2",
+        "assertion": "照片有效性与目标 / 键鼠；输入延迟目标；无手柄需求。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0060",
+              "text": "- I01 键鼠：WASD＝移动",
+              "requirement_ids": [
+                "I01"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0061",
+              "text": "Shift＝蹲伏靠近（降低惊扰）",
+              "requirement_ids": [
+                "I01"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0062",
+              "text": "右键＝取景",
+              "requirement_ids": [
+                "I01"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0063",
+              "text": "滚轮＝切换焦距",
+              "requirement_ids": [
+                "I01"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0064",
+              "text": "左键＝拍摄",
+              "requirement_ids": [
+                "I01"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0065",
+              "text": "Tab＝证据册",
+              "requirement_ids": [
+                "I01"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0066",
+              "text": "E＝提交界面",
+              "requirement_ids": [
+                "I01"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0067",
+              "text": "Esc＝暂停",
+              "requirement_ids": [
+                "I01"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0068",
+              "text": "结算 Enter＝重开。",
+              "requirement_ids": [
+                "I01"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0079",
+              "text": "- I07 输入延迟目标：移动/蹲伏按键到画面反馈 ≤ 80 毫秒",
+              "requirement_ids": [
+                "I07"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入延迟目标"
+            },
+            {
+              "id": "C2.s0080",
+              "text": "快门反馈 ≤ 100 毫秒。",
+              "requirement_ids": [
+                "I07"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入延迟目标"
+            },
+            {
+              "id": "C2.s0073",
+              "text": "- I03 无手柄需求。",
+              "requirement_ids": [
+                "I03"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "无手柄需求。"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.07",
+        "table_column": "C2",
+        "assertion": "输入语义边界；输入优先级；焦点与失焦规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0069",
+              "text": "- I02 输入语义边界：快门为 0 时拍摄无效",
+              "requirement_ids": [
+                "I02"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入语义边界"
+            },
+            {
+              "id": "C2.s0070",
+              "text": "未取景时左键无效",
+              "requirement_ids": [
+                "I02"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入语义边界"
+            },
+            {
+              "id": "C2.s0071",
+              "text": "提交界面外按 E 无效",
+              "requirement_ids": [
+                "I02"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入语义边界"
+            },
+            {
+              "id": "C2.s0072",
+              "text": "暂停/结算期间输入无效。",
+              "requirement_ids": [
+                "I02"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入语义边界"
+            },
+            {
+              "id": "C2.s0074",
+              "text": "- I04 输入优先级：暂停与结算状态阻断全部玩法输入",
+              "requirement_ids": [
+                "I04"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入优先级"
+            },
+            {
+              "id": "C2.s0075",
+              "text": "取景模式下移动键降速生效、标签选择优先于拍摄。",
+              "requirement_ids": [
+                "I04"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入优先级"
+            },
+            {
+              "id": "C2.s0076",
+              "text": "- I05 焦点与失焦规则：点击画布捕获输入焦点",
+              "requirement_ids": [
+                "I05"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "焦点与失焦规则"
+            },
+            {
+              "id": "C2.s0077",
+              "text": "面板层阻断点击穿透",
+              "requirement_ids": [
+                "I05"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "焦点与失焦规则"
+            },
+            {
+              "id": "C2.s0078",
+              "text": "窗口失焦自动暂停。",
+              "requirement_ids": [
+                "I05"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "焦点与失焦规则"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.08",
+        "table_column": "C2",
+        "assertion": "照片有效性与目标 / 目标物/交互物/场景/UI 对象；生成对象；区域等4项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0085",
+              "text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/取景 UI/证据册/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入",
+              "requirement_ids": [
+                "L03"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 区域与内容清单 [L01–L04]",
+              "topic": "目标物/交互物/场景/UI 对象"
+            },
+            {
+              "id": "C2.s0086",
+              "text": "数量与属性以 L01/L02 与 G 系为准。",
+              "requirement_ids": [
+                "L03"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 区域与内容清单 [L01–L04]",
+              "topic": "目标物/交互物/场景/UI 对象"
+            },
+            {
+              "id": "C2.s0081",
+              "text": "- L01 生成对象：调查员角色 1（人形）、三个调查对象（白鹭/苇莺/水獭，原创造型）、观测点 3、芦苇丛隐蔽区 3、相机 UI（取景框/焦距/距离）",
+              "requirement_ids": [
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 区域与内容清单 [L01–L04]",
+              "topic": "生成对象"
+            },
+            {
+              "id": "C2.s0082",
+              "text": "湿地装饰为表现层。",
+              "requirement_ids": [
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 区域与内容清单 [L01–L04]",
+              "topic": "生成对象"
+            },
+            {
+              "id": "C2.s0083",
+              "text": "- L02 区域：单湿地区域（芦苇带、浅滩、水道），动物初始位置、巡游路线、行为相位与芦苇丛由 seed=1052 冻结",
+              "requirement_ids": [
+                "L02"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 区域与内容清单 [L01–L04]",
+              "topic": "区域"
+            },
+            {
+              "id": "C2.s0084",
+              "text": "惊扰半径 8 米（蹲伏芦苇丛内 4 米）。",
+              "requirement_ids": [
+                "L02"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 区域与内容清单 [L01–L04]",
+              "topic": "区域"
+            },
+            {
+              "id": "C2.s0087",
+              "text": "- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求",
+              "requirement_ids": [
+                "L04"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 区域与内容清单 [L01–L04]",
+              "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+            },
+            {
+              "id": "C2.s0088",
+              "text": "§9 未冻结的装饰造型与配色为生成自由度，不得评估为缺失",
+              "requirement_ids": [
+                "L04"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 区域与内容清单 [L01–L04]",
+              "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+            },
+            {
+              "id": "C2.s0089",
+              "text": "实现默认值必须明确标注且符合核心机制。",
+              "requirement_ids": [
+                "L04"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 区域与内容清单 [L01–L04]",
+              "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.09",
+        "table_column": "C2",
+        "assertion": "证据组合与推理 / 结论分支；证据组合；惊扰与回归",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0099",
+              "text": "input：提交成立组合",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "gate",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "结论分支"
+            },
+            {
+              "id": "C2.s0100",
+              "text": "precondition：组合按 G03 成立",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "gate",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "结论分支"
+            },
+            {
+              "id": "C2.s0101",
+              "text": "state_change：按证据构成触发「迁徙停歇地」或「过境通道」结论 → 结算",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "结论分支"
+            },
+            {
+              "id": "C2.s0102",
+              "text": "invalid_case：证据构成与结论不匹配的提交 → 判不成立",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "结论分支"
+            },
+            {
+              "id": "C2.s0103",
+              "text": "recovery：续拍重提交",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "结论分支"
+            },
+            {
+              "id": "C2.s0095",
+              "text": "input：提交界面勾选证据组合",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "gate",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "证据组合"
+            },
+            {
+              "id": "C2.s0096",
+              "text": "precondition：至少存在待提交条目",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "gate",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "证据组合"
+            },
+            {
+              "id": "C2.s0097",
+              "text": "invalid_case：组合不成立 → 提示缺项并允许续拍",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "证据组合"
+            },
+            {
+              "id": "C2.s0098",
+              "text": "recovery：快门重置为 24、证据册保留",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "证据组合"
+            },
+            {
+              "id": "C2.s0109",
+              "text": "input：跑动进入惊扰半径（系统）",
+              "requirement_ids": [
+                "M05"
+              ],
+              "scoring_role": "gate",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "惊扰与回归"
+            },
+            {
+              "id": "C2.s0110",
+              "text": "precondition：动物在该观测点处于活动中",
+              "requirement_ids": [
+                "M05"
+              ],
+              "scoring_role": "gate",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "惊扰与回归"
+            },
+            {
+              "id": "C2.s0111",
+              "text": "state_change：行为中断 → 离开观测点 → 60 秒不回归该点；蹲伏芦苇丛内半径缩至 4 米",
+              "requirement_ids": [
+                "M05"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "惊扰与回归"
+            },
+            {
+              "id": "C2.s0112",
+              "text": "invalid_case：蹲伏移动不触发",
+              "requirement_ids": [
+                "M05"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "惊扰与回归"
+            },
+            {
+              "id": "C2.s0113",
+              "text": "recovery：60 秒后或转移观测点\n\n系统耦合边（玩法必需、可复现）：",
+              "requirement_ids": [
+                "M05"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "惊扰与回归"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.10",
+        "table_column": "C2",
+        "assertion": "变焦构图与取景 / 焦距与取景；拍摄条件（主机制）；from_system=动物行为时间表 → to_system=拍摄判定系统等4项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0104",
+              "text": "input：滚轮切换焦距",
+              "requirement_ids": [
+                "M04"
+              ],
+              "scoring_role": "gate",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "焦距与取景"
+            },
+            {
+              "id": "C2.s0105",
+              "text": "precondition：处于取景模式",
+              "requirement_ids": [
+                "M04"
+              ],
+              "scoring_role": "gate",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "焦距与取景"
+            },
+            {
+              "id": "C2.s0106",
+              "text": "state_change：视场 40°↔15° 切换；HUD 焦距与距离更新",
+              "requirement_ids": [
+                "M04"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "焦距与取景"
+            },
+            {
+              "id": "C2.s0107",
+              "text": "invalid_case：非取景状态滚轮无效",
+              "requirement_ids": [
+                "M04"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "焦距与取景"
+            },
+            {
+              "id": "C2.s0108",
+              "text": "recovery：无副作用",
+              "requirement_ids": [
+                "M04"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "焦距与取景"
+            },
+            {
+              "id": "C2.s0090",
+              "text": "input：取景＋左键拍摄（含行为标签选择）",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "gate",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "拍摄条件（主机制）"
+            },
+            {
+              "id": "C2.s0091",
+              "text": "precondition：快门 >0 且处于取景模式",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "gate",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "拍摄条件（主机制）"
+            },
+            {
+              "id": "C2.s0092",
+              "text": "state_change：按 G02 判定表生成照片有效性 → 有效入册（G07 去重）/无效丢弃",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "拍摄条件（主机制）"
+            },
+            {
+              "id": "C2.s0093",
+              "text": "invalid_case：任一判定项不满足 → 无效；快门 0 → 拒绝",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "拍摄条件（主机制）"
+            },
+            {
+              "id": "C2.s0094",
+              "text": "recovery：续拍重置快门",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "拍摄条件（主机制）"
+            },
+            {
+              "id": "C2.s0117",
+              "text": "- E02 from_system=动物行为时间表 → to_system=拍摄判定系统",
+              "requirement_ids": [
+                "E02"
+              ],
+              "scoring_role": "scored",
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=动物行为时间表 → to_system=拍摄判定系统"
+            },
+            {
+              "id": "C2.s0118",
+              "text": "changed_state=标签与动物瞬时状态一致/不一致直接决定照片有效/无效（G02 第四判定项）",
+              "requirement_ids": [
+                "E02"
+              ],
+              "scoring_role": "scored",
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=动物行为时间表 → to_system=拍摄判定系统"
+            },
+            {
+              "id": "C2.s0119",
+              "text": "验证方式=同一位置不同行为状态两次拍摄的判定对照。",
+              "requirement_ids": [
+                "E02"
+              ],
+              "scoring_role": "scored",
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=动物行为时间表 → to_system=拍摄判定系统"
+            },
+            {
+              "id": "C2.s0114",
+              "text": "- E01 from_system=潜行系统 → to_system=动物行为系统",
+              "requirement_ids": [
+                "E01"
+              ],
+              "scoring_role": "scored",
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=潜行系统 → to_system=动物行为系统"
+            },
+            {
+              "id": "C2.s0115",
+              "text": "changed_state=蹲伏且芦苇丛内使惊扰半径 8→4 米，可接近至 4–8 米内拍摄（G06 高质量距离档由此可达）",
+              "requirement_ids": [
+                "E01"
+              ],
+              "scoring_role": "scored",
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=潜行系统 → to_system=动物行为系统"
+            },
+            {
+              "id": "C2.s0116",
+              "text": "验证方式=蹲伏芦苇丛内/外分别跑动接近的 flee 事件边界对照（state_before/after）。",
+              "requirement_ids": [
+                "E01"
+              ],
+              "scoring_role": "scored",
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=潜行系统 → to_system=动物行为系统"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C2.11",
+        "table_column": "C2",
+        "assertion": "恢复语义；软锁与不可达处理；失败条件等6项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0123",
+              "text": "- V03 恢复语义：不成立续拍时快门重置为 24、证据册保留",
+              "requirement_ids": [
+                "V03"
+              ],
+              "scoring_role": "scored",
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "恢复语义"
+            },
+            {
+              "id": "C2.s0124",
+              "text": "快门耗尽/手动重开 → 证据册与快门全量清空。",
+              "requirement_ids": [
+                "V03"
+              ],
+              "scoring_role": "scored",
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "恢复语义"
+            },
+            {
+              "id": "C2.s0130",
+              "text": "- V06 软锁与不可达处理：不设永久软锁——快门可续拍重置、行为循环必然复现，任意时刻可完成或重开。",
+              "requirement_ids": [
+                "V06"
+              ],
+              "scoring_role": "scored",
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "软锁与不可达处理"
+            },
+            {
+              "id": "C2.s0121",
+              "text": "- V02 失败条件：结论不成立（可续拍重提交）",
+              "requirement_ids": [
+                "V02"
+              ],
+              "scoring_role": "scored",
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "失败条件"
+            },
+            {
+              "id": "C2.s0122",
+              "text": "无角色死亡态。",
+              "requirement_ids": [
+                "V02"
+              ],
+              "scoring_role": "scored",
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "失败条件"
+            },
+            {
+              "id": "C2.s0120",
+              "text": "- V01 成功条件：提交成立证据组合 → 结论分支结算（显示结论、有效照片数、质量分布、快门余量）。",
+              "requirement_ids": [
+                "V01"
+              ],
+              "scoring_role": "scored",
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "成功条件"
+            },
+            {
+              "id": "C2.s0127",
+              "text": "- V05 persistent_state 生命周期：当前动作级状态即时结算",
+              "requirement_ids": [
+                "V05"
+              ],
+              "scoring_role": "scored",
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state 生命周期"
+            },
+            {
+              "id": "C2.s0128",
+              "text": "当前局级状态（证据册/快门）局内保留、重开清空",
+              "requirement_ids": [
+                "V05"
+              ],
+              "scoring_role": "scored",
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state 生命周期"
+            },
+            {
+              "id": "C2.s0129",
+              "text": "无跨局保留状态。",
+              "requirement_ids": [
+                "V05"
+              ],
+              "scoring_role": "scored",
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state 生命周期"
+            },
+            {
+              "id": "C2.s0125",
+              "text": "- V04 persistent_state：无（重开全量清空",
+              "requirement_ids": [
+                "V04"
+              ],
+              "scoring_role": "scored",
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state"
+            },
+            {
+              "id": "C2.s0126",
+              "text": "证据册仅局内保留，见 §1 与种子卡差异）。",
+              "requirement_ids": [
+                "V04"
+              ],
+              "scoring_role": "scored",
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C3.01",
+        "table_column": "C3",
+        "assertion": "角色与物体接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0001",
+              "text": "3d_object/wildlife_surveyor：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0002",
+              "text": "3d_object/egret_heron：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G02",
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0003",
+              "text": "3d_object/reed_warbler：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G02",
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0004",
+              "text": "3d_object/ripple_otter：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G02",
+                "G08"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C3.02",
+        "table_column": "C3",
+        "assertion": "动作占位接口；VFX占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0006",
+              "text": "motion/idle：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "motion",
+              "topic": "动作占位接口"
+            },
+            {
+              "id": "C3.s0007",
+              "text": "motion/walk：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "motion",
+              "topic": "动作占位接口"
+            },
+            {
+              "id": "C3.s0008",
+              "text": "motion/crouch_sneak：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "motion",
+              "topic": "动作占位接口"
+            },
+            {
+              "id": "C3.s0020",
+              "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+              "requirement_ids": [
+                "F05",
+                "F07",
+                "N06"
+              ],
+              "scoring_role": "scored",
+              "system": "vfx",
+              "topic": "VFX占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C3.03",
+        "table_column": "C3",
+        "assertion": "声音占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0009",
+              "text": "audio/camera_open：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0010",
+              "text": "audio/zoom_tick：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0011",
+              "text": "audio/focus_lock：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0012",
+              "text": "audio/shutter_soft：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0013",
+              "text": "audio/archive_page：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0014",
+              "text": "audio/wings_burst：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0015",
+              "text": "audio/report_stamp：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0016",
+              "text": "audio/film_empty：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0017",
+              "text": "audio/wetland_ambience：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.C3.04",
+        "table_column": "C3",
+        "assertion": "演出占位接口；场景与地标接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0018",
+              "text": "cg_video/开场调查：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C01"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0019",
+              "text": "cg_video/调查报告：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C02"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0005",
+              "text": "3d_scene/G052_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L02"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_scene",
+              "topic": "场景与地标接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.Q.01",
+        "table_column": "Q",
+        "assertion": "视角与镜头；画面验收3；画面验收2等6项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0006",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：第三人称跟随（距离 3.5 米、高度 2 米），平滑插值 0.08 秒",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0007",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：取景模式切换为相机取景框画面（保留肩后视角叠加）",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0008",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头边界＝湿地步道与可涉区外框",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0009",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：受惊失败时镜头短暂跟随惊飞方向 0.5 秒。",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0022",
+              "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收3",
+              "topic": "画面验收3"
+            },
+            {
+              "id": "Q.s0021",
+              "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收2",
+              "topic": "画面验收2"
+            },
+            {
+              "id": "Q.s0023",
+              "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收4",
+              "topic": "画面验收4"
+            },
+            {
+              "id": "Q.s0020",
+              "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收1",
+              "topic": "画面验收1"
+            },
+            {
+              "id": "Q.s0024",
+              "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "参考图辨识",
+              "topic": "参考图辨识"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.Q.02",
+        "table_column": "Q",
+        "assertion": "关键操作镜头变化；本测例当前无已绑定参考图",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0010",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：3× 焦距时取景画面轻微缩放稳定（减抖动 50%）",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0011",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：惊扰瞬间镜头轻微晃动 0.15 秒",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0012",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：无慢动作。",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0018",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- 本测例当前无已绑定参考图",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01]",
+              "topic": "本测例当前无已绑定参考图"
+            },
+            {
+              "id": "Q.s0019",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：规划的参考图（调查员「苇」、白鹭/苇莺/水獭三物种、相机、湿地观测点等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01]",
+              "topic": "本测例当前无已绑定参考图"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.Q.03",
+        "table_column": "Q",
+        "assertion": "VFX 信息性与遮挡约束；核心循环一句话；环境常驻效果",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0015",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：芦苇与晨雾粒子单帧 ≤ 40 且不遮挡取景判定框与动物。",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "Q.s0001",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- S02 核心循环一句话：观察行为 → 构图拍摄 → 证据入册 → 组合提交 → 结论分支。",
+              "requirement_ids": [
+                "S02"
+              ],
+              "scoring_role": "scored",
+              "system": "S:1. 定位与完整流程 [S01–S06]",
+              "topic": "核心循环一句话"
+            },
+            {
+              "id": "Q.s0013",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：芦苇风摆、水面涟漪与晨雾、玩家泥滩脚印（留痕 45 秒渐隐）、远处飞鸟剪影",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            },
+            {
+              "id": "Q.s0014",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：不遮挡取景判定框。",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.Q.04",
+        "table_column": "Q",
+        "assertion": "屏幕震动；焦距与取景（本包冻结值）；视觉风格与色彩材质",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0016",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：惊扰瞬间 0.15 秒小幅",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "Q.s0017",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：设置界面提供「镜头震动开/关」（关闭不影响判定）。",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "Q.s0002",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：焦距只改变取景画面与目标占比，有效性判定的距离上限仍为实际 15 米",
+              "requirement_ids": [
+                "G05"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "焦距与取景（本包冻结值）"
+            },
+            {
+              "id": "Q.s0003",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：风格化写实湿地",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0004",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝苇绿（#7FA05A 系）＋浅滩米（#D8CFA8 系）＋水色青蓝（#5C8FA3 系）",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0005",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质以芦苇、湿泥、羽色为主，光线为清晨柔光。",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.G.01",
+        "table_column": "G",
+        "assertion": "焦距与取景（本包冻结值）；惊扰与回归（本包冻结值）；交互反馈4等6项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0001",
+              "text": "- G05 焦距与取景（本包冻结值）：取景模式下滚轮切换焦距 2 档（1×/3×）",
+              "requirement_ids": [
+                "G05"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "焦距与取景（本包冻结值）"
+            },
+            {
+              "id": "G.s0002",
+              "text": "1× 视场 40°、3× 视场 15°",
+              "requirement_ids": [
+                "G05"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "焦距与取景（本包冻结值）"
+            },
+            {
+              "id": "G.s0003",
+              "text": "HUD 取景框旁显示当前焦距（图标＋文字「1×/3×」）与实际距离。",
+              "requirement_ids": [
+                "G05"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "焦距与取景（本包冻结值）"
+            },
+            {
+              "id": "G.s0004",
+              "text": "- G09 惊扰与回归（本包冻结值）：跑动进入动物 8 米范围 → 当次行为中断并离开当前观测点，被惊扰动物 60 秒不回归该点，HUD 提示「目标受惊，建议转移观测点」（图标＋文字）",
+              "requirement_ids": [
+                "G09"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "惊扰与回归（本包冻结值）"
+            },
+            {
+              "id": "G.s0005",
+              "text": "蹲伏移动本身不触发惊扰。",
+              "requirement_ids": [
+                "G09"
+              ],
+              "scoring_role": "scored",
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "惊扰与回归（本包冻结值）"
+            },
+            {
+              "id": "G.s0038",
+              "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈4",
+              "topic": "交互反馈4"
+            },
+            {
+              "id": "G.s0036",
+              "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈2",
+              "topic": "交互反馈2"
+            },
+            {
+              "id": "G.s0037",
+              "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈3",
+              "topic": "交互反馈3"
+            },
+            {
+              "id": "G.s0035",
+              "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈1",
+              "topic": "交互反馈1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+        "table_column": "G",
+        "assertion": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0010",
+              "text": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0011",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 进入取景 | 取景框展开＋焦距/距离显示 | 相机开镜声 | 退出取景 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0012",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 切换焦距 | 视场缩放动画 0.2s＋档位标签跳动 | 变焦轻响 | 完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0013",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 对焦锁定 | 目标描边微亮＋对焦标记 | 对焦提示音 | 目标离开或拍摄 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0014",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 拍摄有效 | 闪光禁用快照框＋照片飞入证据册＋质量徽标弹出 | 快门轻响＋入册叮声 | 完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0015",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 拍摄无效 | 灰色快照框＋失效原因文字（距离/遮挡/标签） | 快门轻响＋短促提示音 | 0.5s |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0016",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 重复样本 | 照片存档不入册＋「重复样本」提示 | 存档沙沙声 | 0.5s |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0017",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 惊扰触发 | 动物急速逃离＋羽毛/水花粒子＋HUD 受惊提示 | 惊飞振翅声＋动物鸣叫 | 离开视野 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0018",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 蹲伏隐蔽 | 角色压低姿态＋芦苇半掩描边＋「隐蔽」图标 | 衣料摩擦声 | 状态常驻 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0019",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 证据入册整理 | 条目卡片排布＋质量徽标高亮 | 纸页翻动声 | 完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0020",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 提交成立 | 报告页盖章＋结论字样弹出 | 盖章声＋上扬音 | 进入结算 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0021",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 提交不成立 | 报告页打回红标＋缺项提示 | 纸页回卷声 | 续拍开始 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0022",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 快门耗尽 | 相机下垂＋「样张不足」面板 | 低提示音 | 自动重开 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.G.03",
+        "table_column": "G",
+        "assertion": "音画同步；环境氛围与声音语言；关键音效清单",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0029",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：快门声与拍摄帧同步",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0030",
+              "text": "盖章声与提交成立帧同步",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0031",
+              "text": "振翅声与 flee 事件帧同步。",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0008",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：清晨湿地的生机——常驻虫鸣与水声、物种鸣叫（白鹭短唳/苇莺啭鸣/水獭低咕）",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0009",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「快门轻响＋对焦提示＋惊飞振翅」，全部音效按 §9 F06 冻结清单交付。",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0023",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单：开镜、变焦、对焦提示、快门轻响、入册叮、失效提示、存档沙沙、振翅、动物鸣叫（三种）、衣料摩擦、翻页、盖章、上扬音、回卷、低提示音",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0024",
+              "text": "环境音：虫鸣＋水声（常驻循环）＋晨风拂苇",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0025",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：循环音开始/结束：环境声随区域载入开始、随结算淡出 0.5s",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0026",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：无配音需求。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.G.04",
+        "table_column": "G",
+        "assertion": "前端界面；UI 必须显示的状态；VFX 信息性与遮挡约束",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0032",
+              "text": "- F10 前端界面：标题（任务简报/开始/设置/退出）→ HUD（快门余量、焦距、距离、惊扰提示、隐蔽图标）→ 取景 UI（取景框/标签选择/对焦标记）→ 证据册（条目/质量/去重提示）→ 提交界面（勾选/确认）→ 结算报告（结论/照片数/质量分布/重开/返回）→ 暂停面板（继续/重开/设置）",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0033",
+              "text": "关键状态附图标＋文字（焦距档、受惊、重复样本），不只靠颜色区分",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0034",
+              "text": "窗口失焦自动暂停。",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0006",
+              "text": "- I06 UI 必须显示的状态：快门余量、当前焦距与距离、取景框、行为标签选择、证据册条目与质量、惊扰提示",
+              "requirement_ids": [
+                "I06"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0007",
+              "text": "HUD 对照见 rubric。",
+              "requirement_ids": [
+                "I06"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0027",
+              "text": "- F07 VFX 信息性与遮挡约束：取景框、对焦标记与惊扰提示承担调查信息",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "G.s0028",
+              "text": "质量徽标承担证据信息",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.P.01",
+        "table_column": "P",
+        "assertion": "运行验收1",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0001",
+              "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收1",
+              "topic": "运行验收1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.P.02",
+        "table_column": "P",
+        "assertion": "运行验收2",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0002",
+              "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收2",
+              "topic": "运行验收2"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.P.03",
+        "table_column": "P",
+        "assertion": "运行验收3",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0003",
+              "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收3",
+              "topic": "运行验收3"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.P.04",
+        "table_column": "P",
+        "assertion": "运行验收4",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0004",
+              "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收4",
+              "topic": "运行验收4"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G052_wildlife_photo_survey.WB.CH.01",
+        "table_column": "CH",
+        "assertion": "代码健康诊断",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "CH.s0001",
+              "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0002",
+              "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0003",
+              "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0004",
+              "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

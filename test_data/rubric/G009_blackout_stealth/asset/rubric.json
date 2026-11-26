@@ -1,0 +1,26 @@
+{
+  "game_id": "G009_blackout_stealth",
+  "assets": {
+    "G009_blackout_stealth_obj_003": {
+      "assertions": []
+    },
+    "G009_blackout_stealth_obj_004": {
+      "assertions": []
+    },
+    "G009_cg_001": {
+      "assertions": []
+    },
+    "G009_cg_002": {
+      "assertions": []
+    },
+    "G009_cg_003": {
+      "assertions": []
+    },
+    "G009_cg_004": {
+      "assertions": []
+    },
+    "G009_scene_001": {
+      "assertions": []
+    }
+  }
+}

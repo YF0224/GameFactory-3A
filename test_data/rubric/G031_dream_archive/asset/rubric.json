@@ -1,0 +1,35 @@
+{
+  "game_id": "G031_dream_archive",
+  "assets": {
+    "G031_cg_001": {
+      "assertions": []
+    },
+    "G031_cg_002": {
+      "assertions": []
+    },
+    "G031_dream_archive_obj_004": {
+      "assertions": []
+    },
+    "G031_dream_archive_obj_005": {
+      "assertions": []
+    },
+    "G031_dream_archive_obj_006": {
+      "assertions": []
+    },
+    "G031_dream_archive_obj_008": {
+      "assertions": []
+    },
+    "G031_dream_archive_obj_009": {
+      "assertions": []
+    },
+    "G031_scene_001": {
+      "assertions": []
+    },
+    "G031_scene_002": {
+      "assertions": []
+    },
+    "G031_scene_003": {
+      "assertions": []
+    }
+  }
+}

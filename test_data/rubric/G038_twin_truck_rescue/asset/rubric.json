@@ -1,0 +1,23 @@
+{
+  "game_id": "G038_twin_truck_rescue",
+  "assets": {
+    "G038_cg_001": {
+      "assertions": []
+    },
+    "G038_cg_002": {
+      "assertions": []
+    },
+    "G038_cg_003": {
+      "assertions": []
+    },
+    "G038_scene_001": {
+      "assertions": []
+    },
+    "G038_twin_truck_rescue_obj_008": {
+      "assertions": []
+    },
+    "G038_twin_truck_rescue_obj_009": {
+      "assertions": []
+    }
+  }
+}

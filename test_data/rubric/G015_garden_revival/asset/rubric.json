@@ -1,0 +1,62 @@
+{
+  "game_id": "G015_garden_revival",
+  "assets": {
+    "G015_cg_001": {
+      "assertions": []
+    },
+    "G015_cg_002": {
+      "assertions": []
+    },
+    "G015_cg_003": {
+      "assertions": []
+    },
+    "G015_cg_004": {
+      "assertions": []
+    },
+    "G015_garden_revival_obj_001": {
+      "assertions": []
+    },
+    "G015_garden_revival_obj_002": {
+      "assertions": []
+    },
+    "G015_garden_revival_obj_003": {
+      "assertions": []
+    },
+    "G015_garden_revival_obj_004": {
+      "assertions": []
+    },
+    "G015_garden_revival_obj_005": {
+      "assertions": []
+    },
+    "G015_garden_revival_obj_006": {
+      "assertions": []
+    },
+    "G015_garden_revival_obj_007": {
+      "assertions": []
+    },
+    "G015_mot_001": {
+      "assertions": []
+    },
+    "G015_mot_002": {
+      "assertions": []
+    },
+    "G015_mot_003": {
+      "assertions": []
+    },
+    "G015_mot_004": {
+      "assertions": []
+    },
+    "G015_mot_005": {
+      "assertions": []
+    },
+    "G015_mot_006": {
+      "assertions": []
+    },
+    "G015_mot_007": {
+      "assertions": []
+    },
+    "G015_scene_001": {
+      "assertions": []
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "game_id": "G036_salt_flat_timetrial",
+  "assets": {
+    "G036_cg_001": {
+      "assertions": []
+    },
+    "G036_cg_002": {
+      "assertions": []
+    },
+    "G036_cg_003": {
+      "assertions": []
+    },
+    "G036_salt_flat_timetrial_obj_005": {
+      "assertions": []
+    },
+    "G036_scene_001": {
+      "assertions": []
+    }
+  }
+}

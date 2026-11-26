@@ -1,0 +1,17 @@
+{
+  "game_id": "G013_wind_tower_grapple",
+  "assets": {
+    "G013_cg_001": {
+      "assertions": []
+    },
+    "G013_cg_002": {
+      "assertions": []
+    },
+    "G013_cg_003": {
+      "assertions": []
+    },
+    "G013_scene_001": {
+      "assertions": []
+    }
+  }
+}

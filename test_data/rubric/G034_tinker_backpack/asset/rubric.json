@@ -1,0 +1,32 @@
+{
+  "game_id": "G034_tinker_backpack",
+  "assets": {
+    "G034_cg_001": {
+      "assertions": []
+    },
+    "G034_cg_002": {
+      "assertions": []
+    },
+    "G034_cg_003": {
+      "assertions": []
+    },
+    "G034_scene_001": {
+      "assertions": []
+    },
+    "G034_vo_017": {
+      "assertions": []
+    },
+    "G034_vo_018": {
+      "assertions": []
+    },
+    "G034_vo_019": {
+      "assertions": []
+    },
+    "G034_vo_020": {
+      "assertions": []
+    },
+    "G034_vo_021": {
+      "assertions": []
+    }
+  }
+}

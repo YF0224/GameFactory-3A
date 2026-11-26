@@ -1,0 +1,17 @@
+{
+  "game_id": "G007_crystal_probe_run",
+  "assets": {
+    "G007_cg_001": {
+      "assertions": []
+    },
+    "G007_cg_002": {
+      "assertions": []
+    },
+    "G007_cg_003": {
+      "assertions": []
+    },
+    "G007_scene_001": {
+      "assertions": []
+    }
+  }
+}

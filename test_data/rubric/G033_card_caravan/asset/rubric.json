@@ -1,0 +1,32 @@
+{
+  "game_id": "G033_card_caravan",
+  "assets": {
+    "G033_cg_001": {
+      "assertions": []
+    },
+    "G033_cg_002": {
+      "assertions": []
+    },
+    "G033_cg_003": {
+      "assertions": []
+    },
+    "G033_scene_001": {
+      "assertions": []
+    },
+    "G033_vo_017": {
+      "assertions": []
+    },
+    "G033_vo_018": {
+      "assertions": []
+    },
+    "G033_vo_019": {
+      "assertions": []
+    },
+    "G033_vo_020": {
+      "assertions": []
+    },
+    "G033_vo_021": {
+      "assertions": []
+    }
+  }
+}

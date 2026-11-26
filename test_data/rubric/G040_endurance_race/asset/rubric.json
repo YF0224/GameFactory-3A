@@ -1,0 +1,56 @@
+{
+  "game_id": "G040_endurance_race",
+  "assets": {
+    "G040_cg_001": {
+      "assertions": []
+    },
+    "G040_cg_002": {
+      "assertions": []
+    },
+    "G040_cg_003": {
+      "assertions": []
+    },
+    "G040_cg_004": {
+      "assertions": []
+    },
+    "G040_endurance_race_mot_001": {
+      "assertions": []
+    },
+    "G040_endurance_race_obj_001": {
+      "assertions": []
+    },
+    "G040_endurance_race_obj_002": {
+      "assertions": []
+    },
+    "G040_endurance_race_obj_003": {
+      "assertions": []
+    },
+    "G040_endurance_race_obj_004": {
+      "assertions": []
+    },
+    "G040_endurance_race_obj_005": {
+      "assertions": []
+    },
+    "G040_endurance_race_obj_006": {
+      "assertions": []
+    },
+    "G040_endurance_race_obj_007": {
+      "assertions": []
+    },
+    "G040_endurance_race_obj_008": {
+      "assertions": []
+    },
+    "G040_endurance_race_obj_009": {
+      "assertions": []
+    },
+    "G040_scene_001": {
+      "assertions": []
+    },
+    "G040_scene_002": {
+      "assertions": []
+    },
+    "G040_scene_003": {
+      "assertions": []
+    }
+  }
+}

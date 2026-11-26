@@ -1,0 +1,20 @@
+{
+  "game_id": "G056_garden_minigolf",
+  "assets": {
+    "G056_cg_001": {
+      "assertions": []
+    },
+    "G056_cg_002": {
+      "assertions": []
+    },
+    "G056_garden_minigolf_obj_002": {
+      "assertions": []
+    },
+    "G056_garden_minigolf_obj_003": {
+      "assertions": []
+    },
+    "G056_scene_001": {
+      "assertions": []
+    }
+  }
+}

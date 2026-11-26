@@ -1,0 +1,5878 @@
+{
+  "game_id": "G054_identity_trial",
+  "mechanic": {
+    "version": "tiered-core-v1",
+    "assertions": [
+      {
+        "assertion_id": "G054_identity_trial.WB.C1.01",
+        "table_column": "C1",
+        "assertion": "玩家身份与当前任务",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0004",
+              "text": "- W03 玩家身份与当前任务：玩家是过关旅人之一（具体身份由 seed 分配）",
+              "requirement_ids": [
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务"
+            },
+            {
+              "id": "C1.s0005",
+              "text": "当前任务：以身份所属阵营达成目标——守关官找出私运者、私运者混过关防、平民平安通行。",
+              "requirement_ids": [
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C1.02",
+        "table_column": "C1",
+        "assertion": "失败代价与结局表达",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0006",
+              "text": "- W04 失败代价与结局表达：阵营失败＝通行判决按对立阵营出具（私货过关或关口失序）",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            },
+            {
+              "id": "C1.s0007",
+              "text": "结局表达见 G09 与 C03 尾帧，不改变胜负规则。",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C1.03",
+        "table_column": "C1",
+        "assertion": "叙事来源；场景所在地；世界与时代背景",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0008",
+              "text": "- W05 叙事来源：7 种卡牌＝审讯手法（指控/反驳＝言辞对质，攻击/闪避＝肢体冲突，急救/装备＝堂内救治与护具，查验/比对＝关防文书核验）",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0009",
+              "text": "证词档案＝每人的过关申报",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0010",
+              "text": "关口声望＝守关官的考绩。全部原创。",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0003",
+              "text": "- W02 场景所在地：界桥关的审讯堂——圆桌、火把、印章台与证词档案架构成单场景对局。",
+              "requirement_ids": [
+                "W02"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "场景所在地"
+            },
+            {
+              "id": "C1.s0001",
+              "text": "- W01 世界与时代背景：架空战乱初定的年代",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            },
+            {
+              "id": "C1.s0002",
+              "text": "「界桥关」是南北通商的唯一孔道，灾后关防严查夹带兵械与违禁私货的旅队。",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C1.04",
+        "table_column": "C1",
+        "assertion": "故事表达方式",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0011",
+              "text": "- W08 故事表达方式：开场视频（C01）交代关口与六旅人 → 证据揭示视频（C02）在首次比对出「时间重叠·可疑」时强化推理节点 → 审判结算视频（C03）按判决分支收束",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            },
+            {
+              "id": "C1.s0012",
+              "text": "故事只做包装，不改变机制数值。",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.TC2.01",
+        "table_column": "C2",
+        "assertion": "身份隐藏与信息边界（主机制）：有效操作与状态变化：身份仅本人可见；查验与比对仅守关官可执行且结果公开规则不同（查验仅其本人得知、比对全员公开）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.01",
+              "text": "身份仅本人可见；查验与比对仅守关官可执行且结果公开规则不同（查验仅其本人得知、比对全员公开）",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "身份隐藏与信息边界（主机制）：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.TC2.02",
+        "table_column": "C2",
+        "assertion": "身份隐藏与信息边界（主机制）：拒绝与边界：任何泄露他人身份的输出视为红线 FAIL",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.02",
+              "text": "任何泄露他人身份的输出视为红线 FAIL",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "身份隐藏与信息边界（主机制）：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.TC2.03",
+        "table_column": "C2",
+        "assertion": "响应窗口：有效操作与状态变化：窗口开启 5 秒 → 响应（闪避/反驳/急救）或放弃 → 结算",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.03",
+              "text": "窗口开启 5 秒 → 响应（闪避/反驳/急救）或放弃 → 结算",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "响应窗口：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.TC2.04",
+        "table_column": "C2",
+        "assertion": "响应窗口：拒绝与边界：超时视为放弃不可回退",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.04",
+              "text": "超时视为放弃不可回退",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "响应窗口：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.TC2.05",
+        "table_column": "C2",
+        "assertion": "投票与出局：有效操作与状态变化：得票过高出局 → 身份揭示 → 存活信息更新",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.05",
+              "text": "得票过高出局 → 身份揭示 → 存活信息更新",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "投票与出局：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.TC2.06",
+        "table_column": "C2",
+        "assertion": "投票与出局：拒绝与边界：未过半/平票无人出局",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.06",
+              "text": "未过半/平票无人出局",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "投票与出局：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.TC2.07",
+        "table_column": "C2",
+        "assertion": "濒死救援与多阵营胜利：有效操作与状态变化：急救可救回（＋3 HP）；无人救则出局揭示；阵营条件满足 → 胜利结算",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.07",
+              "text": "急救可救回（＋3 HP）；无人救则出局揭示；阵营条件满足 → 胜利结算",
+              "requirement_ids": [
+                "M04"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "濒死救援与多阵营胜利：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.TC2.08",
+        "table_column": "C2",
+        "assertion": "证词与审判状态：有效操作与状态变化：六条陈述登记档案；比对公开「一致/时间重叠·可疑」；真人守关官声望按指控结果 ±2；终局输出通行判决",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.08",
+              "text": "六条陈述登记档案；比对公开「一致/时间重叠·可疑」；真人守关官声望按指控结果 ±2；终局输出通行判决",
+              "requirement_ids": [
+                "M05"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "证词与审判状态：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.TC2.09",
+        "table_column": "C2",
+        "assertion": "暂停冻结与继续：暂停覆盖层打开；窗口倒计时与 AI 行动冻结",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.09",
+              "text": "暂停覆盖层打开；窗口倒计时与 AI 行动冻结",
+              "requirement_ids": [
+                "S11"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "暂停冻结与继续"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.TC2.10",
+        "table_column": "C2",
+        "assertion": "成功终局：- V01 成功条件：真人所在阵营达成 G06 对应胜利条件 → 胜利结算（揭示全部身份、通行判决与关键事件时间线）。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.10",
+              "text": "- V01 成功条件：真人所在阵营达成 G06 对应胜利条件 → 胜利结算（揭示全部身份、通行判决与关键事件时间线）。",
+              "requirement_ids": [
+                "V01"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "成功终局"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.TC2.11",
+        "table_column": "C2",
+        "assertion": "失败或非失败边界：- V02 失败条件：敌对阵营先达成胜利条件 → 失败结算（同样揭示全部身份与判决）。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.11",
+              "text": "- V02 失败条件：敌对阵营先达成胜利条件 → 失败结算（同样揭示全部身份与判决）。",
+              "requirement_ids": [
+                "V02"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "失败或非失败边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.TC2.12",
+        "table_column": "C2",
+        "assertion": "原生恢复与重新开始：- V03 恢复语义：对局结束「重新审理」＝全新一局；seed=1054 复现身份分配、牌序与证词文案（用于评测对账）；局内无存档。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.tiered.12",
+              "text": "- V03 恢复语义：对局结束「重新审理」＝全新一局；seed=1054 复现身份分配、牌序与证词文案（用于评测对账）；局内无存档。",
+              "requirement_ids": [
+                "V03"
+              ],
+              "scoring_role": "scored",
+              "system": "tiered-core-v1",
+              "topic": "原生恢复与重新开始"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.01",
+        "table_column": "C3",
+        "assertion": "角色与物体接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0001",
+              "text": "3d_object/gate_warden：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0002",
+              "text": "3d_object/merchant_shen：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0003",
+              "text": "3d_object/herb_woman：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0004",
+              "text": "3d_object/vagrant_scholar：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0005",
+              "text": "3d_object/courier_boy：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0006",
+              "text": "3d_object/testimony_desk：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G07"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.02",
+        "table_column": "C3",
+        "assertion": "场景与地标接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0007",
+              "text": "3d_scene/G054_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L02"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_scene",
+              "topic": "场景与地标接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.03",
+        "table_column": "C3",
+        "assertion": "动作占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0008",
+              "text": "motion/testimony_gesture：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "motion",
+              "topic": "动作占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.04",
+        "table_column": "C3",
+        "assertion": "声音占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0009",
+              "text": "audio/paper_slide：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.05",
+        "table_column": "C3",
+        "assertion": "声音占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0010",
+              "text": "audio/card_flip：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0011",
+              "text": "audio/window_tick：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0012",
+              "text": "audio/contradiction_sting：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0013",
+              "text": "audio/consistent_page：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0014",
+              "text": "audio/vote_gavel：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0015",
+              "text": "audio/reveal_gong：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0016",
+              "text": "audio/prestige_stamp：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0017",
+              "text": "audio/verdict_bell：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0018",
+              "text": "audio/gate_hall_ambience：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.06",
+        "table_column": "C3",
+        "assertion": "演出占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0019",
+              "text": "cg_video/开场抵达：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C01"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0020",
+              "text": "cg_video/关键证据揭示：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C02"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0021",
+              "text": "cg_video/审判结算：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C03"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.07",
+        "table_column": "C3",
+        "assertion": "VFX占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0022",
+              "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+              "requirement_ids": [
+                "F07",
+                "N06"
+              ],
+              "scoring_role": "scored",
+              "system": "vfx",
+              "topic": "VFX占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.01",
+        "table_column": "Q",
+        "assertion": "视角与镜头；本测例当前无已绑定参考图",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0005",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：固定正面圆桌全景（16:9 全员可见），无跟随",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0006",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：缩放仅两档（全景/当前行动者特写），特写随座次行动自动切换并回位",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0007",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头边界＝审讯堂内框。",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0016",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- 本测例当前无已绑定参考图",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01]",
+              "topic": "本测例当前无已绑定参考图"
+            },
+            {
+              "id": "Q.s0017",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：规划的参考图（六名旅人角色、七种卡牌、界桥关审讯堂场景等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01]",
+              "topic": "本测例当前无已绑定参考图"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.02",
+        "table_column": "Q",
+        "assertion": "关键操作镜头变化；视觉风格与色彩材质",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0008",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：比对出「时间重叠·可疑」时镜头在两人间快速切换一次＋红光扫过＋0.15 秒小幅震动",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0009",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：出局揭示时镜头推近被揭示者 5%（1 秒）",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0010",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：无慢动作。",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0002",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：风格化写实的边关夜堂",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0003",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝火把暖橙（#D98A4A 系）＋石墙灰（#7D7468 系）＋印泥朱红（#B03A3A 系）",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0004",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质以粗石、旧木、火光为主，明暗对比支撑推理氛围。",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.03",
+        "table_column": "Q",
+        "assertion": "VFX 信息性与遮挡约束；无手柄需求；参考图辨识",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0013",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：火把烟粒单帧 ≤ 30 且不遮挡手牌、倒计时与投票面板。",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "Q.s0001",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：本人身份提示须私显（不向画面外泄露）、他人身份一律不显示",
+              "requirement_ids": [
+                "I03"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "无手柄需求"
+            },
+            {
+              "id": "Q.s0024",
+              "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "参考图辨识",
+              "topic": "参考图辨识"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.04",
+        "table_column": "Q",
+        "assertion": "屏幕震动；环境常驻效果",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0014",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：矛盾比对·可疑 0.15 秒小幅",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "Q.s0015",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：设置界面提供「镜头震动开/关」（关闭不影响判定）。",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "Q.s0011",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：火把光焰跳动与烟、证词档案纸页微动、窗外夜风掠影",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            },
+            {
+              "id": "Q.s0012",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：不遮挡手牌与倒计时。",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.05",
+        "table_column": "Q",
+        "assertion": "画面验收4；画面验收1；画面验收5",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0021",
+              "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收4",
+              "topic": "画面验收4"
+            },
+            {
+              "id": "Q.s0018",
+              "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收1",
+              "topic": "画面验收1"
+            },
+            {
+              "id": "Q.s0022",
+              "text": "占位物比例、坐标和视觉表达一致，避免悬空、穿插或混乱尺度妨碍阅读。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收5",
+              "topic": "画面验收5"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.06",
+        "table_column": "Q",
+        "assertion": "画面验收6；画面验收2；画面验收3",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0023",
+              "text": "画面中前景、背景与交互区域层次清楚，效果不会持续淹没必要信息。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收6",
+              "topic": "画面验收6"
+            },
+            {
+              "id": "Q.s0019",
+              "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收2",
+              "topic": "画面验收2"
+            },
+            {
+              "id": "Q.s0020",
+              "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收3",
+              "topic": "画面验收3"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.01",
+        "table_column": "G",
+        "assertion": "UI 必须显示的状态；无手柄需求",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0004",
+              "text": "- I06 UI 必须显示的状态：手牌数、本人 HP 与身份提示、窗口倒计时、回合数与座次、证词档案（六条陈述与比对结果）、投票进度",
+              "requirement_ids": [
+                "I06"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0005",
+              "text": "HUD 对照见 rubric。",
+              "requirement_ids": [
+                "I06"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0002",
+              "text": "- I03 无手柄需求",
+              "requirement_ids": [
+                "I03"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "无手柄需求"
+            },
+            {
+              "id": "G.s0003",
+              "text": "手牌与 HP 常驻可见。",
+              "requirement_ids": [
+                "I03"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "无手柄需求"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.02",
+        "table_column": "G",
+        "assertion": "目标物/交互物/场景/UI 对象；生成对象；最低完整流程",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0007",
+              "text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（对局 HUD/证词档案/投票面板/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入",
+              "requirement_ids": [
+                "L03"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "目标物/交互物/场景/UI 对象"
+            },
+            {
+              "id": "G.s0008",
+              "text": "数量与属性以 L01/L02 与 G 系为准。",
+              "requirement_ids": [
+                "L03"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "目标物/交互物/场景/UI 对象"
+            },
+            {
+              "id": "G.s0006",
+              "text": "- L01 生成对象：角色 6（原创造型：关口守卫、行商、农妇、医士、驿卒、游学书生）、卡牌 7 种、关口圆桌场景（证词档案台、火把、印章）、身份提示与投票面板、结算面板。",
+              "requirement_ids": [
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "生成对象"
+            },
+            {
+              "id": "G.s0001",
+              "text": "- S04 最低完整流程：身份提示、手牌、出牌、响应窗口、投票面板、出局揭示、结算、重开必须全部存在且有真实入口。",
+              "requirement_ids": [
+                "S04"
+              ],
+              "scoring_role": "scored",
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "最低完整流程"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.03",
+        "table_column": "G",
+        "assertion": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）；VFX 信息性与遮挡约束",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0011",
+              "text": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0012",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 证词发布 | 说话者立牌＋字幕逐字浮现＋档案纸飞入档案架 | 纸页声 | 下一位开始 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0013",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 摸牌 | 两张牌从牌堆飞入手牌 | 翻牌声 | 到位即停 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0014",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出牌 | 卡牌推至桌面中央＋行动者特写 | 出牌轻拍声 | 结算完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0015",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 响应窗口开启 | 屏幕边缘蓝金光边＋倒计时环 | 滴答声（窗口循环） | 响应或超时 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0016",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 矛盾比对·可疑 | 两人立牌红光连线＋「时间重叠·可疑」印章弹出 | 矛盾刺音＋落锤声 | 1s 后常驻标记 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0017",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 矛盾比对·一致 | 两人立牌灰绿连线＋「证词一致」印章 | 翻页确认音 | 0.6s |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0018",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 投票聚焦 | 被投者立牌聚光＋票数跳动 | 落锤声（每票） | 投票结束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0019",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出局揭示 | 被揭示者灰化＋身份徽记翻转亮出 | 揭示锣声 | 常驻灰化 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0020",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 濒死救援 | 急救光带连至濒死者＋HP +3 跳动 | 治疗柔音 | 完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0021",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 声望变化 | 声望章印 +2/−2 弹出 | 盖印声 | 0.5s |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0022",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 阵营胜利 | 判决文书展开＋「通行判决」字样＋阵营色徽 | 判决钟声 | 进入结算 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0027",
+              "text": "- F07 VFX 信息性与遮挡约束：响应窗口光边与倒计时承担时限信息",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "G.s0028",
+              "text": "比对连线与印章承担推理信息",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.04",
+        "table_column": "G",
+        "assertion": "关键音效清单",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0023",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单：纸页、翻牌、出牌轻拍、滴答、矛盾刺音、落锤、翻页确认、揭示锣、治疗柔音、盖印、判决钟声",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0024",
+              "text": "环境音：火把噼啪＋夜风（常驻循环）",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0025",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：循环音开始/结束：滴答按窗口起止、环境声随对局开始、暂停全部静音",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0026",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：无配音需求（证词以字幕文本呈现）。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.05",
+        "table_column": "G",
+        "assertion": "音画同步；环境氛围与声音语言",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0029",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：落锤声与每票入账帧同步",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0030",
+              "text": "矛盾刺音与比对结果帧同步",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0031",
+              "text": "揭示锣与身份翻转帧同步。",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0009",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：夜风穿堂的关口——常驻火把噼啪与风声",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0010",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「翻牌＋盖印＋窗口滴答＋投票落锤＋矛盾刺音」，全部音效按 §9 F06 冻结清单交付。",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.06",
+        "table_column": "G",
+        "assertion": "前端界面",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0032",
+              "text": "- F10 前端界面：标题（开庭/设置/退出）→ 对局 HUD（手牌、本人 HP 与私显身份、回合与座次、窗口倒计时）→ 证词档案面板（六条陈述＋比对记录）→ 投票面板 → 结算（阵营胜负/通行判决/声望徽标/重新审理/返回）→ 暂停面板（继续/重新审理/设置）",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0033",
+              "text": "关键状态附图标＋文字（身份徽记、比对结果、声望），不只靠颜色区分",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0034",
+              "text": "窗口失焦自动暂停。",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.07",
+        "table_column": "G",
+        "assertion": "交互反馈5；交互反馈1；交互反馈3等7项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0039",
+              "text": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈5",
+              "topic": "交互反馈5"
+            },
+            {
+              "id": "G.s0035",
+              "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈1",
+              "topic": "交互反馈1"
+            },
+            {
+              "id": "G.s0037",
+              "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈3",
+              "topic": "交互反馈3"
+            },
+            {
+              "id": "G.s0040",
+              "text": "危险预警与恢复入口可发现，玩家能据此调整操作。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈6",
+              "topic": "交互反馈6"
+            },
+            {
+              "id": "G.s0036",
+              "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈2",
+              "topic": "交互反馈2"
+            },
+            {
+              "id": "G.s0041",
+              "text": "并发单位或多个事件同时发生时，关键反馈仍能对应到正确对象。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈7",
+              "topic": "交互反馈7"
+            },
+            {
+              "id": "G.s0038",
+              "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈4",
+              "topic": "交互反馈4"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.P.01",
+        "table_column": "P",
+        "assertion": "运行验收1",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0001",
+              "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收1",
+              "topic": "运行验收1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.P.02",
+        "table_column": "P",
+        "assertion": "运行验收2",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0002",
+              "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收2",
+              "topic": "运行验收2"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.P.03",
+        "table_column": "P",
+        "assertion": "运行验收3",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0003",
+              "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收3",
+              "topic": "运行验收3"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.P.04",
+        "table_column": "P",
+        "assertion": "运行验收4",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0004",
+              "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收4",
+              "topic": "运行验收4"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.CH.01",
+        "table_column": "CH",
+        "assertion": "代码健康诊断",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "CH.s0001",
+              "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0002",
+              "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0003",
+              "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0004",
+              "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "asset_slot": {
+    "version": "core12-v1",
+    "assertions": [
+      {
+        "assertion_id": "G054_identity_trial.WB.C1.01",
+        "table_column": "C1",
+        "assertion": "玩家身份与当前任务",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0004",
+              "text": "- W03 玩家身份与当前任务：玩家是过关旅人之一（具体身份由 seed 分配）",
+              "requirement_ids": [
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务"
+            },
+            {
+              "id": "C1.s0005",
+              "text": "当前任务：以身份所属阵营达成目标——守关官找出私运者、私运者混过关防、平民平安通行。",
+              "requirement_ids": [
+                "W03"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C1.02",
+        "table_column": "C1",
+        "assertion": "失败代价与结局表达",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0006",
+              "text": "- W04 失败代价与结局表达：阵营失败＝通行判决按对立阵营出具（私货过关或关口失序）",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            },
+            {
+              "id": "C1.s0007",
+              "text": "结局表达见 G09 与 C03 尾帧，不改变胜负规则。",
+              "requirement_ids": [
+                "W04"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C1.03",
+        "table_column": "C1",
+        "assertion": "叙事来源；场景所在地；世界与时代背景",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0008",
+              "text": "- W05 叙事来源：7 种卡牌＝审讯手法（指控/反驳＝言辞对质，攻击/闪避＝肢体冲突，急救/装备＝堂内救治与护具，查验/比对＝关防文书核验）",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0009",
+              "text": "证词档案＝每人的过关申报",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0010",
+              "text": "关口声望＝守关官的考绩。全部原创。",
+              "requirement_ids": [
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0003",
+              "text": "- W02 场景所在地：界桥关的审讯堂——圆桌、火把、印章台与证词档案架构成单场景对局。",
+              "requirement_ids": [
+                "W02"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "场景所在地"
+            },
+            {
+              "id": "C1.s0001",
+              "text": "- W01 世界与时代背景：架空战乱初定的年代",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            },
+            {
+              "id": "C1.s0002",
+              "text": "「界桥关」是南北通商的唯一孔道，灾后关防严查夹带兵械与违禁私货的旅队。",
+              "requirement_ids": [
+                "W01"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C1.04",
+        "table_column": "C1",
+        "assertion": "故事表达方式",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0011",
+              "text": "- W08 故事表达方式：开场视频（C01）交代关口与六旅人 → 证据揭示视频（C02）在首次比对出「时间重叠·可疑」时强化推理节点 → 审判结算视频（C03）按判决分支收束",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            },
+            {
+              "id": "C1.s0012",
+              "text": "故事只做包装，不改变机制数值。",
+              "requirement_ids": [
+                "W08"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.01",
+        "table_column": "C2",
+        "assertion": "身份隐藏与信息边界（主机制）：有效操作与状态变化：身份仅本人可见；查验与比对仅守关官可执行且结果公开规则不同（查验仅其本人得知、比对全员公开）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.01",
+              "text": "身份仅本人可见；查验与比对仅守关官可执行且结果公开规则不同（查验仅其本人得知、比对全员公开）",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "身份隐藏与信息边界（主机制）：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.02",
+        "table_column": "C2",
+        "assertion": "身份隐藏与信息边界（主机制）：拒绝与边界：任何泄露他人身份的输出视为红线 FAIL",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.02",
+              "text": "任何泄露他人身份的输出视为红线 FAIL",
+              "requirement_ids": [
+                "M01"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "身份隐藏与信息边界（主机制）：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.03",
+        "table_column": "C2",
+        "assertion": "响应窗口：有效操作与状态变化：窗口开启 5 秒 → 响应（闪避/反驳/急救）或放弃 → 结算",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.03",
+              "text": "窗口开启 5 秒 → 响应（闪避/反驳/急救）或放弃 → 结算",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "响应窗口：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.04",
+        "table_column": "C2",
+        "assertion": "响应窗口：拒绝与边界：超时视为放弃不可回退",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.04",
+              "text": "超时视为放弃不可回退",
+              "requirement_ids": [
+                "M02"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "响应窗口：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.05",
+        "table_column": "C2",
+        "assertion": "投票与出局：有效操作与状态变化：得票过高出局 → 身份揭示 → 存活信息更新",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.05",
+              "text": "得票过高出局 → 身份揭示 → 存活信息更新",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "投票与出局：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.06",
+        "table_column": "C2",
+        "assertion": "投票与出局：拒绝与边界：未过半/平票无人出局",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.06",
+              "text": "未过半/平票无人出局",
+              "requirement_ids": [
+                "M03"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "投票与出局：拒绝与边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.07",
+        "table_column": "C2",
+        "assertion": "濒死救援与多阵营胜利：有效操作与状态变化：急救可救回（＋3 HP）；无人救则出局揭示；阵营条件满足 → 胜利结算",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.07",
+              "text": "急救可救回（＋3 HP）；无人救则出局揭示；阵营条件满足 → 胜利结算",
+              "requirement_ids": [
+                "M04"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "濒死救援与多阵营胜利：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.08",
+        "table_column": "C2",
+        "assertion": "证词与审判状态：有效操作与状态变化：六条陈述登记档案；比对公开「一致/时间重叠·可疑」；真人守关官声望按指控结果 ±2；终局输出通行判决",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.08",
+              "text": "六条陈述登记档案；比对公开「一致/时间重叠·可疑」；真人守关官声望按指控结果 ±2；终局输出通行判决",
+              "requirement_ids": [
+                "M05"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "证词与审判状态：有效操作与状态变化"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.09",
+        "table_column": "C2",
+        "assertion": "暂停冻结与继续：暂停覆盖层打开；窗口倒计时与 AI 行动冻结",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.09",
+              "text": "暂停覆盖层打开；窗口倒计时与 AI 行动冻结",
+              "requirement_ids": [
+                "S11"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "暂停冻结与继续"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.10",
+        "table_column": "C2",
+        "assertion": "成功终局：- V01 成功条件：真人所在阵营达成 G06 对应胜利条件 → 胜利结算（揭示全部身份、通行判决与关键事件时间线）。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.10",
+              "text": "- V01 成功条件：真人所在阵营达成 G06 对应胜利条件 → 胜利结算（揭示全部身份、通行判决与关键事件时间线）。",
+              "requirement_ids": [
+                "V01"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "成功终局"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.11",
+        "table_column": "C2",
+        "assertion": "失败或非失败边界：- V02 失败条件：敌对阵营先达成胜利条件 → 失败结算（同样揭示全部身份与判决）。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.11",
+              "text": "- V02 失败条件：敌对阵营先达成胜利条件 → 失败结算（同样揭示全部身份与判决）。",
+              "requirement_ids": [
+                "V02"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "失败或非失败边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.12",
+        "table_column": "C2",
+        "assertion": "原生恢复与重新开始：- V03 恢复语义：对局结束「重新审理」＝全新一局；seed=1054 复现身份分配、牌序与证词文案（用于评测对账）；局内无存档。",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.core12.12",
+              "text": "- V03 恢复语义：对局结束「重新审理」＝全新一局；seed=1054 复现身份分配、牌序与证词文案（用于评测对账）；局内无存档。",
+              "requirement_ids": [
+                "V03"
+              ],
+              "scoring_role": "scored",
+              "system": "core12",
+              "topic": "原生恢复与重新开始"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.01",
+        "table_column": "C3",
+        "assertion": "角色与物体接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0001",
+              "text": "3d_object/gate_warden：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0002",
+              "text": "3d_object/merchant_shen：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0003",
+              "text": "3d_object/herb_woman：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0004",
+              "text": "3d_object/vagrant_scholar：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0005",
+              "text": "3d_object/courier_boy：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0006",
+              "text": "3d_object/testimony_desk：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G07"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.02",
+        "table_column": "C3",
+        "assertion": "场景与地标接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0007",
+              "text": "3d_scene/G054_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L02"
+              ],
+              "scoring_role": "scored",
+              "system": "3d_scene",
+              "topic": "场景与地标接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.03",
+        "table_column": "C3",
+        "assertion": "动作占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0008",
+              "text": "motion/testimony_gesture：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "motion",
+              "topic": "动作占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.04",
+        "table_column": "C3",
+        "assertion": "声音占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0009",
+              "text": "audio/paper_slide：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.05",
+        "table_column": "C3",
+        "assertion": "声音占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0010",
+              "text": "audio/card_flip：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0011",
+              "text": "audio/window_tick：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0012",
+              "text": "audio/contradiction_sting：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0013",
+              "text": "audio/consistent_page：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0014",
+              "text": "audio/vote_gavel：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0015",
+              "text": "audio/reveal_gong：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0016",
+              "text": "audio/prestige_stamp：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0017",
+              "text": "audio/verdict_bell：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0018",
+              "text": "audio/gate_hall_ambience：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "audio",
+              "topic": "声音占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.06",
+        "table_column": "C3",
+        "assertion": "演出占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0019",
+              "text": "cg_video/开场抵达：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C01"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0020",
+              "text": "cg_video/关键证据揭示：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C02"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0021",
+              "text": "cg_video/审判结算：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C03"
+              ],
+              "scoring_role": "scored",
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.07",
+        "table_column": "C3",
+        "assertion": "VFX占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0022",
+              "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+              "requirement_ids": [
+                "F07",
+                "N06"
+              ],
+              "scoring_role": "scored",
+              "system": "vfx",
+              "topic": "VFX占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.01",
+        "table_column": "Q",
+        "assertion": "视角与镜头；本测例当前无已绑定参考图",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0005",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：固定正面圆桌全景（16:9 全员可见），无跟随",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0006",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：缩放仅两档（全景/当前行动者特写），特写随座次行动自动切换并回位",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0007",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头边界＝审讯堂内框。",
+              "requirement_ids": [
+                "F01"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0016",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- 本测例当前无已绑定参考图",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01]",
+              "topic": "本测例当前无已绑定参考图"
+            },
+            {
+              "id": "Q.s0017",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：规划的参考图（六名旅人角色、七种卡牌、界桥关审讯堂场景等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。",
+              "requirement_ids": [
+                "A01"
+              ],
+              "scoring_role": "scored",
+              "system": "A:12. 参考图绑定 [A01]",
+              "topic": "本测例当前无已绑定参考图"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.02",
+        "table_column": "Q",
+        "assertion": "关键操作镜头变化；视觉风格与色彩材质",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0008",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：比对出「时间重叠·可疑」时镜头在两人间快速切换一次＋红光扫过＋0.15 秒小幅震动",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0009",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：出局揭示时镜头推近被揭示者 5%（1 秒）",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0010",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：无慢动作。",
+              "requirement_ids": [
+                "F02"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0002",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：风格化写实的边关夜堂",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0003",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝火把暖橙（#D98A4A 系）＋石墙灰（#7D7468 系）＋印泥朱红（#B03A3A 系）",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0004",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质以粗石、旧木、火光为主，明暗对比支撑推理氛围。",
+              "requirement_ids": [
+                "W06"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.03",
+        "table_column": "Q",
+        "assertion": "VFX 信息性与遮挡约束；无手柄需求；参考图辨识",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0013",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：火把烟粒单帧 ≤ 30 且不遮挡手牌、倒计时与投票面板。",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "Q.s0001",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：本人身份提示须私显（不向画面外泄露）、他人身份一律不显示",
+              "requirement_ids": [
+                "I03"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "无手柄需求"
+            },
+            {
+              "id": "Q.s0024",
+              "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "参考图辨识",
+              "topic": "参考图辨识"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.04",
+        "table_column": "Q",
+        "assertion": "屏幕震动；环境常驻效果",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0014",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：矛盾比对·可疑 0.15 秒小幅",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "Q.s0015",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：设置界面提供「镜头震动开/关」（关闭不影响判定）。",
+              "requirement_ids": [
+                "F09"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "Q.s0011",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：火把光焰跳动与烟、证词档案纸页微动、窗外夜风掠影",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            },
+            {
+              "id": "Q.s0012",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：不遮挡手牌与倒计时。",
+              "requirement_ids": [
+                "F04"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.05",
+        "table_column": "Q",
+        "assertion": "画面验收4；画面验收1；画面验收5",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0021",
+              "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收4",
+              "topic": "画面验收4"
+            },
+            {
+              "id": "Q.s0018",
+              "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收1",
+              "topic": "画面验收1"
+            },
+            {
+              "id": "Q.s0022",
+              "text": "占位物比例、坐标和视觉表达一致，避免悬空、穿插或混乱尺度妨碍阅读。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收5",
+              "topic": "画面验收5"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.06",
+        "table_column": "Q",
+        "assertion": "画面验收6；画面验收2；画面验收3",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0023",
+              "text": "画面中前景、背景与交互区域层次清楚，效果不会持续淹没必要信息。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收6",
+              "topic": "画面验收6"
+            },
+            {
+              "id": "Q.s0019",
+              "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收2",
+              "topic": "画面验收2"
+            },
+            {
+              "id": "Q.s0020",
+              "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "scoring_role": "scored",
+              "system": "画面验收3",
+              "topic": "画面验收3"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.01",
+        "table_column": "G",
+        "assertion": "UI 必须显示的状态；无手柄需求",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0004",
+              "text": "- I06 UI 必须显示的状态：手牌数、本人 HP 与身份提示、窗口倒计时、回合数与座次、证词档案（六条陈述与比对结果）、投票进度",
+              "requirement_ids": [
+                "I06"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0005",
+              "text": "HUD 对照见 rubric。",
+              "requirement_ids": [
+                "I06"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0002",
+              "text": "- I03 无手柄需求",
+              "requirement_ids": [
+                "I03"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "无手柄需求"
+            },
+            {
+              "id": "G.s0003",
+              "text": "手牌与 HP 常驻可见。",
+              "requirement_ids": [
+                "I03"
+              ],
+              "scoring_role": "scored",
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "无手柄需求"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.02",
+        "table_column": "G",
+        "assertion": "目标物/交互物/场景/UI 对象；生成对象；最低完整流程",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0007",
+              "text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（对局 HUD/证词档案/投票面板/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入",
+              "requirement_ids": [
+                "L03"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "目标物/交互物/场景/UI 对象"
+            },
+            {
+              "id": "G.s0008",
+              "text": "数量与属性以 L01/L02 与 G 系为准。",
+              "requirement_ids": [
+                "L03"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "目标物/交互物/场景/UI 对象"
+            },
+            {
+              "id": "G.s0006",
+              "text": "- L01 生成对象：角色 6（原创造型：关口守卫、行商、农妇、医士、驿卒、游学书生）、卡牌 7 种、关口圆桌场景（证词档案台、火把、印章）、身份提示与投票面板、结算面板。",
+              "requirement_ids": [
+                "L01"
+              ],
+              "scoring_role": "scored",
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "生成对象"
+            },
+            {
+              "id": "G.s0001",
+              "text": "- S04 最低完整流程：身份提示、手牌、出牌、响应窗口、投票面板、出局揭示、结算、重开必须全部存在且有真实入口。",
+              "requirement_ids": [
+                "S04"
+              ],
+              "scoring_role": "scored",
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "最低完整流程"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.03",
+        "table_column": "G",
+        "assertion": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）；VFX 信息性与遮挡约束",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0011",
+              "text": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0012",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 证词发布 | 说话者立牌＋字幕逐字浮现＋档案纸飞入档案架 | 纸页声 | 下一位开始 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0013",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 摸牌 | 两张牌从牌堆飞入手牌 | 翻牌声 | 到位即停 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0014",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出牌 | 卡牌推至桌面中央＋行动者特写 | 出牌轻拍声 | 结算完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0015",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 响应窗口开启 | 屏幕边缘蓝金光边＋倒计时环 | 滴答声（窗口循环） | 响应或超时 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0016",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 矛盾比对·可疑 | 两人立牌红光连线＋「时间重叠·可疑」印章弹出 | 矛盾刺音＋落锤声 | 1s 后常驻标记 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0017",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 矛盾比对·一致 | 两人立牌灰绿连线＋「证词一致」印章 | 翻页确认音 | 0.6s |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0018",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 投票聚焦 | 被投者立牌聚光＋票数跳动 | 落锤声（每票） | 投票结束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0019",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出局揭示 | 被揭示者灰化＋身份徽记翻转亮出 | 揭示锣声 | 常驻灰化 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0020",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 濒死救援 | 急救光带连至濒死者＋HP +3 跳动 | 治疗柔音 | 完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0021",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 声望变化 | 声望章印 +2/−2 弹出 | 盖印声 | 0.5s |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0022",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 阵营胜利 | 判决文书展开＋「通行判决」字样＋阵营色徽 | 判决钟声 | 进入结算 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0027",
+              "text": "- F07 VFX 信息性与遮挡约束：响应窗口光边与倒计时承担时限信息",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "G.s0028",
+              "text": "比对连线与印章承担推理信息",
+              "requirement_ids": [
+                "F07"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.04",
+        "table_column": "G",
+        "assertion": "关键音效清单",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0023",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单：纸页、翻牌、出牌轻拍、滴答、矛盾刺音、落锤、翻页确认、揭示锣、治疗柔音、盖印、判决钟声",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0024",
+              "text": "环境音：火把噼啪＋夜风（常驻循环）",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0025",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：循环音开始/结束：滴答按窗口起止、环境声随对局开始、暂停全部静音",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0026",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：无配音需求（证词以字幕文本呈现）。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.05",
+        "table_column": "G",
+        "assertion": "音画同步；环境氛围与声音语言",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0029",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：落锤声与每票入账帧同步",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0030",
+              "text": "矛盾刺音与比对结果帧同步",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0031",
+              "text": "揭示锣与身份翻转帧同步。",
+              "requirement_ids": [
+                "F08"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0009",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：夜风穿堂的关口——常驻火把噼啪与风声",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0010",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「翻牌＋盖印＋窗口滴答＋投票落锤＋矛盾刺音」，全部音效按 §9 F06 冻结清单交付。",
+              "requirement_ids": [
+                "W07"
+              ],
+              "scoring_role": "scored",
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.06",
+        "table_column": "G",
+        "assertion": "前端界面",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0032",
+              "text": "- F10 前端界面：标题（开庭/设置/退出）→ 对局 HUD（手牌、本人 HP 与私显身份、回合与座次、窗口倒计时）→ 证词档案面板（六条陈述＋比对记录）→ 投票面板 → 结算（阵营胜负/通行判决/声望徽标/重新审理/返回）→ 暂停面板（继续/重新审理/设置）",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0033",
+              "text": "关键状态附图标＋文字（身份徽记、比对结果、声望），不只靠颜色区分",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0034",
+              "text": "窗口失焦自动暂停。",
+              "requirement_ids": [
+                "F10"
+              ],
+              "scoring_role": "scored",
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.07",
+        "table_column": "G",
+        "assertion": "交互反馈5；交互反馈1；交互反馈3等7项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0039",
+              "text": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈5",
+              "topic": "交互反馈5"
+            },
+            {
+              "id": "G.s0035",
+              "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈1",
+              "topic": "交互反馈1"
+            },
+            {
+              "id": "G.s0037",
+              "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈3",
+              "topic": "交互反馈3"
+            },
+            {
+              "id": "G.s0040",
+              "text": "危险预警与恢复入口可发现，玩家能据此调整操作。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈6",
+              "topic": "交互反馈6"
+            },
+            {
+              "id": "G.s0036",
+              "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈2",
+              "topic": "交互反馈2"
+            },
+            {
+              "id": "G.s0041",
+              "text": "并发单位或多个事件同时发生时，关键反馈仍能对应到正确对象。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈7",
+              "topic": "交互反馈7"
+            },
+            {
+              "id": "G.s0038",
+              "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "scoring_role": "scored",
+              "system": "交互反馈4",
+              "topic": "交互反馈4"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.P.01",
+        "table_column": "P",
+        "assertion": "运行验收1",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0001",
+              "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收1",
+              "topic": "运行验收1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.P.02",
+        "table_column": "P",
+        "assertion": "运行验收2",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0002",
+              "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收2",
+              "topic": "运行验收2"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.P.03",
+        "table_column": "P",
+        "assertion": "运行验收3",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0003",
+              "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收3",
+              "topic": "运行验收3"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.P.04",
+        "table_column": "P",
+        "assertion": "运行验收4",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0004",
+              "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "scoring_role": "scored",
+              "system": "运行验收4",
+              "topic": "运行验收4"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.CH.01",
+        "table_column": "CH",
+        "assertion": "代码健康诊断",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "CH.s0001",
+              "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0002",
+              "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0003",
+              "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0004",
+              "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "scoring_role": "scored",
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "gameness": {
+    "version": "final",
+    "assertions": [
+      {
+        "assertion_id": "G054_identity_trial.WB.C1.01",
+        "table_column": "C1",
+        "assertion": "玩家身份与当前任务",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0004",
+              "text": "- W03 玩家身份与当前任务：玩家是过关旅人之一（具体身份由 seed 分配）",
+              "requirement_ids": [
+                "W03"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务"
+            },
+            {
+              "id": "C1.s0005",
+              "text": "当前任务：以身份所属阵营达成目标——守关官找出私运者、私运者混过关防、平民平安通行。",
+              "requirement_ids": [
+                "W03"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "玩家身份与当前任务"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C1.02",
+        "table_column": "C1",
+        "assertion": "失败代价与结局表达",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0006",
+              "text": "- W04 失败代价与结局表达：阵营失败＝通行判决按对立阵营出具（私货过关或关口失序）",
+              "requirement_ids": [
+                "W04"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            },
+            {
+              "id": "C1.s0007",
+              "text": "结局表达见 G09 与 C03 尾帧，不改变胜负规则。",
+              "requirement_ids": [
+                "W04"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "失败代价与结局表达"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C1.03",
+        "table_column": "C1",
+        "assertion": "叙事来源；场景所在地；世界与时代背景",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0008",
+              "text": "- W05 叙事来源：7 种卡牌＝审讯手法（指控/反驳＝言辞对质，攻击/闪避＝肢体冲突，急救/装备＝堂内救治与护具，查验/比对＝关防文书核验）",
+              "requirement_ids": [
+                "W05"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0009",
+              "text": "证词档案＝每人的过关申报",
+              "requirement_ids": [
+                "W05"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0010",
+              "text": "关口声望＝守关官的考绩。全部原创。",
+              "requirement_ids": [
+                "W05"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "叙事来源"
+            },
+            {
+              "id": "C1.s0003",
+              "text": "- W02 场景所在地：界桥关的审讯堂——圆桌、火把、印章台与证词档案架构成单场景对局。",
+              "requirement_ids": [
+                "W02"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "场景所在地"
+            },
+            {
+              "id": "C1.s0001",
+              "text": "- W01 世界与时代背景：架空战乱初定的年代",
+              "requirement_ids": [
+                "W01"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            },
+            {
+              "id": "C1.s0002",
+              "text": "「界桥关」是南北通商的唯一孔道，灾后关防严查夹带兵械与违禁私货的旅队。",
+              "requirement_ids": [
+                "W01"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "世界与时代背景"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C1.04",
+        "table_column": "C1",
+        "assertion": "故事表达方式",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C1.s0011",
+              "text": "- W08 故事表达方式：开场视频（C01）交代关口与六旅人 → 证据揭示视频（C02）在首次比对出「时间重叠·可疑」时强化推理节点 → 审判结算视频（C03）按判决分支收束",
+              "requirement_ids": [
+                "W08"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            },
+            {
+              "id": "C1.s0012",
+              "text": "故事只做包装，不改变机制数值。",
+              "requirement_ids": [
+                "W08"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "故事表达方式"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.01",
+        "table_column": "C2",
+        "assertion": "会话恢复与重开 / 证词与审判层速览；类型；流程等6项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0009",
+              "text": "- S07 证词与审判层速览：开庭证词按座次发布并支持比对",
+              "requirement_ids": [
+                "S07"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "证词与审判层速览"
+            },
+            {
+              "id": "C2.s0010",
+              "text": "关口声望记录玩家指控质量",
+              "requirement_ids": [
+                "S07"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "证词与审判层速览"
+            },
+            {
+              "id": "C2.s0011",
+              "text": "通行判决按阵营胜负表达，不改变 G06 胜负条件。",
+              "requirement_ids": [
+                "S07"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "证词与审判层速览"
+            },
+            {
+              "id": "C2.s0001",
+              "text": "- S01 类型：单真人对局（其余 5 席为本地 AI）的隐藏身份社交推理。本测例包含的能力：身份池与遮蔽、开庭证词与矛盾比对、24 张七种行动/响应牌、5 秒响应窗口、即时投票、濒死救援、三条件阵营胜利、关口声望与通行判决表达、开场/证据/审判视频。",
+              "requirement_ids": [
+                "S01"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "类型"
+            },
+            {
+              "id": "C2.s0003",
+              "text": "- S03 流程：开庭（证词发布）→ 开局试探（回合 1–2）→ 中盘推理（回合 3–5）→ 终局投票（回合 6–8）→ 阵营胜利判定与通行判决。",
+              "requirement_ids": [
+                "S03"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "流程"
+            },
+            {
+              "id": "C2.s0004",
+              "text": "- S05 失败恢复入口：对局结束「重新审理」（一键重开＝全新一局，seed 复现分配与牌序）",
+              "requirement_ids": [
+                "S05"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "失败恢复入口"
+            },
+            {
+              "id": "C2.s0005",
+              "text": "局内无存档",
+              "requirement_ids": [
+                "S05"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "失败恢复入口"
+            },
+            {
+              "id": "C2.s0006",
+              "text": "Esc 暂停。",
+              "requirement_ids": [
+                "S05"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "失败恢复入口"
+            },
+            {
+              "id": "C2.s0007",
+              "text": "- S06 本局耦合边速览：身份信息系统→决策系统（查验/比对结果改变指控与投票指向）",
+              "requirement_ids": [
+                "S06"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "本局耦合边速览"
+            },
+            {
+              "id": "C2.s0008",
+              "text": "响应窗口系统→状态结算系统（闪避/反驳/急救改变行动结算）。",
+              "requirement_ids": [
+                "S06"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "本局耦合边速览"
+            },
+            {
+              "id": "C2.s0002",
+              "text": "- S02 核心循环一句话：回合行动 → 响应窗口 → 状态结算 → 怀疑博弈 → 投票 → 阵营胜利。",
+              "requirement_ids": [
+                "S02"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "核心循环一句话"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.02",
+        "table_column": "C2",
+        "assertion": "中盘推理（回合 3–5）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0012",
+              "text": "input：指控/查验/比对陈述/投票（触发方：玩家/AI）",
+              "requirement_ids": [
+                "S08"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "中盘推理（回合 3–5）"
+            },
+            {
+              "id": "C2.s0013",
+              "text": "precondition：座次轮到且对应牌可用（查验守关官专属；比对每回合限 1 次）",
+              "requirement_ids": [
+                "S08"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "中盘推理（回合 3–5）"
+            },
+            {
+              "id": "C2.s0014",
+              "text": "state_change：指控未被反驳触发即时投票；比对公开「一致/时间重叠」结果",
+              "requirement_ids": [
+                "S08"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "中盘推理（回合 3–5）"
+            },
+            {
+              "id": "C2.s0015",
+              "text": "next_actions：进入「终局投票」",
+              "requirement_ids": [
+                "S08"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "中盘推理（回合 3–5）"
+            },
+            {
+              "id": "C2.s0016",
+              "text": "outcome：信任指向与声望变化",
+              "requirement_ids": [
+                "S08"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "中盘推理（回合 3–5）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.03",
+        "table_column": "C2",
+        "assertion": "投票任务与终局 / 终局投票（回合 6–8）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0017",
+              "text": "input：投票面板点头像（触发方：玩家/AI）",
+              "requirement_ids": [
+                "S09"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "终局投票（回合 6–8）"
+            },
+            {
+              "id": "C2.s0018",
+              "text": "precondition：触发投票或回合推进至终局判定",
+              "requirement_ids": [
+                "S09"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "终局投票（回合 6–8）"
+            },
+            {
+              "id": "C2.s0019",
+              "text": "state_change：得票过半出局并揭示身份；否则无人出局",
+              "requirement_ids": [
+                "S09"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "终局投票（回合 6–8）"
+            },
+            {
+              "id": "C2.s0020",
+              "text": "next_actions：满足任一胜利条件 →「胜利判定与判决」（先播 C03）",
+              "requirement_ids": [
+                "S09"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "终局投票（回合 6–8）"
+            },
+            {
+              "id": "C2.s0021",
+              "text": "outcome：按 G06 判定阵营胜负",
+              "requirement_ids": [
+                "S09"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "终局投票（回合 6–8）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.04",
+        "table_column": "C2",
+        "assertion": "胜利判定与判决",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0022",
+              "text": "input：Enter＝重新审理 / Esc＝返回标题（触发方：玩家）",
+              "requirement_ids": [
+                "S10"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "胜利判定与判决"
+            },
+            {
+              "id": "C2.s0023",
+              "text": "precondition：G06 任一条件达成",
+              "requirement_ids": [
+                "S10"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "胜利判定与判决"
+            },
+            {
+              "id": "C2.s0024",
+              "text": "state_change：揭示全部身份 → 结算面板（阵营胜负、通行判决、声望徽标）",
+              "requirement_ids": [
+                "S10"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "胜利判定与判决"
+            },
+            {
+              "id": "C2.s0025",
+              "text": "next_actions：重新审理或返回",
+              "requirement_ids": [
+                "S10"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "胜利判定与判决"
+            },
+            {
+              "id": "C2.s0026",
+              "text": "outcome：无跨局写入",
+              "requirement_ids": [
+                "S10"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "胜利判定与判决"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.05",
+        "table_column": "C2",
+        "assertion": "暂停",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0027",
+              "text": "input：Esc（触发方：玩家）",
+              "requirement_ids": [
+                "S11"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "暂停"
+            },
+            {
+              "id": "C2.s0028",
+              "text": "precondition：处于对局中",
+              "requirement_ids": [
+                "S11"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "暂停"
+            },
+            {
+              "id": "C2.s0029",
+              "text": "state_change：暂停覆盖层打开；窗口倒计时与 AI 行动冻结",
+              "requirement_ids": [
+                "S11"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "暂停"
+            },
+            {
+              "id": "C2.s0030",
+              "text": "next_actions：Esc 或「继续」→ 恢复",
+              "requirement_ids": [
+                "S11"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "暂停"
+            },
+            {
+              "id": "C2.s0031",
+              "text": "outcome：恢复后倒计时从暂停点继续（G04）",
+              "requirement_ids": [
+                "S11"
+              ],
+              "system": "S:2. 完整核心循环与阶段 [S06–S11]",
+              "topic": "暂停"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.06",
+        "table_column": "C2",
+        "assertion": "视野身份与信息边界 / 对局与身份（本包冻结值）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0034",
+              "text": "- G02 对局与身份（本包冻结值）：6 人局＝真人 1＋AI 5",
+              "requirement_ids": [
+                "G02"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "对局与身份（本包冻结值）"
+            },
+            {
+              "id": "C2.s0035",
+              "text": "身份池——守关官 1、私运者 2、平民 3",
+              "requirement_ids": [
+                "G02"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "对局与身份（本包冻结值）"
+            },
+            {
+              "id": "C2.s0036",
+              "text": "身份仅本人可见",
+              "requirement_ids": [
+                "G02"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "对局与身份（本包冻结值）"
+            },
+            {
+              "id": "C2.s0037",
+              "text": "每人 HP 6。",
+              "requirement_ids": [
+                "G02"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "对局与身份（本包冻结值）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.07",
+        "table_column": "C2",
+        "assertion": "回合与响应窗口（本包冻结值）；统一刻度",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0041",
+              "text": "- G04 回合与响应窗口（本包冻结值）：按座次 1–6 行动：摸 2 → 出 1 张行动牌 → 结算",
+              "requirement_ids": [
+                "G04"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "回合与响应窗口（本包冻结值）"
+            },
+            {
+              "id": "C2.s0042",
+              "text": "被攻击/被指控/有玩家濒死时开启 5 秒响应窗口（AI 即时决策，真人超时视为放弃）",
+              "requirement_ids": [
+                "G04"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "回合与响应窗口（本包冻结值）"
+            },
+            {
+              "id": "C2.s0043",
+              "text": "窗口内可出对应响应牌（闪避/反驳/急救各限对应场景）。",
+              "requirement_ids": [
+                "G04"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "回合与响应窗口（本包冻结值）"
+            },
+            {
+              "id": "C2.s0032",
+              "text": "- G01 统一刻度：HP 按点数、牌按张、票按票计、声望按点（0–10）",
+              "requirement_ids": [
+                "G01"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "统一刻度"
+            },
+            {
+              "id": "C2.s0033",
+              "text": "回合制为主，仅响应窗口为 5 秒限时（本包冻结值）。",
+              "requirement_ids": [
+                "G01"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "统一刻度"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.08",
+        "table_column": "C2",
+        "assertion": "投票任务与终局 / 投票与出局（本包冻结值）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0044",
+              "text": "- G05 投票与出局（本包冻结值）：指控未被反驳即触发即时投票（全体存活者各 1 票）",
+              "requirement_ids": [
+                "G05"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "投票与出局（本包冻结值）"
+            },
+            {
+              "id": "C2.s0045",
+              "text": "得票严格过半（＞存活人数一半）者出局并揭示身份",
+              "requirement_ids": [
+                "G05"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "投票与出局（本包冻结值）"
+            },
+            {
+              "id": "C2.s0046",
+              "text": "平票或未过半无人出局",
+              "requirement_ids": [
+                "G05"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "投票与出局（本包冻结值）"
+            },
+            {
+              "id": "C2.s0047",
+              "text": "HP 归零进入濒死，无人出急救则出局并揭示身份。",
+              "requirement_ids": [
+                "G05"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "投票与出局（本包冻结值）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.09",
+        "table_column": "C2",
+        "assertion": "胜利判定与独立 oracle（本包冻结值）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0048",
+              "text": "- G06 胜利判定与独立 oracle（本包冻结值）：①私运者全部出局 → 守关官阵营胜（存活平民同享）",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "胜利判定与独立 oracle（本包冻结值）"
+            },
+            {
+              "id": "C2.s0049",
+              "text": "②守关官出局或私运者存活数 ≥ 非私运者存活数 → 私运者胜",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "胜利判定与独立 oracle（本包冻结值）"
+            },
+            {
+              "id": "C2.s0050",
+              "text": "③回合 8 上限：在场私运者 ≥2 判私运者胜、否则守关官胜。投票 oracle——6 人存活、4 票同投 1 人（＞3）必出局揭示",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "胜利判定与独立 oracle（本包冻结值）"
+            },
+            {
+              "id": "C2.s0051",
+              "text": "3 票（未过半）必无人出局",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "胜利判定与独立 oracle（本包冻结值）"
+            },
+            {
+              "id": "C2.s0052",
+              "text": "任何偏离即 FAIL。",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "胜利判定与独立 oracle（本包冻结值）"
+            },
+            {
+              "id": "C2.s0053",
+              "text": "AI 信息红线：AI 决策仅基于公开信息与自身身份，任何 AI 输出（日志/文本/行为）不得包含或泄露他人身份（身份遮蔽断言）。",
+              "requirement_ids": [
+                "G06"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "胜利判定与独立 oracle（本包冻结值）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.10",
+        "table_column": "C2",
+        "assertion": "开庭证词与矛盾（本包冻结值）；牌组（本包冻结值）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0054",
+              "text": "- G07 开庭证词与矛盾（本包冻结值）：开局按座次 1–6 每人发布一句公开「当日行踪陈述」（文案由 seed 冻结）",
+              "requirement_ids": [
+                "G07"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "开庭证词与矛盾（本包冻结值）"
+            },
+            {
+              "id": "C2.s0055",
+              "text": "其中两名私运者的陈述间预置 1 处「时间重叠矛盾」",
+              "requirement_ids": [
+                "G07"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "开庭证词与矛盾（本包冻结值）"
+            },
+            {
+              "id": "C2.s0056",
+              "text": "守关官专属「比对」牌（每回合限 1 次比对）比对任意两人陈述并公开结果（「证词一致」或「时间重叠·可疑」）",
+              "requirement_ids": [
+                "G07"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "开庭证词与矛盾（本包冻结值）"
+            },
+            {
+              "id": "C2.s0057",
+              "text": "比对结果对全员公开，作为推理信息博弈素材",
+              "requirement_ids": [
+                "G07"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "开庭证词与矛盾（本包冻结值）"
+            },
+            {
+              "id": "C2.s0058",
+              "text": "证词与比对不改变 G02–G06 任何数值。",
+              "requirement_ids": [
+                "G07"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "开庭证词与矛盾（本包冻结值）"
+            },
+            {
+              "id": "C2.s0038",
+              "text": "- G03 牌组（本包冻结值）：全牌组 24 张——指控×4、攻击×4（目标 −2 HP）、急救×4（＋3 HP）、闪避×4（响应：抵消攻击）、反驳×4（响应：抵消指控）、查验×2（守关官专属：查看 1 人身份）、比对×2（守关官专属：比对任意两人证词）、装备×2（＋2 HP 上限）",
+              "requirement_ids": [
+                "G03"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "牌组（本包冻结值）"
+            },
+            {
+              "id": "C2.s0039",
+              "text": "每人起始 4 张、每回合摸 2 张",
+              "requirement_ids": [
+                "G03"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "牌组（本包冻结值）"
+            },
+            {
+              "id": "C2.s0040",
+              "text": "牌序由 seed=1054 冻结。",
+              "requirement_ids": [
+                "G03"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "牌组（本包冻结值）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.11",
+        "table_column": "C2",
+        "assertion": "关口声望（本包冻结值，玩家表达层）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0059",
+              "text": "- G08 关口声望（本包冻结值，玩家表达层）：真人担任守关官时启用——声望初始 5（0–10）：指控并导致私运者出局 +2、指控并导致平民出局 −2",
+              "requirement_ids": [
+                "G08"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "关口声望（本包冻结值，玩家表达层）"
+            },
+            {
+              "id": "C2.s0060",
+              "text": "声望 ≥8 终局附「明察」徽标、≤2 附「误判」标记",
+              "requirement_ids": [
+                "G08"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "关口声望（本包冻结值，玩家表达层）"
+            },
+            {
+              "id": "C2.s0061",
+              "text": "真人担任私运者/平民时声望不适用",
+              "requirement_ids": [
+                "G08"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "关口声望（本包冻结值，玩家表达层）"
+            },
+            {
+              "id": "C2.s0062",
+              "text": "声望只改结算展示，不改变胜负条件。",
+              "requirement_ids": [
+                "G08"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "关口声望（本包冻结值，玩家表达层）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.12",
+        "table_column": "C2",
+        "assertion": "通行判决（本包冻结值，叙事表达层）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0063",
+              "text": "- G09 通行判决（本包冻结值，叙事表达层）：终局按阵营胜负输出「关口通行判决」——守关官阵营胜＝关口秩序恢复（真人按身份显示「获准通行/留任守关」）",
+              "requirement_ids": [
+                "G09"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "通行判决（本包冻结值，叙事表达层）"
+            },
+            {
+              "id": "C2.s0064",
+              "text": "私运者胜＝私货过关（真人显示「通行成功」表达）",
+              "requirement_ids": [
+                "G09"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "通行判决（本包冻结值，叙事表达层）"
+            },
+            {
+              "id": "C2.s0065",
+              "text": "判决只改结算文案与 C03 尾帧，不改变 G06 胜利条件",
+              "requirement_ids": [
+                "G09"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "通行判决（本包冻结值，叙事表达层）"
+            },
+            {
+              "id": "C2.s0066",
+              "text": "「重新审理」＝结算界面重开入口（V03）。",
+              "requirement_ids": [
+                "G09"
+              ],
+              "system": "G:3. 数值口径与全局规则 [G01–G09]",
+              "topic": "通行判决（本包冻结值，叙事表达层）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.13",
+        "table_column": "C2",
+        "assertion": "键鼠；输入延迟目标",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0067",
+              "text": "- I01 键鼠：点击手牌＝选牌",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0068",
+              "text": "点击目标＝结算",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0069",
+              "text": "窗口内点响应牌＝响应",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0070",
+              "text": "投票面板点头像＝投票",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0071",
+              "text": "证词档案面板＝查看/比对",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0072",
+              "text": "Esc＝暂停",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0073",
+              "text": "结算界面 Enter＝重新审理。",
+              "requirement_ids": [
+                "I01"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "键鼠"
+            },
+            {
+              "id": "C2.s0084",
+              "text": "- I07 输入延迟目标：选牌/响应点击到反馈 ≤ 100 毫秒。",
+              "requirement_ids": [
+                "I07"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入延迟目标"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.14",
+        "table_column": "C2",
+        "assertion": "视野身份与信息边界 / 输入语义边界",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0074",
+              "text": "- I02 输入语义边界：无对应场景的响应牌不可出",
+              "requirement_ids": [
+                "I02"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入语义边界"
+            },
+            {
+              "id": "C2.s0075",
+              "text": "目标无效（已出局）指令被拒",
+              "requirement_ids": [
+                "I02"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入语义边界"
+            },
+            {
+              "id": "C2.s0076",
+              "text": "暂停/结算期间输入无效",
+              "requirement_ids": [
+                "I02"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入语义边界"
+            },
+            {
+              "id": "C2.s0077",
+              "text": "窗口超时视为放弃且不可回退。",
+              "requirement_ids": [
+                "I02"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入语义边界"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.15",
+        "table_column": "C2",
+        "assertion": "焦点与失焦规则；输入优先级",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0081",
+              "text": "- I05 焦点与失焦规则：点击画布捕获输入焦点",
+              "requirement_ids": [
+                "I05"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "焦点与失焦规则"
+            },
+            {
+              "id": "C2.s0082",
+              "text": "面板层阻断点击穿透",
+              "requirement_ids": [
+                "I05"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "焦点与失焦规则"
+            },
+            {
+              "id": "C2.s0083",
+              "text": "窗口失焦自动暂停（响应窗口同步冻结）。",
+              "requirement_ids": [
+                "I05"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "焦点与失焦规则"
+            },
+            {
+              "id": "C2.s0078",
+              "text": "- I04 输入优先级：暂停与结算状态阻断全部玩法输入",
+              "requirement_ids": [
+                "I04"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入优先级"
+            },
+            {
+              "id": "C2.s0079",
+              "text": "响应窗口内响应优先于普通出牌流程",
+              "requirement_ids": [
+                "I04"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入优先级"
+            },
+            {
+              "id": "C2.s0080",
+              "text": "同帧多输入按选牌→目标→确认顺序结算。",
+              "requirement_ids": [
+                "I04"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "输入优先级"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.16",
+        "table_column": "C2",
+        "assertion": "线索生成与新鲜度 / 冻结需求 vs 实现默认 vs 生成自由度；关卡",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0088",
+              "text": "- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求",
+              "requirement_ids": [
+                "L04"
+              ],
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+            },
+            {
+              "id": "C2.s0089",
+              "text": "§9 未冻结的装饰造型与配色为生成自由度，不得评估为缺失",
+              "requirement_ids": [
+                "L04"
+              ],
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+            },
+            {
+              "id": "C2.s0090",
+              "text": "实现默认值必须明确标注且符合核心机制。",
+              "requirement_ids": [
+                "L04"
+              ],
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "冻结需求 vs 实现默认 vs 生成自由度"
+            },
+            {
+              "id": "C2.s0085",
+              "text": "- L02 关卡：单局 6 人对局",
+              "requirement_ids": [
+                "L02"
+              ],
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "关卡"
+            },
+            {
+              "id": "C2.s0086",
+              "text": "身份分配、牌序与证词文案由 seed=1054 冻结",
+              "requirement_ids": [
+                "L02"
+              ],
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "关卡"
+            },
+            {
+              "id": "C2.s0087",
+              "text": "AI 座次行为策略固定可复现。",
+              "requirement_ids": [
+                "L02"
+              ],
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "关卡"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.17",
+        "table_column": "C2",
+        "assertion": "视野身份与信息边界 / 身份隐藏与信息边界（主机制）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0091",
+              "text": "input：开局身份分配（seed）",
+              "requirement_ids": [
+                "M01"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "身份隐藏与信息边界（主机制）"
+            },
+            {
+              "id": "C2.s0092",
+              "text": "precondition：对局初始化完成",
+              "requirement_ids": [
+                "M01"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "身份隐藏与信息边界（主机制）"
+            },
+            {
+              "id": "C2.s0093",
+              "text": "state_change：身份仅本人可见；查验与比对仅守关官可执行且结果公开规则不同（查验仅其本人得知、比对全员公开）",
+              "requirement_ids": [
+                "M01"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "身份隐藏与信息边界（主机制）"
+            },
+            {
+              "id": "C2.s0094",
+              "text": "invalid_case：任何泄露他人身份的输出视为红线 FAIL",
+              "requirement_ids": [
+                "M01"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "身份隐藏与信息边界（主机制）"
+            },
+            {
+              "id": "C2.s0095",
+              "text": "recovery：终局揭示全量对账",
+              "requirement_ids": [
+                "M01"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "身份隐藏与信息边界（主机制）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.18",
+        "table_column": "C2",
+        "assertion": "响应窗口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0096",
+              "text": "input：被攻击/被指控/濒死触发（系统）",
+              "requirement_ids": [
+                "M02"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "响应窗口"
+            },
+            {
+              "id": "C2.s0097",
+              "text": "precondition：对应响应牌在手",
+              "requirement_ids": [
+                "M02"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "响应窗口"
+            },
+            {
+              "id": "C2.s0098",
+              "text": "state_change：窗口开启 5 秒 → 响应（闪避/反驳/急救）或放弃 → 结算",
+              "requirement_ids": [
+                "M02"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "响应窗口"
+            },
+            {
+              "id": "C2.s0099",
+              "text": "invalid_case：超时视为放弃不可回退",
+              "requirement_ids": [
+                "M02"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "响应窗口"
+            },
+            {
+              "id": "C2.s0100",
+              "text": "recovery：后续回合继续",
+              "requirement_ids": [
+                "M02"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "响应窗口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.19",
+        "table_column": "C2",
+        "assertion": "投票任务与终局 / 投票与出局",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0101",
+              "text": "input：投票阶段",
+              "requirement_ids": [
+                "M03"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "投票与出局"
+            },
+            {
+              "id": "C2.s0102",
+              "text": "precondition：指控未被反驳（即时投票）",
+              "requirement_ids": [
+                "M03"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "投票与出局"
+            },
+            {
+              "id": "C2.s0103",
+              "text": "state_change：得票过高出局 → 身份揭示 → 存活信息更新",
+              "requirement_ids": [
+                "M03"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "投票与出局"
+            },
+            {
+              "id": "C2.s0104",
+              "text": "invalid_case：未过半/平票无人出局",
+              "requirement_ids": [
+                "M03"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "投票与出局"
+            },
+            {
+              "id": "C2.s0105",
+              "text": "recovery：对局继续",
+              "requirement_ids": [
+                "M03"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "投票与出局"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.20",
+        "table_column": "C2",
+        "assertion": "倒地揭露与阵营 / 濒死救援与多阵营胜利",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0106",
+              "text": "input：濒死判定/胜利检查（系统）",
+              "requirement_ids": [
+                "M04"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "濒死救援与多阵营胜利"
+            },
+            {
+              "id": "C2.s0107",
+              "text": "precondition：濒死者 HP=0 或胜利条件达成",
+              "requirement_ids": [
+                "M04"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "濒死救援与多阵营胜利"
+            },
+            {
+              "id": "C2.s0108",
+              "text": "state_change：急救可救回（＋3 HP）；无人救则出局揭示；阵营条件满足 → 胜利结算",
+              "requirement_ids": [
+                "M04"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "濒死救援与多阵营胜利"
+            },
+            {
+              "id": "C2.s0109",
+              "text": "invalid_case：条件不满足继续对局",
+              "requirement_ids": [
+                "M04"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "濒死救援与多阵营胜利"
+            },
+            {
+              "id": "C2.s0110",
+              "text": "recovery：回合 8 上限兜底判定",
+              "requirement_ids": [
+                "M04"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "濒死救援与多阵营胜利"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.21",
+        "table_column": "C2",
+        "assertion": "证词与审判状态",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0111",
+              "text": "input：证词发布（系统）/「比对」出牌（守关官）",
+              "requirement_ids": [
+                "M05"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "证词与审判状态"
+            },
+            {
+              "id": "C2.s0112",
+              "text": "precondition：开局发布完毕；比对每回合限 1 次且比对牌在手",
+              "requirement_ids": [
+                "M05"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "证词与审判状态"
+            },
+            {
+              "id": "C2.s0113",
+              "text": "state_change：六条陈述登记档案；比对公开「一致/时间重叠·可疑」；真人守关官声望按指控结果 ±2；终局输出通行判决",
+              "requirement_ids": [
+                "M05"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "证词与审判状态"
+            },
+            {
+              "id": "C2.s0114",
+              "text": "invalid_case：非守关官出比对被拒；无比对牌出牌被拒",
+              "requirement_ids": [
+                "M05"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "证词与审判状态"
+            },
+            {
+              "id": "C2.s0115",
+              "text": "recovery：声望与判决为表达层，不产生失败态\n\n系统耦合边（玩法必需、可复现）：",
+              "requirement_ids": [
+                "M05"
+              ],
+              "system": "M:6. 机制系统 [M01–M05]",
+              "topic": "证词与审判状态"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.22",
+        "table_column": "C2",
+        "assertion": "视野身份与信息边界 / from_system=身份信息系统 → to_system=决策系统",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0116",
+              "text": "- E01 from_system=身份信息系统 → to_system=决策系统",
+              "requirement_ids": [
+                "E01"
+              ],
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=身份信息系统 → to_system=决策系统"
+            },
+            {
+              "id": "C2.s0117",
+              "text": "changed_state=守关官查验所得身份直接改变其后续指控与投票指向（同一目标 state_before=未查验仅怀疑／state_after=查验后必指向该目标或规避误伤）",
+              "requirement_ids": [
+                "E01"
+              ],
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=身份信息系统 → to_system=决策系统"
+            },
+            {
+              "id": "C2.s0118",
+              "text": "验证方式=查验事件→后续投票指向对照。",
+              "requirement_ids": [
+                "E01"
+              ],
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=身份信息系统 → to_system=决策系统"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.23",
+        "table_column": "C2",
+        "assertion": "from_system=响应窗口系统 → to_system=状态结算系统",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0119",
+              "text": "- E02 from_system=响应窗口系统 → to_system=状态结算系统",
+              "requirement_ids": [
+                "E02"
+              ],
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=响应窗口系统 → to_system=状态结算系统"
+            },
+            {
+              "id": "C2.s0120",
+              "text": "changed_state=同一攻击在窗口内出闪避时结算为无效、放弃时 HP −2",
+              "requirement_ids": [
+                "E02"
+              ],
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=响应窗口系统 → to_system=状态结算系统"
+            },
+            {
+              "id": "C2.s0121",
+              "text": "急救改变濒死结局",
+              "requirement_ids": [
+                "E02"
+              ],
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=响应窗口系统 → to_system=状态结算系统"
+            },
+            {
+              "id": "C2.s0122",
+              "text": "验证方式=同攻击两种响应的结算对照。",
+              "requirement_ids": [
+                "E02"
+              ],
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=响应窗口系统 → to_system=状态结算系统"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.24",
+        "table_column": "C2",
+        "assertion": "视野身份与信息边界 / from_system=证词信息系统 → to_system=决策系统",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0123",
+              "text": "- E03 from_system=证词信息系统 → to_system=决策系统",
+              "requirement_ids": [
+                "E03"
+              ],
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=证词信息系统 → to_system=决策系统"
+            },
+            {
+              "id": "C2.s0124",
+              "text": "changed_state=比对公开「时间重叠·可疑」后，AI 与玩家的指控/投票指向向被比对双方集中（同局无比对信息时指向分布对照）",
+              "requirement_ids": [
+                "E03"
+              ],
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=证词信息系统 → to_system=决策系统"
+            },
+            {
+              "id": "C2.s0125",
+              "text": "验证方式=比对事件前后投票指向分布差分（固定种子多次采样）。",
+              "requirement_ids": [
+                "E03"
+              ],
+              "system": "E:6. 机制系统 [M01–M05]",
+              "topic": "from_system=证词信息系统 → to_system=决策系统"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.25",
+        "table_column": "C2",
+        "assertion": "会话恢复与重开 / 恢复语义",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0128",
+              "text": "- V03 恢复语义：对局结束「重新审理」＝全新一局",
+              "requirement_ids": [
+                "V03"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "恢复语义"
+            },
+            {
+              "id": "C2.s0129",
+              "text": "seed=1054 复现身份分配、牌序与证词文案（用于评测对账）",
+              "requirement_ids": [
+                "V03"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "恢复语义"
+            },
+            {
+              "id": "C2.s0130",
+              "text": "局内无存档。",
+              "requirement_ids": [
+                "V03"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "恢复语义"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.26",
+        "table_column": "C2",
+        "assertion": "persistent_state 生命周期；persistent_state",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0133",
+              "text": "- V05 persistent_state 生命周期：当前动作级状态即时结算",
+              "requirement_ids": [
+                "V05"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state 生命周期"
+            },
+            {
+              "id": "C2.s0134",
+              "text": "当前局级状态局内保留、重开清空",
+              "requirement_ids": [
+                "V05"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state 生命周期"
+            },
+            {
+              "id": "C2.s0135",
+              "text": "无跨局保留状态。",
+              "requirement_ids": [
+                "V05"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state 生命周期"
+            },
+            {
+              "id": "C2.s0131",
+              "text": "- V04 persistent_state：局内（身份/手牌/出局记录/声望/证词档案仅本局",
+              "requirement_ids": [
+                "V04"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state"
+            },
+            {
+              "id": "C2.s0132",
+              "text": "重开全量清空）。",
+              "requirement_ids": [
+                "V04"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "persistent_state"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C2.27",
+        "table_column": "C2",
+        "assertion": "软锁与不可达处理；失败条件；成功条件",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C2.s0136",
+              "text": "- V06 软锁与不可达处理：不设永久软锁——回合 8 上限保证终局",
+              "requirement_ids": [
+                "V06"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "软锁与不可达处理"
+            },
+            {
+              "id": "C2.s0137",
+              "text": "响应超时按放弃兜底",
+              "requirement_ids": [
+                "V06"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "软锁与不可达处理"
+            },
+            {
+              "id": "C2.s0138",
+              "text": "胜利三条件全覆盖对局可达。",
+              "requirement_ids": [
+                "V06"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "软锁与不可达处理"
+            },
+            {
+              "id": "C2.s0127",
+              "text": "- V02 失败条件：敌对阵营先达成胜利条件 → 失败结算（同样揭示全部身份与判决）。",
+              "requirement_ids": [
+                "V02"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "失败条件"
+            },
+            {
+              "id": "C2.s0126",
+              "text": "- V01 成功条件：真人所在阵营达成 G06 对应胜利条件 → 胜利结算（揭示全部身份、通行判决与关键事件时间线）。",
+              "requirement_ids": [
+                "V01"
+              ],
+              "system": "V:7. 成功、失败与恢复 [V01–V05]",
+              "topic": "成功条件"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.01",
+        "table_column": "C3",
+        "assertion": "角色与物体接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0001",
+              "text": "3d_object/gate_warden：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0002",
+              "text": "3d_object/merchant_shen：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0003",
+              "text": "3d_object/herb_woman：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0004",
+              "text": "3d_object/vagrant_scholar：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0005",
+              "text": "3d_object/courier_boy：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "W05"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            },
+            {
+              "id": "C3.s0006",
+              "text": "3d_object/testimony_desk：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L01",
+                "G07"
+              ],
+              "system": "3d_object",
+              "topic": "角色与物体接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.02",
+        "table_column": "C3",
+        "assertion": "场景与地标接口；声音占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0007",
+              "text": "3d_scene/G054_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "L02"
+              ],
+              "system": "3d_scene",
+              "topic": "场景与地标接口"
+            },
+            {
+              "id": "C3.s0017",
+              "text": "audio/verdict_bell：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0018",
+              "text": "audio/gate_hall_ambience：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.03",
+        "table_column": "C3",
+        "assertion": "动作占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0008",
+              "text": "motion/testimony_gesture：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F05",
+                "L01"
+              ],
+              "system": "motion",
+              "topic": "动作占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.04",
+        "table_column": "C3",
+        "assertion": "声音占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0009",
+              "text": "audio/paper_slide：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.05",
+        "table_column": "C3",
+        "assertion": "声音占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0010",
+              "text": "audio/card_flip：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0011",
+              "text": "audio/window_tick：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0012",
+              "text": "audio/contradiction_sting：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0013",
+              "text": "audio/consistent_page：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0014",
+              "text": "audio/vote_gavel：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0015",
+              "text": "audio/reveal_gong：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            },
+            {
+              "id": "C3.s0016",
+              "text": "audio/prestige_stamp：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "audio",
+              "topic": "声音占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.06",
+        "table_column": "C3",
+        "assertion": "演出占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0019",
+              "text": "cg_video/开场抵达：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C01"
+              ],
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0020",
+              "text": "cg_video/关键证据揭示：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C02"
+              ],
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            },
+            {
+              "id": "C3.s0021",
+              "text": "cg_video/审判结算：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+              "requirement_ids": [
+                "C03"
+              ],
+              "system": "cg_video",
+              "topic": "演出占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.C3.07",
+        "table_column": "C3",
+        "assertion": "VFX占位接口",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "C3.s0022",
+              "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+              "requirement_ids": [
+                "F07",
+                "N06"
+              ],
+              "system": "vfx",
+              "topic": "VFX占位接口"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.01",
+        "table_column": "Q",
+        "assertion": "视角与镜头；本测例当前无已绑定参考图",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0005",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：固定正面圆桌全景（16:9 全员可见），无跟随",
+              "requirement_ids": [
+                "F01"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0006",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：缩放仅两档（全景/当前行动者特写），特写随座次行动自动切换并回位",
+              "requirement_ids": [
+                "F01"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0007",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头边界＝审讯堂内框。",
+              "requirement_ids": [
+                "F01"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "视角与镜头"
+            },
+            {
+              "id": "Q.s0016",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- 本测例当前无已绑定参考图",
+              "requirement_ids": [
+                "A01"
+              ],
+              "system": "A:12. 参考图绑定 [A01]",
+              "topic": "本测例当前无已绑定参考图"
+            },
+            {
+              "id": "Q.s0017",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：规划的参考图（六名旅人角色、七种卡牌、界桥关审讯堂场景等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。",
+              "requirement_ids": [
+                "A01"
+              ],
+              "system": "A:12. 参考图绑定 [A01]",
+              "topic": "本测例当前无已绑定参考图"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.02",
+        "table_column": "Q",
+        "assertion": "关键操作镜头变化；视觉风格与色彩材质",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0008",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：比对出「时间重叠·可疑」时镜头在两人间快速切换一次＋红光扫过＋0.15 秒小幅震动",
+              "requirement_ids": [
+                "F02"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0009",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：出局揭示时镜头推近被揭示者 5%（1 秒）",
+              "requirement_ids": [
+                "F02"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0010",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：无慢动作。",
+              "requirement_ids": [
+                "F02"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键操作镜头变化"
+            },
+            {
+              "id": "Q.s0002",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：风格化写实的边关夜堂",
+              "requirement_ids": [
+                "W06"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0003",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝火把暖橙（#D98A4A 系）＋石墙灰（#7D7468 系）＋印泥朱红（#B03A3A 系）",
+              "requirement_ids": [
+                "W06"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            },
+            {
+              "id": "Q.s0004",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质以粗石、旧木、火光为主，明暗对比支撑推理氛围。",
+              "requirement_ids": [
+                "W06"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "视觉风格与色彩材质"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.03",
+        "table_column": "Q",
+        "assertion": "VFX 信息性与遮挡约束；无手柄需求；参考图辨识",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0013",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：火把烟粒单帧 ≤ 30 且不遮挡手牌、倒计时与投票面板。",
+              "requirement_ids": [
+                "F07"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "Q.s0001",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：本人身份提示须私显（不向画面外泄露）、他人身份一律不显示",
+              "requirement_ids": [
+                "I03"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "无手柄需求"
+            },
+            {
+              "id": "Q.s0024",
+              "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "system": "参考图辨识",
+              "topic": "参考图辨识"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.04",
+        "table_column": "Q",
+        "assertion": "屏幕震动；环境常驻效果",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0014",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：矛盾比对·可疑 0.15 秒小幅",
+              "requirement_ids": [
+                "F09"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "Q.s0015",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：设置界面提供「镜头震动开/关」（关闭不影响判定）。",
+              "requirement_ids": [
+                "F09"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "屏幕震动"
+            },
+            {
+              "id": "Q.s0011",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：火把光焰跳动与烟、证词档案纸页微动、窗外夜风掠影",
+              "requirement_ids": [
+                "F04"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            },
+            {
+              "id": "Q.s0012",
+              "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：不遮挡手牌与倒计时。",
+              "requirement_ids": [
+                "F04"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "环境常驻效果"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.05",
+        "table_column": "Q",
+        "assertion": "画面验收4；画面验收1；画面验收5",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0021",
+              "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "system": "画面验收4",
+              "topic": "画面验收4"
+            },
+            {
+              "id": "Q.s0018",
+              "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "system": "画面验收1",
+              "topic": "画面验收1"
+            },
+            {
+              "id": "Q.s0022",
+              "text": "占位物比例、坐标和视觉表达一致，避免悬空、穿插或混乱尺度妨碍阅读。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "system": "画面验收5",
+              "topic": "画面验收5"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.Q.06",
+        "table_column": "Q",
+        "assertion": "画面验收6；画面验收2；画面验收3",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "Q.s0023",
+              "text": "画面中前景、背景与交互区域层次清楚，效果不会持续淹没必要信息。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "system": "画面验收6",
+              "topic": "画面验收6"
+            },
+            {
+              "id": "Q.s0019",
+              "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "system": "画面验收2",
+              "topic": "画面验收2"
+            },
+            {
+              "id": "Q.s0020",
+              "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#Q"
+              ],
+              "system": "画面验收3",
+              "topic": "画面验收3"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.01",
+        "table_column": "G",
+        "assertion": "UI 必须显示的状态；无手柄需求",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0004",
+              "text": "- I06 UI 必须显示的状态：手牌数、本人 HP 与身份提示、窗口倒计时、回合数与座次、证词档案（六条陈述与比对结果）、投票进度",
+              "requirement_ids": [
+                "I06"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0005",
+              "text": "HUD 对照见 rubric。",
+              "requirement_ids": [
+                "I06"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "UI 必须显示的状态"
+            },
+            {
+              "id": "G.s0002",
+              "text": "- I03 无手柄需求",
+              "requirement_ids": [
+                "I03"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "无手柄需求"
+            },
+            {
+              "id": "G.s0003",
+              "text": "手牌与 HP 常驻可见。",
+              "requirement_ids": [
+                "I03"
+              ],
+              "system": "I:4. 操作与输入 [I01–I07]",
+              "topic": "无手柄需求"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.02",
+        "table_column": "G",
+        "assertion": "目标物/交互物/场景/UI 对象；生成对象；最低完整流程",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0007",
+              "text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（对局 HUD/证词档案/投票面板/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入",
+              "requirement_ids": [
+                "L03"
+              ],
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "目标物/交互物/场景/UI 对象"
+            },
+            {
+              "id": "G.s0008",
+              "text": "数量与属性以 L01/L02 与 G 系为准。",
+              "requirement_ids": [
+                "L03"
+              ],
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "目标物/交互物/场景/UI 对象"
+            },
+            {
+              "id": "G.s0006",
+              "text": "- L01 生成对象：角色 6（原创造型：关口守卫、行商、农妇、医士、驿卒、游学书生）、卡牌 7 种、关口圆桌场景（证词档案台、火把、印章）、身份提示与投票面板、结算面板。",
+              "requirement_ids": [
+                "L01"
+              ],
+              "system": "L:5. 对局与内容清单 [L01–L04]",
+              "topic": "生成对象"
+            },
+            {
+              "id": "G.s0001",
+              "text": "- S04 最低完整流程：身份提示、手牌、出牌、响应窗口、投票面板、出局揭示、结算、重开必须全部存在且有真实入口。",
+              "requirement_ids": [
+                "S04"
+              ],
+              "system": "S:1. 定位与完整流程 [S01–S07]",
+              "topic": "最低完整流程"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.03",
+        "table_column": "G",
+        "assertion": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0012",
+              "text": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0013",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 证词发布 | 说话者立牌＋字幕逐字浮现＋档案纸飞入档案架 | 纸页声 | 下一位开始 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0014",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 摸牌 | 两张牌从牌堆飞入手牌 | 翻牌声 | 到位即停 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0015",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出牌 | 卡牌推至桌面中央＋行动者特写 | 出牌轻拍声 | 结算完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0016",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 响应窗口开启 | 屏幕边缘蓝金光边＋倒计时环 | 滴答声（窗口循环） | 响应或超时 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0017",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 矛盾比对·可疑 | 两人立牌红光连线＋「时间重叠·可疑」印章弹出 | 矛盾刺音＋落锤声 | 1s 后常驻标记 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0018",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 矛盾比对·一致 | 两人立牌灰绿连线＋「证词一致」印章 | 翻页确认音 | 0.6s |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0019",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 投票聚焦 | 被投者立牌聚光＋票数跳动 | 落锤声（每票） | 投票结束 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0020",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出局揭示 | 被揭示者灰化＋身份徽记翻转亮出 | 揭示锣声 | 常驻灰化 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0021",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 濒死救援 | 急救光带连至濒死者＋HP +3 跳动 | 治疗柔音 | 完成 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0022",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 声望变化 | 声望章印 +2/−2 弹出 | 盖印声 | 0.5s |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            },
+            {
+              "id": "G.s0023",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 阵营胜利 | 判决文书展开＋「通行判决」字样＋阵营色徽 | 判决钟声 | 进入结算 |",
+              "requirement_ids": [
+                "F05"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.04",
+        "table_column": "G",
+        "assertion": "关键音效清单",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0024",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单：纸页、翻牌、出牌轻拍、滴答、矛盾刺音、落锤、翻页确认、揭示锣、治疗柔音、盖印、判决钟声",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0025",
+              "text": "环境音：火把噼啪＋夜风（常驻循环）",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0026",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：循环音开始/结束：滴答按窗口起止、环境声随对局开始、暂停全部静音",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            },
+            {
+              "id": "G.s0027",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：无配音需求（证词以字幕文本呈现）。",
+              "requirement_ids": [
+                "F06"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "关键音效清单"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.05",
+        "table_column": "G",
+        "assertion": "音画同步；环境氛围与声音语言；VFX 信息性与遮挡约束等4项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0030",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：落锤声与每票入账帧同步",
+              "requirement_ids": [
+                "F08"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0031",
+              "text": "矛盾刺音与比对结果帧同步",
+              "requirement_ids": [
+                "F08"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0032",
+              "text": "揭示锣与身份翻转帧同步。",
+              "requirement_ids": [
+                "F08"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "音画同步"
+            },
+            {
+              "id": "G.s0009",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：夜风穿堂的关口——常驻火把噼啪与风声",
+              "requirement_ids": [
+                "W07"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0010",
+              "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「翻牌＋盖印＋窗口滴答＋投票落锤＋矛盾刺音」，全部音效按 §9 F06 冻结清单交付。",
+              "requirement_ids": [
+                "W07"
+              ],
+              "system": "W:8. 世界设定与创作基线 [W01–W08]",
+              "topic": "环境氛围与声音语言"
+            },
+            {
+              "id": "G.s0028",
+              "text": "- F07 VFX 信息性与遮挡约束：响应窗口光边与倒计时承担时限信息",
+              "requirement_ids": [
+                "F07"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "G.s0029",
+              "text": "比对连线与印章承担推理信息",
+              "requirement_ids": [
+                "F07"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "VFX 信息性与遮挡约束"
+            },
+            {
+              "id": "G.s0011",
+              "text": "- F03 输入与延迟：见 I07。",
+              "requirement_ids": [
+                "F03"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "输入与延迟"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.06",
+        "table_column": "G",
+        "assertion": "前端界面",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0033",
+              "text": "- F10 前端界面：标题（开庭/设置/退出）→ 对局 HUD（手牌、本人 HP 与私显身份、回合与座次、窗口倒计时）→ 证词档案面板（六条陈述＋比对记录）→ 投票面板 → 结算（阵营胜负/通行判决/声望徽标/重新审理/返回）→ 暂停面板（继续/重新审理/设置）",
+              "requirement_ids": [
+                "F10"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0034",
+              "text": "关键状态附图标＋文字（身份徽记、比对结果、声望），不只靠颜色区分",
+              "requirement_ids": [
+                "F10"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            },
+            {
+              "id": "G.s0035",
+              "text": "窗口失焦自动暂停。",
+              "requirement_ids": [
+                "F10"
+              ],
+              "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+              "topic": "前端界面"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.G.07",
+        "table_column": "G",
+        "assertion": "交互反馈5；交互反馈1；交互反馈3等7项关联规则",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "G.s0040",
+              "text": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "system": "交互反馈5",
+              "topic": "交互反馈5"
+            },
+            {
+              "id": "G.s0036",
+              "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "system": "交互反馈1",
+              "topic": "交互反馈1"
+            },
+            {
+              "id": "G.s0038",
+              "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "system": "交互反馈3",
+              "topic": "交互反馈3"
+            },
+            {
+              "id": "G.s0041",
+              "text": "危险预警与恢复入口可发现，玩家能据此调整操作。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "system": "交互反馈6",
+              "topic": "交互反馈6"
+            },
+            {
+              "id": "G.s0037",
+              "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "system": "交互反馈2",
+              "topic": "交互反馈2"
+            },
+            {
+              "id": "G.s0042",
+              "text": "并发单位或多个事件同时发生时，关键反馈仍能对应到正确对象。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "system": "交互反馈7",
+              "topic": "交互反馈7"
+            },
+            {
+              "id": "G.s0039",
+              "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#G"
+              ],
+              "system": "交互反馈4",
+              "topic": "交互反馈4"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.P.01",
+        "table_column": "P",
+        "assertion": "运行验收1",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0001",
+              "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "system": "运行验收1",
+              "topic": "运行验收1"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.P.02",
+        "table_column": "P",
+        "assertion": "运行验收2",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0002",
+              "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "system": "运行验收2",
+              "topic": "运行验收2"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.P.03",
+        "table_column": "P",
+        "assertion": "运行验收3",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0003",
+              "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "system": "运行验收3",
+              "topic": "运行验收3"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.P.04",
+        "table_column": "P",
+        "assertion": "运行验收4",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "P.s0004",
+              "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#P"
+              ],
+              "system": "运行验收4",
+              "topic": "运行验收4"
+            }
+          ]
+        }
+      },
+      {
+        "assertion_id": "G054_identity_trial.WB.CH.01",
+        "table_column": "CH",
+        "assertion": "代码健康诊断",
+        "binding": {
+          "subchecks": [
+            {
+              "id": "CH.s0001",
+              "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0002",
+              "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0003",
+              "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            },
+            {
+              "id": "CH.s0004",
+              "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+              "requirement_ids": [
+                "evaluation_plan_table.md#CH"
+              ],
+              "system": "代码健康诊断",
+              "topic": "代码健康诊断"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

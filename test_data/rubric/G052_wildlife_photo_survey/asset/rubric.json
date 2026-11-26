@@ -1,0 +1,17 @@
+{
+  "game_id": "G052_wildlife_photo_survey",
+  "assets": {
+    "G052_cg_001": {
+      "assertions": []
+    },
+    "G052_cg_002": {
+      "assertions": []
+    },
+    "G052_scene_001": {
+      "assertions": []
+    },
+    "G052_wildlife_photo_survey_obj_003": {
+      "assertions": []
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "game_id": "G005_broken_realm_echo",
+  "assets": {
+    "G005_broken_realm_echo_obj_006": {
+      "assertions": []
+    },
+    "G005_broken_realm_echo_obj_007": {
+      "assertions": []
+    },
+    "G005_broken_realm_echo_obj_008": {
+      "assertions": []
+    },
+    "G005_broken_realm_echo_obj_009": {
+      "assertions": []
+    },
+    "G005_broken_realm_echo_obj_010": {
+      "assertions": []
+    },
+    "G005_broken_realm_echo_obj_011": {
+      "assertions": []
+    },
+    "G005_broken_realm_echo_obj_012": {
+      "assertions": []
+    },
+    "G005_broken_realm_echo_obj_013": {
+      "assertions": []
+    },
+    "G005_broken_realm_echo_obj_015": {
+      "assertions": []
+    },
+    "G005_cg_001": {
+      "assertions": []
+    },
+    "G005_cg_002": {
+      "assertions": []
+    },
+    "G005_cg_003": {
+      "assertions": []
+    },
+    "G005_scene_001": {
+      "assertions": []
+    },
+    "G005_scene_002": {
+      "assertions": []
+    }
+  }
+}

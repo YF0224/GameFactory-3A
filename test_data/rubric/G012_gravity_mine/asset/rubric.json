@@ -1,0 +1,23 @@
+{
+  "game_id": "G012_gravity_mine",
+  "assets": {
+    "G012_cg_001": {
+      "assertions": []
+    },
+    "G012_cg_002": {
+      "assertions": []
+    },
+    "G012_cg_003": {
+      "assertions": []
+    },
+    "G012_gravity_mine_obj_004": {
+      "assertions": []
+    },
+    "G012_gravity_mine_obj_005": {
+      "assertions": []
+    },
+    "G012_scene_001": {
+      "assertions": []
+    }
+  }
+}

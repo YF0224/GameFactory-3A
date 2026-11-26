@@ -1,0 +1,20 @@
+{
+  "game_id": "G032_starport_autobattle",
+  "assets": {
+    "G032_cg_001": {
+      "assertions": []
+    },
+    "G032_cg_002": {
+      "assertions": []
+    },
+    "G032_cg_003": {
+      "assertions": []
+    },
+    "G032_scene_001": {
+      "assertions": []
+    },
+    "G032_starport_autobattle_obj_006": {
+      "assertions": []
+    }
+  }
+}

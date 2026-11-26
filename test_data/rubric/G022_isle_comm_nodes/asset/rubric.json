@@ -1,0 +1,20 @@
+{
+  "game_id": "G022_isle_comm_nodes",
+  "assets": {
+    "G022_cg_001": {
+      "assertions": []
+    },
+    "G022_cg_002": {
+      "assertions": []
+    },
+    "G022_cg_003": {
+      "assertions": []
+    },
+    "G022_isle_comm_nodes_obj_005": {
+      "assertions": []
+    },
+    "G022_scene_001": {
+      "assertions": []
+    }
+  }
+}

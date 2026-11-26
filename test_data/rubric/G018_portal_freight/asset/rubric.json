@@ -1,0 +1,17 @@
+{
+  "game_id": "G018_portal_freight",
+  "assets": {
+    "G018_cg_001": {
+      "assertions": []
+    },
+    "G018_cg_002": {
+      "assertions": []
+    },
+    "G018_cg_003": {
+      "assertions": []
+    },
+    "G018_scene_001": {
+      "assertions": []
+    }
+  }
+}

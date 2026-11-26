@@ -1,0 +1,26 @@
+{
+  "game_id": "G011_cloud_mail_runner",
+  "assets": {
+    "G011_cg_001": {
+      "assertions": []
+    },
+    "G011_cg_002": {
+      "assertions": []
+    },
+    "G011_cg_003": {
+      "assertions": []
+    },
+    "G011_cloud_mail_runner_obj_004": {
+      "assertions": []
+    },
+    "G011_cloud_mail_runner_obj_005": {
+      "assertions": []
+    },
+    "G011_cloud_mail_runner_obj_006": {
+      "assertions": []
+    },
+    "G011_scene_001": {
+      "assertions": []
+    }
+  }
+}

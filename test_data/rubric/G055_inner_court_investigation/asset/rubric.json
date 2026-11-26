@@ -1,0 +1,47 @@
+{
+  "game_id": "G055_inner_court_investigation",
+  "assets": {
+    "G055_cg_001": {
+      "assertions": []
+    },
+    "G055_cg_002": {
+      "assertions": []
+    },
+    "G055_cg_003": {
+      "assertions": []
+    },
+    "G055_cg_004": {
+      "assertions": []
+    },
+    "G055_cg_005": {
+      "assertions": []
+    },
+    "G055_inner_court_investigation_obj_001": {
+      "assertions": []
+    },
+    "G055_inner_court_investigation_obj_002": {
+      "assertions": []
+    },
+    "G055_inner_court_investigation_obj_003": {
+      "assertions": []
+    },
+    "G055_inner_court_investigation_obj_004": {
+      "assertions": []
+    },
+    "G055_mot_001": {
+      "assertions": []
+    },
+    "G055_mot_002": {
+      "assertions": []
+    },
+    "G055_mot_003": {
+      "assertions": []
+    },
+    "G055_mot_004": {
+      "assertions": []
+    },
+    "G055_scene_001": {
+      "assertions": []
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "game_id": "G030_polar_night_td",
+  "assets": {
+    "G030_cg_001": {
+      "assertions": []
+    },
+    "G030_cg_002": {
+      "assertions": []
+    },
+    "G030_cg_003": {
+      "assertions": []
+    },
+    "G030_cg_004": {
+      "assertions": []
+    },
+    "G030_cg_005": {
+      "assertions": []
+    },
+    "G030_polar_night_td_mot_001": {
+      "assertions": []
+    },
+    "G030_polar_night_td_obj_001": {
+      "assertions": []
+    },
+    "G030_polar_night_td_obj_002": {
+      "assertions": []
+    },
+    "G030_polar_night_td_obj_003": {
+      "assertions": []
+    },
+    "G030_polar_night_td_obj_004": {
+      "assertions": []
+    },
+    "G030_polar_night_td_obj_005": {
+      "assertions": []
+    },
+    "G030_polar_night_td_obj_006": {
+      "assertions": []
+    },
+    "G030_polar_night_td_obj_007": {
+      "assertions": []
+    },
+    "G030_polar_night_td_obj_008": {
+      "assertions": []
+    },
+    "G030_polar_night_td_obj_009": {
+      "assertions": []
+    },
+    "G030_scene_001": {
+      "assertions": []
+    },
+    "G030_vo_019": {
+      "assertions": []
+    },
+    "G030_vo_020": {
+      "assertions": []
+    },
+    "G030_vo_021": {
+      "assertions": []
+    },
+    "G030_vo_022": {
+      "assertions": []
+    },
+    "G030_vo_023": {
+      "assertions": []
+    },
+    "G030_vo_024": {
+      "assertions": []
+    },
+    "G030_vo_025": {
+      "assertions": []
+    }
+  }
+}

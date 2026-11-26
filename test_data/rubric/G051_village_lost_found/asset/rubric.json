@@ -1,0 +1,23 @@
+{
+  "game_id": "G051_village_lost_found",
+  "assets": {
+    "G051_cg_001": {
+      "assertions": []
+    },
+    "G051_cg_002": {
+      "assertions": []
+    },
+    "G051_cg_003": {
+      "assertions": []
+    },
+    "G051_scene_001": {
+      "assertions": []
+    },
+    "G051_village_lost_found_obj_005": {
+      "assertions": []
+    },
+    "G051_village_lost_found_obj_006": {
+      "assertions": []
+    }
+  }
+}

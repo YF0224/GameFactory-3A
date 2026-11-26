@@ -1,0 +1,23 @@
+{
+  "game_id": "G037_night_drift_yard",
+  "assets": {
+    "G037_cg_001": {
+      "assertions": []
+    },
+    "G037_cg_002": {
+      "assertions": []
+    },
+    "G037_cg_003": {
+      "assertions": []
+    },
+    "G037_night_drift_yard_obj_008": {
+      "assertions": []
+    },
+    "G037_night_drift_yard_obj_009": {
+      "assertions": []
+    },
+    "G037_scene_001": {
+      "assertions": []
+    }
+  }
+}

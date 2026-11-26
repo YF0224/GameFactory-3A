@@ -1,0 +1,23 @@
+{
+  "game_id": "G046_storm_isle_survival",
+  "assets": {
+    "G046_cg_001": {
+      "assertions": []
+    },
+    "G046_cg_002": {
+      "assertions": []
+    },
+    "G046_cg_003": {
+      "assertions": []
+    },
+    "G046_scene_001": {
+      "assertions": []
+    },
+    "G046_storm_isle_survival_obj_001": {
+      "assertions": []
+    },
+    "G046_storm_isle_survival_obj_002": {
+      "assertions": []
+    }
+  }
+}

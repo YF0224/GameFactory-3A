@@ -1,0 +1,17 @@
+{
+  "game_id": "G016_theater_sorting",
+  "assets": {
+    "G016_cg_001": {
+      "assertions": []
+    },
+    "G016_cg_002": {
+      "assertions": []
+    },
+    "G016_scene_001": {
+      "assertions": []
+    },
+    "G016_theater_sorting_obj_003": {
+      "assertions": []
+    }
+  }
+}

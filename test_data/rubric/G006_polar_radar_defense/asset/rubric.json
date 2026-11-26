@@ -1,0 +1,29 @@
+{
+  "game_id": "G006_polar_radar_defense",
+  "assets": {
+    "G006_cg_001": {
+      "assertions": []
+    },
+    "G006_cg_002": {
+      "assertions": []
+    },
+    "G006_cg_003": {
+      "assertions": []
+    },
+    "G006_polar_radar_defense_obj_005": {
+      "assertions": []
+    },
+    "G006_polar_radar_defense_obj_007": {
+      "assertions": []
+    },
+    "G006_polar_radar_defense_obj_008": {
+      "assertions": []
+    },
+    "G006_polar_radar_defense_obj_009": {
+      "assertions": []
+    },
+    "G006_scene_001": {
+      "assertions": []
+    }
+  }
+}

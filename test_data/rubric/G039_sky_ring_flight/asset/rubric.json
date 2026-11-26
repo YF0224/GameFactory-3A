@@ -1,0 +1,20 @@
+{
+  "game_id": "G039_sky_ring_flight",
+  "assets": {
+    "G039_cg_001": {
+      "assertions": []
+    },
+    "G039_cg_002": {
+      "assertions": []
+    },
+    "G039_cg_003": {
+      "assertions": []
+    },
+    "G039_scene_001": {
+      "assertions": []
+    },
+    "G039_sky_ring_flight_obj_005": {
+      "assertions": []
+    }
+  }
+}

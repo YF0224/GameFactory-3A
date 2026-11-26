@@ -1,0 +1,20 @@
+{
+  "game_id": "G027_dune_maze_td",
+  "assets": {
+    "G027_cg_001": {
+      "assertions": []
+    },
+    "G027_cg_002": {
+      "assertions": []
+    },
+    "G027_dune_maze_td_obj_002": {
+      "assertions": []
+    },
+    "G027_dune_maze_td_obj_004": {
+      "assertions": []
+    },
+    "G027_scene_001": {
+      "assertions": []
+    }
+  }
+}

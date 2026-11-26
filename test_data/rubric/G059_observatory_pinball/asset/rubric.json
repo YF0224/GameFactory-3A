@@ -1,0 +1,23 @@
+{
+  "game_id": "G059_observatory_pinball",
+  "assets": {
+    "G059_cg_001": {
+      "assertions": []
+    },
+    "G059_cg_002": {
+      "assertions": []
+    },
+    "G059_cg_003": {
+      "assertions": []
+    },
+    "G059_observatory_pinball_obj_001": {
+      "assertions": []
+    },
+    "G059_observatory_pinball_obj_003": {
+      "assertions": []
+    },
+    "G059_scene_001": {
+      "assertions": []
+    }
+  }
+}

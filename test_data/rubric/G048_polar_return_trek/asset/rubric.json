@@ -1,0 +1,20 @@
+{
+  "game_id": "G048_polar_return_trek",
+  "assets": {
+    "G048_cg_001": {
+      "assertions": []
+    },
+    "G048_cg_002": {
+      "assertions": []
+    },
+    "G048_cg_003": {
+      "assertions": []
+    },
+    "G048_polar_return_trek_obj_002": {
+      "assertions": []
+    },
+    "G048_scene_001": {
+      "assertions": []
+    }
+  }
+}

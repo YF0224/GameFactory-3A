@@ -1,0 +1,29 @@
+{
+  "game_id": "G042_highland_seed_farm",
+  "assets": {
+    "G042_cg_001": {
+      "assertions": []
+    },
+    "G042_cg_002": {
+      "assertions": []
+    },
+    "G042_cg_003": {
+      "assertions": []
+    },
+    "G042_highland_seed_farm_obj_005": {
+      "assertions": []
+    },
+    "G042_highland_seed_farm_obj_006": {
+      "assertions": []
+    },
+    "G042_highland_seed_farm_obj_007": {
+      "assertions": []
+    },
+    "G042_highland_seed_farm_obj_008": {
+      "assertions": []
+    },
+    "G042_scene_001": {
+      "assertions": []
+    }
+  }
+}

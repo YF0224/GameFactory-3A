@@ -1,0 +1,38 @@
+{
+  "game_id": "G004_desert_observatory",
+  "assets": {
+    "G004_cg_001": {
+      "assertions": []
+    },
+    "G004_cg_002": {
+      "assertions": []
+    },
+    "G004_cg_003": {
+      "assertions": []
+    },
+    "G004_cg_004": {
+      "assertions": []
+    },
+    "G004_desert_observatory_obj_007": {
+      "assertions": []
+    },
+    "G004_desert_observatory_obj_008": {
+      "assertions": []
+    },
+    "G004_desert_observatory_obj_009": {
+      "assertions": []
+    },
+    "G004_desert_observatory_obj_010": {
+      "assertions": []
+    },
+    "G004_scene_001": {
+      "assertions": []
+    },
+    "G004_vo_014": {
+      "assertions": []
+    },
+    "G004_vo_015": {
+      "assertions": []
+    }
+  }
+}

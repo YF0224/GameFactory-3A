@@ -1,0 +1,26 @@
+{
+  "game_id": "G002_mountain_ritual_duel",
+  "assets": {
+    "G002_cg_001": {
+      "assertions": []
+    },
+    "G002_cg_002": {
+      "assertions": []
+    },
+    "G002_cg_003": {
+      "assertions": []
+    },
+    "G002_mountain_ritual_duel_obj_003": {
+      "assertions": []
+    },
+    "G002_mountain_ritual_duel_obj_005": {
+      "assertions": []
+    },
+    "G002_mountain_ritual_duel_obj_006": {
+      "assertions": []
+    },
+    "G002_scene_001": {
+      "assertions": []
+    }
+  }
+}

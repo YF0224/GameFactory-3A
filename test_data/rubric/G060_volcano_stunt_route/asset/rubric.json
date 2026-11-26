@@ -1,0 +1,38 @@
+{
+  "game_id": "G060_volcano_stunt_route",
+  "assets": {
+    "G060_cg_001": {
+      "assertions": []
+    },
+    "G060_cg_002": {
+      "assertions": []
+    },
+    "G060_cg_003": {
+      "assertions": []
+    },
+    "G060_cg_004": {
+      "assertions": []
+    },
+    "G060_mot_001": {
+      "assertions": []
+    },
+    "G060_mot_002": {
+      "assertions": []
+    },
+    "G060_mot_003": {
+      "assertions": []
+    },
+    "G060_scene_001": {
+      "assertions": []
+    },
+    "G060_volcano_stunt_route_obj_001": {
+      "assertions": []
+    },
+    "G060_volcano_stunt_route_obj_002": {
+      "assertions": []
+    },
+    "G060_volcano_stunt_route_obj_003": {
+      "assertions": []
+    }
+  }
+}
