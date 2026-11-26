@@ -1,0 +1,193 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G052_wildlife_photo_survey",
+      "task_id": "G052_wildlife_photo_survey_obj_003",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 189,
+      "rubric": {
+        "path": "test_data/test_samples/G052_wildlife_photo_survey/rubric_assets/priority_observable_v2/G052_wildlife_photo_survey_obj_003.json",
+        "sha256": "9d7cc877403e50cf3b953d0b9fdebefff3791737d1e539d67314140196db2308"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G052_wildlife_photo_survey",
+      "task_id": "G052_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 60,
+      "rubric": {
+        "path": "test_data/test_samples/G052_wildlife_photo_survey/rubric_assets/priority_observable_v2/G052_scene_001.json",
+        "sha256": "df5d1b64bcdba99fd01002ae0bed6211201f61c717759c4693a64c77273a6cda"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G052_wildlife_photo_survey",
+      "task_id": "G052_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 614,
+      "rubric": {
+        "path": "test_data/test_samples/G052_wildlife_photo_survey/rubric_assets/priority_observable_v2/G052_sfx_001.json",
+        "sha256": "b224be9065ba56c6a6ff2b86bb48512c247849cdcbdc5d8c5455a20bc3c4c390"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G052_wildlife_photo_survey",
+      "task_id": "G052_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 615,
+      "rubric": {
+        "path": "test_data/test_samples/G052_wildlife_photo_survey/rubric_assets/priority_observable_v2/G052_sfx_002.json",
+        "sha256": "aa96a20fe15f67721b348c9864ea50e3b24062b70566d2852a3420c703ea67f0"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G052_wildlife_photo_survey",
+      "task_id": "G052_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 616,
+      "rubric": {
+        "path": "test_data/test_samples/G052_wildlife_photo_survey/rubric_assets/priority_observable_v2/G052_sfx_003.json",
+        "sha256": "d5061c68eaffb5e83f3cd688b7de19d7da0f759ccb6b9dea95cc6118178c2824"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G052_wildlife_photo_survey",
+      "task_id": "G052_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 617,
+      "rubric": {
+        "path": "test_data/test_samples/G052_wildlife_photo_survey/rubric_assets/priority_observable_v2/G052_sfx_004.json",
+        "sha256": "217f24a4260eb1234a5d20f0b21eed6cfd3572a784cc146c739c9ace51a8e53b"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G052_wildlife_photo_survey",
+      "task_id": "G052_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 618,
+      "rubric": {
+        "path": "test_data/test_samples/G052_wildlife_photo_survey/rubric_assets/priority_observable_v2/G052_sfx_005.json",
+        "sha256": "e7dc6114606b65e7eb95df016b02c9598e5282bcdf7e3966b5ed4635091112c6"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G052_wildlife_photo_survey",
+      "task_id": "G052_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 619,
+      "rubric": {
+        "path": "test_data/test_samples/G052_wildlife_photo_survey/rubric_assets/priority_observable_v2/G052_sfx_006.json",
+        "sha256": "0729433ae21fcb7f599f328fe2cba043aea184a984ba65951ded434637760995"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G052_wildlife_photo_survey",
+      "task_id": "G052_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 620,
+      "rubric": {
+        "path": "test_data/test_samples/G052_wildlife_photo_survey/rubric_assets/priority_observable_v2/G052_sfx_007.json",
+        "sha256": "e4450ac6342c3eb6e1611cfab98a4f508cfb9577c1834e7995305b11f4338791"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G052_wildlife_photo_survey",
+      "task_id": "G052_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 621,
+      "rubric": {
+        "path": "test_data/test_samples/G052_wildlife_photo_survey/rubric_assets/priority_observable_v2/G052_sfx_008.json",
+        "sha256": "ba504b1e374ad6989edfc65380792175461c57b836194aeb1558c8cb057735e2"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G052_wildlife_photo_survey",
+      "task_id": "G052_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 622,
+      "rubric": {
+        "path": "test_data/test_samples/G052_wildlife_photo_survey/rubric_assets/priority_observable_v2/G052_sfx_009.json",
+        "sha256": "2b45d894964db8376fb726a4337b06e65a3670b9065a70af84bac1f264ba77a4"
+      },
+      "C_checks": 4,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G052_wildlife_photo_survey",
+      "task_id": "G052_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 166,
+      "rubric": {
+        "path": "test_data/test_samples/G052_wildlife_photo_survey/rubric_assets/priority_observable_v2/G052_cg_001.json",
+        "sha256": "2de1dc15462125800b877f67421fb0746f46f1e17b3818f0aa430f6a3ca936bb"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G052_wildlife_photo_survey",
+      "task_id": "G052_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 167,
+      "rubric": {
+        "path": "test_data/test_samples/G052_wildlife_photo_survey/rubric_assets/priority_observable_v2/G052_cg_002.json",
+        "sha256": "1a665c39d18b13dc6ad8253b4ab529fb518b4a2053c98c96d24bda05fad30f88"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    }
+  ]
+}

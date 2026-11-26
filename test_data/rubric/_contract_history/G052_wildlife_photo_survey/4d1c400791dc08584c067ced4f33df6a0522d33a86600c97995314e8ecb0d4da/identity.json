@@ -1,0 +1,7 @@
+{
+  "contract_id": "G052_wildlife_photo_survey.whitebox.final",
+  "version": "final",
+  "content_sha256": "4d1c400791dc08584c067ced4f33df6a0522d33a86600c97995314e8ecb0d4da",
+  "rubric_json_sha256": "6e73b0135fb2742c2e51571c67a692f110096e55a214bc4239be573e297dee29",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

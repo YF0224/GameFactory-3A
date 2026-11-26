@@ -1,0 +1,582 @@
+{
+  "version": "gameness-tiered-independent-v2",
+  "case_id": "G016_theater_sorting",
+  "tier": "S",
+  "target_count": 8,
+  "mechanic_target_count": 8,
+  "group_quotas": {
+    "layout": 3,
+    "guidance": 2,
+    "feedback": 3
+  },
+  "criteria": [
+    {
+      "id": "gameness.independent.layout.01",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- I06 UI 必须显示的状态：本关号、步数预算剩余/已用、覆盖计数/目标点数、undo_count\n固定范围：原文I06列出的当前玩法阶段核心状态内容及其正确对象；同阶段适用字段不能任取一项代替\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0004",
+        "frozen_assertion_id": "G016_theater_sorting.WB.G.04",
+        "frozen_subcheck_id": "G.s0004",
+        "frozen_text": "- I06 UI 必须显示的状态：本关号、步数预算剩余/已用、覆盖计数/目标点数、undo_count",
+        "requirement_ids": [
+          "I06"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "- I06 UI 必须显示的状态：本关号、步数预算剩余/已用、覆盖计数/目标点数、undo_count"
+      },
+      "independence": {
+        "key": "layout:required-gameplay-state",
+        "fixed_target": "原文I06列出的当前玩法阶段核心状态内容及其正确对象；同阶段适用字段不能任取一项代替",
+        "source_criterion_id": "expanded.G.s0004"
+      }
+    },
+    {
+      "id": "gameness.independent.layout.02",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。\n固定范围：作者真实玩法界面中主要状态与次要信息的层级关系（不改成标题页）\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.hierarchy",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。"
+      },
+      "independence": {
+        "key": "layout:hierarchy",
+        "fixed_target": "作者真实玩法界面中主要状态与次要信息的层级关系（不改成标题页）",
+        "source_criterion_id": "game.layout.hierarchy"
+      }
+    },
+    {
+      "id": "gameness.independent.layout.03",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。\n固定范围：作者真实玩法界面的关键文字/控件可辨识可用，不以只读到标题按钮代替\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.readable",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。"
+      },
+      "independence": {
+        "key": "layout:readability",
+        "fixed_target": "作者真实玩法界面的关键文字/控件可辨识可用，不以只读到标题按钮代替",
+        "source_criterion_id": "game.layout.readable"
+      }
+    },
+    {
+      "id": "gameness.independent.guidance.01",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "实际游戏展示或清楚传达必要操作方法。\n固定范围：作者核心玩法所必需的操作方式在操作前可知，不能只以操作后反馈证明\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.guidance.controls",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "guidance",
+        "requirement": "实际游戏展示或清楚传达必要操作方法。"
+      },
+      "independence": {
+        "key": "guidance:controls-before-action",
+        "fixed_target": "作者核心玩法所必需的操作方式在操作前可知，不能只以操作后反馈证明",
+        "source_criterion_id": "game.guidance.controls"
+      }
+    },
+    {
+      "id": "gameness.independent.guidance.02",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。\n固定范围：严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0038",
+        "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+        "frozen_subcheck_id": "G.s0038",
+        "frozen_text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。"
+      },
+      "independence": {
+        "key": "guidance:expanded.G.s0038",
+        "fixed_target": "严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件",
+        "source_criterion_id": "expanded.G.s0038"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.01",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【失败】实际发生时可视表现为【灯光转暗＋HUD 变灰】，结束条件【进入失败面板即停】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【失败】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0024",
+        "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+        "frozen_subcheck_id": "G.s0024",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 失败 | 灯光转暗＋HUD 变灰 | 低沉提示音 | 进入失败面板即停 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【失败】实际发生时可视表现为【灯光转暗＋HUD 变灰】，结束条件【进入失败面板即停】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:失败",
+        "fixed_target": "仅事件【失败】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0024"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.02",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【过关】实际发生时可视表现为【全场景灯组亮起＋彩带粒子】，结束条件【进入结算即淡出】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【过关】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0023",
+        "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+        "frozen_subcheck_id": "G.s0023",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 过关 | 全场景灯组亮起＋彩带粒子 | 上扬提示音＋掌声（一次，不循环） | 进入结算即淡出 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【过关】实际发生时可视表现为【全场景灯组亮起＋彩带粒子】，结束条件【进入结算即淡出】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:过关",
+        "fixed_target": "仅事件【过关】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0023"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.03",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【推动成功】实际发生时可视表现为【箱体滑动 0.15s＋箱底尘土小粒子】，结束条件【滑动到位即停】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【推动成功】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0018",
+        "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+        "frozen_subcheck_id": "G.s0018",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 推动成功 | 箱体滑动 0.15s＋箱底尘土小粒子 | 木质滑动声（与动画同步起止） | 滑动到位即停 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【推动成功】实际发生时可视表现为【箱体滑动 0.15s＋箱底尘土小粒子】，结束条件【滑动到位即停】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:推动成功",
+        "fixed_target": "仅事件【推动成功】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0018"
+      }
+    }
+  ],
+  "source_bindings": {
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G016_theater_sorting/rubric_whitebox_core/rubric.json": "d015f7fe2a657019d1eed9e34bc5575ed4b70ffde87809016e84cccbdbf4aaf8",
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G016_theater_sorting/general_requirement.txt": "3da769956ee4769074c0898083cd74f058191028d4c78acde20510d51b7740a0"
+  },
+  "source_contract_id": "G016_theater_sorting.whitebox.tiered-core-v1.301c1a8fe4593559517ce62cb01e671a644d335ca7a7ce0667a2ee673695d1fb",
+  "selection_basis": "Original requirements only; fixed event roles then authored order; no scores/runtime/source implementation",
+  "unselected_source_criteria": [
+    {
+      "id": "expanded.G.s0008",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.01",
+      "frozen_subcheck_id": "G.s0008",
+      "frozen_text": "input：系统在每次 push 后判定",
+      "requirement_ids": [
+        "M03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "input：系统在每次 push 后判定"
+    },
+    {
+      "id": "expanded.G.s0009",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.01",
+      "frozen_subcheck_id": "G.s0009",
+      "frozen_text": "precondition：刚发生一次有效 `push`",
+      "requirement_ids": [
+        "M03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "precondition：刚发生一次有效 `push`"
+    },
+    {
+      "id": "expanded.G.s0010",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.01",
+      "frozen_subcheck_id": "G.s0010",
+      "frozen_text": "state_change：箱子被推入「贴墙角格」（其行进正交两侧均为墙/界的格子）且该格不是目标点时，标记该箱为不可解；不强制失败，玩家可撤销或重置",
+      "requirement_ids": [
+        "M03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "state_change：箱子被推入「贴墙角格」（其行进正交两侧均为墙/界的格子）且该格不是目标点时，标记该箱为不可解；不强制失败，玩家可撤销或重置"
+    },
+    {
+      "id": "expanded.G.s0011",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.01",
+      "frozen_subcheck_id": "G.s0011",
+      "frozen_text": "invalid_case：箱子落入目标点角格不触发 deadlock；普通贴墙（单侧）不误报",
+      "requirement_ids": [
+        "M03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "invalid_case：箱子落入目标点角格不触发 deadlock；普通贴墙（单侧）不误报"
+    },
+    {
+      "id": "expanded.G.s0012",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.01",
+      "frozen_subcheck_id": "G.s0012",
+      "frozen_text": "recovery：Z 撤销该步即可解除标记",
+      "requirement_ids": [
+        "M03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "recovery：Z 撤销该步即可解除标记"
+    },
+    {
+      "id": "expanded.G.s0013",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.01",
+      "frozen_subcheck_id": "G.s0013",
+      "frozen_text": "- V06 软锁与不可达处理：不设永久软锁——死角仅提示不判负，关键目标均可通过正常操作或 R 重置达成",
+      "requirement_ids": [
+        "V06"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- V06 软锁与不可达处理：不设永久软锁——死角仅提示不判负，关键目标均可通过正常操作或 R 重置达成"
+    },
+    {
+      "id": "expanded.G.s0019",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+      "frozen_subcheck_id": "G.s0019",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 目标覆盖 | 目标点金圈点亮 0.3s＋箱子描金边 | 「叮」确认音 | 覆盖状态常亮至变化 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【目标覆盖】实际发生时可视表现为【目标点金圈点亮 0.3s＋箱子描金边】，结束条件【覆盖状态常亮至变化】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0020",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+      "frozen_subcheck_id": "G.s0020",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 非法移动 | 机器人原地抖动 0.3s＋目标格红框闪 1 次 | 短促否定音 | 0.3s 结束 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【非法移动】实际发生时可视表现为【机器人原地抖动 0.3s＋目标格红框闪 1 次】，结束条件【0.3s 结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0021",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+      "frozen_subcheck_id": "G.s0021",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 撤销 | 箱体与机器人反向回放 0.15s | 回摆音（滑动声倒放感） | 回放到位即停 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【撤销】实际发生时可视表现为【箱体与机器人反向回放 0.15s】，结束条件【回放到位即停】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0022",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+      "frozen_subcheck_id": "G.s0022",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 重置确认 | 幕布暗转 0.5s | 幕布摩擦声 | 布局重载完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【重置确认】实际发生时可视表现为【幕布暗转 0.5s】，结束条件【布局重载完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0025",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+      "frozen_subcheck_id": "G.s0025",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 死角提示 | 该箱红色高亮＋文字标签一次 | 警示音一次 | 提示 2s 后仅保留描边 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【死角提示】实际发生时可视表现为【该箱红色高亮＋文字标签一次】，结束条件【提示 2s 后仅保留描边】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0030",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+      "frozen_subcheck_id": "G.s0030",
+      "frozen_text": "- F07 VFX 信息性与遮挡约束：目标点金色圆环与死角红色高亮承担玩法信息（可辨认可解状态）",
+      "requirement_ids": [
+        "F07"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- F07 VFX 信息性与遮挡约束：目标点金色圆环与死角红色高亮承担玩法信息（可辨认可解状态）"
+    },
+    {
+      "id": "expanded.G.s0016",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+      "frozen_subcheck_id": "G.s0016",
+      "frozen_text": "Z/R 的反馈延迟同 I07 目标。",
+      "requirement_ids": [
+        "F03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "Z/R 的反馈延迟同 I07 目标。",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0041",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+      "frozen_subcheck_id": "G.s0041",
+      "frozen_text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。"
+    },
+    {
+      "id": "expanded.G.s0039",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+      "frozen_subcheck_id": "G.s0039",
+      "frozen_text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。"
+    },
+    {
+      "id": "expanded.G.s0040",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.02",
+      "frozen_subcheck_id": "G.s0040",
+      "frozen_text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "目标进度、阶段变化与终局结果向玩家明确呈现。"
+    },
+    {
+      "id": "expanded.G.s0034",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.04",
+      "frozen_subcheck_id": "G.s0034",
+      "frozen_text": "- F10 前端界面：标题（开始/设置/退出）→ 选关（三关卡片＋完成标记）→ HUD（关卡号、步数预算剩余/已用、覆盖计数/目标点数、undo_count）→ 过关结算（步数/undo_count/用时/下一关/重开/返回）→ 失败结算（重试本关/返回选关）",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- F10 前端界面：标题（开始/设置/退出）→ 选关（三关卡片＋完成标记）→ HUD（关卡号、步数预算剩余/已用、覆盖计数/目标点数、undo_count）→ 过关结算（步数/undo_count/用时/下一关/重开/返回）→ 失败结算（重试本关/返回选关）"
+    },
+    {
+      "id": "expanded.G.s0035",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.04",
+      "frozen_subcheck_id": "G.s0035",
+      "frozen_text": "关键状态均附图标＋文字（目标点金环＋「目标」标签、死角红框＋「死角」标签），不只靠颜色区分",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "关键状态均附图标＋文字（目标点金环＋「目标」标签、死角红框＋「死角」标签），不只靠颜色区分"
+    },
+    {
+      "id": "expanded.G.s0036",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.04",
+      "frozen_subcheck_id": "G.s0036",
+      "frozen_text": "Esc 暂停面板含继续/重置本关/返回选关/设置",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "Esc 暂停面板含继续/重置本关/返回选关/设置"
+    },
+    {
+      "id": "expanded.G.s0037",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.04",
+      "frozen_subcheck_id": "G.s0037",
+      "frozen_text": "窗口失焦自动暂停（F10 与 I05 一致）。",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "窗口失焦自动暂停（F10 与 I05 一致）。",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0002",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.04",
+      "frozen_subcheck_id": "G.s0002",
+      "frozen_text": "- S04 最低完整流程：标题、选关、游玩、过关结算、失败提示、重置、重开必须全部存在且有真实入口。",
+      "requirement_ids": [
+        "S04"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- S04 最低完整流程：标题、选关、游玩、过关结算、失败提示、重置、重开必须全部存在且有真实入口。"
+    },
+    {
+      "id": "expanded.G.s0001",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.04",
+      "frozen_subcheck_id": "G.s0001",
+      "frozen_text": "- S01 类型：2D 俯视格子推箱解谜，单人单屏。本测例包含的能力：三关静态棋盘、推动与覆盖检测、撤销与重置、死角提示、步数预算、开场与结算视频、舞台主题表现层。",
+      "requirement_ids": [
+        "S01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- S01 类型：2D 俯视格子推箱解谜，单人单屏。本测例包含的能力：三关静态棋盘、推动与覆盖检测、撤销与重置、死角提示、步数预算、开场与结算视频、舞台主题表现层。"
+    },
+    {
+      "id": "expanded.G.s0005",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.04",
+      "frozen_subcheck_id": "G.s0005",
+      "frozen_text": "HUD 对照见 rubric。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "HUD 对照见 rubric。"
+    },
+    {
+      "id": "expanded.G.s0006",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.04",
+      "frozen_subcheck_id": "G.s0006",
+      "frozen_text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/选关/HUD/结算/失败/暂停面板、视频播放层）与交互物逐类存在且运行时可进入",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/选关/HUD/结算/失败/暂停面板、视频播放层）与交互物逐类存在且运行时可进入"
+    },
+    {
+      "id": "expanded.G.s0007",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.04",
+      "frozen_subcheck_id": "G.s0007",
+      "frozen_text": "数量与属性以对应 G·M 条目为准。",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "数量与属性以对应 G·M 条目为准。"
+    },
+    {
+      "id": "expanded.G.s0003",
+      "frozen_assertion_id": "G016_theater_sorting.WB.G.04",
+      "frozen_subcheck_id": "G.s0003",
+      "frozen_text": "UI 过渡不得触发格子逻辑",
+      "requirement_ids": [
+        "G05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "UI 过渡不得触发格子逻辑"
+    }
+  ],
+  "authorized_change": "Gameness-only independent concrete targets; exact time/fine space diagnostic",
+  "aggregation": "Unchanged equal mean of layout/guidance/feedback; 10/50/100 highest level",
+  "prior_results": "Preserved; new policy requires independent contract, source review and runtime judge",
+  "revision_sha256": "5e133b08ecc0cfcf742132735d5eea939d468c7a561dbddc0d022bcc92222c64"
+}

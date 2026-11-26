@@ -1,0 +1,7 @@
+{
+  "contract_id": "G012_gravity_mine.whitebox.final",
+  "version": "final",
+  "content_sha256": "9147640cb0b0b81e745e25d5dd4563304e7561f075878e41f2d4a086fa31f36d",
+  "rubric_json_sha256": "77356c1cd497e04a13727c4515c952740a51aa0e3d1e16d2a97d01de13787331",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

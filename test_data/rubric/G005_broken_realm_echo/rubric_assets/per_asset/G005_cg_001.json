@@ -1,0 +1,413 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.v1",
+  "authoring_protocol": "priority_asset_rubrics.v1",
+  "status": "source_grounded_draft",
+  "game_id": "G005_broken_realm_echo",
+  "task_id": "G005_cg_001",
+  "asset_type": "cg_video",
+  "asset_subtype": "cg_video",
+  "asset_name": "断界残响",
+  "scope": "Track B：独立资产；不含 T-pose、自然音效或引擎导入/playtest。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G005_broken_realm_echo",
+    "task_id": "G005_cg_001",
+    "cg_type": "Opening",
+    "cg_name": "断界残响",
+    "mode": "text_to_video",
+    "prompt": "断界废墟中残响粒子漂浮如尘；持刀的残响猎人驻足于断垣之间，衣摆扬起；远处界卫指挥官的身影自废墟深处现身，护甲泛起金光、长剑拄地；镜头由粒子特写拉至双人对峙全景",
+    "duration_sec": 8,
+    "resolution": "1280x720",
+    "fps": 24,
+    "seed": 6051,
+    "trigger": "首次由主菜单进入断垣区之前，每局一次；Esc/Enter 跳过→直接进入断垣区探索，播放期间不推进计时",
+    "skippable": true,
+    "spec_ref": "C01",
+    "start_condition": "首次由主菜单进入断垣区之前，每局一次；Esc/Enter 跳过→直接进入断垣区探索，播放期间不推进计时",
+    "end_condition": "natural playback end or skip input",
+    "skip_behavior": "skip_to_declared_next_state",
+    "next_state": "直接进入断垣区探索，播放期间不推进计时",
+    "planned_source": "closed_source_video_api"
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L118-118",
+      "general:L119-119",
+      "general:L120-120",
+      "general:L122-122"
+    ],
+    "visual_style_source_ids": [
+      "general:L123-123"
+    ],
+    "sound_style_source_ids": [
+      "general:L124-124"
+    ],
+    "asset_description_source_ids": [
+      "general:L6",
+      "general:L26",
+      "general:L161"
+    ],
+    "spec_ref_source_ids": [
+      "general:L161-166"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L6",
+    "canonical_asset_content_source_ids": [
+      "general:L163"
+    ]
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "sha256": "94b96f71d2d9684d0746b5c3d70633028fad9317dcf578377ccafbe214233eac",
+      "start_line": 15,
+      "end_line": 15,
+      "quote": "{\"game_id\": \"G005_broken_realm_echo\", \"task_id\": \"G005_cg_001\", \"cg_type\": \"Opening\", \"cg_name\": \"断界残响\", \"mode\": \"text_to_video\", \"prompt\": \"断界废墟中残响粒子漂浮如尘；持刀的残响猎人驻足于断垣之间，衣摆扬起；远处界卫指挥官的身影自废墟深处现身，护甲泛起金光、长剑拄地；镜头由粒子特写拉至双人对峙全景\", \"duration_sec\": 8, \"resolution\": \"1280x720\", \"fps\": 24, \"seed\": 6051, \"trigger\": \"首次由主菜单进入断垣区之前，每局一次；Esc/Enter 跳过→直接进入断垣区探索，播放期间不推进计时\", \"skippable\": true, \"spec_ref\": \"C01\", \"start_condition\": \"首次由主菜单进入断垣区之前，每局一次；Esc/Enter 跳过→直接进入断垣区探索，播放期间不推进计时\", \"end_condition\": \"natural playback end or skip input\", \"skip_behavior\": \"skip_to_declared_next_state\", \"next_state\": \"直接进入断垣区探索，播放期间不推进计时\", \"planned_source\": \"closed_source_video_api\"}"
+    },
+    "general:L118-118": {
+      "path": "test_data/test_samples/G005_broken_realm_echo/general_requirement.txt",
+      "sha256": "1c63df2ab5a4829f89437db918d2d4f8d120e640cea11d05a477fd289f11fc39",
+      "start_line": 118,
+      "end_line": 118,
+      "quote": "- W01 世界与时代背景：「断界」——现实与记忆之间的破碎空间；旧战场的废墟悬浮其中，凝结的残响粒子（亡佚记忆的碎片）漂浮如尘，被吞噬的记忆会在此回响。"
+    },
+    "general:L119-119": {
+      "path": "test_data/test_samples/G005_broken_realm_echo/general_requirement.txt",
+      "sha256": "1c63df2ab5a4829f89437db918d2d4f8d120e640cea11d05a477fd289f11fc39",
+      "start_line": 119,
+      "end_line": 119,
+      "quote": "- W02 场景所在地：断垣区（破碎废墟、锁链桥与游离残响粒子的黄昏战场）与外苑（月夜蓝紫、灯笼与鸟居的静谧回廊），两场景以界门往返。"
+    },
+    "general:L120-120": {
+      "path": "test_data/test_samples/G005_broken_realm_echo/general_requirement.txt",
+      "sha256": "1c63df2ab5a4829f89437db918d2d4f8d120e640cea11d05a477fd289f11fc39",
+      "start_line": 120,
+      "end_line": 120,
+      "quote": "- W03 玩家身份与当前任务动机：玩家是残响猎人——一名觉醒了界解之力的持刀者；动机：斩落失控的界卫指挥官，回收其核心中的残响结晶，让断界重归沉寂。"
+    },
+    "general:L122-122": {
+      "path": "test_data/test_samples/G005_broken_realm_echo/general_requirement.txt",
+      "sha256": "1c63df2ab5a4829f89437db918d2d4f8d120e640cea11d05a477fd289f11fc39",
+      "start_line": 122,
+      "end_line": 122,
+      "quote": "- W05 叙事来源：残响粒子=漂浮的记忆碎片（场景氛围件）；残响锚点=指挥官以残响钉住空间的力场桩（拔除即削弱其防御，E08）；血装=界卫的护甲相位（静/动两态，E07）；宝箱与补给=先行者留下的物资；锁链捷径=断界的封路残骸。全部原创，不使用商业作品的名称、技能或造型。"
+    },
+    "general:L123-123": {
+      "path": "test_data/test_samples/G005_broken_realm_echo/general_requirement.txt",
+      "sha256": "1c63df2ab5a4829f89437db918d2d4f8d120e640cea11d05a477fd289f11fc39",
+      "start_line": 123,
+      "end_line": 123,
+      "quote": "- W06 视觉风格与色彩材质：简化几何/低多边形方向（A 系共同风格）＋月夜氛围光；主色=断界蓝灰 #5A6E8C、酒红 #7E3B47、月夜紫 #3D3654、残响青 #7FD8E8、灯笼暖橙 #E8A25C；材质为风化石、旧铁、纸灯笼与发光残响。"
+    },
+    "general:L124-124": {
+      "path": "test_data/test_samples/G005_broken_realm_echo/general_requirement.txt",
+      "sha256": "1c63df2ab5a4829f89437db918d2d4f8d120e640cea11d05a477fd289f11fc39",
+      "start_line": 124,
+      "end_line": 124,
+      "quote": "- W07 环境氛围与声音语言：断垣区风声为底、外苑风铃与灯笼环境音为衬；音效语言为「斩击+金属+残响嗡鸣」，全部音效按 §9 F06 冻结清单交付。"
+    },
+    "general:L161-166": {
+      "path": "test_data/test_samples/G005_broken_realm_echo/general_requirement.txt",
+      "sha256": "1c63df2ab5a4829f89437db918d2d4f8d120e640cea11d05a477fd289f11fc39",
+      "start_line": 161,
+      "end_line": 166,
+      "quote": "- C01 断界残响（Opening，8 秒，1280×720@24fps）\n  - 触发时机：首次由主菜单进入断垣区之前，每局一次\n  - 内容与角色场景：断界废墟中残响粒子漂浮如尘；持刀的残响猎人驻足于断垣之间，衣摆扬起；远处界卫指挥官的身影自废墟深处现身，护甲泛起金光、长剑拄地\n  - 资产对应：玩家（A01）、指挥官（A05）、断垣区（A06）与游戏内模型/贴图同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入断垣区探索；自然播完 → 进入断垣区探索\n  - 状态一致：播放期间不推进任何游戏计时；首领出现计时从零开始（G05）"
+    },
+    "general:L6": {
+      "path": "test_data/test_samples/G005_broken_realm_echo/general_requirement.txt",
+      "sha256": "1c63df2ab5a4829f89437db918d2d4f8d120e640cea11d05a477fd289f11fc39",
+      "start_line": 6,
+      "end_line": 6,
+      "quote": "title: 断界残响"
+    },
+    "general:L26": {
+      "path": "test_data/test_samples/G005_broken_realm_echo/general_requirement.txt",
+      "sha256": "1c63df2ab5a4829f89437db918d2d4f8d120e640cea11d05a477fd289f11fc39",
+      "start_line": 26,
+      "end_line": 26,
+      "quote": "- 作品名：《断界残响》；版本：mechanics-v3（2026-10-11 完整性修订：由团队包 v2 冻结需求完整迁移并 v3 化——补世界设定 W01–W08、演出反馈 F01–F10、过场视频 C01–C03 与正向范围清单 N01–N06；目标引擎迁移至 Unreal Engine 5；2026-10-13 引擎分配冻结迁移至 Unity 2022.3（URP）；全部商业关联用词替换为本测例原创术语（界解/残响粒子/断界存档）；锚点机制赋予真实防御作用（E08）；音频从可选升级为冻结需求（F06））；运行引擎：**Unity 2022.3（URP 渲染管线）**——选择理由：断界的残响粒子氛围、斩击 VFX 与首领多阶段演出依赖高质量粒子与后处理，URP 粒子系统与后处理链路开销可控，目标平台 Windows 桌面构建；摄像机：第三人称跟随（Pointer Lock 鼠标转向）；输入：键鼠；构建启动：Unity 2022.3 LTS 打开工程后 Build And Run，或使用交付的构建包直接启动 exe。"
+    },
+    "general:L161": {
+      "path": "test_data/test_samples/G005_broken_realm_echo/general_requirement.txt",
+      "sha256": "1c63df2ab5a4829f89437db918d2d4f8d120e640cea11d05a477fd289f11fc39",
+      "start_line": 161,
+      "end_line": 161,
+      "quote": "- C01 断界残响（Opening，8 秒，1280×720@24fps）"
+    },
+    "asset_requirement:L6": {
+      "path": "test_data/test_samples/G005_broken_realm_echo/cg_video/requirement.txt",
+      "sha256": "e792ba85ffaebc7ee0eb11f4b351f3567c746b423ad63baf9833b7142a6b81db",
+      "start_line": 6,
+      "end_line": 6,
+      "quote": "- G005_cg_001: 断界废墟中残响粒子漂浮如尘；持刀的残响猎人驻足于断垣之间，衣摆扬起；远处界卫指挥官的身影自废墟深处现身，护甲泛起金光、长剑拄地；镜头由粒子特写拉至双人对峙全景"
+    },
+    "general:L163": {
+      "path": "test_data/test_samples/G005_broken_realm_echo/general_requirement.txt",
+      "sha256": "1c63df2ab5a4829f89437db918d2d4f8d120e640cea11d05a477fd289f11fc39",
+      "start_line": 163,
+      "end_line": 163,
+      "quote": "  - 内容与角色场景：断界废墟中残响粒子漂浮如尘；持刀的残响猎人驻足于断垣之间，衣摆扬起；远处界卫指挥官的身影自废墟深处现身，护甲泛起金光、长剑拄地"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+      "start_line": 78,
+      "end_line": 82,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "断界废墟中残响粒子漂浮如尘",
+      "持刀的残响猎人驻足于断垣之间",
+      "衣摆扬起",
+      "远处界卫指挥官的身影自废墟深处现身",
+      "护甲泛起金光",
+      "长剑拄地",
+      "镜头由粒子特写拉至双人对峙全景"
+    ],
+    "style": [],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求符合度",
+      "checks": [
+        {
+          "id": "C01",
+          "title": "指定主体、事件或镜头片段",
+          "assertion": "实际产物可观察地满足：断界废墟中残响粒子漂浮如尘；持刀的残响猎人驻足于断垣之间；衣摆扬起",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "断界废墟中残响粒子漂浮如尘",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "持刀的残响猎人驻足于断垣之间",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "衣摆扬起",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          },
+          "canonical_content_source_ids": [
+            "general:L163"
+          ],
+          "canonical_override_rule": "上述 canonical 内容原文优先解释本项所涉对象/事件；priority prompt 只能补充不矛盾的镜头细节。原文中与本项无关的片段不在本项重复评分。",
+          "temporal_rule": "仅按原文明示的先后、因果或同步关系核对；列举不等于严格时间顺序。双意象/胜负分支是不同版本，不要求胜利与失败连续发生在同一时间线。"
+        },
+        {
+          "id": "C02",
+          "title": "指定主体、事件或镜头片段",
+          "assertion": "实际产物可观察地满足：远处界卫指挥官的身影自废墟深处现身；护甲泛起金光",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "远处界卫指挥官的身影自废墟深处现身",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "护甲泛起金光",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          },
+          "canonical_content_source_ids": [
+            "general:L163"
+          ],
+          "canonical_override_rule": "上述 canonical 内容原文优先解释本项所涉对象/事件；priority prompt 只能补充不矛盾的镜头细节。原文中与本项无关的片段不在本项重复评分。",
+          "temporal_rule": "仅按原文明示的先后、因果或同步关系核对；列举不等于严格时间顺序。双意象/胜负分支是不同版本，不要求胜利与失败连续发生在同一时间线。"
+        },
+        {
+          "id": "C03",
+          "title": "指定主体、事件或镜头片段",
+          "assertion": "实际产物可观察地满足：长剑拄地；镜头由粒子特写拉至双人对峙全景",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "长剑拄地",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "镜头由粒子特写拉至双人对峙全景",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          },
+          "canonical_content_source_ids": [
+            "general:L163"
+          ],
+          "canonical_override_rule": "上述 canonical 内容原文优先解释本项所涉对象/事件；priority prompt 只能补充不矛盾的镜头细节。原文中与本项无关的片段不在本项重复评分。",
+          "temporal_rule": "仅按原文明示的先后、因果或同步关系核对；列举不等于严格时间顺序。双意象/胜负分支是不同版本，不要求胜利与失败连续发生在同一时间线。"
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L118-118",
+              "text": "- W01 世界与时代背景：「断界」——现实与记忆之间的破碎空间；旧战场的废墟悬浮其中，凝结的残响粒子（亡佚记忆的碎片）漂浮如尘，被吞噬的记忆会在此回响。"
+            },
+            {
+              "source_id": "general:L119-119",
+              "text": "- W02 场景所在地：断垣区（破碎废墟、锁链桥与游离残响粒子的黄昏战场）与外苑（月夜蓝紫、灯笼与鸟居的静谧回廊），两场景以界门往返。"
+            },
+            {
+              "source_id": "general:L6",
+              "text": "title: 断界残响"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L123-123",
+              "text": "- W06 视觉风格与色彩材质：简化几何/低多边形方向（A 系共同风格）＋月夜氛围光；主色=断界蓝灰 #5A6E8C、酒红 #7E3B47、月夜紫 #3D3654、残响青 #7FD8E8、灯笼暖橙 #E8A25C；材质为风化石、旧铁、纸灯笼与发光残响。"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "单帧视觉质量",
+          "assertion": "只评实际帧中的形体、细节和生成伪影；不重复检查主体/风格是否符合输入。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "多数关键帧严重畸变或不可辨",
+            "2": "关键主体多处明显变形/涂抹/破碎",
+            "3": "关键帧可读，局部畸变或细节伪影可见",
+            "4": "整体清楚，仅有轻微局部伪影",
+            "5": "全片关键帧清楚，未见明显畸变、涂抹或非设计性形体破损"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "时间连续性",
+          "assertion": "需跨全片时序证据；只评闪烁、身份漂移、跳变和运动断裂，不重复评分剧情顺序。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "持续闪烁/身份崩解/运动断裂，无法跟随主体",
+            "2": "频繁身份漂移、空间跳变或不合理形变",
+            "3": "主线连续，局部闪烁/跳变/形变可见",
+            "4": "时间上连贯，仅有少量轻微不稳定",
+            "5": "主体身份、空间和运动连贯；未见明显非设计性闪烁、跳变或形变"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。"
+  },
+  "evidence_requirements": [
+    "完整实际视频，或覆盖全片并附时间戳的连续帧序列",
+    "时间顺序和连续性需足够密集的时序证据；声音要求需实际音轨"
+  ],
+  "objective_specs": {
+    "duration_sec": 8,
+    "resolution": "1280x720",
+    "fps": 24
+  },
+  "objective_metric_policy": "规格与传统指标单独由探针/脚本报告原始值，不与三维 rubric 分数混合；本文件不代表已计算任何指标。",
+  "authoring_warnings": []
+}

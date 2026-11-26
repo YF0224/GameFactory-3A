@@ -1,0 +1,4668 @@
+rubric-format: v2
+game: G046_storm_isle_survival
+stage: whitebox
+version: core12-v1
+engine: unity3d
+status: frozen
+contract-id: G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8
+synopsis: |
+    现代近海航运时代；货轮「灰鸥号」在风暴季失事，幸存者漂流到无人小岛「灰鸥岛」，必须在风暴季的窗口期内发出求救信号。 The setting is 灰鸥岛——南部海滩（落点）、中部林地（原木/浆果）、北部岩区（石块/燧石），全岛受周期性风暴带影响。. 玩家是灰鸥号幸存船员；当前任务：采集、制作、搭建有顶庇护所，并在庇护所内点燃信号篝火坚持 10 秒，引来救援船。 Core loop: 采集 → 制作工具 → 建造庇护所 → 达成求救条件。. 超时＝风暴季窗口关闭、救援无望（判负文案）；HP 归零＝短暂昏迷后于安全点苏醒（非终局）；成功则 C03 呈现救援船破浪而来的场面。 Narrative devices: 六类方块＝岛上可利用的自然资源；石斧＝船舱工具箱遗失后的手工替代品；信号篝火＝船员求生的最后手段；庇护所＝抵御风暴带的必要工事。全部原创。. Art direction: 风格化卡通体素；主色＝海雾蓝绿（#5E8C7A 系）＋风暴雨灰（#6B7280 系）＋篝火暖橙（#E8935A 系）；材质以哑光木纹、粗岩、叶片为主，昼夜光照差异明显。. Sound direction: 风暴带海岛——昼段海鸟与浪声、夜段风声渐强；音效语言为「方块碎裂＋放置闷响＋风暴呼啸＋篝火噼啪」，全部音效按 §9 F06 冻结清单交付。. Asset tasks: 2 3d_object, 1 3d_scene, 1 motion, 10 audio, 3 cg_video; they serve the same declared world, characters and gameplay.
+
+scoring-protocol: |
+    本版本机制 C2 固定十二项、项间等权，每项仅一个可计分判定；引用上下文不再展开为额外评分原子。未选中的 general_requirement 规则不属于本版本 C2 分母；其他维度保留原有验收项。这是核心机制子集协议，不宣称覆盖完整需求；与历史全量协议分开报告。每行是一个验收终点，binding.subchecks 为必须独立取证的冻结细则，不是额外主项。全部主项及 CH 由同一配置的 VLM 判断；不使用 human.only 或人工回退。子检查角色为 precondition/action/behavior/boundary/recovery。precondition/action 是取证门槛，不计功能完成分。每个子检查只能 PASS/FAIL/UNKNOWN；任何必需子检查 UNKNOWN 或取证门槛 FAIL，主项 UNKNOWN。门槛全部通过后，仅按 behavior/boundary/recovery 的 PASS 数/冻结可计分子检查数计算；全通过 PASS、全失败 FAIL，其余 PARTIAL。UNKNOWN/ERROR 不记零分、不缩减冻结分母；仅报告 provisional 和证据覆盖率。补采所缺场景/事件/精确数值或实际模态证据后 VLM 重评；证据仍不足继续 UNKNOWN。代码与声明不能单独证明玩法完成。C2 必须有触发条件、实际操作、结果及拒绝/恢复分支证据。仅在输入已执行且观察窗口完整时才能判失败；环境/评估器故障为 ERROR。C1 故事事实；C2 机制行为；C3 可替换接口；Q 白模构图、比例与占位模型可读性；G 玩家理解与决策；P 首次构建启动稳定性。同一事实只归一个主维度；同源不同事实可分别取证。最终资产导入播放、事件绑定质量留 Track C。先按行等权计算 C1/C2/C3，再 C=mean(C1,C2,C3)，Overall=mean(C,Q,G,P)；CH 不参与。白模允许简图、文字、几何体及占位反馈，不能以缺少最终资产判 FAIL。Q 不评价最终拓扑、材质或精细建模；P 不等于全流程通关，完整游玩闭环还需结合 C2/G 及实际试验覆盖。数值、优先级、例外和实现自由度以 general_requirement.txt 为准，引用上下文不单独计分。
+
+execution: |
+    {
+      "build": {
+        "required": true,
+        "timeout_s": 1800
+      },
+      "input_bindings": {
+        "attack": "左键",
+        "interact": "右键",
+        "jump": "空格",
+        "move": "WASD",
+        "pause": "Esc",
+        "restart": "Enter"
+      },
+      "playtest_timeout_s": 1800,
+      "trials": [
+        {
+          "action_plan": [
+            {
+              "seconds": 3,
+              "verb": "wait"
+            }
+          ],
+          "description": "Fresh real build; hold on the title for player-facing identity, goal and framing. No gameplay input.",
+          "duration_s": 3,
+          "evidence_channels": [
+            "frames",
+            "video",
+            "actions",
+            "state_trace",
+            "event_trace"
+          ],
+          "seed": 1046,
+          "trial_id": "title"
+        },
+        {
+          "action_plan": [
+            {
+              "seconds": 2,
+              "verb": "wait"
+            },
+            {
+              "verb": "interact"
+            },
+            {
+              "seconds": 11.0,
+              "verb": "wait"
+            },
+            {
+              "seconds": 1,
+              "verb": "move"
+            },
+            {
+              "seconds": 1.5,
+              "verb": "wait"
+            },
+            {
+              "seconds": 1,
+              "verb": "jump"
+            },
+            {
+              "seconds": 1.5,
+              "verb": "wait"
+            },
+            {
+              "seconds": 1,
+              "verb": "attack"
+            },
+            {
+              "seconds": 1.5,
+              "verb": "wait"
+            },
+            {
+              "seconds": 1,
+              "verb": "interact"
+            },
+            {
+              "seconds": 1.5,
+              "verb": "wait"
+            },
+            {
+              "seconds": 8,
+              "verb": "wait"
+            }
+          ],
+          "description": "Title → start → exercise the declared core actions (move→WASD; jump→空格; attack→左键; interact→右键; interact→1–9; interact→C) → observe the running HUD and scene. Waits absorb the declared opening presentation.",
+          "duration_s": 41,
+          "evidence_channels": [
+            "frames",
+            "video",
+            "actions",
+            "state_trace",
+            "event_trace"
+          ],
+          "seed": 1046,
+          "trial_id": "core_probe"
+        },
+        {
+          "action_plan": [
+            {
+              "seconds": 2,
+              "verb": "wait"
+            },
+            {
+              "verb": "interact"
+            },
+            {
+              "seconds": 11.0,
+              "verb": "wait"
+            },
+            {
+              "seconds": 1,
+              "verb": "move"
+            },
+            {
+              "seconds": 1.5,
+              "verb": "wait"
+            },
+            {
+              "seconds": 1,
+              "verb": "jump"
+            },
+            {
+              "seconds": 1.5,
+              "verb": "wait"
+            },
+            {
+              "verb": "pause"
+            },
+            {
+              "seconds": 1,
+              "verb": "wait"
+            },
+            {
+              "verb": "pause"
+            },
+            {
+              "seconds": 120,
+              "verb": "wait"
+            },
+            {
+              "verb": "restart"
+            },
+            {
+              "seconds": 4,
+              "verb": "wait"
+            }
+          ],
+          "description": "Fresh title → start → core actions → pause/continue → then play without optimization or recovery input so the natural outcome path (settlement/loss/recovery) is exercised → restart at the end. Capture continuously at normal speed; no teleport, state injection or simulation-speed change is allowed.",
+          "duration_s": 148,
+          "evidence_channels": [
+            "frames",
+            "video",
+            "actions",
+            "state_trace",
+            "event_trace"
+          ],
+          "seed": 1046,
+          "trial_id": "settle_restart"
+        }
+      ]
+    }
+
+task-coverage-policy: |
+    {
+      "asset_tasks": [
+        "G046_obj_001",
+        "G046_obj_002",
+        "G046_scene_001",
+        "G046_storm_isle_survival_mot_001",
+        "G046_sfx_001",
+        "G046_sfx_002",
+        "G046_sfx_003",
+        "G046_sfx_004",
+        "G046_sfx_005",
+        "G046_sfx_006",
+        "G046_sfx_007",
+        "G046_sfx_008",
+        "G046_sfx_009",
+        "G046_sfx_010",
+        "G046_cg_001",
+        "G046_cg_002",
+        "G046_cg_003"
+      ],
+      "authoring_protocol": "gamefactory3a.whitebox_core12.v1",
+      "core12": {
+        "count": 12,
+        "original_rubric": "test_data/test_samples/G046_storm_isle_survival/rubric_whitebox",
+        "previous_contract_id": "G046_storm_isle_survival.whitebox.endpoints-v2-candidate.a1615a3fc10de3b0b45b8e460ab4e8270457e0ff30dc6b5619504302e7ed7534",
+        "previous_json_sha256": "089ce9f311596fc5a24cfb3d9d4702cdf56934cb4471369a956cc2d7e1c09250",
+        "scored_atom_count": 12,
+        "selection": [
+          {
+            "expectation": "方块从世界移入库存（耗时按工具效率：徒手 2 秒/石斧 1 秒）；放置消耗库存并写入世界；放置后庇护所判定即时重算",
+            "requirement_ids": [
+              "M01"
+            ],
+            "selector": "M01/change",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M05]",
+            "title": "采集与放置（主机制）：有效操作与状态变化"
+          },
+          {
+            "expectation": "边界外放置、重叠放置、库存空放置 → 拒绝且无副作用",
+            "requirement_ids": [
+              "M01"
+            ],
+            "selector": "M01/invalid",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M05]",
+            "title": "采集与放置（主机制）：拒绝与边界"
+          },
+          {
+            "expectation": "按 G03 配方消耗材料产出成品（资源守恒，不可重复消耗）",
+            "requirement_ids": [
+              "M02"
+            ],
+            "selector": "M02/change",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M05]",
+            "title": "合成配方：有效操作与状态变化"
+          },
+          {
+            "expectation": "材料不足拒绝且不部分消耗",
+            "requirement_ids": [
+              "M02"
+            ],
+            "selector": "M02/invalid",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M05]",
+            "title": "合成配方：拒绝与边界"
+          },
+          {
+            "expectation": "按 G06 切换昼夜（能见度/移速/伤害分档）；风暴每次判定玩家露天或庇护所内 → 伤害按 G02 昼夜分档（昼 −4/夜 −6/庇护 0）；庇护所判定按 G04 几何规则即时更新",
+            "requirement_ids": [
+              "M03"
+            ],
+            "selector": "M03/change",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M05]",
+            "title": "昼夜与庇护所防护：有效操作与状态变化"
+          },
+          {
+            "expectation": "庇护所破坏后顶盖不满足 → 重新判定为露天",
+            "requirement_ids": [
+              "M03"
+            ],
+            "selector": "M03/invalid",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M05]",
+            "title": "昼夜与庇护所防护：拒绝与边界"
+          },
+          {
+            "expectation": "持续 10 秒 → 判胜结算；死亡 → 3 秒后重生于最近安全点、丢失携带栏 50% 物品",
+            "requirement_ids": [
+              "M04"
+            ],
+            "selector": "M04/change",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M05]",
+            "title": "求救与安全点重生：有效操作与状态变化"
+          },
+          {
+            "expectation": "存档保存世界体素、库存、HP、昼夜与安全点全量状态；读档恢复",
+            "requirement_ids": [
+              "M05"
+            ],
+            "selector": "M05/change",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M05]",
+            "title": "检查点存档：有效操作与状态变化"
+          },
+          {
+            "expectation": "- G05 暂停与随机：Esc 暂停冻结风暴、采集、昼夜与倒计时；窗口失焦自动暂停；fixed_seed=1046 冻结岛屿地形与资源分布（同 seed 双跑布置 diff=0）；本作无概率判定。",
+            "requirement_ids": [
+              "G05"
+            ],
+            "selector": "G05/pause",
+            "source_file": "general_requirement.txt",
+            "source_section": "3. 数值口径与全局规则 [G01–G07]",
+            "title": "暂停冻结与继续"
+          },
+          {
+            "expectation": "- V01 成功条件：在庇护所内点燃信号篝火持续 10 秒 → 求救成功结算（显示用时、剩余 HP、死亡次数）。",
+            "requirement_ids": [
+              "V01"
+            ],
+            "selector": "V01",
+            "source_file": "general_requirement.txt",
+            "source_section": "7. 成功、失败与恢复 [V01–V05]",
+            "title": "成功终局"
+          },
+          {
+            "expectation": "- V02 失败条件：600 秒超时判负；HP 归零非终局（进入安全点重生流程），死亡不限次数。",
+            "requirement_ids": [
+              "V02"
+            ],
+            "selector": "V02",
+            "source_file": "general_requirement.txt",
+            "source_section": "7. 成功、失败与恢复 [V01–V05]",
+            "title": "失败或非失败边界"
+          },
+          {
+            "expectation": "- V03 恢复语义：死亡重生于最近安全点（G07），保留世界修改与放置方块、丢失携带栏 50% 物品；F5/F9 局内检查点存读档；失败结算一键重开。",
+            "requirement_ids": [
+              "V03"
+            ],
+            "selector": "V03",
+            "source_file": "general_requirement.txt",
+            "source_section": "7. 成功、失败与恢复 [V01–V05]",
+            "title": "原生恢复与重新开始"
+          }
+        ],
+        "selection_basis": "canonical general_requirement.txt only; independent of submissions and historical scores",
+        "source_sha256": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2",
+        "unselected_rules": "Outside the new C2 scoring subset; never silently claimed covered"
+      },
+      "coverage": {
+        "A01": [
+          "G046_storm_isle_survival.WB.Q.03"
+        ],
+        "C01": [
+          "G046_storm_isle_survival.WB.C3.06"
+        ],
+        "C02": [
+          "G046_storm_isle_survival.WB.C3.06"
+        ],
+        "C03": [
+          "G046_storm_isle_survival.WB.C3.06"
+        ],
+        "F01": [
+          "G046_storm_isle_survival.WB.Q.01"
+        ],
+        "F02": [
+          "G046_storm_isle_survival.WB.Q.02"
+        ],
+        "F04": [
+          "G046_storm_isle_survival.WB.C3.07",
+          "G046_storm_isle_survival.WB.Q.03"
+        ],
+        "F05": [
+          "G046_storm_isle_survival.WB.C3.03",
+          "G046_storm_isle_survival.WB.C3.07",
+          "G046_storm_isle_survival.WB.G.03"
+        ],
+        "F06": [
+          "G046_storm_isle_survival.WB.C3.04",
+          "G046_storm_isle_survival.WB.C3.05",
+          "G046_storm_isle_survival.WB.G.04"
+        ],
+        "F07": [
+          "G046_storm_isle_survival.WB.C3.07",
+          "G046_storm_isle_survival.WB.Q.04",
+          "G046_storm_isle_survival.WB.G.06"
+        ],
+        "F08": [
+          "G046_storm_isle_survival.WB.G.05"
+        ],
+        "F09": [
+          "G046_storm_isle_survival.WB.Q.04"
+        ],
+        "F10": [
+          "G046_storm_isle_survival.WB.G.06"
+        ],
+        "G03": [
+          "G046_storm_isle_survival.WB.C3.01"
+        ],
+        "G04": [
+          "G046_storm_isle_survival.WB.C3.01"
+        ],
+        "G05": [
+          "G046_storm_isle_survival.WB.C2.09"
+        ],
+        "G06": [
+          "G046_storm_isle_survival.WB.G.01"
+        ],
+        "I06": [
+          "G046_storm_isle_survival.WB.G.02"
+        ],
+        "I07": [
+          "G046_storm_isle_survival.WB.G.02"
+        ],
+        "L01": [
+          "G046_storm_isle_survival.WB.C3.01",
+          "G046_storm_isle_survival.WB.C3.03"
+        ],
+        "L02": [
+          "G046_storm_isle_survival.WB.C3.02"
+        ],
+        "L03": [
+          "G046_storm_isle_survival.WB.G.06"
+        ],
+        "M01": [
+          "G046_storm_isle_survival.WB.C2.01",
+          "G046_storm_isle_survival.WB.C2.02"
+        ],
+        "M02": [
+          "G046_storm_isle_survival.WB.C2.03",
+          "G046_storm_isle_survival.WB.C2.04"
+        ],
+        "M03": [
+          "G046_storm_isle_survival.WB.C2.05",
+          "G046_storm_isle_survival.WB.C2.06"
+        ],
+        "M04": [
+          "G046_storm_isle_survival.WB.C2.07"
+        ],
+        "M05": [
+          "G046_storm_isle_survival.WB.C2.08"
+        ],
+        "N06": [
+          "G046_storm_isle_survival.WB.C3.07"
+        ],
+        "V01": [
+          "G046_storm_isle_survival.WB.C2.10"
+        ],
+        "V02": [
+          "G046_storm_isle_survival.WB.C2.11"
+        ],
+        "V03": [
+          "G046_storm_isle_survival.WB.C2.12"
+        ],
+        "W01": [
+          "G046_storm_isle_survival.WB.C1.01"
+        ],
+        "W02": [
+          "G046_storm_isle_survival.WB.C1.01"
+        ],
+        "W03": [
+          "G046_storm_isle_survival.WB.C1.03"
+        ],
+        "W04": [
+          "G046_storm_isle_survival.WB.C1.02"
+        ],
+        "W05": [
+          "G046_storm_isle_survival.WB.C1.03"
+        ],
+        "W06": [
+          "G046_storm_isle_survival.WB.Q.02"
+        ],
+        "W07": [
+          "G046_storm_isle_survival.WB.G.05"
+        ],
+        "W08": [
+          "G046_storm_isle_survival.WB.C1.04"
+        ],
+        "evaluation_plan_table.md#CH": [
+          "G046_storm_isle_survival.WB.CH.01"
+        ],
+        "evaluation_plan_table.md#G": [
+          "G046_storm_isle_survival.WB.G.07"
+        ],
+        "evaluation_plan_table.md#P": [
+          "G046_storm_isle_survival.WB.P.01",
+          "G046_storm_isle_survival.WB.P.02",
+          "G046_storm_isle_survival.WB.P.03",
+          "G046_storm_isle_survival.WB.P.04"
+        ],
+        "evaluation_plan_table.md#Q": [
+          "G046_storm_isle_survival.WB.Q.01",
+          "G046_storm_isle_survival.WB.Q.05",
+          "G046_storm_isle_survival.WB.Q.06"
+        ]
+      },
+      "coverage_basis": "explicit subcheck requirement_ids only; context and evaluation-plan facets do not claim requirement coverage",
+      "coverage_semantics": "authoring traceability only; not measured gameplay completion or runtime evidence coverage",
+      "dimension_allocation": {
+        "C1": 4,
+        "C2": 12,
+        "C3": 7,
+        "G": 7,
+        "P": 4,
+        "Q": 6
+      },
+      "evaluation_plans": {
+        "asset_evaluation_plan.md": "248e80c2516d4e3488bf9f159e9d82ea8752da03037f11f45d17bdb34598470a",
+        "evaluation_plan_table.md": "c40bfe47f9788fcd14b853541fc55cb0df0e62172edabf18125faa3e2aa2cba2"
+      },
+      "execution_scope": "existing smoke trials retained; each binding.procedure additionally requires targeted evidence; unexecuted branches remain UNKNOWN",
+      "group_size_policy": "C2: exactly twelve endpoints with one scored subcheck each.",
+      "judge_policy": "vlm_only_no_human",
+      "main_quota": 40,
+      "ownership": {
+        "A01": {
+          "columns": [
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "C01": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "C02": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "C03": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F01": {
+          "columns": [
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F02": {
+          "columns": [
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F04": {
+          "columns": [
+            "C3",
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F05": {
+          "columns": [
+            "C3",
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F06": {
+          "columns": [
+            "C3",
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F07": {
+          "columns": [
+            "C3",
+            "G",
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F08": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F09": {
+          "columns": [
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F10": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "G03": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "G04": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "G05": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "G06": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "I06": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "I07": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "L01": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "L02": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "L03": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "M01": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "M02": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "M03": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "M04": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "M05": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "N06": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "V01": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "V02": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "V03": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W01": {
+          "columns": [
+            "C1"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W02": {
+          "columns": [
+            "C1"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W03": {
+          "columns": [
+            "C1"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W04": {
+          "columns": [
+            "C1"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W05": {
+          "columns": [
+            "C1"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W06": {
+          "columns": [
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W07": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W08": {
+          "columns": [
+            "C1"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "evaluation_plan_table.md#CH": {
+          "columns": [
+            "CH"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "evaluation_plan_table.md#G": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "evaluation_plan_table.md#P": {
+          "columns": [
+            "P"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "evaluation_plan_table.md#Q": {
+          "columns": [
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        }
+      },
+      "path_base": "case_root",
+      "release_status": "source_frozen_core12_runtime_not_validated",
+      "result_protocol": "gamefactory3a.result_protocol.v3",
+      "score_interpretation": {
+        "C": "story/mechanism/hook completeness; not raw percent of all source rules",
+        "P": "first build, launch, scene entry, observed runtime; not full-game completion",
+        "Q": "whitebox scene/proportion/placeholder readability; not final mesh/material quality",
+        "playable_loop": "interpret C2 + G + P together with executed trials and UNKNOWN coverage"
+      },
+      "source_inputs": {
+        "3D_object/object_tasks.jsonl": "f39dc3d1e13cd8ec3130ca4f9ec70446018ec67b9e0985bebf044d847a64f1c0",
+        "3D_object/ref_images/ref_signal_bonfire.png": "08e2dc1319d5489766c7ed4d8fc16e3c0f2656ac64febd417b9ebb14f64b8c55",
+        "3D_scene/ref_images/ref_storm_isle_overview.png": "0dfd7fc5d0b062913334d4cf5e0567b3f438f0d7257a4b9ac2f2601abc6ccc59",
+        "3D_scene/scene_tasks.jsonl": "6764cbec2ace05ed3d8320e30e1ed757c7d6b48cb8df69d7c4b337885cc5cc4f",
+        "audio/audio_tasks.jsonl": "b7572be83d028d23c1637840d5e4ee9fa712ccf641c32231fd3778e32c920059",
+        "cg_video/cg_tasks.jsonl": "f9cafb9ee5757ebc68cc05c62d52766252387abd0f039d32cb10b18464734e04",
+        "general_requirement.txt": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2",
+        "motion/motion_tasks.jsonl": "d6cb3058a07867862974bf0acbf780a673a10d9b62772becdfafff877f6693ae"
+      },
+      "standalone_tpose": "preparation_input_only",
+      "subcheck_aggregation": "role_gated_mean.v1; setup gates do not award functional credit",
+      "tier": "M"
+    }
+
+define scoring-rule scored_subchecks_3: {"kind": "tiered_mean", "subitems": 3, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_6: {"kind": "tiered_mean", "subitems": 6, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_2: {"kind": "tiered_mean", "subitems": 2, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_10: {"kind": "tiered_mean", "subitems": 10, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_4: {"kind": "tiered_mean", "subitems": 4, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_5: {"kind": "tiered_mean", "subitems": 5, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_7: {"kind": "tiered_mean", "subitems": 7, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_1: {"kind": "tiered_mean", "subitems": 1, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_9: {"kind": "tiered_mean", "subitems": 9, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_13: {"kind": "tiered_mean", "subitems": 13, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+reference whitebox_image_01: 3D_object/ref_images/ref_signal_bonfire.png
+reference whitebox_image_02: 3D_scene/ref_images/ref_storm_isle_overview.png
+
+item G046_storm_isle_survival.WB.C1.01:
+  column: C1
+  dimension: Completeness
+  requirements: W01, W02
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_3
+  target: |
+    世界与时代背景；场景所在地
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "W01": "- W01 世界与时代背景：现代近海航运时代；货轮「灰鸥号」在风暴季失事，幸存者漂流到无人小岛「灰鸥岛」，必须在风暴季的窗口期内发出求救信号。",
+        "W02": "- W02 场景所在地：灰鸥岛——南部海滩（落点）、中部林地（原木/浆果）、北部岩区（石块/燧石），全岛受周期性风暴带影响。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "世界与时代背景",
+        "场景所在地"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制标题、任务入口、推进及结果窗口，核对故事事实在实际游戏中的表达。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "- W01 世界与时代背景",
+          "id": "C1.s0001",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W01 世界与时代背景：现代近海航运时代",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "- W01 世界与时代背景：现代近海航运时代",
+          "topic": "世界与时代背景"
+        },
+        {
+          "facet": "货轮「灰鸥号」在风暴季失事，幸存者漂流到无人小岛「灰鸥岛」，",
+          "id": "C1.s0002",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "货轮「灰鸥号」在风暴季失事，幸存者漂流到无人小岛「灰鸥岛」，必须在风暴季的窗口期内发出求救信号。",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "货轮「灰鸥号」在风暴季失事，幸存者漂流到无人小岛「灰鸥岛」，必须在风暴季的窗口期内发出求救信号。",
+          "topic": "世界与时代背景"
+        },
+        {
+          "facet": "- W02 场景所在地",
+          "id": "C1.s0003",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W02 场景所在地：灰鸥岛——南部海滩（落点）、中部林地（原木/浆果）、北部岩区（石块/燧石），全岛受周期性风暴带影响。",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "- W02 场景所在地：灰鸥岛——南部海滩（落点）、中部林地（原木/浆果）、北部岩区（石块/燧石），全岛受周期性风暴带影响。",
+          "topic": "场景所在地"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C1.02:
+  column: C1
+  dimension: Completeness
+  requirements: W04
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_3
+  target: |
+    失败代价与结局表达
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "C03": "- C03 求救成功（Ending，10 秒，1280×720@24fps）\n  - 触发时机：求救判定达成后、结算面板之前，每局一次\n  - 内容与角色场景：信号弹升空，救援船破浪靠近，探照灯落在庇护所与篝火上，幸存者挥手\n  - 资产对应：庇护所、篝火、救援船与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 进入结算面板\n  - 状态一致：仅在真实达成 V01 后触发",
+        "W04": "- W04 失败代价与结局表达：超时＝风暴季窗口关闭、救援无望（判负文案）；HP 归零＝短暂昏迷后于安全点苏醒（非终局）；成功则 C03 呈现救援船破浪而来的场面。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "失败代价与结局表达"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制标题、任务入口、推进及结果窗口，核对故事事实在实际游戏中的表达。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "- W04 失败代价与结局表达",
+          "id": "C1.s0006",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W04 失败代价与结局表达：超时＝风暴季窗口关闭、救援无望（判负文案）",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "- W04 失败代价与结局表达：超时＝风暴季窗口关闭、救援无望（判负文案）",
+          "topic": "失败代价与结局表达"
+        },
+        {
+          "facet": "HP 归零＝短暂昏迷后于安全点苏醒（非终局）",
+          "id": "C1.s0007",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "HP 归零＝短暂昏迷后于安全点苏醒（非终局）",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "HP 归零＝短暂昏迷后于安全点苏醒（非终局）",
+          "topic": "失败代价与结局表达"
+        },
+        {
+          "facet": "成功则 C03 呈现救援船破浪而来的场面。",
+          "id": "C1.s0008",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "成功则 C03 呈现救援船破浪而来的场面。",
+          "source_unit": 3,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "成功则 C03 呈现救援船破浪而来的场面。",
+          "topic": "失败代价与结局表达"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C1.03:
+  column: C1
+  dimension: Completeness
+  requirements: W05, W03
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_6
+  target: |
+    叙事来源；玩家身份与当前任务
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "W03": "- W03 玩家身份与当前任务：玩家是灰鸥号幸存船员；当前任务：采集、制作、搭建有顶庇护所，并在庇护所内点燃信号篝火坚持 10 秒，引来救援船。",
+        "W05": "- W05 叙事来源：六类方块＝岛上可利用的自然资源；石斧＝船舱工具箱遗失后的手工替代品；信号篝火＝船员求生的最后手段；庇护所＝抵御风暴带的必要工事。全部原创。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "叙事来源",
+        "玩家身份与当前任务"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制标题、任务入口、推进及结果窗口，核对故事事实在实际游戏中的表达。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "- W05 叙事来源",
+          "id": "C1.s0009",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W05 叙事来源：六类方块＝岛上可利用的自然资源",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "- W05 叙事来源：六类方块＝岛上可利用的自然资源",
+          "topic": "叙事来源"
+        },
+        {
+          "facet": "石斧＝船舱工具箱遗失后的手工替代品",
+          "id": "C1.s0010",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "石斧＝船舱工具箱遗失后的手工替代品",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "石斧＝船舱工具箱遗失后的手工替代品",
+          "topic": "叙事来源"
+        },
+        {
+          "facet": "信号篝火＝船员求生的最后手段",
+          "id": "C1.s0011",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "信号篝火＝船员求生的最后手段",
+          "source_unit": 3,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "信号篝火＝船员求生的最后手段",
+          "topic": "叙事来源"
+        },
+        {
+          "facet": "庇护所＝抵御风暴带的必要工事。全部原创。",
+          "id": "C1.s0012",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "庇护所＝抵御风暴带的必要工事。全部原创。",
+          "source_unit": 4,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "庇护所＝抵御风暴带的必要工事。全部原创。",
+          "topic": "叙事来源"
+        },
+        {
+          "facet": "- W03 玩家身份与当前任务",
+          "id": "C1.s0004",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W03 玩家身份与当前任务：玩家是灰鸥号幸存船员",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "- W03 玩家身份与当前任务：玩家是灰鸥号幸存船员",
+          "topic": "玩家身份与当前任务"
+        },
+        {
+          "facet": "当前任务",
+          "id": "C1.s0005",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "当前任务：采集、制作、搭建有顶庇护所，并在庇护所内点燃信号篝火坚持 10 秒，引来救援船。",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "当前任务：采集、制作、搭建有顶庇护所，并在庇护所内点燃信号篝火坚持 10 秒，引来救援船。",
+          "topic": "玩家身份与当前任务"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C1.04:
+  column: C1
+  dimension: Completeness
+  requirements: W08
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_2
+  target: |
+    故事表达方式
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "C01": "- C01 登陆漂流（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入空降海滩之前，每局一次\n  - 内容与角色场景：风暴夜的海面，救生圈漂到灰鸥岛沙滩，幸存船员爬上岸回望远处沉没的货轮「灰鸥号」\n  - 资产对应：海滩、救生圈、玩家造型与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入游玩；自然播完 → 进入游玩\n  - 状态一致：播放期间不推进倒计时；进入状态＝海滩落点、HP 100",
+        "C02": "- C02 首场风暴（Event，8 秒，1280×720@24fps）\n  - 触发时机：首次进入夜段（150 秒节点）时短暂插入，每局一次\n  - 内容与角色场景：天色骤暗，风线横扫海面，闪电照亮未完工的庇护所轮廓，幸存者抱紧木板\n  - 资产对应：岛屿、庇护所方块与游戏内一致\n  - 可跳过：Esc 跳过 → 直接进入夜段；自然播完 → 进入夜段\n  - 状态一致：播放期间倒计时冻结，播完/跳过后夜段从 0 秒起算",
+        "C03": "- C03 求救成功（Ending，10 秒，1280×720@24fps）\n  - 触发时机：求救判定达成后、结算面板之前，每局一次\n  - 内容与角色场景：信号弹升空，救援船破浪靠近，探照灯落在庇护所与篝火上，幸存者挥手\n  - 资产对应：庇护所、篝火、救援船与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 进入结算面板\n  - 状态一致：仅在真实达成 V01 后触发",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代海难与落岛 → 风暴视频（C02）在首场夜段风暴前强化威胁 → 结算视频（C03）收束；故事只做包装，不改变机制数值。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "故事表达方式"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制标题、任务入口、推进及结果窗口，核对故事事实在实际游戏中的表达。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "- W08 故事表达方式",
+          "id": "C1.s0013",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W08"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W08 故事表达方式：开场视频（C01）交代海难与落岛 → 风暴视频（C02）在首场夜段风暴前强化威胁 → 结算视频（C03）收束",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "- W08 故事表达方式：开场视频（C01）交代海难与落岛 → 风暴视频（C02）在首场夜段风暴前强化威胁 → 结算视频（C03）收束",
+          "topic": "故事表达方式"
+        },
+        {
+          "facet": "故事只做包装，不改变机制数值。",
+          "id": "C1.s0014",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W08"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "故事只做包装，不改变机制数值。",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "故事只做包装，不改变机制数值。",
+          "topic": "故事表达方式"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C2.01:
+  column: C2
+  dimension: Completeness
+  requirements: M01
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    采集与放置（主机制）：有效操作与状态变化：方块从世界移入库存（耗时按工具效率：徒手 2 秒/石斧 1 秒）；放置消耗库存并写入世界；放置后庇护所判定即时重算
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "M01": "- M01 采集与放置（主机制）\n  - input：左键采集／右键放置\n  - precondition：目标方块在可及范围内（放置格不与玩家碰撞体重叠、在世界界内）\n  - state_change：方块从世界移入库存（耗时按工具效率：徒手 2 秒/石斧 1 秒）；放置消耗库存并写入世界；放置后庇护所判定即时重算\n  - observable：方块增减事件（含类型与坐标）与库存流水\n  - invalid_case：边界外放置、重叠放置、库存空放置 → 拒绝且无副作用\n  - recovery：F9 读档或死亡重生恢复"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M01/change",
+        "sha256": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2"
+      },
+      "focus": [
+        "采集与放置（主机制）：有效操作与状态变化"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "采集与放置（主机制）：有效操作与状态变化",
+          "id": "C2.core12.01",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M05]",
+          "source_text": "- M01 采集与放置（主机制）\n  - input：左键采集／右键放置\n  - precondition：目标方块在可及范围内（放置格不与玩家碰撞体重叠、在世界界内）\n  - state_change：方块从世界移入库存（耗时按工具效率：徒手 2 秒/石斧 1 秒）；放置消耗库存并写入世界；放置后庇护所判定即时重算\n  - observable：方块增减事件（含类型与坐标）与库存流水\n  - invalid_case：边界外放置、重叠放置、库存空放置 → 拒绝且无副作用\n  - recovery：F9 读档或死亡重生恢复",
+          "source_unit": 1,
+          "system": "core12",
+          "text": "方块从世界移入库存（耗时按工具效率：徒手 2 秒/石斧 1 秒）；放置消耗库存并写入世界；放置后庇护所判定即时重算",
+          "topic": "采集与放置（主机制）：有效操作与状态变化"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C2.02:
+  column: C2
+  dimension: Completeness
+  requirements: M01
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    采集与放置（主机制）：拒绝与边界：边界外放置、重叠放置、库存空放置 → 拒绝且无副作用
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "M01": "- M01 采集与放置（主机制）\n  - input：左键采集／右键放置\n  - precondition：目标方块在可及范围内（放置格不与玩家碰撞体重叠、在世界界内）\n  - state_change：方块从世界移入库存（耗时按工具效率：徒手 2 秒/石斧 1 秒）；放置消耗库存并写入世界；放置后庇护所判定即时重算\n  - observable：方块增减事件（含类型与坐标）与库存流水\n  - invalid_case：边界外放置、重叠放置、库存空放置 → 拒绝且无副作用\n  - recovery：F9 读档或死亡重生恢复"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M01/invalid",
+        "sha256": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2"
+      },
+      "focus": [
+        "采集与放置（主机制）：拒绝与边界"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "采集与放置（主机制）：拒绝与边界",
+          "id": "C2.core12.02",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M05]",
+          "source_text": "- M01 采集与放置（主机制）\n  - input：左键采集／右键放置\n  - precondition：目标方块在可及范围内（放置格不与玩家碰撞体重叠、在世界界内）\n  - state_change：方块从世界移入库存（耗时按工具效率：徒手 2 秒/石斧 1 秒）；放置消耗库存并写入世界；放置后庇护所判定即时重算\n  - observable：方块增减事件（含类型与坐标）与库存流水\n  - invalid_case：边界外放置、重叠放置、库存空放置 → 拒绝且无副作用\n  - recovery：F9 读档或死亡重生恢复",
+          "source_unit": 2,
+          "system": "core12",
+          "text": "边界外放置、重叠放置、库存空放置 → 拒绝且无副作用",
+          "topic": "采集与放置（主机制）：拒绝与边界"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C2.03:
+  column: C2
+  dimension: Completeness
+  requirements: M02
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    合成配方：有效操作与状态变化：按 G03 配方消耗材料产出成品（资源守恒，不可重复消耗）
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "G03": "- G03 采集与合成（本包冻结值）：徒手采集 2 秒/方块、石斧 1 秒/方块；配方——木板×4←原木×1；石斧×1←木板×2＋燧石×1；信号篝火×1←木板×4＋石块×4。资源守恒 oracle：合成 1 把石斧必消耗 2 木板＋1 燧石且不可重复消耗；数例：采集 3 原木＋1 燧石 → 可合成 12 木板、1 石斧，余 0 原木。",
+        "M02": "- M02 合成配方\n  - input：C 界面点击配方\n  - precondition：材料满足配方且库存可容纳成品\n  - state_change：按 G03 配方消耗材料产出成品（资源守恒，不可重复消耗）\n  - observable：合成事件（材料/成品数量对照）\n  - invalid_case：材料不足拒绝且不部分消耗\n  - recovery：补齐材料重试"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M02/change",
+        "sha256": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2"
+      },
+      "focus": [
+        "合成配方：有效操作与状态变化"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "合成配方：有效操作与状态变化",
+          "id": "C2.core12.03",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M05]",
+          "source_text": "- M02 合成配方\n  - input：C 界面点击配方\n  - precondition：材料满足配方且库存可容纳成品\n  - state_change：按 G03 配方消耗材料产出成品（资源守恒，不可重复消耗）\n  - observable：合成事件（材料/成品数量对照）\n  - invalid_case：材料不足拒绝且不部分消耗\n  - recovery：补齐材料重试",
+          "source_unit": 3,
+          "system": "core12",
+          "text": "按 G03 配方消耗材料产出成品（资源守恒，不可重复消耗）",
+          "topic": "合成配方：有效操作与状态变化"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C2.04:
+  column: C2
+  dimension: Completeness
+  requirements: M02
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    合成配方：拒绝与边界：材料不足拒绝且不部分消耗
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "M02": "- M02 合成配方\n  - input：C 界面点击配方\n  - precondition：材料满足配方且库存可容纳成品\n  - state_change：按 G03 配方消耗材料产出成品（资源守恒，不可重复消耗）\n  - observable：合成事件（材料/成品数量对照）\n  - invalid_case：材料不足拒绝且不部分消耗\n  - recovery：补齐材料重试"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M02/invalid",
+        "sha256": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2"
+      },
+      "focus": [
+        "合成配方：拒绝与边界"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "合成配方：拒绝与边界",
+          "id": "C2.core12.04",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M05]",
+          "source_text": "- M02 合成配方\n  - input：C 界面点击配方\n  - precondition：材料满足配方且库存可容纳成品\n  - state_change：按 G03 配方消耗材料产出成品（资源守恒，不可重复消耗）\n  - observable：合成事件（材料/成品数量对照）\n  - invalid_case：材料不足拒绝且不部分消耗\n  - recovery：补齐材料重试",
+          "source_unit": 4,
+          "system": "core12",
+          "text": "材料不足拒绝且不部分消耗",
+          "topic": "合成配方：拒绝与边界"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C2.05:
+  column: C2
+  dimension: Completeness
+  requirements: M03
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    昼夜与庇护所防护：有效操作与状态变化：按 G06 切换昼夜（能见度/移速/伤害分档）；风暴每次判定玩家露天或庇护所内 → 伤害按 G02 昼夜分档（昼 −4/夜 −6/庇护 0）；庇护所判定按 G04 几何规则即时更新
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "G02": "- G02 生存数值（本包冻结值，v3 按昼夜分档修订）：HP 100；风暴每 30 秒席卷一次——昼段露天每次 −4 HP、夜段露天每次 **−6 HP**、处于有顶庇护所内为 0；进食浆果 +10 HP（浆果丛可重复采收，每 60 秒刷新）；单局限时 **600 秒**（超时判负）。",
+        "G04": "- G04 求救判定（本包冻结值）：庇护所＝以信号篝火为中心 5×5 水平范围内任意实体方块构成顶盖、玩家处于顶盖下方；在庇护所内点燃篝火持续 **10 秒** → 判胜；判定在每次方块变化后即时更新。",
+        "G06": "- G06 日夜循环与风暴预警（本包冻结值）：600 秒内昼夜交替——昼段 150 秒、夜段 150 秒（0–150 昼、150–300 夜、300–450 昼、450–600 夜）；夜段最大自然能见度 12 米（篝火/庇护所内照明范围不受限）、移动速度 ×0.9；每次夜段开始前 **10 秒** HUD 显示「风暴将至」预警（图标＋文字），环境风声渐强；风暴席卷瞬间伴随小幅屏幕震动 0.1 秒。",
+        "M03": "- M03 昼夜与庇护所防护\n  - input：昼夜计时（系统）／建造放置（玩家）\n  - precondition：处于游玩状态\n  - state_change：按 G06 切换昼夜（能见度/移速/伤害分档）；风暴每次判定玩家露天或庇护所内 → 伤害按 G02 昼夜分档（昼 −4/夜 −6/庇护 0）；庇护所判定按 G04 几何规则即时更新\n  - observable：`storm_tick` 事件（含时段、伤害字段、玩家位置状态）、昼夜切换事件\n  - invalid_case：庇护所破坏后顶盖不满足 → 重新判定为露天\n  - recovery：补建顶盖即恢复防护"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M03/change",
+        "sha256": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2"
+      },
+      "focus": [
+        "昼夜与庇护所防护：有效操作与状态变化"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "昼夜与庇护所防护：有效操作与状态变化",
+          "id": "C2.core12.05",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M05]",
+          "source_text": "- M03 昼夜与庇护所防护\n  - input：昼夜计时（系统）／建造放置（玩家）\n  - precondition：处于游玩状态\n  - state_change：按 G06 切换昼夜（能见度/移速/伤害分档）；风暴每次判定玩家露天或庇护所内 → 伤害按 G02 昼夜分档（昼 −4/夜 −6/庇护 0）；庇护所判定按 G04 几何规则即时更新\n  - observable：`storm_tick` 事件（含时段、伤害字段、玩家位置状态）、昼夜切换事件\n  - invalid_case：庇护所破坏后顶盖不满足 → 重新判定为露天\n  - recovery：补建顶盖即恢复防护",
+          "source_unit": 5,
+          "system": "core12",
+          "text": "按 G06 切换昼夜（能见度/移速/伤害分档）；风暴每次判定玩家露天或庇护所内 → 伤害按 G02 昼夜分档（昼 −4/夜 −6/庇护 0）；庇护所判定按 G04 几何规则即时更新",
+          "topic": "昼夜与庇护所防护：有效操作与状态变化"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C2.06:
+  column: C2
+  dimension: Completeness
+  requirements: M03
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    昼夜与庇护所防护：拒绝与边界：庇护所破坏后顶盖不满足 → 重新判定为露天
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "M03": "- M03 昼夜与庇护所防护\n  - input：昼夜计时（系统）／建造放置（玩家）\n  - precondition：处于游玩状态\n  - state_change：按 G06 切换昼夜（能见度/移速/伤害分档）；风暴每次判定玩家露天或庇护所内 → 伤害按 G02 昼夜分档（昼 −4/夜 −6/庇护 0）；庇护所判定按 G04 几何规则即时更新\n  - observable：`storm_tick` 事件（含时段、伤害字段、玩家位置状态）、昼夜切换事件\n  - invalid_case：庇护所破坏后顶盖不满足 → 重新判定为露天\n  - recovery：补建顶盖即恢复防护"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M03/invalid",
+        "sha256": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2"
+      },
+      "focus": [
+        "昼夜与庇护所防护：拒绝与边界"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "昼夜与庇护所防护：拒绝与边界",
+          "id": "C2.core12.06",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M05]",
+          "source_text": "- M03 昼夜与庇护所防护\n  - input：昼夜计时（系统）／建造放置（玩家）\n  - precondition：处于游玩状态\n  - state_change：按 G06 切换昼夜（能见度/移速/伤害分档）；风暴每次判定玩家露天或庇护所内 → 伤害按 G02 昼夜分档（昼 −4/夜 −6/庇护 0）；庇护所判定按 G04 几何规则即时更新\n  - observable：`storm_tick` 事件（含时段、伤害字段、玩家位置状态）、昼夜切换事件\n  - invalid_case：庇护所破坏后顶盖不满足 → 重新判定为露天\n  - recovery：补建顶盖即恢复防护",
+          "source_unit": 6,
+          "system": "core12",
+          "text": "庇护所破坏后顶盖不满足 → 重新判定为露天",
+          "topic": "昼夜与庇护所防护：拒绝与边界"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C2.07:
+  column: C2
+  dimension: Completeness
+  requirements: M04
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    求救与安全点重生：有效操作与状态变化：持续 10 秒 → 判胜结算；死亡 → 3 秒后重生于最近安全点、丢失携带栏 50% 物品
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "M04": "- M04 求救与安全点重生\n  - input：篝火点燃（庇护所内）／HP 归零（系统）\n  - precondition：篝火点燃需材料与位置满足 G04；重生需 HP 归零\n  - state_change：持续 10 秒 → 判胜结算；死亡 → 3 秒后重生于最近安全点、丢失携带栏 50% 物品\n  - observable：`beacon_lit`/`win` 事件、`death`/`respawn` 事件（含丢失物品清单与安全点 ID）\n  - invalid_case：篝火中断（离开范围/顶盖破坏）计数作废重计\n  - recovery：重生后流程可继续"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M04/change",
+        "sha256": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2"
+      },
+      "focus": [
+        "求救与安全点重生：有效操作与状态变化"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "求救与安全点重生：有效操作与状态变化",
+          "id": "C2.core12.07",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M05]",
+          "source_text": "- M04 求救与安全点重生\n  - input：篝火点燃（庇护所内）／HP 归零（系统）\n  - precondition：篝火点燃需材料与位置满足 G04；重生需 HP 归零\n  - state_change：持续 10 秒 → 判胜结算；死亡 → 3 秒后重生于最近安全点、丢失携带栏 50% 物品\n  - observable：`beacon_lit`/`win` 事件、`death`/`respawn` 事件（含丢失物品清单与安全点 ID）\n  - invalid_case：篝火中断（离开范围/顶盖破坏）计数作废重计\n  - recovery：重生后流程可继续",
+          "source_unit": 7,
+          "system": "core12",
+          "text": "持续 10 秒 → 判胜结算；死亡 → 3 秒后重生于最近安全点、丢失携带栏 50% 物品",
+          "topic": "求救与安全点重生：有效操作与状态变化"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C2.08:
+  column: C2
+  dimension: Completeness
+  requirements: M05
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    检查点存档：有效操作与状态变化：存档保存世界体素、库存、HP、昼夜与安全点全量状态；读档恢复
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "M05": "- M05 检查点存档\n  - input：F5 存档／F9 读档\n  - precondition：处于游玩状态\n  - state_change：存档保存世界体素、库存、HP、昼夜与安全点全量状态；读档恢复\n  - observable：存读档前后快照 diff=0\n  - invalid_case：无存档时 F9 无效\n  - recovery：读档即恢复\n\n系统耦合边（玩法必需、可复现）："
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M05/change",
+        "sha256": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2"
+      },
+      "focus": [
+        "检查点存档：有效操作与状态变化"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "检查点存档：有效操作与状态变化",
+          "id": "C2.core12.08",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M05]",
+          "source_text": "- M05 检查点存档\n  - input：F5 存档／F9 读档\n  - precondition：处于游玩状态\n  - state_change：存档保存世界体素、库存、HP、昼夜与安全点全量状态；读档恢复\n  - observable：存读档前后快照 diff=0\n  - invalid_case：无存档时 F9 无效\n  - recovery：读档即恢复\n\n系统耦合边（玩法必需、可复现）：",
+          "source_unit": 8,
+          "system": "core12",
+          "text": "存档保存世界体素、库存、HP、昼夜与安全点全量状态；读档恢复",
+          "topic": "检查点存档：有效操作与状态变化"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C2.09:
+  column: C2
+  dimension: Completeness
+  requirements: G05
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    暂停冻结与继续：- G05 暂停与随机：Esc 暂停冻结风暴、采集、昼夜与倒计时；窗口失焦自动暂停；fixed_seed=1046 冻结岛屿地形与资源分布（同 seed 双跑布置 diff=0）；本作无概率判定。
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "G05": "- G05 暂停与随机：Esc 暂停冻结风暴、采集、昼夜与倒计时；窗口失焦自动暂停；fixed_seed=1046 冻结岛屿地形与资源分布（同 seed 双跑布置 diff=0）；本作无概率判定。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "G05/pause",
+        "sha256": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2"
+      },
+      "focus": [
+        "暂停冻结与继续"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "暂停冻结与继续",
+          "id": "C2.core12.09",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "G05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "3. 数值口径与全局规则 [G01–G07]",
+          "source_text": "- G05 暂停与随机：Esc 暂停冻结风暴、采集、昼夜与倒计时；窗口失焦自动暂停；fixed_seed=1046 冻结岛屿地形与资源分布（同 seed 双跑布置 diff=0）；本作无概率判定。",
+          "source_unit": 9,
+          "system": "core12",
+          "text": "- G05 暂停与随机：Esc 暂停冻结风暴、采集、昼夜与倒计时；窗口失焦自动暂停；fixed_seed=1046 冻结岛屿地形与资源分布（同 seed 双跑布置 diff=0）；本作无概率判定。",
+          "topic": "暂停冻结与继续"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C2.10:
+  column: C2
+  dimension: Completeness
+  requirements: V01
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    成功终局：- V01 成功条件：在庇护所内点燃信号篝火持续 10 秒 → 求救成功结算（显示用时、剩余 HP、死亡次数）。
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "V01": "- V01 成功条件：在庇护所内点燃信号篝火持续 10 秒 → 求救成功结算（显示用时、剩余 HP、死亡次数）。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "V01",
+        "sha256": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2"
+      },
+      "focus": [
+        "成功终局"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "成功终局",
+          "id": "C2.core12.10",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "V01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "7. 成功、失败与恢复 [V01–V05]",
+          "source_text": "- V01 成功条件：在庇护所内点燃信号篝火持续 10 秒 → 求救成功结算（显示用时、剩余 HP、死亡次数）。",
+          "source_unit": 10,
+          "system": "core12",
+          "text": "- V01 成功条件：在庇护所内点燃信号篝火持续 10 秒 → 求救成功结算（显示用时、剩余 HP、死亡次数）。",
+          "topic": "成功终局"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C2.11:
+  column: C2
+  dimension: Completeness
+  requirements: V02
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    失败或非失败边界：- V02 失败条件：600 秒超时判负；HP 归零非终局（进入安全点重生流程），死亡不限次数。
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "V02": "- V02 失败条件：600 秒超时判负；HP 归零非终局（进入安全点重生流程），死亡不限次数。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "V02",
+        "sha256": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2"
+      },
+      "focus": [
+        "失败或非失败边界"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "失败或非失败边界",
+          "id": "C2.core12.11",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "V02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "7. 成功、失败与恢复 [V01–V05]",
+          "source_text": "- V02 失败条件：600 秒超时判负；HP 归零非终局（进入安全点重生流程），死亡不限次数。",
+          "source_unit": 11,
+          "system": "core12",
+          "text": "- V02 失败条件：600 秒超时判负；HP 归零非终局（进入安全点重生流程），死亡不限次数。",
+          "topic": "失败或非失败边界"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C2.12:
+  column: C2
+  dimension: Completeness
+  requirements: V03
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    原生恢复与重新开始：- V03 恢复语义：死亡重生于最近安全点（G07），保留世界修改与放置方块、丢失携带栏 50% 物品；F5/F9 局内检查点存读档；失败结算一键重开。
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "G07": "- G07 安全点重生（本包冻结值）：安全点集合＝海滩落点＋每个已建成庇护所门口；HP 归零后 3 秒重生于**最近**安全点（距离取直线最近），重生保留世界修改与放置方块、丢失携带栏 50% 物品（每组按数量减半向下取整，清单事件可核）；F5 局内存档为检查点，读档回到存档时刻全量状态。",
+        "V03": "- V03 恢复语义：死亡重生于最近安全点（G07），保留世界修改与放置方块、丢失携带栏 50% 物品；F5/F9 局内检查点存读档；失败结算一键重开。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "V03",
+        "sha256": "ababbfd4c041fa42d4fcae603c055385723d6cffee09b383d500ee37f91dffd2"
+      },
+      "focus": [
+        "原生恢复与重新开始"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "原生恢复与重新开始",
+          "id": "C2.core12.12",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "V03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "7. 成功、失败与恢复 [V01–V05]",
+          "source_text": "- V03 恢复语义：死亡重生于最近安全点（G07），保留世界修改与放置方块、丢失携带栏 50% 物品；F5/F9 局内检查点存读档；失败结算一键重开。",
+          "source_unit": 12,
+          "system": "core12",
+          "text": "- V03 恢复语义：死亡重生于最近安全点（G07），保留世界修改与放置方块、丢失携带栏 50% 物品；F5/F9 局内检查点存读档；失败结算一键重开。",
+          "topic": "原生恢复与重新开始"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C3.01:
+  column: C3
+  dimension: Completeness
+  requirements: L01, G03, G04
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_2
+  target: |
+    角色与物体接口
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: code_files, screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "G03": "- G03 采集与合成（本包冻结值）：徒手采集 2 秒/方块、石斧 1 秒/方块；配方——木板×4←原木×1；石斧×1←木板×2＋燧石×1；信号篝火×1←木板×4＋石块×4。资源守恒 oracle：合成 1 把石斧必消耗 2 木板＋1 燧石且不可重复消耗；数例：采集 3 原木＋1 燧石 → 可合成 12 木板、1 石斧，余 0 原木。",
+        "G04": "- G04 求救判定（本包冻结值）：庇护所＝以信号篝火为中心 5×5 水平范围内任意实体方块构成顶盖、玩家处于顶盖下方；在庇护所内点燃篝火持续 **10 秒** → 判胜；判定在每次方块变化后即时更新。",
+        "L01": "- L01 生成对象：六类方块（原木/石块/木板/叶片/燧石/浆果丛）、石斧 1 种工具、3 条配方、信号篝火 1、重生海滩落点 1、庇护所门口安全点（动态）；生物与非冻结装饰不做。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "角色与物体接口"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+        "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "asset_kind": "3d_object",
+          "asset_task_id": "G046_obj_001",
+          "facet": "3d_object/stone_axe",
+          "id": "C3.s0001",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L01",
+            "G03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "3d_object",
+          "text": "3d_object/stone_axe：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "角色与物体接口"
+        },
+        {
+          "asset_kind": "3d_object",
+          "asset_task_id": "G046_obj_002",
+          "facet": "3d_object/signal_bonfire",
+          "id": "C3.s0002",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L01",
+            "G04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "3d_object",
+          "text": "3d_object/signal_bonfire：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "角色与物体接口"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C3.02:
+  column: C3
+  dimension: Completeness
+  requirements: L02
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    场景与地标接口
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: code_files, screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "L02": "- L02 岛屿：32×32×16 有界体素世界（海滩、林地、岩区），地形与资源分布由 seed=1046 冻结；四周边界不可放置/采集。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "场景与地标接口"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+        "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "asset_kind": "3d_scene",
+          "asset_task_id": "G046_scene_001",
+          "facet": "3d_scene/G046_scene_001",
+          "id": "C3.s0003",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "3d_scene",
+          "text": "3d_scene/G046_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "场景与地标接口"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C3.03:
+  column: C3
+  dimension: Completeness
+  requirements: F05, L01
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    动作占位接口
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: code_files, screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F05": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 采集命中 | 方块裂纹逐级加深＋碎屑粒子（按方块材质） | 方块碎裂声（材质分档） | 采集完成即碎 |\n| 拾取入包 | 物品图标飞入快捷栏＋计数跳动 | 拾取叮声 | 到位即停 |\n| 放置方块 | 放置吸附高亮＋落地小尘环 | 放置闷响 | 完成 |\n| 合成完成 | 成品图标弹出＋材料图标淡出 | 木工敲击声 | 弹窗确认即停 |\n| 昼夜切换 | 光照 3 秒渐变（暖↔冷蓝）＋昼夜图标翻转 | 环境声交叉淡变 | 渐变完成 |\n| 风暴预警 | HUD「风暴将至」图标＋文字＋风声渐强 10 秒 | 风声渐强（预警期循环） | 夜段开始 |\n| 风暴席卷 | 屏幕边缘风线＋雨幕＋小幅震动 0.1s＋泥地飞溅 | 风暴呼啸（席卷期） | 判定完成 |\n| 露天受击 | 屏幕红闪＋HP 条跳动 | 受击闷响 | 0.3s |\n| 庇护所成立 | 「庇护所已成形」图标＋顶盖描边亮起 | 确认音 | 常亮至破坏 |\n| 死亡重生 | 画面渐黑→安全点亮起渐显 | 低沉心跳→苏醒吸气声 | 重生完成 |\n| 篝火点燃 | 火光展开＋烟柱升起＋求救进度条 | 篝火噼啪（燃烧期间循环） | 熄灭或判胜 |\n| 求救成功 | 海平面救援船探照灯扫过＋信号弹升空 | 汽笛声 | 进入结算淡出 |",
+        "L01": "- L01 生成对象：六类方块（原木/石块/木板/叶片/燧石/浆果丛）、石斧 1 种工具、3 条配方、信号篝火 1、重生海滩落点 1、庇护所门口安全点（动态）；生物与非冻结装饰不做。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "动作占位接口"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+        "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "asset_kind": "motion",
+          "asset_task_id": "G046_storm_isle_survival_mot_001",
+          "facet": "motion/bonfire_ignite",
+          "id": "C3.s0004",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05",
+            "L01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "motion",
+          "text": "motion/bonfire_ignite：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "动作占位接口"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C3.04:
+  column: C3
+  dimension: Completeness
+  requirements: F06
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    声音占位接口
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: code_files, screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F06": "- F06 关键音效清单：碎裂声分档、放置、拾取、木工敲击、受击、确认、心跳、苏醒、汽笛；环境音：昼段海鸟＋浪声、夜段风声（时段循环切换）、风暴呼啸（席卷期）、篝火噼啪（燃烧期）、庇护所内低风闷响（庇护内循环）；循环音开始/结束：环境声按时段切换、暂停时全部静音、随结算淡出；无配音需求。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "声音占位接口"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+        "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G046_sfx_001",
+          "facet": "audio/chop_wood",
+          "id": "C3.s0005",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/chop_wood：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C3.05:
+  column: C3
+  dimension: Completeness
+  requirements: F06
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_9
+  target: |
+    声音占位接口
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: code_files, screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F06": "- F06 关键音效清单：碎裂声分档、放置、拾取、木工敲击、受击、确认、心跳、苏醒、汽笛；环境音：昼段海鸟＋浪声、夜段风声（时段循环切换）、风暴呼啸（席卷期）、篝火噼啪（燃烧期）、庇护所内低风闷响（庇护内循环）；循环音开始/结束：环境声按时段切换、暂停时全部静音、随结算淡出；无配音需求。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "声音占位接口"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+        "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G046_sfx_002",
+          "facet": "audio/crack_stone",
+          "id": "C3.s0006",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/crack_stone：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G046_sfx_003",
+          "facet": "audio/place_thud",
+          "id": "C3.s0007",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/place_thud：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G046_sfx_004",
+          "facet": "audio/craft_tap",
+          "id": "C3.s0008",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/craft_tap：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G046_sfx_005",
+          "facet": "audio/storm_tick",
+          "id": "C3.s0009",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/storm_tick：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G046_sfx_006",
+          "facet": "audio/shelter_done",
+          "id": "C3.s0010",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/shelter_done：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G046_sfx_007",
+          "facet": "audio/beacon_crank",
+          "id": "C3.s0011",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/beacon_crank：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G046_sfx_008",
+          "facet": "audio/rescue_horn",
+          "id": "C3.s0012",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/rescue_horn：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G046_sfx_009",
+          "facet": "audio/island_day_ambience",
+          "id": "C3.s0013",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/island_day_ambience：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G046_sfx_010",
+          "facet": "audio/island_night_storm",
+          "id": "C3.s0014",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/island_night_storm：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C3.06:
+  column: C3
+  dimension: Completeness
+  requirements: C01, C02, C03
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_3
+  target: |
+    演出占位接口
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: code_files, screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "C01": "- C01 登陆漂流（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入空降海滩之前，每局一次\n  - 内容与角色场景：风暴夜的海面，救生圈漂到灰鸥岛沙滩，幸存船员爬上岸回望远处沉没的货轮「灰鸥号」\n  - 资产对应：海滩、救生圈、玩家造型与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入游玩；自然播完 → 进入游玩\n  - 状态一致：播放期间不推进倒计时；进入状态＝海滩落点、HP 100",
+        "C02": "- C02 首场风暴（Event，8 秒，1280×720@24fps）\n  - 触发时机：首次进入夜段（150 秒节点）时短暂插入，每局一次\n  - 内容与角色场景：天色骤暗，风线横扫海面，闪电照亮未完工的庇护所轮廓，幸存者抱紧木板\n  - 资产对应：岛屿、庇护所方块与游戏内一致\n  - 可跳过：Esc 跳过 → 直接进入夜段；自然播完 → 进入夜段\n  - 状态一致：播放期间倒计时冻结，播完/跳过后夜段从 0 秒起算",
+        "C03": "- C03 求救成功（Ending，10 秒，1280×720@24fps）\n  - 触发时机：求救判定达成后、结算面板之前，每局一次\n  - 内容与角色场景：信号弹升空，救援船破浪靠近，探照灯落在庇护所与篝火上，幸存者挥手\n  - 资产对应：庇护所、篝火、救援船与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 进入结算面板\n  - 状态一致：仅在真实达成 V01 后触发",
+        "V01": "- V01 成功条件：在庇护所内点燃信号篝火持续 10 秒 → 求救成功结算（显示用时、剩余 HP、死亡次数）。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "演出占位接口"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+        "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "asset_kind": "cg_video",
+          "asset_task_id": "G046_cg_001",
+          "facet": "cg_video/登陆漂流",
+          "id": "C3.s0015",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "C01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "cg_video",
+          "text": "cg_video/登陆漂流：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "演出占位接口"
+        },
+        {
+          "asset_kind": "cg_video",
+          "asset_task_id": "G046_cg_002",
+          "facet": "cg_video/首场风暴",
+          "id": "C3.s0016",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "C02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "cg_video",
+          "text": "cg_video/首场风暴：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "演出占位接口"
+        },
+        {
+          "asset_kind": "cg_video",
+          "asset_task_id": "G046_cg_003",
+          "facet": "cg_video/求救成功",
+          "id": "C3.s0017",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "C03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "cg_video",
+          "text": "cg_video/求救成功：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "演出占位接口"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.C3.07:
+  column: C3
+  dimension: Completeness
+  requirements: F04, F05, F07, N06
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    VFX占位接口
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: code_files, screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F04": "- F04 环境常驻效果：昼段海面反光与云影流动；夜段风线粒子与远处闪电（低频率，仅表现）；篝火火光与烟柱常驻；庇护所内暖光。",
+        "F05": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 采集命中 | 方块裂纹逐级加深＋碎屑粒子（按方块材质） | 方块碎裂声（材质分档） | 采集完成即碎 |\n| 拾取入包 | 物品图标飞入快捷栏＋计数跳动 | 拾取叮声 | 到位即停 |\n| 放置方块 | 放置吸附高亮＋落地小尘环 | 放置闷响 | 完成 |\n| 合成完成 | 成品图标弹出＋材料图标淡出 | 木工敲击声 | 弹窗确认即停 |\n| 昼夜切换 | 光照 3 秒渐变（暖↔冷蓝）＋昼夜图标翻转 | 环境声交叉淡变 | 渐变完成 |\n| 风暴预警 | HUD「风暴将至」图标＋文字＋风声渐强 10 秒 | 风声渐强（预警期循环） | 夜段开始 |\n| 风暴席卷 | 屏幕边缘风线＋雨幕＋小幅震动 0.1s＋泥地飞溅 | 风暴呼啸（席卷期） | 判定完成 |\n| 露天受击 | 屏幕红闪＋HP 条跳动 | 受击闷响 | 0.3s |\n| 庇护所成立 | 「庇护所已成形」图标＋顶盖描边亮起 | 确认音 | 常亮至破坏 |\n| 死亡重生 | 画面渐黑→安全点亮起渐显 | 低沉心跳→苏醒吸气声 | 重生完成 |\n| 篝火点燃 | 火光展开＋烟柱升起＋求救进度条 | 篝火噼啪（燃烧期间循环） | 熄灭或判胜 |\n| 求救成功 | 海平面救援船探照灯扫过＋信号弹升空 | 汽笛声 | 进入结算淡出 |",
+        "F07": "- F07 VFX 信息性与遮挡约束：昼夜光照与庇护所暖光承担位置/安全信息；风暴预警图标承担时段信息；雨幕与风线粒子单帧 ≤ 60 且不遮挡快捷栏与合成界面。",
+        "L04": "- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的装饰造型与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。",
+        "N06": "- N06 表现层自由度：§9 未冻结的岛屿装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "VFX占位接口"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+        "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占",
+          "id": "C3.s0018",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F04",
+            "F05",
+            "F07",
+            "N06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "vfx",
+          "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+          "topic": "VFX占位接口"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.Q.01:
+  column: Q
+  dimension: Quality
+  requirements: F01, evaluation_plan_table.md#Q
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_6
+  target: |
+    视角与镜头；参考图辨识
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F01": "- F01 视角与镜头：第一人称；鼠标偏航 ±180°、俯仰 ±85°；无镜头自动回正；摄像机边界＝体素世界外墙；死亡与读档后镜头回安全点/存档点冻结朝向。",
+        "evaluation_plan_table.md#Q": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "视角与镜头",
+        "参考图辨识"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+      ],
+      "reference_paths": [
+        "3D_object/ref_images/ref_signal_bonfire.png",
+        "3D_scene/ref_images/ref_storm_isle_overview.png"
+      ],
+      "subchecks": [
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0004",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F01 视角与镜头：第一人称",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：第一人称",
+          "topic": "视角与镜头"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0005",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "鼠标偏航 ±180°、俯仰 ±85°",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：鼠标偏航 ±180°、俯仰 ±85°",
+          "topic": "视角与镜头"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0006",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "无镜头自动回正",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：无镜头自动回正",
+          "topic": "视角与镜头"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0007",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "摄像机边界＝体素世界外墙",
+          "source_unit": 4,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：摄像机边界＝体素世界外墙",
+          "topic": "视角与镜头"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0008",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "死亡与读档后镜头回安全点/存档点冻结朝向。",
+          "source_unit": 5,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：死亡与读档后镜头回安全点/存档点冻结朝向。",
+          "topic": "视角与镜头"
+        },
+        {
+          "facet": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要",
+          "id": "Q.s0029",
+          "origin": "evaluation_plan",
+          "reference_paths": [
+            "3D_object/ref_images/ref_signal_bonfire.png",
+            "3D_scene/ref_images/ref_storm_isle_overview.png"
+          ],
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#Q"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "参考图辨识",
+          "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+          "topic": "参考图辨识"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.Q.02:
+  column: Q
+  dimension: Quality
+  requirements: F02, W06
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_7
+  target: |
+    关键操作镜头变化；视觉风格与色彩材质
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F02": "- F02 关键操作镜头变化：风暴席卷瞬间小幅震动 0.1 秒；夜段进入时镜头轻微下沉变冷色；被雷击照亮瞬间短暂曝光提升；无慢动作。",
+        "W06": "- W06 视觉风格与色彩材质：风格化卡通体素；主色＝海雾蓝绿（#5E8C7A 系）＋风暴雨灰（#6B7280 系）＋篝火暖橙（#E8935A 系）；材质以哑光木纹、粗岩、叶片为主，昼夜光照差异明显。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "关键操作镜头变化",
+        "视觉风格与色彩材质"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0009",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F02 关键操作镜头变化：风暴席卷瞬间小幅震动 0.1 秒",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：风暴席卷瞬间小幅震动 0.1 秒",
+          "topic": "关键操作镜头变化"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0010",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "夜段进入时镜头轻微下沉变冷色",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：夜段进入时镜头轻微下沉变冷色",
+          "topic": "关键操作镜头变化"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0011",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "被雷击照亮瞬间短暂曝光提升",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：被雷击照亮瞬间短暂曝光提升",
+          "topic": "关键操作镜头变化"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0012",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "无慢动作。",
+          "source_unit": 4,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：无慢动作。",
+          "topic": "关键操作镜头变化"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0001",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W06 视觉风格与色彩材质：风格化卡通体素",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：风格化卡通体素",
+          "topic": "视觉风格与色彩材质"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0002",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "主色＝海雾蓝绿（#5E8C7A 系）＋风暴雨灰（#6B7280 系）＋篝火暖橙（#E8935A 系）",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝海雾蓝绿（#5E8C7A 系）＋风暴雨灰（#6B7280 系）＋篝火暖橙（#E8935A 系）",
+          "topic": "视觉风格与色彩材质"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0003",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "材质以哑光木纹、粗岩、叶片为主，昼夜光照差异明显。",
+          "source_unit": 3,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质以哑光木纹、粗岩、叶片为主，昼夜光照差异明显。",
+          "topic": "视觉风格与色彩材质"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.Q.03:
+  column: Q
+  dimension: Quality
+  requirements: F04, A01
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_6
+  target: |
+    环境常驻效果；本测例当前无已绑定参考图
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "A01": "- 本测例当前无已绑定参考图；规划的参考图（幸存者手臂、六类方块、石斧、信号篝火、岛屿鸟瞰等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。",
+        "F04": "- F04 环境常驻效果：昼段海面反光与云影流动；夜段风线粒子与远处闪电（低频率，仅表现）；篝火火光与烟柱常驻；庇护所内暖光。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "环境常驻效果",
+        "本测例当前无已绑定参考图"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0013",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F04 环境常驻效果：昼段海面反光与云影流动",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：昼段海面反光与云影流动",
+          "topic": "环境常驻效果"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0014",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "夜段风线粒子与远处闪电（低频率，仅表现）",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：夜段风线粒子与远处闪电（低频率，仅表现）",
+          "topic": "环境常驻效果"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0015",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "篝火火光与烟柱常驻",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：篝火火光与烟柱常驻",
+          "topic": "环境常驻效果"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0016",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "庇护所内暖光。",
+          "source_unit": 4,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：庇护所内暖光。",
+          "topic": "环境常驻效果"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0021",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "A01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- 本测例当前无已绑定参考图",
+          "source_unit": 1,
+          "system": "A:12. 参考图绑定 [A01]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- 本测例当前无已绑定参考图",
+          "topic": "本测例当前无已绑定参考图"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0022",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "A01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "规划的参考图（幸存者手臂、六类方块、石斧、信号篝火、岛屿鸟瞰等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。",
+          "source_unit": 2,
+          "system": "A:12. 参考图绑定 [A01]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：规划的参考图（幸存者手臂、六类方块、石斧、信号篝火、岛屿鸟瞰等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。",
+          "topic": "本测例当前无已绑定参考图"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.Q.04:
+  column: Q
+  dimension: Quality
+  requirements: F09, F07
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_4
+  target: |
+    屏幕震动；VFX 信息性与遮挡约束
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F07": "- F07 VFX 信息性与遮挡约束：昼夜光照与庇护所暖光承担位置/安全信息；风暴预警图标承担时段信息；雨幕与风线粒子单帧 ≤ 60 且不遮挡快捷栏与合成界面。",
+        "F09": "- F09 屏幕震动：风暴席卷 0.1 秒小幅；受击 0.15 秒小幅；设置界面提供「镜头震动开/关」（关闭不影响判定）。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "屏幕震动",
+        "VFX 信息性与遮挡约束"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0018",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F09"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F09 屏幕震动：风暴席卷 0.1 秒小幅",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：风暴席卷 0.1 秒小幅",
+          "topic": "屏幕震动"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0019",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F09"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "受击 0.15 秒小幅",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：受击 0.15 秒小幅",
+          "topic": "屏幕震动"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0020",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F09"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "设置界面提供「镜头震动开/关」（关闭不影响判定）。",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：设置界面提供「镜头震动开/关」（关闭不影响判定）。",
+          "topic": "屏幕震动"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0017",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F07"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "雨幕与风线粒子单帧 ≤ 60 且不遮挡快捷栏与合成界面。",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：雨幕与风线粒子单帧 ≤ 60 且不遮挡快捷栏与合成界面。",
+          "topic": "VFX 信息性与遮挡约束"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.Q.05:
+  column: Q
+  dimension: Quality
+  requirements: evaluation_plan_table.md#Q
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_3
+  target: |
+    画面验收4；画面验收1；画面验收5
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#Q": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "画面验收4",
+        "画面验收1",
+        "画面验收5"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+      ],
+      "reference_paths": [
+        "3D_object/ref_images/ref_signal_bonfire.png",
+        "3D_scene/ref_images/ref_storm_isle_overview.png"
+      ],
+      "subchecks": [
+        {
+          "facet": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度",
+          "id": "Q.s0026",
+          "origin": "evaluation_plan",
+          "reference_paths": [],
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#Q"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "画面验收4",
+          "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+          "topic": "画面验收4"
+        },
+        {
+          "facet": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体",
+          "id": "Q.s0023",
+          "origin": "evaluation_plan",
+          "reference_paths": [
+            "3D_object/ref_images/ref_signal_bonfire.png",
+            "3D_scene/ref_images/ref_storm_isle_overview.png"
+          ],
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#Q"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "画面验收1",
+          "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+          "topic": "画面验收1"
+        },
+        {
+          "facet": "占位物比例、坐标和视觉表达一致，避免悬空、穿插或混乱尺度妨碍",
+          "id": "Q.s0027",
+          "origin": "evaluation_plan",
+          "reference_paths": [],
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#Q"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "画面验收5",
+          "text": "占位物比例、坐标和视觉表达一致，避免悬空、穿插或混乱尺度妨碍阅读。",
+          "topic": "画面验收5"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.Q.06:
+  column: Q
+  dimension: Quality
+  requirements: evaluation_plan_table.md#Q
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_3
+  target: |
+    画面验收6；画面验收2；画面验收3
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#Q": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "画面验收6",
+        "画面验收2",
+        "画面验收3"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "画面中前景、背景与交互区域层次清楚，效果不会持续淹没必要信息",
+          "id": "Q.s0028",
+          "origin": "evaluation_plan",
+          "reference_paths": [],
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#Q"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "画面验收6",
+          "text": "画面中前景、背景与交互区域层次清楚，效果不会持续淹没必要信息。",
+          "topic": "画面验收6"
+        },
+        {
+          "facet": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮",
+          "id": "Q.s0024",
+          "origin": "evaluation_plan",
+          "reference_paths": [],
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#Q"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "画面验收2",
+          "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+          "topic": "画面验收2"
+        },
+        {
+          "facet": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠",
+          "id": "Q.s0025",
+          "origin": "evaluation_plan",
+          "reference_paths": [],
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#Q"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "画面验收3",
+          "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+          "topic": "画面验收3"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.G.01:
+  column: G
+  dimension: Gameness
+  requirements: G06
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_4
+  target: |
+    日夜循环与风暴预警（本包冻结值）
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "G06": "- G06 日夜循环与风暴预警（本包冻结值）：600 秒内昼夜交替——昼段 150 秒、夜段 150 秒（0–150 昼、150–300 夜、300–450 昼、450–600 夜）；夜段最大自然能见度 12 米（篝火/庇护所内照明范围不受限）、移动速度 ×0.9；每次夜段开始前 **10 秒** HUD 显示「风暴将至」预警（图标＋文字），环境风声渐强；风暴席卷瞬间伴随小幅屏幕震动 0.1 秒。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "日夜循环与风暴预警（本包冻结值）"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+        "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "- G06 日夜循环与风暴预警（本包冻结值）",
+          "id": "G.s0001",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "G06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- G06 日夜循环与风暴预警（本包冻结值）：600 秒内昼夜交替——昼段 150 秒、夜段 150 秒（0–150 昼、150–300 夜、300–450 昼、450–600 夜）",
+          "source_unit": 1,
+          "system": "G:3. 数值口径与全局规则 [G01–G07]",
+          "text": "- G06 日夜循环与风暴预警（本包冻结值）：600 秒内昼夜交替——昼段 150 秒、夜段 150 秒（0–150 昼、150–300 夜、300–450 昼、450–600 夜）",
+          "topic": "日夜循环与风暴预警（本包冻结值）"
+        },
+        {
+          "facet": "夜段最大自然能见度 12 米（篝火/庇护所内照明范围不受限）",
+          "id": "G.s0002",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "G06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "夜段最大自然能见度 12 米（篝火/庇护所内照明范围不受限）、移动速度 ×0.9",
+          "source_unit": 2,
+          "system": "G:3. 数值口径与全局规则 [G01–G07]",
+          "text": "夜段最大自然能见度 12 米（篝火/庇护所内照明范围不受限）、移动速度 ×0.9",
+          "topic": "日夜循环与风暴预警（本包冻结值）"
+        },
+        {
+          "facet": "每次夜段开始前 **10 秒** HUD 显示「风暴将至」预",
+          "id": "G.s0003",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "G06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "每次夜段开始前 **10 秒** HUD 显示「风暴将至」预警（图标＋文字），环境风声渐强",
+          "source_unit": 3,
+          "system": "G:3. 数值口径与全局规则 [G01–G07]",
+          "text": "每次夜段开始前 **10 秒** HUD 显示「风暴将至」预警（图标＋文字），环境风声渐强",
+          "topic": "日夜循环与风暴预警（本包冻结值）"
+        },
+        {
+          "facet": "风暴席卷瞬间伴随小幅屏幕震动 0.1 秒。",
+          "id": "G.s0004",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "G06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "风暴席卷瞬间伴随小幅屏幕震动 0.1 秒。",
+          "source_unit": 4,
+          "system": "G:3. 数值口径与全局规则 [G01–G07]",
+          "text": "风暴席卷瞬间伴随小幅屏幕震动 0.1 秒。",
+          "topic": "日夜循环与风暴预警（本包冻结值）"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.G.02:
+  column: G
+  dimension: Gameness
+  requirements: I06, I07
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_3
+  target: |
+    UI 必须显示的状态；输入延迟目标
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "I06": "- I06 UI 必须显示的状态：HP、昼夜图标与时段剩余、风暴预警、快捷栏与物品数、合成界面、倒计时；HUD 对照见 rubric。",
+        "I07": "- I07 输入延迟目标：移动/采集/放置按键到画面反馈 ≤ 80 毫秒；界面操作 ≤ 100 毫秒。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "UI 必须显示的状态",
+        "输入延迟目标"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+        "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "- I06 UI 必须显示的状态",
+          "id": "G.s0005",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "I06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- I06 UI 必须显示的状态：HP、昼夜图标与时段剩余、风暴预警、快捷栏与物品数、合成界面、倒计时",
+          "source_unit": 1,
+          "system": "I:4. 操作与输入 [I01–I07]",
+          "text": "- I06 UI 必须显示的状态：HP、昼夜图标与时段剩余、风暴预警、快捷栏与物品数、合成界面、倒计时",
+          "topic": "UI 必须显示的状态"
+        },
+        {
+          "facet": "HUD 对照见 rubric。",
+          "id": "G.s0006",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "I06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "HUD 对照见 rubric。",
+          "source_unit": 2,
+          "system": "I:4. 操作与输入 [I01–I07]",
+          "text": "HUD 对照见 rubric。",
+          "topic": "UI 必须显示的状态"
+        },
+        {
+          "facet": "界面操作 ≤ 100 毫秒。",
+          "id": "G.s0007",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "I07"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "界面操作 ≤ 100 毫秒。",
+          "source_unit": 2,
+          "system": "I:4. 操作与输入 [I01–I07]",
+          "text": "界面操作 ≤ 100 毫秒。",
+          "topic": "输入延迟目标"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.G.03:
+  column: G
+  dimension: Gameness
+  requirements: F05
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_13
+  target: |
+    事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video, audio
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F05": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 采集命中 | 方块裂纹逐级加深＋碎屑粒子（按方块材质） | 方块碎裂声（材质分档） | 采集完成即碎 |\n| 拾取入包 | 物品图标飞入快捷栏＋计数跳动 | 拾取叮声 | 到位即停 |\n| 放置方块 | 放置吸附高亮＋落地小尘环 | 放置闷响 | 完成 |\n| 合成完成 | 成品图标弹出＋材料图标淡出 | 木工敲击声 | 弹窗确认即停 |\n| 昼夜切换 | 光照 3 秒渐变（暖↔冷蓝）＋昼夜图标翻转 | 环境声交叉淡变 | 渐变完成 |\n| 风暴预警 | HUD「风暴将至」图标＋文字＋风声渐强 10 秒 | 风声渐强（预警期循环） | 夜段开始 |\n| 风暴席卷 | 屏幕边缘风线＋雨幕＋小幅震动 0.1s＋泥地飞溅 | 风暴呼啸（席卷期） | 判定完成 |\n| 露天受击 | 屏幕红闪＋HP 条跳动 | 受击闷响 | 0.3s |\n| 庇护所成立 | 「庇护所已成形」图标＋顶盖描边亮起 | 确认音 | 常亮至破坏 |\n| 死亡重生 | 画面渐黑→安全点亮起渐显 | 低沉心跳→苏醒吸气声 | 重生完成 |\n| 篝火点燃 | 火光展开＋烟柱升起＋求救进度条 | 篝火噼啪（燃烧期间循环） | 熄灭或判胜 |\n| 求救成功 | 海平面救援船探照灯扫过＋信号弹升空 | 汽笛声 | 进入结算淡出 |"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+        "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为",
+          "id": "G.s0012",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：",
+          "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0013",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 采集命中 | 方块裂纹逐级加深＋碎屑粒子（按方块材质） | 方块碎裂声（材质分档） | 采集完成即碎 |",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 采集命中 | 方块裂纹逐级加深＋碎屑粒子（按方块材质） | 方块碎裂声（材质分档） | 采集完成即碎 |",
+          "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0014",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 拾取入包 | 物品图标飞入快捷栏＋计数跳动 | 拾取叮声 | 到位即停 |",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 拾取入包 | 物品图标飞入快捷栏＋计数跳动 | 拾取叮声 | 到位即停 |",
+          "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0015",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 放置方块 | 放置吸附高亮＋落地小尘环 | 放置闷响 | 完成 |",
+          "source_unit": 4,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 放置方块 | 放置吸附高亮＋落地小尘环 | 放置闷响 | 完成 |",
+          "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0016",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 合成完成 | 成品图标弹出＋材料图标淡出 | 木工敲击声 | 弹窗确认即停 |",
+          "source_unit": 5,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 合成完成 | 成品图标弹出＋材料图标淡出 | 木工敲击声 | 弹窗确认即停 |",
+          "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0017",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 昼夜切换 | 光照 3 秒渐变（暖↔冷蓝）＋昼夜图标翻转 | 环境声交叉淡变 | 渐变完成 |",
+          "source_unit": 6,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 昼夜切换 | 光照 3 秒渐变（暖↔冷蓝）＋昼夜图标翻转 | 环境声交叉淡变 | 渐变完成 |",
+          "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0018",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 风暴预警 | HUD「风暴将至」图标＋文字＋风声渐强 10 秒 | 风声渐强（预警期循环） | 夜段开始 |",
+          "source_unit": 7,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 风暴预警 | HUD「风暴将至」图标＋文字＋风声渐强 10 秒 | 风声渐强（预警期循环） | 夜段开始 |",
+          "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0019",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 风暴席卷 | 屏幕边缘风线＋雨幕＋小幅震动 0.1s＋泥地飞溅 | 风暴呼啸（席卷期） | 判定完成 |",
+          "source_unit": 8,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 风暴席卷 | 屏幕边缘风线＋雨幕＋小幅震动 0.1s＋泥地飞溅 | 风暴呼啸（席卷期） | 判定完成 |",
+          "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0020",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 露天受击 | 屏幕红闪＋HP 条跳动 | 受击闷响 | 0.3s |",
+          "source_unit": 9,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 露天受击 | 屏幕红闪＋HP 条跳动 | 受击闷响 | 0.3s |",
+          "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0021",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 庇护所成立 | 「庇护所已成形」图标＋顶盖描边亮起 | 确认音 | 常亮至破坏 |",
+          "source_unit": 10,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 庇护所成立 | 「庇护所已成形」图标＋顶盖描边亮起 | 确认音 | 常亮至破坏 |",
+          "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0022",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 死亡重生 | 画面渐黑→安全点亮起渐显 | 低沉心跳→苏醒吸气声 | 重生完成 |",
+          "source_unit": 11,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 死亡重生 | 画面渐黑→安全点亮起渐显 | 低沉心跳→苏醒吸气声 | 重生完成 |",
+          "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0023",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 篝火点燃 | 火光展开＋烟柱升起＋求救进度条 | 篝火噼啪（燃烧期间循环） | 熄灭或判胜 |",
+          "source_unit": 12,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 篝火点燃 | 火光展开＋烟柱升起＋求救进度条 | 篝火噼啪（燃烧期间循环） | 熄灭或判胜 |",
+          "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0024",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 求救成功 | 海平面救援船探照灯扫过＋信号弹升空 | 汽笛声 | 进入结算淡出 |",
+          "source_unit": 13,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 求救成功 | 海平面救援船探照灯扫过＋信号弹升空 | 汽笛声 | 进入结算淡出 |",
+          "topic": "事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.G.04:
+  column: G
+  dimension: Gameness
+  requirements: F06
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_4
+  target: |
+    关键音效清单
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video, audio
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F06": "- F06 关键音效清单：碎裂声分档、放置、拾取、木工敲击、受击、确认、心跳、苏醒、汽笛；环境音：昼段海鸟＋浪声、夜段风声（时段循环切换）、风暴呼啸（席卷期）、篝火噼啪（燃烧期）、庇护所内低风闷响（庇护内循环）；循环音开始/结束：环境声按时段切换、暂停时全部静音、随结算淡出；无配音需求。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "关键音效清单"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+        "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0025",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F06 关键音效清单：碎裂声分档、放置、拾取、木工敲击、受击、确认、心跳、苏醒、汽笛",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单：碎裂声分档、放置、拾取、木工敲击、受击、确认、心跳、苏醒、汽笛",
+          "topic": "关键音效清单"
+        },
+        {
+          "facet": "环境音",
+          "id": "G.s0026",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "环境音：昼段海鸟＋浪声、夜段风声（时段循环切换）、风暴呼啸（席卷期）、篝火噼啪（燃烧期）、庇护所内低风闷响（庇护内循环）",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "环境音：昼段海鸟＋浪声、夜段风声（时段循环切换）、风暴呼啸（席卷期）、篝火噼啪（燃烧期）、庇护所内低风闷响（庇护内循环）",
+          "topic": "关键音效清单"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0027",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "循环音开始/结束：环境声按时段切换、暂停时全部静音、随结算淡出",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：循环音开始/结束：环境声按时段切换、暂停时全部静音、随结算淡出",
+          "topic": "关键音效清单"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0028",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "无配音需求。",
+          "source_unit": 4,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：无配音需求。",
+          "topic": "关键音效清单"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.G.05:
+  column: G
+  dimension: Gameness
+  requirements: F08, W07
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_5
+  target: |
+    音画同步；环境氛围与声音语言
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video, audio
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F06": "- F06 关键音效清单：碎裂声分档、放置、拾取、木工敲击、受击、确认、心跳、苏醒、汽笛；环境音：昼段海鸟＋浪声、夜段风声（时段循环切换）、风暴呼啸（席卷期）、篝火噼啪（燃烧期）、庇护所内低风闷响（庇护内循环）；循环音开始/结束：环境声按时段切换、暂停时全部静音、随结算淡出；无配音需求。",
+        "F08": "- F08 音画同步：碎裂声与裂纹动画同步；风暴呼啸与席卷判定帧同步；篝火噼啪与点燃事件帧同步起止。",
+        "W07": "- W07 环境氛围与声音语言：风暴带海岛——昼段海鸟与浪声、夜段风声渐强；音效语言为「方块碎裂＋放置闷响＋风暴呼啸＋篝火噼啪」，全部音效按 §9 F06 冻结清单交付。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "音画同步",
+        "环境氛围与声音语言"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+        "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0031",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F08"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F08 音画同步：碎裂声与裂纹动画同步",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：碎裂声与裂纹动画同步",
+          "topic": "音画同步"
+        },
+        {
+          "facet": "风暴呼啸与席卷判定帧同步",
+          "id": "G.s0032",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F08"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "风暴呼啸与席卷判定帧同步",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "风暴呼啸与席卷判定帧同步",
+          "topic": "音画同步"
+        },
+        {
+          "facet": "篝火噼啪与点燃事件帧同步起止。",
+          "id": "G.s0033",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F08"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "篝火噼啪与点燃事件帧同步起止。",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "篝火噼啪与点燃事件帧同步起止。",
+          "topic": "音画同步"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0010",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W07"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W07 环境氛围与声音语言：风暴带海岛——昼段海鸟与浪声、夜段风声渐强",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：风暴带海岛——昼段海鸟与浪声、夜段风声渐强",
+          "topic": "环境氛围与声音语言"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0011",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W07"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "音效语言为「方块碎裂＋放置闷响＋风暴呼啸＋篝火噼啪」，全部音效按 §9 F06 冻结清单交付。",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「方块碎裂＋放置闷响＋风暴呼啸＋篝火噼啪」，全部音效按 §9 F06 冻结清单交付。",
+          "topic": "环境氛围与声音语言"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.G.06:
+  column: G
+  dimension: Gameness
+  requirements: F10, L03, F07
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_7
+  target: |
+    前端界面；目标物/交互物/场景/UI 对象；VFX 信息性与遮挡约束
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F07": "- F07 VFX 信息性与遮挡约束：昼夜光照与庇护所暖光承担位置/安全信息；风暴预警图标承担时段信息；雨幕与风线粒子单帧 ≤ 60 且不遮挡快捷栏与合成界面。",
+        "F10": "- F10 前端界面：标题（任务简报/开始/设置/退出）→ HUD（HP、昼夜图标与时段剩余、风暴预警、快捷栏、倒计时）→ 合成界面（配方列表＋材料高亮）→ 结算（用时/剩余 HP/死亡次数/重开/返回）→ 判负（原因/重开）→ 暂停面板（继续/读档/重开/设置）；关键状态附图标＋文字（昼夜、预警、庇护所状态），不只靠颜色区分；窗口失焦自动暂停。",
+        "L01": "- L01 生成对象：六类方块（原木/石块/木板/叶片/燧石/浆果丛）、石斧 1 种工具、3 条配方、信号篝火 1、重生海滩落点 1、庇护所门口安全点（动态）；生物与非冻结装饰不做。",
+        "L02": "- L02 岛屿：32×32×16 有界体素世界（海滩、林地、岩区），地形与资源分布由 seed=1046 冻结；四周边界不可放置/采集。",
+        "L03": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/合成/结算/判负/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "前端界面",
+        "目标物/交互物/场景/UI 对象",
+        "VFX 信息性与遮挡约束"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+        "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "- F10 前端界面",
+          "id": "G.s0034",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F10"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F10 前端界面：标题（任务简报/开始/设置/退出）→ HUD（HP、昼夜图标与时段剩余、风暴预警、快捷栏、倒计时）→ 合成界面（配方列表＋材料高亮）→ 结算（用时/剩余 HP/死亡次数/重开/返回）→ 判负（原因/重开）→ 暂停面板（继续/读档/重开/设置）",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "- F10 前端界面：标题（任务简报/开始/设置/退出）→ HUD（HP、昼夜图标与时段剩余、风暴预警、快捷栏、倒计时）→ 合成界面（配方列表＋材料高亮）→ 结算（用时/剩余 HP/死亡次数/重开/返回）→ 判负（原因/重开）→ 暂停面板（继续/读档/重开/设置）",
+          "topic": "前端界面"
+        },
+        {
+          "facet": "关键状态附图标＋文字（昼夜、预警、庇护所状态），不只靠颜色区",
+          "id": "G.s0035",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F10"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "关键状态附图标＋文字（昼夜、预警、庇护所状态），不只靠颜色区分",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "关键状态附图标＋文字（昼夜、预警、庇护所状态），不只靠颜色区分",
+          "topic": "前端界面"
+        },
+        {
+          "facet": "窗口失焦自动暂停。",
+          "id": "G.s0036",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F10"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "窗口失焦自动暂停。",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "窗口失焦自动暂停。",
+          "topic": "前端界面"
+        },
+        {
+          "facet": "- L03 目标物/交互物/场景/UI 对象",
+          "id": "G.s0008",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/合成/结算/判负/暂停/视频播放层）与交互物逐类存在且运行时可进入",
+          "source_unit": 1,
+          "system": "L:5. 岛屿与内容清单 [L01–L04]",
+          "text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/合成/结算/判负/暂停/视频播放层）与交互物逐类存在且运行时可进入",
+          "topic": "目标物/交互物/场景/UI 对象"
+        },
+        {
+          "facet": "数量与属性以 L01/L02 与 G 系为准。",
+          "id": "G.s0009",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "数量与属性以 L01/L02 与 G 系为准。",
+          "source_unit": 2,
+          "system": "L:5. 岛屿与内容清单 [L01–L04]",
+          "text": "数量与属性以 L01/L02 与 G 系为准。",
+          "topic": "目标物/交互物/场景/UI 对象"
+        },
+        {
+          "facet": "- F07 VFX 信息性与遮挡约束",
+          "id": "G.s0029",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F07"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F07 VFX 信息性与遮挡约束：昼夜光照与庇护所暖光承担位置/安全信息",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "- F07 VFX 信息性与遮挡约束：昼夜光照与庇护所暖光承担位置/安全信息",
+          "topic": "VFX 信息性与遮挡约束"
+        },
+        {
+          "facet": "风暴预警图标承担时段信息",
+          "id": "G.s0030",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F07"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "风暴预警图标承担时段信息",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "风暴预警图标承担时段信息",
+          "topic": "VFX 信息性与遮挡约束"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.G.07:
+  column: G
+  dimension: Gameness
+  requirements: evaluation_plan_table.md#G
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_7
+  target: |
+    交互反馈5；交互反馈1；交互反馈3等7项关联规则
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#G": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "交互反馈5",
+        "交互反馈1",
+        "交互反馈3",
+        "交互反馈6",
+        "交互反馈2",
+        "交互反馈7",
+        "交互反馈4"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+        "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因",
+          "id": "G.s0041",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#G"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "交互反馈5",
+          "text": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因。",
+          "topic": "交互反馈5"
+        },
+        {
+          "facet": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文",
+          "id": "G.s0037",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#G"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "交互反馈1",
+          "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+          "topic": "交互反馈1"
+        },
+        {
+          "facet": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+          "id": "G.s0039",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#G"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "交互反馈3",
+          "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+          "topic": "交互反馈3"
+        },
+        {
+          "facet": "危险预警与恢复入口可发现，玩家能据此调整操作。",
+          "id": "G.s0042",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#G"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "交互反馈6",
+          "text": "危险预警与恢复入口可发现，玩家能据此调整操作。",
+          "topic": "交互反馈6"
+        },
+        {
+          "facet": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 ",
+          "id": "G.s0038",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#G"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "交互反馈2",
+          "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+          "topic": "交互反馈2"
+        },
+        {
+          "facet": "并发单位或多个事件同时发生时，关键反馈仍能对应到正确对象。",
+          "id": "G.s0043",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#G"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "交互反馈7",
+          "text": "并发单位或多个事件同时发生时，关键反馈仍能对应到正确对象。",
+          "topic": "交互反馈7"
+        },
+        {
+          "facet": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+          "id": "G.s0040",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#G"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "交互反馈4",
+          "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+          "topic": "交互反馈4"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.P.01:
+  column: P
+  dimension: Playability
+  requirements: evaluation_plan_table.md#P
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    运行验收1
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: build_log, screenshot, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#P": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "运行验收1"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "保留首轮构建日志、实际启动及目标场景进入证据，记录基础运行窗口。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修",
+          "id": "P.s0001",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#P"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "运行验收1",
+          "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+          "topic": "运行验收1"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.P.02:
+  column: P
+  dimension: Playability
+  requirements: evaluation_plan_table.md#P
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    运行验收2
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: build_log, screenshot, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#P": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "运行验收2"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "保留首轮构建日志、实际启动及目标场景进入证据，记录基础运行窗口。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日",
+          "id": "P.s0002",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#P"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "运行验收2",
+          "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+          "topic": "运行验收2"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.P.03:
+  column: P
+  dimension: Playability
+  requirements: evaluation_plan_table.md#P
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    运行验收3
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: build_log, screenshot, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#P": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "运行验收3"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "保留首轮构建日志、实际启动及目标场景进入证据，记录基础运行窗口。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+          "id": "P.s0003",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#P"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "运行验收3",
+          "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+          "topic": "运行验收3"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.P.04:
+  column: P
+  dimension: Playability
+  requirements: evaluation_plan_table.md#P
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    运行验收4
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: build_log, screenshot, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#P": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "运行验收4"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "保留首轮构建日志、实际启动及目标场景进入证据，记录基础运行窗口。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本",
+          "id": "P.s0004",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#P"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "运行验收4",
+          "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+          "topic": "运行验收4"
+        }
+      ]
+    }
+
+item G046_storm_isle_survival.WB.CH.01:
+  column: CH
+  dimension: Diagnostic
+  requirements: evaluation_plan_table.md#CH
+  task: G046_storm_isle_survival_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_4
+  target: |
+    代码健康诊断
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: code_files
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#CH": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "contract_id": "G046_storm_isle_survival.whitebox.core12-v1.9d4970cfa2532c7b9134e88474f2ea996f97daf0390d9c5464354c716d535cf8",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "代码健康诊断"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "只对游戏源码诊断引擎约定、职责依赖、重复与扩展性，证据不足继续 UNKNOWN。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "源码遵循所用引擎的基本组织与生命周期约定。",
+          "id": "CH.s0001",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#CH"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "代码健康诊断",
+          "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+          "topic": "代码健康诊断"
+        },
+        {
+          "facet": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+          "id": "CH.s0002",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#CH"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "代码健康诊断",
+          "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+          "topic": "代码健康诊断"
+        },
+        {
+          "facet": "不存在影响维护的大量重复逻辑或冗余实现。",
+          "id": "CH.s0003",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#CH"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "代码健康诊断",
+          "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+          "topic": "代码健康诊断"
+        },
+        {
+          "facet": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+          "id": "CH.s0004",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#CH"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "代码健康诊断",
+          "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+          "topic": "代码健康诊断"
+        }
+      ]
+    }

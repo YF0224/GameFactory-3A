@@ -1,0 +1,7 @@
+{
+  "contract_id": "G026_signal_tower_td.whitebox.final",
+  "version": "final",
+  "content_sha256": "8aaa88a23f81c6344165a8f896d58fdfe31e6c8df832ed4d54ddce8551ec444b",
+  "rubric_json_sha256": "7cecb02bed5165952250444f12c7a55ec07c388bfdb51f0658874ddf33039678",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

@@ -1,0 +1,4408 @@
+rubric-format: v2
+game: G021_outpost_assault
+stage: whitebox
+version: core12-v1
+engine: godot
+status: frozen
+contract-id: G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496
+synopsis: |
+    荒漠海岸的前哨第二道命令——风沙纪元的海岸防线吃紧，前哨是大陆桥头的最后支点。 The setting is 荒漠海岸两张俯视地图（己方前哨：主堡＋建造位＋陷阱位；敌方目标岛：核心、外围工事、两段防线、三处登陆点）。. 玩家是前哨指挥官；动机是在来袭波逼近下布置第一道防线、组织出征并摧毁敌方海岸核心，把战利品投入后续作战。 Core loop: 布置防御 → 编组出征小队 → 选登陆点 → 摧毁目标工事带回战利品 → 升级布防 → 再出征，直至摧毁敌方核心。. 敌核心摧毁=胜利（C03 胜利意象）；主堡被毁=局败（C03 局败意象）；小队全灭/超时=撤回（C03 撤回意象，非终局）；三种结果结算界面区分原因。 Narrative devices: 塔=前哨速射哨塔；陷阱=荒漠陷坑；三类兵种=沙枪手/岩甲车/破壁手（海岸戍卫编制）；战利品=缴获军资；登陆点=东滩/南崖/西湾三处抢滩口。全部原创。. Art direction: 荒漠海岸军事风；主色=沙金 #D8B96A、岩褐 #8A7A66、军绿 #6E8F5A、警示橙 #E4762C、海雾蓝 #7FA3B8；材质为风化岩、帆布工事、金属塔架。. Sound direction: 海岸风沙为底；音效语言为「建造落位＋塔击发＋命中闪烁＋战利品弹字＋波次警报＋升级脉冲」，全部音效按 §9 F06 冻结清单交付；混音优先级：波次/主堡警报 ＞ 战斗命中 ＞ 建造/升级 ＞ 环境风沙。. Asset tasks: 8 3d_object, 1 3d_scene, 1 tpose, 8 motion, 13 audio, 3 cg_video; they serve the same declared world, characters and gameplay.
+
+scoring-protocol: |
+    本版本机制 C2 固定十二项、项间等权，每项仅一个可计分判定；引用上下文不再展开为额外评分原子。未选中的 general_requirement 规则不属于本版本 C2 分母；其他维度保留原有验收项。这是核心机制子集协议，不宣称覆盖完整需求；与历史全量协议分开报告。每行是一个验收终点，binding.subchecks 为必须独立取证的冻结细则，不是额外主项。全部主项及 CH 由同一配置的 VLM 判断；不使用 human.only 或人工回退。子检查角色为 precondition/action/behavior/boundary/recovery。precondition/action 是取证门槛，不计功能完成分。每个子检查只能 PASS/FAIL/UNKNOWN；任何必需子检查 UNKNOWN 或取证门槛 FAIL，主项 UNKNOWN。门槛全部通过后，仅按 behavior/boundary/recovery 的 PASS 数/冻结可计分子检查数计算；全通过 PASS、全失败 FAIL，其余 PARTIAL。UNKNOWN/ERROR 不记零分、不缩减冻结分母；仅报告 provisional 和证据覆盖率。补采所缺场景/事件/精确数值或实际模态证据后 VLM 重评；证据仍不足继续 UNKNOWN。代码与声明不能单独证明玩法完成。C2 必须有触发条件、实际操作、结果及拒绝/恢复分支证据。仅在输入已执行且观察窗口完整时才能判失败；环境/评估器故障为 ERROR。C1 故事事实；C2 机制行为；C3 可替换接口；Q 白模构图、比例与占位模型可读性；G 玩家理解与决策；P 首次构建启动稳定性。同一事实只归一个主维度；同源不同事实可分别取证。最终资产导入播放、事件绑定质量留 Track C。先按行等权计算 C1/C2/C3，再 C=mean(C1,C2,C3)，Overall=mean(C,Q,G,P)；CH 不参与。白模允许简图、文字、几何体及占位反馈，不能以缺少最终资产判 FAIL。Q 不评价最终拓扑、材质或精细建模；P 不等于全流程通关，完整游玩闭环还需结合 C2/G 及实际试验覆盖。数值、优先级、例外和实现自由度以 general_requirement.txt 为准，引用上下文不单独计分。
+
+execution: |
+    {
+      "build": {
+        "required": true,
+        "timeout_s": 900
+      },
+      "input_bindings": {
+        "pause": "Esc",
+        "restart": "Enter"
+      },
+      "playtest_timeout_s": 1800,
+      "trials": [
+        {
+          "action_plan": [
+            {
+              "seconds": 3,
+              "verb": "wait"
+            }
+          ],
+          "description": "Fresh real build; hold on the title for player-facing identity, goal and framing. No gameplay input.",
+          "duration_s": 3,
+          "evidence_channels": [
+            "frames",
+            "video",
+            "actions",
+            "state_trace",
+            "event_trace"
+          ],
+          "seed": 1021,
+          "trial_id": "title"
+        },
+        {
+          "action_plan": [
+            {
+              "seconds": 2,
+              "verb": "wait"
+            },
+            {
+              "verb": "interact"
+            },
+            {
+              "seconds": 6.0,
+              "verb": "wait"
+            },
+            {
+              "seconds": 1,
+              "verb": "interact"
+            },
+            {
+              "seconds": 1.5,
+              "verb": "wait"
+            },
+            {
+              "seconds": 8,
+              "verb": "wait"
+            }
+          ],
+          "description": "Title → start → exercise the declared core actions (pause→Esc; restart→Enter) → observe the running HUD and scene. Waits absorb the declared opening presentation.",
+          "duration_s": 60,
+          "evidence_channels": [
+            "frames",
+            "video",
+            "actions",
+            "state_trace",
+            "event_trace"
+          ],
+          "seed": 1021,
+          "trial_id": "core_probe"
+        },
+        {
+          "action_plan": [
+            {
+              "seconds": 2,
+              "verb": "wait"
+            },
+            {
+              "verb": "interact"
+            },
+            {
+              "seconds": 6.0,
+              "verb": "wait"
+            },
+            {
+              "seconds": 1,
+              "verb": "interact"
+            },
+            {
+              "seconds": 1.5,
+              "verb": "wait"
+            },
+            {
+              "verb": "pause"
+            },
+            {
+              "seconds": 1,
+              "verb": "wait"
+            },
+            {
+              "verb": "pause"
+            },
+            {
+              "seconds": 180,
+              "verb": "wait"
+            },
+            {
+              "verb": "restart"
+            },
+            {
+              "seconds": 4,
+              "verb": "wait"
+            }
+          ],
+          "description": "Fresh title → start → core actions → pause/continue → then play without optimization or recovery input so the natural outcome path (settlement/loss/recovery) is exercised → restart at the end. Capture continuously at normal speed; no teleport, state injection or simulation-speed change is allowed.",
+          "duration_s": 200,
+          "evidence_channels": [
+            "frames",
+            "video",
+            "actions",
+            "state_trace",
+            "event_trace"
+          ],
+          "seed": 1021,
+          "trial_id": "settle_restart"
+        }
+      ]
+    }
+
+task-coverage-policy: |
+    {
+      "asset_tasks": [
+        "G021_obj_001",
+        "G021_obj_002",
+        "G021_obj_003",
+        "G021_obj_004",
+        "G021_obj_005",
+        "G021_obj_006",
+        "G021_obj_007",
+        "G021_obj_008",
+        "G021_scene_001",
+        "G021_mot_001",
+        "G021_mot_002",
+        "G021_mot_003",
+        "G021_mot_004",
+        "G021_mot_005",
+        "G021_mot_006",
+        "G021_mot_007",
+        "G021_mot_008",
+        "G021_sfx_001",
+        "G021_sfx_002",
+        "G021_sfx_003",
+        "G021_sfx_004",
+        "G021_sfx_005",
+        "G021_sfx_006",
+        "G021_sfx_007",
+        "G021_sfx_008",
+        "G021_sfx_009",
+        "G021_sfx_010",
+        "G021_sfx_011",
+        "G021_sfx_012",
+        "G021_sfx_013",
+        "G021_cg_001",
+        "G021_cg_002",
+        "G021_cg_003"
+      ],
+      "authoring_protocol": "gamefactory3a.whitebox_core12.v1",
+      "core12": {
+        "count": 12,
+        "original_rubric": "test_data/test_samples/G021_outpost_assault/rubric_whitebox",
+        "previous_contract_id": "G021_outpost_assault.whitebox.endpoints-v2-candidate.fe076e80f1c3b2f27bb85f13710ab6629243639e6d1637c579a2ffc6dd51045c",
+        "previous_json_sha256": "9f91f1fb9212d49196aa004dc0ff886cac6833ef5aa9f41f9011966096bf6ccb",
+        "scored_atom_count": 12,
+        "selection": [
+          {
+            "expectation": "塔/陷阱落位（扣预算）→ 改变敌方来袭单位的路径与损耗；升级按 AUD12 公式提升基础攻/最大 HP（不补满已损 HP）；已损毁塔/已消耗陷阱不退款（AUD14）",
+            "requirement_ids": [
+              "M01"
+            ],
+            "selector": "M01/change",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M04]",
+            "title": "防御布防（主机制）：有效操作与状态变化"
+          },
+          {
+            "expectation": "预算/战利品不足、位满时点击无效且无副作用",
+            "requirement_ids": [
+              "M01"
+            ],
+            "selector": "M01/invalid",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M04]",
+            "title": "防御布防（主机制）：拒绝与边界"
+          },
+          {
+            "expectation": "不同登陆点 → 接触敌方不同防线序列 → 战损差分；交战优先射程内最近敌人、同距按实体 ID 破序；被建筑阻挡时攻击可破坏阻挡体（AUD14）",
+            "requirement_ids": [
+              "M02"
+            ],
+            "selector": "M02/change",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M04]",
+            "title": "登陆点与交战（主机制）：有效操作与状态变化"
+          },
+          {
+            "expectation": "超编/无效目标点击拒绝且无副作用",
+            "requirement_ids": [
+              "M02"
+            ],
+            "selector": "M02/invalid",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M04]",
+            "title": "登陆点与交战（主机制）：拒绝与边界"
+          },
+          {
+            "expectation": "按 G02 克制表与 AUD14 取整公式结算伤害；敌核心被毁 → 通关结算；出征小队全灭/180 秒超时 → 撤回中间结算（保留布局/战利品/升级/敌工事伤害/一次性奖励状态）；主堡被毁 → 局败结算；主堡毁与核心毁同帧局败优先（AUD13）",
+            "requirement_ids": [
+              "M03"
+            ],
+            "selector": "M03/change",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M04]",
+            "title": "兵种克制与三种结算（主机制）：有效操作与状态变化"
+          },
+          {
+            "expectation": "结算后再触发判定被拒绝（每局每种一次）",
+            "requirement_ids": [
+              "M03"
+            ],
+            "selector": "M03/invalid",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M04]",
+            "title": "兵种克制与三种结算（主机制）：拒绝与边界"
+          },
+          {
+            "expectation": "核心 +200/工事 +20/己方建筑被毁 −10；工事奖励按对象 ID 每局仅一次（幂等）；升级消耗 100、按基础值加算（第 k 级攻=基础×(1+0.1k)、最大 HP=基础×(1+0.2k)）",
+            "requirement_ids": [
+              "M04"
+            ],
+            "selector": "M04/change",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M04]",
+            "title": "战利品经济与幂等（主机制）：有效操作与状态变化"
+          },
+          {
+            "expectation": "重复摧毁同一工事 ID 不重复发放；负战利品时升级拒绝",
+            "requirement_ids": [
+              "M04"
+            ],
+            "selector": "M04/invalid",
+            "source_file": "general_requirement.txt",
+            "source_section": "6. 机制系统 [M01–M04]",
+            "title": "战利品经济与幂等（主机制）：拒绝与边界"
+          },
+          {
+            "expectation": "暂停覆盖层打开，战斗与计时（含 180 秒与波次脚本）冻结",
+            "requirement_ids": [
+              "S13"
+            ],
+            "selector": "S13/pause",
+            "source_file": "general_requirement.txt",
+            "source_section": "2. 完整核心循环与阶段 [S07–S13]",
+            "title": "暂停冻结与继续"
+          },
+          {
+            "expectation": "- V01 成功条件（通关）：摧毁敌方目标核心 → 终局胜利结算（显示战利品、战损比、用时）。",
+            "requirement_ids": [
+              "V01"
+            ],
+            "selector": "V01",
+            "source_file": "general_requirement.txt",
+            "source_section": "7. 成功、失败与恢复 [V01–V06]",
+            "title": "成功终局"
+          },
+          {
+            "expectation": "- V02 失败条件（局败）：己方前哨主堡被毁 → 局败结算（注明「主堡被毁」）；与核心被毁同帧局败优先（AUD13）。",
+            "requirement_ids": [
+              "V02"
+            ],
+            "selector": "V02",
+            "source_file": "general_requirement.txt",
+            "source_section": "7. 成功、失败与恢复 [V01–V06]",
+            "title": "失败或非失败边界"
+          },
+          {
+            "expectation": "- V03 撤回（中间结算）：出征小队全灭或 180 秒超时 → 撤回结算；布局、战利品、升级、敌工事/核心伤害与一次性奖励状态保留；下一次出征 180 秒与两波脚本重置（AUD13）——与通关/局败的终局语义不同，三者必须区分。",
+            "requirement_ids": [
+              "V03"
+            ],
+            "selector": "V03",
+            "source_file": "general_requirement.txt",
+            "source_section": "7. 成功、失败与恢复 [V01–V06]",
+            "title": "原生恢复与重新开始"
+          }
+        ],
+        "selection_basis": "canonical general_requirement.txt only; independent of submissions and historical scores",
+        "source_sha256": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134",
+        "unselected_rules": "Outside the new C2 scoring subset; never silently claimed covered"
+      },
+      "coverage": {
+        "A01": [
+          "G021_outpost_assault.WB.Q.04"
+        ],
+        "A02": [
+          "G021_outpost_assault.WB.Q.04"
+        ],
+        "C01": [
+          "G021_outpost_assault.WB.C3.04"
+        ],
+        "C02": [
+          "G021_outpost_assault.WB.C3.04"
+        ],
+        "C03": [
+          "G021_outpost_assault.WB.C3.04"
+        ],
+        "F01": [
+          "G021_outpost_assault.WB.C3.02",
+          "G021_outpost_assault.WB.Q.01"
+        ],
+        "F02": [
+          "G021_outpost_assault.WB.Q.02"
+        ],
+        "F03": [
+          "G021_outpost_assault.WB.G.03"
+        ],
+        "F04": [
+          "G021_outpost_assault.WB.Q.02"
+        ],
+        "F05": [
+          "G021_outpost_assault.WB.C3.02",
+          "G021_outpost_assault.WB.C3.03",
+          "G021_outpost_assault.WB.G.01"
+        ],
+        "F06": [
+          "G021_outpost_assault.WB.C3.03",
+          "G021_outpost_assault.WB.G.02"
+        ],
+        "F07": [
+          "G021_outpost_assault.WB.C3.02",
+          "G021_outpost_assault.WB.Q.03"
+        ],
+        "F08": [
+          "G021_outpost_assault.WB.G.02"
+        ],
+        "F09": [
+          "G021_outpost_assault.WB.C3.02",
+          "G021_outpost_assault.WB.Q.02",
+          "G021_outpost_assault.WB.G.03"
+        ],
+        "F10": [
+          "G021_outpost_assault.WB.G.03"
+        ],
+        "G02": [
+          "G021_outpost_assault.WB.C3.01"
+        ],
+        "G03": [
+          "G021_outpost_assault.WB.C3.01"
+        ],
+        "I06": [
+          "G021_outpost_assault.WB.G.03"
+        ],
+        "L01": [
+          "G021_outpost_assault.WB.C3.01",
+          "G021_outpost_assault.WB.C3.02"
+        ],
+        "L02": [
+          "G021_outpost_assault.WB.C3.04"
+        ],
+        "L03": [
+          "G021_outpost_assault.WB.G.03"
+        ],
+        "L04": [
+          "G021_outpost_assault.WB.C3.02"
+        ],
+        "M01": [
+          "G021_outpost_assault.WB.C2.01",
+          "G021_outpost_assault.WB.C2.02"
+        ],
+        "M02": [
+          "G021_outpost_assault.WB.C2.03",
+          "G021_outpost_assault.WB.C2.04"
+        ],
+        "M03": [
+          "G021_outpost_assault.WB.C2.05",
+          "G021_outpost_assault.WB.C2.06"
+        ],
+        "M04": [
+          "G021_outpost_assault.WB.C2.07",
+          "G021_outpost_assault.WB.C2.08"
+        ],
+        "N06": [
+          "G021_outpost_assault.WB.C3.02"
+        ],
+        "S13": [
+          "G021_outpost_assault.WB.C2.09"
+        ],
+        "V01": [
+          "G021_outpost_assault.WB.C2.10"
+        ],
+        "V02": [
+          "G021_outpost_assault.WB.C2.11"
+        ],
+        "V03": [
+          "G021_outpost_assault.WB.C2.12"
+        ],
+        "W01": [
+          "G021_outpost_assault.WB.C1.01"
+        ],
+        "W02": [
+          "G021_outpost_assault.WB.C1.01"
+        ],
+        "W03": [
+          "G021_outpost_assault.WB.C1.01"
+        ],
+        "W04": [
+          "G021_outpost_assault.WB.C1.02"
+        ],
+        "W05": [
+          "G021_outpost_assault.WB.C1.03"
+        ],
+        "W06": [
+          "G021_outpost_assault.WB.Q.01"
+        ],
+        "W07": [
+          "G021_outpost_assault.WB.G.02"
+        ],
+        "W08": [
+          "G021_outpost_assault.WB.C1.02"
+        ],
+        "evaluation_plan_table.md#CH": [
+          "G021_outpost_assault.WB.CH.01"
+        ],
+        "evaluation_plan_table.md#G": [
+          "G021_outpost_assault.WB.G.04"
+        ],
+        "evaluation_plan_table.md#P": [
+          "G021_outpost_assault.WB.P.01",
+          "G021_outpost_assault.WB.P.02",
+          "G021_outpost_assault.WB.P.03",
+          "G021_outpost_assault.WB.P.04"
+        ],
+        "evaluation_plan_table.md#Q": [
+          "G021_outpost_assault.WB.Q.03",
+          "G021_outpost_assault.WB.Q.04"
+        ]
+      },
+      "coverage_basis": "explicit subcheck requirement_ids only; context and evaluation-plan facets do not claim requirement coverage",
+      "coverage_semantics": "authoring traceability only; not measured gameplay completion or runtime evidence coverage",
+      "dimension_allocation": {
+        "C1": 3,
+        "C2": 12,
+        "C3": 4,
+        "G": 4,
+        "P": 4,
+        "Q": 4
+      },
+      "evaluation_plans": {
+        "asset_evaluation_plan.md": "248e80c2516d4e3488bf9f159e9d82ea8752da03037f11f45d17bdb34598470a",
+        "evaluation_plan_table.md": "c40bfe47f9788fcd14b853541fc55cb0df0e62172edabf18125faa3e2aa2cba2"
+      },
+      "execution_scope": "existing smoke trials retained; each binding.procedure additionally requires targeted evidence; unexecuted branches remain UNKNOWN",
+      "group_size_policy": "C2: exactly twelve endpoints with one scored subcheck each.",
+      "judge_policy": "vlm_only_no_human",
+      "main_quota": 31,
+      "ownership": {
+        "A01": {
+          "columns": [
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "A02": {
+          "columns": [
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "C01": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "C02": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "C03": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F01": {
+          "columns": [
+            "C3",
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F02": {
+          "columns": [
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F03": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F04": {
+          "columns": [
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F05": {
+          "columns": [
+            "C3",
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F06": {
+          "columns": [
+            "C3",
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F07": {
+          "columns": [
+            "C3",
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F08": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F09": {
+          "columns": [
+            "C3",
+            "G",
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "F10": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "G02": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "G03": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "I06": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "L01": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "L02": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "L03": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "L04": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "M01": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "M02": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "M03": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "M04": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "N06": {
+          "columns": [
+            "C3"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "S13": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "V01": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "V02": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "V03": {
+          "columns": [
+            "C2"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W01": {
+          "columns": [
+            "C1"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W02": {
+          "columns": [
+            "C1"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W03": {
+          "columns": [
+            "C1"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W04": {
+          "columns": [
+            "C1"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W05": {
+          "columns": [
+            "C1"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W06": {
+          "columns": [
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W07": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "W08": {
+          "columns": [
+            "C1"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "evaluation_plan_table.md#CH": {
+          "columns": [
+            "CH"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "evaluation_plan_table.md#G": {
+          "columns": [
+            "G"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "evaluation_plan_table.md#P": {
+          "columns": [
+            "P"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        },
+        "evaluation_plan_table.md#Q": {
+          "columns": [
+            "Q"
+          ],
+          "reason": "Explicit retained or core12 scoring check references only"
+        }
+      },
+      "path_base": "case_root",
+      "release_status": "source_frozen_core12_runtime_not_validated",
+      "result_protocol": "gamefactory3a.result_protocol.v3",
+      "score_interpretation": {
+        "C": "story/mechanism/hook completeness; not raw percent of all source rules",
+        "P": "first build, launch, scene entry, observed runtime; not full-game completion",
+        "Q": "whitebox scene/proportion/placeholder readability; not final mesh/material quality",
+        "playable_loop": "interpret C2 + G + P together with executed trials and UNKNOWN coverage"
+      },
+      "source_inputs": {
+        "3D_object/object_tasks.jsonl": "0da5e83ad6c370caa07216d49f1e7c7b43f654ef1f038ee0bdc6edbd211aa92f",
+        "3D_object/ref_images/generated_ref_01.png": "f11ec182580cb60d5a4d44b512c086dab3739ece95ac17012baab17baf44cfc8",
+        "3D_object/ref_images/outpost_rock_armor_car_ref.png": "370ad278f0a054e7ee95da8929e5ce5541fc8b17ac9756e9107d98fc98806758",
+        "3D_object/ref_images/outpost_sentry_tower_ref.png": "a0d7e081a6d1773a319e9242605b78ee58c56c337171a49b8b66c2623059767b",
+        "3D_scene/scene_tasks.jsonl": "259274c32de219dbd09624d3449dc36779ec82f822fe0dd6ada0af6104ef59ff",
+        "audio/audio_tasks.jsonl": "dfb3e45d0abcf89509e3fffeafa36079d148a4740a33af2ab72db633d0c5aede",
+        "cg_video/cg_tasks.jsonl": "8d1a2f825ec85a8f50157161035c1e1b9c08d001960bb02befc2275fd87a567a",
+        "general_requirement.txt": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134",
+        "motion/motion_tasks.jsonl": "e92365ea1bc08b76190fcb1b77c0a81b7487530039e4996cb3431bed276edf04",
+        "tpose/ref_images/generated_ref_02.png": "91d0c4ed286c463af1adf411f7790a364dacb42731e132661a5b38af9c3de5bb"
+      },
+      "standalone_tpose": "preparation_input_only",
+      "subcheck_aggregation": "role_gated_mean.v1; setup gates do not award functional credit",
+      "tier": "S"
+    }
+
+define scoring-rule scored_subchecks_5: {"kind": "tiered_mean", "subitems": 5, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_7: {"kind": "tiered_mean", "subitems": 7, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_9: {"kind": "tiered_mean", "subitems": 9, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_15: {"kind": "tiered_mean", "subitems": 15, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_6: {"kind": "tiered_mean", "subitems": 6, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_29: {"kind": "tiered_mean", "subitems": 29, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_10: {"kind": "tiered_mean", "subitems": 10, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_13: {"kind": "tiered_mean", "subitems": 13, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_12: {"kind": "tiered_mean", "subitems": 12, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_16: {"kind": "tiered_mean", "subitems": 16, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_8: {"kind": "tiered_mean", "subitems": 8, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_4: {"kind": "tiered_mean", "subitems": 4, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+define scoring-rule scored_subchecks_1: {"kind": "tiered_mean", "subitems": 1, "tiers": {"FAIL": 0.0, "PASS": 1.0}}
+reference whitebox_image_01: 3D_object/ref_images/generated_ref_01.png
+reference whitebox_image_02: 3D_object/ref_images/outpost_sentry_tower_ref.png
+reference whitebox_image_03: 3D_object/ref_images/outpost_rock_armor_car_ref.png
+reference whitebox_image_04: tpose/ref_images/generated_ref_02.png
+
+item G021_outpost_assault.WB.C1.01:
+  column: C1
+  dimension: Completeness
+  requirements: W02, W01, W03
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_5
+  target: |
+    场景所在地；世界与时代背景；玩家身份与当前任务动机
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "W01": "- W01 世界与时代背景：荒漠海岸的前哨第二道命令——风沙纪元的海岸防线吃紧，前哨是大陆桥头的最后支点。",
+        "W02": "- W02 场景所在地：荒漠海岸两张俯视地图（己方前哨：主堡＋建造位＋陷阱位；敌方目标岛：核心、外围工事、两段防线、三处登陆点）。",
+        "W03": "- W03 玩家身份与当前任务动机：玩家是前哨指挥官；动机是在来袭波逼近下布置第一道防线、组织出征并摧毁敌方海岸核心，把战利品投入后续作战。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "场景所在地",
+        "世界与时代背景",
+        "玩家身份与当前任务动机"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制标题、任务入口、推进及结果窗口，核对故事事实在实际游戏中的表达。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "- W02 场景所在地",
+          "id": "C1.s0002",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W02 场景所在地：荒漠海岸两张俯视地图（己方前哨：主堡＋建造位＋陷阱位",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "- W02 场景所在地：荒漠海岸两张俯视地图（己方前哨：主堡＋建造位＋陷阱位",
+          "topic": "场景所在地"
+        },
+        {
+          "facet": "敌方目标岛",
+          "id": "C1.s0003",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "敌方目标岛：核心、外围工事、两段防线、三处登陆点）。",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "敌方目标岛：核心、外围工事、两段防线、三处登陆点）。",
+          "topic": "场景所在地"
+        },
+        {
+          "facet": "- W01 世界与时代背景",
+          "id": "C1.s0001",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W01 世界与时代背景：荒漠海岸的前哨第二道命令——风沙纪元的海岸防线吃紧，前哨是大陆桥头的最后支点。",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "- W01 世界与时代背景：荒漠海岸的前哨第二道命令——风沙纪元的海岸防线吃紧，前哨是大陆桥头的最后支点。",
+          "topic": "世界与时代背景"
+        },
+        {
+          "facet": "- W03 玩家身份与当前任务动机",
+          "id": "C1.s0004",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W03 玩家身份与当前任务动机：玩家是前哨指挥官",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "- W03 玩家身份与当前任务动机：玩家是前哨指挥官",
+          "topic": "玩家身份与当前任务动机"
+        },
+        {
+          "facet": "动机是在来袭波逼近下布置第一道防线、组织出征并摧毁敌方海岸核",
+          "id": "C1.s0005",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "动机是在来袭波逼近下布置第一道防线、组织出征并摧毁敌方海岸核心，把战利品投入后续作战。",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "动机是在来袭波逼近下布置第一道防线、组织出征并摧毁敌方海岸核心，把战利品投入后续作战。",
+          "topic": "玩家身份与当前任务动机"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C1.02:
+  column: C1
+  dimension: Completeness
+  requirements: W04, W08
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_7
+  target: |
+    失败代价与结局表达；故事表达方式
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "C01": "- C01 第二道命令（Opening，5 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入布防态之前，每局一次\n  - 内容与角色场景：荒漠海岸前哨全景——主堡旗帜在风沙中展开，镜头掠过空置的建造位与三处抢滩口，停在海峡对岸敌方核心的轮廓\n  - 资产对应：主堡、塔架、敌方核心与游戏内模型/贴图同源设计\n  - 可跳过：Enter/Space 或跳过按钮 → 直接进入布防态；自然播完 → 进入布防态\n  - 状态一致：跳过与自然播完后初始状态 hash 相同；播放期间不推进任何游戏计时",
+        "C02": "- C02 敌影上滩（Event，5 秒，1280×720@24fps）\n  - 触发时机：每次出征首次来袭波触发（出征模拟 t=30 秒）时，每次出征一次\n  - 内容与角色场景：敌方登陆艇轮廓逼近海岸线，波次路径预览在地图上展开，主堡警报灯点亮——枪兵/装甲/破甲三色剪影沿预览路线推进\n  - 资产对应：三类兵种、主堡与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接继续战斗（波次状态保持）；自然播完 → 继续战斗\n  - 状态一致：播放期间战斗与计时冻结，播放结束瞬间按冻结前状态恢复",
+        "C03": "- C03 三种号角（Ending，6 秒，1280×720@24fps，三意象共用条目）\n  - 触发时机：V01/V02 成立或撤回中间结算面板出现之前（撤回播简短撤回意象、通关/局败播对应终局意象）\n  - 内容与角色场景：胜利意象=敌方核心爆裂光柱、前哨旗帜插上残骸；局败意象=主堡坍塌沙尘、旗帜倒下；撤回意象=队伍旗帜收拢退回防线（简短、非终局）\n  - 资产对应：主堡、核心、兵种与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02/V03 后触发；播放期间不推进任何游戏计时",
+        "W04": "- W04 失败代价与结局表达：敌核心摧毁=胜利（C03 胜利意象）；主堡被毁=局败（C03 局败意象）；小队全灭/超时=撤回（C03 撤回意象，非终局）；三种结果结算界面区分原因。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代前哨与敌方核心目标 → 波次视频（C02）承载敌袭升级的过程叙事 → 结算视频（C03）三意象收束；叙事提示不阻断控制、不改变数值；提前失败允许直接进入失败结局。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "失败代价与结局表达",
+        "故事表达方式"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制标题、任务入口、推进及结果窗口，核对故事事实在实际游戏中的表达。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "- W04 失败代价与结局表达",
+          "id": "C1.s0006",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W04 失败代价与结局表达：敌核心摧毁=胜利（C03 胜利意象）",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "- W04 失败代价与结局表达：敌核心摧毁=胜利（C03 胜利意象）",
+          "topic": "失败代价与结局表达"
+        },
+        {
+          "facet": "主堡被毁=局败（C03 局败意象）",
+          "id": "C1.s0007",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "主堡被毁=局败（C03 局败意象）",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "主堡被毁=局败（C03 局败意象）",
+          "topic": "失败代价与结局表达"
+        },
+        {
+          "facet": "小队全灭/超时=撤回（C03 撤回意象，非终局）",
+          "id": "C1.s0008",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "小队全灭/超时=撤回（C03 撤回意象，非终局）",
+          "source_unit": 3,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "小队全灭/超时=撤回（C03 撤回意象，非终局）",
+          "topic": "失败代价与结局表达"
+        },
+        {
+          "facet": "三种结果结算界面区分原因。",
+          "id": "C1.s0009",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "三种结果结算界面区分原因。",
+          "source_unit": 4,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "三种结果结算界面区分原因。",
+          "topic": "失败代价与结局表达"
+        },
+        {
+          "facet": "- W08 故事表达方式",
+          "id": "C1.s0015",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W08"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W08 故事表达方式：开场视频（C01）交代前哨与敌方核心目标 → 波次视频（C02）承载敌袭升级的过程叙事 → 结算视频（C03）三意象收束",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "- W08 故事表达方式：开场视频（C01）交代前哨与敌方核心目标 → 波次视频（C02）承载敌袭升级的过程叙事 → 结算视频（C03）三意象收束",
+          "topic": "故事表达方式"
+        },
+        {
+          "facet": "叙事提示不阻断控制、不改变数值",
+          "id": "C1.s0016",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W08"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "叙事提示不阻断控制、不改变数值",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "叙事提示不阻断控制、不改变数值",
+          "topic": "故事表达方式"
+        },
+        {
+          "facet": "提前失败允许直接进入失败结局。",
+          "id": "C1.s0017",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W08"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "提前失败允许直接进入失败结局。",
+          "source_unit": 3,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "提前失败允许直接进入失败结局。",
+          "topic": "故事表达方式"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C1.03:
+  column: C1
+  dimension: Completeness
+  requirements: W05
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_5
+  target: |
+    叙事来源
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "W05": "- W05 叙事来源：塔=前哨速射哨塔；陷阱=荒漠陷坑；三类兵种=沙枪手/岩甲车/破壁手（海岸戍卫编制）；战利品=缴获军资；登陆点=东滩/南崖/西湾三处抢滩口。全部原创。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "叙事来源"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制标题、任务入口、推进及结果窗口，核对故事事实在实际游戏中的表达。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "- W05 叙事来源",
+          "id": "C1.s0010",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W05 叙事来源：塔=前哨速射哨塔",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "- W05 叙事来源：塔=前哨速射哨塔",
+          "topic": "叙事来源"
+        },
+        {
+          "facet": "陷阱=荒漠陷坑",
+          "id": "C1.s0011",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "陷阱=荒漠陷坑",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "陷阱=荒漠陷坑",
+          "topic": "叙事来源"
+        },
+        {
+          "facet": "三类兵种=沙枪手/岩甲车/破壁手（海岸戍卫编制）",
+          "id": "C1.s0012",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "三类兵种=沙枪手/岩甲车/破壁手（海岸戍卫编制）",
+          "source_unit": 3,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "三类兵种=沙枪手/岩甲车/破壁手（海岸戍卫编制）",
+          "topic": "叙事来源"
+        },
+        {
+          "facet": "战利品=缴获军资",
+          "id": "C1.s0013",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "战利品=缴获军资",
+          "source_unit": 4,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "战利品=缴获军资",
+          "topic": "叙事来源"
+        },
+        {
+          "facet": "登陆点=东滩/南崖/西湾三处抢滩口。全部原创。",
+          "id": "C1.s0014",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "登陆点=东滩/南崖/西湾三处抢滩口。全部原创。",
+          "source_unit": 5,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "登陆点=东滩/南崖/西湾三处抢滩口。全部原创。",
+          "topic": "叙事来源"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C2.01:
+  column: C2
+  dimension: Completeness
+  requirements: M01
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    防御布防（主机制）：有效操作与状态变化：塔/陷阱落位（扣预算）→ 改变敌方来袭单位的路径与损耗；升级按 AUD12 公式提升基础攻/最大 HP（不补满已损 HP）；已损毁塔/已消耗陷阱不退款（AUD14）
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "M01": "- M01 防御布防（主机制）\n  - input：布防态放置/出售/升级指令（触发方：玩家）\n  - precondition：建造需布防预算 ≥50（塔）/≥25（陷阱）且对应空位；升级需战利品 ≥100；出售仅出征前全额返还\n  - state_change：塔/陷阱落位（扣预算）→ 改变敌方来袭单位的路径与损耗；升级按 AUD12 公式提升基础攻/最大 HP（不补满已损 HP）；已损毁塔/已消耗陷阱不退款（AUD14）\n  - observable：布防快照（塔/陷阱/位）与敌方来袭损耗流水对账；预算/战利品流水\n  - invalid_case：预算/战利品不足、位满时点击无效且无副作用\n  - recovery：出售返还可重新布防；撤回中间结算保留布局（AUD13）"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M01/change",
+        "sha256": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134"
+      },
+      "focus": [
+        "防御布防（主机制）：有效操作与状态变化"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "防御布防（主机制）：有效操作与状态变化",
+          "id": "C2.core12.01",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M04]",
+          "source_text": "- M01 防御布防（主机制）\n  - input：布防态放置/出售/升级指令（触发方：玩家）\n  - precondition：建造需布防预算 ≥50（塔）/≥25（陷阱）且对应空位；升级需战利品 ≥100；出售仅出征前全额返还\n  - state_change：塔/陷阱落位（扣预算）→ 改变敌方来袭单位的路径与损耗；升级按 AUD12 公式提升基础攻/最大 HP（不补满已损 HP）；已损毁塔/已消耗陷阱不退款（AUD14）\n  - observable：布防快照（塔/陷阱/位）与敌方来袭损耗流水对账；预算/战利品流水\n  - invalid_case：预算/战利品不足、位满时点击无效且无副作用\n  - recovery：出售返还可重新布防；撤回中间结算保留布局（AUD13）",
+          "source_unit": 1,
+          "system": "core12",
+          "text": "塔/陷阱落位（扣预算）→ 改变敌方来袭单位的路径与损耗；升级按 AUD12 公式提升基础攻/最大 HP（不补满已损 HP）；已损毁塔/已消耗陷阱不退款（AUD14）",
+          "topic": "防御布防（主机制）：有效操作与状态变化"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C2.02:
+  column: C2
+  dimension: Completeness
+  requirements: M01
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    防御布防（主机制）：拒绝与边界：预算/战利品不足、位满时点击无效且无副作用
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "M01": "- M01 防御布防（主机制）\n  - input：布防态放置/出售/升级指令（触发方：玩家）\n  - precondition：建造需布防预算 ≥50（塔）/≥25（陷阱）且对应空位；升级需战利品 ≥100；出售仅出征前全额返还\n  - state_change：塔/陷阱落位（扣预算）→ 改变敌方来袭单位的路径与损耗；升级按 AUD12 公式提升基础攻/最大 HP（不补满已损 HP）；已损毁塔/已消耗陷阱不退款（AUD14）\n  - observable：布防快照（塔/陷阱/位）与敌方来袭损耗流水对账；预算/战利品流水\n  - invalid_case：预算/战利品不足、位满时点击无效且无副作用\n  - recovery：出售返还可重新布防；撤回中间结算保留布局（AUD13）"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M01/invalid",
+        "sha256": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134"
+      },
+      "focus": [
+        "防御布防（主机制）：拒绝与边界"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "防御布防（主机制）：拒绝与边界",
+          "id": "C2.core12.02",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M04]",
+          "source_text": "- M01 防御布防（主机制）\n  - input：布防态放置/出售/升级指令（触发方：玩家）\n  - precondition：建造需布防预算 ≥50（塔）/≥25（陷阱）且对应空位；升级需战利品 ≥100；出售仅出征前全额返还\n  - state_change：塔/陷阱落位（扣预算）→ 改变敌方来袭单位的路径与损耗；升级按 AUD12 公式提升基础攻/最大 HP（不补满已损 HP）；已损毁塔/已消耗陷阱不退款（AUD14）\n  - observable：布防快照（塔/陷阱/位）与敌方来袭损耗流水对账；预算/战利品流水\n  - invalid_case：预算/战利品不足、位满时点击无效且无副作用\n  - recovery：出售返还可重新布防；撤回中间结算保留布局（AUD13）",
+          "source_unit": 2,
+          "system": "core12",
+          "text": "预算/战利品不足、位满时点击无效且无副作用",
+          "topic": "防御布防（主机制）：拒绝与边界"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C2.03:
+  column: C2
+  dimension: Completeness
+  requirements: M02
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    登陆点与交战（主机制）：有效操作与状态变化：不同登陆点 → 接触敌方不同防线序列 → 战损差分；交战优先射程内最近敌人、同距按实体 ID 破序；被建筑阻挡时攻击可破坏阻挡体（AUD14）
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "M02": "- M02 登陆点与交战（主机制）\n  - input：出征界面点选登陆点；进攻态点选目标点（触发方：玩家）\n  - precondition：编组 ≤20 单位且处于进攻态\n  - state_change：不同登陆点 → 接触敌方不同防线序列 → 战损差分；交战优先射程内最近敌人、同距按实体 ID 破序；被建筑阻挡时攻击可破坏阻挡体（AUD14）\n  - observable：登陆事件与逐单位战损流水（含空间分布与克制字段）\n  - invalid_case：超编/无效目标点击拒绝且无副作用\n  - recovery：小队全灭/超时走 M03 撤回"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M02/change",
+        "sha256": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134"
+      },
+      "focus": [
+        "登陆点与交战（主机制）：有效操作与状态变化"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "登陆点与交战（主机制）：有效操作与状态变化",
+          "id": "C2.core12.03",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M04]",
+          "source_text": "- M02 登陆点与交战（主机制）\n  - input：出征界面点选登陆点；进攻态点选目标点（触发方：玩家）\n  - precondition：编组 ≤20 单位且处于进攻态\n  - state_change：不同登陆点 → 接触敌方不同防线序列 → 战损差分；交战优先射程内最近敌人、同距按实体 ID 破序；被建筑阻挡时攻击可破坏阻挡体（AUD14）\n  - observable：登陆事件与逐单位战损流水（含空间分布与克制字段）\n  - invalid_case：超编/无效目标点击拒绝且无副作用\n  - recovery：小队全灭/超时走 M03 撤回",
+          "source_unit": 3,
+          "system": "core12",
+          "text": "不同登陆点 → 接触敌方不同防线序列 → 战损差分；交战优先射程内最近敌人、同距按实体 ID 破序；被建筑阻挡时攻击可破坏阻挡体（AUD14）",
+          "topic": "登陆点与交战（主机制）：有效操作与状态变化"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C2.04:
+  column: C2
+  dimension: Completeness
+  requirements: M02
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    登陆点与交战（主机制）：拒绝与边界：超编/无效目标点击拒绝且无副作用
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "M02": "- M02 登陆点与交战（主机制）\n  - input：出征界面点选登陆点；进攻态点选目标点（触发方：玩家）\n  - precondition：编组 ≤20 单位且处于进攻态\n  - state_change：不同登陆点 → 接触敌方不同防线序列 → 战损差分；交战优先射程内最近敌人、同距按实体 ID 破序；被建筑阻挡时攻击可破坏阻挡体（AUD14）\n  - observable：登陆事件与逐单位战损流水（含空间分布与克制字段）\n  - invalid_case：超编/无效目标点击拒绝且无副作用\n  - recovery：小队全灭/超时走 M03 撤回"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M02/invalid",
+        "sha256": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134"
+      },
+      "focus": [
+        "登陆点与交战（主机制）：拒绝与边界"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "登陆点与交战（主机制）：拒绝与边界",
+          "id": "C2.core12.04",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M04]",
+          "source_text": "- M02 登陆点与交战（主机制）\n  - input：出征界面点选登陆点；进攻态点选目标点（触发方：玩家）\n  - precondition：编组 ≤20 单位且处于进攻态\n  - state_change：不同登陆点 → 接触敌方不同防线序列 → 战损差分；交战优先射程内最近敌人、同距按实体 ID 破序；被建筑阻挡时攻击可破坏阻挡体（AUD14）\n  - observable：登陆事件与逐单位战损流水（含空间分布与克制字段）\n  - invalid_case：超编/无效目标点击拒绝且无副作用\n  - recovery：小队全灭/超时走 M03 撤回",
+          "source_unit": 4,
+          "system": "core12",
+          "text": "超编/无效目标点击拒绝且无副作用",
+          "topic": "登陆点与交战（主机制）：拒绝与边界"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C2.05:
+  column: C2
+  dimension: Completeness
+  requirements: M03
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    兵种克制与三种结算（主机制）：有效操作与状态变化：按 G02 克制表与 AUD14 取整公式结算伤害；敌核心被毁 → 通关结算；出征小队全灭/180 秒超时 → 撤回中间结算（保留布局/战利品/升级/敌工事伤害/一次性奖励状态）；主堡被毁 → 局败结算；主堡毁与核心毁同帧局败优先（AUD13）
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "G02": "- G02 兵种与克制（本包冻结值）：三类兵种——沙枪手（基础攻 10、HP 40）、岩甲车（攻 40、HP 120）、破壁手（攻 25、HP 60）。两两克制：岩甲车克沙枪手、沙枪手克破壁手、破壁手克岩甲车，克制系数 ×1.5、被克 ×0.75、同类 ×1.0。伤害结算（AUD14）：**先计算升级后的基础攻，再乘克制系数，最后 floor(x+0.5) 取整，每击至少 1**。独立 oracle 数例：岩甲车对沙枪手单发 40×1.5＝**60**；沙枪手对岩甲车单发 10×0.75＝floor(7.5+0.5)＝**8**；未升级沙枪手对己方无克制目标 10×1.0＝**10**。",
+        "M03": "- M03 兵种克制与三种结算（主机制）\n  - input：编组配置＋交战判定；终局判定（触发方：系统）\n  - precondition：处于进攻态\n  - state_change：按 G02 克制表与 AUD14 取整公式结算伤害；敌核心被毁 → 通关结算；出征小队全灭/180 秒超时 → 撤回中间结算（保留布局/战利品/升级/敌工事伤害/一次性奖励状态）；主堡被毁 → 局败结算；主堡毁与核心毁同帧局败优先（AUD13）\n  - observable：克制命中伤害差分（含双方类型字段）、三种结算事件（win/lose/retreat）\n  - invalid_case：结算后再触发判定被拒绝（每局每种一次）\n  - recovery：撤回后免费重编组再出征；通关/局败后 Enter 重开清空全局"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M03/change",
+        "sha256": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134"
+      },
+      "focus": [
+        "兵种克制与三种结算（主机制）：有效操作与状态变化"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "兵种克制与三种结算（主机制）：有效操作与状态变化",
+          "id": "C2.core12.05",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M04]",
+          "source_text": "- M03 兵种克制与三种结算（主机制）\n  - input：编组配置＋交战判定；终局判定（触发方：系统）\n  - precondition：处于进攻态\n  - state_change：按 G02 克制表与 AUD14 取整公式结算伤害；敌核心被毁 → 通关结算；出征小队全灭/180 秒超时 → 撤回中间结算（保留布局/战利品/升级/敌工事伤害/一次性奖励状态）；主堡被毁 → 局败结算；主堡毁与核心毁同帧局败优先（AUD13）\n  - observable：克制命中伤害差分（含双方类型字段）、三种结算事件（win/lose/retreat）\n  - invalid_case：结算后再触发判定被拒绝（每局每种一次）\n  - recovery：撤回后免费重编组再出征；通关/局败后 Enter 重开清空全局",
+          "source_unit": 5,
+          "system": "core12",
+          "text": "按 G02 克制表与 AUD14 取整公式结算伤害；敌核心被毁 → 通关结算；出征小队全灭/180 秒超时 → 撤回中间结算（保留布局/战利品/升级/敌工事伤害/一次性奖励状态）；主堡被毁 → 局败结算；主堡毁与核心毁同帧局败优先（AUD13）",
+          "topic": "兵种克制与三种结算（主机制）：有效操作与状态变化"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C2.06:
+  column: C2
+  dimension: Completeness
+  requirements: M03
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    兵种克制与三种结算（主机制）：拒绝与边界：结算后再触发判定被拒绝（每局每种一次）
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "M03": "- M03 兵种克制与三种结算（主机制）\n  - input：编组配置＋交战判定；终局判定（触发方：系统）\n  - precondition：处于进攻态\n  - state_change：按 G02 克制表与 AUD14 取整公式结算伤害；敌核心被毁 → 通关结算；出征小队全灭/180 秒超时 → 撤回中间结算（保留布局/战利品/升级/敌工事伤害/一次性奖励状态）；主堡被毁 → 局败结算；主堡毁与核心毁同帧局败优先（AUD13）\n  - observable：克制命中伤害差分（含双方类型字段）、三种结算事件（win/lose/retreat）\n  - invalid_case：结算后再触发判定被拒绝（每局每种一次）\n  - recovery：撤回后免费重编组再出征；通关/局败后 Enter 重开清空全局"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M03/invalid",
+        "sha256": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134"
+      },
+      "focus": [
+        "兵种克制与三种结算（主机制）：拒绝与边界"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "兵种克制与三种结算（主机制）：拒绝与边界",
+          "id": "C2.core12.06",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M04]",
+          "source_text": "- M03 兵种克制与三种结算（主机制）\n  - input：编组配置＋交战判定；终局判定（触发方：系统）\n  - precondition：处于进攻态\n  - state_change：按 G02 克制表与 AUD14 取整公式结算伤害；敌核心被毁 → 通关结算；出征小队全灭/180 秒超时 → 撤回中间结算（保留布局/战利品/升级/敌工事伤害/一次性奖励状态）；主堡被毁 → 局败结算；主堡毁与核心毁同帧局败优先（AUD13）\n  - observable：克制命中伤害差分（含双方类型字段）、三种结算事件（win/lose/retreat）\n  - invalid_case：结算后再触发判定被拒绝（每局每种一次）\n  - recovery：撤回后免费重编组再出征；通关/局败后 Enter 重开清空全局",
+          "source_unit": 6,
+          "system": "core12",
+          "text": "结算后再触发判定被拒绝（每局每种一次）",
+          "topic": "兵种克制与三种结算（主机制）：拒绝与边界"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C2.07:
+  column: C2
+  dimension: Completeness
+  requirements: M04
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    战利品经济与幂等（主机制）：有效操作与状态变化：核心 +200/工事 +20/己方建筑被毁 −10；工事奖励按对象 ID 每局仅一次（幂等）；升级消耗 100、按基础值加算（第 k 级攻=基础×(1+0.1k)、最大 HP=基础×(1+0.2k)）
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "M04": "- M04 战利品经济与幂等（主机制）\n  - input：摧毁敌方对象（触发方：系统）；升级点击（触发方：玩家）\n  - precondition：战利品 ≥100 才可升级（AUD12）\n  - state_change：核心 +200/工事 +20/己方建筑被毁 −10；工事奖励按对象 ID 每局仅一次（幂等）；升级消耗 100、按基础值加算（第 k 级攻=基础×(1+0.1k)、最大 HP=基础×(1+0.2k)）\n  - observable：战利品流水（含对象 ID 与幂等标记）、升级事件与属性差分（升级前后快照）\n  - invalid_case：重复摧毁同一工事 ID 不重复发放；负战利品时升级拒绝\n  - recovery：撤回中间结算保留战利品与升级（AUD13）\n\n系统耦合边（玩法必需、可复现）："
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M04/change",
+        "sha256": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134"
+      },
+      "focus": [
+        "战利品经济与幂等（主机制）：有效操作与状态变化"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "战利品经济与幂等（主机制）：有效操作与状态变化",
+          "id": "C2.core12.07",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M04]",
+          "source_text": "- M04 战利品经济与幂等（主机制）\n  - input：摧毁敌方对象（触发方：系统）；升级点击（触发方：玩家）\n  - precondition：战利品 ≥100 才可升级（AUD12）\n  - state_change：核心 +200/工事 +20/己方建筑被毁 −10；工事奖励按对象 ID 每局仅一次（幂等）；升级消耗 100、按基础值加算（第 k 级攻=基础×(1+0.1k)、最大 HP=基础×(1+0.2k)）\n  - observable：战利品流水（含对象 ID 与幂等标记）、升级事件与属性差分（升级前后快照）\n  - invalid_case：重复摧毁同一工事 ID 不重复发放；负战利品时升级拒绝\n  - recovery：撤回中间结算保留战利品与升级（AUD13）\n\n系统耦合边（玩法必需、可复现）：",
+          "source_unit": 7,
+          "system": "core12",
+          "text": "核心 +200/工事 +20/己方建筑被毁 −10；工事奖励按对象 ID 每局仅一次（幂等）；升级消耗 100、按基础值加算（第 k 级攻=基础×(1+0.1k)、最大 HP=基础×(1+0.2k)）",
+          "topic": "战利品经济与幂等（主机制）：有效操作与状态变化"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C2.08:
+  column: C2
+  dimension: Completeness
+  requirements: M04
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    战利品经济与幂等（主机制）：拒绝与边界：重复摧毁同一工事 ID 不重复发放；负战利品时升级拒绝
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "M04": "- M04 战利品经济与幂等（主机制）\n  - input：摧毁敌方对象（触发方：系统）；升级点击（触发方：玩家）\n  - precondition：战利品 ≥100 才可升级（AUD12）\n  - state_change：核心 +200/工事 +20/己方建筑被毁 −10；工事奖励按对象 ID 每局仅一次（幂等）；升级消耗 100、按基础值加算（第 k 级攻=基础×(1+0.1k)、最大 HP=基础×(1+0.2k)）\n  - observable：战利品流水（含对象 ID 与幂等标记）、升级事件与属性差分（升级前后快照）\n  - invalid_case：重复摧毁同一工事 ID 不重复发放；负战利品时升级拒绝\n  - recovery：撤回中间结算保留战利品与升级（AUD13）\n\n系统耦合边（玩法必需、可复现）："
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "M04/invalid",
+        "sha256": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134"
+      },
+      "focus": [
+        "战利品经济与幂等（主机制）：拒绝与边界"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "战利品经济与幂等（主机制）：拒绝与边界",
+          "id": "C2.core12.08",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "M04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "6. 机制系统 [M01–M04]",
+          "source_text": "- M04 战利品经济与幂等（主机制）\n  - input：摧毁敌方对象（触发方：系统）；升级点击（触发方：玩家）\n  - precondition：战利品 ≥100 才可升级（AUD12）\n  - state_change：核心 +200/工事 +20/己方建筑被毁 −10；工事奖励按对象 ID 每局仅一次（幂等）；升级消耗 100、按基础值加算（第 k 级攻=基础×(1+0.1k)、最大 HP=基础×(1+0.2k)）\n  - observable：战利品流水（含对象 ID 与幂等标记）、升级事件与属性差分（升级前后快照）\n  - invalid_case：重复摧毁同一工事 ID 不重复发放；负战利品时升级拒绝\n  - recovery：撤回中间结算保留战利品与升级（AUD13）\n\n系统耦合边（玩法必需、可复现）：",
+          "source_unit": 8,
+          "system": "core12",
+          "text": "重复摧毁同一工事 ID 不重复发放；负战利品时升级拒绝",
+          "topic": "战利品经济与幂等（主机制）：拒绝与边界"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C2.09:
+  column: C2
+  dimension: Completeness
+  requirements: S13
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    暂停冻结与继续：暂停覆盖层打开，战斗与计时（含 180 秒与波次脚本）冻结
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "S13": "- S13 暂停\n  - input：Esc（触发方：玩家）；窗口失焦自动触发（触发方：系统）\n  - precondition：处于布防态或进攻态\n  - state_change：暂停覆盖层打开，战斗与计时（含 180 秒与波次脚本）冻结\n  - feedback：暂停面板（继续/重开/返回/设置）\n  - next_actions：继续 → 回到原状态\n  - outcome：恢复后状态逐字段一致"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "S13/pause",
+        "sha256": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134"
+      },
+      "focus": [
+        "暂停冻结与继续"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "暂停冻结与继续",
+          "id": "C2.core12.09",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "S13"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "2. 完整核心循环与阶段 [S07–S13]",
+          "source_text": "- S13 暂停\n  - input：Esc（触发方：玩家）；窗口失焦自动触发（触发方：系统）\n  - precondition：处于布防态或进攻态\n  - state_change：暂停覆盖层打开，战斗与计时（含 180 秒与波次脚本）冻结\n  - feedback：暂停面板（继续/重开/返回/设置）\n  - next_actions：继续 → 回到原状态\n  - outcome：恢复后状态逐字段一致",
+          "source_unit": 9,
+          "system": "core12",
+          "text": "暂停覆盖层打开，战斗与计时（含 180 秒与波次脚本）冻结",
+          "topic": "暂停冻结与继续"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C2.10:
+  column: C2
+  dimension: Completeness
+  requirements: V01
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    成功终局：- V01 成功条件（通关）：摧毁敌方目标核心 → 终局胜利结算（显示战利品、战损比、用时）。
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "V01": "- V01 成功条件（通关）：摧毁敌方目标核心 → 终局胜利结算（显示战利品、战损比、用时）。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "V01",
+        "sha256": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134"
+      },
+      "focus": [
+        "成功终局"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "成功终局",
+          "id": "C2.core12.10",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "V01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "7. 成功、失败与恢复 [V01–V06]",
+          "source_text": "- V01 成功条件（通关）：摧毁敌方目标核心 → 终局胜利结算（显示战利品、战损比、用时）。",
+          "source_unit": 10,
+          "system": "core12",
+          "text": "- V01 成功条件（通关）：摧毁敌方目标核心 → 终局胜利结算（显示战利品、战损比、用时）。",
+          "topic": "成功终局"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C2.11:
+  column: C2
+  dimension: Completeness
+  requirements: V02
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    失败或非失败边界：- V02 失败条件（局败）：己方前哨主堡被毁 → 局败结算（注明「主堡被毁」）；与核心被毁同帧局败优先（AUD13）。
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "V02": "- V02 失败条件（局败）：己方前哨主堡被毁 → 局败结算（注明「主堡被毁」）；与核心被毁同帧局败优先（AUD13）。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "V02",
+        "sha256": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134"
+      },
+      "focus": [
+        "失败或非失败边界"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "失败或非失败边界",
+          "id": "C2.core12.11",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "V02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "7. 成功、失败与恢复 [V01–V06]",
+          "source_text": "- V02 失败条件（局败）：己方前哨主堡被毁 → 局败结算（注明「主堡被毁」）；与核心被毁同帧局败优先（AUD13）。",
+          "source_unit": 11,
+          "system": "core12",
+          "text": "- V02 失败条件（局败）：己方前哨主堡被毁 → 局败结算（注明「主堡被毁」）；与核心被毁同帧局败优先（AUD13）。",
+          "topic": "失败或非失败边界"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C2.12:
+  column: C2
+  dimension: Completeness
+  requirements: V03
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    原生恢复与重新开始：- V03 撤回（中间结算）：出征小队全灭或 180 秒超时 → 撤回结算；布局、战利品、升级、敌工事/核心伤害与一次性奖励状态保留；下一次出征 180 秒与两波脚本重置（AUD13）——与通关/局败的终局语义不同，三者必须区分。
+  pass: |
+    通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。
+  partial: |
+    本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。
+  fail: |
+    仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。
+  evidence: screenshot, input_trace, event_trace, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "V03": "- V03 撤回（中间结算）：出征小队全灭或 180 秒超时 → 撤回结算；布局、战利品、升级、敌工事/核心伤害与一次性奖励状态保留；下一次出征 180 秒与两波脚本重置（AUD13）——与通关/局败的终局语义不同，三者必须区分。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+      "core12_source": {
+        "path": "general_requirement.txt",
+        "selector": "V03",
+        "sha256": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134"
+      },
+      "focus": [
+        "原生恢复与重新开始"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+        "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+        "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "原生恢复与重新开始",
+          "id": "C2.core12.12",
+          "origin": "general_requirement_core12_selection",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "V03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "7. 成功、失败与恢复 [V01–V06]",
+          "source_text": "- V03 撤回（中间结算）：出征小队全灭或 180 秒超时 → 撤回结算；布局、战利品、升级、敌工事/核心伤害与一次性奖励状态保留；下一次出征 180 秒与两波脚本重置（AUD13）——与通关/局败的终局语义不同，三者必须区分。",
+          "source_unit": 12,
+          "system": "core12",
+          "text": "- V03 撤回（中间结算）：出征小队全灭或 180 秒超时 → 撤回结算；布局、战利品、升级、敌工事/核心伤害与一次性奖励状态保留；下一次出征 180 秒与两波脚本重置（AUD13）——与通关/局败的终局语义不同，三者必须区分。",
+          "topic": "原生恢复与重新开始"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C3.01:
+  column: C3
+  dimension: Completeness
+  requirements: L01, G03, G02
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_8
+  target: |
+    角色与物体接口
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: code_files, screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "A01": "- A01 `images/generated_ref_01.png` → 己方主堡 image-to-3D 输入与建筑外观参考。",
+        "A02": "- A02 `images/generated_ref_02.png` → 沙枪手（枪兵）image-to-3D 输入与 T-pose 参考。",
+        "G02": "- G02 兵种与克制（本包冻结值）：三类兵种——沙枪手（基础攻 10、HP 40）、岩甲车（攻 40、HP 120）、破壁手（攻 25、HP 60）。两两克制：岩甲车克沙枪手、沙枪手克破壁手、破壁手克岩甲车，克制系数 ×1.5、被克 ×0.75、同类 ×1.0。伤害结算（AUD14）：**先计算升级后的基础攻，再乘克制系数，最后 floor(x+0.5) 取整，每击至少 1**。独立 oracle 数例：岩甲车对沙枪手单发 40×1.5＝**60**；沙枪手对岩甲车单发 10×0.75＝floor(7.5+0.5)＝**8**；未升级沙枪手对己方无克制目标 10×1.0＝**10**。",
+        "G03": "- G03 布防与建筑（zkx 裁决冻结，AUD10/14）：布防预算 **300**（独立于战利品；战利品初始 **100**）；建造费用：塔 **50**、地面陷阱 **25**；出征前出售建筑**全额返还**布防预算；塔 HP 300、攻击 20、间隔 1 秒、射程 **6 格**、自动选敌（射程内最近敌人优先，同距按实体 ID 破序，AUD14）；地面陷阱对触发单位一次造成 **50 无甲伤害**后消耗（不退款）；主堡 HP **1000**；敌方核心 HP **1200**、外围工事 HP **200**；建造位不超 8 建筑/6 陷阱位。布防预算在局内保留，已损毁塔/已消耗陷阱不退款（AUD14）。",
+        "L01": "- L01 生成对象：己方主堡 1（按 A01 参考图）；防御塔（建筑位 8）、地面陷阱（陷阱位 6）；敌方目标岛（核心 1、外围工事 6、防线 2 段）；三类兵种单位模型（沙枪手/岩甲车/破壁手，枪兵按 A02 参考图）；来袭波脚本（seed 冻结，2 波）；两张固定俯视地图。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "角色与物体接口"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+        "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "asset_kind": "3d_object",
+          "asset_task_id": "G021_obj_001",
+          "facet": "3d_object/outpost_keep",
+          "id": "C3.s0001",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L01",
+            "G03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "3d_object",
+          "text": "3d_object/outpost_keep：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "角色与物体接口"
+        },
+        {
+          "asset_kind": "3d_object",
+          "asset_task_id": "G021_obj_002",
+          "facet": "3d_object/sentry_tower",
+          "id": "C3.s0002",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L01",
+            "G03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "3d_object",
+          "text": "3d_object/sentry_tower：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "角色与物体接口"
+        },
+        {
+          "asset_kind": "3d_object",
+          "asset_task_id": "G021_obj_003",
+          "facet": "3d_object/ground_trap",
+          "id": "C3.s0003",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L01",
+            "G03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "3d_object",
+          "text": "3d_object/ground_trap：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "角色与物体接口"
+        },
+        {
+          "asset_kind": "3d_object",
+          "asset_task_id": "G021_obj_004",
+          "facet": "3d_object/enemy_core",
+          "id": "C3.s0004",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L01",
+            "G03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "3d_object",
+          "text": "3d_object/enemy_core：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "角色与物体接口"
+        },
+        {
+          "asset_kind": "3d_object",
+          "asset_task_id": "G021_obj_005",
+          "facet": "3d_object/outer_bastion",
+          "id": "C3.s0005",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L01",
+            "G03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "3d_object",
+          "text": "3d_object/outer_bastion：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "角色与物体接口"
+        },
+        {
+          "asset_kind": "3d_object",
+          "asset_task_id": "G021_obj_006",
+          "facet": "3d_object/rock_armor_car",
+          "id": "C3.s0006",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L01",
+            "G02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "3d_object",
+          "text": "3d_object/rock_armor_car：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "角色与物体接口"
+        },
+        {
+          "asset_kind": "3d_object",
+          "asset_task_id": "G021_obj_007",
+          "facet": "3d_object/sand_gunner",
+          "id": "C3.s0007",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L01",
+            "G02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "3d_object",
+          "text": "3d_object/sand_gunner：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "角色与物体接口"
+        },
+        {
+          "asset_kind": "3d_object",
+          "asset_task_id": "G021_obj_008",
+          "facet": "3d_object/wall_breaker",
+          "id": "C3.s0008",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L01",
+            "G02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "3d_object",
+          "text": "3d_object/wall_breaker：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "角色与物体接口"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C3.02:
+  column: C3
+  dimension: Completeness
+  requirements: F05, L01, L04, F01, F07, F09, N06
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_9
+  target: |
+    动作占位接口；VFX占位接口
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: code_files, screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "A01": "- A01 `images/generated_ref_01.png` → 己方主堡 image-to-3D 输入与建筑外观参考。",
+        "A02": "- A02 `images/generated_ref_02.png` → 沙枪手（枪兵）image-to-3D 输入与 T-pose 参考。",
+        "F01": "- F01 视角与镜头：俯视相机支持缩放和边缘平移；战斗特效不改变地图可读性；核心受击 0.08 秒轻微震动（FEEL01）；相机重置仅在明确切场/复位时。",
+        "F05": "- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 建造落位 | 放置网格闪现＋塔架升起尘土 | 建造落位音 | 落位完成 |\n| 出售返还 | 塔架拆除淡出＋预算回弹字 | 出售返还音 | 0.3s 结束 |\n| 塔击发 | 弹道曳光＋命中火花 | 塔击发音 | 每发即时 |\n| 单位受击 | 受击闪烁＋HP 数字 | 命中音 | 0.15s 结束 |\n| 克制命中 | 伤害数字放大＋克制色框 | 无（数字承载） | 0.2s 结束 |\n| 战利品弹字 | +20/+200/−10 弹字 | 战利品弹字音 | 弹字飘出 |\n| 升级 | 升级脉冲环＋属性面板刷新 | 升级脉冲音 | 0.5s 结束 |\n| 来袭波警报 | 波次路径预览＋屏幕边缘警示 | 波次警报音 | 波开始 2s 后 |\n| 主堡受击 | 主堡闪红＋镜头 0.08s 震动 | 主堡受击音 | 闪烁结束 |\n| 敌核心被毁 | 核心爆裂光柱（core_destroyed_burst） | 核心爆裂音 | 进入通关结算 |\n| 撤回 | 队伍撤回旗帜收拢画面 | 撤回信号音 | 进入撤回结算 |",
+        "F07": "- F07 VFX 信息性与遮挡约束：波次路径预览、塔射程圈、放置网格、主堡/核心 HP 条为信息类 VFX，必须清晰可辨；特效不改变地图可读性（FEEL01）；粒子不遮挡 HUD 与关键目标；非结算单个全屏遮挡 ≤0.5 秒。",
+        "F09": "- F09 屏幕震动：主堡受击 0.08s（≤ 画面高度 1.5%）；暂停/结算/重开取消未结束的震动与特效；设置可关闭（FEEL04）。",
+        "L01": "- L01 生成对象：己方主堡 1（按 A01 参考图）；防御塔（建筑位 8）、地面陷阱（陷阱位 6）；敌方目标岛（核心 1、外围工事 6、防线 2 段）；三类兵种单位模型（沙枪手/岩甲车/破壁手，枪兵按 A02 参考图）；来袭波脚本（seed 冻结，2 波）；两张固定俯视地图。",
+        "L04": "- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的装饰造型、配色、粒子参数与音色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。按 zkx 裁决交付 layout_manifest.json（实例 ID、坐标、碰撞体、通行关系、脚本事件表、seed 与 hash；同版本同 seed 重开 diff=0；装饰 scene.glb 不替代数值关卡、导航图或碰撞体）。",
+        "N06": "- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失；持久在线、联盟、排行榜、长线升级树、多地图轮换、剧情成就、兵种技能与手动微操不在本轮验收分母（原收敛清单口径以此正向承载）。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "动作占位接口",
+        "VFX占位接口"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+        "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "asset_kind": "motion",
+          "asset_task_id": "G021_mot_001",
+          "facet": "motion/move",
+          "id": "C3.s0010",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05",
+            "L01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "motion",
+          "text": "motion/move：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "动作占位接口"
+        },
+        {
+          "asset_kind": "motion",
+          "asset_task_id": "G021_mot_002",
+          "facet": "motion/attack",
+          "id": "C3.s0011",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05",
+            "L01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "motion",
+          "text": "motion/attack：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "动作占位接口"
+        },
+        {
+          "asset_kind": "motion",
+          "asset_task_id": "G021_mot_003",
+          "facet": "motion/hit",
+          "id": "C3.s0012",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05",
+            "L01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "motion",
+          "text": "motion/hit：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "动作占位接口"
+        },
+        {
+          "asset_kind": "motion",
+          "asset_task_id": "G021_mot_004",
+          "facet": "motion/death",
+          "id": "C3.s0013",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05",
+            "L01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "motion",
+          "text": "motion/death：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "动作占位接口"
+        },
+        {
+          "asset_kind": "motion",
+          "asset_task_id": "G021_mot_005",
+          "facet": "motion/move",
+          "id": "C3.s0014",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05",
+            "L01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "motion",
+          "text": "motion/move：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "动作占位接口"
+        },
+        {
+          "asset_kind": "motion",
+          "asset_task_id": "G021_mot_006",
+          "facet": "motion/attack",
+          "id": "C3.s0015",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05",
+            "L01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "motion",
+          "text": "motion/attack：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "动作占位接口"
+        },
+        {
+          "asset_kind": "motion",
+          "asset_task_id": "G021_mot_007",
+          "facet": "motion/hit",
+          "id": "C3.s0016",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05",
+            "L01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "motion",
+          "text": "motion/hit：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "动作占位接口"
+        },
+        {
+          "asset_kind": "motion",
+          "asset_task_id": "G021_mot_008",
+          "facet": "motion/death",
+          "id": "C3.s0017",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05",
+            "L01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "motion",
+          "text": "motion/death：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "动作占位接口"
+        },
+        {
+          "facet": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占",
+          "id": "C3.s0034",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L04",
+            "F01",
+            "F07",
+            "F09",
+            "N06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "vfx",
+          "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+          "topic": "VFX占位接口"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C3.03:
+  column: C3
+  dimension: Completeness
+  requirements: F05, F06
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_13
+  target: |
+    声音占位接口
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: code_files, screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F05": "- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 建造落位 | 放置网格闪现＋塔架升起尘土 | 建造落位音 | 落位完成 |\n| 出售返还 | 塔架拆除淡出＋预算回弹字 | 出售返还音 | 0.3s 结束 |\n| 塔击发 | 弹道曳光＋命中火花 | 塔击发音 | 每发即时 |\n| 单位受击 | 受击闪烁＋HP 数字 | 命中音 | 0.15s 结束 |\n| 克制命中 | 伤害数字放大＋克制色框 | 无（数字承载） | 0.2s 结束 |\n| 战利品弹字 | +20/+200/−10 弹字 | 战利品弹字音 | 弹字飘出 |\n| 升级 | 升级脉冲环＋属性面板刷新 | 升级脉冲音 | 0.5s 结束 |\n| 来袭波警报 | 波次路径预览＋屏幕边缘警示 | 波次警报音 | 波开始 2s 后 |\n| 主堡受击 | 主堡闪红＋镜头 0.08s 震动 | 主堡受击音 | 闪烁结束 |\n| 敌核心被毁 | 核心爆裂光柱（core_destroyed_burst） | 核心爆裂音 | 进入通关结算 |\n| 撤回 | 队伍撤回旗帜收拢画面 | 撤回信号音 | 进入撤回结算 |",
+        "F06": "- F06 关键音效清单（one_shot 10 条＋环境循环 1 条，全部冻结需求）：建造落位音、出售返还音、塔击发音、单位命中音、战利品弹字音、升级脉冲音、波次警报音、主堡受击音、核心爆裂音、胜利/失败结算音（胜利号角/失败低音各一）；环境循环：荒漠海岸风沙。无配音需求。震动事件到调度日志 ≤50ms，日志含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available；无震动硬件时验证调度与禁用行为，不声称物理马达已震动。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "声音占位接口"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+        "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G021_sfx_001",
+          "facet": "audio/place_defense",
+          "id": "C3.s0018",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/place_defense：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G021_sfx_002",
+          "facet": "audio/sell_refund",
+          "id": "C3.s0019",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/sell_refund：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G021_sfx_003",
+          "facet": "audio/tower_fire",
+          "id": "C3.s0020",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/tower_fire：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G021_sfx_004",
+          "facet": "audio/unit_hit",
+          "id": "C3.s0021",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/unit_hit：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G021_sfx_005",
+          "facet": "audio/trap_snap",
+          "id": "C3.s0022",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/trap_snap：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G021_sfx_006",
+          "facet": "audio/loot_popup",
+          "id": "C3.s0023",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/loot_popup：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G021_sfx_007",
+          "facet": "audio/upgrade_pulse",
+          "id": "C3.s0024",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/upgrade_pulse：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G021_sfx_008",
+          "facet": "audio/wave_alert",
+          "id": "C3.s0025",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/wave_alert：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G021_sfx_009",
+          "facet": "audio/keep_hit",
+          "id": "C3.s0026",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/keep_hit：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G021_sfx_010",
+          "facet": "audio/core_destroyed_burst",
+          "id": "C3.s0027",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/core_destroyed_burst：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G021_sfx_011",
+          "facet": "audio/victory_horn",
+          "id": "C3.s0028",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/victory_horn：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G021_sfx_012",
+          "facet": "audio/defeat_tone",
+          "id": "C3.s0029",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/defeat_tone：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        },
+        {
+          "asset_kind": "audio",
+          "asset_task_id": "G021_sfx_013",
+          "facet": "audio/desert_coast_wind_loop",
+          "id": "C3.s0030",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "audio",
+          "text": "audio/desert_coast_wind_loop：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "声音占位接口"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.C3.04:
+  column: C3
+  dimension: Completeness
+  requirements: C01, C02, C03, L02
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_4
+  target: |
+    演出占位接口；场景与地标接口
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: code_files, screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "C01": "- C01 第二道命令（Opening，5 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入布防态之前，每局一次\n  - 内容与角色场景：荒漠海岸前哨全景——主堡旗帜在风沙中展开，镜头掠过空置的建造位与三处抢滩口，停在海峡对岸敌方核心的轮廓\n  - 资产对应：主堡、塔架、敌方核心与游戏内模型/贴图同源设计\n  - 可跳过：Enter/Space 或跳过按钮 → 直接进入布防态；自然播完 → 进入布防态\n  - 状态一致：跳过与自然播完后初始状态 hash 相同；播放期间不推进任何游戏计时",
+        "C02": "- C02 敌影上滩（Event，5 秒，1280×720@24fps）\n  - 触发时机：每次出征首次来袭波触发（出征模拟 t=30 秒）时，每次出征一次\n  - 内容与角色场景：敌方登陆艇轮廓逼近海岸线，波次路径预览在地图上展开，主堡警报灯点亮——枪兵/装甲/破甲三色剪影沿预览路线推进\n  - 资产对应：三类兵种、主堡与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接继续战斗（波次状态保持）；自然播完 → 继续战斗\n  - 状态一致：播放期间战斗与计时冻结，播放结束瞬间按冻结前状态恢复",
+        "C03": "- C03 三种号角（Ending，6 秒，1280×720@24fps，三意象共用条目）\n  - 触发时机：V01/V02 成立或撤回中间结算面板出现之前（撤回播简短撤回意象、通关/局败播对应终局意象）\n  - 内容与角色场景：胜利意象=敌方核心爆裂光柱、前哨旗帜插上残骸；局败意象=主堡坍塌沙尘、旗帜倒下；撤回意象=队伍旗帜收拢退回防线（简短、非终局）\n  - 资产对应：主堡、核心、兵种与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02/V03 后触发；播放期间不推进任何游戏计时",
+        "L02": "- L02 场地（代码块冻结口径）：\n\n```text\n两张固定俯视地图：己方前哨 32×20 格、敌方目标岛 36×22 格\n建造位 8、陷阱位 6（不超原上限，AUD10）；登陆点 3 处（东滩、南崖、西湾）\n敌方岛工事布位与来袭波脚本由 seed=1021 冻结\n来袭两波：出征模拟 t=30/90 秒各 4 单位（2 枪兵 1 装甲 1 破甲），沿最近可达路线攻击主堡\n```",
+        "V01": "- V01 成功条件（通关）：摧毁敌方目标核心 → 终局胜利结算（显示战利品、战损比、用时）。",
+        "V02": "- V02 失败条件（局败）：己方前哨主堡被毁 → 局败结算（注明「主堡被毁」）；与核心被毁同帧局败优先（AUD13）。",
+        "V03": "- V03 撤回（中间结算）：出征小队全灭或 180 秒超时 → 撤回结算；布局、战利品、升级、敌工事/核心伤害与一次性奖励状态保留；下一次出征 180 秒与两波脚本重置（AUD13）——与通关/局败的终局语义不同，三者必须区分。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "演出占位接口",
+        "场景与地标接口"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+        "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "asset_kind": "cg_video",
+          "asset_task_id": "G021_cg_001",
+          "facet": "cg_video/第二道命令",
+          "id": "C3.s0031",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "C01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "cg_video",
+          "text": "cg_video/第二道命令：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "演出占位接口"
+        },
+        {
+          "asset_kind": "cg_video",
+          "asset_task_id": "G021_cg_002",
+          "facet": "cg_video/敌影上滩",
+          "id": "C3.s0032",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "C02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "cg_video",
+          "text": "cg_video/敌影上滩：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "演出占位接口"
+        },
+        {
+          "asset_kind": "cg_video",
+          "asset_task_id": "G021_cg_003",
+          "facet": "cg_video/三种号角",
+          "id": "C3.s0033",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "C03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "cg_video",
+          "text": "cg_video/三种号角：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "演出占位接口"
+        },
+        {
+          "asset_kind": "3d_scene",
+          "asset_task_id": "G021_scene_001",
+          "facet": "3d_scene/G021_scene_001",
+          "id": "C3.s0009",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "3d_scene",
+          "text": "3d_scene/G021_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+          "topic": "场景与地标接口"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.Q.01:
+  column: Q
+  dimension: Quality
+  requirements: F01, W06
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_7
+  target: |
+    视角与镜头；视觉风格与色彩材质
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F01": "- F01 视角与镜头：俯视相机支持缩放和边缘平移；战斗特效不改变地图可读性；核心受击 0.08 秒轻微震动（FEEL01）；相机重置仅在明确切场/复位时。",
+        "W06": "- W06 视觉风格与色彩材质：荒漠海岸军事风；主色=沙金 #D8B96A、岩褐 #8A7A66、军绿 #6E8F5A、警示橙 #E4762C、海雾蓝 #7FA3B8；材质为风化岩、帆布工事、金属塔架。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "视角与镜头",
+        "视觉风格与色彩材质"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0004",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F01 视角与镜头：俯视相机支持缩放和边缘平移",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：俯视相机支持缩放和边缘平移",
+          "topic": "视角与镜头"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0005",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "战斗特效不改变地图可读性",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：战斗特效不改变地图可读性",
+          "topic": "视角与镜头"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0006",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "核心受击 0.08 秒轻微震动（FEEL01）",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：核心受击 0.08 秒轻微震动（FEEL01）",
+          "topic": "视角与镜头"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0007",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "相机重置仅在明确切场/复位时。",
+          "source_unit": 4,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：相机重置仅在明确切场/复位时。",
+          "topic": "视角与镜头"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0001",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W06 视觉风格与色彩材质：荒漠海岸军事风",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：荒漠海岸军事风",
+          "topic": "视觉风格与色彩材质"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0002",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "主色=沙金 #D8B96A、岩褐 #8A7A66、军绿 #6E8F5A、警示橙 #E4762C、海雾蓝 #7FA3B8",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色=沙金 #D8B96A、岩褐 #8A7A66、军绿 #6E8F5A、警示橙 #E4762C、海雾蓝 #7FA3B8",
+          "topic": "视觉风格与色彩材质"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0003",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "材质为风化岩、帆布工事、金属塔架。",
+          "source_unit": 3,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质为风化岩、帆布工事、金属塔架。",
+          "topic": "视觉风格与色彩材质"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.Q.02:
+  column: Q
+  dimension: Quality
+  requirements: F02, F09, F04
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_6
+  target: |
+    关键操作镜头变化；屏幕震动；环境常驻效果
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F02": "- F02 关键操作镜头变化：建造落位轻推 0.03s；核心受击 0.08s 轻微震动（≤ 画面高度 1.5%）；通关镜头缓推向核心残骸；提供「镜头震动开/关」与「减少动态效果」设置（关闭不影响判定与数值）。",
+        "F04": "- F04 环境常驻效果：沙尘飘移、海雾带、旗帜翻卷、工事呼吸灯。纯表现层，不参与判定。",
+        "F09": "- F09 屏幕震动：主堡受击 0.08s（≤ 画面高度 1.5%）；暂停/结算/重开取消未结束的震动与特效；设置可关闭（FEEL04）。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "关键操作镜头变化",
+        "屏幕震动",
+        "环境常驻效果"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0008",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F02 关键操作镜头变化：建造落位轻推 0.03s",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：建造落位轻推 0.03s",
+          "topic": "关键操作镜头变化"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0009",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "核心受击 0.08s 轻微震动（≤ 画面高度 1.5%）",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：核心受击 0.08s 轻微震动（≤ 画面高度 1.5%）",
+          "topic": "关键操作镜头变化"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0010",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "通关镜头缓推向核心残骸",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：通关镜头缓推向核心残骸",
+          "topic": "关键操作镜头变化"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0011",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "提供「镜头震动开/关」与「减少动态效果」设置（关闭不影响判定与数值）。",
+          "source_unit": 4,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：提供「镜头震动开/关」与「减少动态效果」设置（关闭不影响判定与数值）。",
+          "topic": "关键操作镜头变化"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0017",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F09"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F09 屏幕震动：主堡受击 0.08s（≤ 画面高度 1.5%）",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：主堡受击 0.08s（≤ 画面高度 1.5%）",
+          "topic": "屏幕震动"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0012",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F04"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F04 环境常驻效果：沙尘飘移、海雾带、旗帜翻卷、工事呼吸灯。纯表现层，不参与判定。",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：沙尘飘移、海雾带、旗帜翻卷、工事呼吸灯。纯表现层，不参与判定。",
+          "topic": "环境常驻效果"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.Q.03:
+  column: Q
+  dimension: Quality
+  requirements: F07, evaluation_plan_table.md#Q
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_6
+  target: |
+    VFX 信息性与遮挡约束；画面验收3；画面验收2
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F07": "- F07 VFX 信息性与遮挡约束：波次路径预览、塔射程圈、放置网格、主堡/核心 HP 条为信息类 VFX，必须清晰可辨；特效不改变地图可读性（FEEL01）；粒子不遮挡 HUD 与关键目标；非结算单个全屏遮挡 ≤0.5 秒。",
+        "evaluation_plan_table.md#Q": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "VFX 信息性与遮挡约束",
+        "画面验收3",
+        "画面验收2"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0013",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F07"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F07 VFX 信息性与遮挡约束：波次路径预览、塔射程圈、放置网格、主堡/核心 HP 条为信息类 VFX，必须清晰可辨",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F07 VFX 信息性与遮挡约束：波次路径预览、塔射程圈、放置网格、主堡/核心 HP 条为信息类 VFX，必须清晰可辨",
+          "topic": "VFX 信息性与遮挡约束"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0014",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F07"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "特效不改变地图可读性（FEEL01）",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：特效不改变地图可读性（FEEL01）",
+          "topic": "VFX 信息性与遮挡约束"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0015",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F07"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "粒子不遮挡 HUD 与关键目标",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：粒子不遮挡 HUD 与关键目标",
+          "topic": "VFX 信息性与遮挡约束"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0016",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F07"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "非结算单个全屏遮挡 ≤0.5 秒。",
+          "source_unit": 4,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：非结算单个全屏遮挡 ≤0.5 秒。",
+          "topic": "VFX 信息性与遮挡约束"
+        },
+        {
+          "facet": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠",
+          "id": "Q.s0022",
+          "origin": "evaluation_plan",
+          "reference_paths": [],
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#Q"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "画面验收3",
+          "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+          "topic": "画面验收3"
+        },
+        {
+          "facet": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮",
+          "id": "Q.s0021",
+          "origin": "evaluation_plan",
+          "reference_paths": [],
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#Q"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "画面验收2",
+          "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+          "topic": "画面验收2"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.Q.04:
+  column: Q
+  dimension: Quality
+  requirements: A02, A01, evaluation_plan_table.md#Q
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_5
+  target: |
+    `images/generated_ref_02.png` → 沙枪手（枪兵）image-；`images/generated_ref_01.png` → 己方主堡 image-to；参考图辨识等5项关联规则
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "A01": "- A01 `images/generated_ref_01.png` → 己方主堡 image-to-3D 输入与建筑外观参考。",
+        "A02": "- A02 `images/generated_ref_02.png` → 沙枪手（枪兵）image-to-3D 输入与 T-pose 参考。",
+        "evaluation_plan_table.md#Q": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "`images/generated_ref_02.png` → 沙枪手（枪兵）image-",
+        "`images/generated_ref_01.png` → 己方主堡 image-to",
+        "参考图辨识",
+        "画面验收4",
+        "画面验收1"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+      ],
+      "reference_paths": [
+        "3D_object/ref_images/generated_ref_01.png",
+        "3D_object/ref_images/outpost_sentry_tower_ref.png",
+        "3D_object/ref_images/outpost_rock_armor_car_ref.png",
+        "tpose/ref_images/generated_ref_02.png"
+      ],
+      "subchecks": [
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0019",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "A02"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- A02 `images/generated_ref_02.png` → 沙枪手（枪兵）image-to-3D 输入与 T-pose 参考。",
+          "source_unit": 1,
+          "system": "A:12. 参考图绑定 [A01–A02]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A02 `images/generated_ref_02.png` → 沙枪手（枪兵）image-to-3D 输入与 T-pose 参考。",
+          "topic": "`images/generated_ref_02.png` → 沙枪手（枪兵）image-"
+        },
+        {
+          "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+          "id": "Q.s0018",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "A01"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- A01 `images/generated_ref_01.png` → 己方主堡 image-to-3D 输入与建筑外观参考。",
+          "source_unit": 1,
+          "system": "A:12. 参考图绑定 [A01–A02]",
+          "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A01 `images/generated_ref_01.png` → 己方主堡 image-to-3D 输入与建筑外观参考。",
+          "topic": "`images/generated_ref_01.png` → 己方主堡 image-to"
+        },
+        {
+          "facet": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要",
+          "id": "Q.s0024",
+          "origin": "evaluation_plan",
+          "reference_paths": [
+            "3D_object/ref_images/generated_ref_01.png",
+            "3D_object/ref_images/outpost_sentry_tower_ref.png",
+            "3D_object/ref_images/outpost_rock_armor_car_ref.png",
+            "tpose/ref_images/generated_ref_02.png"
+          ],
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#Q"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "参考图辨识",
+          "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+          "topic": "参考图辨识"
+        },
+        {
+          "facet": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度",
+          "id": "Q.s0023",
+          "origin": "evaluation_plan",
+          "reference_paths": [],
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#Q"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "画面验收4",
+          "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+          "topic": "画面验收4"
+        },
+        {
+          "facet": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体",
+          "id": "Q.s0020",
+          "origin": "evaluation_plan",
+          "reference_paths": [
+            "3D_object/ref_images/generated_ref_01.png",
+            "3D_object/ref_images/outpost_sentry_tower_ref.png",
+            "3D_object/ref_images/outpost_rock_armor_car_ref.png",
+            "tpose/ref_images/generated_ref_02.png"
+          ],
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#Q"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "画面验收1",
+          "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+          "topic": "画面验收1"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.G.01:
+  column: G
+  dimension: Gameness
+  requirements: F05
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_12
+  target: |
+    事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video, audio
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F05": "- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 建造落位 | 放置网格闪现＋塔架升起尘土 | 建造落位音 | 落位完成 |\n| 出售返还 | 塔架拆除淡出＋预算回弹字 | 出售返还音 | 0.3s 结束 |\n| 塔击发 | 弹道曳光＋命中火花 | 塔击发音 | 每发即时 |\n| 单位受击 | 受击闪烁＋HP 数字 | 命中音 | 0.15s 结束 |\n| 克制命中 | 伤害数字放大＋克制色框 | 无（数字承载） | 0.2s 结束 |\n| 战利品弹字 | +20/+200/−10 弹字 | 战利品弹字音 | 弹字飘出 |\n| 升级 | 升级脉冲环＋属性面板刷新 | 升级脉冲音 | 0.5s 结束 |\n| 来袭波警报 | 波次路径预览＋屏幕边缘警示 | 波次警报音 | 波开始 2s 后 |\n| 主堡受击 | 主堡闪红＋镜头 0.08s 震动 | 主堡受击音 | 闪烁结束 |\n| 敌核心被毁 | 核心爆裂光柱（core_destroyed_burst） | 核心爆裂音 | 进入通关结算 |\n| 撤回 | 队伍撤回旗帜收拢画面 | 撤回信号音 | 进入撤回结算 |"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+        "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0008",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：",
+          "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0009",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 建造落位 | 放置网格闪现＋塔架升起尘土 | 建造落位音 | 落位完成 |",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 建造落位 | 放置网格闪现＋塔架升起尘土 | 建造落位音 | 落位完成 |",
+          "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0010",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出售返还 | 塔架拆除淡出＋预算回弹字 | 出售返还音 | 0.3s 结束 |",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出售返还 | 塔架拆除淡出＋预算回弹字 | 出售返还音 | 0.3s 结束 |",
+          "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0011",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 塔击发 | 弹道曳光＋命中火花 | 塔击发音 | 每发即时 |",
+          "source_unit": 4,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 塔击发 | 弹道曳光＋命中火花 | 塔击发音 | 每发即时 |",
+          "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0012",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 单位受击 | 受击闪烁＋HP 数字 | 命中音 | 0.15s 结束 |",
+          "source_unit": 5,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 单位受击 | 受击闪烁＋HP 数字 | 命中音 | 0.15s 结束 |",
+          "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0013",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 克制命中 | 伤害数字放大＋克制色框 | 无（数字承载） | 0.2s 结束 |",
+          "source_unit": 6,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 克制命中 | 伤害数字放大＋克制色框 | 无（数字承载） | 0.2s 结束 |",
+          "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0014",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 战利品弹字 | +20/+200/−10 弹字 | 战利品弹字音 | 弹字飘出 |",
+          "source_unit": 7,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 战利品弹字 | +20/+200/−10 弹字 | 战利品弹字音 | 弹字飘出 |",
+          "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0015",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 升级 | 升级脉冲环＋属性面板刷新 | 升级脉冲音 | 0.5s 结束 |",
+          "source_unit": 8,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 升级 | 升级脉冲环＋属性面板刷新 | 升级脉冲音 | 0.5s 结束 |",
+          "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0016",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 来袭波警报 | 波次路径预览＋屏幕边缘警示 | 波次警报音 | 波开始 2s 后 |",
+          "source_unit": 9,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 来袭波警报 | 波次路径预览＋屏幕边缘警示 | 波次警报音 | 波开始 2s 后 |",
+          "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0017",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 主堡受击 | 主堡闪红＋镜头 0.08s 震动 | 主堡受击音 | 闪烁结束 |",
+          "source_unit": 10,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 主堡受击 | 主堡闪红＋镜头 0.08s 震动 | 主堡受击音 | 闪烁结束 |",
+          "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0018",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 敌核心被毁 | 核心爆裂光柱（core_destroyed_burst） | 核心爆裂音 | 进入通关结算 |",
+          "source_unit": 11,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 敌核心被毁 | 核心爆裂光柱（core_destroyed_burst） | 核心爆裂音 | 进入通关结算 |",
+          "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0019",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F05"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 撤回 | 队伍撤回旗帜收拢画面 | 撤回信号音 | 进入撤回结算 |",
+          "source_unit": 12,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 撤回 | 队伍撤回旗帜收拢画面 | 撤回信号音 | 进入撤回结算 |",
+          "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.G.02:
+  column: G
+  dimension: Gameness
+  requirements: F08, W07, F06
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_10
+  target: |
+    音画同步；环境氛围与声音语言；关键音效清单（one_shot 10 条＋环境循环 1 条，全部冻结需求）
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video, audio
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F06": "- F06 关键音效清单（one_shot 10 条＋环境循环 1 条，全部冻结需求）：建造落位音、出售返还音、塔击发音、单位命中音、战利品弹字音、升级脉冲音、波次警报音、主堡受击音、核心爆裂音、胜利/失败结算音（胜利号角/失败低音各一）；环境循环：荒漠海岸风沙。无配音需求。震动事件到调度日志 ≤50ms，日志含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available；无震动硬件时验证调度与禁用行为，不声称物理马达已震动。",
+        "F08": "- F08 音画同步：塔击发音与弹道同帧；战利品弹字音与弹字同帧；波次警报与预览同帧；核心爆裂音与光柱同帧。",
+        "W07": "- W07 环境氛围与声音语言：海岸风沙为底；音效语言为「建造落位＋塔击发＋命中闪烁＋战利品弹字＋波次警报＋升级脉冲」，全部音效按 §9 F06 冻结清单交付；混音优先级：波次/主堡警报 ＞ 战斗命中 ＞ 建造/升级 ＞ 环境风沙。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "音画同步",
+        "环境氛围与声音语言",
+        "关键音效清单（one_shot 10 条＋环境循环 1 条，全部冻结需求）"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+        "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0023",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F08"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F08 音画同步：塔击发音与弹道同帧",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：塔击发音与弹道同帧",
+          "topic": "音画同步"
+        },
+        {
+          "facet": "战利品弹字音与弹字同帧",
+          "id": "G.s0024",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F08"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "战利品弹字音与弹字同帧",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "战利品弹字音与弹字同帧",
+          "topic": "音画同步"
+        },
+        {
+          "facet": "波次警报与预览同帧",
+          "id": "G.s0025",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F08"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "波次警报与预览同帧",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "波次警报与预览同帧",
+          "topic": "音画同步"
+        },
+        {
+          "facet": "核心爆裂音与光柱同帧。",
+          "id": "G.s0026",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F08"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "核心爆裂音与光柱同帧。",
+          "source_unit": 4,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "核心爆裂音与光柱同帧。",
+          "topic": "音画同步"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0004",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W07"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- W07 环境氛围与声音语言：海岸风沙为底",
+          "source_unit": 1,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：海岸风沙为底",
+          "topic": "环境氛围与声音语言"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0005",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W07"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "音效语言为「建造落位＋塔击发＋命中闪烁＋战利品弹字＋波次警报＋升级脉冲」，全部音效按 §9 F06 冻结清单交付",
+          "source_unit": 2,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言为「建造落位＋塔击发＋命中闪烁＋战利品弹字＋波次警报＋升级脉冲」，全部音效按 §9 F06 冻结清单交付",
+          "topic": "环境氛围与声音语言"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0006",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "W07"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "混音优先级：波次/主堡警报 ＞ 战斗命中 ＞ 建造/升级 ＞ 环境风沙。",
+          "source_unit": 3,
+          "system": "W:8. 世界设定与创作基线 [W01–W08]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：混音优先级：波次/主堡警报 ＞ 战斗命中 ＞ 建造/升级 ＞ 环境风沙。",
+          "topic": "环境氛围与声音语言"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0020",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F06 关键音效清单（one_shot 10 条＋环境循环 1 条，全部冻结需求）：建造落位音、出售返还音、塔击发音、单位命中音、战利品弹字音、升级脉冲音、波次警报音、主堡受击音、核心爆裂音、胜利/失败结算音（胜利号角/失败低音各一）",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单（one_shot 10 条＋环境循环 1 条，全部冻结需求）：建造落位音、出售返还音、塔击发音、单位命中音、战利品弹字音、升级脉冲音、波次警报音、主堡受击音、核心爆裂音、胜利/失败结算音（胜利号角/失败低音各一）",
+          "topic": "关键音效清单（one_shot 10 条＋环境循环 1 条，全部冻结需求）"
+        },
+        {
+          "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+          "id": "G.s0021",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "环境循环：荒漠海岸风沙。无配音需求。震动事件到调度日志 ≤50ms，日志含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：环境循环：荒漠海岸风沙。无配音需求。震动事件到调度日志 ≤50ms，日志含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available",
+          "topic": "关键音效清单（one_shot 10 条＋环境循环 1 条，全部冻结需求）"
+        },
+        {
+          "facet": "无震动硬件时验证调度与禁用行为，不声称物理马达已震动。",
+          "id": "G.s0022",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "无震动硬件时验证调度与禁用行为，不声称物理马达已震动。",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "无震动硬件时验证调度与禁用行为，不声称物理马达已震动。",
+          "topic": "关键音效清单（one_shot 10 条＋环境循环 1 条，全部冻结需求）"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.G.03:
+  column: G
+  dimension: Gameness
+  requirements: F10, L03, I06, F09, F03
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_10
+  target: |
+    前端界面；目标物/交互物/场景/UI 对象；UI 必显状态等5项关联规则
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "F03": "- F03 输入与延迟：见 I07（≤150ms WebGL P95）；顿帧不改变计时口径。",
+        "F09": "- F09 屏幕震动：主堡受击 0.08s（≤ 画面高度 1.5%）；暂停/结算/重开取消未结束的震动与特效；设置可关闭（FEEL04）。",
+        "F10": "- F10 前端界面：标题（开始/设置/退出）→ 布防 HUD（I06 全项＋建造/升级面板）→ 编组界面（三类兵种/上限 20/登陆点）→ 撤回/通关/局败结算面板（区分原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）；关键状态图标+文字并用；窗口失焦自动暂停；叙事节拍提示不阻断控制。",
+        "I06": "- I06 UI 必显状态：布防预算、战利品、己方建筑/陷阱数量、小队编成（三类数量）、出征倒计时（180s）、来袭波预告、主堡 HP、敌核心 HP、登陆点选择。",
+        "I07": "- I07 输入延迟目标：点击到画面反馈 ≤150 毫秒（WebGL 口径，P95，≥30 次采样/类别）。",
+        "L03": "- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（布防/编组/结算/暂停面板、HUD）与交互物（建造格、陷阱位、登陆点、目标）逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "前端界面",
+        "目标物/交互物/场景/UI 对象",
+        "UI 必显状态",
+        "屏幕震动",
+        "输入与延迟"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+        "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "- F10 前端界面",
+          "id": "G.s0029",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F10"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- F10 前端界面：标题（开始/设置/退出）→ 布防 HUD（I06 全项＋建造/升级面板）→ 编组界面（三类兵种/上限 20/登陆点）→ 撤回/通关/局败结算面板（区分原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）",
+          "source_unit": 1,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "- F10 前端界面：标题（开始/设置/退出）→ 布防 HUD（I06 全项＋建造/升级面板）→ 编组界面（三类兵种/上限 20/登陆点）→ 撤回/通关/局败结算面板（区分原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）",
+          "topic": "前端界面"
+        },
+        {
+          "facet": "关键状态图标+文字并用",
+          "id": "G.s0030",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F10"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "关键状态图标+文字并用",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "关键状态图标+文字并用",
+          "topic": "前端界面"
+        },
+        {
+          "facet": "窗口失焦自动暂停",
+          "id": "G.s0031",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F10"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "窗口失焦自动暂停",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "窗口失焦自动暂停",
+          "topic": "前端界面"
+        },
+        {
+          "facet": "叙事节拍提示不阻断控制。",
+          "id": "G.s0032",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F10"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "叙事节拍提示不阻断控制。",
+          "source_unit": 4,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "叙事节拍提示不阻断控制。",
+          "topic": "前端界面"
+        },
+        {
+          "facet": "- L03 目标物/交互物/场景/UI 对象",
+          "id": "G.s0002",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（布防/编组/结算/暂停面板、HUD）与交互物（建造格、陷阱位、登陆点、目标）逐类存在且运行时可进入",
+          "source_unit": 1,
+          "system": "L:5. 场地与内容清单 [L01–L04]",
+          "text": "- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（布防/编组/结算/暂停面板、HUD）与交互物（建造格、陷阱位、登陆点、目标）逐类存在且运行时可进入",
+          "topic": "目标物/交互物/场景/UI 对象"
+        },
+        {
+          "facet": "数量与属性以对应 G·M 条目为准。",
+          "id": "G.s0003",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "L03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "数量与属性以对应 G·M 条目为准。",
+          "source_unit": 2,
+          "system": "L:5. 场地与内容清单 [L01–L04]",
+          "text": "数量与属性以对应 G·M 条目为准。",
+          "topic": "目标物/交互物/场景/UI 对象"
+        },
+        {
+          "facet": "- I06 UI 必显状态",
+          "id": "G.s0001",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "I06"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "- I06 UI 必显状态：布防预算、战利品、己方建筑/陷阱数量、小队编成（三类数量）、出征倒计时（180s）、来袭波预告、主堡 HP、敌核心 HP、登陆点选择。",
+          "source_unit": 1,
+          "system": "I:4. 操作与输入 [I01–I07]",
+          "text": "- I06 UI 必显状态：布防预算、战利品、己方建筑/陷阱数量、小队编成（三类数量）、出征倒计时（180s）、来袭波预告、主堡 HP、敌核心 HP、登陆点选择。",
+          "topic": "UI 必显状态"
+        },
+        {
+          "facet": "暂停/结算/重开取消未结束的震动与特效",
+          "id": "G.s0027",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F09"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "暂停/结算/重开取消未结束的震动与特效",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "暂停/结算/重开取消未结束的震动与特效",
+          "topic": "屏幕震动"
+        },
+        {
+          "facet": "设置可关闭（FEEL04）。",
+          "id": "G.s0028",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F09"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "设置可关闭（FEEL04）。",
+          "source_unit": 3,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "设置可关闭（FEEL04）。",
+          "topic": "屏幕震动"
+        },
+        {
+          "facet": "顿帧不改变计时口径。",
+          "id": "G.s0007",
+          "origin": "general_requirement",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "F03"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "source_subsection": "",
+          "source_text": "顿帧不改变计时口径。",
+          "source_unit": 2,
+          "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+          "text": "顿帧不改变计时口径。",
+          "topic": "输入与延迟"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.G.04:
+  column: G
+  dimension: Gameness
+  requirements: evaluation_plan_table.md#G
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_4
+  target: |
+    交互反馈4；交互反馈2；交互反馈3等4项关联规则
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: screenshot, video
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#G": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "交互反馈4",
+        "交互反馈2",
+        "交互反馈3",
+        "交互反馈1"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+        "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+          "id": "G.s0036",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#G"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "交互反馈4",
+          "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+          "topic": "交互反馈4"
+        },
+        {
+          "facet": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 ",
+          "id": "G.s0034",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#G"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "交互反馈2",
+          "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+          "topic": "交互反馈2"
+        },
+        {
+          "facet": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+          "id": "G.s0035",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#G"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "交互反馈3",
+          "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+          "topic": "交互反馈3"
+        },
+        {
+          "facet": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文",
+          "id": "G.s0033",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#G"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "交互反馈1",
+          "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+          "topic": "交互反馈1"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.P.01:
+  column: P
+  dimension: Playability
+  requirements: evaluation_plan_table.md#P
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    运行验收1
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: build_log, screenshot, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#P": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "运行验收1"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "保留首轮构建日志、实际启动及目标场景进入证据，记录基础运行窗口。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修",
+          "id": "P.s0001",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#P"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "运行验收1",
+          "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+          "topic": "运行验收1"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.P.02:
+  column: P
+  dimension: Playability
+  requirements: evaluation_plan_table.md#P
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    运行验收2
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: build_log, screenshot, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#P": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "运行验收2"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "保留首轮构建日志、实际启动及目标场景进入证据，记录基础运行窗口。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日",
+          "id": "P.s0002",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#P"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "运行验收2",
+          "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+          "topic": "运行验收2"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.P.03:
+  column: P
+  dimension: Playability
+  requirements: evaluation_plan_table.md#P
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    运行验收3
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: build_log, screenshot, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#P": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "运行验收3"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "保留首轮构建日志、实际启动及目标场景进入证据，记录基础运行窗口。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+          "id": "P.s0003",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#P"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "运行验收3",
+          "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+          "topic": "运行验收3"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.P.04:
+  column: P
+  dimension: Playability
+  requirements: evaluation_plan_table.md#P
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_1
+  target: |
+    运行验收4
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: build_log, screenshot, runtime_state
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#P": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "运行验收4"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "保留首轮构建日志、实际启动及目标场景进入证据，记录基础运行窗口。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本",
+          "id": "P.s0004",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#P"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "运行验收4",
+          "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+          "topic": "运行验收4"
+        }
+      ]
+    }
+
+item G021_outpost_assault.WB.CH.01:
+  column: CH
+  dimension: Diagnostic
+  requirements: evaluation_plan_table.md#CH
+  task: G021_outpost_assault_whitebox
+  points: 1.0
+  applicable: yes
+  scoring: scored_subchecks_4
+  target: |
+    代码健康诊断
+  pass: |
+    已执行且本行所有冻结子检查均有充分证据通过。
+  partial: |
+    全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。
+  fail: |
+    取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。
+  evidence: code_files
+  evaluator: visual.rubric_judge
+  binding: |
+    {
+      "aggregation_protocol": "role_gated_mean.v1",
+      "context": {
+        "evaluation_plan_table.md#CH": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+      },
+      "contract_identity": {
+        "content_sha256": "5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "contract_id": "G021_outpost_assault.whitebox.core12-v1.5104072e423155bfb8d41b2264ff645d12f6eb3cacd3ef25e41d9667596c7496",
+        "version": "core12-v1"
+      },
+      "focus": [
+        "代码健康诊断"
+      ],
+      "judge_policy": "vlm_only_no_human",
+      "procedure": [
+        "只对游戏源码诊断引擎约定、职责依赖、重复与扩展性，证据不足继续 UNKNOWN。"
+      ],
+      "reference_paths": [],
+      "subchecks": [
+        {
+          "facet": "源码遵循所用引擎的基本组织与生命周期约定。",
+          "id": "CH.s0001",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#CH"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "代码健康诊断",
+          "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+          "topic": "代码健康诊断"
+        },
+        {
+          "facet": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+          "id": "CH.s0002",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#CH"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "代码健康诊断",
+          "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+          "topic": "代码健康诊断"
+        },
+        {
+          "facet": "不存在影响维护的大量重复逻辑或冗余实现。",
+          "id": "CH.s0003",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#CH"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "代码健康诊断",
+          "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+          "topic": "代码健康诊断"
+        },
+        {
+          "facet": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+          "id": "CH.s0004",
+          "origin": "evaluation_plan",
+          "required_for_verdict": true,
+          "requirement_ids": [
+            "evaluation_plan_table.md#CH"
+          ],
+          "role": "behavior",
+          "scoring_role": "scored",
+          "system": "代码健康诊断",
+          "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+          "topic": "代码健康诊断"
+        }
+      ]
+    }

@@ -1,0 +1,359 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.v1",
+  "authoring_protocol": "priority_asset_rubrics.v1",
+  "status": "source_grounded_draft",
+  "game_id": "G034_tinker_backpack",
+  "task_id": "G034_vo_017",
+  "asset_type": "audio",
+  "asset_subtype": "dialogue",
+  "asset_name": "阿铆·试炼开始",
+  "scope": "Track B：独立资产；不含 T-pose、自然音效或引擎导入/playtest。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G034_tinker_backpack",
+    "task_id": "G034_vo_017",
+    "asset_name": "阿铆·试炼开始",
+    "audio_type": "dialogue",
+    "text": "一只背包，一路修过去。试炼开始。",
+    "speaker_id": "tinker_amao",
+    "emotion": "confident",
+    "prompt": "A cheerful young tinker voice, confident",
+    "language": "Chinese",
+    "sample_rate": 24000,
+    "duration_sec": 3.0,
+    "seed": 5857,
+    "trigger": "开场节点（C01 播报，每局一次）",
+    "required_by_spec": true,
+    "spec_ref": "W08",
+    "loop": false,
+    "stop_condition": "natural_end",
+    "priority": "gameplay_critical",
+    "ducking": "none",
+    "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+    "planned_source": "dedicated_dialogue_model"
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L192-192",
+      "general:L193-193",
+      "general:L194-194",
+      "general:L196-196"
+    ],
+    "visual_style_source_ids": [
+      "general:L197-197"
+    ],
+    "sound_style_source_ids": [
+      "general:L198-198"
+    ],
+    "asset_description_source_ids": [],
+    "spec_ref_source_ids": [
+      "general:L199-199"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L22",
+    "canonical_asset_content_source_ids": []
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "sha256": "a2a8f8ece61ca200b7687d3a04d27bca7c182b0e08749cb29841c66bc3f90463",
+      "start_line": 28,
+      "end_line": 28,
+      "quote": "{\"game_id\": \"G034_tinker_backpack\", \"task_id\": \"G034_vo_017\", \"asset_name\": \"阿铆·试炼开始\", \"audio_type\": \"dialogue\", \"text\": \"一只背包，一路修过去。试炼开始。\", \"speaker_id\": \"tinker_amao\", \"emotion\": \"confident\", \"prompt\": \"A cheerful young tinker voice, confident\", \"language\": \"Chinese\", \"sample_rate\": 24000, \"duration_sec\": 3.0, \"seed\": 5857, \"trigger\": \"开场节点（C01 播报，每局一次）\", \"required_by_spec\": true, \"spec_ref\": \"W08\", \"loop\": false, \"stop_condition\": \"natural_end\", \"priority\": \"gameplay_critical\", \"ducking\": \"none\", \"sync_contract\": \"one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition\", \"planned_source\": \"dedicated_dialogue_model\"}"
+    },
+    "general:L192-192": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 192,
+      "end_line": 192,
+      "quote": "- W01 世界与时代背景：废土纪元的工坊带依靠旧发电塔群维持电力；机械兽群占据废弃工坊，「行囊试炼」是修补匠行会的出师考核——只带一只背包，修好一座塔。"
+    },
+    "general:L193-193": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 193,
+      "end_line": 193,
+      "quote": "- W02 场景所在地：废土工坊三段战斗舞台——初战的废料场、中战的哨卡隘口、终战的旧发电塔内部（核心蜂后巢室）。"
+    },
+    "general:L194-194": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 194,
+      "end_line": 194,
+      "quote": "- W03 玩家身份与当前任务动机：玩家是修补匠阿铆；参加「行囊试炼」，用扳手、锤子、灯笼与卷尺在 4×4 行囊里排出最优布局，穿过废土工坊修好被核心蜂后占据的旧发电塔。"
+    },
+    "general:L196-196": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 196,
+      "end_line": 196,
+      "quote": "- W05 叙事来源：磨损拾荒器/废土守卫/核心蜂后为原创造型（机兽与机兵）；战利品三选一=工坊废墟里捡到的器材；加成辅件=齿轮咬合、机油润滑、电池供电的行话转译。全部原创，不用商业作品命名。"
+    },
+    "general:L197-197": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 197,
+      "end_line": 197,
+      "quote": "- W06 视觉风格与色彩材质：蒸汽朋克修补匠风；主色＝黄铜 #B08D57、锈红 #8A4A2E、皮革褐 #6B4F3A、帆布米 #D8CBB0；材质为黄铜件、帆布补丁、铆钉铁板与机油渍。"
+    },
+    "general:L198-198": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 198,
+      "end_line": 198,
+      "quote": "- W07 环境氛围与声音语言：废土风噪与远处金属哐当为底；音效语言＝拖拽落格/旋转/加成连线/出牌/四类攻击/格挡/强化/胜负（F06 冻结清单）；混音优先级：胜负结算 ＞ 攻击与加成 ＞ 卡牌与布局操作 ＞ 环境底噪。"
+    },
+    "general:L199-199": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 199,
+      "end_line": 199,
+      "quote": "- W08 故事表达方式（M 档冻结节点表，触发时机 → 台词/字幕，每节点 ≤2 句，可跳过，剧情界面打开时游戏暂停）：开场（C01＋阿铆台词「一只背包，一路修过去。试炼开始。」）→ 中战前（守卫台词「未经许可，禁止通过。」）→ 终战前（C02＋阿铆台词「发电塔里那只蜂后……就是这次试炼的终点。」）→ 胜利（C03＋阿铆台词「灯亮了。试炼完成。」）→ 失败（阿铆台词「工具散了一地……再来一次。」＋失败结算面板）。叙事只做包装不改数值。"
+    },
+    "asset_requirement:L22": {
+      "path": "test_data/test_samples/G034_tinker_backpack/audio/requirement.txt",
+      "sha256": "fce234365d2d56d036e82422829bbe5f2f49d90fc880e36c8567c174aa41489b",
+      "start_line": 22,
+      "end_line": 22,
+      "quote": "- 阿铆·试炼开始: A cheerful young tinker voice, confident"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+      "start_line": 78,
+      "end_line": 82,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "A cheerful young tinker voice, confident"
+    ],
+    "style": [],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求符合度",
+      "checks": [
+        {
+          "id": "C01",
+          "title": "台词内容",
+          "assertion": "实际语音说出冻结台词，不漏掉关键语义、不替换或增添台词。",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "一只背包，一路修过去。试炼开始。",
+              "field": "text"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [
+            "音频听辨与逐字转写；轻微标点/书写差异不作错词，CER/WER另报。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C02",
+          "title": "语言与说话人设定",
+          "assertion": "语言与指定说话人角色设定正确；角色ID不是声纹参考，不据ID要求某一未知真人音色。",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "Chinese",
+              "field": "language"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "tinker_amao",
+              "field": "speaker_id"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [
+            "听辨语言；说话人按明确角色描述判断，不可仅凭ID猜年龄、性别或声纹。无角色声线描述则说话人子目标 UNKNOWN，不伪造声纹参考。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "C03",
+          "title": "明确情绪与声线描述",
+          "assertion": "实际对白呈现指定情绪与本条 prompt 中的声线/表达要求。",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "confident",
+              "field": "emotion"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "A cheerful young tinker voice, confident",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L192-192",
+              "text": "- W01 世界与时代背景：废土纪元的工坊带依靠旧发电塔群维持电力；机械兽群占据废弃工坊，「行囊试炼」是修补匠行会的出师考核——只带一只背包，修好一座塔。"
+            },
+            {
+              "source_id": "general:L193-193",
+              "text": "- W02 场景所在地：废土工坊三段战斗舞台——初战的废料场、中战的哨卡隘口、终战的旧发电塔内部（核心蜂后巢室）。"
+            },
+            {
+              "source_id": "general:L199-199",
+              "text": "- W08 故事表达方式（M 档冻结节点表，触发时机 → 台词/字幕，每节点 ≤2 句，可跳过，剧情界面打开时游戏暂停）：开场（C01＋阿铆台词「一只背包，一路修过去。试炼开始。」）→ 中战前（守卫台词「未经许可，禁止通过。」）→ 终战前（C02＋阿铆台词「发电塔里那只蜂后……就是这次试炼的终点。」）→ 胜利（C03＋阿铆台词「灯亮了。试炼完成。」）→ 失败（阿铆台词「工具散了一地……再来一次。」＋失败结算面板）。叙事只做包装不改数值。"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "声音风格一致性",
+          "assertion": "对白的表达与录音空间感适合游戏的叙事与声音基线；不强求对白包含环境音效或背景音乐，不重复评分 C 项中指定情绪/声线，也不把环境音资产纳入评测。",
+          "targets": [
+            {
+              "source_id": "general:L198-198",
+              "text": "- W07 环境氛围与声音语言：废土风噪与远处金属哐当为底；音效语言＝拖拽落格/旋转/加成连线/出牌/四类攻击/格挡/强化/胜负（F06 冻结清单）；混音优先级：胜负结算 ＞ 攻击与加成 ＞ 卡牌与布局操作 ＞ 环境底噪。"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "语音清晰度与音质",
+          "assertion": "必须听原音频；只评可懂度、噪声、削波和断裂，不重复计算台词正确率。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "多数语句被噪声/失真覆盖，无法听懂",
+            "2": "明显噪声、削波或断裂反复影响听辨",
+            "3": "整体可懂，仍有可闻局部噪声/失真",
+            "4": "清晰且仅有轻微局部瑕疵",
+            "5": "全段清楚，无明显噪声、削波、断裂或非预期静音"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "发声与韵律自然度",
+          "assertion": "只评发音衔接、停顿和韵律是否自然；不重复评分指定角色/情绪。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "大范围机械拼接/异常发音，几乎不成自然语流",
+            "2": "频繁不自然停顿、重音或拉长音",
+            "3": "语流基本自然，局部节奏/发音生硬",
+            "4": "整体自然，仅有轻微韵律瑕疵",
+            "5": "语流、停连、呼吸和韵律自然连贯，无明显合成异常"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。"
+  },
+  "evidence_requirements": [
+    "完整实际对白音频，必须由可听音频的模型听辨",
+    "原音频对应的转写和时间戳可辅助内容核对，不能替代音质听辨"
+  ],
+  "objective_specs": {
+    "sample_rate": 24000,
+    "duration_sec": 3.0,
+    "loop": false
+  },
+  "objective_metric_policy": "规格与传统指标单独由探针/脚本报告原始值，不与三维 rubric 分数混合；本文件不代表已计算任何指标。",
+  "authoring_warnings": [
+    {
+      "code": "no_literal_asset_mention_in_general",
+      "detail": "general 中未找到资产名/ID的逐字匹配；采用已解析 spec_ref 与分资产原文，不伪造独立描述。"
+    }
+  ]
+}

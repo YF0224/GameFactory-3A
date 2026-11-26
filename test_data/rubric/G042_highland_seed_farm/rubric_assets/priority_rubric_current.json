@@ -1,0 +1,282 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_highland_seed_farm_obj_005",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 163,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_highland_seed_farm_obj_005.json",
+        "sha256": "93784284e33c0c938ad783f6017c86a0905e97e03d9b7501e7558ce7d6921be8"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_highland_seed_farm_obj_006",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 164,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_highland_seed_farm_obj_006.json",
+        "sha256": "62455c2970b8b5f6122f922c573cb82da76db79f691c0e0b2e7002fbb087af2e"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_highland_seed_farm_obj_007",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 165,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_highland_seed_farm_obj_007.json",
+        "sha256": "0f9dafda5a2ab1d9772fff1d9df96d877f9dc931f7650f6bef3dd5b430027fea"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_highland_seed_farm_obj_008",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 166,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_highland_seed_farm_obj_008.json",
+        "sha256": "aa14281298fba4dda90e88be5efdf08538014c75d06b9bbc896fc95771ae788e"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 46,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_scene_001.json",
+        "sha256": "535addad3913dc509b2a340d54834531c1e76e2e36e37825ddbb7b5996b952f4"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 467,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_sfx_001.json",
+        "sha256": "fd8e00017b5f06dc156a49334db09ac6350bae3ca944a8f45a15f07242c6eeab"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 468,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_sfx_002.json",
+        "sha256": "1d1320d5138954178b84f1ede2c0db222d43bd35781ce2e7d1f200b9f3a5a6ed"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 469,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_sfx_003.json",
+        "sha256": "a553689c0e579f47b47d743360d5078c25bcd772e0aca2a6845c34691dc81daa"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 470,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_sfx_004.json",
+        "sha256": "5db1682f5f61bc2243ec9db2c878d0961ef16d5e4701c7b8ab5f4235589aee84"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 471,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_sfx_005.json",
+        "sha256": "f5a184043f27b34d353b8cb9db0b7dabf96c1ca484af82d690b8d20cf9c03f79"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 472,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_sfx_006.json",
+        "sha256": "65da9149c61ba76688dbd397bdf0a9f9c6e1bcc866b128fef79e1a392a70a95a"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 473,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_sfx_007.json",
+        "sha256": "9ee8d0e9be186a776d9e94f231127db506a2d5ef97bf0719db58ecca25a8247a"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 474,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_sfx_008.json",
+        "sha256": "653baaeadc8e1a8870a09389646f8a6829f4c112e5a29d66bb8608b00f48ad0b"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 475,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_sfx_009.json",
+        "sha256": "3f7371c11ce2b344dde1ad6d276218511ee4eababe4e63887361e221f88f3e7d"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 476,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_sfx_010.json",
+        "sha256": "15d5a34e03477a1b7f4db4cb50c4afcfaebdb0421afe4368577384c1ce7ca81c"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 477,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_sfx_011.json",
+        "sha256": "32c7dde2e05b4d1659dd17e0657f93969ea8cdb3c7257dd45e898f5eb8e38314"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 120,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_cg_001.json",
+        "sha256": "5270f67b890e527a360f157423205f4606e1dbc07018d21de34ebb4dc7e9d87c"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 121,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_cg_002.json",
+        "sha256": "3a793962ebd8abc1df78fd4b951930ac7e14e9843ff23afbaff31076a1f3a292"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G042_highland_seed_farm",
+      "task_id": "G042_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 122,
+      "rubric": {
+        "path": "test_data/test_samples/G042_highland_seed_farm/rubric_assets/priority_observable_v2/G042_cg_003.json",
+        "sha256": "d2e1426fe774dabad550e814b0ee4dc1d78a4afae2a426102605359fe424e7b3"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "multi_variant_cg_requires_delivery_convention",
+        "branch_delivery_review"
+      ]
+    }
+  ]
+}

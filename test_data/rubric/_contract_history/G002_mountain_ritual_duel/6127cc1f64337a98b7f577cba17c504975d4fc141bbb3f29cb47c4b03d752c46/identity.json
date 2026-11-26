@@ -1,0 +1,7 @@
+{
+  "contract_id": "G002_mountain_ritual_duel.whitebox.endpoints-v2-candidate.6127cc1f64337a98b7f577cba17c504975d4fc141bbb3f29cb47c4b03d752c46",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "6127cc1f64337a98b7f577cba17c504975d4fc141bbb3f29cb47c4b03d752c46",
+  "rubric_json_sha256": "887086abee394b699817ef840b04cd78fd85890928d4feb03526cc30085caadd",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

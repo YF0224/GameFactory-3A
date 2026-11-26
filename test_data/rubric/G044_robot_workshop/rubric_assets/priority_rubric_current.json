@@ -1,0 +1,226 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 48,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_scene_001.json",
+        "sha256": "aac63df68db81f3db1fe147c8e27b06c737d75b70481753d3a3873c55cb6d558"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 489,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_sfx_001.json",
+        "sha256": "264f82aece76176d079c37a1fb7f6f84b90644aebe735e116ec5d62858bd1bf4"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 490,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_sfx_002.json",
+        "sha256": "6be53ebd509380ca4019282d7ee0e6df3ccde97c417601098eaac37f3196b9ed"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 491,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_sfx_003.json",
+        "sha256": "b314c540d3ccb7ffa543313b31f23b194fe21a809df364cbc63a8b1d85a0d11b"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 492,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_sfx_004.json",
+        "sha256": "03b1270d642d160bc7181837bd94cef173424a8d42bdb0e431d08b54dab8a2f5"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 493,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_sfx_005.json",
+        "sha256": "d235463018f453487df709e00b0d25655ef3843c4c50c52abe597855c1116b4a"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 494,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_sfx_006.json",
+        "sha256": "ca4ce46fe2b12fb1b6c0e73b5b9cdbf0f7ca7004a809cfd4766209b3d3151340"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 495,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_sfx_007.json",
+        "sha256": "30040447e796f0c96c8026bce4a47ab46f6616e887e6927c7a5ce88e794f08d4"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 496,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_sfx_008.json",
+        "sha256": "f69226740a316f0b29d0da51787cbd3cda514956c1f99b2fd38fb7a89367308f"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 497,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_sfx_009.json",
+        "sha256": "30894c6c6420798f8f7ba1a4bde7bc0ff0be25a751893a49dca4549a68fcecb1"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 498,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_sfx_010.json",
+        "sha256": "0e9b6b1f25ead31e10a8072aef12631d5163ac392124ad494d90c1a163d66ca3"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 499,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_sfx_011.json",
+        "sha256": "c5f6a0067fc697fe96f21642497c2fa8ce99af4abf8c0056354361f6a17d467f"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 126,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_cg_001.json",
+        "sha256": "1200bc48787f387d4e1420521f240fa01d78a575a63efc25e4411e273c0e492e"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "source_text_display_conflict"
+      ]
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 127,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_cg_002.json",
+        "sha256": "f5619c32ff541cbf010b7d32540e6b4a36ff18055fa1fd95c554c132dd0f8046"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G044_robot_workshop",
+      "task_id": "G044_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 128,
+      "rubric": {
+        "path": "test_data/test_samples/G044_robot_workshop/rubric_assets/priority_observable_v2/G044_cg_003.json",
+        "sha256": "7318bcb20e111787ef53d0bca51a2e20d09b61a3766e800d06ea69fb5e7f8d1b"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "multi_variant_cg_requires_delivery_convention",
+        "branch_delivery_review"
+      ]
+    }
+  ]
+}

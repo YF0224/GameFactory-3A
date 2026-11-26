@@ -1,0 +1,395 @@
+{
+  "game_id": "G042_highland_seed_farm",
+  "task_id": "G042_sfx_009",
+  "asset_type": "audio",
+  "asset_subtype": "sound_effect",
+  "asset_name": "defeat_sting",
+  "task_input": {
+    "game_id": "G042_highland_seed_farm",
+    "task_id": "G042_sfx_009",
+    "asset_name": "defeat_sting",
+    "audio_type": "sound_effect",
+    "sound_category": "one_shot",
+    "prompt": "Season defeat sting, muted low strings with cold wind tail, dignified not dramatic",
+    "duration_sec": 2.5,
+    "sample_rate": 48000,
+    "seed": 5429,
+    "trigger": "V02 季末判负（C03 失败意象）",
+    "required_by_spec": true,
+    "spec_ref": "F05,F06",
+    "loop": false,
+    "stop_condition": "natural_end",
+    "priority": "gameplay_critical",
+    "ducking": "none",
+    "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+    "planned_source": "general_audio_llm"
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L165-165",
+      "general:L166-166",
+      "general:L167-167",
+      "general:L169-169"
+    ],
+    "visual_style_source_ids": [
+      "general:L170-170"
+    ],
+    "sound_style_source_ids": [
+      "general:L171-171"
+    ],
+    "asset_description_source_ids": [
+      "general:L195",
+      "general:L197"
+    ],
+    "spec_ref_source_ids": [
+      "general:L180-195",
+      "general:L197-197"
+    ],
+    "unresolved_spec_refs": []
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "sha256": "658d571abb647c6b75c2aee4a8cc6975cccf8e5b8187d221a99ad406a9c39fb0",
+      "start_line": 475,
+      "end_line": 475,
+      "quote": "{\"game_id\": \"G042_highland_seed_farm\", \"task_id\": \"G042_sfx_009\", \"asset_name\": \"defeat_sting\", \"audio_type\": \"sound_effect\", \"sound_category\": \"one_shot\", \"prompt\": \"Season defeat sting, muted low strings with cold wind tail, dignified not dramatic\", \"duration_sec\": 2.5, \"sample_rate\": 48000, \"seed\": 5429, \"trigger\": \"V02 季末判负（C03 失败意象）\", \"required_by_spec\": true, \"spec_ref\": \"F05,F06\", \"loop\": false, \"stop_condition\": \"natural_end\", \"priority\": \"gameplay_critical\", \"ducking\": \"none\", \"sync_contract\": \"one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition\", \"planned_source\": \"general_audio_llm\"}"
+    },
+    "general:L165-165": {
+      "path": "test_data/test_samples/G042_highland_seed_farm/general_requirement.txt",
+      "sha256": "643955e35ae6dec5d21fd3d9d36fbac85951201c876b9882aea7c2bea1142544",
+      "start_line": 165,
+      "end_line": 165,
+      "quote": "- W01 世界与时代背景：原创高原世界「云脊高原」——山民世代在陡坡垄田上育种，高原种子站保存着耐寒作物的火种；一个雨季的收成决定整个山坳的来年。"
+    },
+    "general:L166-166": {
+      "path": "test_data/test_samples/G042_highland_seed_farm/general_requirement.txt",
+      "sha256": "643955e35ae6dec5d21fd3d9d36fbac85951201c876b9882aea7c2bea1142544",
+      "start_line": 166,
+      "end_line": 166,
+      "quote": "- W02 场景所在地：云脊高原半山种子站——12 格垄作梯田、木架种子站柜台、远山云海与经幡；雨季云层每日过境。"
+    },
+    "general:L167-167": {
+      "path": "test_data/test_samples/G042_highland_seed_farm/general_requirement.txt",
+      "sha256": "643955e35ae6dec5d21fd3d9d36fbac85951201c876b9882aea7c2bea1142544",
+      "start_line": 167,
+      "end_line": 167,
+      "quote": "- W03 玩家身份与当前任务动机：玩家是种子站的年轻育种员，接手师父留下的一季试验田——在 10 个高原日内把净利做到 500 以上，证明试验田值得保留。"
+    },
+    "general:L169-169": {
+      "path": "test_data/test_samples/G042_highland_seed_farm/general_requirement.txt",
+      "sha256": "643955e35ae6dec5d21fd3d9d36fbac85951201c876b9882aea7c2bea1142544",
+      "start_line": 169,
+      "end_line": 169,
+      "quote": "- W05 叙事来源：三种作物（速生叶菜/高原薯/耐寒花）＝山坳三代育种成果；种子站＝师父手植的木架小屋；订单＝山谷市集与药铺的预订。全部原创，不用商业作品命名。"
+    },
+    "general:L170-170": {
+      "path": "test_data/test_samples/G042_highland_seed_farm/general_requirement.txt",
+      "sha256": "643955e35ae6dec5d21fd3d9d36fbac85951201c876b9882aea7c2bea1142544",
+      "start_line": 170,
+      "end_line": 170,
+      "quote": "- W06 视觉风格与色彩材质：清冷高原农事风；主色＝云脊青 #4A7C6F、田垄褐 #7A6248、苗绿 #7FB069、经幡红 #C25B4A；材质为湿褐垄土、木架、粗布袋与耐寒花瓣。"
+    },
+    "general:L171-171": {
+      "path": "test_data/test_samples/G042_highland_seed_farm/general_requirement.txt",
+      "sha256": "643955e35ae6dec5d21fd3d9d36fbac85951201c876b9882aea7c2bea1142544",
+      "start_line": 171,
+      "end_line": 171,
+      "quote": "- W07 环境氛围与声音语言：高原风与远处鸟鸣为底；音效语言＝播种、浇水、降雨、收获、金币、订单提示、日推进（F06 冻结清单）；混音优先级：订单到期提醒 ＞ 收获/金币 ＞ 浇水/降雨 ＞ 风环境。"
+    },
+    "general:L180-195": {
+      "path": "test_data/test_samples/G042_highland_seed_farm/general_requirement.txt",
+      "sha256": "643955e35ae6dec5d21fd3d9d36fbac85951201c876b9882aea7c2bea1142544",
+      "start_line": 180,
+      "end_line": 195,
+      "quote": "- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 播种 | 格内扬土动画＋种子图标浮出 | seed_plant | 动画收束 |\n| 浇水 | 格内水光涟漪＋土色加深 | water_splash | 涟漪结束 |\n| 雨日开始 | 全屏雨幕＋檐滴 | highland_rain_loop | 雨日结束 |\n| 阶段推进 | 格上阶段图标切换弹跳 | day_advance（推进档） | 图标定格 |\n| 作物成熟 | 格上成熟图标金框高亮 | harvest_ready | 玩家收获或日推进 |\n| 收获 | 割取动画＋背包件数滚动 | harvest_pickup | 动画收束 |\n| 出售 | 金币弹出＋资金滚动 | coin_chime | 金币动画收束 |\n| 订单按期交付 | 订单卡打勾＋金额结算滚动 | order_complete | 卡片定格 |\n| 订单到期未交付 | 订单卡红框＋罚款金额滚动 | order_alert | 卡片关闭 |\n| 日推进 | 「第 N 天·晴/雨」横幅 1.5 秒 | day_advance | 横幅收起 |\n| 季末达标 | C03 胜利意象＋结算面板 | victory_sting | 进入结算面板 |\n| 季末未达标 | C03 失败意象＋结算面板 | defeat_sting | 进入结算面板 |"
+    },
+    "general:L197-197": {
+      "path": "test_data/test_samples/G042_highland_seed_farm/general_requirement.txt",
+      "sha256": "643955e35ae6dec5d21fd3d9d36fbac85951201c876b9882aea7c2bea1142544",
+      "start_line": 197,
+      "end_line": 197,
+      "quote": "- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：seed_plant、water_splash、harvest_pickup、coin_chime、order_alert、order_complete、day_advance、victory_sting、defeat_sting；环境循环：highland_wind_loop（高原风与鸟鸣）、highland_rain_loop（雨日降雨）。无配音需求。"
+    },
+    "general:L195": {
+      "path": "test_data/test_samples/G042_highland_seed_farm/general_requirement.txt",
+      "sha256": "643955e35ae6dec5d21fd3d9d36fbac85951201c876b9882aea7c2bea1142544",
+      "start_line": 195,
+      "end_line": 195,
+      "quote": "| 季末未达标 | C03 失败意象＋结算面板 | defeat_sting | 进入结算面板 |"
+    },
+    "general:L197": {
+      "path": "test_data/test_samples/G042_highland_seed_farm/general_requirement.txt",
+      "sha256": "643955e35ae6dec5d21fd3d9d36fbac85951201c876b9882aea7c2bea1142544",
+      "start_line": 197,
+      "end_line": 197,
+      "quote": "- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：seed_plant、water_splash、harvest_pickup、coin_chime、order_alert、order_complete、day_advance、victory_sting、defeat_sting；环境循环：highland_wind_loop（高原风与鸟鸣）、highland_rain_loop（雨日降雨）。无配音需求。"
+    },
+    "revision_policy": {
+      "path": "workspaces/priority_rubric_observable_20261026/POLICY.md",
+      "sha256": "581d726dee3f0efba7c72e8616f553a1248d822791a75f42e6d463b81a9312ca",
+      "start_line": 1,
+      "end_line": 34,
+      "quote": "# Priority 资产可观察需求 rubric 修订 v2\n\n此版本只服务资产三列中的第一列需求完整性，不更改原始生成任务、既有分数或历史冻结合同。\n所有七份 priority 清单逐条覆盖，禁止仅用同类代表任务代替。输出位于各游戏 rubric_assets/priority_observable_v2/，游戏内 priority_rubric_current.json 是显式修订索引，不是对生产 evaluator 的隐式切换。\n\n## 第一列保留\n\n任务明确要求的主体类别、部件、形状、轮廓、命名色彩、材质表现、可见标记、姿态、动作阶段、声音事件、声源、情绪、语言及台词内容。\n任务明确要求的上下、左右、内外、中央/周边、前后、连接、环绕、相对大小/深浅、留白和遮挡关系。\nCG 只要求原文明示的事件顺序、状态变化与镜头行为；不能把列表自动解释为严格顺序。动作片段保留循环/单次与原地组织，不设严格时长/帧数/零位移阈值。\n台词或资产名称中的数字可以是实际内容，不是数值验收阈值；不因文本包含数字机械删掉语义。\n对象数量只作原文上下文，不按精确计数通过率评分；保留主次、成组、单体/多体和必要的关系含义。\n\n## 第一列不计分\n\n绝对坐标、原点、尺寸、距离、速度、时长、角度、帧数、分辨率、面数、数值颜色/色差、采样率、响度和频率阈值，以及机制数值、随机种子、容量、库存、伤害、时间窗。\n这些字段和原始引文完整保留在 task_input、sources 或 excluded_field_values 中，不伪称已经满足，也不当作第一列隐藏门槛。\n引擎导入、碰撞、导航、触发、跳过、暂停、同步、状态机与游戏内混音另属交付/集成验证，不凭离线素材判通过。\n\n## 三列分工\n\nC：当前任务明确指定什么，实际内容是否呈现。\nG：与角色/场景参考及游戏整体世界/美术/声音方向是否相容，不重复扣C的缺失。\nQ：内在感知/技术质量，不重复内容语义或世界适配。\n已有逐资产 rubric 的 G/Q 维度原样保留。此前未建逐资产文件的自然音效/T-pose只补源文支持的G/Q草稿，不能假称复用了已验证分数。\n参考图只按明确绑定使用；image_path 的存在不是生成模型实际收到图片的证明。T-pose中的参考身份/比例比较放G，不在C重复。\n\n## 来源与状态\n\n先遵从原有来源优先级；保留 canonical/分资产原文与任务JSONL。定性投影不得补造“附近”“左侧”等源文不支持的位置。\n场景 layout_constraints 已逐条整理为可见关系；原始标定与运行时要求另存。不宣称精确坐标被视觉验证。\n相互矛盾的要求保留并报审查警告，不用PARTIAL掩盖来源冲突，不把两种胜负分支强行串为一条时间线。\n每条判词必须给视角、帧或音频时间证据。观察不清/未取证为UNKNOWN，调用/配置故障为ERROR，均不填0或100、不删除分母；报告coverage和上下界，证据不足的得分只能PROVISIONAL。\n本次为有来源的修订版与结构/来源校验，不宣布所有1305条人工语义审核完成，不自动冻结，不自动启动评测。"
+    }
+  },
+  "references": [],
+  "objective_specs": {},
+  "authoring_warnings": [],
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求完整性（可观察内容）",
+      "checks": [
+        {
+          "id": "C001",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：Season defeat sting",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "Season defeat sting",
+              "text": "Season defeat sting"
+            }
+          ],
+          "modality": "audio_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C002",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：muted low strings with cold wind tail",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "muted low strings with cold wind tail",
+              "text": "muted low strings with cold wind tail"
+            }
+          ],
+          "modality": "audio_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C003",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：dignified not dramatic",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "dignified not dramatic",
+              "text": "dignified not dramatic"
+            }
+          ],
+          "modality": "audio_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "游戏世界与用途相容性",
+          "assertion": "仅评价与当前游戏世界及本资产用途的相容性；不重复第一列声源、姿态、部件或事件缺失。",
+          "targets": [
+            {
+              "source_id": "general:L165-165",
+              "text": "- W01 世界与时代背景：原创高原世界「云脊高原」——山民世代在陡坡垄田上育种，高原种子站保存着耐寒作物的火种；一个雨季的收成决定整个山坳的来年。"
+            },
+            {
+              "source_id": "general:L166-166",
+              "text": "- W02 场景所在地：云脊高原半山种子站——12 格垄作梯田、木架种子站柜台、远山云海与经幡；雨季云层每日过境。"
+            },
+            {
+              "source_id": "general:L167-167",
+              "text": "- W03 玩家身份与当前任务动机：玩家是种子站的年轻育种员，接手师父留下的一季试验田——在 10 个高原日内把净利做到 500 以上，证明试验田值得保留。"
+            },
+            {
+              "source_id": "general:L169-169",
+              "text": "- W05 叙事来源：三种作物（速生叶菜/高原薯/耐寒花）＝山坳三代育种成果；种子站＝师父手植的木架小屋；订单＝山谷市集与药铺的预订。全部原创，不用商业作品命名。"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "适用的声音/美术语言相容性",
+          "assertion": "按资产角色判断与所引游戏声音或美术方向是否相容；不要求单资产包含全部世界元素，不重复质量缺陷。",
+          "targets": [
+            {
+              "source_id": "general:L171-171",
+              "text": "- W07 环境氛围与声音语言：高原风与远处鸟鸣为底；音效语言＝播种、浇水、降雨、收获、金币、订单提示、日推进（F06 冻结清单）；混音优先级：订单到期提醒 ＞ 收获/金币 ＞ 浇水/降雨 ＞ 风环境。"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "基础质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "音色与信号感知质量",
+          "assertion": "只评完整音频中音色解析、非预期噪声、失真、削波与断裂；不评价指定声源是否正确。",
+          "rating_anchors": {
+            "1": "严重缺陷，主要内容难以辨识",
+            "2": "明显缺陷反复影响观察",
+            "3": "基本清楚，局部缺陷可见",
+            "4": "整体良好，仅轻微瑕疵",
+            "5": "在所给证据中未见明显缺陷"
+          },
+          "unknown_rule": "缺证据为 UNKNOWN，不给默认分。"
+        },
+        {
+          "id": "Q02",
+          "title": "时间与动态感知质量",
+          "assertion": "只评起止、衰减、动态清晰度及适用时的持续声纹稳定性。不按绝对时长/响度阈值评分。无语音不设对白要求；无持续纹理不得凭片长推断。",
+          "rating_anchors": {
+            "1": "严重缺陷，主要内容难以辨识",
+            "2": "明显缺陷反复影响观察",
+            "3": "基本清楚，局部缺陷可见",
+            "4": "整体良好，仅轻微瑕疵",
+            "5": "在所给证据中未见明显缺陷"
+          },
+          "unknown_rule": "缺证据为 UNKNOWN，不给默认分。"
+        }
+      ]
+    }
+  ],
+  "schema_version": "gamefactory3a.asset_rubric.observable.v2",
+  "authoring_protocol": "priority_observable_v2",
+  "status": "source_grounded_revision_not_judged",
+  "scope": "priority gen 独立资产三列口径；第一列仅可观察需求内容，排除标定数值及运行时验收。",
+  "requirement_revision": {
+    "version": "priority_observable_v2",
+    "old_rubric": null,
+    "original_other_dimensions_preserved": false,
+    "original_task_input_unchanged": true,
+    "numerical_policy": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+    "reference_ownership": "任务指定姿态/部件/颜色归C，参考角色匹配/全局世界适配归G，内在感知质量归Q；同一事实不重复扣分。",
+    "baseline": "Old frozen aggregate rubric and historical scores untouched; new path requires explicit evaluator support for this schema.",
+    "freeze_status": "规则修订已生成并校验，未声明逐任务人工语义审核完成，不自动冻结或发布分数。",
+    "source_rebinding_audit": [],
+    "clause_ledger": [
+      {
+        "field": "prompt",
+        "source_quote": "Season defeat sting",
+        "action": "RETAINED",
+        "normalized": "Season defeat sting",
+        "check_id": "C001"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "muted low strings with cold wind tail",
+        "action": "RETAINED",
+        "normalized": "muted low strings with cold wind tail",
+        "check_id": "C002"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "dignified not dramatic",
+        "action": "RETAINED",
+        "normalized": "dignified not dramatic",
+        "check_id": "C003"
+      }
+    ],
+    "excluded_field_values": {
+      "sound_category": "one_shot",
+      "duration_sec": 2.5,
+      "sample_rate": 48000,
+      "seed": 5429,
+      "trigger": "V02 季末判负（C03 失败意象）",
+      "required_by_spec": true,
+      "spec_ref": "F05,F06",
+      "loop": false,
+      "stop_condition": "natural_end",
+      "priority": "gameplay_critical",
+      "ducking": "none",
+      "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+      "planned_source": "general_audio_llm"
+    },
+    "excluded_fields_policy": "保留来源，不作为第一列附加验收。loop/root_motion等只使用上述C条目所述的定性部分。"
+  },
+  "scoring_policy": {
+    "requirement_completeness_v2": {
+      "column": "requirement_reference",
+      "score": "100*mean(verified C item scores); PASS=1, PARTIAL=0.5, FAIL=0",
+      "coverage": "verified applicable C count / frozen applicable C count; UNKNOWN/ERROR retained in denominator and bounds, not converted to zero or full credit.",
+      "lower_bound": "100*sum(verified scores)/all applicable C count",
+      "upper_bound": "100*(sum(verified scores)+unknown applicable C count)/all applicable C count",
+      "status": "Any incomplete applicable C coverage => PROVISIONAL; no verified C => null.",
+      "overall": "三列等权；没有任一列不得给总分。此修订不重新计算历史结果。"
+    }
+  },
+  "evidence_requirements": [
+    "完整音频听评及具体时间段；循环内容另听未修改的双周期。"
+  ],
+  "objective_metric_policy": "原始数值和输出格式仅作独立交付/诊断信息；不并入本版第一列。不改变其他列既有实现。"
+}

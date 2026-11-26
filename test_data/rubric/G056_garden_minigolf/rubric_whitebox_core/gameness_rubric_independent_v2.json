@@ -1,0 +1,478 @@
+{
+  "version": "gameness-tiered-independent-v2",
+  "case_id": "G056_garden_minigolf",
+  "tier": "S",
+  "target_count": 8,
+  "mechanic_target_count": 8,
+  "group_quotas": {
+    "layout": 3,
+    "guidance": 2,
+    "feedback": 3
+  },
+  "criteria": [
+    {
+      "id": "gameness.independent.layout.01",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示\n固定范围：原文I06列出的当前玩法阶段核心状态内容及其正确对象；同阶段适用字段不能任取一项代替\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0005",
+        "frozen_assertion_id": "G056_garden_minigolf.WB.G.01",
+        "frozen_subcheck_id": "G.s0005",
+        "frozen_text": "- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示",
+        "requirement_ids": [
+          "I06"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示"
+      },
+      "independence": {
+        "key": "layout:required-gameplay-state",
+        "fixed_target": "原文I06列出的当前玩法阶段核心状态内容及其正确对象；同阶段适用字段不能任取一项代替",
+        "source_criterion_id": "expanded.G.s0005"
+      }
+    },
+    {
+      "id": "gameness.independent.layout.02",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。\n固定范围：作者真实玩法界面中主要状态与次要信息的层级关系（不改成标题页）\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.hierarchy",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。"
+      },
+      "independence": {
+        "key": "layout:hierarchy",
+        "fixed_target": "作者真实玩法界面中主要状态与次要信息的层级关系（不改成标题页）",
+        "source_criterion_id": "game.layout.hierarchy"
+      }
+    },
+    {
+      "id": "gameness.independent.layout.03",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。\n固定范围：作者真实玩法界面的关键文字/控件可辨识可用，不以只读到标题按钮代替\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.readable",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。"
+      },
+      "independence": {
+        "key": "layout:readability",
+        "fixed_target": "作者真实玩法界面的关键文字/控件可辨识可用，不以只读到标题按钮代替",
+        "source_criterion_id": "game.layout.readable"
+      }
+    },
+    {
+      "id": "gameness.independent.guidance.01",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "实际游戏展示或清楚传达必要操作方法。\n固定范围：作者核心玩法所必需的操作方式在操作前可知，不能只以操作后反馈证明\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.guidance.controls",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "guidance",
+        "requirement": "实际游戏展示或清楚传达必要操作方法。"
+      },
+      "independence": {
+        "key": "guidance:controls-before-action",
+        "fixed_target": "作者核心玩法所必需的操作方式在操作前可知，不能只以操作后反馈证明",
+        "source_criterion_id": "game.guidance.controls"
+      }
+    },
+    {
+      "id": "gameness.independent.guidance.02",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。\n固定范围：严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0030",
+        "frozen_assertion_id": "G056_garden_minigolf.WB.G.04",
+        "frozen_subcheck_id": "G.s0030",
+        "frozen_text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。"
+      },
+      "independence": {
+        "key": "guidance:expanded.G.s0030",
+        "fixed_target": "严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件",
+        "source_criterion_id": "expanded.G.s0030"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.01",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【入洞】实际发生时可视表现为【球旋入洞杯＋旗杆亮灯＋花瓣迸溅】，结束条件【进入下一洞】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【入洞】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0018",
+        "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+        "frozen_subcheck_id": "G.s0018",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 入洞 | 球旋入洞杯＋旗杆亮灯＋花瓣迸溅 | 入洞清脆音 | 进入下一洞 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【入洞】实际发生时可视表现为【球旋入洞杯＋旗杆亮灯＋花瓣迸溅】，结束条件【进入下一洞】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:入洞",
+        "fixed_target": "仅事件【入洞】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0018"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.02",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【碰撞挡板】实际发生时可视表现为【火花小粒子＋球体挤压回弹】，结束条件【回弹完成】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【碰撞挡板】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0015",
+        "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+        "frozen_subcheck_id": "G.s0015",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 碰撞挡板 | 火花小粒子＋球体挤压回弹 | 碰撞闷响 | 回弹完成 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【碰撞挡板】实际发生时可视表现为【火花小粒子＋球体挤压回弹】，结束条件【回弹完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:碰撞挡板",
+        "fixed_target": "仅事件【碰撞挡板】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0015"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.03",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【蓄力开始】实际发生时可视表现为【蓄力条展开＋数值跳动】，结束条件【松开或取消】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【蓄力开始】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0012",
+        "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+        "frozen_subcheck_id": "G.s0012",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 蓄力开始 | 蓄力条展开＋数值跳动 | 蓄力低鸣（按住循环，音调随力度升高） | 松开或取消 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【蓄力开始】实际发生时可视表现为【蓄力条展开＋数值跳动】，结束条件【松开或取消】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:蓄力开始",
+        "fixed_target": "仅事件【蓄力开始】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0012"
+      }
+    }
+  ],
+  "source_bindings": {
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G056_garden_minigolf/rubric_whitebox_core/rubric.json": "e80c4589dade4fbca196da06b0d014ff86a9f4c573b096f5f2598ab4f11f99ae",
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G056_garden_minigolf/general_requirement.txt": "ad13ec4682722b104bf6d56801d8b7bb5aaee25bf2fd17f75997bab49f55e8bd"
+  },
+  "source_contract_id": "G056_garden_minigolf.whitebox.tiered-core-v1.026e410f20c5611fa449efa3fa8b3866de72810c73e07f4e1d6ec6cce2480977",
+  "selection_basis": "Original requirements only; fixed event roles then authored order; no scores/runtime/source implementation",
+  "unselected_source_criteria": [
+    {
+      "id": "expanded.G.s0006",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.01",
+      "frozen_subcheck_id": "G.s0006",
+      "frozen_text": "HUD 对照见 rubric。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "HUD 对照见 rubric。"
+    },
+    {
+      "id": "expanded.G.s0001",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.01",
+      "frozen_subcheck_id": "G.s0001",
+      "frozen_text": "- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。",
+      "requirement_ids": [
+        "S04"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。"
+    },
+    {
+      "id": "expanded.G.s0007",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.01",
+      "frozen_subcheck_id": "G.s0007",
+      "frozen_text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入"
+    },
+    {
+      "id": "expanded.G.s0008",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.01",
+      "frozen_subcheck_id": "G.s0008",
+      "frozen_text": "数量与属性以 L01/L02 与 G 系为准。",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "数量与属性以 L01/L02 与 G 系为准。"
+    },
+    {
+      "id": "expanded.G.s0013",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+      "frozen_subcheck_id": "G.s0013",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 击球 | 球推出＋草地小尘环＋轨迹残影启动 | 击球脆响 | 残影 0.5s 渐隐 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【击球】实际发生时可视表现为【球推出＋草地小尘环＋轨迹残影启动】，结束条件【残影 0.5s 渐隐】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0014",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+      "frozen_subcheck_id": "G.s0014",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 球滚动 | 轨迹残影跟随＋草浪压痕 | 滚动沙沙（滚动中循环） | 球停 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【球滚动】实际发生时可视表现为【轨迹残影跟随＋草浪压痕】，结束条件【球停】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0016",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+      "frozen_subcheck_id": "G.s0016",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 上坡减速 | 瞄准线透明度提示（击球前）/球速渐减 | 沙沙声减弱 | 坡段结束 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【上坡减速】实际发生时可视表现为【瞄准线透明度提示（击球前）/球速渐减】，结束条件【坡段结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0017",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+      "frozen_subcheck_id": "G.s0017",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出界 | 球坠云＋镜头拉高＋「界外＋1 杆」提示 | 坠落风声 | 复位完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【出界】实际发生时可视表现为【球坠云＋镜头拉高＋「界外＋1 杆」提示】，结束条件【复位完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0019",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+      "frozen_subcheck_id": "G.s0019",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 达杆数上限 | 「本洞按 8 杆计」横幅 | 低提示音 | 推进下一洞 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【达杆数上限】实际发生时可视表现为【「本洞按 8 杆计」横幅】，结束条件【推进下一洞】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0020",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+      "frozen_subcheck_id": "G.s0020",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 三洞完成 | 花灯升空粒子 | 结算上扬音 | 进入总结算 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【三洞完成】实际发生时可视表现为【花灯升空粒子】，结束条件【进入总结算】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0025",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+      "frozen_subcheck_id": "G.s0025",
+      "frozen_text": "- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息",
+      "requirement_ids": [
+        "F07"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息"
+    },
+    {
+      "id": "expanded.G.s0026",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+      "frozen_subcheck_id": "G.s0026",
+      "frozen_text": "轨迹残影承担落点复盘信息",
+      "requirement_ids": [
+        "F07"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "轨迹残影承担落点复盘信息"
+    },
+    {
+      "id": "expanded.G.s0002",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+      "frozen_subcheck_id": "G.s0002",
+      "frozen_text": "- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速",
+      "requirement_ids": [
+        "G05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速"
+    },
+    {
+      "id": "expanded.G.s0003",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+      "frozen_subcheck_id": "G.s0003",
+      "frozen_text": "蓄力条 0–100% 数值与当前蓄力同步",
+      "requirement_ids": [
+        "G05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "蓄力条 0–100% 数值与当前蓄力同步"
+    },
+    {
+      "id": "expanded.G.s0004",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.02",
+      "frozen_subcheck_id": "G.s0004",
+      "frozen_text": "球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。",
+      "requirement_ids": [
+        "G05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。"
+    },
+    {
+      "id": "expanded.G.s0033",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.04",
+      "frozen_subcheck_id": "G.s0033",
+      "frozen_text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。"
+    },
+    {
+      "id": "expanded.G.s0031",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.04",
+      "frozen_subcheck_id": "G.s0031",
+      "frozen_text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。"
+    },
+    {
+      "id": "expanded.G.s0032",
+      "frozen_assertion_id": "G056_garden_minigolf.WB.G.04",
+      "frozen_subcheck_id": "G.s0032",
+      "frozen_text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "目标进度、阶段变化与终局结果向玩家明确呈现。"
+    }
+  ],
+  "authorized_change": "Gameness-only independent concrete targets; exact time/fine space diagnostic",
+  "aggregation": "Unchanged equal mean of layout/guidance/feedback; 10/50/100 highest level",
+  "prior_results": "Preserved; new policy requires independent contract, source review and runtime judge",
+  "revision_sha256": "b8eb82f8db72b47fde49261248e48accdddefb5805dc2025091bf0d4b7fd4bc5"
+}

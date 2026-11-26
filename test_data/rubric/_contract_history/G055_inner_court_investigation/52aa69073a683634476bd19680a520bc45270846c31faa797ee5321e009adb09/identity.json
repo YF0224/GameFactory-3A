@@ -1,0 +1,7 @@
+{
+  "contract_id": "G055_inner_court_investigation.whitebox.final",
+  "version": "final",
+  "content_sha256": "52aa69073a683634476bd19680a520bc45270846c31faa797ee5321e009adb09",
+  "rubric_json_sha256": "1b44f94e087c3bc9f2c2830fdd1e0be5edce17c6159288021db11e87674d903c",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

@@ -1,0 +1,7 @@
+{
+  "contract_id": "G012_gravity_mine.whitebox.endpoints-v2-candidate.cd07aca127b4e5479efd71768a41d35ceb1315f7384e8faf3aaba43c98f08dca",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "cd07aca127b4e5479efd71768a41d35ceb1315f7384e8faf3aaba43c98f08dca",
+  "rubric_json_sha256": "146cc2cc72dd0a20e2b395c97beed40c7d2c08747b6a35c82ef5ba5538cb1740",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

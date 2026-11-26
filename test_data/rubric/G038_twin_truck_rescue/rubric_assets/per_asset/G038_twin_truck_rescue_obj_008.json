@@ -1,0 +1,405 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.v1",
+  "authoring_protocol": "priority_asset_rubrics.v1",
+  "status": "source_grounded_draft",
+  "game_id": "G038_twin_truck_rescue",
+  "task_id": "G038_twin_truck_rescue_obj_008",
+  "asset_type": "3d_object",
+  "asset_subtype": "prop",
+  "asset_name": "路段检查点标",
+  "scope": "Track B：独立资产；不含 T-pose、自然音效或引擎导入/playtest。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G038_twin_truck_rescue",
+    "task_id": "G038_twin_truck_rescue_obj_008",
+    "asset_name": "checkpoint_marker",
+    "name_zh": "路段检查点标",
+    "role": "prop",
+    "input_mode": "text_to_3d",
+    "prompt": "Roadside recovery checkpoint marker post with orange reflector band and small flag, lightweight steel pole, readable at distance, single object, Y-up, low-poly style, minimal triangle count, flat faceted surfaces, clean silhouette, no fine surface detail",
+    "seed": 1045,
+    "decimation_target": 8000,
+    "texture_size": 1024,
+    "rig": "none",
+    "animation_strategy": "procedural",
+    "spec_ref": "L01,G04",
+    "poly_policy": "low_poly_priority"
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L191-191",
+      "general:L192-192",
+      "general:L193-193",
+      "general:L195-195"
+    ],
+    "visual_style_source_ids": [
+      "general:L196-196"
+    ],
+    "sound_style_source_ids": [
+      "general:L197-197"
+    ],
+    "asset_description_source_ids": [
+      "general:L118",
+      "general:L296"
+    ],
+    "spec_ref_source_ids": [
+      "general:L118-118",
+      "general:L100-100"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L13",
+    "canonical_asset_content_source_ids": []
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "sha256": "a6a9b03f45ab40197fbb18aaf9614638a9691890a7824c137aef95fcd79868f9",
+      "start_line": 149,
+      "end_line": 149,
+      "quote": "{\"game_id\": \"G038_twin_truck_rescue\", \"task_id\": \"G038_twin_truck_rescue_obj_008\", \"asset_name\": \"checkpoint_marker\", \"name_zh\": \"路段检查点标\", \"role\": \"prop\", \"input_mode\": \"text_to_3d\", \"prompt\": \"Roadside recovery checkpoint marker post with orange reflector band and small flag, lightweight steel pole, readable at distance, single object, Y-up, low-poly style, minimal triangle count, flat faceted surfaces, clean silhouette, no fine surface detail\", \"seed\": 1045, \"decimation_target\": 8000, \"texture_size\": 1024, \"rig\": \"none\", \"animation_strategy\": \"procedural\", \"spec_ref\": \"L01,G04\", \"poly_policy\": \"low_poly_priority\"}"
+    },
+    "general:L191-191": {
+      "path": "test_data/test_samples/G038_twin_truck_rescue/general_requirement.txt",
+      "sha256": "dd6b6e6de631095e1d5bfe8be63397718f3586593e011703ec310b9b6530ade6",
+      "start_line": 191,
+      "end_line": 191,
+      "quote": "- W01 世界与时代背景：「云岭道」救援联盟的后勤时代——山洪与落石常年在云岭古道上制造事故，双车救援小队（牵引＋清障）是山区物资生命线的最后保障。"
+    },
+    "general:L192-192": {
+      "path": "test_data/test_samples/G038_twin_truck_rescue/general_requirement.txt",
+      "sha256": "dd6b6e6de631095e1d5bfe8be63397718f3586593e011703ec310b9b6530ade6",
+      "start_line": 192,
+      "end_line": 192,
+      "quote": "- W02 场景所在地：云岭古道一段——装货点在山脚营地，交付站越过垭口；稳路沿河谷绕行 1200 米，险路穿峡谷抄近 800 米、3 处落石区横在窄弯之间；每 200 米设路段检查点。"
+    },
+    "general:L193-193": {
+      "path": "test_data/test_samples/G038_twin_truck_rescue/general_requirement.txt",
+      "sha256": "dd6b6e6de631095e1d5bfe8be63397718f3586593e011703ec310b9b6530ade6",
+      "start_line": 193,
+      "end_line": 193,
+      "quote": "- W03 玩家身份与当前任务动机：两名玩家分别是 A 牵引车驾驶员（绞盘手）与 B 清障车驾驶员（转运手）——一辆载着 8 件救援物资的货车在古道上抛锚被困，须在 600 秒内把它拖到交付站，且至少 6 件物资完好。"
+    },
+    "general:L195-195": {
+      "path": "test_data/test_samples/G038_twin_truck_rescue/general_requirement.txt",
+      "sha256": "dd6b6e6de631095e1d5bfe8be63397718f3586593e011703ec310b9b6530ade6",
+      "start_line": 195,
+      "end_line": 195,
+      "quote": "- W05 叙事来源：A 车＝橙白涂装的绞盘牵引卡车；B 车＝带货斗与凿岩工具架的清障卡车；被困物资车＝抛锚的山区补给货车；落石区＝峡谷风化岩壁的塌方段。全部原创，不用商业作品命名。"
+    },
+    "general:L196-196": {
+      "path": "test_data/test_samples/G038_twin_truck_rescue/general_requirement.txt",
+      "sha256": "dd6b6e6de631095e1d5bfe8be63397718f3586593e011703ec310b9b6530ade6",
+      "start_line": 196,
+      "end_line": 196,
+      "quote": "- W06 视觉风格与色彩材质：山地工程救援风；主色＝岩褐 #7A6A5A、救援橙 #E4762C、山谷青 #5E8C6A、钢灰 #4A4F55；材质为风化岩、防滚架钢材、帆布货罩与湿碎石。"
+    },
+    "general:L197-197": {
+      "path": "test_data/test_samples/G038_twin_truck_rescue/general_requirement.txt",
+      "sha256": "dd6b6e6de631095e1d5bfe8be63397718f3586593e011703ec310b9b6530ade6",
+      "start_line": 197,
+      "end_line": 197,
+      "quote": "- W07 环境氛围与声音语言：山风与碎石滚落为底；音效语言＝双引擎、绞盘、绳索、落石、碰撞、通信提示、交付（F06 冻结清单）；混音优先级：通信/警报 ＞ 落石/断绳 ＞ 碰撞 ＞ 引擎 ＞ 山风环境。"
+    },
+    "general:L118-118": {
+      "path": "test_data/test_samples/G038_twin_truck_rescue/general_requirement.txt",
+      "sha256": "dd6b6e6de631095e1d5bfe8be63397718f3586593e011703ec310b9b6530ade6",
+      "start_line": 118,
+      "end_line": 118,
+      "quote": "- L01 生成对象：牵引卡车 A 1、清障卡车 B 1、被困物资车 1（救援目标）、物资箱 8、绞盘绳索装置 1、落石堆 3、岩壁/碎石、装货点与交付站、路段检查点标、双端 HUD。"
+    },
+    "general:L100-100": {
+      "path": "test_data/test_samples/G038_twin_truck_rescue/general_requirement.txt",
+      "sha256": "dd6b6e6de631095e1d5bfe8be63397718f3586593e011703ec310b9b6530ade6",
+      "start_line": 100,
+      "end_line": 100,
+      "quote": "- G04 路线（本包冻结值）：装货点→交付站共享起终点；稳路绕远 1200 米（平整宽路）；险路抄近 800 米（窄弯＋碎石减速带＋3 处落石区）；双车可各选路线；每 200 米设路段检查点（翻车复位用）。"
+    },
+    "general:L118": {
+      "path": "test_data/test_samples/G038_twin_truck_rescue/general_requirement.txt",
+      "sha256": "dd6b6e6de631095e1d5bfe8be63397718f3586593e011703ec310b9b6530ade6",
+      "start_line": 118,
+      "end_line": 118,
+      "quote": "- L01 生成对象：牵引卡车 A 1、清障卡车 B 1、被困物资车 1（救援目标）、物资箱 8、绞盘绳索装置 1、落石堆 3、岩壁/碎石、装货点与交付站、路段检查点标、双端 HUD。"
+    },
+    "general:L296": {
+      "path": "test_data/test_samples/G038_twin_truck_rescue/general_requirement.txt",
+      "sha256": "dd6b6e6de631095e1d5bfe8be63397718f3586593e011703ec310b9b6530ade6",
+      "start_line": 296,
+      "end_line": 296,
+      "quote": "- object：9 个（text-to-3D 6，image-to-3D 3）；object 任务资产为：tractor_truck_a, recovery_truck_b, supply_crate_set, trapped_supply_vehicle, winch_cable_unit, rockfall_pile, delivery_station, checkpoint_marker, mountain_signpost。每项只允许一个物体；组合物必须拆成独立任务。"
+    },
+    "asset_requirement:L13": {
+      "path": "test_data/test_samples/G038_twin_truck_rescue/3D_object/requirement.txt",
+      "sha256": "058c7378520a530a78299ebef66a35698b2cd638575ae6e961c503a3f58408b0",
+      "start_line": 13,
+      "end_line": 13,
+      "quote": "- checkpoint_marker: Roadside recovery checkpoint marker post with orange reflector band and small flag, lightweight steel pole, readable at distance, single object, Y-up"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+      "start_line": 78,
+      "end_line": 82,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "Roadside recovery checkpoint marker post with orange reflector band and small flag",
+      "lightweight steel pole",
+      "readable at distance",
+      "single object"
+    ],
+    "style": [
+      "low-poly style",
+      "minimal triangle count",
+      "flat faceted surfaces",
+      "clean silhouette",
+      "no fine surface detail"
+    ],
+    "technical": [
+      "Y-up"
+    ],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求符合度",
+      "checks": [
+        {
+          "id": "C01",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：Roadside recovery checkpoint marker post；with orange reflector band and small flag",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "Roadside recovery checkpoint marker post",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "with orange reflector band and small flag",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "C02",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：lightweight steel pole；readable at distance",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "lightweight steel pole",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "readable at distance",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "C03",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：single object",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "single object",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L191-191",
+              "text": "- W01 世界与时代背景：「云岭道」救援联盟的后勤时代——山洪与落石常年在云岭古道上制造事故，双车救援小队（牵引＋清障）是山区物资生命线的最后保障。"
+            },
+            {
+              "source_id": "general:L192-192",
+              "text": "- W02 场景所在地：云岭古道一段——装货点在山脚营地，交付站越过垭口；稳路沿河谷绕行 1200 米，险路穿峡谷抄近 800 米、3 处落石区横在窄弯之间；每 200 米设路段检查点。"
+            },
+            {
+              "source_id": "general:L118",
+              "text": "- L01 生成对象：牵引卡车 A 1、清障卡车 B 1、被困物资车 1（救援目标）、物资箱 8、绞盘绳索装置 1、落石堆 3、岩壁/碎石、装货点与交付站、路段检查点标、双端 HUD。"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L196-196",
+              "text": "- W06 视觉风格与色彩材质：山地工程救援风；主色＝岩褐 #7A6A5A、救援橙 #E4762C、山谷青 #5E8C6A、钢灰 #4A4F55；材质为风化岩、防滚架钢材、帆布货罩与湿碎石。"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "low-poly style",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "minimal triangle count",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "flat faceted surfaces",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "clean silhouette",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "no fine surface detail",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "几何结构质量",
+          "assertion": "只评几何/形体自身缺陷，不重复评分所需部件是否存在。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "大范围塌陷、破面或融合，主体结构不可辨",
+            "2": "多处明显破损/漂浮/穿插，严重影响辨识",
+            "3": "主体结构完整，局部破面或穿插可见",
+            "4": "只有轻微局部瑕疵，不影响轮廓与结构",
+            "5": "多视角下结构完整，未见明显破面、漂浮或异常穿插"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "材质与表面质量",
+          "assertion": "只评表面清晰、材质连贯和伪影；低多边形/平面着色本身不是缺陷。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "大面积错误贴图/糊化/污染，表面不可读",
+            "2": "明显接缝、拉伸或材质错乱覆盖主要区域",
+            "3": "主体表面可读，但存在局部接缝/拉伸/涂抹",
+            "4": "仅有轻微接缝或局部表面瑕疵",
+            "5": "材质与色块连贯，多视角下未见明显接缝、拉伸或生成伪影"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。"
+  },
+  "evidence_requirements": [
+    "实际三维产物的固定光照多视角渲染（正/侧/背及细节）",
+    "必要时的网格、尺度和材质探针；不是任务描述或文件名"
+  ],
+  "objective_specs": {
+    "decimation_target": 8000,
+    "texture_size": 1024,
+    "rig": "none"
+  },
+  "objective_metric_policy": "规格与传统指标单独由探针/脚本报告原始值，不与三维 rubric 分数混合；本文件不代表已计算任何指标。",
+  "authoring_warnings": []
+}

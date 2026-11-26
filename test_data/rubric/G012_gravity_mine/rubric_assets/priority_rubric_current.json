@@ -1,0 +1,238 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_gravity_mine_obj_004",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 48,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_gravity_mine_obj_004.json",
+        "sha256": "411a80c927a6a4dae7d85970e8944cdddd615fb44bf43ae980efccf864c97cdb"
+      },
+      "C_checks": 2,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_gravity_mine_obj_005",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 49,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_gravity_mine_obj_005.json",
+        "sha256": "8c131c881c11ef85f0ffb53c2051ffb895aacfb2fa4ab6b61278f4fd25445048"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 13,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_scene_001.json",
+        "sha256": "2277ed1bcb280f6f6fbc6c6607e28fad135f2539414ab855d763afc7fba968c9"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 136,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_sfx_001.json",
+        "sha256": "8d6c36896dfecc102ebcf970a2522cb4e274f06466ef06e4c07a499b6e39c12a"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 137,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_sfx_002.json",
+        "sha256": "49d308c12715b8aeeb97644d199a5fab0b891fac8a72f89bb15324967fa1d6c7"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 138,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_sfx_003.json",
+        "sha256": "4a596a9953257fd6de7eb812a23ef9c982fcedbe1bd8ee16c78bc9cb9a3b7cb2"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 139,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_sfx_004.json",
+        "sha256": "bb9f4ee6f4deac643a9ce037980f8d8f12d4e82723d2aa93a4f516e10eaeb988"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 140,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_sfx_005.json",
+        "sha256": "dca84e9f5caf0acc49df784d12e3622a3627b84259c03a263fe1477ec38e1eb4"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 141,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_sfx_006.json",
+        "sha256": "c6b57ceea752b1ded6859d7450e7303006d75e307c3f004b5261930b2d623676"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 142,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_sfx_007.json",
+        "sha256": "1121e05e35d5db655a89402d9b501deb4a8dbd50a325a712dfdb2f8fb0c69ea2"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 143,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_sfx_008.json",
+        "sha256": "17b6a14adb3b42eef95dc6cdf0235bd2ae96941744b318b521987d904ff478bb"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 144,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_sfx_009.json",
+        "sha256": "3bdc3eb4c311f5868d5e8a0f83dc500205199a174108979894451627482e6d7f"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 145,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_sfx_010.json",
+        "sha256": "4826b944522a07437440b583577ac41710cbf45cbbac073ae9c134f8b7cd0ecc"
+      },
+      "C_checks": 4,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 39,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_cg_001.json",
+        "sha256": "3acf097b56cb7e2449d67373f98e4acd12103a4c8a74b56243e7a07cc795e585"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 40,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_cg_002.json",
+        "sha256": "34a792b6555fc5dec0f143fa20954a6c6249d392df99cc89320579dad7a6607e"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G012_gravity_mine",
+      "task_id": "G012_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 41,
+      "rubric": {
+        "path": "test_data/test_samples/G012_gravity_mine/rubric_assets/priority_observable_v2/G012_cg_003.json",
+        "sha256": "9e1f8627662d8e8838f1970453a32a2aaf0d237dfac79ab152e307719be38bef"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "multi_variant_cg_requires_delivery_convention",
+        "branch_delivery_review"
+      ]
+    }
+  ]
+}

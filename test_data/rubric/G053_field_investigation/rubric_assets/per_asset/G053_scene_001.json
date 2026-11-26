@@ -1,0 +1,404 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.v1",
+  "authoring_protocol": "priority_asset_rubrics.v1",
+  "status": "source_grounded_draft",
+  "game_id": "G053_field_investigation",
+  "task_id": "G053_scene_001",
+  "asset_type": "3d_scene",
+  "asset_subtype": "3d_scene",
+  "asset_name": "G053_scene_001",
+  "scope": "Track B：独立资产；不含 T-pose、自然音效或引擎导入/playtest。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G053_field_investigation",
+    "task_id": "G053_scene_001",
+    "prompt": "Original three-domain field research landscape: flower slope meadow Z01 with sparse trees, creek bay Z02 with shallow water, wooden bridge and reed bank, thunder crystal hill Z03 with blue-grey rocks and amber crystals, central research station S01, matching bound reference art style, stylized semi-realistic, game-ready 3D scene",
+    "seed": 4531,
+    "output_format": "glb",
+    "texture_size": 2048,
+    "layout_constraints": "三域总可玩直径 ≥50 单位（R04.1）；区域互通由引擎按 seed=1053 布局；此场景为地形与氛围基线",
+    "spec_ref": "L02",
+    "comparison_sources": [
+      "hunyuan_worldplay",
+      "llm_combo"
+    ]
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L271-271",
+      "general:L272-272",
+      "general:L273-273",
+      "general:L275-275"
+    ],
+    "visual_style_source_ids": [
+      "general:L276-276"
+    ],
+    "sound_style_source_ids": [
+      "general:L277-277"
+    ],
+    "asset_description_source_ids": [],
+    "spec_ref_source_ids": [],
+    "unresolved_spec_refs": [
+      "L02"
+    ],
+    "per_kind_description_source_id": "asset_requirement:L6",
+    "canonical_asset_content_source_ids": [],
+    "track_c_only_layout_clauses": []
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "sha256": "b2078680d8eecfe6289960a046b337eb8774cec2e1759b59928be48420a42ede",
+      "start_line": 61,
+      "end_line": 61,
+      "quote": "{\"game_id\": \"G053_field_investigation\", \"task_id\": \"G053_scene_001\", \"prompt\": \"Original three-domain field research landscape: flower slope meadow Z01 with sparse trees, creek bay Z02 with shallow water, wooden bridge and reed bank, thunder crystal hill Z03 with blue-grey rocks and amber crystals, central research station S01, matching bound reference art style, stylized semi-realistic, game-ready 3D scene\", \"seed\": 4531, \"output_format\": \"glb\", \"texture_size\": 2048, \"layout_constraints\": \"三域总可玩直径 ≥50 单位（R04.1）；区域互通由引擎按 seed=1053 布局；此场景为地形与氛围基线\", \"spec_ref\": \"L02\", \"comparison_sources\": [\"hunyuan_worldplay\", \"llm_combo\"]}"
+    },
+    "general:L271-271": {
+      "path": "test_data/test_samples/G053_field_investigation/general_requirement.txt",
+      "sha256": "340c30f1c27c9800de5d1e864361ad9299e7367270f7fb817a0797ab1f2dece4",
+      "start_line": 271,
+      "end_line": 271,
+      "quote": "- W01 世界与时代背景：架空的「晴岚山原」生态纪年；开春以来原野生灵行为异常——鸟群提前集结、水獭改道、领地冲突增多，「生灵学会」委托驻地调查站查明成因。"
+    },
+    "general:L272-272": {
+      "path": "test_data/test_samples/G053_field_investigation/general_requirement.txt",
+      "sha256": "340c30f1c27c9800de5d1e864361ad9299e7367270f7fb817a0797ab1f2dece4",
+      "start_line": 272,
+      "end_line": 272,
+      "quote": "- W02 场景所在地：晴岚山原的三个区域——花坡区 Z01（开阔草甸）、溪湾区 Z02（浅水木桥芦苇）、雷晶丘 Z03（蓝灰岩丘与琥珀晶体），调查站 S01 位于三域交界。"
+    },
+    "general:L273-273": {
+      "path": "test_data/test_samples/G053_field_investigation/general_requirement.txt",
+      "sha256": "340c30f1c27c9800de5d1e864361ad9299e7367270f7fb817a0797ab1f2dece4",
+      "start_line": 273,
+      "end_line": 273,
+      "quote": "- W03 玩家身份与当前任务：玩家是调查站学徒调查员 A01（外观按 images/A01_field_researcher.png 绑定）；当前任务：完成四阶段调查（扫描/收集/对练/精英调查），并通过调查笔记的线索与假设给出「异常成因结论」。"
+    },
+    "general:L275-275": {
+      "path": "test_data/test_samples/G053_field_investigation/general_requirement.txt",
+      "sha256": "340c30f1c27c9800de5d1e864361ad9299e7367270f7fb817a0797ab1f2dece4",
+      "start_line": 275,
+      "end_line": 275,
+      "quote": "- W05 叙事来源：五类线索（足迹/气味/抓痕/栖息痕迹/行为标记）＝生灵异常行为的现场证据；三个假设（迁徙期扰动/水源地变化/领地争夺）＝学会的三个待验证成因假说；观察台 S02＝学会设立的既有观测设施。全部原创。"
+    },
+    "general:L276-276": {
+      "path": "test_data/test_samples/G053_field_investigation/general_requirement.txt",
+      "sha256": "340c30f1c27c9800de5d1e864361ad9299e7367270f7fb817a0797ab1f2dece4",
+      "start_line": 276,
+      "end_line": 276,
+      "quote": "- W06 视觉风格与色彩材质：按四张绑定示意图约束的写实风格化野外；三域主色——花坡暖绿（#7FA05A 系）、溪湾水青（#5C8FA3 系）、雷晶丘蓝灰＋琥珀（#6B7A8C/#D99A2B 系）；材质以草甸、湿岩、晶体为主。"
+    },
+    "general:L277-277": {
+      "path": "test_data/test_samples/G053_field_investigation/general_requirement.txt",
+      "sha256": "340c30f1c27c9800de5d1e864361ad9299e7367270f7fb817a0797ab1f2dece4",
+      "start_line": 277,
+      "end_line": 277,
+      "quote": "- W07 环境氛围与声音语言：晨雾与鸟鸣的原野——音效语言为「扫描嗡鸣＋线索提示音＋对练打击＋收集乐音」＋三域环境鸟鸣溪流（§22 F06 冻结清单交付）。"
+    },
+    "asset_requirement:L6": {
+      "path": "test_data/test_samples/G053_field_investigation/3D_scene/requirement.txt",
+      "sha256": "c6d1259f3d298dad3fe66247136a26c54de4acc07a2a8b5777ac152622c6bd1c",
+      "start_line": 6,
+      "end_line": 6,
+      "quote": "- G053_scene_001: Original three-domain field research landscape: flower slope meadow Z01 with sparse trees, creek bay Z02 with shallow water, wooden bridge and reed bank, thunder crystal hill Z03 with blue-grey rocks and amber crystals, central research station S01, matching bound reference art style, stylized semi-realistic, game-ready 3D scene"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+      "start_line": 78,
+      "end_line": 82,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "Original three-domain field research landscape: flower slope meadow Z01 with sparse trees",
+      "creek bay Z02 with shallow water",
+      "wooden bridge and reed bank",
+      "thunder crystal hill Z03 with blue-grey rocks and amber crystals",
+      "central research station S01",
+      "stylized semi-realistic"
+    ],
+    "style": [
+      "matching bound reference art style",
+      "game-ready 3D scene"
+    ],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求符合度",
+      "checks": [
+        {
+          "id": "C01",
+          "title": "场景区域、地标或可见内容",
+          "assertion": "实际产物可观察地满足：Original three-domain field research landscape: flower slope meadow Z01 with sparse trees；creek bay Z02 with shallow water",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "Original three-domain field research landscape: flower slope meadow Z01 with sparse trees",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "creek bay Z02 with shallow water",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "这里只核对场景区域/地标的存在、类别与外观。layout_constraints 已声明的数量、尺寸及空间位置由布局项核对，不在此重复计分。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "C02",
+          "title": "场景区域、地标或可见内容",
+          "assertion": "实际产物可观察地满足：wooden bridge and reed bank；thunder crystal hill Z03 with blue-grey rocks and amber crystals",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "wooden bridge and reed bank",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "thunder crystal hill Z03 with blue-grey rocks and amber crystals",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "这里只核对场景区域/地标的存在、类别与外观。layout_constraints 已声明的数量、尺寸及空间位置由布局项核对，不在此重复计分。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "C03",
+          "title": "场景区域、地标或可见内容",
+          "assertion": "实际产物可观察地满足：central research station S01；stylized semi-realistic",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "central research station S01",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "stylized semi-realistic",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "这里只核对场景区域/地标的存在、类别与外观。layout_constraints 已声明的数量、尺寸及空间位置由布局项核对，不在此重复计分。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "C04",
+          "title": "明确空间布局",
+          "assertion": "场景外观与可量测空间关系满足：三域总可玩直径 ≥50 单位（R04.1）；区域互通由引擎按 seed=1053 布局；此场景为地形与氛围基线",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "三域总可玩直径 ≥50 单位（R04.1）",
+              "field": "layout_constraints"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "区域互通由引擎按 seed=1053 布局",
+              "field": "layout_constraints"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "此场景为地形与氛围基线",
+              "field": "layout_constraints"
+            }
+          ],
+          "scope_exclusions": "不验收碰撞、导航、时间脚本、出生触发与运行时判定；保留视觉空间要求。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [
+            "精确距离/尺寸必须由场景尺度与坐标探针证明，不从单帧估算。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L271-271",
+              "text": "- W01 世界与时代背景：架空的「晴岚山原」生态纪年；开春以来原野生灵行为异常——鸟群提前集结、水獭改道、领地冲突增多，「生灵学会」委托驻地调查站查明成因。"
+            },
+            {
+              "source_id": "general:L272-272",
+              "text": "- W02 场景所在地：晴岚山原的三个区域——花坡区 Z01（开阔草甸）、溪湾区 Z02（浅水木桥芦苇）、雷晶丘 Z03（蓝灰岩丘与琥珀晶体），调查站 S01 位于三域交界。"
+            },
+            {
+              "source_id": "asset_requirement:L6",
+              "text": "- G053_scene_001: Original three-domain field research landscape: flower slope meadow Z01 with sparse trees, creek bay Z02 with shallow water, wooden bridge and reed bank, thunder crystal hill Z03 with blue-grey rocks and amber crystals, central research station S01, matching bound reference art style, stylized semi-realistic, game-ready 3D scene"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L276-276",
+              "text": "- W06 视觉风格与色彩材质：按四张绑定示意图约束的写实风格化野外；三域主色——花坡暖绿（#7FA05A 系）、溪湾水青（#5C8FA3 系）、雷晶丘蓝灰＋琥珀（#6B7A8C/#D99A2B 系）；材质以草甸、湿岩、晶体为主。"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "matching bound reference art style",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "game-ready 3D scene",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "场景几何完整性",
+          "assertion": "只评场景自身断裂、漂浮、交叠与尺度突变，不验证碰撞或导航。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "主要场景崩坏或大面积缺面，空间不可辨",
+            "2": "主要区域存在明显断裂/悬浮/异常尺度突变",
+            "3": "场景整体完整，局部连接或几何有可见瑕疵",
+            "4": "仅有轻微局部几何瑕疵",
+            "5": "全景与近景均完整，未见明显断裂、漂浮或非设计性穿插"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "整体视觉组织与表面质量",
+          "assertion": "只评构图可读性、光照及材质连贯；不重复检查地标数量与布局需求。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "画面混乱或严重伪影，主要空间无法辨识",
+            "2": "光照/材质错乱显著，空间层次难辨",
+            "3": "空间层次可辨，局部拥挤/涂抹/光照接缝可见",
+            "4": "空间组织清晰，仅少量视觉瑕疵",
+            "5": "空间层次、光照与材质连贯，全景和近景均无明显伪影"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。"
+  },
+  "evidence_requirements": [
+    "实际三维场景的俯视全景、地标及区域近景",
+    "空间关系需场景坐标/尺寸探针；截图不能证明精确米数"
+  ],
+  "objective_specs": {
+    "output_format": "glb",
+    "texture_size": 2048
+  },
+  "objective_metric_policy": "规格与传统指标单独由探针/脚本报告原始值，不与三维 rubric 分数混合；本文件不代表已计算任何指标。",
+  "authoring_warnings": [
+    {
+      "code": "unresolved_spec_ref",
+      "detail": "L02"
+    },
+    {
+      "code": "no_literal_asset_mention_in_general",
+      "detail": "general 中未找到资产名/ID的逐字匹配；采用已解析 spec_ref 与分资产原文，不伪造独立描述。"
+    }
+  ]
+}

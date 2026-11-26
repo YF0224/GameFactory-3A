@@ -1,0 +1,7 @@
+{
+  "contract_id": "G031_dream_archive.whitebox.final",
+  "version": "final",
+  "content_sha256": "5b5ab8a3e5d29faa1d0dee3786c9aa9f693d86ce37f33d328737f3be838c8157",
+  "rubric_json_sha256": "7c96dcff4008f99e5b9492690578f0a34f6bac149f1afe5495970721cb8826b9",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

@@ -1,0 +1,923 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_009",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 124,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_009.json",
+        "sha256": "8a54308d08d187ec3452e04e832b2d32650337fb5b0a1eccf35f1db6f1457399"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_010",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 125,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_010.json",
+        "sha256": "c16136f3d1fa57a1ea65f146ba9bc7770b80097af14dba4bd7c3edc592e8a098"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_011",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 126,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_011.json",
+        "sha256": "763b1179c01eb2199b638f032b158a9b5ae7cf94aae77530e137fd81b326d59e"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_012",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 127,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_012.json",
+        "sha256": "6e8e27037496801030bd69f2ddf525e988fed99a1abc00dee833a041d669b086"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_013",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 128,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_013.json",
+        "sha256": "a0004da832c9c0977e5fae4db3804e080784c16de90674c8c30da2c1448ebb5b"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_014",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 129,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_014.json",
+        "sha256": "7c520a4d6406fab92248f84764e268ecff3777b6cef9661d575959809f25aa46"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_015",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 130,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_015.json",
+        "sha256": "1a3e9137180fef36d2163556d29ece46f7f8b9ad333b8cf29d22d96e5f8bdff5"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_016",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 131,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_016.json",
+        "sha256": "fe3a212e7b851ac200e5ec74de9bae56c233e0079670f1051a0aa40764d354f1"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_017",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 132,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_017.json",
+        "sha256": "01b92f86516f2b0783b3171ad9f2eb75113d0e178d619343dc85a2fae662c6f4"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_018",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 133,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_018.json",
+        "sha256": "ba073f28991e914589d304775de95230b5b31397bebae22fb09a265605b25030"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_019",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 134,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_019.json",
+        "sha256": "aa6e3ee14685a1fa3a62b1ea2536db48f292a6517ff1f9a0ebd357872eb0d93d"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_020",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 135,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_020.json",
+        "sha256": "8dd6f50d1f46e6c9d269af1dcf18c3cbe18e69bdf35881b70172b0e28b327338"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_021",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 136,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_021.json",
+        "sha256": "86ec42fe97b287476f3c00b844cf58be5a6623a982e1ae033bf3c0a48d0d9117"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_022",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 137,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_022.json",
+        "sha256": "fa89fa1a0758a873bf7e2947d356526081fcc6addda4c407720be5911c88751b"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_023",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 138,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_023.json",
+        "sha256": "bc6e99c47517ed661ac6cdedc08eb27b4ae282785fe5f5b437bef697bea6feb8"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_024",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 139,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_024.json",
+        "sha256": "a9c098f5d19a618810726fe90cbe5989c35917d0fb232970bc69c736fb665a75"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_025",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 140,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_025.json",
+        "sha256": "4c8145dc7930d37a31993c0e8e2b8252bd415056e01728007157d9aab57d91c3"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_026",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 141,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_026.json",
+        "sha256": "adf92e25351b53c123421655b6f6b22fa6e62b6ea6e999736c62281c749b73f4"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_027",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 142,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_027.json",
+        "sha256": "6bbfb9cec8578d5f279f447cd6bb4362327d04516a0b96a364f04cc8aa381c28"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_028",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 143,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_028.json",
+        "sha256": "f70f162d141c1fb0b1f35568aef6cb88240bc375f9667403faa9ef9aa5dec1c1"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_029",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 144,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_029.json",
+        "sha256": "9f1f205af9d310d9561be245645108bed6915af7a5675fd52715f926658f0200"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_rift_expedition_obj_030",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 145,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_rift_expedition_obj_030.json",
+        "sha256": "323e4176056f9cf51953f48b9073748ce52f3f074b74293ce007ee6da76d7073"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 35,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_scene_001.json",
+        "sha256": "986b815633513f65817dbe3272f9e28c4cf74237d27a67dfcfe711236eecd838"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_scene_002",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 36,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_scene_002.json",
+        "sha256": "82c12441983d3fd226e67492ba3d7b5fe75b41d517a813b4fcd512316cefd817"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_scene_003",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 37,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_scene_003.json",
+        "sha256": "fd540ac266d88677940c84ca56f57f9acf609a86a1e3233d8579fc64736a43d2"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_vo_016",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 33,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_vo_016.json",
+        "sha256": "df6ab91c52b4b612b935b1a04b4098ba20a69c1f456bc04c4d2101237d427b24"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_vo_017",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 34,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_vo_017.json",
+        "sha256": "af40fe6c176bded2f379019f0f82976113b2e34904e323942c6e69d267d8ec4a"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_vo_018",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 35,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_vo_018.json",
+        "sha256": "c673edf513f1b52b78f0a3a0862385e3afdb9aed7ddcffb9beae1488f46db227"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_vo_019",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 36,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_vo_019.json",
+        "sha256": "5e2e80b2e31c25129eda61cbf1d2cebe33cb85efc6c54b613e1bbc2a4cd767bb"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_vo_020",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 37,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_vo_020.json",
+        "sha256": "effe7fa8a42c5aff0c7f9aef7431eeaf9b1ae447882e9796bbc3c24847d10915"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_vo_021",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 38,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_vo_021.json",
+        "sha256": "1c88cfff52aa9d1dc63c211a379c355c1ffee065c85583d11bfc5209215f76d5"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 377,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_001.json",
+        "sha256": "2e05caff60872c5bbf1fcbf2c5dc100e96a046fac64d10748cde22fa77f17398"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 378,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_002.json",
+        "sha256": "ee7b780ad25951229c96ca7355e39427a7b5c43f957b4b721949b2d267c36dfc"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 379,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_003.json",
+        "sha256": "670be8a64ad8bb1c34f413645a7ab0f57b38bd0f2f6e1a27c9429d296483596a"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 380,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_004.json",
+        "sha256": "07bdcd85df86425827df890feec72163a00c2eed9e7c901d0b16815b767661d5"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 381,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_005.json",
+        "sha256": "0c80a5d4eb716b9048cd87b77121a90bba4d80e2d39063bc11f4423eb7a73194"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 382,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_006.json",
+        "sha256": "faf53bae85d0838de16379e2489b40be5f3e379fa6fa3e1f97c5b3ab228306a5"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 383,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_007.json",
+        "sha256": "063445303f6a2d24e934c0248b98684c6c31c863d5362ca75057ac146d8ba14a"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 384,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_008.json",
+        "sha256": "b67604fe198d029eb58ad94ac8bdffa66e4c7592daaf2706685ee890c137e7c1"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 385,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_009.json",
+        "sha256": "64ec73df35a3cd10a6fcc1e09fe98cd5acb871355f5f4295eb7d87e328e7c748"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 386,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_010.json",
+        "sha256": "a546341267a860a2c8deea44bfec1b7d439cef136dbb46adacf384f612b56605"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 387,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_011.json",
+        "sha256": "f0331c04c443ae299a9fd2d9984659c2676a1c258c1ceb425f10e89c94cb09e5"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_012",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 388,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_012.json",
+        "sha256": "dd92c61937871d917547856487f99fb4cd6526fc4fb845101d610208f6d96267"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_013",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 389,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_013.json",
+        "sha256": "ebfd1fb93d95d6d91975daeeccc9986efacf0e975a8a8f98f36d291d446bb463"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_014",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 390,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_014.json",
+        "sha256": "2377bcbbb78335e074e5b7b8af895a0f142088527860cc1c93b95a7feb294bbd"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_sfx_015",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 391,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_sfx_015.json",
+        "sha256": "fddc5a1ed8a36258025d9f21fa906f2469b8a3ee3613ff0660b7f75065d2efe5"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 97,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_cg_001.json",
+        "sha256": "1b53784996ac0535d0df77035dda5da8a5e15feef23a7d05d20a4f03082b9cd1"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 98,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_cg_002.json",
+        "sha256": "f89f9b7d0584186f2046f9e8756ca4ee8acd1d0619ee302e0d11841ed9fc37b4"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 99,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_cg_003.json",
+        "sha256": "92285bea00b19cca10ed2941e4c6bbd038374b8e4f4999445b177ca8dd703a4c"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_cg_004",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 100,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_cg_004.json",
+        "sha256": "98108db660cd32a51bab5162be8512888918079605ff030cd77e97ba7f299d81"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_mot_001",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 67,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_mot_001.json",
+        "sha256": "9abda4343a47dda62ad33bacfe58bdaf6b647b504f67393d96459c084425bc48"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_mot_002",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 68,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_mot_002.json",
+        "sha256": "ba1c08d58cf96ff38b2704745585aed2230188b1c3b1da920d2f84fa9d126235"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_mot_003",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 69,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_mot_003.json",
+        "sha256": "7ef5b1298c0f129ee1cc69cb2418a0340ea9767ec413893e2bf432bff65eb499"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_mot_004",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 70,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_mot_004.json",
+        "sha256": "24136fe14b46bebf767f3555bf971cbb8fae059b8d88c63e4a303c51d0072e4f"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_mot_005",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 71,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_mot_005.json",
+        "sha256": "d0e99a06ef57be58c6c7696cffe2b7577414ce8b22904b1fbc4460ab64d0b433"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_mot_006",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 72,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_mot_006.json",
+        "sha256": "42608962afd472c822e7aaddb8797d84dda1e1b757130ee1c04dffc12dd224f5"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_mot_007",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 73,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_mot_007.json",
+        "sha256": "cd77f3cb9319d070c5193ac6f6c2e99286b7954490bde8559733407953c032f3"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_mot_008",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 74,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_mot_008.json",
+        "sha256": "11c68c83059e2305584c141b3f95d61a5412bba06b384f25f9b5d1a897555afe"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_mot_009",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 75,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_mot_009.json",
+        "sha256": "19f6af977113c9d316da874f1499886fc0ac1b0bce1a8c25cef4a70a6f846574"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_mot_010",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 76,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_mot_010.json",
+        "sha256": "7fca9f9956ae9c8359d2467d513ac91a5baa1936530b907cc9fde86b7216fe82"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_mot_011",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 77,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_mot_011.json",
+        "sha256": "3f57e1dcfa88782bce8a2408ac23790aaaf0dafe0a04e07ccdf0fe67b191d3de"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_tpose_001",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 8,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_tpose_001.json",
+        "sha256": "e76ad6390c3e75813df2eb22c730a3b5aa4e771252b27e8fb510f8482079ba0a"
+      },
+      "C_checks": 7,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_tpose_002",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 9,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_tpose_002.json",
+        "sha256": "f6b62dcc7eb3d9e79f899c1ca5508779b18a66f34abefe80c220647c1b44843a"
+      },
+      "C_checks": 6,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G035_rift_expedition",
+      "task_id": "G035_tpose_003",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 10,
+      "rubric": {
+        "path": "test_data/test_samples/G035_rift_expedition/rubric_assets/priority_observable_v2/G035_tpose_003.json",
+        "sha256": "75bbba87c3da9254849b30852e95febed0fc409a22df9527b71898acc3582b9f"
+      },
+      "C_checks": 7,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    }
+  ]
+}

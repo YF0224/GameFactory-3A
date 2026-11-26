@@ -1,0 +1,7 @@
+{
+  "contract_id": "G020_tidal_glyphs.whitebox.endpoints-v2-candidate.8f79f4a2b953a1ac48f20fbfd85a41bcb9c0e943e7641e99b498a15fdfda9194",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "8f79f4a2b953a1ac48f20fbfd85a41bcb9c0e943e7641e99b498a15fdfda9194",
+  "rubric_json_sha256": "194499a9210162a3deb3613357059b25537699f590ce21d3261478baf32d11d2",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

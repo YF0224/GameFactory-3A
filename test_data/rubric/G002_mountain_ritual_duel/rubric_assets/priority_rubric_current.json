@@ -1,0 +1,263 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_mountain_ritual_duel_obj_003",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 3,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_mountain_ritual_duel_obj_003.json",
+        "sha256": "de7c3964010d49350c66c3295885c709da0f7e3c94489ffe9d23be0ad8d550a5"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_mountain_ritual_duel_obj_005",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 4,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_mountain_ritual_duel_obj_005.json",
+        "sha256": "4456de7d273bb3ee0161050542513e16da7ecf99d9f38027d2f03b5e3f2a5c35"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_mountain_ritual_duel_obj_006",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 5,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_mountain_ritual_duel_obj_006.json",
+        "sha256": "b529819c62f8f4c377de93a33c94a3d25e3982960f6d74717ced398eaa9ac504"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 2,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_scene_001.json",
+        "sha256": "88e67740738a33386b056c025b47926d450e61e26549bf65edb3026e42c2c2b0"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 10,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_sfx_001.json",
+        "sha256": "585c7d4a31b04ff6d9392e28175e4f7e8ae2e997728d1ebd370e8b38867f8432"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 11,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_sfx_002.json",
+        "sha256": "b5fbdc8c3c1e5be3da791c2d70a04842685801bdd52599997409ea986cf71469"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 12,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_sfx_003.json",
+        "sha256": "d2fabd2e38800b96a1dd0ba4d014cc9e99bf52f7b48b95f28c794500ad541c16"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 13,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_sfx_004.json",
+        "sha256": "3ee16fa2dff77382d59ac52670464b89e70f81aa0430fc6cf8232dfb842e6b0d"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 14,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_sfx_005.json",
+        "sha256": "64db9856f0046d3f51e403cb7ebbda1ad7feeceee08816762dbf0472638f09bf"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 15,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_sfx_006.json",
+        "sha256": "134ac01a6580e5fcb5e8397264513453f537a527ebcca6e040cd65b00754e49f"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 16,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_sfx_007.json",
+        "sha256": "30236bc0489265aa3e0fa9372a3efb7218a5e2bace7fb2f518c6875db8548da8"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 17,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_sfx_008.json",
+        "sha256": "b18260089418906a84f1b992a42a40c81bc63c52070a3c277024bef480cb2cc2"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 18,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_sfx_009.json",
+        "sha256": "46e20e67fa11a10da40381a7bdfe7bd500ebbb8196f73c09eff23e6c2b87e5bf"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 19,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_sfx_010.json",
+        "sha256": "93871093bab8f685becb4c73ff9faa57ba0304254b9f70caadf09323310f03c4"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 20,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_sfx_011.json",
+        "sha256": "07118ef362f9706459d5a88344592f45d82a00aefd8adff94b4a65b390facd6d"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 4,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_cg_001.json",
+        "sha256": "9652bb8308481d872eeec69713e401f8bc702f6a1af659ad6511ce9b906a8604"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 5,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_cg_002.json",
+        "sha256": "30160f9b56d79a64119559bdcc02e57eadaa67968c343e3bf8fae3b4287c7ab7"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G002_mountain_ritual_duel",
+      "task_id": "G002_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 6,
+      "rubric": {
+        "path": "test_data/test_samples/G002_mountain_ritual_duel/rubric_assets/priority_observable_v2/G002_cg_003.json",
+        "sha256": "e55a821e8a64dc44bd785b9f876a801b3a98f888e923231116c7351d7d0eb428"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    }
+  ]
+}

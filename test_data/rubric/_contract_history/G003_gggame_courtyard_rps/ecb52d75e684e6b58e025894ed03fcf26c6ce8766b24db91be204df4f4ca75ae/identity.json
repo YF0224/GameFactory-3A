@@ -1,0 +1,7 @@
+{
+  "contract_id": "G003_gggame_courtyard_rps.whitebox.final",
+  "version": "final",
+  "content_sha256": "ecb52d75e684e6b58e025894ed03fcf26c6ce8766b24db91be204df4f4ca75ae",
+  "rubric_json_sha256": "e6a5c927870bcdbcc753474e236794839348df31930ef269a065c314bed2e545",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

@@ -1,0 +1,370 @@
+{
+  "game_id": "G040_endurance_race",
+  "task_id": "G040_sfx_006",
+  "asset_type": "audio",
+  "asset_subtype": "sound_effect",
+  "asset_name": "fuel_warning",
+  "task_input": {
+    "game_id": "G040_endurance_race",
+    "task_id": "G040_sfx_006",
+    "asset_name": "fuel_warning",
+    "audio_type": "sound_effect",
+    "sound_category": "one_shot",
+    "prompt": "Low fuel warning tone, soft amber two-pulse alert suitable for repeating every 5 seconds",
+    "duration_sec": 0.6,
+    "sample_rate": 48000,
+    "seed": 5406,
+    "trigger": "燃油 <15%（HUD 油表转黄闪烁同帧）",
+    "required_by_spec": true,
+    "spec_ref": "F05,F06",
+    "loop": false,
+    "stop_condition": "natural_end",
+    "priority": "gameplay_critical",
+    "ducking": "none",
+    "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+    "planned_source": "general_audio_llm",
+    "l_tier_repair_target": true
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L218-218",
+      "general:L219-219",
+      "general:L220-220",
+      "general:L222-222"
+    ],
+    "visual_style_source_ids": [
+      "general:L223-223"
+    ],
+    "sound_style_source_ids": [
+      "general:L224-224"
+    ],
+    "asset_description_source_ids": [
+      "general:L104",
+      "general:L241",
+      "general:L251"
+    ],
+    "spec_ref_source_ids": [
+      "general:L233-249",
+      "general:L251-251"
+    ],
+    "unresolved_spec_refs": []
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "sha256": "658d571abb647c6b75c2aee4a8cc6975cccf8e5b8187d221a99ad406a9c39fb0",
+      "start_line": 448,
+      "end_line": 448,
+      "quote": "{\"game_id\": \"G040_endurance_race\", \"task_id\": \"G040_sfx_006\", \"asset_name\": \"fuel_warning\", \"audio_type\": \"sound_effect\", \"sound_category\": \"one_shot\", \"prompt\": \"Low fuel warning tone, soft amber two-pulse alert suitable for repeating every 5 seconds\", \"duration_sec\": 0.6, \"sample_rate\": 48000, \"seed\": 5406, \"trigger\": \"燃油 <15%（HUD 油表转黄闪烁同帧）\", \"required_by_spec\": true, \"spec_ref\": \"F05,F06\", \"loop\": false, \"stop_condition\": \"natural_end\", \"priority\": \"gameplay_critical\", \"ducking\": \"none\", \"sync_contract\": \"one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition\", \"planned_source\": \"general_audio_llm\", \"l_tier_repair_target\": true}"
+    },
+    "general:L218-218": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 218,
+      "end_line": 218,
+      "quote": "- W01 世界与时代背景：「环涛耐久赛」——海岸城市涛澜湾一年一度的三日街头耐久锦标赛，独立车队与城市公路共同书写耐久传说；轮胎、油量与耐心同样快的车队才能登顶。"
+    },
+    "general:L219-219": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 219,
+      "end_line": 219,
+      "quote": "- W02 场景所在地：涛澜湾三段赛程——赛段一穿老城街道（干燥午后）、赛段二沿海滨大道（阵雨初歇、湿地反光）、赛段三夜战港口区（夜雨、灯光与积水）；维修区设在滨海直道旁。"
+    },
+    "general:L220-220": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 220,
+      "end_line": 220,
+      "quote": "- W03 玩家身份与当前任务动机：玩家是独立车队「白帆车队」的签约车手，驾驶 07 号耐久赛车，与三支风格鲜明的 AI 车队（红隼/信天翁/灰鸥）争夺三赛段累计积分冠军。"
+    },
+    "general:L222-222": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 222,
+      "end_line": 222,
+      "quote": "- W05 叙事来源：07 号耐久赛车＝白帆车队自制 LMP 风格原型车；红隼/信天翁/灰鸥＝三支 AI 车队的图腾涂装；安全车＝赛会柠檬黄引导车；维修区＝滨海直道的活动板房与胎墙。全部原创，不用商业作品命名。"
+    },
+    "general:L223-223": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 223,
+      "end_line": 223,
+      "quote": "- W06 视觉风格与色彩材质：晴雨交替的城市耐久风；主色＝涛澜青 #2E6E7E、白帆白 #F2F4EF、赛会金 #E8B84B、警示红 #D9553F；材质为沥青湿地反光、护栏钢、胎墙橡胶与港口夜灯。"
+    },
+    "general:L224-224": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 224,
+      "end_line": 224,
+      "quote": "- W07 环境氛围与声音语言：海风与港口低鸣为底，夜雨段转为雨幕；音效语言＝引擎、轮胎、进站扳手、油泵、判罚提示、无线电提示（F06 冻结清单）；混音优先级：判罚/警报 ＞ 无线电 ＞ 进站 ＞ 引擎 ＞ 雨环境。"
+    },
+    "general:L233-249": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 233,
+      "end_line": 249,
+      "quote": "- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 发车灯 | 红灯依次亮起 → 绿灯 | start_light_beep | 绿灯起跑 |\n| 完成一圈 | 圈号横幅＋圈速差 | lap_complete_chime | 横幅收起 |\n| 抓地 <40 | HUD 抓地表转橙 | wear_warning（并入 radio_alert 前置提示档） | 进站换胎 |\n| 打滑事件 | 车尾甩动＋烟雾＋镜头甩动 1.5 秒 | tire_squeal_loop 峰值 | 失控 1.5 秒结束 |\n| 燃油 <15% | HUD 油表转黄闪烁 | fuel_warning | 进站加油 |\n| 燃油归零 | 引擎音熄灭＋车辆滑行 | engine_loop 淡出 | 停机退赛 |\n| 切弯判罚 | 判罚横幅（+5 秒） | penalty_beep | 横幅收起 |\n| 碰撞 | 火花＋0.3 秒中震 | collision_crash | 0.3 秒结束 |\n| 进站 | 维修区俯视镜头＋换胎/加油动作（可跳过） | pit_wrench | 出站 |\n| 安全车出动 | 黄旗全屏条幅＋镜头切安全车 1 秒 | radio_alert | deployed 期间常驻黄旗角标 |\n| 安全车退出 | 绿旗角标闪两下 | radio_alert（绿旗档） | green 恢复 |\n| 退赛 | 退赛横幅＋C04 退赛意象 | defeat_sting（退赛档） | 进入段内退赛结算 |\n| 总评结算 | C04 播放（登顶/未登顶意象）＋总评面板 | victory_sting / defeat_sting | 进入总评面板 |"
+    },
+    "general:L251-251": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 251,
+      "end_line": 251,
+      "quote": "- F06 关键音效清单（one_shot 9 条＋环境循环 3 条，全部冻结需求）：start_light_beep、lap_complete_chime、collision_crash、penalty_beep、radio_alert（安全车/黄旗/绿旗/进站提示共用，按事件切换音色档）、fuel_warning、pit_wrench、victory_sting、defeat_sting、timeout 类并入 penalty_beep 不单列；环境循环：engine_loop（随速变调）、rain_loop（段 2/3）、tire_squeal_loop（打滑/急转）。无配音需求（无线电提示用提示音档表达）。"
+    },
+    "general:L104": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 104,
+      "end_line": 104,
+      "quote": "- G08 燃油（本包冻结值）：燃油 100% 起（每赛段自动加满）；每圈消耗＝基础 22%＋风格加成（激进 +10%、均衡 +5%、保守 +0%）——即激进 32%/圈、均衡 27%/圈、保守 22%/圈；燃油 <15% 时 HUD 黄色油量警报（fuel_warning 音）；燃油归零 → 引擎停机退赛（该段 0 分，V02/S13）；进站补满 +2 秒（G04）。油耗 oracle：激进风格连跑 3 圈耗油 96%（勉强可行）、保守 3 圈耗 66%（余量充足），中途多次打滑修正增加里程将逼近上限——燃油构成真实进站动因。"
+    },
+    "general:L241": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 241,
+      "end_line": 241,
+      "quote": "| 燃油 <15% | HUD 油表转黄闪烁 | fuel_warning | 进站加油 |"
+    },
+    "general:L251": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 251,
+      "end_line": 251,
+      "quote": "- F06 关键音效清单（one_shot 9 条＋环境循环 3 条，全部冻结需求）：start_light_beep、lap_complete_chime、collision_crash、penalty_beep、radio_alert（安全车/黄旗/绿旗/进站提示共用，按事件切换音色档）、fuel_warning、pit_wrench、victory_sting、defeat_sting、timeout 类并入 penalty_beep 不单列；环境循环：engine_loop（随速变调）、rain_loop（段 2/3）、tire_squeal_loop（打滑/急转）。无配音需求（无线电提示用提示音档表达）。"
+    },
+    "revision_policy": {
+      "path": "workspaces/priority_rubric_observable_20261026/POLICY.md",
+      "sha256": "581d726dee3f0efba7c72e8616f553a1248d822791a75f42e6d463b81a9312ca",
+      "start_line": 1,
+      "end_line": 34,
+      "quote": "# Priority 资产可观察需求 rubric 修订 v2\n\n此版本只服务资产三列中的第一列需求完整性，不更改原始生成任务、既有分数或历史冻结合同。\n所有七份 priority 清单逐条覆盖，禁止仅用同类代表任务代替。输出位于各游戏 rubric_assets/priority_observable_v2/，游戏内 priority_rubric_current.json 是显式修订索引，不是对生产 evaluator 的隐式切换。\n\n## 第一列保留\n\n任务明确要求的主体类别、部件、形状、轮廓、命名色彩、材质表现、可见标记、姿态、动作阶段、声音事件、声源、情绪、语言及台词内容。\n任务明确要求的上下、左右、内外、中央/周边、前后、连接、环绕、相对大小/深浅、留白和遮挡关系。\nCG 只要求原文明示的事件顺序、状态变化与镜头行为；不能把列表自动解释为严格顺序。动作片段保留循环/单次与原地组织，不设严格时长/帧数/零位移阈值。\n台词或资产名称中的数字可以是实际内容，不是数值验收阈值；不因文本包含数字机械删掉语义。\n对象数量只作原文上下文，不按精确计数通过率评分；保留主次、成组、单体/多体和必要的关系含义。\n\n## 第一列不计分\n\n绝对坐标、原点、尺寸、距离、速度、时长、角度、帧数、分辨率、面数、数值颜色/色差、采样率、响度和频率阈值，以及机制数值、随机种子、容量、库存、伤害、时间窗。\n这些字段和原始引文完整保留在 task_input、sources 或 excluded_field_values 中，不伪称已经满足，也不当作第一列隐藏门槛。\n引擎导入、碰撞、导航、触发、跳过、暂停、同步、状态机与游戏内混音另属交付/集成验证，不凭离线素材判通过。\n\n## 三列分工\n\nC：当前任务明确指定什么，实际内容是否呈现。\nG：与角色/场景参考及游戏整体世界/美术/声音方向是否相容，不重复扣C的缺失。\nQ：内在感知/技术质量，不重复内容语义或世界适配。\n已有逐资产 rubric 的 G/Q 维度原样保留。此前未建逐资产文件的自然音效/T-pose只补源文支持的G/Q草稿，不能假称复用了已验证分数。\n参考图只按明确绑定使用；image_path 的存在不是生成模型实际收到图片的证明。T-pose中的参考身份/比例比较放G，不在C重复。\n\n## 来源与状态\n\n先遵从原有来源优先级；保留 canonical/分资产原文与任务JSONL。定性投影不得补造“附近”“左侧”等源文不支持的位置。\n场景 layout_constraints 已逐条整理为可见关系；原始标定与运行时要求另存。不宣称精确坐标被视觉验证。\n相互矛盾的要求保留并报审查警告，不用PARTIAL掩盖来源冲突，不把两种胜负分支强行串为一条时间线。\n每条判词必须给视角、帧或音频时间证据。观察不清/未取证为UNKNOWN，调用/配置故障为ERROR，均不填0或100、不删除分母；报告coverage和上下界，证据不足的得分只能PROVISIONAL。\n本次为有来源的修订版与结构/来源校验，不宣布所有1305条人工语义审核完成，不自动冻结，不自动启动评测。"
+    }
+  },
+  "references": [],
+  "objective_specs": {},
+  "authoring_warnings": [],
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求完整性（可观察内容）",
+      "checks": [
+        {
+          "id": "C001",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：Low fuel warning tone",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "Low fuel warning tone",
+              "text": "Low fuel warning tone"
+            }
+          ],
+          "modality": "audio_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C002",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：soft amber two-pulse alert suitable for repeating every",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "soft amber two-pulse alert suitable for repeating every 5 seconds",
+              "text": "soft amber two-pulse alert suitable for repeating every"
+            }
+          ],
+          "modality": "audio_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "游戏世界与用途相容性",
+          "assertion": "仅评价与当前游戏世界及本资产用途的相容性；不重复第一列声源、姿态、部件或事件缺失。",
+          "targets": [
+            {
+              "source_id": "general:L218-218",
+              "text": "- W01 世界与时代背景：「环涛耐久赛」——海岸城市涛澜湾一年一度的三日街头耐久锦标赛，独立车队与城市公路共同书写耐久传说；轮胎、油量与耐心同样快的车队才能登顶。"
+            },
+            {
+              "source_id": "general:L219-219",
+              "text": "- W02 场景所在地：涛澜湾三段赛程——赛段一穿老城街道（干燥午后）、赛段二沿海滨大道（阵雨初歇、湿地反光）、赛段三夜战港口区（夜雨、灯光与积水）；维修区设在滨海直道旁。"
+            },
+            {
+              "source_id": "general:L220-220",
+              "text": "- W03 玩家身份与当前任务动机：玩家是独立车队「白帆车队」的签约车手，驾驶 07 号耐久赛车，与三支风格鲜明的 AI 车队（红隼/信天翁/灰鸥）争夺三赛段累计积分冠军。"
+            },
+            {
+              "source_id": "general:L222-222",
+              "text": "- W05 叙事来源：07 号耐久赛车＝白帆车队自制 LMP 风格原型车；红隼/信天翁/灰鸥＝三支 AI 车队的图腾涂装；安全车＝赛会柠檬黄引导车；维修区＝滨海直道的活动板房与胎墙。全部原创，不用商业作品命名。"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "适用的声音/美术语言相容性",
+          "assertion": "按资产角色判断与所引游戏声音或美术方向是否相容；不要求单资产包含全部世界元素，不重复质量缺陷。",
+          "targets": [
+            {
+              "source_id": "general:L224-224",
+              "text": "- W07 环境氛围与声音语言：海风与港口低鸣为底，夜雨段转为雨幕；音效语言＝引擎、轮胎、进站扳手、油泵、判罚提示、无线电提示（F06 冻结清单）；混音优先级：判罚/警报 ＞ 无线电 ＞ 进站 ＞ 引擎 ＞ 雨环境。"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "基础质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "音色与信号感知质量",
+          "assertion": "只评完整音频中音色解析、非预期噪声、失真、削波与断裂；不评价指定声源是否正确。",
+          "rating_anchors": {
+            "1": "严重缺陷，主要内容难以辨识",
+            "2": "明显缺陷反复影响观察",
+            "3": "基本清楚，局部缺陷可见",
+            "4": "整体良好，仅轻微瑕疵",
+            "5": "在所给证据中未见明显缺陷"
+          },
+          "unknown_rule": "缺证据为 UNKNOWN，不给默认分。"
+        },
+        {
+          "id": "Q02",
+          "title": "时间与动态感知质量",
+          "assertion": "只评起止、衰减、动态清晰度及适用时的持续声纹稳定性。不按绝对时长/响度阈值评分。无语音不设对白要求；无持续纹理不得凭片长推断。",
+          "rating_anchors": {
+            "1": "严重缺陷，主要内容难以辨识",
+            "2": "明显缺陷反复影响观察",
+            "3": "基本清楚，局部缺陷可见",
+            "4": "整体良好，仅轻微瑕疵",
+            "5": "在所给证据中未见明显缺陷"
+          },
+          "unknown_rule": "缺证据为 UNKNOWN，不给默认分。"
+        }
+      ]
+    }
+  ],
+  "schema_version": "gamefactory3a.asset_rubric.observable.v2",
+  "authoring_protocol": "priority_observable_v2",
+  "status": "source_grounded_revision_not_judged",
+  "scope": "priority gen 独立资产三列口径；第一列仅可观察需求内容，排除标定数值及运行时验收。",
+  "requirement_revision": {
+    "version": "priority_observable_v2",
+    "old_rubric": null,
+    "original_other_dimensions_preserved": false,
+    "original_task_input_unchanged": true,
+    "numerical_policy": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+    "reference_ownership": "任务指定姿态/部件/颜色归C，参考角色匹配/全局世界适配归G，内在感知质量归Q；同一事实不重复扣分。",
+    "baseline": "Old frozen aggregate rubric and historical scores untouched; new path requires explicit evaluator support for this schema.",
+    "freeze_status": "规则修订已生成并校验，未声明逐任务人工语义审核完成，不自动冻结或发布分数。",
+    "source_rebinding_audit": [],
+    "clause_ledger": [
+      {
+        "field": "prompt",
+        "source_quote": "Low fuel warning tone",
+        "action": "RETAINED",
+        "normalized": "Low fuel warning tone",
+        "check_id": "C001"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "soft amber two-pulse alert suitable for repeating every 5 seconds",
+        "action": "QUALITATIVE_PROJECTION",
+        "normalized": "soft amber two-pulse alert suitable for repeating every",
+        "check_id": "C002"
+      }
+    ],
+    "excluded_field_values": {
+      "sound_category": "one_shot",
+      "duration_sec": 0.6,
+      "sample_rate": 48000,
+      "seed": 5406,
+      "trigger": "燃油 <15%（HUD 油表转黄闪烁同帧）",
+      "required_by_spec": true,
+      "spec_ref": "F05,F06",
+      "loop": false,
+      "stop_condition": "natural_end",
+      "priority": "gameplay_critical",
+      "ducking": "none",
+      "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+      "planned_source": "general_audio_llm",
+      "l_tier_repair_target": true
+    },
+    "excluded_fields_policy": "保留来源，不作为第一列附加验收。loop/root_motion等只使用上述C条目所述的定性部分。"
+  },
+  "scoring_policy": {
+    "requirement_completeness_v2": {
+      "column": "requirement_reference",
+      "score": "100*mean(verified C item scores); PASS=1, PARTIAL=0.5, FAIL=0",
+      "coverage": "verified applicable C count / frozen applicable C count; UNKNOWN/ERROR retained in denominator and bounds, not converted to zero or full credit.",
+      "lower_bound": "100*sum(verified scores)/all applicable C count",
+      "upper_bound": "100*(sum(verified scores)+unknown applicable C count)/all applicable C count",
+      "status": "Any incomplete applicable C coverage => PROVISIONAL; no verified C => null.",
+      "overall": "三列等权；没有任一列不得给总分。此修订不重新计算历史结果。"
+    }
+  },
+  "evidence_requirements": [
+    "完整音频听评及具体时间段；循环内容另听未修改的双周期。"
+  ],
+  "objective_metric_policy": "原始数值和输出格式仅作独立交付/诊断信息；不并入本版第一列。不改变其他列既有实现。"
+}

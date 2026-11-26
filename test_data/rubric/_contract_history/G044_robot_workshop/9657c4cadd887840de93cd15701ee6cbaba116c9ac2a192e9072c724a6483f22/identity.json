@@ -1,0 +1,7 @@
+{
+  "contract_id": "G044_robot_workshop.whitebox.endpoints-v2-candidate.9657c4cadd887840de93cd15701ee6cbaba116c9ac2a192e9072c724a6483f22",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "9657c4cadd887840de93cd15701ee6cbaba116c9ac2a192e9072c724a6483f22",
+  "rubric_json_sha256": "0a64d97efe88c752229930f5c2dcb741fa8630cedd162bad76e070ec248c1953",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

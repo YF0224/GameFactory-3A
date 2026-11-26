@@ -1,0 +1,471 @@
+{
+  "version": "gameness-tiered-core-v1",
+  "case_id": "G021_outpost_assault",
+  "tier": "S",
+  "target_count": 8,
+  "mechanic_target_count": 8,
+  "group_quotas": {
+    "layout": 3,
+    "guidance": 2,
+    "feedback": 3
+  },
+  "authorized_change": "Gameness only: align count with same-case same-tier Mechanic",
+  "source_bindings": {
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G021_outpost_assault/rubric_whitebox_core/rubric.json": "115a61d125b748b9533bd25cf466dc8d66dfd49792c7ad76b42be4327abb7a47",
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G021_outpost_assault/general_requirement.txt": "8390129ffcabe983058b6bf6962e5a62962042d0684b897133847fade2edd134"
+  },
+  "source_contract_id": "G021_outpost_assault.whitebox.tiered-core-v1.e966bbe9e5376b471d99744d8f43c2c9684dbfefbc085c16b1d9c2f9287e127e",
+  "criteria": [
+    {
+      "id": "gameness.tiered.layout.01",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法阶段的核心状态信息可见，玩家能理解对象与状态的含义；无需全阶段同屏。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0001",
+        "frozen_assertion_id": "G021_outpost_assault.WB.G.03",
+        "frozen_subcheck_id": "G.s0001",
+        "frozen_text": "- I06 UI 必显状态：布防预算、战利品、己方建筑/陷阱数量、小队编成（三类数量）、出征倒计时（180s）、来袭波预告、主堡 HP、敌核心 HP、登陆点选择。",
+        "requirement_ids": [
+          "I06"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "- I06 UI 必显状态：布防预算、战利品、己方建筑/陷阱数量、小队编成（三类数量）、出征倒计时（180s）、来袭波预告、主堡 HP、敌核心 HP、登陆点选择。"
+      }
+    },
+    {
+      "id": "gameness.tiered.layout.02",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法界面的主要状态与次要信息层级清楚，玩家能辨认重点。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.hierarchy",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。"
+      }
+    },
+    {
+      "id": "gameness.tiered.layout.03",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法界面的关键文字和控件可辨认、可使用，不因遮挡或重叠而无法理解。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.readable",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。"
+      }
+    },
+    {
+      "id": "gameness.tiered.guidance.01",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "游戏内清楚传达一项推进当前玩法所必需的核心操作方法。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.guidance.controls",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "guidance",
+        "requirement": "实际游戏展示或清楚传达必要操作方法。"
+      }
+    },
+    {
+      "id": "gameness.tiered.guidance.02",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "玩家在当前真实玩法阶段能理解当前目标或下一步可执行操作。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0033",
+        "frozen_assertion_id": "G021_outpost_assault.WB.G.04",
+        "frozen_subcheck_id": "G.s0033",
+        "frozen_text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.01",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "一项代表性核心操作发生后，玩家能辨认操作成功、失败或被正确拒绝的结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0034",
+        "frozen_assertion_id": "G021_outpost_assault.WB.G.04",
+        "frozen_subcheck_id": "G.s0034",
+        "frozen_text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "requirement": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.02",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "一次真实进度更新、阶段切换或终局结果被清楚传达，信息与实际状态相符。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0035",
+        "frozen_assertion_id": "G021_outpost_assault.WB.G.04",
+        "frozen_subcheck_id": "G.s0035",
+        "frozen_text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "requirement": "目标进度、阶段变化与终局结果向玩家明确呈现。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.03",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "真实发生“建造落位”时，反馈让玩家辨认该事件及其对应对象和结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0009",
+        "frozen_assertion_id": "G021_outpost_assault.WB.G.01",
+        "frozen_subcheck_id": "G.s0009",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 建造落位 | 放置网格闪现＋塔架升起尘土 | 建造落位音 | 落位完成 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【建造落位】实际发生时可视表现为【放置网格闪现＋塔架升起尘土】，结束条件【落位完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      }
+    }
+  ],
+  "unselected_source_criteria": [
+    {
+      "id": "expanded.G.s0010",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.01",
+      "frozen_subcheck_id": "G.s0010",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出售返还 | 塔架拆除淡出＋预算回弹字 | 出售返还音 | 0.3s 结束 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【出售返还】实际发生时可视表现为【塔架拆除淡出＋预算回弹字】，结束条件【0.3s 结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0011",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.01",
+      "frozen_subcheck_id": "G.s0011",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 塔击发 | 弹道曳光＋命中火花 | 塔击发音 | 每发即时 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【塔击发】实际发生时可视表现为【弹道曳光＋命中火花】，结束条件【每发即时】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0012",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.01",
+      "frozen_subcheck_id": "G.s0012",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 单位受击 | 受击闪烁＋HP 数字 | 命中音 | 0.15s 结束 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【单位受击】实际发生时可视表现为【受击闪烁＋HP 数字】，结束条件【0.15s 结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0013",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.01",
+      "frozen_subcheck_id": "G.s0013",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 克制命中 | 伤害数字放大＋克制色框 | 无（数字承载） | 0.2s 结束 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【克制命中】实际发生时可视表现为【伤害数字放大＋克制色框】，结束条件【0.2s 结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0014",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.01",
+      "frozen_subcheck_id": "G.s0014",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 战利品弹字 | +20/+200/−10 弹字 | 战利品弹字音 | 弹字飘出 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【战利品弹字】实际发生时可视表现为【+20/+200/−10 弹字】，结束条件【弹字飘出】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0015",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.01",
+      "frozen_subcheck_id": "G.s0015",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 升级 | 升级脉冲环＋属性面板刷新 | 升级脉冲音 | 0.5s 结束 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【升级】实际发生时可视表现为【升级脉冲环＋属性面板刷新】，结束条件【0.5s 结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0016",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.01",
+      "frozen_subcheck_id": "G.s0016",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 来袭波警报 | 波次路径预览＋屏幕边缘警示 | 波次警报音 | 波开始 2s 后 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【来袭波警报】实际发生时可视表现为【波次路径预览＋屏幕边缘警示】，结束条件【波开始 2s 后】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0017",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.01",
+      "frozen_subcheck_id": "G.s0017",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 主堡受击 | 主堡闪红＋镜头 0.08s 震动 | 主堡受击音 | 闪烁结束 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【主堡受击】实际发生时可视表现为【主堡闪红＋镜头 0.08s 震动】，结束条件【闪烁结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0018",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.01",
+      "frozen_subcheck_id": "G.s0018",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 敌核心被毁 | 核心爆裂光柱（core_destroyed_burst） | 核心爆裂音 | 进入通关结算 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【敌核心被毁】实际发生时可视表现为【核心爆裂光柱（core_destroyed_burst）】，结束条件【进入通关结算】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0019",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.01",
+      "frozen_subcheck_id": "G.s0019",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 撤回 | 队伍撤回旗帜收拢画面 | 撤回信号音 | 进入撤回结算 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【撤回】实际发生时可视表现为【队伍撤回旗帜收拢画面】，结束条件【进入撤回结算】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0029",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.03",
+      "frozen_subcheck_id": "G.s0029",
+      "frozen_text": "- F10 前端界面：标题（开始/设置/退出）→ 布防 HUD（I06 全项＋建造/升级面板）→ 编组界面（三类兵种/上限 20/登陆点）→ 撤回/通关/局败结算面板（区分原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- F10 前端界面：标题（开始/设置/退出）→ 布防 HUD（I06 全项＋建造/升级面板）→ 编组界面（三类兵种/上限 20/登陆点）→ 撤回/通关/局败结算面板（区分原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）"
+    },
+    {
+      "id": "expanded.G.s0030",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.03",
+      "frozen_subcheck_id": "G.s0030",
+      "frozen_text": "关键状态图标+文字并用",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "关键状态图标+文字并用"
+    },
+    {
+      "id": "expanded.G.s0031",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.03",
+      "frozen_subcheck_id": "G.s0031",
+      "frozen_text": "窗口失焦自动暂停",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "窗口失焦自动暂停",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0032",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.03",
+      "frozen_subcheck_id": "G.s0032",
+      "frozen_text": "叙事节拍提示不阻断控制。",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "叙事节拍提示不阻断控制。"
+    },
+    {
+      "id": "expanded.G.s0002",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.03",
+      "frozen_subcheck_id": "G.s0002",
+      "frozen_text": "- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（布防/编组/结算/暂停面板、HUD）与交互物（建造格、陷阱位、登陆点、目标）逐类存在且运行时可进入",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（布防/编组/结算/暂停面板、HUD）与交互物（建造格、陷阱位、登陆点、目标）逐类存在且运行时可进入"
+    },
+    {
+      "id": "expanded.G.s0003",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.03",
+      "frozen_subcheck_id": "G.s0003",
+      "frozen_text": "数量与属性以对应 G·M 条目为准。",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "数量与属性以对应 G·M 条目为准。"
+    },
+    {
+      "id": "expanded.G.s0027",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.03",
+      "frozen_subcheck_id": "G.s0027",
+      "frozen_text": "暂停/结算/重开取消未结束的震动与特效",
+      "requirement_ids": [
+        "F09"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "暂停/结算/重开取消未结束的震动与特效"
+    },
+    {
+      "id": "expanded.G.s0028",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.03",
+      "frozen_subcheck_id": "G.s0028",
+      "frozen_text": "设置可关闭（FEEL04）。",
+      "requirement_ids": [
+        "F09"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "设置可关闭（FEEL04）。"
+    },
+    {
+      "id": "expanded.G.s0007",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.03",
+      "frozen_subcheck_id": "G.s0007",
+      "frozen_text": "顿帧不改变计时口径。",
+      "requirement_ids": [
+        "F03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "顿帧不改变计时口径。",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0036",
+      "frozen_assertion_id": "G021_outpost_assault.WB.G.04",
+      "frozen_subcheck_id": "G.s0036",
+      "frozen_text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。"
+    }
+  ],
+  "unselected_policy": "Retained for traceability/diagnostics; no implicit extra scored checks",
+  "selection_basis": "Original requirement/rubric only; no author implementation, runtime or scores",
+  "aggregation": "Equal mean of layout/guidance/feedback group means; unchanged 10/50/100 levels",
+  "prior_results": "Preserved under their original rubric; not relabeled or arithmetically converted",
+  "revision_sha256": "0e5c31f0fed8faca768b2665e73589141f973139746e2d639e2f8a4ca9f86718"
+}

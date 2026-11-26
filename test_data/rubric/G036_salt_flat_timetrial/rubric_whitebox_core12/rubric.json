@@ -1,0 +1,4889 @@
+{
+  "schema_version": "gamefactory3a.eval_contract.v1",
+  "game_id": "G036_salt_flat_timetrial",
+  "stage": "whitebox",
+  "version": "core12-v1",
+  "engine": "three_js",
+  "status": "frozen",
+  "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+  "synopsis_text": "近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录；盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。 The setting is 白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。. 玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。 Core loop: 驾驶 → 过计时门 → 计时累积 → 选择路面与路线 → 完成圈数 → 结算最好成绩。. 超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）；跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。 Narrative devices: 试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。. Art direction: 高对比白盐工业风；主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C；材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。. Sound direction: 干燥风啸与盐面尘雾为底；音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）；混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。. Asset tasks: 6 3d_object, 1 3d_scene, 1 motion, 11 audio, 3 cg_video; they serve the same declared world, characters and gameplay.",
+  "scoring_protocol": "本版本机制 C2 固定十二项、项间等权，每项仅一个可计分判定；引用上下文不再展开为额外评分原子。未选中的 general_requirement 规则不属于本版本 C2 分母；其他维度保留原有验收项。这是核心机制子集协议，不宣称覆盖完整需求；与历史全量协议分开报告。每行是一个验收终点，binding.subchecks 为必须独立取证的冻结细则，不是额外主项。全部主项及 CH 由同一配置的 VLM 判断；不使用 human.only 或人工回退。子检查角色为 precondition/action/behavior/boundary/recovery。precondition/action 是取证门槛，不计功能完成分。每个子检查只能 PASS/FAIL/UNKNOWN；任何必需子检查 UNKNOWN 或取证门槛 FAIL，主项 UNKNOWN。门槛全部通过后，仅按 behavior/boundary/recovery 的 PASS 数/冻结可计分子检查数计算；全通过 PASS、全失败 FAIL，其余 PARTIAL。UNKNOWN/ERROR 不记零分、不缩减冻结分母；仅报告 provisional 和证据覆盖率。补采所缺场景/事件/精确数值或实际模态证据后 VLM 重评；证据仍不足继续 UNKNOWN。代码与声明不能单独证明玩法完成。C2 必须有触发条件、实际操作、结果及拒绝/恢复分支证据。仅在输入已执行且观察窗口完整时才能判失败；环境/评估器故障为 ERROR。C1 故事事实；C2 机制行为；C3 可替换接口；Q 白模构图、比例与占位模型可读性；G 玩家理解与决策；P 首次构建启动稳定性。同一事实只归一个主维度；同源不同事实可分别取证。最终资产导入播放、事件绑定质量留 Track C。先按行等权计算 C1/C2/C3，再 C=mean(C1,C2,C3)，Overall=mean(C,Q,G,P)；CH 不参与。白模允许简图、文字、几何体及占位反馈，不能以缺少最终资产判 FAIL。Q 不评价最终拓扑、材质或精细建模；P 不等于全流程通关，完整游玩闭环还需结合 C2/G 及实际试验覆盖。数值、优先级、例外和实现自由度以 general_requirement.txt 为准，引用上下文不单独计分。",
+  "execution": {
+    "build": {
+      "required": true,
+      "timeout_s": 900
+    },
+    "input_bindings": {
+      "interact": "W",
+      "look": "A",
+      "pause": "Esc",
+      "restart": "Enter"
+    },
+    "playtest_timeout_s": 3600,
+    "trials": [
+      {
+        "action_plan": [
+          {
+            "seconds": 3,
+            "verb": "wait"
+          }
+        ],
+        "description": "Fresh real build; hold on the title for player-facing identity, goal and framing. No gameplay input.",
+        "duration_s": 3,
+        "evidence_channels": [
+          "frames",
+          "video",
+          "actions",
+          "state_trace",
+          "event_trace"
+        ],
+        "seed": 1036,
+        "trial_id": "title"
+      },
+      {
+        "action_plan": [
+          {
+            "seconds": 2,
+            "verb": "wait"
+          },
+          {
+            "verb": "interact"
+          },
+          {
+            "seconds": 7.0,
+            "verb": "wait"
+          },
+          {
+            "seconds": 1,
+            "verb": "interact"
+          },
+          {
+            "seconds": 1.5,
+            "verb": "wait"
+          },
+          {
+            "seconds": 1,
+            "verb": "look"
+          },
+          {
+            "seconds": 1.5,
+            "verb": "wait"
+          },
+          {
+            "seconds": 8,
+            "verb": "wait"
+          }
+        ],
+        "description": "Title → start → exercise the declared core actions (interact→W/S; look→A/D; interact→R; pause→Esc; restart→Enter) → observe the running HUD and scene. Waits absorb the declared opening presentation.",
+        "duration_s": 32,
+        "evidence_channels": [
+          "frames",
+          "video",
+          "actions",
+          "state_trace",
+          "event_trace"
+        ],
+        "seed": 1036,
+        "trial_id": "core_probe"
+      },
+      {
+        "action_plan": [
+          {
+            "seconds": 2,
+            "verb": "wait"
+          },
+          {
+            "verb": "interact"
+          },
+          {
+            "seconds": 7.0,
+            "verb": "wait"
+          },
+          {
+            "seconds": 1,
+            "verb": "interact"
+          },
+          {
+            "seconds": 1.5,
+            "verb": "wait"
+          },
+          {
+            "seconds": 1,
+            "verb": "look"
+          },
+          {
+            "seconds": 1.5,
+            "verb": "wait"
+          },
+          {
+            "verb": "pause"
+          },
+          {
+            "seconds": 1,
+            "verb": "wait"
+          },
+          {
+            "verb": "pause"
+          },
+          {
+            "seconds": 240,
+            "verb": "wait"
+          },
+          {
+            "verb": "restart"
+          },
+          {
+            "seconds": 4,
+            "verb": "wait"
+          }
+        ],
+        "description": "Fresh title → start → core actions → pause/continue → then play without optimization or recovery input so the natural outcome path (settlement/loss/recovery) is exercised → restart at the end. Capture continuously at normal speed; no teleport, state injection or simulation-speed change is allowed.",
+        "duration_s": 264,
+        "evidence_channels": [
+          "frames",
+          "video",
+          "actions",
+          "state_trace",
+          "event_trace"
+        ],
+        "seed": 1036,
+        "trial_id": "settle_restart"
+      }
+    ]
+  },
+  "task_coverage_policy": {
+    "asset_tasks": [
+      "G036_obj_001",
+      "G036_obj_002",
+      "G036_obj_003",
+      "G036_obj_004",
+      "G036_obj_005",
+      "G036_obj_006",
+      "G036_scene_001",
+      "G036_salt_flat_timetrial_mot_001",
+      "G036_sfx_001",
+      "G036_sfx_002",
+      "G036_sfx_003",
+      "G036_sfx_004",
+      "G036_sfx_005",
+      "G036_sfx_006",
+      "G036_sfx_007",
+      "G036_sfx_008",
+      "G036_sfx_009",
+      "G036_sfx_010",
+      "G036_sfx_011",
+      "G036_cg_001",
+      "G036_cg_002",
+      "G036_cg_003"
+    ],
+    "authoring_protocol": "gamefactory3a.whitebox_core12.v1",
+    "coverage": {
+      "W02": [
+        "G036_salt_flat_timetrial.WB.C1.01",
+        "G036_salt_flat_timetrial.WB.C3.01"
+      ],
+      "W01": [
+        "G036_salt_flat_timetrial.WB.C1.01"
+      ],
+      "W03": [
+        "G036_salt_flat_timetrial.WB.C1.01"
+      ],
+      "W05": [
+        "G036_salt_flat_timetrial.WB.C1.02",
+        "G036_salt_flat_timetrial.WB.C3.01"
+      ],
+      "W08": [
+        "G036_salt_flat_timetrial.WB.C1.03"
+      ],
+      "W04": [
+        "G036_salt_flat_timetrial.WB.C1.03"
+      ],
+      "M01": [
+        "G036_salt_flat_timetrial.WB.C2.01",
+        "G036_salt_flat_timetrial.WB.C2.02",
+        "G036_salt_flat_timetrial.WB.C3.01"
+      ],
+      "M02": [
+        "G036_salt_flat_timetrial.WB.C2.03",
+        "G036_salt_flat_timetrial.WB.C2.04"
+      ],
+      "M03": [
+        "G036_salt_flat_timetrial.WB.C2.05",
+        "G036_salt_flat_timetrial.WB.C2.06"
+      ],
+      "M04": [
+        "G036_salt_flat_timetrial.WB.C2.07",
+        "G036_salt_flat_timetrial.WB.C2.08"
+      ],
+      "G04": [
+        "G036_salt_flat_timetrial.WB.C2.09"
+      ],
+      "V01": [
+        "G036_salt_flat_timetrial.WB.C2.10"
+      ],
+      "V02": [
+        "G036_salt_flat_timetrial.WB.C2.11"
+      ],
+      "V03": [
+        "G036_salt_flat_timetrial.WB.C2.12"
+      ],
+      "L01": [
+        "G036_salt_flat_timetrial.WB.C3.01",
+        "G036_salt_flat_timetrial.WB.C3.02"
+      ],
+      "G03": [
+        "G036_salt_flat_timetrial.WB.C3.01"
+      ],
+      "F04": [
+        "G036_salt_flat_timetrial.WB.C3.01",
+        "G036_salt_flat_timetrial.WB.Q.03"
+      ],
+      "F05": [
+        "G036_salt_flat_timetrial.WB.C3.02",
+        "G036_salt_flat_timetrial.WB.C3.03",
+        "G036_salt_flat_timetrial.WB.G.01"
+      ],
+      "L02": [
+        "G036_salt_flat_timetrial.WB.C3.02"
+      ],
+      "L04": [
+        "G036_salt_flat_timetrial.WB.C3.02"
+      ],
+      "F07": [
+        "G036_salt_flat_timetrial.WB.C3.02",
+        "G036_salt_flat_timetrial.WB.Q.03"
+      ],
+      "N06": [
+        "G036_salt_flat_timetrial.WB.C3.02"
+      ],
+      "F06": [
+        "G036_salt_flat_timetrial.WB.C3.03",
+        "G036_salt_flat_timetrial.WB.G.01"
+      ],
+      "C01": [
+        "G036_salt_flat_timetrial.WB.C3.04"
+      ],
+      "C02": [
+        "G036_salt_flat_timetrial.WB.C3.04"
+      ],
+      "C03": [
+        "G036_salt_flat_timetrial.WB.C3.04"
+      ],
+      "F01": [
+        "G036_salt_flat_timetrial.WB.Q.01"
+      ],
+      "evaluation_plan_table.md#Q": [
+        "G036_salt_flat_timetrial.WB.Q.01",
+        "G036_salt_flat_timetrial.WB.Q.04"
+      ],
+      "F02": [
+        "G036_salt_flat_timetrial.WB.Q.02"
+      ],
+      "W06": [
+        "G036_salt_flat_timetrial.WB.Q.02"
+      ],
+      "F09": [
+        "G036_salt_flat_timetrial.WB.Q.03"
+      ],
+      "A02": [
+        "G036_salt_flat_timetrial.WB.Q.04"
+      ],
+      "A01": [
+        "G036_salt_flat_timetrial.WB.Q.04"
+      ],
+      "F08": [
+        "G036_salt_flat_timetrial.WB.G.02"
+      ],
+      "F03": [
+        "G036_salt_flat_timetrial.WB.G.02"
+      ],
+      "W07": [
+        "G036_salt_flat_timetrial.WB.G.02"
+      ],
+      "F10": [
+        "G036_salt_flat_timetrial.WB.G.03"
+      ],
+      "I06": [
+        "G036_salt_flat_timetrial.WB.G.03"
+      ],
+      "evaluation_plan_table.md#G": [
+        "G036_salt_flat_timetrial.WB.G.04"
+      ],
+      "L03": [
+        "G036_salt_flat_timetrial.WB.G.04"
+      ],
+      "evaluation_plan_table.md#P": [
+        "G036_salt_flat_timetrial.WB.P.01",
+        "G036_salt_flat_timetrial.WB.P.02",
+        "G036_salt_flat_timetrial.WB.P.03",
+        "G036_salt_flat_timetrial.WB.P.04"
+      ],
+      "evaluation_plan_table.md#CH": [
+        "G036_salt_flat_timetrial.WB.CH.01"
+      ]
+    },
+    "coverage_basis": "explicit subcheck requirement_ids only; context and evaluation-plan facets do not claim requirement coverage",
+    "coverage_semantics": "authoring traceability only; not measured gameplay completion or runtime evidence coverage",
+    "dimension_allocation": {
+      "C1": 3,
+      "C2": 12,
+      "C3": 4,
+      "Q": 4,
+      "G": 4,
+      "P": 4
+    },
+    "evaluation_plans": {
+      "asset_evaluation_plan.md": "248e80c2516d4e3488bf9f159e9d82ea8752da03037f11f45d17bdb34598470a",
+      "evaluation_plan_table.md": "c40bfe47f9788fcd14b853541fc55cb0df0e62172edabf18125faa3e2aa2cba2"
+    },
+    "execution_scope": "existing smoke trials retained; each binding.procedure additionally requires targeted evidence; unexecuted branches remain UNKNOWN",
+    "group_size_policy": "C2: exactly twelve endpoints with one scored subcheck each.",
+    "judge_policy": "vlm_only_no_human",
+    "main_quota": 31,
+    "ownership": {
+      "W02": {
+        "columns": [
+          "C1",
+          "C3"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "W01": {
+        "columns": [
+          "C1"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "W03": {
+        "columns": [
+          "C1"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "W05": {
+        "columns": [
+          "C1",
+          "C3"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "W08": {
+        "columns": [
+          "C1"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "W04": {
+        "columns": [
+          "C1"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "M01": {
+        "columns": [
+          "C2",
+          "C3"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "M02": {
+        "columns": [
+          "C2"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "M03": {
+        "columns": [
+          "C2"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "M04": {
+        "columns": [
+          "C2"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "G04": {
+        "columns": [
+          "C2"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "V01": {
+        "columns": [
+          "C2"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "V02": {
+        "columns": [
+          "C2"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "V03": {
+        "columns": [
+          "C2"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "L01": {
+        "columns": [
+          "C3"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "G03": {
+        "columns": [
+          "C3"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "F04": {
+        "columns": [
+          "C3",
+          "Q"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "F05": {
+        "columns": [
+          "C3",
+          "G"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "L02": {
+        "columns": [
+          "C3"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "L04": {
+        "columns": [
+          "C3"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "F07": {
+        "columns": [
+          "C3",
+          "Q"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "N06": {
+        "columns": [
+          "C3"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "F06": {
+        "columns": [
+          "C3",
+          "G"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "C01": {
+        "columns": [
+          "C3"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "C02": {
+        "columns": [
+          "C3"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "C03": {
+        "columns": [
+          "C3"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "F01": {
+        "columns": [
+          "Q"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "evaluation_plan_table.md#Q": {
+        "columns": [
+          "Q"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "F02": {
+        "columns": [
+          "Q"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "W06": {
+        "columns": [
+          "Q"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "F09": {
+        "columns": [
+          "Q"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "A02": {
+        "columns": [
+          "Q"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "A01": {
+        "columns": [
+          "Q"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "F08": {
+        "columns": [
+          "G"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "F03": {
+        "columns": [
+          "G"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "W07": {
+        "columns": [
+          "G"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "F10": {
+        "columns": [
+          "G"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "I06": {
+        "columns": [
+          "G"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "evaluation_plan_table.md#G": {
+        "columns": [
+          "G"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "L03": {
+        "columns": [
+          "G"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "evaluation_plan_table.md#P": {
+        "columns": [
+          "P"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      },
+      "evaluation_plan_table.md#CH": {
+        "columns": [
+          "CH"
+        ],
+        "reason": "Explicit retained or core12 scoring check references only"
+      }
+    },
+    "path_base": "case_root",
+    "release_status": "source_frozen_core12_runtime_not_validated",
+    "result_protocol": "gamefactory3a.result_protocol.v3",
+    "score_interpretation": {
+      "C": "story/mechanism/hook completeness; not raw percent of all source rules",
+      "P": "first build, launch, scene entry, observed runtime; not full-game completion",
+      "Q": "whitebox scene/proportion/placeholder readability; not final mesh/material quality",
+      "playable_loop": "interpret C2 + G + P together with executed trials and UNKNOWN coverage"
+    },
+    "source_inputs": {
+      "3D_object/object_tasks.jsonl": "10d8669de8b94a48eda3a140aac0ddee003124907754efb0ac6e76aecd141349",
+      "3D_object/ref_images/ref_checkpoint_gate_sketch.png": "ad4f9ecef0e04d3143bc6b916281aec2c6de96dbf348dddece1c2fb536a08563",
+      "3D_object/ref_images/ref_race_car_sketch.png": "6d8b39f1fce9b2ba8d0c37fdfb7839a01f987a6f8d6169e9968750391aeb915b",
+      "3D_scene/ref_images/ref_scene_salt_flat_sketch.png": "b916ef246a18b2eb0aa38d4c9e059aa4ba2d010333c887d56e42795806fa0924",
+      "3D_scene/scene_tasks.jsonl": "02b6d6959435014212bf3b8bd146db05c902645abb32b56b85283af2d421bd48",
+      "audio/audio_tasks.jsonl": "7b54ef4376bd56f36edaaa95ed0fcbb60e4fe9e80e0a8e591d02b69ff1c43ef7",
+      "cg_video/cg_tasks.jsonl": "9c800ce4925036ad7f7d7a49ed0d98629e93c05b8e1fbb541ee1d3c9f76e8238",
+      "general_requirement.txt": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+      "motion/motion_tasks.jsonl": "e215477cba73afc56a5f049132cb032c38b02a436466e0616d50ec1435060062"
+    },
+    "standalone_tpose": "preparation_input_only",
+    "subcheck_aggregation": "role_gated_mean.v1; setup gates do not award functional credit",
+    "tier": "S",
+    "core12": {
+      "count": 12,
+      "scored_atom_count": 12,
+      "selection_basis": "canonical general_requirement.txt only; independent of submissions and historical scores",
+      "source_sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+      "previous_contract_id": "G036_salt_flat_timetrial.whitebox.endpoints-v2-candidate.a9a62b9ea38884e95213c482a3861d8458ba3b14877093062a24e2a202977025",
+      "previous_json_sha256": "42c6384f596e10a51a89bb6b0dd8f7385c4b683576b4c67c0ff93a2fe51126ae",
+      "original_rubric": "test_data/test_samples/G036_salt_flat_timetrial/rubric_whitebox",
+      "unselected_rules": "Outside the new C2 scoring subset; never silently claimed covered",
+      "selection": [
+        {
+          "selector": "M01/change",
+          "title": "顺序计时门（主机制）：有效操作与状态变化",
+          "requirement_ids": [
+            "M01"
+          ],
+          "expectation": "计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告",
+          "source_section": "6. 机制系统 [M01–M04]",
+          "source_file": "general_requirement.txt"
+        },
+        {
+          "selector": "M01/invalid",
+          "title": "顺序计时门（主机制）：拒绝与边界",
+          "requirement_ids": [
+            "M01"
+          ],
+          "expectation": "越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结",
+          "source_section": "6. 机制系统 [M01–M04]",
+          "source_file": "general_requirement.txt"
+        },
+        {
+          "selector": "M02/change",
+          "title": "防抄近路：有效操作与状态变化",
+          "requirement_ids": [
+            "M02"
+          ],
+          "expectation": "离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）",
+          "source_section": "6. 机制系统 [M01–M04]",
+          "source_file": "general_requirement.txt"
+        },
+        {
+          "selector": "M02/invalid",
+          "title": "防抄近路：拒绝与边界",
+          "requirement_ids": [
+            "M02"
+          ],
+          "expectation": "分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核",
+          "source_section": "6. 机制系统 [M01–M04]",
+          "source_file": "general_requirement.txt"
+        },
+        {
+          "selector": "M03/change",
+          "title": "复位：有效操作与状态变化",
+          "requirement_ids": [
+            "M03"
+          ],
+          "expectation": "回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒",
+          "source_section": "6. 机制系统 [M01–M04]",
+          "source_file": "general_requirement.txt"
+        },
+        {
+          "selector": "M03/invalid",
+          "title": "复位：拒绝与边界",
+          "requirement_ids": [
+            "M03"
+          ],
+          "expectation": "结算/暂停期间 R 无效",
+          "source_section": "6. 机制系统 [M01–M04]",
+          "source_file": "general_requirement.txt"
+        },
+        {
+          "selector": "M04/change",
+          "title": "路面与路线分岔：有效操作与状态变化",
+          "requirement_ids": [
+            "M04"
+          ],
+          "expectation": "外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）",
+          "source_section": "6. 机制系统 [M01–M04]",
+          "source_file": "general_requirement.txt"
+        },
+        {
+          "selector": "M04/invalid",
+          "title": "路面与路线分岔：拒绝与边界",
+          "requirement_ids": [
+            "M04"
+          ],
+          "expectation": "分岔区两侧均为合法赛道（M02 不判出界）",
+          "source_section": "6. 机制系统 [M01–M04]",
+          "source_file": "general_requirement.txt"
+        },
+        {
+          "selector": "G04/pause",
+          "title": "暂停冻结与继续",
+          "requirement_ids": [
+            "G04"
+          ],
+          "expectation": "- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。",
+          "source_section": "3. 数值口径与全局规则 [G01–G05]",
+          "source_file": "general_requirement.txt"
+        },
+        {
+          "selector": "V01",
+          "title": "成功终局",
+          "requirement_ids": [
+            "V01"
+          ],
+          "expectation": "- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。",
+          "source_section": "7. 成功、失败与恢复 [V01–V05]",
+          "source_file": "general_requirement.txt"
+        },
+        {
+          "selector": "V02",
+          "title": "失败或非失败边界",
+          "requirement_ids": [
+            "V02"
+          ],
+          "expectation": "- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。",
+          "source_section": "7. 成功、失败与恢复 [V01–V05]",
+          "source_file": "general_requirement.txt"
+        },
+        {
+          "selector": "V03",
+          "title": "原生恢复与重新开始",
+          "requirement_ids": [
+            "V03"
+          ],
+          "expectation": "- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。",
+          "source_section": "7. 成功、失败与恢复 [V01–V05]",
+          "source_file": "general_requirement.txt"
+        }
+      ]
+    }
+  },
+  "assertions": [
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C1.01",
+      "table_column": "C1",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "W02",
+        "W01",
+        "W03"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "场景所在地；世界与时代背景；玩家身份与当前任务动机",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "video"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "video"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "W01": "- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录；盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。",
+          "W02": "- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。",
+          "W03": "- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "场景所在地",
+          "世界与时代背景",
+          "玩家身份与当前任务动机"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "录制标题、任务入口、推进及结果窗口，核对故事事实在实际游戏中的表达。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "- W02 场景所在地",
+            "id": "C1.s0003",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带",
+            "source_unit": 1,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带",
+            "topic": "场景所在地"
+          },
+          {
+            "facet": "远处低山、遥测站与维护棚屋点缀地平线",
+            "id": "C1.s0004",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "远处低山、遥测站与维护棚屋点缀地平线",
+            "source_unit": 2,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "远处低山、遥测站与维护棚屋点缀地平线",
+            "topic": "场景所在地"
+          },
+          {
+            "facet": "8 座分段计时门与起终点拱门由 seed 冻结。",
+            "id": "C1.s0005",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "8 座分段计时门与起终点拱门由 seed 冻结。",
+            "source_unit": 3,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "8 座分段计时门与起终点拱门由 seed 冻结。",
+            "topic": "场景所在地"
+          },
+          {
+            "facet": "- W01 世界与时代背景",
+            "id": "C1.s0001",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W01"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录",
+            "source_unit": 1,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录",
+            "topic": "世界与时代背景"
+          },
+          {
+            "facet": "盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出",
+            "id": "C1.s0002",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W01"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。",
+            "source_unit": 2,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。",
+            "topic": "世界与时代背景"
+          },
+          {
+            "facet": "- W03 玩家身份与当前任务动机",
+            "id": "C1.s0006",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W03"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。",
+            "source_unit": 1,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。",
+            "topic": "玩家身份与当前任务动机"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 6,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_6"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C1.02",
+      "table_column": "C1",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "W05"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "叙事来源",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "video"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "video"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "W05": "- W05 叙事来源：试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "叙事来源"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "录制标题、任务入口、推进及结果窗口，核对故事事实在实际游戏中的表达。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "- W05 叙事来源",
+            "id": "C1.s0009",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- W05 叙事来源：试验车＝封闭座舱低重心原型车",
+            "source_unit": 1,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "- W05 叙事来源：试验车＝封闭座舱低重心原型车",
+            "topic": "叙事来源"
+          },
+          {
+            "facet": "分段计时门＝测量局的标准龙门架遥测门",
+            "id": "C1.s0010",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "分段计时门＝测量局的标准龙门架遥测门",
+            "source_unit": 2,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "分段计时门＝测量局的标准龙门架遥测门",
+            "topic": "叙事来源"
+          },
+          {
+            "facet": "酥松带＝盐晶卤水析出带",
+            "id": "C1.s0011",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "酥松带＝盐晶卤水析出带",
+            "source_unit": 3,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "酥松带＝盐晶卤水析出带",
+            "topic": "叙事来源"
+          },
+          {
+            "facet": "遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。",
+            "id": "C1.s0012",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。",
+            "source_unit": 4,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。",
+            "topic": "叙事来源"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 4,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_4"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C1.03",
+      "table_column": "C1",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "W08",
+        "W04"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "故事表达方式；失败代价与结局表达",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "video"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "video"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "C01": "- C01 测速周开幕（Opening，6 秒，1280×720@24fps）\n  - 触发时机：首次由标题点击「开始」后、倒计时起步之前，每局一次\n  - 内容与角色场景：白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门\n  - 资产对应：试验车、计时门、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入倒计时起步；自然播完 → 进入倒计时起步\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时",
+          "C03": "- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时",
+          "W04": "- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）；跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。",
+          "W08": "- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束；叙事只做包装不改数值。"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "故事表达方式",
+          "失败代价与结局表达"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "录制标题、任务入口、推进及结果窗口，核对故事事实在实际游戏中的表达。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "- W08 故事表达方式",
+            "id": "C1.s0013",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W08"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束",
+            "source_unit": 1,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束",
+            "topic": "故事表达方式"
+          },
+          {
+            "facet": "叙事只做包装不改数值。",
+            "id": "C1.s0014",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W08"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "叙事只做包装不改数值。",
+            "source_unit": 2,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "叙事只做包装不改数值。",
+            "topic": "故事表达方式"
+          },
+          {
+            "facet": "- W04 失败代价与结局表达",
+            "id": "C1.s0007",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W04"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）",
+            "source_unit": 1,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）",
+            "topic": "失败代价与结局表达"
+          },
+          {
+            "facet": "跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。",
+            "id": "C1.s0008",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W04"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。",
+            "source_unit": 2,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。",
+            "topic": "失败代价与结局表达"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 4,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_4"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C2.01",
+      "table_column": "C2",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "M01"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "顺序计时门（主机制）：有效操作与状态变化：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告",
+      "pass_rule": "通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。",
+      "partial_rule": "本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。",
+      "fail_rule": "仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "input_trace",
+        "event_trace",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "input_trace",
+          "event_trace",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "judge_policy": "vlm_only_no_human",
+        "focus": [
+          "顺序计时门（主机制）：有效操作与状态变化"
+        ],
+        "procedure": [
+          "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+          "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+          "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+        ],
+        "subchecks": [
+          {
+            "id": "C2.core12.01",
+            "text": "计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告",
+            "role": "behavior",
+            "scoring_role": "scored",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "M01"
+            ],
+            "topic": "顺序计时门（主机制）：有效操作与状态变化",
+            "origin": "general_requirement_core12_selection",
+            "source_text": "- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid",
+            "source_subsection": "6. 机制系统 [M01–M04]",
+            "source_unit": 1,
+            "system": "core12",
+            "facet": "顺序计时门（主机制）：有效操作与状态变化"
+          }
+        ],
+        "context": {
+          "M01": "- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid"
+        },
+        "reference_paths": [],
+        "core12_source": {
+          "path": "general_requirement.txt",
+          "sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+          "selector": "M01/change"
+        },
+        "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        }
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C2.02",
+      "table_column": "C2",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "M01"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "顺序计时门（主机制）：拒绝与边界：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结",
+      "pass_rule": "通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。",
+      "partial_rule": "本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。",
+      "fail_rule": "仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "input_trace",
+        "event_trace",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "input_trace",
+          "event_trace",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "judge_policy": "vlm_only_no_human",
+        "focus": [
+          "顺序计时门（主机制）：拒绝与边界"
+        ],
+        "procedure": [
+          "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+          "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+          "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+        ],
+        "subchecks": [
+          {
+            "id": "C2.core12.02",
+            "text": "越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结",
+            "role": "behavior",
+            "scoring_role": "scored",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "M01"
+            ],
+            "topic": "顺序计时门（主机制）：拒绝与边界",
+            "origin": "general_requirement_core12_selection",
+            "source_text": "- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid",
+            "source_subsection": "6. 机制系统 [M01–M04]",
+            "source_unit": 2,
+            "system": "core12",
+            "facet": "顺序计时门（主机制）：拒绝与边界"
+          }
+        ],
+        "context": {
+          "M01": "- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid"
+        },
+        "reference_paths": [],
+        "core12_source": {
+          "path": "general_requirement.txt",
+          "sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+          "selector": "M01/invalid"
+        },
+        "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        }
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C2.03",
+      "table_column": "C2",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "M02"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "防抄近路：有效操作与状态变化：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）",
+      "pass_rule": "通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。",
+      "partial_rule": "本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。",
+      "fail_rule": "仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "input_trace",
+        "event_trace",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "input_trace",
+          "event_trace",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "judge_policy": "vlm_only_no_human",
+        "focus": [
+          "防抄近路：有效操作与状态变化"
+        ],
+        "procedure": [
+          "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+          "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+          "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+        ],
+        "subchecks": [
+          {
+            "id": "C2.core12.03",
+            "text": "离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）",
+            "role": "behavior",
+            "scoring_role": "scored",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "M02"
+            ],
+            "topic": "防抄近路：有效操作与状态变化",
+            "origin": "general_requirement_core12_selection",
+            "source_text": "- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）",
+            "source_subsection": "6. 机制系统 [M01–M04]",
+            "source_unit": 3,
+            "system": "core12",
+            "facet": "防抄近路：有效操作与状态变化"
+          }
+        ],
+        "context": {
+          "M02": "- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）"
+        },
+        "reference_paths": [],
+        "core12_source": {
+          "path": "general_requirement.txt",
+          "sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+          "selector": "M02/change"
+        },
+        "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        }
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C2.04",
+      "table_column": "C2",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "M02"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "防抄近路：拒绝与边界：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核",
+      "pass_rule": "通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。",
+      "partial_rule": "本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。",
+      "fail_rule": "仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "input_trace",
+        "event_trace",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "input_trace",
+          "event_trace",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "judge_policy": "vlm_only_no_human",
+        "focus": [
+          "防抄近路：拒绝与边界"
+        ],
+        "procedure": [
+          "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+          "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+          "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+        ],
+        "subchecks": [
+          {
+            "id": "C2.core12.04",
+            "text": "分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核",
+            "role": "behavior",
+            "scoring_role": "scored",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "M02"
+            ],
+            "topic": "防抄近路：拒绝与边界",
+            "origin": "general_requirement_core12_selection",
+            "source_text": "- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）",
+            "source_subsection": "6. 机制系统 [M01–M04]",
+            "source_unit": 4,
+            "system": "core12",
+            "facet": "防抄近路：拒绝与边界"
+          }
+        ],
+        "context": {
+          "M02": "- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）",
+          "L02": "- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。"
+        },
+        "reference_paths": [],
+        "core12_source": {
+          "path": "general_requirement.txt",
+          "sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+          "selector": "M02/invalid"
+        },
+        "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        }
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C2.05",
+      "table_column": "C2",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "M03"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "复位：有效操作与状态变化：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒",
+      "pass_rule": "通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。",
+      "partial_rule": "本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。",
+      "fail_rule": "仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "input_trace",
+        "event_trace",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "input_trace",
+          "event_trace",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "judge_policy": "vlm_only_no_human",
+        "focus": [
+          "复位：有效操作与状态变化"
+        ],
+        "procedure": [
+          "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+          "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+          "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+        ],
+        "subchecks": [
+          {
+            "id": "C2.core12.05",
+            "text": "回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒",
+            "role": "behavior",
+            "scoring_role": "scored",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "M03"
+            ],
+            "topic": "复位：有效操作与状态变化",
+            "origin": "general_requirement_core12_selection",
+            "source_text": "- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）",
+            "source_subsection": "6. 机制系统 [M01–M04]",
+            "source_unit": 5,
+            "system": "core12",
+            "facet": "复位：有效操作与状态变化"
+          }
+        ],
+        "context": {
+          "M03": "- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）"
+        },
+        "reference_paths": [],
+        "core12_source": {
+          "path": "general_requirement.txt",
+          "sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+          "selector": "M03/change"
+        },
+        "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        }
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C2.06",
+      "table_column": "C2",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "M03"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "复位：拒绝与边界：结算/暂停期间 R 无效",
+      "pass_rule": "通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。",
+      "partial_rule": "本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。",
+      "fail_rule": "仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "input_trace",
+        "event_trace",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "input_trace",
+          "event_trace",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "judge_policy": "vlm_only_no_human",
+        "focus": [
+          "复位：拒绝与边界"
+        ],
+        "procedure": [
+          "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+          "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+          "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+        ],
+        "subchecks": [
+          {
+            "id": "C2.core12.06",
+            "text": "结算/暂停期间 R 无效",
+            "role": "behavior",
+            "scoring_role": "scored",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "M03"
+            ],
+            "topic": "复位：拒绝与边界",
+            "origin": "general_requirement_core12_selection",
+            "source_text": "- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）",
+            "source_subsection": "6. 机制系统 [M01–M04]",
+            "source_unit": 6,
+            "system": "core12",
+            "facet": "复位：拒绝与边界"
+          }
+        ],
+        "context": {
+          "M03": "- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）"
+        },
+        "reference_paths": [],
+        "core12_source": {
+          "path": "general_requirement.txt",
+          "sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+          "selector": "M03/invalid"
+        },
+        "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        }
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C2.07",
+      "table_column": "C2",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "M04"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "路面与路线分岔：有效操作与状态变化：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）",
+      "pass_rule": "通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。",
+      "partial_rule": "本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。",
+      "fail_rule": "仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "input_trace",
+        "event_trace",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "input_trace",
+          "event_trace",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "judge_policy": "vlm_only_no_human",
+        "focus": [
+          "路面与路线分岔：有效操作与状态变化"
+        ],
+        "procedure": [
+          "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+          "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+          "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+        ],
+        "subchecks": [
+          {
+            "id": "C2.core12.07",
+            "text": "外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）",
+            "role": "behavior",
+            "scoring_role": "scored",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "M04"
+            ],
+            "topic": "路面与路线分岔：有效操作与状态变化",
+            "origin": "general_requirement_core12_selection",
+            "source_text": "- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选",
+            "source_subsection": "6. 机制系统 [M01–M04]",
+            "source_unit": 7,
+            "system": "core12",
+            "facet": "路面与路线分岔：有效操作与状态变化"
+          }
+        ],
+        "context": {
+          "M04": "- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选"
+        },
+        "reference_paths": [],
+        "core12_source": {
+          "path": "general_requirement.txt",
+          "sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+          "selector": "M04/change"
+        },
+        "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        }
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C2.08",
+      "table_column": "C2",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "M04"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "路面与路线分岔：拒绝与边界：分岔区两侧均为合法赛道（M02 不判出界）",
+      "pass_rule": "通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。",
+      "partial_rule": "本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。",
+      "fail_rule": "仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "input_trace",
+        "event_trace",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "input_trace",
+          "event_trace",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "judge_policy": "vlm_only_no_human",
+        "focus": [
+          "路面与路线分岔：拒绝与边界"
+        ],
+        "procedure": [
+          "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+          "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+          "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+        ],
+        "subchecks": [
+          {
+            "id": "C2.core12.08",
+            "text": "分岔区两侧均为合法赛道（M02 不判出界）",
+            "role": "behavior",
+            "scoring_role": "scored",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "M04"
+            ],
+            "topic": "路面与路线分岔：拒绝与边界",
+            "origin": "general_requirement_core12_selection",
+            "source_text": "- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选",
+            "source_subsection": "6. 机制系统 [M01–M04]",
+            "source_unit": 8,
+            "system": "core12",
+            "facet": "路面与路线分岔：拒绝与边界"
+          }
+        ],
+        "context": {
+          "M04": "- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选",
+          "M02": "- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）"
+        },
+        "reference_paths": [],
+        "core12_source": {
+          "path": "general_requirement.txt",
+          "sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+          "selector": "M04/invalid"
+        },
+        "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        }
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C2.09",
+      "table_column": "C2",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "G04"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "暂停冻结与继续：- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。",
+      "pass_rule": "通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。",
+      "partial_rule": "本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。",
+      "fail_rule": "仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "input_trace",
+        "event_trace",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "input_trace",
+          "event_trace",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "judge_policy": "vlm_only_no_human",
+        "focus": [
+          "暂停冻结与继续"
+        ],
+        "procedure": [
+          "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+          "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+          "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+        ],
+        "subchecks": [
+          {
+            "id": "C2.core12.09",
+            "text": "- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。",
+            "role": "behavior",
+            "scoring_role": "scored",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "G04"
+            ],
+            "topic": "暂停冻结与继续",
+            "origin": "general_requirement_core12_selection",
+            "source_text": "- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。",
+            "source_subsection": "3. 数值口径与全局规则 [G01–G05]",
+            "source_unit": 9,
+            "system": "core12",
+            "facet": "暂停冻结与继续"
+          }
+        ],
+        "context": {
+          "G04": "- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。"
+        },
+        "reference_paths": [],
+        "core12_source": {
+          "path": "general_requirement.txt",
+          "sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+          "selector": "G04/pause"
+        },
+        "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        }
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C2.10",
+      "table_column": "C2",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "V01"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "成功终局：- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。",
+      "pass_rule": "通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。",
+      "partial_rule": "本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。",
+      "fail_rule": "仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "input_trace",
+        "event_trace",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "input_trace",
+          "event_trace",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "judge_policy": "vlm_only_no_human",
+        "focus": [
+          "成功终局"
+        ],
+        "procedure": [
+          "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+          "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+          "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+        ],
+        "subchecks": [
+          {
+            "id": "C2.core12.10",
+            "text": "- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。",
+            "role": "behavior",
+            "scoring_role": "scored",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "V01"
+            ],
+            "topic": "成功终局",
+            "origin": "general_requirement_core12_selection",
+            "source_text": "- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。",
+            "source_subsection": "7. 成功、失败与恢复 [V01–V05]",
+            "source_unit": 10,
+            "system": "core12",
+            "facet": "成功终局"
+          }
+        ],
+        "context": {
+          "V01": "- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。"
+        },
+        "reference_paths": [],
+        "core12_source": {
+          "path": "general_requirement.txt",
+          "sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+          "selector": "V01"
+        },
+        "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        }
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C2.11",
+      "table_column": "C2",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "V02"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "失败或非失败边界：- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。",
+      "pass_rule": "通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。",
+      "partial_rule": "本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。",
+      "fail_rule": "仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "input_trace",
+        "event_trace",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "input_trace",
+          "event_trace",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "judge_policy": "vlm_only_no_human",
+        "focus": [
+          "失败或非失败边界"
+        ],
+        "procedure": [
+          "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+          "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+          "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+        ],
+        "subchecks": [
+          {
+            "id": "C2.core12.11",
+            "text": "- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。",
+            "role": "behavior",
+            "scoring_role": "scored",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "V02"
+            ],
+            "topic": "失败或非失败边界",
+            "origin": "general_requirement_core12_selection",
+            "source_text": "- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。",
+            "source_subsection": "7. 成功、失败与恢复 [V01–V05]",
+            "source_unit": 11,
+            "system": "core12",
+            "facet": "失败或非失败边界"
+          }
+        ],
+        "context": {
+          "V02": "- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。",
+          "G05": "- G05 超时（本包冻结值）：全程总时限 **720 秒**（自起步倒计时归零起算，暂停不计入）；超时 → 超时事件 → 判负结算（V02）。"
+        },
+        "reference_paths": [],
+        "core12_source": {
+          "path": "general_requirement.txt",
+          "sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+          "selector": "V02"
+        },
+        "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        }
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C2.12",
+      "table_column": "C2",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "V03"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "原生恢复与重新开始：- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。",
+      "pass_rule": "通过正常玩家操作建立条件；充分实际证据证明本项唯一目标成立。输入已发送、计划预期及源码声明不单独证明通过。",
+      "partial_rule": "本项只有一个评分判定，不拆分或给予 PARTIAL；证据不足、未触发或观察不完整为 UNKNOWN（正式八列表达为 UNVERIFIED）。",
+      "fail_rule": "仅在前提已成立、所需操作实际执行且观察窗口完整时，以真实反例判 FAIL；环境、输入或取证故障为 ERROR。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "input_trace",
+        "event_trace",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "input_trace",
+          "event_trace",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "judge_policy": "vlm_only_no_human",
+        "focus": [
+          "原生恢复与重新开始"
+        ],
+        "procedure": [
+          "从 general_requirement 和真实交付核对原生入口、输入及本项前提，以正常玩家操作触发本项。",
+          "保留操作前后画面及可用只读状态/事件，观察本项完整结果；无法触发或缺证据如实 UNKNOWN。",
+          "多客户端要求使用真实客户端；不得调用玩法函数、写状态或从动作送达推断结果。"
+        ],
+        "subchecks": [
+          {
+            "id": "C2.core12.12",
+            "text": "- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。",
+            "role": "behavior",
+            "scoring_role": "scored",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "V03"
+            ],
+            "topic": "原生恢复与重新开始",
+            "origin": "general_requirement_core12_selection",
+            "source_text": "- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。",
+            "source_subsection": "7. 成功、失败与恢复 [V01–V05]",
+            "source_unit": 12,
+            "system": "core12",
+            "facet": "原生恢复与重新开始"
+          }
+        ],
+        "context": {
+          "V03": "- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。"
+        },
+        "reference_paths": [],
+        "core12_source": {
+          "path": "general_requirement.txt",
+          "sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71",
+          "selector": "V03"
+        },
+        "core12_scope": "One scoring question; context is not expanded into additional atoms.",
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        }
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C3.01",
+      "table_column": "C3",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "L01",
+        "G03",
+        "M01",
+        "W05",
+        "W02",
+        "F04"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "角色与物体接口",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "code_files",
+        "screenshot"
+      ],
+      "expected": {
+        "channels": [
+          "code_files",
+          "screenshot"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "F04": "- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸；风为纯表现层，不参与车辆物理判定（G04）。",
+          "G02": "- G02 计时公式与 oracle（本包冻结值）：单圈用时＝该圈末计时门时间戳 − 该圈首计时门时间戳；总成绩＝两圈之和＋Σ复位罚时（每次 **+3 秒**）。独立 oracle 数例：8 个分段各 30.000 秒 → 单圈 240.000 秒；两圈各 240 秒＋1 次复位 → 总成绩 **483.000 秒**。评级带宽（冻结）：金牌 ≤480 秒、银牌 ≤540 秒、铜牌 ≤600 秒，超铜牌仅显示完赛无评级。",
+          "G03": "- G03 车辆与路面参数（本包冻结值）：极速 200 km/h；常规加速 0–100 km/h 用时 4 秒；转向无漂移辅助，转向灵敏度＝基准×(1−0.5×v/200)（v 为 km/h，即 100 km/h 时 75%、200 km/h 时 50%）；主路面（压实盐板）抓地系数 1.0，100 km/h 制动距离 40 米；盐晶酥松带抓地系数 0.75、制动距离 ×1.3（100 km/h → 52 米）、急转打滑风险显著提高。赛道全长约 4 千米，每圈 8 座分段计时门（起点拱门兼主计时门）。",
+          "G04": "- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。",
+          "L01": "- L01 生成对象：原创试验车 1、分段计时门拱门 8（兼起终点主计时门）、遥测站 1、盐晶岩地标 2、风向袋 3；装饰非冻结需求。",
+          "M01": "- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid",
+          "V02": "- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。",
+          "W02": "- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。",
+          "W05": "- W05 叙事来源：试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "角色与物体接口"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+          "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "asset_kind": "3d_object",
+            "asset_task_id": "G036_obj_001",
+            "facet": "3d_object/salt_flat_prototype_",
+            "id": "C3.s0001",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "L01",
+              "G03"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "3d_object",
+            "text": "3d_object/salt_flat_prototype_car：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "角色与物体接口"
+          },
+          {
+            "asset_kind": "3d_object",
+            "asset_task_id": "G036_obj_002",
+            "facet": "3d_object/checkpoint_gate_kit",
+            "id": "C3.s0002",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "L01",
+              "M01"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "3d_object",
+            "text": "3d_object/checkpoint_gate_kit：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "角色与物体接口"
+          },
+          {
+            "asset_kind": "3d_object",
+            "asset_task_id": "G036_obj_003",
+            "facet": "3d_object/telemetry_station",
+            "id": "C3.s0003",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "L01",
+              "W05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "3d_object",
+            "text": "3d_object/telemetry_station：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "角色与物体接口"
+          },
+          {
+            "asset_kind": "3d_object",
+            "asset_task_id": "G036_obj_004",
+            "facet": "3d_object/salt_crystal_rock",
+            "id": "C3.s0004",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "L01",
+              "W02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "3d_object",
+            "text": "3d_object/salt_crystal_rock：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "角色与物体接口"
+          },
+          {
+            "asset_kind": "3d_object",
+            "asset_task_id": "G036_obj_005",
+            "facet": "3d_object/wind_sock_set",
+            "id": "C3.s0005",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "L01",
+              "F04"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "3d_object",
+            "text": "3d_object/wind_sock_set：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "角色与物体接口"
+          },
+          {
+            "asset_kind": "3d_object",
+            "asset_task_id": "G036_obj_006",
+            "facet": "3d_object/maintenance_shed",
+            "id": "C3.s0006",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "L01",
+              "W02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "3d_object",
+            "text": "3d_object/maintenance_shed：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "角色与物体接口"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 6,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_6"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C3.02",
+      "table_column": "C3",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "F05",
+        "L01",
+        "L02",
+        "L04",
+        "F07",
+        "N06"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "动作占位接口；场景与地标接口；VFX占位接口",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "code_files",
+        "screenshot"
+      ],
+      "expected": {
+        "channels": [
+          "code_files",
+          "screenshot"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "C03": "- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时",
+          "F05": "- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |",
+          "F06": "- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。",
+          "F07": "- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨；尘雾与尾迹不得遮挡 HUD 与前方计时门；非结算单个全屏遮挡 ≤0.5 秒。",
+          "L01": "- L01 生成对象：原创试验车 1、分段计时门拱门 8（兼起终点主计时门）、遥测站 1、盐晶岩地标 2、风向袋 3；装饰非冻结需求。",
+          "L02": "- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。",
+          "L04": "- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的表现层（装饰造型、配色、粒子参数、音色）为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。音效为冻结需求（F06 清单逐条交付，缺失按 FAIL 计）。",
+          "N06": "- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失。"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "动作占位接口",
+          "场景与地标接口",
+          "VFX占位接口"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+          "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "asset_kind": "motion",
+            "asset_task_id": "G036_salt_flat_timetrial_mot_001",
+            "facet": "motion/drift_recovery",
+            "id": "C3.s0008",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05",
+              "L01"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "motion",
+            "text": "motion/drift_recovery：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "动作占位接口"
+          },
+          {
+            "asset_kind": "3d_scene",
+            "asset_task_id": "G036_scene_001",
+            "facet": "3d_scene/G036_scene_001",
+            "id": "C3.s0007",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "L02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "3d_scene",
+            "text": "3d_scene/G036_scene_001：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "场景与地标接口"
+          },
+          {
+            "facet": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占",
+            "id": "C3.s0023",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "L04",
+              "F07",
+              "N06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "vfx",
+            "text": "规定的攻击、受击、交互、阶段及终局 VFX 有独立可替换的占位入口；保留生成/结束接口和绑定目标。此处只验接口，提示是否可理解归 G，最终效果归 Track C。",
+            "topic": "VFX占位接口"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 3,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_3"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C3.03",
+      "table_column": "C3",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "F05",
+        "F06"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "声音占位接口",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "code_files",
+        "screenshot"
+      ],
+      "expected": {
+        "channels": [
+          "code_files",
+          "screenshot"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "C03": "- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时",
+          "F05": "- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |",
+          "F06": "- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "声音占位接口"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+          "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "asset_kind": "audio",
+            "asset_task_id": "G036_sfx_001",
+            "facet": "audio/countdown_beep",
+            "id": "C3.s0009",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05",
+              "F06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "audio",
+            "text": "audio/countdown_beep：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "声音占位接口"
+          },
+          {
+            "asset_kind": "audio",
+            "asset_task_id": "G036_sfx_002",
+            "facet": "audio/start_release",
+            "id": "C3.s0010",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05",
+              "F06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "audio",
+            "text": "audio/start_release：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "声音占位接口"
+          },
+          {
+            "asset_kind": "audio",
+            "asset_task_id": "G036_sfx_003",
+            "facet": "audio/gate_pass",
+            "id": "C3.s0011",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05",
+              "F06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "audio",
+            "text": "audio/gate_pass：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "声音占位接口"
+          },
+          {
+            "asset_kind": "audio",
+            "asset_task_id": "G036_sfx_004",
+            "facet": "audio/gate_miss",
+            "id": "C3.s0012",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05",
+              "F06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "audio",
+            "text": "audio/gate_miss：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "声音占位接口"
+          },
+          {
+            "asset_kind": "audio",
+            "asset_task_id": "G036_sfx_005",
+            "facet": "audio/offroad_rumble",
+            "id": "C3.s0013",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05",
+              "F06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "audio",
+            "text": "audio/offroad_rumble：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "声音占位接口"
+          },
+          {
+            "asset_kind": "audio",
+            "asset_task_id": "G036_sfx_006",
+            "facet": "audio/reset_woosh",
+            "id": "C3.s0014",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05",
+              "F06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "audio",
+            "text": "audio/reset_woosh：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "声音占位接口"
+          },
+          {
+            "asset_kind": "audio",
+            "asset_task_id": "G036_sfx_007",
+            "facet": "audio/timeout_alarm",
+            "id": "C3.s0015",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05",
+              "F06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "audio",
+            "text": "audio/timeout_alarm：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "声音占位接口"
+          },
+          {
+            "asset_kind": "audio",
+            "asset_task_id": "G036_sfx_008",
+            "facet": "audio/victory_sting",
+            "id": "C3.s0016",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05",
+              "F06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "audio",
+            "text": "audio/victory_sting：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "声音占位接口"
+          },
+          {
+            "asset_kind": "audio",
+            "asset_task_id": "G036_sfx_009",
+            "facet": "audio/defeat_sting",
+            "id": "C3.s0017",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05",
+              "F06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "audio",
+            "text": "audio/defeat_sting：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "声音占位接口"
+          },
+          {
+            "asset_kind": "audio",
+            "asset_task_id": "G036_sfx_010",
+            "facet": "audio/salt_flat_wind",
+            "id": "C3.s0018",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "audio",
+            "text": "audio/salt_flat_wind：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "声音占位接口"
+          },
+          {
+            "asset_kind": "audio",
+            "asset_task_id": "G036_sfx_011",
+            "facet": "audio/prototype_engine",
+            "id": "C3.s0019",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "audio",
+            "text": "audio/prototype_engine：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "声音占位接口"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 11,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_11"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.C3.04",
+      "table_column": "C3",
+      "primary_dimension": "Completeness",
+      "requirement_ids": [
+        "C01",
+        "C02",
+        "C03"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "演出占位接口",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "code_files",
+        "screenshot"
+      ],
+      "expected": {
+        "channels": [
+          "code_files",
+          "screenshot"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "C01": "- C01 测速周开幕（Opening，6 秒，1280×720@24fps）\n  - 触发时机：首次由标题点击「开始」后、倒计时起步之前，每局一次\n  - 内容与角色场景：白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门\n  - 资产对应：试验车、计时门、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入倒计时起步；自然播完 → 进入倒计时起步\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时",
+          "C02": "- C02 高速赛段（Event，5 秒，1280×720@24fps）\n  - 触发时机：本局首次速度达到 ≥180 km/h 时插入一次（不打断操作，画中画或瞬时可跳），每局最多一次\n  - 内容与角色场景：追车镜头贴地掠过盐板、尾迹与尘雾拉长、外线酥松带反光一闪\n  - 资产对应：试验车与赛道材质同源\n  - 可跳过：Esc/Enter 跳过 → 立即返回行驶视角；自然播完 → 自动返回\n  - 状态一致：不打断驾驶控制权；播放期间游戏计时正常推进（不暂停、不加成）",
+          "C03": "- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时",
+          "V01": "- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。",
+          "V02": "- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "演出占位接口"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "定位占位对象、实际资源引用及调用代码；用等价占位探针运行相应路径。",
+          "核对全部 task_id 和 VFX；仅验可替换接口，不验最终资产导入品质。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "asset_kind": "cg_video",
+            "asset_task_id": "G036_cg_001",
+            "facet": "cg_video/测速周开幕",
+            "id": "C3.s0020",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "C01"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "cg_video",
+            "text": "cg_video/测速周开幕：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "演出占位接口"
+          },
+          {
+            "asset_kind": "cg_video",
+            "asset_task_id": "G036_cg_002",
+            "facet": "cg_video/高速赛段",
+            "id": "C3.s0021",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "C02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "cg_video",
+            "text": "cg_video/高速赛段：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "演出占位接口"
+          },
+          {
+            "asset_kind": "cg_video",
+            "asset_task_id": "G036_cg_003",
+            "facet": "cg_video/冲线与测速结果",
+            "id": "C3.s0022",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "C03"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "cg_video",
+            "text": "cg_video/冲线与测速结果：可从占位对象定位实际替换引用、绑定对象和调用路径；替换不改写玩法状态。仅清单或未调用资源无效；本阶段不要求生成或导入最终资产。",
+            "topic": "演出占位接口"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 3,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_3"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.Q.01",
+      "table_column": "Q",
+      "primary_dimension": "Quality",
+      "requirement_ids": [
+        "F01",
+        "evaluation_plan_table.md#Q"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "视角与镜头；画面验收3；画面验收2",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "F01": "- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°；镜头平滑跟随（位置阻尼 0.12）；C 键复位镜头到正后方；镜头不出赛道边界；1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。",
+          "I06": "- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。",
+          "evaluation_plan_table.md#Q": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "视角与镜头",
+          "画面验收3",
+          "画面验收2"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0004",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F01"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°",
+            "source_unit": 1,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°",
+            "topic": "视角与镜头"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0005",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F01"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "镜头平滑跟随（位置阻尼 0.12）",
+            "source_unit": 2,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头平滑跟随（位置阻尼 0.12）",
+            "topic": "视角与镜头"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0006",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F01"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "C 键复位镜头到正后方",
+            "source_unit": 3,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：C 键复位镜头到正后方",
+            "topic": "视角与镜头"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0007",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F01"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "镜头不出赛道边界",
+            "source_unit": 4,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：镜头不出赛道边界",
+            "topic": "视角与镜头"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0008",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F01"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。",
+            "source_unit": 5,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。",
+            "topic": "视角与镜头"
+          },
+          {
+            "facet": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠",
+            "id": "Q.s0031",
+            "origin": "evaluation_plan",
+            "reference_paths": [],
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#Q"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "画面验收3",
+            "text": "角色、目标、障碍、可交互物可从轮廓/色块/标签区分，不能只靠调试日志。",
+            "topic": "画面验收3"
+          },
+          {
+            "facet": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮",
+            "id": "Q.s0030",
+            "origin": "evaluation_plan",
+            "reference_paths": [],
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#Q"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "画面验收2",
+            "text": "相机视角与尺度让玩家判断通路、距离和高度，关键目标不被持续遮挡。",
+            "topic": "画面验收2"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 7,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_7"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.Q.02",
+      "table_column": "Q",
+      "primary_dimension": "Quality",
+      "requirement_ids": [
+        "F02",
+        "W06"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "关键操作镜头变化；视觉风格与色彩材质",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "F02": "- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）；碰撞/出界 0.3 秒中幅震动；复位瞬间镜头快速回正；设置里可关闭震动（F09）。",
+          "F09": "- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）；暂停/结算取消未结束的震动；设置可关闭（镜头震动开/关）。",
+          "W06": "- W06 视觉风格与色彩材质：高对比白盐工业风；主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C；材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "关键操作镜头变化",
+          "视觉风格与色彩材质"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0009",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）",
+            "source_unit": 1,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）",
+            "topic": "关键操作镜头变化"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0010",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "碰撞/出界 0.3 秒中幅震动",
+            "source_unit": 2,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：碰撞/出界 0.3 秒中幅震动",
+            "topic": "关键操作镜头变化"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0011",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "复位瞬间镜头快速回正",
+            "source_unit": 3,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：复位瞬间镜头快速回正",
+            "topic": "关键操作镜头变化"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0012",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "设置里可关闭震动（F09）。",
+            "source_unit": 4,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：设置里可关闭震动（F09）。",
+            "topic": "关键操作镜头变化"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0001",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- W06 视觉风格与色彩材质：高对比白盐工业风",
+            "source_unit": 1,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- W06 视觉风格与色彩材质：高对比白盐工业风",
+            "topic": "视觉风格与色彩材质"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0002",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C",
+            "source_unit": 2,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C",
+            "topic": "视觉风格与色彩材质"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0003",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。",
+            "source_unit": 3,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。",
+            "topic": "视觉风格与色彩材质"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 7,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_7"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.Q.03",
+      "table_column": "Q",
+      "primary_dimension": "Quality",
+      "requirement_ids": [
+        "F09",
+        "F04",
+        "F07"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "屏幕震动；环境常驻效果；VFX 信息性与遮挡约束",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "F04": "- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸；风为纯表现层，不参与车辆物理判定（G04）。",
+          "F07": "- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨；尘雾与尾迹不得遮挡 HUD 与前方计时门；非结算单个全屏遮挡 ≤0.5 秒。",
+          "F09": "- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）；暂停/结算取消未结束的震动；设置可关闭（镜头震动开/关）。",
+          "G04": "- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "屏幕震动",
+          "环境常驻效果",
+          "VFX 信息性与遮挡约束"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0018",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F09"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）",
+            "source_unit": 1,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）",
+            "topic": "屏幕震动"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0019",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F09"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "暂停/结算取消未结束的震动",
+            "source_unit": 2,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：暂停/结算取消未结束的震动",
+            "topic": "屏幕震动"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0020",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F09"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "设置可关闭（镜头震动开/关）。",
+            "source_unit": 3,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：设置可关闭（镜头震动开/关）。",
+            "topic": "屏幕震动"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0013",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F04"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸",
+            "source_unit": 1,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸",
+            "topic": "环境常驻效果"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0014",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F04"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "风为纯表现层，不参与车辆物理判定（G04）。",
+            "source_unit": 2,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：风为纯表现层，不参与车辆物理判定（G04）。",
+            "topic": "环境常驻效果"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0015",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F07"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨",
+            "source_unit": 1,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨",
+            "topic": "VFX 信息性与遮挡约束"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0016",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F07"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "尘雾与尾迹不得遮挡 HUD 与前方计时门",
+            "source_unit": 2,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：尘雾与尾迹不得遮挡 HUD 与前方计时门",
+            "topic": "VFX 信息性与遮挡约束"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0017",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F07"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "非结算单个全屏遮挡 ≤0.5 秒。",
+            "source_unit": 3,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：非结算单个全屏遮挡 ≤0.5 秒。",
+            "topic": "VFX 信息性与遮挡约束"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 8,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_8"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.Q.04",
+      "table_column": "Q",
+      "primary_dimension": "Quality",
+      "requirement_ids": [
+        "A02",
+        "A01",
+        "evaluation_plan_table.md#Q"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "绑定表（文件 → 对象）；绑定原则；参考图辨识等5项关联规则",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "A01": "- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）；R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。",
+          "A02": "- A02 绑定表（文件 → 对象）：\n\n| 参考图 | 绑定对象 | 用途 |\n|---|---|---|\n| images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |\n| images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |\n| images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |\n\n参考图为程序化概念草图（1024×1024，无文字；生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。",
+          "L02": "- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。",
+          "evaluation_plan_table.md#Q": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "绑定表（文件 → 对象）",
+          "绑定原则",
+          "参考图辨识",
+          "画面验收4",
+          "画面验收1"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "捕捉固定场景视角、全局布局与主要交互区域；适用参考图独立附给 VLM。"
+        ],
+        "reference_paths": [
+          "3D_object/ref_images/ref_race_car_sketch.png",
+          "3D_object/ref_images/ref_checkpoint_gate_sketch.png",
+          "3D_scene/ref_images/ref_scene_salt_flat_sketch.png"
+        ],
+        "subchecks": [
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0023",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "A02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- A02 绑定表（文件 → 对象）：",
+            "source_unit": 1,
+            "system": "A:12. 参考图绑定 [A01–A02]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A02 绑定表（文件 → 对象）：",
+            "topic": "绑定表（文件 → 对象）"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0024",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "A02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |",
+            "source_unit": 2,
+            "system": "A:12. 参考图绑定 [A01–A02]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |",
+            "topic": "绑定表（文件 → 对象）"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0025",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "A02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |",
+            "source_unit": 3,
+            "system": "A:12. 参考图绑定 [A01–A02]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |",
+            "topic": "绑定表（文件 → 对象）"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0026",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "A02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |",
+            "source_unit": 4,
+            "system": "A:12. 参考图绑定 [A01–A02]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：表字段 | 参考图 | 绑定对象 | 用途 |\n要求行 | images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |",
+            "topic": "绑定表（文件 → 对象）"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0027",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "A02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "参考图为程序化概念草图（1024×1024，无文字",
+            "source_unit": 5,
+            "system": "A:12. 参考图绑定 [A01–A02]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：参考图为程序化概念草图（1024×1024，无文字",
+            "topic": "绑定表（文件 → 对象）"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0028",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "A02"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。",
+            "source_unit": 6,
+            "system": "A:12. 参考图绑定 [A01–A02]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。",
+            "topic": "绑定表（文件 → 对象）"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0021",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "A01"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）",
+            "source_unit": 1,
+            "system": "A:12. 参考图绑定 [A01–A02]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）",
+            "topic": "绑定原则"
+          },
+          {
+            "facet": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空",
+            "id": "Q.s0022",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "A01"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。",
+            "source_unit": 2,
+            "system": "A:12. 参考图绑定 [A01–A02]",
+            "text": "白模外观验收（允许几何体、纯色和标签；只验轮廓、相对比例、空间/色块关系与可读性，不要求最终材质、精细光照或成品模型）：R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。",
+            "topic": "绑定原则"
+          },
+          {
+            "facet": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要",
+            "id": "Q.s0033",
+            "origin": "evaluation_plan",
+            "reference_paths": [
+              "3D_object/ref_images/ref_race_car_sketch.png",
+              "3D_object/ref_images/ref_checkpoint_gate_sketch.png",
+              "3D_scene/ref_images/ref_scene_salt_flat_sketch.png"
+            ],
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#Q"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "参考图辨识",
+            "text": "冻结参考图中的身份、轮廓、地标关系在白模简化后仍可辨认；不要求写实精度。",
+            "topic": "参考图辨识"
+          },
+          {
+            "facet": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度",
+            "id": "Q.s0032",
+            "origin": "evaluation_plan",
+            "reference_paths": [],
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#Q"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "画面验收4",
+            "text": "占位角色和场景遵循游戏冻结的主题与风格方向，不按最终材质精度扣分。",
+            "topic": "画面验收4"
+          },
+          {
+            "facet": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体",
+            "id": "Q.s0029",
+            "origin": "evaluation_plan",
+            "reference_paths": [
+              "3D_object/ref_images/ref_race_car_sketch.png",
+              "3D_object/ref_images/ref_checkpoint_gate_sketch.png",
+              "3D_scene/ref_images/ref_scene_salt_flat_sketch.png"
+            ],
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#Q"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "画面验收1",
+            "text": "场景构图保留冻结的主要区域、地标和参照空间关系；允许用几何体表达。",
+            "topic": "画面验收1"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 11,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_11"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.G.01",
+      "table_column": "G",
+      "primary_dimension": "Gameness",
+      "requirement_ids": [
+        "F05",
+        "F06"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）；关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "video",
+        "audio"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "video",
+          "audio"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "C03": "- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时",
+          "F05": "- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |",
+          "F06": "- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）",
+          "关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+          "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0007",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：",
+            "source_unit": 1,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：",
+            "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0008",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |",
+            "source_unit": 2,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |",
+            "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0009",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |",
+            "source_unit": 3,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |",
+            "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0010",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |",
+            "source_unit": 4,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |",
+            "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0011",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |",
+            "source_unit": 5,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |",
+            "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0012",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |",
+            "source_unit": 6,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |",
+            "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0013",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |",
+            "source_unit": 7,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |",
+            "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0014",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |",
+            "source_unit": 8,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |",
+            "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0015",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |",
+            "source_unit": 9,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |",
+            "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0016",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F05"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |",
+            "source_unit": 10,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |",
+            "topic": "事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0017",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting",
+            "source_unit": 1,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting",
+            "topic": "关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0018",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。",
+            "source_unit": 2,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。",
+            "topic": "关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 12,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_12"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.G.02",
+      "table_column": "G",
+      "primary_dimension": "Gameness",
+      "requirement_ids": [
+        "F08",
+        "F03",
+        "W07"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "音画同步；输入与延迟；环境氛围与声音语言",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "video",
+        "audio"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "video",
+          "audio"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "F03": "- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。",
+          "F06": "- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。",
+          "F08": "- F08 音画同步：过门音与门灯带闪青同帧；倒计时音与数字同帧；冲线音与终点横幅同帧。",
+          "I07": "- I07 输入延迟目标：按键到画面可见反馈 ≤100 毫秒（桌面 P95，每类输入 ≥30 次采样）。",
+          "W07": "- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底；音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）；混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "音画同步",
+          "输入与延迟",
+          "环境氛围与声音语言"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+          "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0019",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F08"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- F08 音画同步：过门音与门灯带闪青同帧",
+            "source_unit": 1,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- F08 音画同步：过门音与门灯带闪青同帧",
+            "topic": "音画同步"
+          },
+          {
+            "facet": "倒计时音与数字同帧",
+            "id": "G.s0020",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F08"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "倒计时音与数字同帧",
+            "source_unit": 2,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "倒计时音与数字同帧",
+            "topic": "音画同步"
+          },
+          {
+            "facet": "冲线音与终点横幅同帧。",
+            "id": "G.s0021",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F08"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "冲线音与终点横幅同帧。",
+            "source_unit": 3,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "冲线音与终点横幅同帧。",
+            "topic": "音画同步"
+          },
+          {
+            "facet": "顿帧不改变计时口径。",
+            "id": "G.s0006",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F03"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "顿帧不改变计时口径。",
+            "source_unit": 2,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "顿帧不改变计时口径。",
+            "topic": "输入与延迟"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0003",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W07"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底",
+            "source_unit": 1,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底",
+            "topic": "环境氛围与声音语言"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0004",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W07"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）",
+            "source_unit": 2,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）",
+            "topic": "环境氛围与声音语言"
+          },
+          {
+            "facet": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语",
+            "id": "G.s0005",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "W07"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。",
+            "source_unit": 3,
+            "system": "W:8. 世界设定与创作基线 [W01–W08]",
+            "text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。",
+            "topic": "环境氛围与声音语言"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 7,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_7"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.G.03",
+      "table_column": "G",
+      "primary_dimension": "Gameness",
+      "requirement_ids": [
+        "F10",
+        "I06"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "前端界面；UI 必须显示的状态",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "video"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "video"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "F10": "- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数；Enter 重开）；关键状态图标＋文字并用；窗口失焦自动暂停。",
+          "I06": "- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "前端界面",
+          "UI 必须显示的状态"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+          "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "- F10 前端界面",
+            "id": "G.s0022",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F10"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数",
+            "source_unit": 1,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数",
+            "topic": "前端界面"
+          },
+          {
+            "facet": "Enter 重开）",
+            "id": "G.s0023",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F10"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "Enter 重开）",
+            "source_unit": 2,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "Enter 重开）",
+            "topic": "前端界面"
+          },
+          {
+            "facet": "关键状态图标＋文字并用",
+            "id": "G.s0024",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F10"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "关键状态图标＋文字并用",
+            "source_unit": 3,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "关键状态图标＋文字并用",
+            "topic": "前端界面"
+          },
+          {
+            "facet": "窗口失焦自动暂停。",
+            "id": "G.s0025",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "F10"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "窗口失焦自动暂停。",
+            "source_unit": 4,
+            "system": "F:9. 演出、镜头与反馈 [F01–F10]",
+            "text": "窗口失焦自动暂停。",
+            "topic": "前端界面"
+          },
+          {
+            "facet": "- I06 UI 必须显示的状态",
+            "id": "G.s0001",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "I06"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。",
+            "source_unit": 1,
+            "system": "I:4. 操作与输入 [I01–I07]",
+            "text": "- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。",
+            "topic": "UI 必须显示的状态"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 5,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_5"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.G.04",
+      "table_column": "G",
+      "primary_dimension": "Gameness",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G",
+        "L03"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "交互反馈3；目标物/交互物/场景/UI 对象；交互反馈1等5项关联规则",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "screenshot",
+        "video"
+      ],
+      "expected": {
+        "channels": [
+          "screenshot",
+          "video"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "L03": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/结算面板）与交互物（计时门触发体、出界判定体、复位点）逐类存在且运行时可进入；计时门判定体由引擎触发器构建，装饰拱门模型不得替代判定体；数量与属性以对应 G·M 条目为准。",
+          "evaluation_plan_table.md#G": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "交互反馈3",
+          "目标物/交互物/场景/UI 对象",
+          "交互反馈1",
+          "交互反馈4",
+          "交互反馈2"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "录制目标提示、实际输入、反馈、阶段变化与选择结果；只判断玩家能否感知和理解。",
+          "要求声音/触觉的细则必须提供真实对应模态证据；静音画面不足则 UNKNOWN。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+            "id": "G.s0028",
+            "origin": "evaluation_plan",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#G"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "交互反馈3",
+            "text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+            "topic": "交互反馈3"
+          },
+          {
+            "facet": "数量与属性以对应 G·M 条目为准。",
+            "id": "G.s0002",
+            "origin": "general_requirement",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "L03"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "source_subsection": "",
+            "source_text": "数量与属性以对应 G·M 条目为准。",
+            "source_unit": 3,
+            "system": "L:5. 赛道与内容清单 [L01–L04]",
+            "text": "数量与属性以对应 G·M 条目为准。",
+            "topic": "目标物/交互物/场景/UI 对象"
+          },
+          {
+            "facet": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文",
+            "id": "G.s0026",
+            "origin": "evaluation_plan",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#G"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "交互反馈1",
+            "text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+            "topic": "交互反馈1"
+          },
+          {
+            "facet": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+            "id": "G.s0029",
+            "origin": "evaluation_plan",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#G"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "交互反馈4",
+            "text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+            "topic": "交互反馈4"
+          },
+          {
+            "facet": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 ",
+            "id": "G.s0027",
+            "origin": "evaluation_plan",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#G"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "交互反馈2",
+            "text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+            "topic": "交互反馈2"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 5,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_5"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.P.01",
+      "table_column": "P",
+      "primary_dimension": "Playability",
+      "requirement_ids": [
+        "evaluation_plan_table.md#P"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "运行验收1",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "build_log",
+        "screenshot",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "build_log",
+          "screenshot",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "evaluation_plan_table.md#P": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "运行验收1"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "保留首轮构建日志、实际启动及目标场景进入证据，记录基础运行窗口。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修",
+            "id": "P.s0001",
+            "origin": "evaluation_plan",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#P"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "运行验收1",
+            "text": "本次评测首次构建尝试成功，有该次实际构建结果及日志；不能用修复后的成功冒充首次成功。",
+            "topic": "运行验收1"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.P.02",
+      "table_column": "P",
+      "primary_dimension": "Playability",
+      "requirement_ids": [
+        "evaluation_plan_table.md#P"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "运行验收2",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "build_log",
+        "screenshot",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "build_log",
+          "screenshot",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "evaluation_plan_table.md#P": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "运行验收2"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "保留首轮构建日志、实际启动及目标场景进入证据，记录基础运行窗口。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日",
+            "id": "P.s0002",
+            "origin": "evaluation_plan",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#P"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "运行验收2",
+            "text": "构建产物能实际启动并显示游戏入口；存在可执行文件或窗口创建日志不足以证明。",
+            "topic": "运行验收2"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.P.03",
+      "table_column": "P",
+      "primary_dimension": "Playability",
+      "requirement_ids": [
+        "evaluation_plan_table.md#P"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "运行验收3",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "build_log",
+        "screenshot",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "build_log",
+          "screenshot",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "evaluation_plan_table.md#P": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "运行验收3"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "保留首轮构建日志、实际启动及目标场景进入证据，记录基础运行窗口。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+            "id": "P.s0003",
+            "origin": "evaluation_plan",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#P"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "运行验收3",
+            "text": "通过正常入口进入规定的可操作目标场景，有实际录屏证据。",
+            "topic": "运行验收3"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.P.04",
+      "table_column": "P",
+      "primary_dimension": "Playability",
+      "requirement_ids": [
+        "evaluation_plan_table.md#P"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "运行验收4",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "build_log",
+        "screenshot",
+        "runtime_state"
+      ],
+      "expected": {
+        "channels": [
+          "build_log",
+          "screenshot",
+          "runtime_state"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "evaluation_plan_table.md#P": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "运行验收4"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "保留首轮构建日志、实际启动及目标场景进入证据，记录基础运行窗口。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本",
+            "id": "P.s0004",
+            "origin": "evaluation_plan",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#P"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "运行验收4",
+            "text": "已覆盖的基础运行窗口没有崩溃、卡死或无法继续执行；结论限于本次窗口，不代表完成全部机制。",
+            "topic": "运行验收4"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 1,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_1"
+    },
+    {
+      "assertion_id": "G036_salt_flat_timetrial.WB.CH.01",
+      "table_column": "CH",
+      "primary_dimension": "Diagnostic",
+      "requirement_ids": [
+        "evaluation_plan_table.md#CH"
+      ],
+      "task_id": "G036_salt_flat_timetrial_whitebox",
+      "reference_ids": [],
+      "assertion": "代码健康诊断",
+      "pass_rule": "已执行且本行所有冻结子检查均有充分证据通过。",
+      "partial_rule": "全部取证门槛通过且所有必需子检查均已判定，按可计分行为 PASS 数/冻结可计分行为数计分；任一 UNKNOWN 或门槛 FAIL 则整行 UNKNOWN。",
+      "fail_rule": "取证门槛通过，全部可计分行为均有实际反证；门槛未建立、未触发或缺证据不能判 FAIL。",
+      "applicable": true,
+      "max_points": 1.0,
+      "evidence_required": [
+        "code_files"
+      ],
+      "expected": {
+        "channels": [
+          "code_files"
+        ]
+      },
+      "evaluator": "visual.rubric_judge",
+      "binding": {
+        "aggregation_protocol": "role_gated_mean.v1",
+        "context": {
+          "evaluation_plan_table.md#CH": "| **A. LLM/Agent game generation with placeholder assets** | The LLM or agent generates the game logic, whitebox scene, UI, and placeholder assets without invoking 3D, motion, video/CG, audio, or VFX generation models. | **Story coverage:** background, player role, goal, and basic conflict are present and reflected in the game task. | **Mechanism coverage:** required core mechanics, interaction flow, resource/state elements, and win/lose or termination conditions are present. | **Asset-hook coverage:** required characters, scenes, animations, audio, VFX, and replacement interfaces or attachment points are reserved. | **Whitebox appearance quality:**<br>• reference/image similarity;<br>• scene composition and spatial relations;<br>• readability of characters, goals, obstacles, and interactable objects;<br>• style/theme consistency;<br>• placeholder coherence. | **Game loop and feedback:**<br>• goal–action–consequence–feedback loop;<br>• meaningful choice and consequence;<br>• progression and goal clarity;<br>• frontend decision support;<br>• event-aligned audio/VFX/haptic feedback when required. | **Whitebox runtime only:**<br>• first-attempt build;<br>• launch success;<br>• entry into the target scene;<br>• crash/freeze-free basic runtime.<br><br>Asset import and full asset playback are evaluated in Track C. | **Code Health (diagnostic only):**<br>• engine conventions;<br>• modularity and dependency clarity;<br>• redundancy and duplicate logic;<br>• extensibility for new mechanics and asset replacement.<br><br>Launch success is counted under P and is not counted again as Code Health. | **Evidence:** build logs, runtime playtest, screenshots/video, input traces, and rubric-based visual/gameplay assessment.<br><br>**Subscores:** C = mean(C1–C3); Q = whitebox quality; G = game-loop and feedback quality; P = build/launch/runtime.<br>**Overall:** `4D Overall = mean(C, Q, G, P)`; Code Health is reported separately and excluded from the 4D total. |"
+        },
+        "contract_identity": {
+          "contract_id": "G036_salt_flat_timetrial.whitebox.core12-v1.3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c",
+          "version": "core12-v1",
+          "content_sha256": "3f1c69a9727b0a76290748d336c716910d94e0a5c6b3eca066bcaabf6495075c"
+        },
+        "focus": [
+          "代码健康诊断"
+        ],
+        "judge_policy": "vlm_only_no_human",
+        "procedure": [
+          "只对游戏源码诊断引擎约定、职责依赖、重复与扩展性，证据不足继续 UNKNOWN。"
+        ],
+        "reference_paths": [],
+        "subchecks": [
+          {
+            "facet": "源码遵循所用引擎的基本组织与生命周期约定。",
+            "id": "CH.s0001",
+            "origin": "evaluation_plan",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#CH"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "代码健康诊断",
+            "text": "源码遵循所用引擎的基本组织与生命周期约定。",
+            "topic": "代码健康诊断"
+          },
+          {
+            "facet": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+            "id": "CH.s0002",
+            "origin": "evaluation_plan",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#CH"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "代码健康诊断",
+            "text": "核心系统职责、依赖和状态所有者清楚，避免相互隐藏修改。",
+            "topic": "代码健康诊断"
+          },
+          {
+            "facet": "不存在影响维护的大量重复逻辑或冗余实现。",
+            "id": "CH.s0003",
+            "origin": "evaluation_plan",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#CH"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "代码健康诊断",
+            "text": "不存在影响维护的大量重复逻辑或冗余实现。",
+            "topic": "代码健康诊断"
+          },
+          {
+            "facet": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+            "id": "CH.s0004",
+            "origin": "evaluation_plan",
+            "required_for_verdict": true,
+            "requirement_ids": [
+              "evaluation_plan_table.md#CH"
+            ],
+            "role": "behavior",
+            "scoring_role": "scored",
+            "system": "代码健康诊断",
+            "text": "增加机制或替换占位资产具有清楚扩展路径；不重复评价启动成功。",
+            "topic": "代码健康诊断"
+          }
+        ]
+      },
+      "scoring_rule": {
+        "kind": "tiered_mean",
+        "subitems": 4,
+        "tiers": {
+          "FAIL": 0.0,
+          "PASS": 1.0
+        }
+      },
+      "scoring_ref": "scored_subchecks_4"
+    }
+  ],
+  "groups": {},
+  "references": {
+    "whitebox_image_01": {
+      "path": "3D_object/ref_images/ref_race_car_sketch.png"
+    },
+    "whitebox_image_02": {
+      "path": "3D_object/ref_images/ref_checkpoint_gate_sketch.png"
+    },
+    "whitebox_image_03": {
+      "path": "3D_scene/ref_images/ref_scene_salt_flat_sketch.png"
+    }
+  },
+  "scoring_rule_defines": {
+    "scored_subchecks_6": {
+      "kind": "tiered_mean",
+      "subitems": 6,
+      "tiers": {
+        "FAIL": 0.0,
+        "PASS": 1.0
+      }
+    },
+    "scored_subchecks_4": {
+      "kind": "tiered_mean",
+      "subitems": 4,
+      "tiers": {
+        "FAIL": 0.0,
+        "PASS": 1.0
+      }
+    },
+    "scored_subchecks_8": {
+      "kind": "tiered_mean",
+      "subitems": 8,
+      "tiers": {
+        "FAIL": 0.0,
+        "PASS": 1.0
+      }
+    },
+    "scored_subchecks_9": {
+      "kind": "tiered_mean",
+      "subitems": 9,
+      "tiers": {
+        "FAIL": 0.0,
+        "PASS": 1.0
+      }
+    },
+    "scored_subchecks_12": {
+      "kind": "tiered_mean",
+      "subitems": 12,
+      "tiers": {
+        "FAIL": 0.0,
+        "PASS": 1.0
+      }
+    },
+    "scored_subchecks_5": {
+      "kind": "tiered_mean",
+      "subitems": 5,
+      "tiers": {
+        "FAIL": 0.0,
+        "PASS": 1.0
+      }
+    },
+    "scored_subchecks_3": {
+      "kind": "tiered_mean",
+      "subitems": 3,
+      "tiers": {
+        "FAIL": 0.0,
+        "PASS": 1.0
+      }
+    },
+    "scored_subchecks_11": {
+      "kind": "tiered_mean",
+      "subitems": 11,
+      "tiers": {
+        "FAIL": 0.0,
+        "PASS": 1.0
+      }
+    },
+    "scored_subchecks_7": {
+      "kind": "tiered_mean",
+      "subitems": 7,
+      "tiers": {
+        "FAIL": 0.0,
+        "PASS": 1.0
+      }
+    },
+    "scored_subchecks_1": {
+      "kind": "tiered_mean",
+      "subitems": 1,
+      "tiers": {
+        "FAIL": 0.0,
+        "PASS": 1.0
+      }
+    }
+  }
+}

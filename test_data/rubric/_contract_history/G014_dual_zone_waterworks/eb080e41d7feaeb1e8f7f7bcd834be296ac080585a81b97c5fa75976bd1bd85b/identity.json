@@ -1,0 +1,7 @@
+{
+  "contract_id": "G014_dual_zone_waterworks.whitebox.final",
+  "version": "final",
+  "content_sha256": "eb080e41d7feaeb1e8f7f7bcd834be296ac080585a81b97c5fa75976bd1bd85b",
+  "rubric_json_sha256": "d50cad39a784b6229587e4fd5dbdcfdecf8bde29b6ba3d3951367a2de5f06b10",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

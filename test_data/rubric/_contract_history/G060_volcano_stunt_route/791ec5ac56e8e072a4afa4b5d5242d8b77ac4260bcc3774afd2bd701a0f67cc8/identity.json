@@ -1,0 +1,7 @@
+{
+  "contract_id": "G060_volcano_stunt_route.whitebox.final",
+  "version": "final",
+  "content_sha256": "791ec5ac56e8e072a4afa4b5d5242d8b77ac4260bcc3774afd2bd701a0f67cc8",
+  "rubric_json_sha256": "1d44edd949452e5f667a094edcfea73d9865f187dc82821e75a50050d97765d7",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

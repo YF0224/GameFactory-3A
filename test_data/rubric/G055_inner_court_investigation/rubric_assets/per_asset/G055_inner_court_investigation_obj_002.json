@@ -1,0 +1,484 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.v1",
+  "authoring_protocol": "priority_asset_rubrics.v1",
+  "status": "source_grounded_draft",
+  "game_id": "G055_inner_court_investigation",
+  "task_id": "G055_inner_court_investigation_obj_002",
+  "asset_type": "3d_object",
+  "asset_subtype": "evidence",
+  "asset_name": "旧香囊残灰",
+  "scope": "Track B：独立资产；不含 T-pose、自然音效或引擎导入/playtest。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G055_inner_court_investigation",
+    "task_id": "G055_inner_court_investigation_obj_002",
+    "asset_name": "evidence_pouch_ash",
+    "name_zh": "旧香囊残灰",
+    "role": "evidence",
+    "input_mode": "image_to_3d",
+    "prompt": "Small scorched silk incense pouch with charred rim and faint residual ash, tied with a cut thread, ancient court stylized, game-ready, PBR textures, low-poly style, minimal triangle count, flat faceted surfaces, clean silhouette, no fine surface detail",
+    "seed": 1552,
+    "decimation_target": 4000,
+    "texture_size": 1024,
+    "rig": "none",
+    "animation_strategy": "procedural",
+    "spec_ref": "P20.E01",
+    "image_path": "test_data/test_samples/G055_inner_court_investigation/3D_object/ref_images/evidence_pouch_ref.png",
+    "reference_image_role": "single_object_visual_anchor",
+    "poly_policy": "low_poly_priority",
+    "l_tier_repair_target": true
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L53",
+      "general:L73",
+      "general:L74",
+      "general:L75"
+    ],
+    "visual_style_source_ids": [
+      "general:L43"
+    ],
+    "sound_style_source_ids": [
+      "general:L587",
+      "general:L588",
+      "general:L589",
+      "general:L590",
+      "general:L591"
+    ],
+    "asset_description_source_ids": [
+      "general:L26",
+      "general:L674",
+      "general:L713",
+      "general:L805"
+    ],
+    "spec_ref_source_ids": [
+      "general:L674-674"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L7",
+    "canonical_asset_content_source_ids": []
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "sha256": "a6a9b03f45ab40197fbb18aaf9614638a9691890a7824c137aef95fcd79868f9",
+      "start_line": 191,
+      "end_line": 191,
+      "quote": "{\"game_id\": \"G055_inner_court_investigation\", \"task_id\": \"G055_inner_court_investigation_obj_002\", \"asset_name\": \"evidence_pouch_ash\", \"name_zh\": \"旧香囊残灰\", \"role\": \"evidence\", \"input_mode\": \"image_to_3d\", \"prompt\": \"Small scorched silk incense pouch with charred rim and faint residual ash, tied with a cut thread, ancient court stylized, game-ready, PBR textures, low-poly style, minimal triangle count, flat faceted surfaces, clean silhouette, no fine surface detail\", \"seed\": 1552, \"decimation_target\": 4000, \"texture_size\": 1024, \"rig\": \"none\", \"animation_strategy\": \"procedural\", \"spec_ref\": \"P20.E01\", \"image_path\": \"test_data/test_samples/G055_inner_court_investigation/3D_object/ref_images/evidence_pouch_ref.png\", \"reference_image_role\": \"single_object_visual_anchor\", \"poly_policy\": \"low_poly_priority\", \"l_tier_repair_target\": true}"
+    },
+    "general:L53": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 53,
+      "end_line": 53,
+      "quote": "玩家扮演沈知微，在一座以礼法、流言、门禁和人情构成的“活迷宫”中调查一份被篡改的宫廷名册；通过观察、伪装、潜行、机关、证词交叉验证与关系经营，在保全自己及同伴的前提下决定真相如何被揭开。"
+    },
+    "general:L73": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 73,
+      "end_line": 73,
+      "quote": "架空大周王朝，年号景和。宫中准备修订《内廷岁档》，它记录各宫人员调动、赏赐、药材领用、出入时辰与旧案批注。档案中一页“冬至夜值房名册”被人调包，牵涉多年前的一场火灾与一位被迫离宫的女官。"
+    },
+    "general:L74": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 74,
+      "end_line": 74,
+      "quote": "沈知微以新人身份入宫，最初只想安稳度日。她在锦瑟院发现一只不属于自己的旧香囊，内藏半张值房轮值签。顾怀青提醒她：香囊上的药香配方不可能来自御药房常规领用。许令仪则发现某名册页码与当值太监的口供对不上。玩家由此开始查案。"
+    },
+    "general:L75": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 75,
+      "end_line": 75,
+      "quote": "案件并非简单的“找出坏人”：名册被改动可能是为掩盖救人、栽赃、替人顶罪或换取权力。玩家需确认谁改、为何改、谁受益、何时能安全公开。"
+    },
+    "general:L43": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 43,
+      "end_line": 43,
+      "quote": "- 画面：写实风格化架空古代宫廷美术，避免历史纪录片式写实；夜景需保证可读性。"
+    },
+    "general:L587": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 587,
+      "end_line": 587,
+      "quote": "- 脚步按木廊、石地、地毯、湿地分别设计声纹。"
+    },
+    "general:L588": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 588,
+      "end_line": 588,
+      "quote": "- 巡更锣、滴漏、风铃、膳房铜器形成时间与方向线索。"
+    },
+    "general:L589": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 589,
+      "end_line": 589,
+      "quote": "- 音乐以弦乐、箫、打击乐低频为主；追查时加入节奏但避免持续压迫。"
+    },
+    "general:L590": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 590,
+      "end_line": 590,
+      "quote": "- 证据发现使用短促细节声，不用夸张“正确答案”音效。"
+    },
+    "general:L591": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 591,
+      "end_line": 591,
+      "quote": "- 听觉提示可视化，支持听障玩家；视觉线索也能完成同一谜题。"
+    },
+    "general:L674-674": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 674,
+      "end_line": 674,
+      "quote": "| E01 | 旧香囊残灰 | 锦瑟院 | 35 | 虞蘅对照香样 | 旧库批次 |"
+    },
+    "general:L26": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 26,
+      "end_line": 26,
+      "quote": "- 独立 oracle：§7.2.3「旧香囊残灰」算分示例（30→36→44→54→61→71→81）与 §7.2.1 证据强度公式、§4.3 潜行/交涉判定公式为冻结对账口径；任何偏离即 FAIL。"
+    },
+    "general:L674": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 674,
+      "end_line": 674,
+      "quote": "| E01 | 旧香囊残灰 | 锦瑟院 | 35 | 虞蘅对照香样 | 旧库批次 |"
+    },
+    "general:L713": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 713,
+      "end_line": 713,
+      "quote": "- K01 阶段A（序章–第一章把「旧香囊残灰」等证据经营到佐证级，§7.2.3 算分链 30→54 落盘）→ 阶段B（第二章解锁条件「香料来源」或「值夜时间」达佐证级 50 分方可推进，§14.1；后续章节按证据假设解锁）→ 阶段C（第六章呈递风险随证据完整度降低，尾声结局组由 truth_score/evidence_integrity 等全局变量触发，§15；早期证据强度在终局仍可观察）；验证方式=跨阶段回溯探针：阶段 A 记录证据强度快照 → 阶段 B 验证章节解锁事件 → 阶段 C 验证结局变量与分支对照。"
+    },
+    "general:L805": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 805,
+      "end_line": 805,
+      "quote": "- object：4 个（text-to-3D 2，image-to-3D 2）；object 任务资产为：shen_zhiwei, evidence_pouch_ash, rota_manuscript, seal_wax_imprint。每项只允许一个物体；组合物必须拆成独立任务。"
+    },
+    "asset_requirement:L7": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/3D_object/requirement.txt",
+      "sha256": "ce5efd67ce33f74668da160a5ee27a829ebf6ea7dc172bbc3c4463507c320cda",
+      "start_line": 7,
+      "end_line": 7,
+      "quote": "- evidence_pouch_ash: Small scorched silk incense pouch with charred rim and faint residual ash, tied with a cut thread, ancient court stylized, game-ready, PBR textures"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+      "start_line": 78,
+      "end_line": 82,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    }
+  },
+  "references": [
+    {
+      "id": "input_image",
+      "path": "test_data/test_samples/G055_inner_court_investigation/3D_object/ref_images/evidence_pouch_ref.png",
+      "sha256": "b5a13889899eea16de82e49b034a09b90d0475c86c32d50da1ee3416319f134d",
+      "exists_at_authoring": true,
+      "source_field": "image_path"
+    }
+  ],
+  "prompt_clause_assignment": {
+    "content": [
+      "Small scorched silk incense pouch with charred rim and faint residual ash",
+      "tied with a cut thread",
+      "ancient court stylized"
+    ],
+    "style": [
+      "game-ready",
+      "PBR textures",
+      "low-poly style",
+      "minimal triangle count",
+      "flat faceted surfaces",
+      "clean silhouette",
+      "no fine surface detail"
+    ],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求符合度",
+      "checks": [
+        {
+          "id": "C01",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：Small scorched silk incense pouch；with charred rim and faint residual ash",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "Small scorched silk incense pouch",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "with charred rim and faint residual ash",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "C02",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：tied with a cut thread",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "tied with a cut thread",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C03",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：ancient court stylized",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "ancient court stylized",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L53",
+              "text": "玩家扮演沈知微，在一座以礼法、流言、门禁和人情构成的“活迷宫”中调查一份被篡改的宫廷名册；通过观察、伪装、潜行、机关、证词交叉验证与关系经营，在保全自己及同伴的前提下决定真相如何被揭开。"
+            },
+            {
+              "source_id": "general:L73",
+              "text": "架空大周王朝，年号景和。宫中准备修订《内廷岁档》，它记录各宫人员调动、赏赐、药材领用、出入时辰与旧案批注。档案中一页“冬至夜值房名册”被人调包，牵涉多年前的一场火灾与一位被迫离宫的女官。"
+            },
+            {
+              "source_id": "general:L26",
+              "text": "- 独立 oracle：§7.2.3「旧香囊残灰」算分示例（30→36→44→54→61→71→81）与 §7.2.1 证据强度公式、§4.3 潜行/交涉判定公式为冻结对账口径；任何偏离即 FAIL。"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L43",
+              "text": "- 画面：写实风格化架空古代宫廷美术，避免历史纪录片式写实；夜景需保证可读性。"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "game-ready",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "PBR textures",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "low-poly style",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "minimal triangle count",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "flat faceted surfaces",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "clean silhouette",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "no fine surface detail",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G03",
+          "title": "适用参考输入一致性",
+          "assertion": "与本任务实际提供的参考图对照，只核对可见的身份特征、轮廓比例、地标/布局和标记。参考不可见部分不推测；不把图像的背景误当成对象必需部件；低多边形只比身份与主要形体，不要求复制像素级细节。",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "test_data/test_samples/G055_inner_court_investigation/3D_object/ref_images/evidence_pouch_ref.png",
+              "field": "image_path"
+            }
+          ],
+          "scope_exclusions": "参考仅约束可见特征；原文明确要求的部件存在性只在 C 中计分。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [
+            "实际产物的可比视角与原始参考图必须同时提供；缺参考为 UNKNOWN，不改为 N/A。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "几何结构质量",
+          "assertion": "只评几何/形体自身缺陷，不重复评分所需部件是否存在。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "大范围塌陷、破面或融合，主体结构不可辨",
+            "2": "多处明显破损/漂浮/穿插，严重影响辨识",
+            "3": "主体结构完整，局部破面或穿插可见",
+            "4": "只有轻微局部瑕疵，不影响轮廓与结构",
+            "5": "多视角下结构完整，未见明显破面、漂浮或异常穿插"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "材质与表面质量",
+          "assertion": "只评表面清晰、材质连贯和伪影；低多边形/平面着色本身不是缺陷。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "大面积错误贴图/糊化/污染，表面不可读",
+            "2": "明显接缝、拉伸或材质错乱覆盖主要区域",
+            "3": "主体表面可读，但存在局部接缝/拉伸/涂抹",
+            "4": "仅有轻微接缝或局部表面瑕疵",
+            "5": "材质与色块连贯，多视角下未见明显接缝、拉伸或生成伪影"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。"
+  },
+  "evidence_requirements": [
+    "实际三维产物的固定光照多视角渲染（正/侧/背及细节）",
+    "必要时的网格、尺度和材质探针；不是任务描述或文件名"
+  ],
+  "objective_specs": {
+    "decimation_target": 4000,
+    "texture_size": 1024,
+    "rig": "none"
+  },
+  "objective_metric_policy": "规格与传统指标单独由探针/脚本报告原始值，不与三维 rubric 分数混合；本文件不代表已计算任何指标。",
+  "authoring_warnings": []
+}

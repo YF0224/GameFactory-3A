@@ -1,0 +1,384 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.v1",
+  "authoring_protocol": "priority_asset_rubrics.v1",
+  "status": "source_grounded_draft",
+  "game_id": "G039_sky_ring_flight",
+  "task_id": "G039_cg_002",
+  "asset_type": "cg_video",
+  "asset_subtype": "cg_video",
+  "asset_name": "关键穿环与气流事件",
+  "scope": "Track B：独立资产；不含 T-pose、自然音效或引擎导入/playtest。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G039_sky_ring_flight",
+    "task_id": "G039_cg_002",
+    "cg_type": "Event",
+    "cg_name": "关键穿环与气流事件",
+    "mode": "text_to_video",
+    "prompt": "机身被上升粒子托举、穿过风谷环门的脉冲光环、风线自侧方掠过镜头，无 UI、无文字",
+    "duration_sec": 5,
+    "resolution": "1280x720",
+    "fps": 24,
+    "seed": 6392,
+    "trigger": "本局首次进入上升气流柱时插入一次（画中画、不打断操作），每局最多一次；Esc/Enter 跳过→立即返回飞行视角；播放期间游戏计时正常推进",
+    "skippable": true,
+    "spec_ref": "C02",
+    "start_condition": "本局首次进入上升气流柱时插入一次（画中画、不打断操作），每局最多一次；Esc/Enter 跳过→立即返回飞行视角；播放期间游戏计时正常推进",
+    "end_condition": "natural playback end or skip input",
+    "skip_behavior": "skip_to_declared_next_state",
+    "next_state": "立即返回飞行视角",
+    "planned_source": "closed_source_video_api"
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L165-165",
+      "general:L166-166",
+      "general:L167-167",
+      "general:L169-169"
+    ],
+    "visual_style_source_ids": [
+      "general:L170-170"
+    ],
+    "sound_style_source_ids": [
+      "general:L171-171"
+    ],
+    "asset_description_source_ids": [
+      "general:L210"
+    ],
+    "spec_ref_source_ids": [
+      "general:L210-215"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L7",
+    "canonical_asset_content_source_ids": [
+      "general:L212"
+    ]
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "sha256": "94b96f71d2d9684d0746b5c3d70633028fad9317dcf578377ccafbe214233eac",
+      "start_line": 111,
+      "end_line": 111,
+      "quote": "{\"game_id\": \"G039_sky_ring_flight\", \"task_id\": \"G039_cg_002\", \"cg_type\": \"Event\", \"cg_name\": \"关键穿环与气流事件\", \"mode\": \"text_to_video\", \"prompt\": \"机身被上升粒子托举、穿过风谷环门的脉冲光环、风线自侧方掠过镜头，无 UI、无文字\", \"duration_sec\": 5, \"resolution\": \"1280x720\", \"fps\": 24, \"seed\": 6392, \"trigger\": \"本局首次进入上升气流柱时插入一次（画中画、不打断操作），每局最多一次；Esc/Enter 跳过→立即返回飞行视角；播放期间游戏计时正常推进\", \"skippable\": true, \"spec_ref\": \"C02\", \"start_condition\": \"本局首次进入上升气流柱时插入一次（画中画、不打断操作），每局最多一次；Esc/Enter 跳过→立即返回飞行视角；播放期间游戏计时正常推进\", \"end_condition\": \"natural playback end or skip input\", \"skip_behavior\": \"skip_to_declared_next_state\", \"next_state\": \"立即返回飞行视角\", \"planned_source\": \"closed_source_video_api\"}"
+    },
+    "general:L165-165": {
+      "path": "test_data/test_samples/G039_sky_ring_flight/general_requirement.txt",
+      "sha256": "cf0cdbb653896fd096631c772cfae144d7a058736f67bee0e827c62a2d9720d7",
+      "start_line": 165,
+      "end_line": 165,
+      "quote": "- W01 世界与时代背景：「浮空群岛」的候鸟节——每年季风转向时，群岛信使驾驶滑翔机沿 12 环天路巡游，向各岛灯塔投递新年的第一封信；天路穿过风谷与云柱，是对飞行员技术的最高礼赞。"
+    },
+    "general:L166-166": {
+      "path": "test_data/test_samples/G039_sky_ring_flight/general_requirement.txt",
+      "sha256": "cf0cdbb653896fd096631c772cfae144d7a058736f67bee0e827c62a2d9720d7",
+      "start_line": 166,
+      "end_line": 166,
+      "quote": "- W02 场景所在地：悬浮于云海之上的群岛天路——起飞平台立于首岛崖顶，环 1–4 沿低空岛缘铺设，环 5–8 横穿风谷（侧风常驻、双气流柱），环 9–12 升入高空窄环，终点环悬于终岛灯塔上空。"
+    },
+    "general:L167-167": {
+      "path": "test_data/test_samples/G039_sky_ring_flight/general_requirement.txt",
+      "sha256": "cf0cdbb653896fd096631c772cfae144d7a058736f67bee0e827c62a2d9720d7",
+      "start_line": 167,
+      "end_line": 167,
+      "quote": "- W03 玩家身份与当前任务动机：玩家是群岛信使候补飞行员，须在 420 秒内按序穿完全部 12 环、且复位不超过 10 次，完成首次正式投递。"
+    },
+    "general:L169-169": {
+      "path": "test_data/test_samples/G039_sky_ring_flight/general_requirement.txt",
+      "sha256": "cf0cdbb653896fd096631c772cfae144d7a058736f67bee0e827c62a2d9720d7",
+      "start_line": 169,
+      "end_line": 169,
+      "quote": "- W05 叙事来源：滑翔机＝信使邮翼机（双翼轻航风格）；穿环＝群岛灯塔联盟的悬空环门；气流柱＝风谷上升暖流；检查点浮标＝灯塔联盟的救援浮标。全部原创，不用商业作品命名。"
+    },
+    "general:L170-170": {
+      "path": "test_data/test_samples/G039_sky_ring_flight/general_requirement.txt",
+      "sha256": "cf0cdbb653896fd096631c772cfae144d7a058736f67bee0e827c62a2d9720d7",
+      "start_line": 170,
+      "end_line": 170,
+      "quote": "- W06 视觉风格与色彩材质：明快云海插画风；主色＝云白 #F4F7F2、邮翼红 #D9553F、灯塔金 #E8B84B、远岛青 #6A9C8F；材质为帆布翼面、轻木机身、铜色环架与半透明风线。"
+    },
+    "general:L171-171": {
+      "path": "test_data/test_samples/G039_sky_ring_flight/general_requirement.txt",
+      "sha256": "cf0cdbb653896fd096631c772cfae144d7a058736f67bee0e827c62a2d9720d7",
+      "start_line": 171,
+      "end_line": 171,
+      "quote": "- W07 环境氛围与声音语言：高空风啸与远处海鸟声为底；音效语言＝引擎、风线、穿环提示、失速警报、复位（F06 冻结清单）；混音优先级：失速警报 ＞ 漏环警告 ＞ 穿环提示 ＞ 引擎 ＞ 风环境。"
+    },
+    "general:L210-215": {
+      "path": "test_data/test_samples/G039_sky_ring_flight/general_requirement.txt",
+      "sha256": "cf0cdbb653896fd096631c772cfae144d7a058736f67bee0e827c62a2d9720d7",
+      "start_line": 210,
+      "end_line": 215,
+      "quote": "- C02 关键穿环与气流事件（Event，5 秒，1280×720@24fps）\n  - 触发时机：本局首次进入上升气流柱时插入一次（画中画、不打断操作），每局最多一次\n  - 内容与角色场景：机身被上升粒子托举、穿过风谷环门的脉冲光环、风线自侧方掠过镜头\n  - 资产对应：邮翼机与环门同源\n  - 可跳过：Esc/Enter 跳过 → 立即返回飞行视角；自然播完 → 自动返回\n  - 状态一致：不打断飞行控制权；播放期间游戏计时正常推进"
+    },
+    "general:L210": {
+      "path": "test_data/test_samples/G039_sky_ring_flight/general_requirement.txt",
+      "sha256": "cf0cdbb653896fd096631c772cfae144d7a058736f67bee0e827c62a2d9720d7",
+      "start_line": 210,
+      "end_line": 210,
+      "quote": "- C02 关键穿环与气流事件（Event，5 秒，1280×720@24fps）"
+    },
+    "asset_requirement:L7": {
+      "path": "test_data/test_samples/G039_sky_ring_flight/cg_video/requirement.txt",
+      "sha256": "0122a78b17ec608fe92ded90313c0eec717ee38b49d25cda9cf2f6292b5913b9",
+      "start_line": 7,
+      "end_line": 7,
+      "quote": "- G039_cg_002: 机身被上升粒子托举、穿过风谷环门的脉冲光环、风线自侧方掠过镜头，无 UI、无文字"
+    },
+    "general:L212": {
+      "path": "test_data/test_samples/G039_sky_ring_flight/general_requirement.txt",
+      "sha256": "cf0cdbb653896fd096631c772cfae144d7a058736f67bee0e827c62a2d9720d7",
+      "start_line": 212,
+      "end_line": 212,
+      "quote": "  - 内容与角色场景：机身被上升粒子托举、穿过风谷环门的脉冲光环、风线自侧方掠过镜头"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+      "start_line": 78,
+      "end_line": 82,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "机身被上升粒子托举",
+      "穿过风谷环门的脉冲光环",
+      "风线自侧方掠过镜头",
+      "无 UI",
+      "无文字"
+    ],
+    "style": [],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求符合度",
+      "checks": [
+        {
+          "id": "C01",
+          "title": "指定主体、事件或镜头片段",
+          "assertion": "实际产物可观察地满足：机身被上升粒子托举；穿过风谷环门的脉冲光环",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "机身被上升粒子托举",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "穿过风谷环门的脉冲光环",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          },
+          "canonical_content_source_ids": [
+            "general:L212"
+          ],
+          "canonical_override_rule": "上述 canonical 内容原文优先解释本项所涉对象/事件；priority prompt 只能补充不矛盾的镜头细节。原文中与本项无关的片段不在本项重复评分。",
+          "temporal_rule": "仅按原文明示的先后、因果或同步关系核对；列举不等于严格时间顺序。双意象/胜负分支是不同版本，不要求胜利与失败连续发生在同一时间线。"
+        },
+        {
+          "id": "C02",
+          "title": "指定主体、事件或镜头片段",
+          "assertion": "实际产物可观察地满足：风线自侧方掠过镜头；无 UI",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "风线自侧方掠过镜头",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "无 UI",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          },
+          "canonical_content_source_ids": [
+            "general:L212"
+          ],
+          "canonical_override_rule": "上述 canonical 内容原文优先解释本项所涉对象/事件；priority prompt 只能补充不矛盾的镜头细节。原文中与本项无关的片段不在本项重复评分。",
+          "temporal_rule": "仅按原文明示的先后、因果或同步关系核对；列举不等于严格时间顺序。双意象/胜负分支是不同版本，不要求胜利与失败连续发生在同一时间线。"
+        },
+        {
+          "id": "C03",
+          "title": "指定主体、事件或镜头片段",
+          "assertion": "实际产物可观察地满足：无文字",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "无文字",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          },
+          "canonical_content_source_ids": [
+            "general:L212"
+          ],
+          "canonical_override_rule": "上述 canonical 内容原文优先解释本项所涉对象/事件；priority prompt 只能补充不矛盾的镜头细节。原文中与本项无关的片段不在本项重复评分。",
+          "temporal_rule": "仅按原文明示的先后、因果或同步关系核对；列举不等于严格时间顺序。双意象/胜负分支是不同版本，不要求胜利与失败连续发生在同一时间线。"
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L165-165",
+              "text": "- W01 世界与时代背景：「浮空群岛」的候鸟节——每年季风转向时，群岛信使驾驶滑翔机沿 12 环天路巡游，向各岛灯塔投递新年的第一封信；天路穿过风谷与云柱，是对飞行员技术的最高礼赞。"
+            },
+            {
+              "source_id": "general:L166-166",
+              "text": "- W02 场景所在地：悬浮于云海之上的群岛天路——起飞平台立于首岛崖顶，环 1–4 沿低空岛缘铺设，环 5–8 横穿风谷（侧风常驻、双气流柱），环 9–12 升入高空窄环，终点环悬于终岛灯塔上空。"
+            },
+            {
+              "source_id": "general:L210",
+              "text": "- C02 关键穿环与气流事件（Event，5 秒，1280×720@24fps）"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L170-170",
+              "text": "- W06 视觉风格与色彩材质：明快云海插画风；主色＝云白 #F4F7F2、邮翼红 #D9553F、灯塔金 #E8B84B、远岛青 #6A9C8F；材质为帆布翼面、轻木机身、铜色环架与半透明风线。"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "单帧视觉质量",
+          "assertion": "只评实际帧中的形体、细节和生成伪影；不重复检查主体/风格是否符合输入。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "多数关键帧严重畸变或不可辨",
+            "2": "关键主体多处明显变形/涂抹/破碎",
+            "3": "关键帧可读，局部畸变或细节伪影可见",
+            "4": "整体清楚，仅有轻微局部伪影",
+            "5": "全片关键帧清楚，未见明显畸变、涂抹或非设计性形体破损"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "时间连续性",
+          "assertion": "需跨全片时序证据；只评闪烁、身份漂移、跳变和运动断裂，不重复评分剧情顺序。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "持续闪烁/身份崩解/运动断裂，无法跟随主体",
+            "2": "频繁身份漂移、空间跳变或不合理形变",
+            "3": "主线连续，局部闪烁/跳变/形变可见",
+            "4": "时间上连贯，仅有少量轻微不稳定",
+            "5": "主体身份、空间和运动连贯；未见明显非设计性闪烁、跳变或形变"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。"
+  },
+  "evidence_requirements": [
+    "完整实际视频，或覆盖全片并附时间戳的连续帧序列",
+    "时间顺序和连续性需足够密集的时序证据；声音要求需实际音轨"
+  ],
+  "objective_specs": {
+    "duration_sec": 5,
+    "resolution": "1280x720",
+    "fps": 24
+  },
+  "objective_metric_policy": "规格与传统指标单独由探针/脚本报告原始值，不与三维 rubric 分数混合；本文件不代表已计算任何指标。",
+  "authoring_warnings": []
+}

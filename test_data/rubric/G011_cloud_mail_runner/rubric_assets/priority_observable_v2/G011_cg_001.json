@@ -1,0 +1,571 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.observable.v2",
+  "authoring_protocol": "priority_observable_v2",
+  "status": "source_grounded_revision_not_judged",
+  "game_id": "G011_cloud_mail_runner",
+  "task_id": "G011_cg_001",
+  "asset_type": "cg_video",
+  "asset_subtype": "cg_video",
+  "asset_name": "最后一班信",
+  "scope": "priority gen 独立资产三列口径；第一列仅可观察需求内容，排除标定数值及运行时验收。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G011_cloud_mail_runner",
+    "task_id": "G011_cg_001",
+    "cg_type": "Opening",
+    "cg_name": "最后一班信",
+    "mode": "text_to_video",
+    "prompt": "暴风云带逼近悬空邮路的远景，镜头缓缓推近最后一位云端邮差背包上的急件；远处云端灯塔在风幕中透出橙光；无剪辑、无 UI、无文字的定格开场",
+    "duration_sec": 5,
+    "resolution": "1280x720",
+    "fps": 24,
+    "seed": 6111,
+    "trigger": "首次由标题进入邮路之前，每局一次；Enter/Space 或跳过按钮→直接进入邮路，跳过与自然播完后初始状态一致",
+    "skippable": true,
+    "spec_ref": "C01",
+    "start_condition": "首次由标题进入邮路之前，每局一次；Enter/Space 或跳过按钮→直接进入邮路，跳过与自然播完后初始状态一致",
+    "end_condition": "natural playback end or skip input",
+    "skip_behavior": "skip_to_declared_next_state",
+    "next_state": "直接进入邮路，跳过与自然播完后初始状态一致",
+    "planned_source": "closed_source_video_api"
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L162-162",
+      "general:L163-163",
+      "general:L164-164",
+      "general:L166-166"
+    ],
+    "visual_style_source_ids": [
+      "general:L167-167"
+    ],
+    "sound_style_source_ids": [
+      "general:L168-168"
+    ],
+    "asset_description_source_ids": [
+      "general:L162",
+      "general:L199"
+    ],
+    "spec_ref_source_ids": [
+      "general:L199-204"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L6",
+    "canonical_asset_content_source_ids": [
+      "general:L201"
+    ]
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "sha256": "94b96f71d2d9684d0746b5c3d70633028fad9317dcf578377ccafbe214233eac",
+      "start_line": 36,
+      "end_line": 36,
+      "quote": "{\"game_id\": \"G011_cloud_mail_runner\", \"task_id\": \"G011_cg_001\", \"cg_type\": \"Opening\", \"cg_name\": \"最后一班信\", \"mode\": \"text_to_video\", \"prompt\": \"暴风云带逼近悬空邮路的远景，镜头缓缓推近最后一位云端邮差背包上的急件；远处云端灯塔在风幕中透出橙光；无剪辑、无 UI、无文字的定格开场\", \"duration_sec\": 5, \"resolution\": \"1280x720\", \"fps\": 24, \"seed\": 6111, \"trigger\": \"首次由标题进入邮路之前，每局一次；Enter/Space 或跳过按钮→直接进入邮路，跳过与自然播完后初始状态一致\", \"skippable\": true, \"spec_ref\": \"C01\", \"start_condition\": \"首次由标题进入邮路之前，每局一次；Enter/Space 或跳过按钮→直接进入邮路，跳过与自然播完后初始状态一致\", \"end_condition\": \"natural playback end or skip input\", \"skip_behavior\": \"skip_to_declared_next_state\", \"next_state\": \"直接进入邮路，跳过与自然播完后初始状态一致\", \"planned_source\": \"closed_source_video_api\"}"
+    },
+    "general:L162-162": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 162,
+      "end_line": 162,
+      "quote": "- W01 世界与时代背景：云端邮路的最后一班信——暴风云带正在吞没这条悬于天际的邮路，这是云邮时代结束前的最后一次投递。"
+    },
+    "general:L163-163": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 163,
+      "end_line": 163,
+      "quote": "- W02 场景所在地：500 米悬空邮路，云海在其下翻涌；上层 3 米高的暴风脊线通道（高收集密度）与下层云面稳妥栈道并行，尽头是云端灯塔。"
+    },
+    "general:L164-164": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 164,
+      "end_line": 164,
+      "quote": "- W03 玩家身份与当前任务动机：玩家是最后一位云端邮差，背着最后一批急件；动机是在邮路被暴风吞没前，把每一件光件（邮路信标）安全送到灯塔。"
+    },
+    "general:L166-166": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 166,
+      "end_line": 166,
+      "quote": "- W05 叙事来源：光件=邮路信标件（收集目标）；高障/低障/连续障=暴风卷起的云岩与断裂横梁；检查点=沿途补给灯站；上层通道=邮路的暴风脊线（高风险高收益）。全部原创，不使用商业作品命名或造型。"
+    },
+    "general:L167-167": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 167,
+      "end_line": 167,
+      "quote": "- W06 视觉风格与色彩材质：明快手绘感的云海世界；主色=云白 #EAF2F8、信件金 #E8C559、暴风灰蓝 #6E8FA3、灯塔橙 #E4762C、光件青 #7FD8E8；材质为云岩、木质栈道、帆布邮包。"
+    },
+    "general:L168-168": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 168,
+      "end_line": 168,
+      "quote": "- W07 环境氛围与声音语言：风声与云层低鸣为底；音效语言为「跳跃风切+滑铲摩擦+收集叮响+碰撞闷响+灯塔钟声」，全部音效按 §9 F06 冻结清单交付。"
+    },
+    "general:L199-204": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 199,
+      "end_line": 204,
+      "quote": "- C01 最后一班信（Opening，5 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入邮路之前，每局一次\n  - 内容与角色场景：暴风云带逼近悬空邮路的远景，镜头缓缓推近邮差背包上的最后一批急件；远处云端灯塔在风幕中透出橙光\n  - 资产对应：邮差、邮路云海与游戏内模型/贴图同源设计\n  - 可跳过：Enter/Space 或跳过按钮 → 直接进入邮路；自然播完 → 进入邮路\n  - 状态一致：跳过与自然播完后初始状态 hash 相同；播放期间不推进任何游戏计时"
+    },
+    "general:L162": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 162,
+      "end_line": 162,
+      "quote": "- W01 世界与时代背景：云端邮路的最后一班信——暴风云带正在吞没这条悬于天际的邮路，这是云邮时代结束前的最后一次投递。"
+    },
+    "general:L199": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 199,
+      "end_line": 199,
+      "quote": "- C01 最后一班信（Opening，5 秒，1280×720@24fps）"
+    },
+    "asset_requirement:L6": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/cg_video/requirement.txt",
+      "sha256": "4abed4db2e7f065f7980b9a6b6a9723145f0b754db493f4c930ebcd7120c4461",
+      "start_line": 6,
+      "end_line": 6,
+      "quote": "- G011_cg_001: 暴风云带逼近悬空邮路的远景，镜头缓缓推近最后一位云端邮差背包上的急件；远处云端灯塔在风幕中透出橙光；无剪辑、无 UI、无文字的定格开场"
+    },
+    "general:L201": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 201,
+      "end_line": 201,
+      "quote": "  - 内容与角色场景：暴风云带逼近悬空邮路的远景，镜头缓缓推近邮差背包上的最后一批急件；远处云端灯塔在风幕中透出橙光"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "1570088e54280dfb58b5516ab111066597b31c5bc34e887cfd5cae85534f95f6",
+      "start_line": 82,
+      "end_line": 86,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    },
+    "revision_policy": {
+      "path": "workspaces/priority_rubric_observable_20261026/POLICY.md",
+      "sha256": "581d726dee3f0efba7c72e8616f553a1248d822791a75f42e6d463b81a9312ca",
+      "start_line": 1,
+      "end_line": 34,
+      "quote": "# Priority 资产可观察需求 rubric 修订 v2\n\n此版本只服务资产三列中的第一列需求完整性，不更改原始生成任务、既有分数或历史冻结合同。\n所有七份 priority 清单逐条覆盖，禁止仅用同类代表任务代替。输出位于各游戏 rubric_assets/priority_observable_v2/，游戏内 priority_rubric_current.json 是显式修订索引，不是对生产 evaluator 的隐式切换。\n\n## 第一列保留\n\n任务明确要求的主体类别、部件、形状、轮廓、命名色彩、材质表现、可见标记、姿态、动作阶段、声音事件、声源、情绪、语言及台词内容。\n任务明确要求的上下、左右、内外、中央/周边、前后、连接、环绕、相对大小/深浅、留白和遮挡关系。\nCG 只要求原文明示的事件顺序、状态变化与镜头行为；不能把列表自动解释为严格顺序。动作片段保留循环/单次与原地组织，不设严格时长/帧数/零位移阈值。\n台词或资产名称中的数字可以是实际内容，不是数值验收阈值；不因文本包含数字机械删掉语义。\n对象数量只作原文上下文，不按精确计数通过率评分；保留主次、成组、单体/多体和必要的关系含义。\n\n## 第一列不计分\n\n绝对坐标、原点、尺寸、距离、速度、时长、角度、帧数、分辨率、面数、数值颜色/色差、采样率、响度和频率阈值，以及机制数值、随机种子、容量、库存、伤害、时间窗。\n这些字段和原始引文完整保留在 task_input、sources 或 excluded_field_values 中，不伪称已经满足，也不当作第一列隐藏门槛。\n引擎导入、碰撞、导航、触发、跳过、暂停、同步、状态机与游戏内混音另属交付/集成验证，不凭离线素材判通过。\n\n## 三列分工\n\nC：当前任务明确指定什么，实际内容是否呈现。\nG：与角色/场景参考及游戏整体世界/美术/声音方向是否相容，不重复扣C的缺失。\nQ：内在感知/技术质量，不重复内容语义或世界适配。\n已有逐资产 rubric 的 G/Q 维度原样保留。此前未建逐资产文件的自然音效/T-pose只补源文支持的G/Q草稿，不能假称复用了已验证分数。\n参考图只按明确绑定使用；image_path 的存在不是生成模型实际收到图片的证明。T-pose中的参考身份/比例比较放G，不在C重复。\n\n## 来源与状态\n\n先遵从原有来源优先级；保留 canonical/分资产原文与任务JSONL。定性投影不得补造“附近”“左侧”等源文不支持的位置。\n场景 layout_constraints 已逐条整理为可见关系；原始标定与运行时要求另存。不宣称精确坐标被视觉验证。\n相互矛盾的要求保留并报审查警告，不用PARTIAL掩盖来源冲突，不把两种胜负分支强行串为一条时间线。\n每条判词必须给视角、帧或音频时间证据。观察不清/未取证为UNKNOWN，调用/配置故障为ERROR，均不填0或100、不删除分母；报告coverage和上下界，证据不足的得分只能PROVISIONAL。\n本次为有来源的修订版与结构/来源校验，不宣布所有1305条人工语义审核完成，不自动冻结，不自动启动评测。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "暴风云带逼近悬空邮路的远景",
+      "镜头缓缓推近最后一位云端邮差背包上的急件",
+      "远处云端灯塔在风幕中透出橙光",
+      "无剪辑",
+      "无 UI",
+      "无文字的定格开场"
+    ],
+    "style": [],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求完整性（可观察内容）",
+      "checks": [
+        {
+          "id": "C001",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：暴风云带逼近悬空邮路的远景",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "暴风云带逼近悬空邮路的远景",
+              "text": "暴风云带逼近悬空邮路的远景"
+            }
+          ],
+          "modality": "video_sequence",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C002",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：镜头缓缓推近最后一位云端邮差背包上的急件",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "镜头缓缓推近最后一位云端邮差背包上的急件",
+              "text": "镜头缓缓推近最后一位云端邮差背包上的急件"
+            }
+          ],
+          "modality": "video_sequence",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C003",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：远处云端灯塔在风幕中透出橙光",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "远处云端灯塔在风幕中透出橙光",
+              "text": "远处云端灯塔在风幕中透出橙光"
+            }
+          ],
+          "modality": "video_sequence",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C004",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：无剪辑",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "无剪辑",
+              "text": "无剪辑"
+            }
+          ],
+          "modality": "video_sequence",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C005",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：无 UI",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "无 UI",
+              "text": "无 UI"
+            }
+          ],
+          "modality": "video_sequence",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C006",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：无文字的定格开场",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "无文字的定格开场",
+              "text": "无文字的定格开场"
+            }
+          ],
+          "modality": "video_sequence",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L162-162",
+              "text": "- W01 世界与时代背景：云端邮路的最后一班信——暴风云带正在吞没这条悬于天际的邮路，这是云邮时代结束前的最后一次投递。"
+            },
+            {
+              "source_id": "general:L163-163",
+              "text": "- W02 场景所在地：500 米悬空邮路，云海在其下翻涌；上层 3 米高的暴风脊线通道（高收集密度）与下层云面稳妥栈道并行，尽头是云端灯塔。"
+            },
+            {
+              "source_id": "general:L162",
+              "text": "- W01 世界与时代背景：云端邮路的最后一班信——暴风云带正在吞没这条悬于天际的邮路，这是云邮时代结束前的最后一次投递。"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L167-167",
+              "text": "- W06 视觉风格与色彩材质：明快手绘感的云海世界；主色=云白 #EAF2F8、信件金 #E8C559、暴风灰蓝 #6E8FA3、灯塔橙 #E4762C、光件青 #7FD8E8；材质为云岩、木质栈道、帆布邮包。"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "单帧视觉质量",
+          "assertion": "只评实际帧中的形体、细节和生成伪影；不重复检查主体/风格是否符合输入。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "多数关键帧严重畸变或不可辨",
+            "2": "关键主体多处明显变形/涂抹/破碎",
+            "3": "关键帧可读，局部畸变或细节伪影可见",
+            "4": "整体清楚，仅有轻微局部伪影",
+            "5": "全片关键帧清楚，未见明显畸变、涂抹或非设计性形体破损"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "时间连续性",
+          "assertion": "需跨全片时序证据；只评闪烁、身份漂移、跳变和运动断裂，不重复评分剧情顺序。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "持续闪烁/身份崩解/运动断裂，无法跟随主体",
+            "2": "频繁身份漂移、空间跳变或不合理形变",
+            "3": "主线连续，局部闪烁/跳变/形变可见",
+            "4": "时间上连贯，仅有少量轻微不稳定",
+            "5": "主体身份、空间和运动连贯；未见明显非设计性闪烁、跳变或形变"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。",
+    "requirement_completeness_v2": {
+      "column": "requirement_reference",
+      "score": "100*mean(verified C item scores); PASS=1, PARTIAL=0.5, FAIL=0",
+      "coverage": "verified applicable C count / frozen applicable C count; UNKNOWN/ERROR retained in denominator and bounds, not converted to zero or full credit.",
+      "lower_bound": "100*sum(verified scores)/all applicable C count",
+      "upper_bound": "100*(sum(verified scores)+unknown applicable C count)/all applicable C count",
+      "status": "Any incomplete applicable C coverage => PROVISIONAL; no verified C => null.",
+      "overall": "三列等权；没有任一列不得给总分。此修订不重新计算历史结果。"
+    }
+  },
+  "evidence_requirements": [
+    "全片固定时间网格与实际首末帧；动作与顺序另核查完整视频或事件邻域，不以稀疏帧证明未发生。"
+  ],
+  "objective_specs": {
+    "duration_sec": 5,
+    "resolution": "1280x720",
+    "fps": 24
+  },
+  "objective_metric_policy": "原始数值和输出格式仅作独立交付/诊断信息；不并入本版第一列。不改变其他列既有实现。",
+  "authoring_warnings": [],
+  "requirement_revision": {
+    "version": "priority_observable_v2",
+    "old_rubric": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/rubric_assets/per_asset/G011_cg_001.json",
+      "sha256": "daeccad0bad062d3868e6241bba5bb691b2f48ae3c0520dc035cc235632d37bc"
+    },
+    "original_other_dimensions_preserved": true,
+    "original_task_input_unchanged": true,
+    "numerical_policy": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+    "reference_ownership": "任务指定姿态/部件/颜色归C，参考角色匹配/全局世界适配归G，内在感知质量归Q；同一事实不重复扣分。",
+    "baseline": "Old frozen aggregate rubric and historical scores untouched; new path requires explicit evaluator support for this schema.",
+    "freeze_status": "规则修订已生成并校验，未声明逐任务人工语义审核完成，不自动冻结或发布分数。",
+    "source_rebinding_audit": [
+      {
+        "source_id": "quality_protocol",
+        "prior": {
+          "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+          "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+          "start_line": 78,
+          "end_line": 82,
+          "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+        },
+        "resolution": "EXACT_QUOTE_REBOUND_TO_CURRENT_FILE"
+      }
+    ],
+    "clause_ledger": [
+      {
+        "field": "prompt",
+        "source_quote": "暴风云带逼近悬空邮路的远景",
+        "action": "RETAINED",
+        "normalized": "暴风云带逼近悬空邮路的远景",
+        "check_id": "C001"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "镜头缓缓推近最后一位云端邮差背包上的急件",
+        "action": "RETAINED",
+        "normalized": "镜头缓缓推近最后一位云端邮差背包上的急件",
+        "check_id": "C002"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "远处云端灯塔在风幕中透出橙光",
+        "action": "RETAINED",
+        "normalized": "远处云端灯塔在风幕中透出橙光",
+        "check_id": "C003"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "无剪辑",
+        "action": "RETAINED",
+        "normalized": "无剪辑",
+        "check_id": "C004"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "无 UI",
+        "action": "RETAINED",
+        "normalized": "无 UI",
+        "check_id": "C005"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "无文字的定格开场",
+        "action": "RETAINED",
+        "normalized": "无文字的定格开场",
+        "check_id": "C006"
+      }
+    ],
+    "excluded_field_values": {
+      "cg_type": "Opening",
+      "mode": "text_to_video",
+      "duration_sec": 5,
+      "resolution": "1280x720",
+      "fps": 24,
+      "seed": 6111,
+      "trigger": "首次由标题进入邮路之前，每局一次；Enter/Space 或跳过按钮→直接进入邮路，跳过与自然播完后初始状态一致",
+      "skippable": true,
+      "spec_ref": "C01",
+      "start_condition": "首次由标题进入邮路之前，每局一次；Enter/Space 或跳过按钮→直接进入邮路，跳过与自然播完后初始状态一致",
+      "end_condition": "natural playback end or skip input",
+      "skip_behavior": "skip_to_declared_next_state",
+      "next_state": "直接进入邮路，跳过与自然播完后初始状态一致",
+      "planned_source": "closed_source_video_api"
+    },
+    "excluded_fields_policy": "保留来源，不作为第一列附加验收。loop/root_motion等只使用上述C条目所述的定性部分。",
+    "temporal_policy": "只核对原文明示的先后/同步/状态变化，列举不等于严格顺序；互斥胜负分支不得强行串为同一事件链。",
+    "canonical_content_sources": [
+      "general:L201"
+    ]
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_storm_isle_survival_obj_001",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 183,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_storm_isle_survival_obj_001.json",
+        "sha256": "316f825016338ac54a6178b45de7c5cb1cfe299b599e0e2da05284178a223648"
+      },
+      "C_checks": 2,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_storm_isle_survival_obj_002",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 184,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_storm_isle_survival_obj_002.json",
+        "sha256": "6bbc2c851ccde47cf15ea0cf6e5fe22b93609e2e70ae667b7760abcd249831b7"
+      },
+      "C_checks": 2,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 68,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_scene_001.json",
+        "sha256": "3eefe1e9a32ab39398b32dc4febbe68aaa468d572ce7291dd2d7ce103e9794ab"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 554,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_sfx_001.json",
+        "sha256": "5a16987c9b890b532c1a0151252579c4911054eeebabfc81d9afa6b736dd9aa2"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 555,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_sfx_002.json",
+        "sha256": "d2b90870de3074611e71c96d67ebdbc6794fa1923483b890bdc07f76e6bf72e8"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 556,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_sfx_003.json",
+        "sha256": "a1af3d03ea48dbb05f409b970faf0b97fb4e460aeaf5fd46bf5921406f6e5727"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 557,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_sfx_004.json",
+        "sha256": "21b44689379c5eba91b7d4fec49bd22612e50f583c8eebc6225c7ecbcdb8287c"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 558,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_sfx_005.json",
+        "sha256": "1cd6c630a2655e40186444713688059ba0b6648a37026a71b133bbb6d8e28339"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 559,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_sfx_006.json",
+        "sha256": "d912895ae4a3d5f8957c423162ddccc1d64df17bac0e5fa1dbc7a3928d2ea91d"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 560,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_sfx_007.json",
+        "sha256": "0de7168957c82eda44ed93f21e7c99ea1f6bd19623a236ce174f21ef6a9792ce"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 561,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_sfx_008.json",
+        "sha256": "beedbd4a613ec4e5b0fa72ce36b39d18f729efcd0ee126764e58ab05cee8f757"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 562,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_sfx_009.json",
+        "sha256": "ac2edcc85827a6ce8e718dfda9c8c13cc12472d2e2b910c9d393aa8d74a315af"
+      },
+      "C_checks": 4,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 563,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_sfx_010.json",
+        "sha256": "9fc334cb4b3adcb12962ff5954f2184797e989febd8e9052978fc7a92abd0394"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 147,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_cg_001.json",
+        "sha256": "8f6074d05be23a1684ca8651183b28a5586f31c2e8486b5191f0ce346a675e1d"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 148,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_cg_002.json",
+        "sha256": "92c686116b71d9276ec79871fc5485fda97057b71fd7ea54213565513361157d"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G046_storm_isle_survival",
+      "task_id": "G046_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 149,
+      "rubric": {
+        "path": "test_data/test_samples/G046_storm_isle_survival/rubric_assets/priority_observable_v2/G046_cg_003.json",
+        "sha256": "638fc17b31d5b171fa5288e835d066b95bdfa9911f5a6729ae8eef53669835f8"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    }
+  ]
+}

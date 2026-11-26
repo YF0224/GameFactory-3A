@@ -1,0 +1,634 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.observable.v2",
+  "authoring_protocol": "priority_observable_v2",
+  "status": "source_grounded_revision_not_judged",
+  "game_id": "G034_tinker_backpack",
+  "task_id": "G034_scene_001",
+  "asset_type": "3d_scene",
+  "asset_subtype": "3d_scene",
+  "asset_name": "G034_scene_001",
+  "scope": "priority gen 独立资产三列口径；第一列仅可观察需求内容，排除标定数值及运行时验收。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G034_tinker_backpack",
+    "task_id": "G034_scene_001",
+    "prompt": "Rusty wasteland junkyard battle stage, side view framing, piles of scrap and broken machines, a patched tent, dusty orange sky, game-ready 3D scene, original design",
+    "seed": 4341,
+    "output_format": "glb",
+    "texture_size": 2048,
+    "layout_constraints": "side-on battle framing: player left, enemy right; clear foreground for card hand and backpack grid UI",
+    "spec_ref": "L01",
+    "image_path": "test_data/test_samples/G034_tinker_backpack/3D_scene/ref_images/ref_scene_junkyard.png",
+    "comparison_sources": [
+      "hunyuan_worldplay",
+      "llm_combo"
+    ]
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L192-192",
+      "general:L193-193",
+      "general:L194-194",
+      "general:L196-196"
+    ],
+    "visual_style_source_ids": [
+      "general:L197-197"
+    ],
+    "sound_style_source_ids": [
+      "general:L198-198"
+    ],
+    "asset_description_source_ids": [],
+    "spec_ref_source_ids": [
+      "general:L137-137"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L6",
+    "canonical_asset_content_source_ids": [],
+    "track_c_only_layout_clauses": []
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "sha256": "b2078680d8eecfe6289960a046b337eb8774cec2e1759b59928be48420a42ede",
+      "start_line": 34,
+      "end_line": 34,
+      "quote": "{\"game_id\": \"G034_tinker_backpack\", \"task_id\": \"G034_scene_001\", \"prompt\": \"Rusty wasteland junkyard battle stage, side view framing, piles of scrap and broken machines, a patched tent, dusty orange sky, game-ready 3D scene, original design\", \"seed\": 4341, \"output_format\": \"glb\", \"texture_size\": 2048, \"layout_constraints\": \"side-on battle framing: player left, enemy right; clear foreground for card hand and backpack grid UI\", \"spec_ref\": \"L01\", \"image_path\": \"test_data/test_samples/G034_tinker_backpack/3D_scene/ref_images/ref_scene_junkyard.png\", \"comparison_sources\": [\"hunyuan_worldplay\", \"llm_combo\"]}"
+    },
+    "general:L192-192": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 192,
+      "end_line": 192,
+      "quote": "- W01 世界与时代背景：废土纪元的工坊带依靠旧发电塔群维持电力；机械兽群占据废弃工坊，「行囊试炼」是修补匠行会的出师考核——只带一只背包，修好一座塔。"
+    },
+    "general:L193-193": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 193,
+      "end_line": 193,
+      "quote": "- W02 场景所在地：废土工坊三段战斗舞台——初战的废料场、中战的哨卡隘口、终战的旧发电塔内部（核心蜂后巢室）。"
+    },
+    "general:L194-194": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 194,
+      "end_line": 194,
+      "quote": "- W03 玩家身份与当前任务动机：玩家是修补匠阿铆；参加「行囊试炼」，用扳手、锤子、灯笼与卷尺在 4×4 行囊里排出最优布局，穿过废土工坊修好被核心蜂后占据的旧发电塔。"
+    },
+    "general:L196-196": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 196,
+      "end_line": 196,
+      "quote": "- W05 叙事来源：磨损拾荒器/废土守卫/核心蜂后为原创造型（机兽与机兵）；战利品三选一=工坊废墟里捡到的器材；加成辅件=齿轮咬合、机油润滑、电池供电的行话转译。全部原创，不用商业作品命名。"
+    },
+    "general:L197-197": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 197,
+      "end_line": 197,
+      "quote": "- W06 视觉风格与色彩材质：蒸汽朋克修补匠风；主色＝黄铜 #B08D57、锈红 #8A4A2E、皮革褐 #6B4F3A、帆布米 #D8CBB0；材质为黄铜件、帆布补丁、铆钉铁板与机油渍。"
+    },
+    "general:L198-198": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 198,
+      "end_line": 198,
+      "quote": "- W07 环境氛围与声音语言：废土风噪与远处金属哐当为底；音效语言＝拖拽落格/旋转/加成连线/出牌/四类攻击/格挡/强化/胜负（F06 冻结清单）；混音优先级：胜负结算 ＞ 攻击与加成 ＞ 卡牌与布局操作 ＞ 环境底噪。"
+    },
+    "general:L137-137": {
+      "path": "test_data/test_samples/G034_tinker_backpack/general_requirement.txt",
+      "sha256": "e270b6e35074dad545956d4a307ae0ebe697f54242c5fc9dfe4d9605a7eaa30f",
+      "start_line": 137,
+      "end_line": 137,
+      "quote": "- L01 生成对象：物品 8 种（原创造型）、敌人 3 型、修补匠阿铆角色、背包网格界面、卡牌 5 种（旋击/重锤/强光/丈量/收纳）、战利品面板。"
+    },
+    "asset_requirement:L6": {
+      "path": "test_data/test_samples/G034_tinker_backpack/3D_scene/requirement.txt",
+      "sha256": "7f7a7324bb8c08034dc73d90a5b88eaace0fa1fbdc3c3fba9116c5f186f4487b",
+      "start_line": 6,
+      "end_line": 6,
+      "quote": "- G034_scene_001: Rusty wasteland junkyard battle stage, side view framing, piles of scrap and broken machines, a patched tent, dusty orange sky, game-ready 3D scene, original design"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "1570088e54280dfb58b5516ab111066597b31c5bc34e887cfd5cae85534f95f6",
+      "start_line": 82,
+      "end_line": 86,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    },
+    "revision_policy": {
+      "path": "workspaces/priority_rubric_observable_20261026/POLICY.md",
+      "sha256": "581d726dee3f0efba7c72e8616f553a1248d822791a75f42e6d463b81a9312ca",
+      "start_line": 1,
+      "end_line": 34,
+      "quote": "# Priority 资产可观察需求 rubric 修订 v2\n\n此版本只服务资产三列中的第一列需求完整性，不更改原始生成任务、既有分数或历史冻结合同。\n所有七份 priority 清单逐条覆盖，禁止仅用同类代表任务代替。输出位于各游戏 rubric_assets/priority_observable_v2/，游戏内 priority_rubric_current.json 是显式修订索引，不是对生产 evaluator 的隐式切换。\n\n## 第一列保留\n\n任务明确要求的主体类别、部件、形状、轮廓、命名色彩、材质表现、可见标记、姿态、动作阶段、声音事件、声源、情绪、语言及台词内容。\n任务明确要求的上下、左右、内外、中央/周边、前后、连接、环绕、相对大小/深浅、留白和遮挡关系。\nCG 只要求原文明示的事件顺序、状态变化与镜头行为；不能把列表自动解释为严格顺序。动作片段保留循环/单次与原地组织，不设严格时长/帧数/零位移阈值。\n台词或资产名称中的数字可以是实际内容，不是数值验收阈值；不因文本包含数字机械删掉语义。\n对象数量只作原文上下文，不按精确计数通过率评分；保留主次、成组、单体/多体和必要的关系含义。\n\n## 第一列不计分\n\n绝对坐标、原点、尺寸、距离、速度、时长、角度、帧数、分辨率、面数、数值颜色/色差、采样率、响度和频率阈值，以及机制数值、随机种子、容量、库存、伤害、时间窗。\n这些字段和原始引文完整保留在 task_input、sources 或 excluded_field_values 中，不伪称已经满足，也不当作第一列隐藏门槛。\n引擎导入、碰撞、导航、触发、跳过、暂停、同步、状态机与游戏内混音另属交付/集成验证，不凭离线素材判通过。\n\n## 三列分工\n\nC：当前任务明确指定什么，实际内容是否呈现。\nG：与角色/场景参考及游戏整体世界/美术/声音方向是否相容，不重复扣C的缺失。\nQ：内在感知/技术质量，不重复内容语义或世界适配。\n已有逐资产 rubric 的 G/Q 维度原样保留。此前未建逐资产文件的自然音效/T-pose只补源文支持的G/Q草稿，不能假称复用了已验证分数。\n参考图只按明确绑定使用；image_path 的存在不是生成模型实际收到图片的证明。T-pose中的参考身份/比例比较放G，不在C重复。\n\n## 来源与状态\n\n先遵从原有来源优先级；保留 canonical/分资产原文与任务JSONL。定性投影不得补造“附近”“左侧”等源文不支持的位置。\n场景 layout_constraints 已逐条整理为可见关系；原始标定与运行时要求另存。不宣称精确坐标被视觉验证。\n相互矛盾的要求保留并报审查警告，不用PARTIAL掩盖来源冲突，不把两种胜负分支强行串为一条时间线。\n每条判词必须给视角、帧或音频时间证据。观察不清/未取证为UNKNOWN，调用/配置故障为ERROR，均不填0或100、不删除分母；报告coverage和上下界，证据不足的得分只能PROVISIONAL。\n本次为有来源的修订版与结构/来源校验，不宣布所有1305条人工语义审核完成，不自动冻结，不自动启动评测。"
+    }
+  },
+  "references": [
+    {
+      "id": "input_image",
+      "path": "test_data/test_samples/G034_tinker_backpack/3D_scene/ref_images/ref_scene_junkyard.png",
+      "sha256": "2599ef3539125c9efac2c83f6a0ef54086730eb6e4fc4f91acac2c6e31f08f2f",
+      "exists_at_authoring": true,
+      "source_field": "image_path"
+    }
+  ],
+  "prompt_clause_assignment": {
+    "content": [
+      "Rusty wasteland junkyard battle stage",
+      "side view framing",
+      "piles of scrap and broken machines",
+      "a patched tent",
+      "dusty orange sky"
+    ],
+    "style": [
+      "game-ready 3D scene",
+      "original design"
+    ],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求完整性（可观察内容）",
+      "checks": [
+        {
+          "id": "C001",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：Rusty wasteland junkyard battle stage",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "Rusty wasteland junkyard battle stage",
+              "text": "Rusty wasteland junkyard battle stage"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C002",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：side view framing",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "side view framing",
+              "text": "side view framing"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C003",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：piles of scrap and broken machines",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "piles of scrap and broken machines",
+              "text": "piles of scrap and broken machines"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C004",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：a patched tent",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "a patched tent",
+              "text": "a patched tent"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C005",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：dusty orange sky",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "dusty orange sky",
+              "text": "dusty orange sky"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C006",
+          "title": "可见布局与相对空间关系",
+          "assertion": "可观察地呈现：侧视战斗构图，玩家在左、敌人在右",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "layout_constraints",
+              "source_quote": "side-on battle framing: player left, enemy right; clear foreground for card hand and backpack grid UI",
+              "text": "侧视战斗构图，玩家在左、敌人在右"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C007",
+          "title": "可见布局与相对空间关系",
+          "assertion": "可观察地呈现：前景为手牌和背包格界面保持清晰留白",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "layout_constraints",
+              "source_quote": "side-on battle framing: player left, enemy right; clear foreground for card hand and backpack grid UI",
+              "text": "前景为手牌和背包格界面保持清晰留白"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L192-192",
+              "text": "- W01 世界与时代背景：废土纪元的工坊带依靠旧发电塔群维持电力；机械兽群占据废弃工坊，「行囊试炼」是修补匠行会的出师考核——只带一只背包，修好一座塔。"
+            },
+            {
+              "source_id": "general:L193-193",
+              "text": "- W02 场景所在地：废土工坊三段战斗舞台——初战的废料场、中战的哨卡隘口、终战的旧发电塔内部（核心蜂后巢室）。"
+            },
+            {
+              "source_id": "general:L137-137",
+              "text": "- L01 生成对象：物品 8 种（原创造型）、敌人 3 型、修补匠阿铆角色、背包网格界面、卡牌 5 种（旋击/重锤/强光/丈量/收纳）、战利品面板。"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L197-197",
+              "text": "- W06 视觉风格与色彩材质：蒸汽朋克修补匠风；主色＝黄铜 #B08D57、锈红 #8A4A2E、皮革褐 #6B4F3A、帆布米 #D8CBB0；材质为黄铜件、帆布补丁、铆钉铁板与机油渍。"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "game-ready 3D scene",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "original design",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G03",
+          "title": "适用参考输入一致性",
+          "assertion": "与本任务实际提供的参考图对照，只核对可见的身份特征、轮廓比例、地标/布局和标记。参考不可见部分不推测；不把图像的背景误当成对象必需部件；低多边形只比身份与主要形体，不要求复制像素级细节。",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "test_data/test_samples/G034_tinker_backpack/3D_scene/ref_images/ref_scene_junkyard.png",
+              "field": "image_path"
+            }
+          ],
+          "scope_exclusions": "参考仅约束可见特征；原文明确要求的部件存在性只在 C 中计分。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [
+            "实际产物的可比视角与原始参考图必须同时提供；缺参考为 UNKNOWN，不改为 N/A。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "场景几何完整性",
+          "assertion": "只评场景自身断裂、漂浮、交叠与尺度突变，不验证碰撞或导航。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "主要场景崩坏或大面积缺面，空间不可辨",
+            "2": "主要区域存在明显断裂/悬浮/异常尺度突变",
+            "3": "场景整体完整，局部连接或几何有可见瑕疵",
+            "4": "仅有轻微局部几何瑕疵",
+            "5": "全景与近景均完整，未见明显断裂、漂浮或非设计性穿插"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "整体视觉组织与表面质量",
+          "assertion": "只评构图可读性、光照及材质连贯；不重复检查地标数量与布局需求。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "画面混乱或严重伪影，主要空间无法辨识",
+            "2": "光照/材质错乱显著，空间层次难辨",
+            "3": "空间层次可辨，局部拥挤/涂抹/光照接缝可见",
+            "4": "空间组织清晰，仅少量视觉瑕疵",
+            "5": "空间层次、光照与材质连贯，全景和近景均无明显伪影"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。",
+    "requirement_completeness_v2": {
+      "column": "requirement_reference",
+      "score": "100*mean(verified C item scores); PASS=1, PARTIAL=0.5, FAIL=0",
+      "coverage": "verified applicable C count / frozen applicable C count; UNKNOWN/ERROR retained in denominator and bounds, not converted to zero or full credit.",
+      "lower_bound": "100*sum(verified scores)/all applicable C count",
+      "upper_bound": "100*(sum(verified scores)+unknown applicable C count)/all applicable C count",
+      "status": "Any incomplete applicable C coverage => PROVISIONAL; no verified C => null.",
+      "overall": "三列等权；没有任一列不得给总分。此修订不重新计算历史结果。"
+    }
+  },
+  "evidence_requirements": [
+    "覆盖可见主体的适用视角，不因遮挡或缺视角推断缺失。"
+  ],
+  "objective_specs": {
+    "output_format": "glb",
+    "texture_size": 2048
+  },
+  "objective_metric_policy": "原始数值和输出格式仅作独立交付/诊断信息；不并入本版第一列。不改变其他列既有实现。",
+  "authoring_warnings": [
+    {
+      "code": "no_literal_asset_mention_in_general",
+      "detail": "general 中未找到资产名/ID的逐字匹配；采用已解析 spec_ref 与分资产原文，不伪造独立描述。"
+    }
+  ],
+  "requirement_revision": {
+    "version": "priority_observable_v2",
+    "old_rubric": {
+      "path": "test_data/test_samples/G034_tinker_backpack/rubric_assets/per_asset/G034_scene_001.json",
+      "sha256": "0379ef6d04813c603a2fcc32a47228a2fce1f42b07e5151b1fb0ed635f472a59"
+    },
+    "original_other_dimensions_preserved": true,
+    "original_task_input_unchanged": true,
+    "numerical_policy": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+    "reference_ownership": "任务指定姿态/部件/颜色归C，参考角色匹配/全局世界适配归G，内在感知质量归Q；同一事实不重复扣分。",
+    "baseline": "Old frozen aggregate rubric and historical scores untouched; new path requires explicit evaluator support for this schema.",
+    "freeze_status": "规则修订已生成并校验，未声明逐任务人工语义审核完成，不自动冻结或发布分数。",
+    "source_rebinding_audit": [
+      {
+        "source_id": "quality_protocol",
+        "prior": {
+          "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+          "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+          "start_line": 78,
+          "end_line": 82,
+          "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+        },
+        "resolution": "EXACT_QUOTE_REBOUND_TO_CURRENT_FILE"
+      }
+    ],
+    "clause_ledger": [
+      {
+        "field": "prompt",
+        "source_quote": "Rusty wasteland junkyard battle stage",
+        "action": "RETAINED",
+        "normalized": "Rusty wasteland junkyard battle stage",
+        "check_id": "C001"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "side view framing",
+        "action": "RETAINED",
+        "normalized": "side view framing",
+        "check_id": "C002"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "piles of scrap and broken machines",
+        "action": "RETAINED",
+        "normalized": "piles of scrap and broken machines",
+        "check_id": "C003"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "a patched tent",
+        "action": "RETAINED",
+        "normalized": "a patched tent",
+        "check_id": "C004"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "dusty orange sky",
+        "action": "RETAINED",
+        "normalized": "dusty orange sky",
+        "check_id": "C005"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "game-ready 3D scene",
+        "action": "DEFERRED",
+        "reason": "统一造型/输出政策已在原G/Q或规格中保留，不重复计第一列。"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "original design",
+        "action": "DEFERRED",
+        "reason": "统一造型/输出政策已在原G/Q或规格中保留，不重复计第一列。"
+      },
+      {
+        "field": "layout_constraints",
+        "source_quote": "side-on battle framing: player left, enemy right; clear foreground for card hand and backpack grid UI",
+        "action": "QUALITATIVE_PROJECTION",
+        "normalized": "侧视战斗构图，玩家在左、敌人在右",
+        "check_id": "C006"
+      },
+      {
+        "field": "layout_constraints",
+        "source_quote": "side-on battle framing: player left, enemy right; clear foreground for card hand and backpack grid UI",
+        "action": "QUALITATIVE_PROJECTION",
+        "normalized": "前景为手牌和背包格界面保持清晰留白",
+        "check_id": "C007"
+      },
+      {
+        "field": "layout_constraints",
+        "source_quote": "side-on battle framing: player left, enemy right; clear foreground for card hand and backpack grid UI",
+        "action": "LAYOUT_REVIEWED_PROJECTION",
+        "reason": "逐任务保留可见关系；绝对标定、容量、时间与运行时逻辑均不计分。"
+      }
+    ],
+    "excluded_field_values": {
+      "seed": 4341,
+      "output_format": "glb",
+      "texture_size": 2048,
+      "spec_ref": "L01",
+      "comparison_sources": [
+        "hunyuan_worldplay",
+        "llm_combo"
+      ]
+    },
+    "excluded_fields_policy": "保留来源，不作为第一列附加验收。loop/root_motion等只使用上述C条目所述的定性部分。"
+  }
+}

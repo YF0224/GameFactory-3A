@@ -1,0 +1,7 @@
+{
+  "contract_id": "G041_frontier_market.whitebox.final",
+  "version": "final",
+  "content_sha256": "0a7dfafac1c10a742f7e2df2120c2db984f14c16838b95e9229581d40e50e516",
+  "rubric_json_sha256": "c88ea49d266ed6e1608aed378e53b5194458632807d69d2356c4e88e36a4fc62",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

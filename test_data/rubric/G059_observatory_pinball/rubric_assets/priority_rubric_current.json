@@ -1,0 +1,252 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_observatory_pinball_obj_001",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 196,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_observatory_pinball_obj_001.json",
+        "sha256": "27f8837b04b6658112c34baa2ee0550d60b6aba8a48310c2dcebb543ca21f744"
+      },
+      "C_checks": 2,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_observatory_pinball_obj_003",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 197,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_observatory_pinball_obj_003.json",
+        "sha256": "4a2a2623225182f5f90aea901ca49ec9958fd420ba888312be67ea4123845379"
+      },
+      "C_checks": 2,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 66,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_scene_001.json",
+        "sha256": "c610c3bcd3f4b09ef9da7e593ede1b7eb7a411e0057d80590abf027bee88cb4b"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 683,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_sfx_001.json",
+        "sha256": "8e05f067862527b7caf8b5d47a2ed2e2bc94095da75ed2f1426f21424cf77be9"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 684,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_sfx_002.json",
+        "sha256": "632e0c52f130b3500c01947fb1d79dd2693d3be50de24e8012e8d61b409a259b"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 685,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_sfx_003.json",
+        "sha256": "200c555d1840fcf1354192cb898c1d5429d0c80fa2f4a674630264f7020111d4"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 686,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_sfx_004.json",
+        "sha256": "52819e240b10f48b491e152954f3fda92658e9f32d8d45c89283e23ff8f99c32"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 687,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_sfx_005.json",
+        "sha256": "b174d17067f9ded45c74c1b09389959588390d790ab0e607b7c6df3fd185a8c6"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 688,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_sfx_006.json",
+        "sha256": "3f06423d37cdda470e15eff961733590fa79cf876abeef240556b05b3a116f8f"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 689,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_sfx_007.json",
+        "sha256": "6bbbeba283378aaf27b937818db4c70f883d9614a070a0de8643a4f9e77e21e9"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 690,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_sfx_008.json",
+        "sha256": "802fba0bb6ebaa568d3a88adac2283d0e37b75cd1bd5b45d02ed98312d18be23"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 691,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_sfx_009.json",
+        "sha256": "1f063de9d94c18741010c15be87f30eabb6f1b618f3927fc3a219e47dff3be8d"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 692,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_sfx_010.json",
+        "sha256": "1fa5884d578846a91ab3e00bce4a772c9b678c430a2c1fea1a1e9fae51a5a011"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 693,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_sfx_011.json",
+        "sha256": "d10d32c32b9ab3cbe96574c8c8afa13ef2f3f0aaa6db2f22a2a9106e47cac496"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 188,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_cg_001.json",
+        "sha256": "537eafade739dee4e08f55302b51ce95df461b6a1244342152f4a0707d7a221a"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 189,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_cg_002.json",
+        "sha256": "24dd3ddb492e98b1585e241219c3711665a65fc2082fbea10a5b5c998bd1bc00"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G059_observatory_pinball",
+      "task_id": "G059_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 190,
+      "rubric": {
+        "path": "test_data/test_samples/G059_observatory_pinball/rubric_assets/priority_observable_v2/G059_cg_003.json",
+        "sha256": "b20b572e8c07ec501121471df67c8a7d8ee742b666aac2a89ee4cac5668084ae"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "multi_variant_cg_requires_delivery_convention",
+        "branch_delivery_review"
+      ]
+    }
+  ]
+}

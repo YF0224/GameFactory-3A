@@ -1,0 +1,7 @@
+{
+  "contract_id": "G017_lighthouse_prism.whitebox.endpoints-v2-candidate.3ca2357917c67b39b739eb35b54caafba4765826abd4db9f5f1bdc1bf3129be9",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "3ca2357917c67b39b739eb35b54caafba4765826abd4db9f5f1bdc1bf3129be9",
+  "rubric_json_sha256": "73d230c3096aa2b8eb40adad89a9ce4275ae8bbb020f7227acb7c60f04d81d64",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

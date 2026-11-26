@@ -1,0 +1,3827 @@
+rubric-format: v2
+game: G059_observatory_pinball
+stage: assets
+version: final
+engine: unity3d
+status: frozen
+contract-id: G059_observatory_pinball.assets.final
+synopsis: |
+    架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。 The setting is 星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。. 玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。 Core loop: 发射弹射 → 挡板控制 → 机关触发 → 倍率累积 → 多球管理 → 出界回收 → 结算。. 机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。 Narrative devices: 三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。. Art direction: 黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。. Sound direction: 安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。. Asset tasks: 3 3d_object, 1 3d_scene, 1 motion, 11 audio, 3 cg_video; they serve the same declared world, characters and gameplay.
+
+scoring-protocol: |
+    每个原子断言只有一个 primary_dimension。同一事实不跨列重复计分。PASS/PARTIAL/FAIL 只在证据充分且前置条件已执行时给出。未到达场景、未触发事件、证据缺失为 UNKNOWN；评估器或配置故障为 ERROR。UNKNOWN/ERROR 不记零分、不从冻结分母删除；仅报告 provisional 已知项均值、已知权重/适用总权重和未完成清单，所有适用项完成后才发布正式列分。N/A 只由输入条件预先决定，不能因生成失败或无法取证改为 N/A。声明文件、类名、日志里出现事件名不单独证明功能完成；行为必须有可复核执行证据。所有文本、数值、时序与例外以 canonical general_requirement.txt 为最高依据；其次为分资产 requirement.txt，再次为任务 JSONL；不把 engine variant 混进主轨。rubric 已冻结表示评分标准确定，不表示实际游戏已评测或通过。engine `unity3d` | asset tasks {'3d_object': 3, '3d_scene': 1, 'motion': 1, 'audio': 11, 'cg_video': 3} | authored by `deterministic_authoring_engine.v1` from the frozen task jsonl files, the per-kind requirement.txt documents, the frozen synopsis and the case reference bindings (no generated artifact of any method was read).
+    Columns: C (requirement compliance), Q1 (reference fidelity), Q2 (game consistency), Q3 (intrinsic quality) — bound PER TASK: every formally evaluated task carries its own C, Q2 and Q3 rows, plus Q1 when a reference input exists (otherwise its own pre-declared N/A row). A task is never covered by a same-kind representative; tasks registered only for Delivery are never reported as quality-covered. Delivery, coverage and quality are reported separately — never mixed into one score.
+    Verdicts: C, Q1 and Q2 are checklist rows — PASS = 1, PARTIAL = the fixed checklist partial 0.5, FAIL = 0 (binary rows declare 'No PARTIAL'). Q3 alone uses the frozen tiered_mean rule named 'q3_mean': each of the two type-specific quality sub-items is rated on the 1–5 anchor tiers (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1) and the row score is their equal-weight mean — never a blanket 0.5. Unobserved quality stays UNKNOWN (execution state), never FAIL; an unreadable or not-generated artifact never receives a quality score.
+    Q1 is pre-declared N/A per task by the frozen reference policy; it is never retro-fitted to a failed generation.
+    Q3 deterministic probes (clipping/silence, degenerate faces, missing textures, foot slide, penetration, decodability) are raw diagnostics and explicit caps on their mapped sub-item — they never replace the per-sub-item judgment.
+    Q3 five-band anchors per family (frozen): 3D object/scene — 1 broken mesh/missing declared parts, 2 major form or texture errors, 3 primitive-but-coherent forms, 4 small artifacts, 5 no observable defect; character — 1 anatomy contradicts the declared design, 2 wrong proportions/missing equipment, 3 believable stylized anatomy with all declared parts, 4 minor extreme-view artifacts, 5 clean stable identity; rigid/prop — 1 structure contradicts the class, 2 wrong proportions/unreadable category, 3 recognizable object with complete parts, 4 small surface artifacts, 5 clean structure and material; audio — 1 heavy clipping or wrong content, 2 audible noise/abrupt cuts, 3 recognizable source with minor noise, 4 slight level issues, 5 clean and natural; motion — 1 frozen/tangled limbs or wrong action, 2 obvious sliding/penetration, 3 readable action with minor issues, 4 small contact inaccuracies, 5 natural and continuous; CG video — 1 undecodable or content absent, 2 missing event/heavy temporal artifacts, 3 events present with minor flicker, 4 small single-frame artifacts, 5 clean continuous motion. Non-realistic/stylized designs are judged against their own declared style, never against photoreal human anatomy.
+    Aggregation: Q_asset = mean(pre-declared applicable Q1, Q2, Q3); C_asset = C. The whitebox 4D Overall is never applied here. Per-game means first, then macro-average across games.
+    The same fact is scored in exactly one column: category/components → C; declared reference identity → Q1; world/style/faction fit → Q2; the asset's own structural/audible/motion quality → Q3.每个任务分别得到 C/Q1/Q2/Q3，再在游戏内按任务等权汇总；不同类型、条件和适用项分组展示，跨游戏采用游戏宏平均。不继承旧生成器的未声明媒体容差；精度不足为 UNKNOWN。
+
+execution: |
+    {}
+
+reference-policy: |
+    {
+      "decision": "Reference fidelity is pre-declared N/A for every frozen task without a reference input at freeze time — never decided after generation; references are never borrowed across tasks. The frozen synopsis is part of every asset task's generation input by protocol; whether a past generation request actually carried it is a recording fact verified separately, not assumed here.",
+      "no_reference_groups": [
+        "motion",
+        "audio",
+        "cg_video"
+      ],
+      "no_reference_tasks": [
+        "G059_obj_001",
+        "G059_obj_003",
+        "G059_observatory_pinball_mot_001",
+        "G059_cg_001",
+        "G059_cg_002",
+        "G059_cg_003",
+        "G059_sfx_001",
+        "G059_sfx_002",
+        "G059_sfx_003",
+        "G059_sfx_004",
+        "G059_sfx_005",
+        "G059_sfx_006",
+        "G059_sfx_007",
+        "G059_sfx_008",
+        "G059_sfx_009",
+        "G059_sfx_010",
+        "G059_sfx_011"
+      ],
+      "referenced_tasks": {
+        "G059_obj_002": "A01",
+        "G059_scene_001": "A02"
+      }
+    }
+
+task-coverage-policy: |
+    {
+      "authoring_protocol": "gamefactory3a.final_rubrics.v1",
+      "evaluation_plans": {
+        "asset_evaluation_plan.md": "88ddd6cd528f22488514d9f5c9f35edbf3529ac04b6dd23d963fe8c2040ade32",
+        "evaluation_plan_table.md": "3817010d4d02033ee530bf90861af02ac11f202ac883d597744a2a0edc0fbb3d"
+      },
+      "mode": "per-task expansion — every formally evaluated task binds its own C, Q2 and Q3 rows plus Q1 when a reference input exists (otherwise its own pre-declared N/A row); no task is covered by a same-kind representative",
+      "path_base": "case_root",
+      "prep_input_task_ids": [],
+      "result_protocol": "gamefactory3a.result_protocol.v2",
+      "scored_task_count": 19,
+      "source_inputs": {
+        "3D_object/object_tasks.jsonl": "f2c59d6853f130998f9abbf9612f773d4e30feb8d39b5b49a16e873a76bbe0e2",
+        "3D_object/requirement.txt": "1e27ec160d8bb2938e838c3379451ac454042e0fdc08975efd3acf9cadae9d08",
+        "3D_scene/requirement.txt": "75a5c066d889a8922d3e47937ad9497673b86c4ad1da4760233d4da56bd16844",
+        "3D_scene/scene_tasks.jsonl": "2286e39087c8e68d8632d3d17e4d2748985dbe827f0f1382d610806e11316ec0",
+        "audio/audio_tasks.jsonl": "4a714210971a28333b3957e9d28824daa9cdf8df16f6341d0b0e237228a7774b",
+        "audio/requirement.txt": "0bb0cdfdee55a20bcf21b9f4f168605a619df4c7241e81037e0f84271cb4bd71",
+        "cg_video/cg_tasks.jsonl": "91437d4071afa7bf764419ce5be8d45b3ff60ee59e45cad3168c349d620877e4",
+        "cg_video/requirement.txt": "6321a5717f80fd01a76a935e14625032dc772a5769d8b22d19d104c2a010d83e",
+        "general_requirement.txt": "6782235b28b148a3057a90f2b01de1e1948ac1bbdf886b902b6a18788c30968f",
+        "motion/motion_tasks.jsonl": "fe9c4f2cfef4c6df5975e57066f3301038c81621e6cf14678364b676cd826de9",
+        "motion/requirement.txt": "415670982be4299f60dc0fa03cd9498fc71f4134d2c617b634d83f0edb183c61"
+      },
+      "stage_order": [
+        "whitebox",
+        "assets",
+        "import_repair"
+      ],
+      "standalone_tpose": "preparation_input_only"
+    }
+
+define scoring-rule binary: {"kind": "binary"}
+define scoring-rule q3_mean: {"kind": "tiered_mean", "subitems": 2, "tiers": {"1_severe": 0.0, "2_obvious": 0.25, "3_acceptable": 0.5, "4_minor": 0.75, "5_clean": 1.0}}
+define scoring-rule half: {"kind": "fixed_partial", "partial_ratio": 0.5}
+define group rigid: ["G059_obj_001", "G059_obj_002", "G059_obj_003"]
+define group scene: ["G059_scene_001"]
+define group non_humanoid: ["G059_observatory_pinball_mot_001"]
+define group natural: ["G059_sfx_001", "G059_sfx_002", "G059_sfx_003", "G059_sfx_004", "G059_sfx_005", "G059_sfx_006", "G059_sfx_007", "G059_sfx_008", "G059_sfx_009", "G059_sfx_010", "G059_sfx_011"]
+define group cg_opening: ["G059_cg_001"]
+define group cg_event: ["G059_cg_002"]
+define group cg_ending: ["G059_cg_003"]
+reference A01: 3D_object/ref_images/ref_star_targets.png
+reference A02: 3D_scene/ref_images/ref_pinball_table.png
+
+item G059_observatory_pinball.AS.C.01:
+  column: C
+  dimension: Completeness
+  requirements: L01
+  task: G059_obj_001
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_obj_001/star_pinball 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Chrome-and-pearl pinball with tiny embedded star flecks",
+        "clean brass-era look",
+        "game-ready",
+        "PBR textures"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "L01": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。"
+      },
+      "spec": {
+        "min_meshes": 1
+      },
+      "task_spec": {
+        "animation_strategy": "procedural",
+        "asset_name": "star_pinball",
+        "decimation_target": 2000,
+        "game_id": "G059_observatory_pinball",
+        "input_mode": "text_to_3d",
+        "name_zh": "星屑弹珠",
+        "no_text_or_ui": true,
+        "prompt": "Chrome-and-pearl pinball with tiny embedded star flecks, clean brass-era look, game-ready, PBR textures",
+        "rig": "none",
+        "role": "prop",
+        "seed": 1591,
+        "single_asset_only": true,
+        "spec_ref": "L01",
+        "task_id": "G059_obj_001",
+        "texture_size": 1024
+      }
+    }
+
+item G059_observatory_pinball.AS.C.02:
+  column: C
+  dimension: Completeness
+  requirements: L01, G03
+  task: G059_obj_002
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_obj_002/planet_target_bank 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Brass pinball target bank of three domed planet medallions on a curved rail with lamp sockets",
+        "brass-and-starlight look",
+        "game-ready",
+        "PBR textures"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "G03": "- G03 机关顺序与倍率（本包冻结值）：3 组机关——A 行星轨道（靶标 A1→A2→A3 按序）、B 星图（B1→B2 按序）、C 彗星（C1→C2→C3 按序）；任一组按序完成 → 倍率 +1（上限 ×5）；组内乱序命中 → 该组链重置（倍率不变）；完成 C 组 → 解锁多球（+2 球）。",
+        "L01": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。"
+      },
+      "spec": {
+        "min_meshes": 1
+      },
+      "task_spec": {
+        "animation_strategy": "procedural",
+        "asset_name": "planet_target_bank",
+        "decimation_target": 15000,
+        "game_id": "G059_observatory_pinball",
+        "image_path": "test_data/test_samples/G059_observatory_pinball/3D_object/ref_images/ref_star_targets.png",
+        "input_mode": "image_to_3d",
+        "name_zh": "行星轨道靶标组",
+        "no_text_or_ui": true,
+        "prompt": "Brass pinball target bank of three domed planet medallions on a curved rail with lamp sockets, brass-and-starlight look, game-ready, PBR textures",
+        "rig": "none",
+        "role": "mechanism",
+        "seed": 1592,
+        "single_asset_only": true,
+        "spec_ref": "L01,G03",
+        "task_id": "G059_obj_002",
+        "texture_size": 2048
+      }
+    }
+
+item G059_observatory_pinball.AS.C.03:
+  column: C
+  dimension: Completeness
+  requirements: L01, G02
+  task: G059_obj_003
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_obj_003/brass_flipper_pair 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Pair of brass-capped pinball flipper assemblies with pivot pins and spring mounts",
+        "brass-era look",
+        "game-ready",
+        "PBR textures"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "G02": "- G02 弹珠台与物理（本包冻结值）：单张天文台弹珠台（倾斜台面、原创造型）；左右挡板各 1、顶部发射弹射轨道；弹珠直径 2.7 cm 等比；重力沿台面分量固定。高速碰撞可靠性红线：任意速度下弹珠不得穿模穿透挡板/靶标/边墙（碰撞采样导出，零穿模事件）；单物理步内连续碰撞 ≥3 次仍须稳定结算（采用连续碰撞检测或子步进，采样导出零穿模零卡死）。",
+        "L01": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。"
+      },
+      "spec": {
+        "min_meshes": 1
+      },
+      "task_spec": {
+        "animation_strategy": "procedural",
+        "asset_name": "brass_flipper_pair",
+        "decimation_target": 10000,
+        "game_id": "G059_observatory_pinball",
+        "input_mode": "text_to_3d",
+        "name_zh": "黄铜挡板对",
+        "no_text_or_ui": true,
+        "prompt": "Pair of brass-capped pinball flipper assemblies with pivot pins and spring mounts, brass-era look, game-ready, PBR textures",
+        "rig": "none",
+        "role": "mechanism",
+        "seed": 1593,
+        "single_asset_only": true,
+        "spec_ref": "L01,G02",
+        "task_id": "G059_obj_003",
+        "texture_size": 2048
+      }
+    }
+
+item G059_observatory_pinball.AS.C.04:
+  column: C
+  dimension: Completeness
+  requirements: L02
+  task: G059_scene_001
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_scene_001/G059_scene_001 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Observatory exhibit hall at night housing a single brass star-chart pinball table: tilted playfield with star-rail lamp bands",
+        "comet lane and planet orbit targets",
+        "deep-blue and brass palette",
+        "stylized"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "L02": "- L02 关卡：单张台面；靶标布局固定，台面扰动序列由 seed=1059 冻结，不随机扩展。"
+      },
+      "spec": {
+        "min_meshes": 1
+      },
+      "task_spec": {
+        "game_id": "G059_observatory_pinball",
+        "image_path": "test_data/test_samples/G059_observatory_pinball/3D_scene/ref_images/ref_pinball_table.png",
+        "layout_constraints": "单张倾斜台面；8 靶标/发射轨道/返回通道按 seed=1059 由引擎布置；本场景为展厅氛围基线",
+        "no_text_or_panels": true,
+        "output_format": "glb",
+        "prompt": "Observatory exhibit hall at night housing a single brass star-chart pinball table: tilted playfield with star-rail lamp bands, comet lane and planet orbit targets, deep-blue and brass palette, stylized, game-ready 3D scene",
+        "seed": 4591,
+        "single_coherent_scene": true,
+        "spec_ref": "L02",
+        "task_id": "G059_scene_001",
+        "texture_size": 2048
+      }
+    }
+
+item G059_observatory_pinball.AS.C.05:
+  column: C
+  dimension: Completeness
+  requirements: F05, L01
+  task: G059_observatory_pinball_mot_001
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_observatory_pinball_mot_001/ball_launch 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Pinball launches from the plunger",
+        "arcs across the table and settles into the active physics loop."
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "F05": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 发射蓄力 | 蓄力弧光沿轨道亮起 | 蓄力嗡声（按住循环） | 发射 |\n| 弹射入台 | 球弹出＋星光尾迹启动 | 弹射砰声 | 尾迹常驻 |\n| 靶标命中 | 靶标星徽点亮＋撞击闪光 | 撞击铛声（按组分档） | 0.3s |\n| 组链推进 | 组链进度灯逐级点亮 | 进度叮声 | 常亮 |\n| 乱序重置 | 该组进度灯熄灭＋红闪一次 | 低沉否定音 | 0.3s |\n| 倍率提升 | 倍率数字放大弹跳＋金光圈 | 倍率上扬音 | 弹跳完成 |\n| 多球解锁 | 灯带全亮＋双球入场星光 | 群星合鸣音 | 入场完成 |\n| 返回通道射入 | 通道流光＋250×倍率飘分 | 通道滑音 | 完成 |\n| 逐球回收 | 球坠出界灰化＋球标识归档 | 落袋闷响 | 完成 |\n| 同帧多球出界 | 双球同时灰化＋「合并计 1」提示 | 双响合并声 | 完成 |\n| 达标线突破 | 分数栏金光爆发＋「记录已破」横幅 | 纪录钟声 | 进入结算淡出 |\n| 判负 | 灯光渐暗 | 低沉收束音 | 进入结算 |",
+        "L01": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。"
+      },
+      "spec": {
+        "duration_s": [
+          0.9,
+          0.9
+        ],
+        "fps": 20
+      },
+      "task_spec": {
+        "action_name": "ball_launch",
+        "cancel_behavior": "cannot_cancel_after_release",
+        "character": "star_pinball",
+        "clip_type": "oneshot",
+        "duration_sec": 0.9,
+        "end_condition": "ball crosses the launch lane sensor",
+        "event_binding": "ball_launch; source_asset=star_pinball",
+        "export_anim_only": true,
+        "fps": 20,
+        "game_id": "G059_observatory_pinball",
+        "in_place": false,
+        "in_place_lock_height": false,
+        "loop": false,
+        "motion_length": 18,
+        "motion_name": "ball_launch",
+        "prompt": "Pinball launches from the plunger, arcs across the table and settles into the active physics loop.",
+        "root_motion_mode": "engine_driven",
+        "seed": 9059,
+        "source_asset": "star_pinball",
+        "spec_ref": "F05,L01",
+        "start_condition": "plunger is released with a ball loaded",
+        "stationary": false,
+        "target_glb_path": "test_data/outputs/G059_observatory_pinball/default/assets/3d_object/G059_observatory_pinball_obj_001/model.glb",
+        "target_mesh_path": "test_data/outputs/G059_observatory_pinball/default/assets/3d_object/G059_observatory_pinball_obj_001/model.glb",
+        "task_id": "G059_observatory_pinball_mot_001",
+        "task_type": "prop",
+        "trigger": "ball_launch",
+        "use_ik": false
+      }
+    }
+
+item G059_observatory_pinball.AS.C.06:
+  column: C
+  dimension: Completeness
+  requirements: F06
+  task: G059_sfx_001
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_sfx_001/plunger_wind 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Ratcheting plunger wind-up"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "spec": {
+        "duration_s": [
+          0.75,
+          1.5
+        ]
+      },
+      "task_spec": {
+        "asset_name": "plunger_wind",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Ratcheting plunger wind-up",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5591,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_001",
+        "trigger": "G06 蓄力（按住循环）"
+      }
+    }
+
+item G059_observatory_pinball.AS.C.07:
+  column: C
+  dimension: Completeness
+  requirements: F06
+  task: G059_sfx_002
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_sfx_002/launch_spring 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Spring launch pop"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "spec": {
+        "duration_s": [
+          0.75,
+          1.5
+        ]
+      },
+      "task_spec": {
+        "asset_name": "launch_spring",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Spring launch pop",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5592,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_002",
+        "trigger": "发射入台"
+      }
+    }
+
+item G059_observatory_pinball.AS.C.08:
+  column: C
+  dimension: Completeness
+  requirements: F06
+  task: G059_sfx_003
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_sfx_003/target_ding 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Brass medallion ding on target hit"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "spec": {
+        "duration_s": [
+          0.75,
+          1.5
+        ]
+      },
+      "task_spec": {
+        "asset_name": "target_ding",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Brass medallion ding on target hit",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5593,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_003",
+        "trigger": "M02 靶标命中（三组分档）"
+      }
+    }
+
+item G059_observatory_pinball.AS.C.09:
+  column: C
+  dimension: Completeness
+  requirements: F06
+  task: G059_sfx_004
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_sfx_004/chain_step 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Rising short chime as a chain progresses"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "spec": {
+        "duration_s": [
+          0.75,
+          1.5
+        ]
+      },
+      "task_spec": {
+        "asset_name": "chain_step",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Rising short chime as a chain progresses",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5594,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_004",
+        "trigger": "组链推进"
+      }
+    }
+
+item G059_observatory_pinball.AS.C.10:
+  column: C
+  dimension: Completeness
+  requirements: F06
+  task: G059_sfx_005
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_sfx_005/multiplier_rise 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Bright multiplier up-chime"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "spec": {
+        "duration_s": [
+          0.75,
+          1.5
+        ]
+      },
+      "task_spec": {
+        "asset_name": "multiplier_rise",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Bright multiplier up-chime",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5595,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_005",
+        "trigger": "倍率提升"
+      }
+    }
+
+item G059_observatory_pinball.AS.C.11:
+  column: C
+  dimension: Completeness
+  requirements: F06
+  task: G059_sfx_006
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_sfx_006/multiball_choir 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Layered starlight choir as two extra balls enter"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "spec": {
+        "duration_s": [
+          0.75,
+          1.5
+        ]
+      },
+      "task_spec": {
+        "asset_name": "multiball_choir",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Layered starlight choir as two extra balls enter",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5596,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_006",
+        "trigger": "M03 多球解锁"
+      }
+    }
+
+item G059_observatory_pinball.AS.C.12:
+  column: C
+  dimension: Completeness
+  requirements: F06
+  task: G059_sfx_007
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_sfx_007/lane_slide 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Glissando down the return lane"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "spec": {
+        "duration_s": [
+          0.75,
+          1.5
+        ]
+      },
+      "task_spec": {
+        "asset_name": "lane_slide",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Glissando down the return lane",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5597,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_007",
+        "trigger": "返回通道射入"
+      }
+    }
+
+item G059_observatory_pinball.AS.C.13:
+  column: C
+  dimension: Completeness
+  requirements: F06
+  task: G059_sfx_008
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_sfx_008/drain_thud 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Muffled drain drop under the table"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "spec": {
+        "duration_s": [
+          0.75,
+          1.5
+        ]
+      },
+      "task_spec": {
+        "asset_name": "drain_thud",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Muffled drain drop under the table",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5598,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_008",
+        "trigger": "M04 逐球回收"
+      }
+    }
+
+item G059_observatory_pinball.AS.C.14:
+  column: C
+  dimension: Completeness
+  requirements: F06
+  task: G059_sfx_009
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_sfx_009/drain_double 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Two overlapped drain thuds with one settle tone"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "spec": {
+        "duration_s": [
+          0.75,
+          1.5
+        ]
+      },
+      "task_spec": {
+        "asset_name": "drain_double",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Two overlapped drain thuds with one settle tone",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5599,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_009",
+        "trigger": "G07 同帧双球出界"
+      }
+    }
+
+item G059_observatory_pinball.AS.C.15:
+  column: C
+  dimension: Completeness
+  requirements: F06
+  task: G059_sfx_010
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_sfx_010/record_bell 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Grand observatory record bell"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "spec": {
+        "duration_s": [
+          0.75,
+          1.5
+        ]
+      },
+      "task_spec": {
+        "asset_name": "record_bell",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Grand observatory record bell",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5600,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_010",
+        "trigger": "达标线突破"
+      }
+    }
+
+item G059_observatory_pinball.AS.C.16:
+  column: C
+  dimension: Completeness
+  requirements: F06
+  task: G059_sfx_011
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_sfx_011/hall_ambience 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Quiet exhibit hall: machine hum",
+        "faint gallery reverb",
+        "night wind outside"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "spec": {
+        "duration_s": [
+          26.25,
+          52.5
+        ]
+      },
+      "task_spec": {
+        "asset_name": "hall_ambience",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 35.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Quiet exhibit hall: machine hum, faint gallery reverb, night wind outside",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5601,
+        "sound_category": "ambient_loop",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_011",
+        "trigger": "常驻环境音"
+      }
+    }
+
+item G059_observatory_pinball.AS.C.17:
+  column: C
+  dimension: Completeness
+  requirements: C01
+  task: G059_cg_001
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_cg_001/开场观测 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "A brass star-chart pinball table in a night observatory hall",
+        "camera glides along lit star-rail bands as a single pearl ball rolls onto the launch rail",
+        "deep-blue and brass",
+        "cinematic"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "C01": "- C01 开场观测（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入台面之前，每局一次\n  - 内容与角色场景：星穹观测台展厅夜景，镜头掠过黄铜弹珠台的星轨灯带，一枚弹珠被推上发射轨道\n  - 资产对应：弹珠台、星轨灯带、弹珠与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入台面；自然播完 → 同\n  - 状态一致：播放期间不推进任何计时；进入状态＝机会 3、倍率 ×1"
+      },
+      "spec": {
+        "duration_s": [
+          10.0,
+          10.0
+        ],
+        "fps": 24,
+        "resolution": [
+          1280,
+          720
+        ]
+      },
+      "task_spec": {
+        "cg_name": "开场观测",
+        "cg_type": "Opening",
+        "duration_sec": 10,
+        "end_condition": "natural playback end or skip input",
+        "fps": 24,
+        "game_id": "G059_observatory_pinball",
+        "mode": "text_to_video",
+        "next_state": "declared_playable_entry_state",
+        "prompt": "A brass star-chart pinball table in a night observatory hall, camera glides along lit star-rail bands as a single pearl ball rolls onto the launch rail, deep-blue and brass, cinematic, original design, no text",
+        "resolution": "1280x720",
+        "seed": 6591,
+        "skip_behavior": "skip_to_declared_next_state",
+        "skippable": true,
+        "spec_ref": "C01",
+        "start_condition": "首次进入台面前（每局一次）",
+        "task_id": "G059_cg_001",
+        "trigger": "首次进入台面前（每局一次）"
+      }
+    }
+
+item G059_observatory_pinball.AS.C.18:
+  column: C
+  dimension: Completeness
+  requirements: C02
+  task: G059_cg_002
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_cg_002/群星多球 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Three comet targets link into a light trail",
+        "two new balls slide down from the star rail as the table lamps blaze to full",
+        "cinematic",
+        "original design"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "C02": "- C02 群星多球（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次完成 C 组解锁多球事件后的下一帧短暂插入（每局一次）\n  - 内容与角色场景：彗星靶标三点连成光轨，两枚新弹珠自星轨灯带滑入台面，灯带全亮\n  - 资产对应：彗星靶标、弹珠、灯带与游戏内一致\n  - 可跳过：Esc 跳过 → 回到台面继续（多球状态已生效）；自然播完 → 同\n  - 状态一致：仅在真实解锁后触发，球数与计分不变"
+      },
+      "spec": {
+        "duration_s": [
+          6.0,
+          6.0
+        ],
+        "fps": 24,
+        "resolution": [
+          1280,
+          720
+        ]
+      },
+      "task_spec": {
+        "cg_name": "群星多球",
+        "cg_type": "Event",
+        "duration_sec": 6,
+        "end_condition": "natural playback end or skip input",
+        "fps": 24,
+        "game_id": "G059_observatory_pinball",
+        "mode": "text_to_video",
+        "next_state": "declared_followup_gameplay_state",
+        "prompt": "Three comet targets link into a light trail, two new balls slide down from the star rail as the table lamps blaze to full, cinematic, original design, no text",
+        "resolution": "1280x720",
+        "seed": 6592,
+        "skip_behavior": "skip_to_declared_next_state",
+        "skippable": true,
+        "spec_ref": "C02",
+        "start_condition": "首次完成 C 组解锁多球后（每局一次）",
+        "task_id": "G059_cg_002",
+        "trigger": "首次完成 C 组解锁多球后（每局一次）"
+      }
+    }
+
+item G059_observatory_pinball.AS.C.19:
+  column: C
+  dimension: Completeness
+  requirements: C03
+  task: G059_cg_003
+  points: 10.0
+  applicable: yes
+  scoring: half
+  target: |
+    G059_cg_003/观测完成 满足本任务全部内容与输出规格；完整任务见 binding.task_spec。
+  pass: |
+    实际产物满足本任务所有适用的内容与输出规格；技术准备度仅诊断。
+  partial: |
+    PARTIAL=0.5：输出类型与主要内容正确，但存在明确必需部件、事件或输出规格缺项。
+  fail: |
+    证实未交付，或产物类型/主要对象/核心动作错误；文本面板、拼贴不得替代所需资产。
+  evidence: static_project
+  evaluator: human.only
+  binding: |
+    {
+      "components": [
+        "Table lamp bands settle tier by tier to the final multiplier",
+        "achieved: a star chart unfolds above the playfield",
+        "failed: lamps dim warmly",
+        "cinematic"
+      ],
+      "procedure": [
+        "打开实际产物，按本任务完整 prompt、分资产需求与 general_requirement 的有效要求列出内容检查项。",
+        "逐项核对类别、组成、数量、事件/动作内容与次序、明确输出规格；风格归 Q2、参考相似归 Q1、本体缺陷归 Q3，运行时生命周期归第三阶段。",
+        "记录每个通过或缺失项及实际模态证据；无可观察产物且未证实任务失败时为 UNKNOWN。"
+      ],
+      "source_requirements": {
+        "C03": "- C03 观测完成（Ending，10 秒，1280×720@24fps）\n  - 触发时机：发球机会归零结算前，每局一次\n  - 内容与角色场景：台面灯带按最终倍率级数逐级定格；达标时星图在台面上方展开并题写「观测记录」，未达标时灯光温和收暗\n  - 资产对应：弹珠台、星图、灯带与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：达标/未达标呈现与真实结算一致"
+      },
+      "spec": {
+        "duration_s": [
+          10.0,
+          10.0
+        ],
+        "fps": 24,
+        "resolution": [
+          1280,
+          720
+        ]
+      },
+      "task_spec": {
+        "cg_name": "观测完成",
+        "cg_type": "Ending",
+        "duration_sec": 10,
+        "end_condition": "natural playback end or skip input",
+        "fps": 24,
+        "game_id": "G059_observatory_pinball",
+        "mode": "text_to_video",
+        "next_state": "declared_result_panel_state",
+        "prompt": "Table lamp bands settle tier by tier to the final multiplier; achieved: a star chart unfolds above the playfield; failed: lamps dim warmly, cinematic, original design, no text",
+        "resolution": "1280x720",
+        "seed": 6593,
+        "skip_behavior": "skip_to_declared_next_state",
+        "skippable": true,
+        "spec_ref": "C03",
+        "start_condition": "发球机会归零结算前（每局一次）",
+        "task_id": "G059_cg_003",
+        "trigger": "发球机会归零结算前（每局一次）"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q1.01:
+  column: Q1
+  dimension: Quality
+  requirements: L01
+  task: G059_obj_001
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_obj_001 (star_pinball): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.02:
+  column: Q1
+  dimension: Quality
+  requirements: L01, G03
+  task: G059_obj_002
+  points: 10.0
+  applicable: yes
+  target: |
+    The rigid deliverable of task G059_obj_002 (planet_target_bank) preserves the supplied reference's identifying silhouette and key forms.
+  pass: |
+    The deliverable preserves the supplied reference's identifying silhouette and key forms.
+  partial: |
+    PARTIAL only when the reference identity is recognizable but proportions, outline or major forms visibly diverge; an unrelated subject earns FAIL. Only the declared reference input for THIS task is judged; unseen sides are UNKNOWN, not FAIL.
+  fail: |
+    The deliverable's subject is unrelated to the supplied reference.
+  evidence: screenshot
+  evaluator: asset.reference_check
+  reference-refs: A01
+  binding: |
+    {
+      "reference_id": "A01",
+      "source_requirements": {
+        "G03": "- G03 机关顺序与倍率（本包冻结值）：3 组机关——A 行星轨道（靶标 A1→A2→A3 按序）、B 星图（B1→B2 按序）、C 彗星（C1→C2→C3 按序）；任一组按序完成 → 倍率 +1（上限 ×5）；组内乱序命中 → 该组链重置（倍率不变）；完成 C 组 → 解锁多球（+2 球）。",
+        "L01": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。"
+      },
+      "task_spec": {
+        "animation_strategy": "procedural",
+        "asset_name": "planet_target_bank",
+        "decimation_target": 15000,
+        "game_id": "G059_observatory_pinball",
+        "image_path": "test_data/test_samples/G059_observatory_pinball/3D_object/ref_images/ref_star_targets.png",
+        "input_mode": "image_to_3d",
+        "name_zh": "行星轨道靶标组",
+        "no_text_or_ui": true,
+        "prompt": "Brass pinball target bank of three domed planet medallions on a curved rail with lamp sockets, brass-and-starlight look, game-ready, PBR textures",
+        "rig": "none",
+        "role": "mechanism",
+        "seed": 1592,
+        "single_asset_only": true,
+        "spec_ref": "L01,G03",
+        "task_id": "G059_obj_002",
+        "texture_size": 2048
+      }
+    }
+
+item G059_observatory_pinball.AS.Q1.03:
+  column: Q1
+  dimension: Quality
+  requirements: L01, G02
+  task: G059_obj_003
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_obj_003 (brass_flipper_pair): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.04:
+  column: Q1
+  dimension: Quality
+  requirements: L02
+  task: G059_scene_001
+  points: 10.0
+  applicable: yes
+  target: |
+    The scene deliverable of task G059_scene_001 (G059_scene_001) preserves the supplied reference's identifying silhouette and key forms.
+  pass: |
+    The deliverable preserves the supplied reference's identifying silhouette and key forms.
+  partial: |
+    PARTIAL only when the reference identity is recognizable but proportions, outline or major forms visibly diverge; an unrelated subject earns FAIL. Only the declared reference input for THIS task is judged; unseen sides are UNKNOWN, not FAIL.
+  fail: |
+    The deliverable's subject is unrelated to the supplied reference.
+  evidence: screenshot
+  evaluator: asset.reference_check
+  reference-refs: A02
+  binding: |
+    {
+      "reference_id": "A02",
+      "source_requirements": {
+        "L02": "- L02 关卡：单张台面；靶标布局固定，台面扰动序列由 seed=1059 冻结，不随机扩展。"
+      },
+      "task_spec": {
+        "game_id": "G059_observatory_pinball",
+        "image_path": "test_data/test_samples/G059_observatory_pinball/3D_scene/ref_images/ref_pinball_table.png",
+        "layout_constraints": "单张倾斜台面；8 靶标/发射轨道/返回通道按 seed=1059 由引擎布置；本场景为展厅氛围基线",
+        "no_text_or_panels": true,
+        "output_format": "glb",
+        "prompt": "Observatory exhibit hall at night housing a single brass star-chart pinball table: tilted playfield with star-rail lamp bands, comet lane and planet orbit targets, deep-blue and brass palette, stylized, game-ready 3D scene",
+        "seed": 4591,
+        "single_coherent_scene": true,
+        "spec_ref": "L02",
+        "task_id": "G059_scene_001",
+        "texture_size": 2048
+      }
+    }
+
+item G059_observatory_pinball.AS.Q1.05:
+  column: Q1
+  dimension: Quality
+  requirements: F05, L01
+  task: G059_observatory_pinball_mot_001
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_observatory_pinball_mot_001 (ball_launch): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.06:
+  column: Q1
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_001
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_sfx_001 (plunger_wind): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.07:
+  column: Q1
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_002
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_sfx_002 (launch_spring): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.08:
+  column: Q1
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_003
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_sfx_003 (target_ding): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.09:
+  column: Q1
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_004
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_sfx_004 (chain_step): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.10:
+  column: Q1
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_005
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_sfx_005 (multiplier_rise): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.11:
+  column: Q1
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_006
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_sfx_006 (multiball_choir): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.12:
+  column: Q1
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_007
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_sfx_007 (lane_slide): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.13:
+  column: Q1
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_008
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_sfx_008 (drain_thud): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.14:
+  column: Q1
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_009
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_sfx_009 (drain_double): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.15:
+  column: Q1
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_010
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_sfx_010 (record_bell): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.16:
+  column: Q1
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_011
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_sfx_011 (hall_ambience): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.17:
+  column: Q1
+  dimension: Quality
+  requirements: C01
+  task: G059_cg_001
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_cg_001 (开场观测): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.18:
+  column: Q1
+  dimension: Quality
+  requirements: C02
+  task: G059_cg_002
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_cg_002 (群星多球): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q1.19:
+  column: Q1
+  dimension: Quality
+  requirements: C03
+  task: G059_cg_003
+  points: 10.0
+  applicable: no
+  target: |
+    Reference fidelity is N/A for task G059_cg_003 (观测完成): this task's frozen input carries no reference.
+  na-reason: |
+    Not applicable at freeze time: this task has no frozen reference input; the row is never executed or rated. Q1 was pre-declared N/A before any generation, not retroactively.
+  evidence: static_project
+  evaluator: asset.reference_check
+  binding: |
+    {}
+
+item G059_observatory_pinball.AS.Q2.01:
+  column: Q2
+  dimension: Quality
+  requirements: L01, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_obj_001
+  points: 10.0
+  applicable: yes
+  target: |
+    The star_pinball design belongs to this game's frozen visual world.
+  pass: |
+    The design belongs to the game's frozen visual world (palette, art family, declared purpose).
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. Judge from the actual modal content (frames/render/preview), never from task text alone. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The design demonstrably clashes with the frozen visual world.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "rigid",
+      "source_requirements": {
+        "L01": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "架空的黄铜天文时代",
+        "场景所在地",
+        "倾斜台面",
+        "黄铜与深蓝星空的机台风",
+        "#1D2B4A"
+      ],
+      "task_spec": {
+        "animation_strategy": "procedural",
+        "asset_name": "star_pinball",
+        "decimation_target": 2000,
+        "game_id": "G059_observatory_pinball",
+        "input_mode": "text_to_3d",
+        "name_zh": "星屑弹珠",
+        "no_text_or_ui": true,
+        "prompt": "Chrome-and-pearl pinball with tiny embedded star flecks, clean brass-era look, game-ready, PBR textures",
+        "rig": "none",
+        "role": "prop",
+        "seed": 1591,
+        "single_asset_only": true,
+        "spec_ref": "L01",
+        "task_id": "G059_obj_001",
+        "texture_size": 1024
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.02:
+  column: Q2
+  dimension: Quality
+  requirements: L01, G03, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_obj_002
+  points: 10.0
+  applicable: yes
+  target: |
+    The planet_target_bank design belongs to this game's frozen visual world.
+  pass: |
+    The design belongs to the game's frozen visual world (palette, art family, declared purpose).
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. Judge from the actual modal content (frames/render/preview), never from task text alone. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The design demonstrably clashes with the frozen visual world.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "rigid",
+      "source_requirements": {
+        "G03": "- G03 机关顺序与倍率（本包冻结值）：3 组机关——A 行星轨道（靶标 A1→A2→A3 按序）、B 星图（B1→B2 按序）、C 彗星（C1→C2→C3 按序）；任一组按序完成 → 倍率 +1（上限 ×5）；组内乱序命中 → 该组链重置（倍率不变）；完成 C 组 → 解锁多球（+2 球）。",
+        "L01": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "架空的黄铜天文时代",
+        "场景所在地",
+        "倾斜台面",
+        "黄铜与深蓝星空的机台风",
+        "#1D2B4A"
+      ],
+      "task_spec": {
+        "animation_strategy": "procedural",
+        "asset_name": "planet_target_bank",
+        "decimation_target": 15000,
+        "game_id": "G059_observatory_pinball",
+        "image_path": "test_data/test_samples/G059_observatory_pinball/3D_object/ref_images/ref_star_targets.png",
+        "input_mode": "image_to_3d",
+        "name_zh": "行星轨道靶标组",
+        "no_text_or_ui": true,
+        "prompt": "Brass pinball target bank of three domed planet medallions on a curved rail with lamp sockets, brass-and-starlight look, game-ready, PBR textures",
+        "rig": "none",
+        "role": "mechanism",
+        "seed": 1592,
+        "single_asset_only": true,
+        "spec_ref": "L01,G03",
+        "task_id": "G059_obj_002",
+        "texture_size": 2048
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.03:
+  column: Q2
+  dimension: Quality
+  requirements: L01, G02, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_obj_003
+  points: 10.0
+  applicable: yes
+  target: |
+    The brass_flipper_pair design belongs to this game's frozen visual world.
+  pass: |
+    The design belongs to the game's frozen visual world (palette, art family, declared purpose).
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. Judge from the actual modal content (frames/render/preview), never from task text alone. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The design demonstrably clashes with the frozen visual world.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "rigid",
+      "source_requirements": {
+        "G02": "- G02 弹珠台与物理（本包冻结值）：单张天文台弹珠台（倾斜台面、原创造型）；左右挡板各 1、顶部发射弹射轨道；弹珠直径 2.7 cm 等比；重力沿台面分量固定。高速碰撞可靠性红线：任意速度下弹珠不得穿模穿透挡板/靶标/边墙（碰撞采样导出，零穿模事件）；单物理步内连续碰撞 ≥3 次仍须稳定结算（采用连续碰撞检测或子步进，采样导出零穿模零卡死）。",
+        "L01": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "架空的黄铜天文时代",
+        "场景所在地",
+        "倾斜台面",
+        "黄铜与深蓝星空的机台风",
+        "#1D2B4A"
+      ],
+      "task_spec": {
+        "animation_strategy": "procedural",
+        "asset_name": "brass_flipper_pair",
+        "decimation_target": 10000,
+        "game_id": "G059_observatory_pinball",
+        "input_mode": "text_to_3d",
+        "name_zh": "黄铜挡板对",
+        "no_text_or_ui": true,
+        "prompt": "Pair of brass-capped pinball flipper assemblies with pivot pins and spring mounts, brass-era look, game-ready, PBR textures",
+        "rig": "none",
+        "role": "mechanism",
+        "seed": 1593,
+        "single_asset_only": true,
+        "spec_ref": "L01,G02",
+        "task_id": "G059_obj_003",
+        "texture_size": 2048
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.04:
+  column: Q2
+  dimension: Quality
+  requirements: L02, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_scene_001
+  points: 10.0
+  applicable: yes
+  target: |
+    The G059_scene_001 design belongs to this game's frozen visual world.
+  pass: |
+    The design belongs to the game's frozen visual world (palette, art family, declared purpose).
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. Judge from the actual modal content (frames/render/preview), never from task text alone. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The design demonstrably clashes with the frozen visual world.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "scene",
+      "source_requirements": {
+        "L02": "- L02 关卡：单张台面；靶标布局固定，台面扰动序列由 seed=1059 冻结，不随机扩展。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "架空的黄铜天文时代",
+        "场景所在地",
+        "倾斜台面",
+        "黄铜与深蓝星空的机台风",
+        "#1D2B4A"
+      ],
+      "task_spec": {
+        "game_id": "G059_observatory_pinball",
+        "image_path": "test_data/test_samples/G059_observatory_pinball/3D_scene/ref_images/ref_pinball_table.png",
+        "layout_constraints": "单张倾斜台面；8 靶标/发射轨道/返回通道按 seed=1059 由引擎布置；本场景为展厅氛围基线",
+        "no_text_or_panels": true,
+        "output_format": "glb",
+        "prompt": "Observatory exhibit hall at night housing a single brass star-chart pinball table: tilted playfield with star-rail lamp bands, comet lane and planet orbit targets, deep-blue and brass palette, stylized, game-ready 3D scene",
+        "seed": 4591,
+        "single_coherent_scene": true,
+        "spec_ref": "L02",
+        "task_id": "G059_scene_001",
+        "texture_size": 2048
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.05:
+  column: Q2
+  dimension: Quality
+  requirements: F05, L01, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_observatory_pinball_mot_001
+  points: 10.0
+  applicable: yes
+  target: |
+    The ball_launch motion matches this game's declared characters and action style.
+  pass: |
+    The motion matches the game's declared characters and action style.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. Judge from the actual modal content (frames/render/preview), never from task text alone. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The motion demonstrably clashes with the declared characters or action style.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "motion",
+      "source_requirements": {
+        "F05": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 发射蓄力 | 蓄力弧光沿轨道亮起 | 蓄力嗡声（按住循环） | 发射 |\n| 弹射入台 | 球弹出＋星光尾迹启动 | 弹射砰声 | 尾迹常驻 |\n| 靶标命中 | 靶标星徽点亮＋撞击闪光 | 撞击铛声（按组分档） | 0.3s |\n| 组链推进 | 组链进度灯逐级点亮 | 进度叮声 | 常亮 |\n| 乱序重置 | 该组进度灯熄灭＋红闪一次 | 低沉否定音 | 0.3s |\n| 倍率提升 | 倍率数字放大弹跳＋金光圈 | 倍率上扬音 | 弹跳完成 |\n| 多球解锁 | 灯带全亮＋双球入场星光 | 群星合鸣音 | 入场完成 |\n| 返回通道射入 | 通道流光＋250×倍率飘分 | 通道滑音 | 完成 |\n| 逐球回收 | 球坠出界灰化＋球标识归档 | 落袋闷响 | 完成 |\n| 同帧多球出界 | 双球同时灰化＋「合并计 1」提示 | 双响合并声 | 完成 |\n| 达标线突破 | 分数栏金光爆发＋「记录已破」横幅 | 纪录钟声 | 进入结算淡出 |\n| 判负 | 灯光渐暗 | 低沉收束音 | 进入结算 |",
+        "L01": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "架空的黄铜天文时代",
+        "场景所在地",
+        "倾斜台面"
+      ],
+      "task_spec": {
+        "action_name": "ball_launch",
+        "cancel_behavior": "cannot_cancel_after_release",
+        "character": "star_pinball",
+        "clip_type": "oneshot",
+        "duration_sec": 0.9,
+        "end_condition": "ball crosses the launch lane sensor",
+        "event_binding": "ball_launch; source_asset=star_pinball",
+        "export_anim_only": true,
+        "fps": 20,
+        "game_id": "G059_observatory_pinball",
+        "in_place": false,
+        "in_place_lock_height": false,
+        "loop": false,
+        "motion_length": 18,
+        "motion_name": "ball_launch",
+        "prompt": "Pinball launches from the plunger, arcs across the table and settles into the active physics loop.",
+        "root_motion_mode": "engine_driven",
+        "seed": 9059,
+        "source_asset": "star_pinball",
+        "spec_ref": "F05,L01",
+        "start_condition": "plunger is released with a ball loaded",
+        "stationary": false,
+        "target_glb_path": "test_data/outputs/G059_observatory_pinball/default/assets/3d_object/G059_observatory_pinball_obj_001/model.glb",
+        "target_mesh_path": "test_data/outputs/G059_observatory_pinball/default/assets/3d_object/G059_observatory_pinball_obj_001/model.glb",
+        "task_id": "G059_observatory_pinball_mot_001",
+        "task_type": "prop",
+        "trigger": "ball_launch",
+        "use_ik": false
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.06:
+  column: Q2
+  dimension: Quality
+  requirements: F06, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_sfx_001
+  points: 10.0
+  applicable: yes
+  target: |
+    The plunger_wind sound fits this game's frozen sound direction.
+  pass: |
+    The clip's timbre and emotional tone fit the frozen sound direction of the game.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. The judge must actually hear the clip; filenames, prompt text or metadata alone are insufficient evidence. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The clip's character demonstrably clashes with the frozen sound direction.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "audio",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "冻结清单交付",
+        "全部音效按",
+        "F06"
+      ],
+      "task_spec": {
+        "asset_name": "plunger_wind",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Ratcheting plunger wind-up",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5591,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_001",
+        "trigger": "G06 蓄力（按住循环）"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.07:
+  column: Q2
+  dimension: Quality
+  requirements: F06, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_sfx_002
+  points: 10.0
+  applicable: yes
+  target: |
+    The launch_spring sound fits this game's frozen sound direction.
+  pass: |
+    The clip's timbre and emotional tone fit the frozen sound direction of the game.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. The judge must actually hear the clip; filenames, prompt text or metadata alone are insufficient evidence. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The clip's character demonstrably clashes with the frozen sound direction.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "audio",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "冻结清单交付",
+        "全部音效按",
+        "F06"
+      ],
+      "task_spec": {
+        "asset_name": "launch_spring",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Spring launch pop",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5592,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_002",
+        "trigger": "发射入台"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.08:
+  column: Q2
+  dimension: Quality
+  requirements: F06, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_sfx_003
+  points: 10.0
+  applicable: yes
+  target: |
+    The target_ding sound fits this game's frozen sound direction.
+  pass: |
+    The clip's timbre and emotional tone fit the frozen sound direction of the game.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. The judge must actually hear the clip; filenames, prompt text or metadata alone are insufficient evidence. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The clip's character demonstrably clashes with the frozen sound direction.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "audio",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "冻结清单交付",
+        "全部音效按",
+        "F06"
+      ],
+      "task_spec": {
+        "asset_name": "target_ding",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Brass medallion ding on target hit",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5593,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_003",
+        "trigger": "M02 靶标命中（三组分档）"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.09:
+  column: Q2
+  dimension: Quality
+  requirements: F06, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_sfx_004
+  points: 10.0
+  applicable: yes
+  target: |
+    The chain_step sound fits this game's frozen sound direction.
+  pass: |
+    The clip's timbre and emotional tone fit the frozen sound direction of the game.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. The judge must actually hear the clip; filenames, prompt text or metadata alone are insufficient evidence. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The clip's character demonstrably clashes with the frozen sound direction.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "audio",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "冻结清单交付",
+        "全部音效按",
+        "F06"
+      ],
+      "task_spec": {
+        "asset_name": "chain_step",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Rising short chime as a chain progresses",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5594,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_004",
+        "trigger": "组链推进"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.10:
+  column: Q2
+  dimension: Quality
+  requirements: F06, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_sfx_005
+  points: 10.0
+  applicable: yes
+  target: |
+    The multiplier_rise sound fits this game's frozen sound direction.
+  pass: |
+    The clip's timbre and emotional tone fit the frozen sound direction of the game.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. The judge must actually hear the clip; filenames, prompt text or metadata alone are insufficient evidence. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The clip's character demonstrably clashes with the frozen sound direction.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "audio",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "冻结清单交付",
+        "全部音效按",
+        "F06"
+      ],
+      "task_spec": {
+        "asset_name": "multiplier_rise",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Bright multiplier up-chime",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5595,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_005",
+        "trigger": "倍率提升"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.11:
+  column: Q2
+  dimension: Quality
+  requirements: F06, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_sfx_006
+  points: 10.0
+  applicable: yes
+  target: |
+    The multiball_choir sound fits this game's frozen sound direction.
+  pass: |
+    The clip's timbre and emotional tone fit the frozen sound direction of the game.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. The judge must actually hear the clip; filenames, prompt text or metadata alone are insufficient evidence. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The clip's character demonstrably clashes with the frozen sound direction.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "audio",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "冻结清单交付",
+        "全部音效按",
+        "F06"
+      ],
+      "task_spec": {
+        "asset_name": "multiball_choir",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Layered starlight choir as two extra balls enter",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5596,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_006",
+        "trigger": "M03 多球解锁"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.12:
+  column: Q2
+  dimension: Quality
+  requirements: F06, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_sfx_007
+  points: 10.0
+  applicable: yes
+  target: |
+    The lane_slide sound fits this game's frozen sound direction.
+  pass: |
+    The clip's timbre and emotional tone fit the frozen sound direction of the game.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. The judge must actually hear the clip; filenames, prompt text or metadata alone are insufficient evidence. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The clip's character demonstrably clashes with the frozen sound direction.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "audio",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "冻结清单交付",
+        "全部音效按",
+        "F06"
+      ],
+      "task_spec": {
+        "asset_name": "lane_slide",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Glissando down the return lane",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5597,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_007",
+        "trigger": "返回通道射入"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.13:
+  column: Q2
+  dimension: Quality
+  requirements: F06, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_sfx_008
+  points: 10.0
+  applicable: yes
+  target: |
+    The drain_thud sound fits this game's frozen sound direction.
+  pass: |
+    The clip's timbre and emotional tone fit the frozen sound direction of the game.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. The judge must actually hear the clip; filenames, prompt text or metadata alone are insufficient evidence. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The clip's character demonstrably clashes with the frozen sound direction.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "audio",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "冻结清单交付",
+        "全部音效按",
+        "F06"
+      ],
+      "task_spec": {
+        "asset_name": "drain_thud",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Muffled drain drop under the table",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5598,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_008",
+        "trigger": "M04 逐球回收"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.14:
+  column: Q2
+  dimension: Quality
+  requirements: F06, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_sfx_009
+  points: 10.0
+  applicable: yes
+  target: |
+    The drain_double sound fits this game's frozen sound direction.
+  pass: |
+    The clip's timbre and emotional tone fit the frozen sound direction of the game.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. The judge must actually hear the clip; filenames, prompt text or metadata alone are insufficient evidence. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The clip's character demonstrably clashes with the frozen sound direction.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "audio",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "冻结清单交付",
+        "全部音效按",
+        "F06"
+      ],
+      "task_spec": {
+        "asset_name": "drain_double",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Two overlapped drain thuds with one settle tone",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5599,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_009",
+        "trigger": "G07 同帧双球出界"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.15:
+  column: Q2
+  dimension: Quality
+  requirements: F06, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_sfx_010
+  points: 10.0
+  applicable: yes
+  target: |
+    The record_bell sound fits this game's frozen sound direction.
+  pass: |
+    The clip's timbre and emotional tone fit the frozen sound direction of the game.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. The judge must actually hear the clip; filenames, prompt text or metadata alone are insufficient evidence. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The clip's character demonstrably clashes with the frozen sound direction.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "audio",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "冻结清单交付",
+        "全部音效按",
+        "F06"
+      ],
+      "task_spec": {
+        "asset_name": "record_bell",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Grand observatory record bell",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5600,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_010",
+        "trigger": "达标线突破"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.16:
+  column: Q2
+  dimension: Quality
+  requirements: F06, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_sfx_011
+  points: 10.0
+  applicable: yes
+  target: |
+    The hall_ambience sound fits this game's frozen sound direction.
+  pass: |
+    The clip's timbre and emotional tone fit the frozen sound direction of the game.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. The judge must actually hear the clip; filenames, prompt text or metadata alone are insufficient evidence. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The clip's character demonstrably clashes with the frozen sound direction.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "audio",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "冻结清单交付",
+        "全部音效按",
+        "F06"
+      ],
+      "task_spec": {
+        "asset_name": "hall_ambience",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 35.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Quiet exhibit hall: machine hum, faint gallery reverb, night wind outside",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5601,
+        "sound_category": "ambient_loop",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_011",
+        "trigger": "常驻环境音"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.17:
+  column: Q2
+  dimension: Quality
+  requirements: C01, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_cg_001
+  points: 10.0
+  applicable: yes
+  target: |
+    The 开场观测 CG content matches this game's declared world, mood and presentation style.
+  pass: |
+    The content matches the game's declared world, mood and presentation style.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. Judge from the actual modal content (frames/render/preview), never from task text alone. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The content demonstrably clashes with the declared world or presentation style.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "cg_video",
+      "source_requirements": {
+        "C01": "- C01 开场观测（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入台面之前，每局一次\n  - 内容与角色场景：星穹观测台展厅夜景，镜头掠过黄铜弹珠台的星轨灯带，一枚弹珠被推上发射轨道\n  - 资产对应：弹珠台、星轨灯带、弹珠与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入台面；自然播完 → 同\n  - 状态一致：播放期间不推进任何计时；进入状态＝机会 3、倍率 ×1",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "架空的黄铜天文时代",
+        "场景所在地",
+        "倾斜台面"
+      ],
+      "task_spec": {
+        "cg_name": "开场观测",
+        "cg_type": "Opening",
+        "duration_sec": 10,
+        "end_condition": "natural playback end or skip input",
+        "fps": 24,
+        "game_id": "G059_observatory_pinball",
+        "mode": "text_to_video",
+        "next_state": "declared_playable_entry_state",
+        "prompt": "A brass star-chart pinball table in a night observatory hall, camera glides along lit star-rail bands as a single pearl ball rolls onto the launch rail, deep-blue and brass, cinematic, original design, no text",
+        "resolution": "1280x720",
+        "seed": 6591,
+        "skip_behavior": "skip_to_declared_next_state",
+        "skippable": true,
+        "spec_ref": "C01",
+        "start_condition": "首次进入台面前（每局一次）",
+        "task_id": "G059_cg_001",
+        "trigger": "首次进入台面前（每局一次）"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.18:
+  column: Q2
+  dimension: Quality
+  requirements: C02, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_cg_002
+  points: 10.0
+  applicable: yes
+  target: |
+    The 群星多球 CG content matches this game's declared world, mood and presentation style.
+  pass: |
+    The content matches the game's declared world, mood and presentation style.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. Judge from the actual modal content (frames/render/preview), never from task text alone. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The content demonstrably clashes with the declared world or presentation style.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "cg_video",
+      "source_requirements": {
+        "C02": "- C02 群星多球（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次完成 C 组解锁多球事件后的下一帧短暂插入（每局一次）\n  - 内容与角色场景：彗星靶标三点连成光轨，两枚新弹珠自星轨灯带滑入台面，灯带全亮\n  - 资产对应：彗星靶标、弹珠、灯带与游戏内一致\n  - 可跳过：Esc 跳过 → 回到台面继续（多球状态已生效）；自然播完 → 同\n  - 状态一致：仅在真实解锁后触发，球数与计分不变",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "架空的黄铜天文时代",
+        "场景所在地",
+        "倾斜台面"
+      ],
+      "task_spec": {
+        "cg_name": "群星多球",
+        "cg_type": "Event",
+        "duration_sec": 6,
+        "end_condition": "natural playback end or skip input",
+        "fps": 24,
+        "game_id": "G059_observatory_pinball",
+        "mode": "text_to_video",
+        "next_state": "declared_followup_gameplay_state",
+        "prompt": "Three comet targets link into a light trail, two new balls slide down from the star rail as the table lamps blaze to full, cinematic, original design, no text",
+        "resolution": "1280x720",
+        "seed": 6592,
+        "skip_behavior": "skip_to_declared_next_state",
+        "skippable": true,
+        "spec_ref": "C02",
+        "start_condition": "首次完成 C 组解锁多球后（每局一次）",
+        "task_id": "G059_cg_002",
+        "trigger": "首次完成 C 组解锁多球后（每局一次）"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q2.19:
+  column: Q2
+  dimension: Quality
+  requirements: C03, W01, W02, W03, W04, W05, W06, W07, W08
+  task: G059_cg_003
+  points: 10.0
+  applicable: yes
+  target: |
+    The 观测完成 CG content matches this game's declared world, mood and presentation style.
+  pass: |
+    The content matches the game's declared world, mood and presentation style.
+  partial: |
+    PARTIAL only when the asset fits its declared purpose but its treatment or style family clashes with the frozen synopsis elements. Judge from the actual modal content (frames/render/preview), never from task text alone. This row scores only THIS task's contextual fit, not reference similarity (Q1) and not its own structural quality (Q3).
+  fail: |
+    The content demonstrably clashes with the declared world or presentation style.
+  evidence: static_project
+  evaluator: asset.game_consistency
+  binding: |
+    {
+      "family": "cg_video",
+      "source_requirements": {
+        "C03": "- C03 观测完成（Ending，10 秒，1280×720@24fps）\n  - 触发时机：发球机会归零结算前，每局一次\n  - 内容与角色场景：台面灯带按最终倍率级数逐级定格；达标时星图在台面上方展开并题写「观测记录」，未达标时灯光温和收暗\n  - 资产对应：弹珠台、星图、灯带与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：达标/未达标呈现与真实结算一致",
+        "W01": "- W01 世界与时代背景：架空的黄铜天文时代；「星穹观测台」的老匠人把一生观测的星图搬进了一台弹珠机，让访客用弹珠「运行」他的星空。",
+        "W02": "- W02 场景所在地：星穹观测台的展示厅——单张天文台主题弹珠台（倾斜台面、星轨灯带、黄铜挡板）。",
+        "W03": "- W03 玩家身份与当前任务：玩家是观测台的访客；当前任务：按序点亮行星轨道、星图与彗星三组机关，解锁「群星多球」，冲击观测记录 10000 分。",
+        "W04": "- W04 失败代价与结局表达：机会耗尽未达标＝「记录未破」（判负文案）；达标则 C03 呈现群星灯带全亮与观测记录题名。",
+        "W05": "- W05 叙事来源：三组机关＝老匠人的三段观测笔记（行星轨道/星图/彗星）；多球＝「群星同辉」时刻；返回通道＝回廊巡星。全部原创。",
+        "W06": "- W06 视觉风格与色彩材质：黄铜与深蓝星空的机台风；主色＝黄铜金（#B08D4F 系）＋星空深蓝（#1D2B4A 系）＋彗星青白（#9FD8E8 系）；材质以黄铜、发光灯带、深色台面为主。",
+        "W07": "- W07 环境氛围与声音语言：安静展厅中的机台低鸣——常驻展厅环境声；音效语言为「弹射砰＋撞击铛＋靶标叮＋多球合鸣」，全部音效按 §9 F06 冻结清单交付。",
+        "W08": "- W08 故事表达方式：开场视频（C01）交代观测台与弹珠机 → 多球视频（C02）在首次解锁多球时呈现「群星同辉」→ 结算视频（C03）收束观测记录；故事只做包装，不改变机制数值。"
+      },
+      "synopsis_elements": [
+        "架空的黄铜天文时代",
+        "场景所在地",
+        "倾斜台面"
+      ],
+      "task_spec": {
+        "cg_name": "观测完成",
+        "cg_type": "Ending",
+        "duration_sec": 10,
+        "end_condition": "natural playback end or skip input",
+        "fps": 24,
+        "game_id": "G059_observatory_pinball",
+        "mode": "text_to_video",
+        "next_state": "declared_result_panel_state",
+        "prompt": "Table lamp bands settle tier by tier to the final multiplier; achieved: a star chart unfolds above the playfield; failed: lamps dim warmly, cinematic, original design, no text",
+        "resolution": "1280x720",
+        "seed": 6593,
+        "skip_behavior": "skip_to_declared_next_state",
+        "skippable": true,
+        "spec_ref": "C03",
+        "start_condition": "发球机会归零结算前（每局一次）",
+        "task_id": "G059_cg_003",
+        "trigger": "发球机会归零结算前（每局一次）"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.01:
+  column: Q3
+  dimension: Quality
+  requirements: L01
+  task: G059_obj_001
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The star_pinball rigid asset holds the rigid-specific quality sub-items (structure + material).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "degenerate_faces",
+        "missing_textures"
+      ],
+      "family": "rigid",
+      "merge": "mean",
+      "source_requirements": {
+        "L01": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。"
+      },
+      "subitems": [
+        {
+          "anchor": "structure/proportion integrity — 1: structure contradicts the object's class or broken/interpenetrating parts; 2: wrong proportions or unreadable category; 3: recognizable object with complete declared parts; 4: small surface artifacts; 5: clean structure",
+          "id": "structure"
+        },
+        {
+          "anchor": "material/texture expression — 1: absent or unreadable textures; 2: wrong materials or misplaced texture mapping; 3: recognizable materials, minor noise; 4: small mapping artifacts; 5: clean material expression",
+          "id": "material"
+        }
+      ],
+      "task_spec": {
+        "animation_strategy": "procedural",
+        "asset_name": "star_pinball",
+        "decimation_target": 2000,
+        "game_id": "G059_observatory_pinball",
+        "input_mode": "text_to_3d",
+        "name_zh": "星屑弹珠",
+        "no_text_or_ui": true,
+        "prompt": "Chrome-and-pearl pinball with tiny embedded star flecks, clean brass-era look, game-ready, PBR textures",
+        "rig": "none",
+        "role": "prop",
+        "seed": 1591,
+        "single_asset_only": true,
+        "spec_ref": "L01",
+        "task_id": "G059_obj_001",
+        "texture_size": 1024
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.02:
+  column: Q3
+  dimension: Quality
+  requirements: L01, G03
+  task: G059_obj_002
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The planet_target_bank rigid asset holds the rigid-specific quality sub-items (structure + material).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "degenerate_faces",
+        "missing_textures"
+      ],
+      "family": "rigid",
+      "merge": "mean",
+      "source_requirements": {
+        "G03": "- G03 机关顺序与倍率（本包冻结值）：3 组机关——A 行星轨道（靶标 A1→A2→A3 按序）、B 星图（B1→B2 按序）、C 彗星（C1→C2→C3 按序）；任一组按序完成 → 倍率 +1（上限 ×5）；组内乱序命中 → 该组链重置（倍率不变）；完成 C 组 → 解锁多球（+2 球）。",
+        "L01": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。"
+      },
+      "subitems": [
+        {
+          "anchor": "structure/proportion integrity — 1: structure contradicts the object's class or broken/interpenetrating parts; 2: wrong proportions or unreadable category; 3: recognizable object with complete declared parts; 4: small surface artifacts; 5: clean structure",
+          "id": "structure"
+        },
+        {
+          "anchor": "material/texture expression — 1: absent or unreadable textures; 2: wrong materials or misplaced texture mapping; 3: recognizable materials, minor noise; 4: small mapping artifacts; 5: clean material expression",
+          "id": "material"
+        }
+      ],
+      "task_spec": {
+        "animation_strategy": "procedural",
+        "asset_name": "planet_target_bank",
+        "decimation_target": 15000,
+        "game_id": "G059_observatory_pinball",
+        "image_path": "test_data/test_samples/G059_observatory_pinball/3D_object/ref_images/ref_star_targets.png",
+        "input_mode": "image_to_3d",
+        "name_zh": "行星轨道靶标组",
+        "no_text_or_ui": true,
+        "prompt": "Brass pinball target bank of three domed planet medallions on a curved rail with lamp sockets, brass-and-starlight look, game-ready, PBR textures",
+        "rig": "none",
+        "role": "mechanism",
+        "seed": 1592,
+        "single_asset_only": true,
+        "spec_ref": "L01,G03",
+        "task_id": "G059_obj_002",
+        "texture_size": 2048
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.03:
+  column: Q3
+  dimension: Quality
+  requirements: L01, G02
+  task: G059_obj_003
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The brass_flipper_pair rigid asset holds the rigid-specific quality sub-items (structure + material).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "degenerate_faces",
+        "missing_textures"
+      ],
+      "family": "rigid",
+      "merge": "mean",
+      "source_requirements": {
+        "G02": "- G02 弹珠台与物理（本包冻结值）：单张天文台弹珠台（倾斜台面、原创造型）；左右挡板各 1、顶部发射弹射轨道；弹珠直径 2.7 cm 等比；重力沿台面分量固定。高速碰撞可靠性红线：任意速度下弹珠不得穿模穿透挡板/靶标/边墙（碰撞采样导出，零穿模事件）；单物理步内连续碰撞 ≥3 次仍须稳定结算（采用连续碰撞检测或子步进，采样导出零穿模零卡死）。",
+        "L01": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。"
+      },
+      "subitems": [
+        {
+          "anchor": "structure/proportion integrity — 1: structure contradicts the object's class or broken/interpenetrating parts; 2: wrong proportions or unreadable category; 3: recognizable object with complete declared parts; 4: small surface artifacts; 5: clean structure",
+          "id": "structure"
+        },
+        {
+          "anchor": "material/texture expression — 1: absent or unreadable textures; 2: wrong materials or misplaced texture mapping; 3: recognizable materials, minor noise; 4: small mapping artifacts; 5: clean material expression",
+          "id": "material"
+        }
+      ],
+      "task_spec": {
+        "animation_strategy": "procedural",
+        "asset_name": "brass_flipper_pair",
+        "decimation_target": 10000,
+        "game_id": "G059_observatory_pinball",
+        "input_mode": "text_to_3d",
+        "name_zh": "黄铜挡板对",
+        "no_text_or_ui": true,
+        "prompt": "Pair of brass-capped pinball flipper assemblies with pivot pins and spring mounts, brass-era look, game-ready, PBR textures",
+        "rig": "none",
+        "role": "mechanism",
+        "seed": 1593,
+        "single_asset_only": true,
+        "spec_ref": "L01,G02",
+        "task_id": "G059_obj_003",
+        "texture_size": 2048
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.04:
+  column: Q3
+  dimension: Quality
+  requirements: L02
+  task: G059_scene_001
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The G059_scene_001 scene asset holds the scene-specific quality sub-items (scene_structure + scene_surface).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "degenerate_faces",
+        "missing_textures"
+      ],
+      "family": "scene",
+      "merge": "mean",
+      "source_requirements": {
+        "L02": "- L02 关卡：单张台面；靶标布局固定，台面扰动序列由 seed=1059 冻结，不随机扩展。"
+      },
+      "subitems": [
+        {
+          "anchor": "scene-structure coherence — 1: broken or missing key geometry; 2: major form errors or heavy z-fighting; 3: coherent forms, readable layout; 4: small artifacts invisible in normal views; 5: clean structure",
+          "id": "scene_structure"
+        },
+        {
+          "anchor": "surface/resource completeness — 1: missing referenced resources everywhere; 2: clearly misplaced textures; 3: recognizable materials, minor noise; 4: small surface artifacts; 5: clean surfaces",
+          "id": "scene_surface"
+        }
+      ],
+      "task_spec": {
+        "game_id": "G059_observatory_pinball",
+        "image_path": "test_data/test_samples/G059_observatory_pinball/3D_scene/ref_images/ref_pinball_table.png",
+        "layout_constraints": "单张倾斜台面；8 靶标/发射轨道/返回通道按 seed=1059 由引擎布置；本场景为展厅氛围基线",
+        "no_text_or_panels": true,
+        "output_format": "glb",
+        "prompt": "Observatory exhibit hall at night housing a single brass star-chart pinball table: tilted playfield with star-rail lamp bands, comet lane and planet orbit targets, deep-blue and brass palette, stylized, game-ready 3D scene",
+        "seed": 4591,
+        "single_coherent_scene": true,
+        "spec_ref": "L02",
+        "task_id": "G059_scene_001",
+        "texture_size": 2048
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.05:
+  column: Q3
+  dimension: Quality
+  requirements: F05, L01
+  task: G059_observatory_pinball_mot_001
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The ball_launch motion asset holds the motion-specific quality sub-items (motion_naturalness + contact_quality).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "foot_slide",
+        "penetration"
+      ],
+      "family": "motion",
+      "merge": "mean",
+      "source_requirements": {
+        "F05": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 发射蓄力 | 蓄力弧光沿轨道亮起 | 蓄力嗡声（按住循环） | 发射 |\n| 弹射入台 | 球弹出＋星光尾迹启动 | 弹射砰声 | 尾迹常驻 |\n| 靶标命中 | 靶标星徽点亮＋撞击闪光 | 撞击铛声（按组分档） | 0.3s |\n| 组链推进 | 组链进度灯逐级点亮 | 进度叮声 | 常亮 |\n| 乱序重置 | 该组进度灯熄灭＋红闪一次 | 低沉否定音 | 0.3s |\n| 倍率提升 | 倍率数字放大弹跳＋金光圈 | 倍率上扬音 | 弹跳完成 |\n| 多球解锁 | 灯带全亮＋双球入场星光 | 群星合鸣音 | 入场完成 |\n| 返回通道射入 | 通道流光＋250×倍率飘分 | 通道滑音 | 完成 |\n| 逐球回收 | 球坠出界灰化＋球标识归档 | 落袋闷响 | 完成 |\n| 同帧多球出界 | 双球同时灰化＋「合并计 1」提示 | 双响合并声 | 完成 |\n| 达标线突破 | 分数栏金光爆发＋「记录已破」横幅 | 纪录钟声 | 进入结算淡出 |\n| 判负 | 灯光渐暗 | 低沉收束音 | 进入结算 |",
+        "L01": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。"
+      },
+      "subitems": [
+        {
+          "anchor": "motion smoothness/naturalness — 1: frozen or tangled limbs or wrong action; 2: unnatural, jerky motion; 3: readable action, minor stiffness; 4: small abruptness; 5: natural, continuous",
+          "id": "motion_naturalness"
+        },
+        {
+          "anchor": "contact/grounding quality — 1: no correct contacts or heavy penetration; 2: obvious sliding or penetration; 3: minor contact inaccuracies; 4: small slips; 5: correct contacts",
+          "id": "contact_quality"
+        }
+      ],
+      "task_spec": {
+        "action_name": "ball_launch",
+        "cancel_behavior": "cannot_cancel_after_release",
+        "character": "star_pinball",
+        "clip_type": "oneshot",
+        "duration_sec": 0.9,
+        "end_condition": "ball crosses the launch lane sensor",
+        "event_binding": "ball_launch; source_asset=star_pinball",
+        "export_anim_only": true,
+        "fps": 20,
+        "game_id": "G059_observatory_pinball",
+        "in_place": false,
+        "in_place_lock_height": false,
+        "loop": false,
+        "motion_length": 18,
+        "motion_name": "ball_launch",
+        "prompt": "Pinball launches from the plunger, arcs across the table and settles into the active physics loop.",
+        "root_motion_mode": "engine_driven",
+        "seed": 9059,
+        "source_asset": "star_pinball",
+        "spec_ref": "F05,L01",
+        "start_condition": "plunger is released with a ball loaded",
+        "stationary": false,
+        "target_glb_path": "test_data/outputs/G059_observatory_pinball/default/assets/3d_object/G059_observatory_pinball_obj_001/model.glb",
+        "target_mesh_path": "test_data/outputs/G059_observatory_pinball/default/assets/3d_object/G059_observatory_pinball_obj_001/model.glb",
+        "task_id": "G059_observatory_pinball_mot_001",
+        "task_type": "prop",
+        "trigger": "ball_launch",
+        "use_ik": false
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.06:
+  column: Q3
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_001
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The plunger_wind audio asset holds the audio-specific quality sub-items (clarity + naturalness).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "clipping",
+        "silence"
+      ],
+      "family": "audio",
+      "merge": "mean",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "subitems": [
+        {
+          "anchor": "clarity/distortion — 1: heavy clipping or distortion; 2: audible noise or abrupt cuts; 3: recognizable source, minor noise; 4: slight level or fade issues; 5: clean, nothing audible wrong",
+          "id": "clarity"
+        },
+        {
+          "anchor": "naturalness/continuity — 1: wrong or synthetic-broken content; 2: unnatural pacing or dead segments; 3: recognizable and mostly natural; 4: slight stiffness; 5: fully natural",
+          "id": "naturalness"
+        }
+      ],
+      "task_spec": {
+        "asset_name": "plunger_wind",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Ratcheting plunger wind-up",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5591,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_001",
+        "trigger": "G06 蓄力（按住循环）"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.07:
+  column: Q3
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_002
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The launch_spring audio asset holds the audio-specific quality sub-items (clarity + naturalness).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "clipping",
+        "silence"
+      ],
+      "family": "audio",
+      "merge": "mean",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "subitems": [
+        {
+          "anchor": "clarity/distortion — 1: heavy clipping or distortion; 2: audible noise or abrupt cuts; 3: recognizable source, minor noise; 4: slight level or fade issues; 5: clean, nothing audible wrong",
+          "id": "clarity"
+        },
+        {
+          "anchor": "naturalness/continuity — 1: wrong or synthetic-broken content; 2: unnatural pacing or dead segments; 3: recognizable and mostly natural; 4: slight stiffness; 5: fully natural",
+          "id": "naturalness"
+        }
+      ],
+      "task_spec": {
+        "asset_name": "launch_spring",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Spring launch pop",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5592,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_002",
+        "trigger": "发射入台"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.08:
+  column: Q3
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_003
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The target_ding audio asset holds the audio-specific quality sub-items (clarity + naturalness).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "clipping",
+        "silence"
+      ],
+      "family": "audio",
+      "merge": "mean",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "subitems": [
+        {
+          "anchor": "clarity/distortion — 1: heavy clipping or distortion; 2: audible noise or abrupt cuts; 3: recognizable source, minor noise; 4: slight level or fade issues; 5: clean, nothing audible wrong",
+          "id": "clarity"
+        },
+        {
+          "anchor": "naturalness/continuity — 1: wrong or synthetic-broken content; 2: unnatural pacing or dead segments; 3: recognizable and mostly natural; 4: slight stiffness; 5: fully natural",
+          "id": "naturalness"
+        }
+      ],
+      "task_spec": {
+        "asset_name": "target_ding",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Brass medallion ding on target hit",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5593,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_003",
+        "trigger": "M02 靶标命中（三组分档）"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.09:
+  column: Q3
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_004
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The chain_step audio asset holds the audio-specific quality sub-items (clarity + naturalness).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "clipping",
+        "silence"
+      ],
+      "family": "audio",
+      "merge": "mean",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "subitems": [
+        {
+          "anchor": "clarity/distortion — 1: heavy clipping or distortion; 2: audible noise or abrupt cuts; 3: recognizable source, minor noise; 4: slight level or fade issues; 5: clean, nothing audible wrong",
+          "id": "clarity"
+        },
+        {
+          "anchor": "naturalness/continuity — 1: wrong or synthetic-broken content; 2: unnatural pacing or dead segments; 3: recognizable and mostly natural; 4: slight stiffness; 5: fully natural",
+          "id": "naturalness"
+        }
+      ],
+      "task_spec": {
+        "asset_name": "chain_step",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Rising short chime as a chain progresses",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5594,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_004",
+        "trigger": "组链推进"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.10:
+  column: Q3
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_005
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The multiplier_rise audio asset holds the audio-specific quality sub-items (clarity + naturalness).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "clipping",
+        "silence"
+      ],
+      "family": "audio",
+      "merge": "mean",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "subitems": [
+        {
+          "anchor": "clarity/distortion — 1: heavy clipping or distortion; 2: audible noise or abrupt cuts; 3: recognizable source, minor noise; 4: slight level or fade issues; 5: clean, nothing audible wrong",
+          "id": "clarity"
+        },
+        {
+          "anchor": "naturalness/continuity — 1: wrong or synthetic-broken content; 2: unnatural pacing or dead segments; 3: recognizable and mostly natural; 4: slight stiffness; 5: fully natural",
+          "id": "naturalness"
+        }
+      ],
+      "task_spec": {
+        "asset_name": "multiplier_rise",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Bright multiplier up-chime",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5595,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_005",
+        "trigger": "倍率提升"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.11:
+  column: Q3
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_006
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The multiball_choir audio asset holds the audio-specific quality sub-items (clarity + naturalness).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "clipping",
+        "silence"
+      ],
+      "family": "audio",
+      "merge": "mean",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "subitems": [
+        {
+          "anchor": "clarity/distortion — 1: heavy clipping or distortion; 2: audible noise or abrupt cuts; 3: recognizable source, minor noise; 4: slight level or fade issues; 5: clean, nothing audible wrong",
+          "id": "clarity"
+        },
+        {
+          "anchor": "naturalness/continuity — 1: wrong or synthetic-broken content; 2: unnatural pacing or dead segments; 3: recognizable and mostly natural; 4: slight stiffness; 5: fully natural",
+          "id": "naturalness"
+        }
+      ],
+      "task_spec": {
+        "asset_name": "multiball_choir",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Layered starlight choir as two extra balls enter",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5596,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_006",
+        "trigger": "M03 多球解锁"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.12:
+  column: Q3
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_007
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The lane_slide audio asset holds the audio-specific quality sub-items (clarity + naturalness).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "clipping",
+        "silence"
+      ],
+      "family": "audio",
+      "merge": "mean",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "subitems": [
+        {
+          "anchor": "clarity/distortion — 1: heavy clipping or distortion; 2: audible noise or abrupt cuts; 3: recognizable source, minor noise; 4: slight level or fade issues; 5: clean, nothing audible wrong",
+          "id": "clarity"
+        },
+        {
+          "anchor": "naturalness/continuity — 1: wrong or synthetic-broken content; 2: unnatural pacing or dead segments; 3: recognizable and mostly natural; 4: slight stiffness; 5: fully natural",
+          "id": "naturalness"
+        }
+      ],
+      "task_spec": {
+        "asset_name": "lane_slide",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Glissando down the return lane",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5597,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_007",
+        "trigger": "返回通道射入"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.13:
+  column: Q3
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_008
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The drain_thud audio asset holds the audio-specific quality sub-items (clarity + naturalness).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "clipping",
+        "silence"
+      ],
+      "family": "audio",
+      "merge": "mean",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "subitems": [
+        {
+          "anchor": "clarity/distortion — 1: heavy clipping or distortion; 2: audible noise or abrupt cuts; 3: recognizable source, minor noise; 4: slight level or fade issues; 5: clean, nothing audible wrong",
+          "id": "clarity"
+        },
+        {
+          "anchor": "naturalness/continuity — 1: wrong or synthetic-broken content; 2: unnatural pacing or dead segments; 3: recognizable and mostly natural; 4: slight stiffness; 5: fully natural",
+          "id": "naturalness"
+        }
+      ],
+      "task_spec": {
+        "asset_name": "drain_thud",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Muffled drain drop under the table",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5598,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_008",
+        "trigger": "M04 逐球回收"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.14:
+  column: Q3
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_009
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The drain_double audio asset holds the audio-specific quality sub-items (clarity + naturalness).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "clipping",
+        "silence"
+      ],
+      "family": "audio",
+      "merge": "mean",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "subitems": [
+        {
+          "anchor": "clarity/distortion — 1: heavy clipping or distortion; 2: audible noise or abrupt cuts; 3: recognizable source, minor noise; 4: slight level or fade issues; 5: clean, nothing audible wrong",
+          "id": "clarity"
+        },
+        {
+          "anchor": "naturalness/continuity — 1: wrong or synthetic-broken content; 2: unnatural pacing or dead segments; 3: recognizable and mostly natural; 4: slight stiffness; 5: fully natural",
+          "id": "naturalness"
+        }
+      ],
+      "task_spec": {
+        "asset_name": "drain_double",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Two overlapped drain thuds with one settle tone",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5599,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_009",
+        "trigger": "G07 同帧双球出界"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.15:
+  column: Q3
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_010
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The record_bell audio asset holds the audio-specific quality sub-items (clarity + naturalness).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "clipping",
+        "silence"
+      ],
+      "family": "audio",
+      "merge": "mean",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "subitems": [
+        {
+          "anchor": "clarity/distortion — 1: heavy clipping or distortion; 2: audible noise or abrupt cuts; 3: recognizable source, minor noise; 4: slight level or fade issues; 5: clean, nothing audible wrong",
+          "id": "clarity"
+        },
+        {
+          "anchor": "naturalness/continuity — 1: wrong or synthetic-broken content; 2: unnatural pacing or dead segments; 3: recognizable and mostly natural; 4: slight stiffness; 5: fully natural",
+          "id": "naturalness"
+        }
+      ],
+      "task_spec": {
+        "asset_name": "record_bell",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 1.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Grand observatory record bell",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5600,
+        "sound_category": "one_shot",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_010",
+        "trigger": "达标线突破"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.16:
+  column: Q3
+  dimension: Quality
+  requirements: F06
+  task: G059_sfx_011
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The hall_ambience audio asset holds the audio-specific quality sub-items (clarity + naturalness).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "clipping",
+        "silence"
+      ],
+      "family": "audio",
+      "merge": "mean",
+      "source_requirements": {
+        "F06": "- F06 关键音效清单：蓄力嗡声、弹射砰、撞击铛（三组分档）、进度叮、否定音、倍率上扬、群星合鸣、通道滑音、落袋闷响、双响合并、纪录钟声、收束音；环境音：展厅低鸣＋机台运转（常驻循环）；循环音开始/结束：蓄力嗡声按按住起止、环境声随台面载入开始、随结算淡出 0.5s；无配音需求。"
+      },
+      "subitems": [
+        {
+          "anchor": "clarity/distortion — 1: heavy clipping or distortion; 2: audible noise or abrupt cuts; 3: recognizable source, minor noise; 4: slight level or fade issues; 5: clean, nothing audible wrong",
+          "id": "clarity"
+        },
+        {
+          "anchor": "naturalness/continuity — 1: wrong or synthetic-broken content; 2: unnatural pacing or dead segments; 3: recognizable and mostly natural; 4: slight stiffness; 5: fully natural",
+          "id": "naturalness"
+        }
+      ],
+      "task_spec": {
+        "asset_name": "hall_ambience",
+        "audio_type": "sound_effect",
+        "ducking": "none",
+        "duration_sec": 35.0,
+        "game_id": "G059_observatory_pinball",
+        "loop": false,
+        "priority": "gameplay_critical",
+        "prompt": "Quiet exhibit hall: machine hum, faint gallery reverb, night wind outside",
+        "required_by_spec": true,
+        "sample_rate": 48000,
+        "seed": 5601,
+        "sound_category": "ambient_loop",
+        "spec_ref": "F06",
+        "stop_condition": "natural_end",
+        "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+        "task_id": "G059_sfx_011",
+        "trigger": "常驻环境音"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.17:
+  column: Q3
+  dimension: Quality
+  requirements: C01
+  task: G059_cg_001
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The 开场观测 cg_video asset holds the cg_video-specific quality sub-items (frame_quality + temporal).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "decodable",
+        "frame_spread"
+      ],
+      "family": "cg_video",
+      "merge": "mean",
+      "source_requirements": {
+        "C01": "- C01 开场观测（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入台面之前，每局一次\n  - 内容与角色场景：星穹观测台展厅夜景，镜头掠过黄铜弹珠台的星轨灯带，一枚弹珠被推上发射轨道\n  - 资产对应：弹珠台、星轨灯带、弹珠与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入台面；自然播完 → 同\n  - 状态一致：播放期间不推进任何计时；进入状态＝机会 3、倍率 ×1"
+      },
+      "subitems": [
+        {
+          "anchor": "single-frame visual quality — 1: undecodable or content absent; 2: heavy artifacts per frame; 3: minor per-frame noise; 4: small single-frame artifacts; 5: clean frames",
+          "id": "frame_quality"
+        },
+        {
+          "anchor": "temporal continuity — 1: no usable motion; 2: heavy temporal artifacts or missing required event; 3: events present, minor flicker; 4: small glitches; 5: continuous motion",
+          "id": "temporal"
+        }
+      ],
+      "task_spec": {
+        "cg_name": "开场观测",
+        "cg_type": "Opening",
+        "duration_sec": 10,
+        "end_condition": "natural playback end or skip input",
+        "fps": 24,
+        "game_id": "G059_observatory_pinball",
+        "mode": "text_to_video",
+        "next_state": "declared_playable_entry_state",
+        "prompt": "A brass star-chart pinball table in a night observatory hall, camera glides along lit star-rail bands as a single pearl ball rolls onto the launch rail, deep-blue and brass, cinematic, original design, no text",
+        "resolution": "1280x720",
+        "seed": 6591,
+        "skip_behavior": "skip_to_declared_next_state",
+        "skippable": true,
+        "spec_ref": "C01",
+        "start_condition": "首次进入台面前（每局一次）",
+        "task_id": "G059_cg_001",
+        "trigger": "首次进入台面前（每局一次）"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.18:
+  column: Q3
+  dimension: Quality
+  requirements: C02
+  task: G059_cg_002
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The 群星多球 cg_video asset holds the cg_video-specific quality sub-items (frame_quality + temporal).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "decodable",
+        "frame_spread"
+      ],
+      "family": "cg_video",
+      "merge": "mean",
+      "source_requirements": {
+        "C02": "- C02 群星多球（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次完成 C 组解锁多球事件后的下一帧短暂插入（每局一次）\n  - 内容与角色场景：彗星靶标三点连成光轨，两枚新弹珠自星轨灯带滑入台面，灯带全亮\n  - 资产对应：彗星靶标、弹珠、灯带与游戏内一致\n  - 可跳过：Esc 跳过 → 回到台面继续（多球状态已生效）；自然播完 → 同\n  - 状态一致：仅在真实解锁后触发，球数与计分不变"
+      },
+      "subitems": [
+        {
+          "anchor": "single-frame visual quality — 1: undecodable or content absent; 2: heavy artifacts per frame; 3: minor per-frame noise; 4: small single-frame artifacts; 5: clean frames",
+          "id": "frame_quality"
+        },
+        {
+          "anchor": "temporal continuity — 1: no usable motion; 2: heavy temporal artifacts or missing required event; 3: events present, minor flicker; 4: small glitches; 5: continuous motion",
+          "id": "temporal"
+        }
+      ],
+      "task_spec": {
+        "cg_name": "群星多球",
+        "cg_type": "Event",
+        "duration_sec": 6,
+        "end_condition": "natural playback end or skip input",
+        "fps": 24,
+        "game_id": "G059_observatory_pinball",
+        "mode": "text_to_video",
+        "next_state": "declared_followup_gameplay_state",
+        "prompt": "Three comet targets link into a light trail, two new balls slide down from the star rail as the table lamps blaze to full, cinematic, original design, no text",
+        "resolution": "1280x720",
+        "seed": 6592,
+        "skip_behavior": "skip_to_declared_next_state",
+        "skippable": true,
+        "spec_ref": "C02",
+        "start_condition": "首次完成 C 组解锁多球后（每局一次）",
+        "task_id": "G059_cg_002",
+        "trigger": "首次完成 C 组解锁多球后（每局一次）"
+      }
+    }
+
+item G059_observatory_pinball.AS.Q3.19:
+  column: Q3
+  dimension: Quality
+  requirements: C03
+  task: G059_cg_003
+  points: 10.0
+  applicable: yes
+  scoring: q3_mean
+  target: |
+    The 观测完成 cg_video asset holds the cg_video-specific quality sub-items (frame_quality + temporal).
+  pass: |
+    Both type-specific quality sub-items are rated clean (5/5): merged ratio 1.0.
+  partial: |
+    Each of the two type-specific quality sub-items is rated 1–5 on its frozen anchor by the judge that actually observes the modality (VLM over rendered views/frames/FK previews; the audio judge over the real clip — never text over probe numbers). The row score is the equal-weight mean of the two sub-item ratios (1→0, 2→0.25, 3→0.5, 4→0.75, 5→1; the structured scoring_rule is tiered_mean). A definitively failing deterministic probe caps its mapped sub-item at rating 2 — probes never replace the judgment; an unobservable sub-item keeps the row UNKNOWN. This row scores only THIS task's quality.
+  fail: |
+    Both type-specific quality sub-items are rated severely defective (1/1): merged ratio 0.
+  evidence: static_project
+  evaluator: asset.intrinsic_quality
+  binding: |
+    {
+      "checks": [
+        "decodable",
+        "frame_spread"
+      ],
+      "family": "cg_video",
+      "merge": "mean",
+      "source_requirements": {
+        "C03": "- C03 观测完成（Ending，10 秒，1280×720@24fps）\n  - 触发时机：发球机会归零结算前，每局一次\n  - 内容与角色场景：台面灯带按最终倍率级数逐级定格；达标时星图在台面上方展开并题写「观测记录」，未达标时灯光温和收暗\n  - 资产对应：弹珠台、星图、灯带与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：达标/未达标呈现与真实结算一致"
+      },
+      "subitems": [
+        {
+          "anchor": "single-frame visual quality — 1: undecodable or content absent; 2: heavy artifacts per frame; 3: minor per-frame noise; 4: small single-frame artifacts; 5: clean frames",
+          "id": "frame_quality"
+        },
+        {
+          "anchor": "temporal continuity — 1: no usable motion; 2: heavy temporal artifacts or missing required event; 3: events present, minor flicker; 4: small glitches; 5: continuous motion",
+          "id": "temporal"
+        }
+      ],
+      "task_spec": {
+        "cg_name": "观测完成",
+        "cg_type": "Ending",
+        "duration_sec": 10,
+        "end_condition": "natural playback end or skip input",
+        "fps": 24,
+        "game_id": "G059_observatory_pinball",
+        "mode": "text_to_video",
+        "next_state": "declared_result_panel_state",
+        "prompt": "Table lamp bands settle tier by tier to the final multiplier; achieved: a star chart unfolds above the playfield; failed: lamps dim warmly, cinematic, original design, no text",
+        "resolution": "1280x720",
+        "seed": 6593,
+        "skip_behavior": "skip_to_declared_next_state",
+        "skippable": true,
+        "spec_ref": "C03",
+        "start_condition": "发球机会归零结算前（每局一次）",
+        "task_id": "G059_cg_003",
+        "trigger": "发球机会归零结算前（每局一次）"
+      }
+    }

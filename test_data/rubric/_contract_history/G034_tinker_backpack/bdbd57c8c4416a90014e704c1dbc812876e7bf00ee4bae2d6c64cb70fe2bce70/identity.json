@@ -1,0 +1,7 @@
+{
+  "contract_id": "G034_tinker_backpack.whitebox.endpoints-v2-candidate.bdbd57c8c4416a90014e704c1dbc812876e7bf00ee4bae2d6c64cb70fe2bce70",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "bdbd57c8c4416a90014e704c1dbc812876e7bf00ee4bae2d6c64cb70fe2bce70",
+  "rubric_json_sha256": "e3cd5f4bfa3f1f5498ebc1c7834244fe75161b4a95129749444c6bcc46f38661",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

@@ -1,0 +1,7 @@
+{
+  "contract_id": "G043_airship_kitchen.whitebox.final",
+  "version": "final",
+  "content_sha256": "72a1d610d2c69aff4db5bf4838a3391b6f7029229e01da43e4f6f15dd43cb8f3",
+  "rubric_json_sha256": "d79149d0101cce027291e51bd20bdb839a072ed475bd8967a754743856a20706",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

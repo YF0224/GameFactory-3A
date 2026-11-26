@@ -1,0 +1,476 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_garden_revival_obj_001",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 50,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_garden_revival_obj_001.json",
+        "sha256": "76750f5fc828406ea004d9cedeb83541b139be5846dda2684fd919e7aaff0ba6"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_garden_revival_obj_002",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 51,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_garden_revival_obj_002.json",
+        "sha256": "aa97256dc654b85bbcc5572040f6b46e02f32dd28d9805703b94992c207c928a"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_garden_revival_obj_003",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 52,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_garden_revival_obj_003.json",
+        "sha256": "bc8823d6230cadc451337c8a005f75d7533749389432fb9fa80e562130504d7d"
+      },
+      "C_checks": 2,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_garden_revival_obj_004",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 53,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_garden_revival_obj_004.json",
+        "sha256": "0deb79b02e0463cdc561e32743f7a3de0e44c37d01978aa473bce5a59ee998a3"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_garden_revival_obj_005",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 54,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_garden_revival_obj_005.json",
+        "sha256": "634e8fd5da9d96a21f8c3348777bcb31ec9bdfa2b1874a93208ead1c88ad91a4"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_garden_revival_obj_006",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 55,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_garden_revival_obj_006.json",
+        "sha256": "08c1a492cb2da806de10b2a39c86cd29da3db313d515cfc03f781bbae3e3d78e"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_garden_revival_obj_007",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 56,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_garden_revival_obj_007.json",
+        "sha256": "eab7fbdd6432844ac51b3fe128619489aeb3f728dd6cbb2983a956f5e1d31b8b"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 16,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_scene_001.json",
+        "sha256": "1f10f3a49bbbd35da11c07f1e6f3a9d6dcec7ff9b4fcfe0445af10e87c9c3692"
+      },
+      "C_checks": 11,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 172,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_sfx_001.json",
+        "sha256": "347c9f23ad56354667eff7c5a9aff107b2c542c0938f60248d24813150da07c6"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 173,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_sfx_002.json",
+        "sha256": "e671fcfdef8fa928c30f37d5c797b5d0be24b22a2f3967a41c67b411cff17c25"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 174,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_sfx_003.json",
+        "sha256": "4f672f87d7b59a28ada6699efd2d80a85938a5218e09b7a07435864591b0be50"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 175,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_sfx_004.json",
+        "sha256": "15234180edcdc3f392019e45a4b362c95a155876c4b34d53416815ba7629c6e0"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 176,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_sfx_005.json",
+        "sha256": "9e712fc9b08638f7db0073331c74a8510082573f4bb9e3a9e2f85970735a9f05"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 177,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_sfx_006.json",
+        "sha256": "38b534809019fc9167a94b223048d34b4b76a73922048ab74649f94add553757"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 178,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_sfx_007.json",
+        "sha256": "6fb7dddb41bf9f76a05056fdffcb123dbaeca680cf477ac519c37145d201409a"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 179,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_sfx_008.json",
+        "sha256": "b9cd26e21bf2ef62264ffaade3712110914aac3242494e2cc2895fc1c11efa55"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 180,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_sfx_009.json",
+        "sha256": "a5d51b7844cd925e4adee059bbc9da0c4834b331b205d57177463abf4a81dd23"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 181,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_sfx_010.json",
+        "sha256": "1d62542dbe72168e7eccee8f36663049bedcfa89e437ea59e9e87de562dfdf13"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 182,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_sfx_011.json",
+        "sha256": "01b86fa1030bf2704c50d09b0bea4784627a12db6785716303db2d1b8cb24d01"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_sfx_012",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 183,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_sfx_012.json",
+        "sha256": "64fe50eb507e87c3a5158aa7f340f271dfd93ba5a131acce57560d95a333cfce"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_sfx_013",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 184,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_sfx_013.json",
+        "sha256": "ab8e2e91c725f825508859a7976fbcdaee6f7f452b1c5a562842f15e2ac913ae"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 48,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_cg_001.json",
+        "sha256": "66ae4d529418fbe8b864b1d4ccbfd1b1a0bad7875cd2a5384d64a9c81254154c"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 49,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_cg_002.json",
+        "sha256": "964172b59867b4d3a65237b073763692c7108f3dbb17e305549d09744b7379c4"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 50,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_cg_003.json",
+        "sha256": "cad1d3b881511cd6a2187563e7a8fcb8b88fa4180f6609ecb7b7f35ad8be70f9"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_cg_004",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 51,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_cg_004.json",
+        "sha256": "a9210badc3266fbce98c0b2bcea27f9f56123cc0c9aba18081d9096c01182ead"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "multi_variant_cg_requires_delivery_convention",
+        "branch_delivery_review"
+      ]
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_mot_001",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 36,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_mot_001.json",
+        "sha256": "f30985693f1af4b468fec93a1fb81dde895ed923cbc26c99d97943b8bc4c3b38"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_mot_002",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 37,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_mot_002.json",
+        "sha256": "27de39e9610867b52294c76591eca2130509c0a8b454b41c20682dbdac10960f"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_mot_003",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 38,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_mot_003.json",
+        "sha256": "d92e0e5090b6685b0a0a7a3d7467b550d2f952494764d603254b75e361fafe82"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_mot_004",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 39,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_mot_004.json",
+        "sha256": "d58caea23fee06e51a7a0d55dc8dc67c0897eae3f40e1224bfb10290919a82bc"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_mot_005",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 40,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_mot_005.json",
+        "sha256": "74b9c9e58f7575e05dab480989b3a586c9f74399f3fc8ed49609c5497772757f"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_mot_006",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 41,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_mot_006.json",
+        "sha256": "5861880acc66c0330e7c946eb302d6c432e707bf369989052cd1118826073296"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_mot_007",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 42,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_mot_007.json",
+        "sha256": "84efcd8646c60ef505ec906abe6f903ec63cdf19ea04e0f8e0d8081972194eb4"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G015_garden_revival",
+      "task_id": "G015_tpose_001",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 5,
+      "rubric": {
+        "path": "test_data/test_samples/G015_garden_revival/rubric_assets/priority_observable_v2/G015_tpose_001.json",
+        "sha256": "620f49b51f50f386210877eb80a8338e71ab89dab816ed16ef2cced10b9d7f6f"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    }
+  ]
+}

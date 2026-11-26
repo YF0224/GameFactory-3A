@@ -1,0 +1,238 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 69,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_scene_001.json",
+        "sha256": "3ef751af948863e2f3edbaeb4df0cf5c1f869659f0eeeaac47c0d0ad2556a3a7"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 673,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_sfx_001.json",
+        "sha256": "883da60e4b386fc06e7e1609e8e043a29ba0721c07bb9abc48c3a6ec21aedbc9"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 674,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_sfx_002.json",
+        "sha256": "94416c8fde1ccdcc62ce9e09f91dd3810fb16ee2cea233d274cb48603b08d814"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 675,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_sfx_003.json",
+        "sha256": "5742175e5e4308a9ce32678aa8ad4926115428c6559b239d1707a58dad7c9c5c"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 676,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_sfx_004.json",
+        "sha256": "ec07ebe368a93bc642e39a23e7cb5410c3927dd92bc91abac782e353ae2ffe51"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 677,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_sfx_005.json",
+        "sha256": "bb3130774f546ffcb35d7862932059b88f282089e6cb64e1ac60b51eca0dd3b1"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 678,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_sfx_006.json",
+        "sha256": "772049e0e8380d4fc7db032624ce3c325656825fa8554ed063724ebaa4d39f52"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 679,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_sfx_007.json",
+        "sha256": "0d80c610f874ee6503c6e7d11dd6d2df473c7f1f6158e918f57ae5034496bf72"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 680,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_sfx_008.json",
+        "sha256": "fcbf811909c777faba307b29ad5528c914b0ce44ad37d74ff252971476a07a39"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 681,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_sfx_009.json",
+        "sha256": "308f6b335ada20416a8879a863c5a6f58ac9853bba72b0927cc6b722e669b22c"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 682,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_sfx_010.json",
+        "sha256": "b7f62474b9a63c6d05e1606168e3b83bb2b43b3e642d9061ba2bef33e0f6e5e9"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 184,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_cg_001.json",
+        "sha256": "7d07577f181cf23aa33c61b662b7f68a580da7d381934ff11d29090b7c53c47e"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 185,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_cg_002.json",
+        "sha256": "cde7d610f3dc9bbc423a534cd2bd5acf83eeefee46ecf9b61a5e1ea1793b585e"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 186,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_cg_003.json",
+        "sha256": "95a61967e7d9beb3f41a8baa34057caab8b985290203830c69fce4fa21368bd4"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_cg_004",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 187,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_cg_004.json",
+        "sha256": "12f1f04dfa13168588e2cb649e839bfdf496a4264e83db1aaa9d4aa48c8e5c04"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G058_pitch_dreams_football",
+      "task_id": "G058_pitch_dreams_football_mot_001",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 15,
+      "rubric": {
+        "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/priority_observable_v2/G058_pitch_dreams_football_mot_001.json",
+        "sha256": "71626e4d5851b047dd380d3885c4514f297b0680f471c42224c47768565b7c08"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "duplicate_asset_requirement_entry",
+        "no_literal_asset_mention_in_general"
+      ]
+    }
+  ]
+}

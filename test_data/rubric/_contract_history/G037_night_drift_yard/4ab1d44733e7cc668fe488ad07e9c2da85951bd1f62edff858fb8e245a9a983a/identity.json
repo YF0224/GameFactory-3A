@@ -1,0 +1,7 @@
+{
+  "contract_id": "G037_night_drift_yard.whitebox.endpoints-v2-candidate.4ab1d44733e7cc668fe488ad07e9c2da85951bd1f62edff858fb8e245a9a983a",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "4ab1d44733e7cc668fe488ad07e9c2da85951bd1f62edff858fb8e245a9a983a",
+  "rubric_json_sha256": "6a2a2e8c13b891db911d873871dd6ed644d93aa546b7421da4522798a2e5512b",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

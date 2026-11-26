@@ -1,0 +1,595 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.observable.v2",
+  "authoring_protocol": "priority_observable_v2",
+  "status": "source_grounded_revision_not_judged",
+  "game_id": "G055_inner_court_investigation",
+  "task_id": "G055_mot_001",
+  "asset_type": "motion",
+  "asset_subtype": "humanoid",
+  "asset_name": "shen_idle",
+  "scope": "priority gen 独立资产三列口径；第一列仅可观察需求内容，排除标定数值及运行时验收。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G055_inner_court_investigation",
+    "task_id": "G055_mot_001",
+    "task_type": "humanoid",
+    "character": "shen_zhiwei",
+    "motion_name": "idle",
+    "action_name": "shen_idle",
+    "prompt": "A court investigator stands idle, sleeve hand folded, lantern light swaying",
+    "seed": 3551,
+    "target_mesh_path": "test_data/outputs/G055_inner_court_investigation/default/assets/3d_object/G055_obj_001/model.glb",
+    "target_glb_path": "test_data/outputs/G055_inner_court_investigation/default/assets/3d_object/G055_obj_001/model.glb",
+    "fps": 20,
+    "motion_length": 80,
+    "use_ik": true,
+    "in_place": true,
+    "in_place_lock_height": true,
+    "loop": true,
+    "stationary": true,
+    "export_anim_only": true,
+    "clip_type": "loop",
+    "root_motion_mode": "in_place_xz",
+    "spec_ref": "F05,L01",
+    "duration_sec": 4.0,
+    "source_asset": "shen_zhiwei",
+    "trigger": "spawn_or_state_enter",
+    "start_condition": "source asset is active and the declared input/event is valid",
+    "end_condition": "clip reaches its final frame and the declared gameplay state is committed",
+    "cancel_behavior": "cancel on damage, state change, or explicit interrupt unless the spec forbids interruption",
+    "event_binding": "spawn_or_state_enter; source_asset=shen_zhiwei",
+    "planned_source": "motion_comparison",
+    "comparison_sources": [
+      "momask_puppeteer",
+      "llm_direct_motion"
+    ],
+    "l_tier_repair_target": true
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L53",
+      "general:L73",
+      "general:L74",
+      "general:L75"
+    ],
+    "visual_style_source_ids": [
+      "general:L43"
+    ],
+    "sound_style_source_ids": [
+      "general:L587",
+      "general:L588",
+      "general:L589",
+      "general:L590",
+      "general:L591"
+    ],
+    "asset_description_source_ids": [
+      "general:L805"
+    ],
+    "spec_ref_source_ids": [
+      "general:L735-748"
+    ],
+    "unresolved_spec_refs": [
+      "L01"
+    ],
+    "per_kind_description_source_id": "asset_requirement:L6",
+    "canonical_asset_content_source_ids": [],
+    "character_description_source_ids": [
+      "character_requirement:L6"
+    ]
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "sha256": "ee8512be63a9458a4dc70324e63952f5ab49bd7aa80c6394956d5a6d072ffc50",
+      "start_line": 8,
+      "end_line": 8,
+      "quote": "{\"game_id\": \"G055_inner_court_investigation\", \"task_id\": \"G055_mot_001\", \"task_type\": \"humanoid\", \"character\": \"shen_zhiwei\", \"motion_name\": \"idle\", \"action_name\": \"shen_idle\", \"prompt\": \"A court investigator stands idle, sleeve hand folded, lantern light swaying\", \"seed\": 3551, \"target_mesh_path\": \"test_data/outputs/G055_inner_court_investigation/default/assets/3d_object/G055_obj_001/model.glb\", \"target_glb_path\": \"test_data/outputs/G055_inner_court_investigation/default/assets/3d_object/G055_obj_001/model.glb\", \"fps\": 20, \"motion_length\": 80, \"use_ik\": true, \"in_place\": true, \"in_place_lock_height\": true, \"loop\": true, \"stationary\": true, \"export_anim_only\": true, \"clip_type\": \"loop\", \"root_motion_mode\": \"in_place_xz\", \"spec_ref\": \"F05,L01\", \"duration_sec\": 4.0, \"source_asset\": \"shen_zhiwei\", \"trigger\": \"spawn_or_state_enter\", \"start_condition\": \"source asset is active and the declared input/event is valid\", \"end_condition\": \"clip reaches its final frame and the declared gameplay state is committed\", \"cancel_behavior\": \"cancel on damage, state change, or explicit interrupt unless the spec forbids interruption\", \"event_binding\": \"spawn_or_state_enter; source_asset=shen_zhiwei\", \"planned_source\": \"motion_comparison\", \"comparison_sources\": [\"momask_puppeteer\", \"llm_direct_motion\"], \"l_tier_repair_target\": true}"
+    },
+    "general:L53": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 53,
+      "end_line": 53,
+      "quote": "玩家扮演沈知微，在一座以礼法、流言、门禁和人情构成的“活迷宫”中调查一份被篡改的宫廷名册；通过观察、伪装、潜行、机关、证词交叉验证与关系经营，在保全自己及同伴的前提下决定真相如何被揭开。"
+    },
+    "general:L73": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 73,
+      "end_line": 73,
+      "quote": "架空大周王朝，年号景和。宫中准备修订《内廷岁档》，它记录各宫人员调动、赏赐、药材领用、出入时辰与旧案批注。档案中一页“冬至夜值房名册”被人调包，牵涉多年前的一场火灾与一位被迫离宫的女官。"
+    },
+    "general:L74": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 74,
+      "end_line": 74,
+      "quote": "沈知微以新人身份入宫，最初只想安稳度日。她在锦瑟院发现一只不属于自己的旧香囊，内藏半张值房轮值签。顾怀青提醒她：香囊上的药香配方不可能来自御药房常规领用。许令仪则发现某名册页码与当值太监的口供对不上。玩家由此开始查案。"
+    },
+    "general:L75": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 75,
+      "end_line": 75,
+      "quote": "案件并非简单的“找出坏人”：名册被改动可能是为掩盖救人、栽赃、替人顶罪或换取权力。玩家需确认谁改、为何改、谁受益、何时能安全公开。"
+    },
+    "general:L43": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 43,
+      "end_line": 43,
+      "quote": "- 画面：写实风格化架空古代宫廷美术，避免历史纪录片式写实；夜景需保证可读性。"
+    },
+    "general:L587": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 587,
+      "end_line": 587,
+      "quote": "- 脚步按木廊、石地、地毯、湿地分别设计声纹。"
+    },
+    "general:L588": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 588,
+      "end_line": 588,
+      "quote": "- 巡更锣、滴漏、风铃、膳房铜器形成时间与方向线索。"
+    },
+    "general:L589": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 589,
+      "end_line": 589,
+      "quote": "- 音乐以弦乐、箫、打击乐低频为主；追查时加入节奏但避免持续压迫。"
+    },
+    "general:L590": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 590,
+      "end_line": 590,
+      "quote": "- 证据发现使用短促细节声，不用夸张“正确答案”音效。"
+    },
+    "general:L591": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 591,
+      "end_line": 591,
+      "quote": "- 听觉提示可视化，支持听障玩家；视觉线索也能完成同一谜题。"
+    },
+    "general:L735-748": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 735,
+      "end_line": 748,
+      "quote": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求；音效引用 §17.2 声纹设计）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 拾取证据 | 纸页/物证描边高亮＋入档飞入线索板 | 短促细节声（§17.2） | 登记完成 |\n| 证据强度提升 | 线索节点光色升档＋强度数字定格 | 细节确认声 | 0.3s 定格 |\n| 伪装换装 | 衣饰逐件着身＋匹配度逐项打钩 | 布料摩擦声 | 完成 |\n| 盘问对答 | 屏风剪影停顿＋对话字幕微缩 | 纸页/衣料声 | 对话结束 |\n| 侦测留意 | 目光锥高亮 2 秒（§P02 留意态） | 短促注意音 | 确认或解除 |\n| 警戒升级 | 区域灯色升档＋更鼓一响 | 更鼓/锣声（对应层级） | 常驻至回落 |\n| 挣脱/制服 | 动作残影＋看守踉跄 | 布料与闷响 | 动作完成 |\n| 关系变化 | 关系页徽记明暗变化 | 玉佩轻碰声 | 常驻 |\n| 章节切换 | 夜色转场＋章名卷轴展开 | 转场弦乐短句（一次性） | 转场完成 |\n| 结局结算 | 判词卷轴展开（按结局组） | 终章箫声短句 | 进入结局面板 |"
+    },
+    "general:L805": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/general_requirement.txt",
+      "sha256": "00b10ef93777ecf93f2b1c9bfffad996ecb2da491896448c4ea7fa0a28ff45a9",
+      "start_line": 805,
+      "end_line": 805,
+      "quote": "- object：4 个（text-to-3D 2，image-to-3D 2）；object 任务资产为：shen_zhiwei, evidence_pouch_ash, rota_manuscript, seal_wax_imprint。每项只允许一个物体；组合物必须拆成独立任务。"
+    },
+    "asset_requirement:L6": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/motion/requirement.txt",
+      "sha256": "fdc2cce892369b9a47316d56e7665d6b1986d27372c1decdf5b0d1946ad16b0f",
+      "start_line": 6,
+      "end_line": 6,
+      "quote": "- G055_mot_001: A court investigator stands idle, sleeve hand folded, lantern light swaying"
+    },
+    "character_requirement:L6": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/3D_object/requirement.txt",
+      "sha256": "ce5efd67ce33f74668da160a5ee27a829ebf6ea7dc172bbc3c4463507c320cda",
+      "start_line": 6,
+      "end_line": 6,
+      "quote": "- shen_zhiwei: Original young court investigator Shen Zhiwei: understated dark-teal commoner robe with faint embroidery, hair in a plain bun with wooden pin, cloth shoes, sharp calm gaze, stylized semi-realistic ancient court style, vermilion-and-indigo palette, T-pose, game-ready, PBR textures"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "1570088e54280dfb58b5516ab111066597b31c5bc34e887cfd5cae85534f95f6",
+      "start_line": 82,
+      "end_line": 86,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    },
+    "revision_policy": {
+      "path": "workspaces/priority_rubric_observable_20261026/POLICY.md",
+      "sha256": "581d726dee3f0efba7c72e8616f553a1248d822791a75f42e6d463b81a9312ca",
+      "start_line": 1,
+      "end_line": 34,
+      "quote": "# Priority 资产可观察需求 rubric 修订 v2\n\n此版本只服务资产三列中的第一列需求完整性，不更改原始生成任务、既有分数或历史冻结合同。\n所有七份 priority 清单逐条覆盖，禁止仅用同类代表任务代替。输出位于各游戏 rubric_assets/priority_observable_v2/，游戏内 priority_rubric_current.json 是显式修订索引，不是对生产 evaluator 的隐式切换。\n\n## 第一列保留\n\n任务明确要求的主体类别、部件、形状、轮廓、命名色彩、材质表现、可见标记、姿态、动作阶段、声音事件、声源、情绪、语言及台词内容。\n任务明确要求的上下、左右、内外、中央/周边、前后、连接、环绕、相对大小/深浅、留白和遮挡关系。\nCG 只要求原文明示的事件顺序、状态变化与镜头行为；不能把列表自动解释为严格顺序。动作片段保留循环/单次与原地组织，不设严格时长/帧数/零位移阈值。\n台词或资产名称中的数字可以是实际内容，不是数值验收阈值；不因文本包含数字机械删掉语义。\n对象数量只作原文上下文，不按精确计数通过率评分；保留主次、成组、单体/多体和必要的关系含义。\n\n## 第一列不计分\n\n绝对坐标、原点、尺寸、距离、速度、时长、角度、帧数、分辨率、面数、数值颜色/色差、采样率、响度和频率阈值，以及机制数值、随机种子、容量、库存、伤害、时间窗。\n这些字段和原始引文完整保留在 task_input、sources 或 excluded_field_values 中，不伪称已经满足，也不当作第一列隐藏门槛。\n引擎导入、碰撞、导航、触发、跳过、暂停、同步、状态机与游戏内混音另属交付/集成验证，不凭离线素材判通过。\n\n## 三列分工\n\nC：当前任务明确指定什么，实际内容是否呈现。\nG：与角色/场景参考及游戏整体世界/美术/声音方向是否相容，不重复扣C的缺失。\nQ：内在感知/技术质量，不重复内容语义或世界适配。\n已有逐资产 rubric 的 G/Q 维度原样保留。此前未建逐资产文件的自然音效/T-pose只补源文支持的G/Q草稿，不能假称复用了已验证分数。\n参考图只按明确绑定使用；image_path 的存在不是生成模型实际收到图片的证明。T-pose中的参考身份/比例比较放G，不在C重复。\n\n## 来源与状态\n\n先遵从原有来源优先级；保留 canonical/分资产原文与任务JSONL。定性投影不得补造“附近”“左侧”等源文不支持的位置。\n场景 layout_constraints 已逐条整理为可见关系；原始标定与运行时要求另存。不宣称精确坐标被视觉验证。\n相互矛盾的要求保留并报审查警告，不用PARTIAL掩盖来源冲突，不把两种胜负分支强行串为一条时间线。\n每条判词必须给视角、帧或音频时间证据。观察不清/未取证为UNKNOWN，调用/配置故障为ERROR，均不填0或100、不删除分母；报告coverage和上下界，证据不足的得分只能PROVISIONAL。\n本次为有来源的修订版与结构/来源校验，不宣布所有1305条人工语义审核完成，不自动冻结，不自动启动评测。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "A court investigator stands idle",
+      "sleeve hand folded",
+      "lantern light swaying"
+    ],
+    "style": [],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求完整性（可观察内容）",
+      "checks": [
+        {
+          "id": "C001",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：A court investigator stands idle",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "A court investigator stands idle",
+              "text": "A court investigator stands idle"
+            }
+          ],
+          "modality": "motion_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C002",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：sleeve hand folded",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "sleeve hand folded",
+              "text": "sleeve hand folded"
+            }
+          ],
+          "modality": "motion_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C003",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：lantern light swaying",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "lantern light swaying",
+              "text": "lantern light swaying"
+            }
+          ],
+          "modality": "motion_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C004",
+          "title": "动作片段组织",
+          "assertion": "可观察地呈现：动作具有可重复衔接的循环组织；不设循环时长或帧数门槛。",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "loop",
+              "source_quote": "True",
+              "text": "动作具有可重复衔接的循环组织；不设循环时长或帧数门槛。"
+            }
+          ],
+          "modality": "motion_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C005",
+          "title": "相对根位移",
+          "assertion": "可观察地呈现：整体保持原地表演的组织，不以零位移容差判定；跳跃等任务所需的垂直运动允许保留。",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "root_motion_mode",
+              "source_quote": "in_place_xz",
+              "text": "整体保持原地表演的组织，不以零位移容差判定；跳跃等任务所需的垂直运动允许保留。"
+            }
+          ],
+          "modality": "motion_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L53",
+              "text": "玩家扮演沈知微，在一座以礼法、流言、门禁和人情构成的“活迷宫”中调查一份被篡改的宫廷名册；通过观察、伪装、潜行、机关、证词交叉验证与关系经营，在保全自己及同伴的前提下决定真相如何被揭开。"
+            },
+            {
+              "source_id": "general:L73",
+              "text": "架空大周王朝，年号景和。宫中准备修订《内廷岁档》，它记录各宫人员调动、赏赐、药材领用、出入时辰与旧案批注。档案中一页“冬至夜值房名册”被人调包，牵涉多年前的一场火灾与一位被迫离宫的女官。"
+            },
+            {
+              "source_id": "general:L805",
+              "text": "- object：4 个（text-to-3D 2，image-to-3D 2）；object 任务资产为：shen_zhiwei, evidence_pouch_ash, rota_manuscript, seal_wax_imprint。每项只允许一个物体；组合物必须拆成独立任务。"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "动作的幅度、力度和节奏与角色的体量/职业及游戏用途相容；只评价动作表现体系，不评价目标角色材质/服装颜色/渲染风格，不重复核对 C 中的动作类别、阶段和位移约束。",
+          "targets": [
+            {
+              "source_id": "character_requirement:L6",
+              "text": "- shen_zhiwei: Original young court investigator Shen Zhiwei: understated dark-teal commoner robe with faint embroidery, hair in a plain bun with wooden pin, cloth shoes, sharp calm gaze, stylized semi-realistic ancient court style, vermilion-and-indigo palette, T-pose, game-ready, PBR textures"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "动作连续与平滑度",
+          "assertion": "只评速度/加速度异常和关节跳变，不把有意的冲击或停顿当成缺陷。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "动作多处断裂/跳帧，无法辨识连续运动",
+            "2": "频繁突兀抖动或非设计性速度突变",
+            "3": "动作可连贯观看，局部顿挫可见",
+            "4": "整体平滑，仅有轻微局部顿挫",
+            "5": "全段运动连续，节奏转换自然，无明显关节跳变或非设计性抖动"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "形体与接触合理性",
+          "assertion": "按实际对象评定：人形看关节/重心/脚手接触，非人形看部件连接和支撑；不重复评分动作类别。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "严重肢体/部件扭折或大面积穿透，运动不可用",
+            "2": "多处明显反关节、滑移、漂浮或错误支撑",
+            "3": "形体基本合理，局部接触/重心/穿插问题可见",
+            "4": "形体和接触可信，仅有轻微局部瑕疵",
+            "5": "对象结构、支撑和接触可信，无明显扭折、非设计性滑移或穿透"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。",
+    "requirement_completeness_v2": {
+      "column": "requirement_reference",
+      "score": "100*mean(verified C item scores); PASS=1, PARTIAL=0.5, FAIL=0",
+      "coverage": "verified applicable C count / frozen applicable C count; UNKNOWN/ERROR retained in denominator and bounds, not converted to zero or full credit.",
+      "lower_bound": "100*sum(verified scores)/all applicable C count",
+      "upper_bound": "100*(sum(verified scores)+unknown applicable C count)/all applicable C count",
+      "status": "Any incomplete applicable C coverage => PROVISIONAL; no verified C => null.",
+      "overall": "三列等权；没有任一列不得给总分。此修订不重新计算历史结果。"
+    }
+  },
+  "evidence_requirements": [
+    "完整动作预览，检查阶段与相对位移，不设标定速度/角度/时长门槛。"
+  ],
+  "objective_specs": {
+    "fps": 20,
+    "motion_length": 80,
+    "duration_sec": 4.0,
+    "export_anim_only": true,
+    "use_ik": true,
+    "in_place_lock_height": true
+  },
+  "objective_metric_policy": "原始数值和输出格式仅作独立交付/诊断信息；不并入本版第一列。不改变其他列既有实现。",
+  "authoring_warnings": [
+    {
+      "code": "unresolved_spec_ref",
+      "detail": "L01"
+    }
+  ],
+  "requirement_revision": {
+    "version": "priority_observable_v2",
+    "old_rubric": {
+      "path": "test_data/test_samples/G055_inner_court_investigation/rubric_assets/per_asset/G055_mot_001.json",
+      "sha256": "13384530f458a583ef6281fc25a61d8534779d5bd33a24402fbee46549637571"
+    },
+    "original_other_dimensions_preserved": true,
+    "original_task_input_unchanged": true,
+    "numerical_policy": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+    "reference_ownership": "任务指定姿态/部件/颜色归C，参考角色匹配/全局世界适配归G，内在感知质量归Q；同一事实不重复扣分。",
+    "baseline": "Old frozen aggregate rubric and historical scores untouched; new path requires explicit evaluator support for this schema.",
+    "freeze_status": "规则修订已生成并校验，未声明逐任务人工语义审核完成，不自动冻结或发布分数。",
+    "source_rebinding_audit": [
+      {
+        "source_id": "quality_protocol",
+        "prior": {
+          "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+          "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+          "start_line": 78,
+          "end_line": 82,
+          "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+        },
+        "resolution": "EXACT_QUOTE_REBOUND_TO_CURRENT_FILE"
+      }
+    ],
+    "clause_ledger": [
+      {
+        "field": "prompt",
+        "source_quote": "A court investigator stands idle",
+        "action": "RETAINED",
+        "normalized": "A court investigator stands idle",
+        "check_id": "C001"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "sleeve hand folded",
+        "action": "RETAINED",
+        "normalized": "sleeve hand folded",
+        "check_id": "C002"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "lantern light swaying",
+        "action": "RETAINED",
+        "normalized": "lantern light swaying",
+        "check_id": "C003"
+      },
+      {
+        "field": "loop",
+        "source_quote": "True",
+        "action": "QUALITATIVE_PROJECTION",
+        "normalized": "动作具有可重复衔接的循环组织；不设循环时长或帧数门槛。",
+        "check_id": "C004"
+      },
+      {
+        "field": "root_motion_mode",
+        "source_quote": "in_place_xz",
+        "action": "QUALITATIVE_PROJECTION",
+        "normalized": "整体保持原地表演的组织，不以零位移容差判定；跳跃等任务所需的垂直运动允许保留。",
+        "check_id": "C005"
+      }
+    ],
+    "excluded_field_values": {
+      "character": "shen_zhiwei",
+      "action_name": "shen_idle",
+      "seed": 3551,
+      "target_mesh_path": "test_data/outputs/G055_inner_court_investigation/default/assets/3d_object/G055_obj_001/model.glb",
+      "target_glb_path": "test_data/outputs/G055_inner_court_investigation/default/assets/3d_object/G055_obj_001/model.glb",
+      "fps": 20,
+      "motion_length": 80,
+      "use_ik": true,
+      "in_place": true,
+      "in_place_lock_height": true,
+      "loop": true,
+      "stationary": true,
+      "export_anim_only": true,
+      "clip_type": "loop",
+      "root_motion_mode": "in_place_xz",
+      "spec_ref": "F05,L01",
+      "duration_sec": 4.0,
+      "source_asset": "shen_zhiwei",
+      "trigger": "spawn_or_state_enter",
+      "start_condition": "source asset is active and the declared input/event is valid",
+      "end_condition": "clip reaches its final frame and the declared gameplay state is committed",
+      "cancel_behavior": "cancel on damage, state change, or explicit interrupt unless the spec forbids interruption",
+      "event_binding": "spawn_or_state_enter; source_asset=shen_zhiwei",
+      "planned_source": "motion_comparison",
+      "comparison_sources": [
+        "momask_puppeteer",
+        "llm_direct_motion"
+      ],
+      "l_tier_repair_target": true
+    },
+    "excluded_fields_policy": "保留来源，不作为第一列附加验收。loop/root_motion等只使用上述C条目所述的定性部分。"
+  }
+}

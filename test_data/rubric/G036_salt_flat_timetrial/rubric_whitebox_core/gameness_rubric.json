@@ -1,0 +1,402 @@
+{
+  "version": "gameness-tiered-core-v1",
+  "case_id": "G036_salt_flat_timetrial",
+  "tier": "S",
+  "target_count": 8,
+  "mechanic_target_count": 8,
+  "group_quotas": {
+    "layout": 3,
+    "guidance": 2,
+    "feedback": 3
+  },
+  "authorized_change": "Gameness only: align count with same-case same-tier Mechanic",
+  "source_bindings": {
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G036_salt_flat_timetrial/rubric_whitebox_core/rubric.json": "ff24c3efa2537036c19d03bf00a3d239cc1b2016be02b2ea68c3883c67326062",
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G036_salt_flat_timetrial/general_requirement.txt": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71"
+  },
+  "source_contract_id": "G036_salt_flat_timetrial.whitebox.tiered-core-v1.2a55096b6ddcfe605d4c23a88705650b9892fc8419418e6a7ea8b5d729c73d29",
+  "criteria": [
+    {
+      "id": "gameness.tiered.layout.01",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法阶段的核心状态信息可见，玩家能理解对象与状态的含义；无需全阶段同屏。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0001",
+        "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.03",
+        "frozen_subcheck_id": "G.s0001",
+        "frozen_text": "- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。",
+        "requirement_ids": [
+          "I06"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。"
+      }
+    },
+    {
+      "id": "gameness.tiered.layout.02",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法界面的主要状态与次要信息层级清楚，玩家能辨认重点。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.hierarchy",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。"
+      }
+    },
+    {
+      "id": "gameness.tiered.layout.03",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法界面的关键文字和控件可辨认、可使用，不因遮挡或重叠而无法理解。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.readable",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。"
+      }
+    },
+    {
+      "id": "gameness.tiered.guidance.01",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "游戏内清楚传达一项推进当前玩法所必需的核心操作方法。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.guidance.controls",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "guidance",
+        "requirement": "实际游戏展示或清楚传达必要操作方法。"
+      }
+    },
+    {
+      "id": "gameness.tiered.guidance.02",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "玩家在当前真实玩法阶段能理解当前目标或下一步可执行操作。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0026",
+        "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.04",
+        "frozen_subcheck_id": "G.s0026",
+        "frozen_text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.01",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "一项代表性核心操作发生后，玩家能辨认操作成功、失败或被正确拒绝的结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0027",
+        "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.04",
+        "frozen_subcheck_id": "G.s0027",
+        "frozen_text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "requirement": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.02",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "一次真实进度更新、阶段切换或终局结果被清楚传达，信息与实际状态相符。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0028",
+        "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.04",
+        "frozen_subcheck_id": "G.s0028",
+        "frozen_text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "requirement": "目标进度、阶段变化与终局结果向玩家明确呈现。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.03",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "真实发生“倒计时起步”时，反馈让玩家辨认该事件及其对应对象和结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0008",
+        "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.01",
+        "frozen_subcheck_id": "G.s0008",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【倒计时起步】实际发生时可视表现为【3-2-1 数字放大】，结束条件【起步瞬间】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      }
+    }
+  ],
+  "unselected_source_criteria": [
+    {
+      "id": "expanded.G.s0009",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.01",
+      "frozen_subcheck_id": "G.s0009",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【过分段计时门】实际发生时可视表现为【门上灯带闪青＋分段时间横幅 1.5 秒】，结束条件【横幅收起】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0010",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.01",
+      "frozen_subcheck_id": "G.s0010",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【漏门警告】实际发生时可视表现为【屏幕边缘橙框＋「MISS GATE」提示】，结束条件【玩家过下一合法门或复位】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0011",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.01",
+      "frozen_subcheck_id": "G.s0011",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【出界】实际发生时可视表现为【尘土爆起＋画面去饱和 20%（2 秒）】，结束条件【回到界内】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0012",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.01",
+      "frozen_subcheck_id": "G.s0012",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【驶入酥松带】实际发生时可视表现为【车身扬起盐晶尘雾、胎痕颜色变浅】，结束条件【离开酥松带】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0013",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.01",
+      "frozen_subcheck_id": "G.s0013",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【高速直线（≥150）】实际发生时可视表现为【尾迹拉长＋镜头 FOV +8°】，结束条件【速度跌破 150】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0014",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.01",
+      "frozen_subcheck_id": "G.s0014",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【复位】实际发生时可视表现为【车辆淡出淡入回检查点＋镜头回正】，结束条件【复位完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0015",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.01",
+      "frozen_subcheck_id": "G.s0015",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【超时】实际发生时可视表现为【画面暗角＋「TIME OUT」横幅】，结束条件【进入判负结算】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0016",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.01",
+      "frozen_subcheck_id": "G.s0016",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【冲线结算】实际发生时可视表现为【C03 播放（双意象）＋结算面板】，结束条件【进入结算面板】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0006",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.02",
+      "frozen_subcheck_id": "G.s0006",
+      "frozen_text": "顿帧不改变计时口径。",
+      "requirement_ids": [
+        "F03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "顿帧不改变计时口径。",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0022",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.03",
+      "frozen_subcheck_id": "G.s0022",
+      "frozen_text": "- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数"
+    },
+    {
+      "id": "expanded.G.s0023",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.03",
+      "frozen_subcheck_id": "G.s0023",
+      "frozen_text": "Enter 重开）",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "Enter 重开）"
+    },
+    {
+      "id": "expanded.G.s0024",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.03",
+      "frozen_subcheck_id": "G.s0024",
+      "frozen_text": "关键状态图标＋文字并用",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "关键状态图标＋文字并用"
+    },
+    {
+      "id": "expanded.G.s0025",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.03",
+      "frozen_subcheck_id": "G.s0025",
+      "frozen_text": "窗口失焦自动暂停。",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "窗口失焦自动暂停。",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0002",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.04",
+      "frozen_subcheck_id": "G.s0002",
+      "frozen_text": "数量与属性以对应 G·M 条目为准。",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "数量与属性以对应 G·M 条目为准。"
+    },
+    {
+      "id": "expanded.G.s0029",
+      "frozen_assertion_id": "G036_salt_flat_timetrial.WB.G.04",
+      "frozen_subcheck_id": "G.s0029",
+      "frozen_text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。"
+    }
+  ],
+  "unselected_policy": "Retained for traceability/diagnostics; no implicit extra scored checks",
+  "selection_basis": "Original requirement/rubric only; no author implementation, runtime or scores",
+  "aggregation": "Equal mean of layout/guidance/feedback group means; unchanged 10/50/100 levels",
+  "prior_results": "Preserved under their original rubric; not relabeled or arithmetically converted",
+  "revision_sha256": "693afa29774dfc77658167b53fe0b019fdd736b628f68291e8688abe8b00e891"
+}

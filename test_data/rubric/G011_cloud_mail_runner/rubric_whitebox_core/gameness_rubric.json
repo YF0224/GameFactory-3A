@@ -1,0 +1,506 @@
+{
+  "version": "gameness-tiered-core-v1",
+  "case_id": "G011_cloud_mail_runner",
+  "tier": "S",
+  "target_count": 8,
+  "mechanic_target_count": 8,
+  "group_quotas": {
+    "layout": 3,
+    "guidance": 2,
+    "feedback": 3
+  },
+  "authorized_change": "Gameness only: align count with same-case same-tier Mechanic",
+  "source_bindings": {
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G011_cloud_mail_runner/rubric_whitebox_core/rubric.json": "33463e0294e7890d888fc30f77ae4950462793beb9a2eb48ff06efbe494bf2cc",
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f"
+  },
+  "source_contract_id": "G011_cloud_mail_runner.whitebox.tiered-core-v1.69c2e64c692f61d3655c9c255f2e6e96821aa377d47565e66486d09d623c0d71",
+  "criteria": [
+    {
+      "id": "gameness.tiered.layout.01",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法阶段的核心状态信息可见，玩家能理解对象与状态的含义；无需全阶段同屏。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0006",
+        "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.04",
+        "frozen_subcheck_id": "G.s0006",
+        "frozen_text": "- I06 UI 必显状态：距离（米）、收集数、碰撞计数（0–3）、当前检查点编号、总分实时值。",
+        "requirement_ids": [
+          "I06"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "- I06 UI 必显状态：距离（米）、收集数、碰撞计数（0–3）、当前检查点编号、总分实时值。"
+      }
+    },
+    {
+      "id": "gameness.tiered.layout.02",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法界面的主要状态与次要信息层级清楚，玩家能辨认重点。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.hierarchy",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。"
+      }
+    },
+    {
+      "id": "gameness.tiered.layout.03",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法界面的关键文字和控件可辨认、可使用，不因遮挡或重叠而无法理解。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.readable",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。"
+      }
+    },
+    {
+      "id": "gameness.tiered.guidance.01",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "游戏内清楚传达一项推进当前玩法所必需的核心操作方法。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.guidance.controls",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "guidance",
+        "requirement": "实际游戏展示或清楚传达必要操作方法。"
+      }
+    },
+    {
+      "id": "gameness.tiered.guidance.02",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "玩家在当前真实玩法阶段能理解当前目标或下一步可执行操作。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0033",
+        "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.04",
+        "frozen_subcheck_id": "G.s0033",
+        "frozen_text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.01",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "一项代表性核心操作发生后，玩家能辨认操作成功、失败或被正确拒绝的结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0034",
+        "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.04",
+        "frozen_subcheck_id": "G.s0034",
+        "frozen_text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "requirement": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.02",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "一次真实进度更新、阶段切换或终局结果被清楚传达，信息与实际状态相符。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0035",
+        "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.04",
+        "frozen_subcheck_id": "G.s0035",
+        "frozen_text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "requirement": "目标进度、阶段变化与终局结果向玩家明确呈现。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.03",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "真实发生“跳跃起跳”时，反馈让玩家辨认该事件及其对应对象和结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0013",
+        "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.02",
+        "frozen_subcheck_id": "G.s0013",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 跳跃起跳 | 起跳尘土＋跳跃轨迹残影（jump_trail） | 跳跃风切音 | 0.9 秒动作结束 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【跳跃起跳】实际发生时可视表现为【起跳尘土＋跳跃轨迹残影（jump_trail）】，结束条件【0.9 秒动作结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      }
+    }
+  ],
+  "unselected_source_criteria": [
+    {
+      "id": "expanded.G.s0001",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.01",
+      "frozen_subcheck_id": "G.s0001",
+      "frozen_text": "- G04 障碍布局（zkx 裁决冻结）：连续障组按「高-低-高」实例化，中心间距 **9 米**，沿跑向碰撞宽 0.8 米（原 2.2 米间距短于 0.9 秒不可打断跳跃的实际位移，予以废止）",
+      "requirement_ids": [
+        "G04"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- G04 障碍布局（zkx 裁决冻结）：连续障组按「高-低-高」实例化，中心间距 **9 米**，沿跑向碰撞宽 0.8 米（原 2.2 米间距短于 0.9 秒不可打断跳跃的实际位移，予以废止）"
+    },
+    {
+      "id": "expanded.G.s0002",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.01",
+      "frozen_subcheck_id": "G.s0002",
+      "frozen_text": "三类障碍共 20 处（高障 8、低障 8、连续障 4 组×3 个）",
+      "requirement_ids": [
+        "G04"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "三类障碍共 20 处（高障 8、低障 8、连续障 4 组×3 个）"
+    },
+    {
+      "id": "expanded.G.s0003",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.01",
+      "frozen_subcheck_id": "G.s0003",
+      "frozen_text": "上层通道为高度 3 米的平台段，入口必须设 1.5 米中继台阶（每次垂直上升 ≤2.2 米）",
+      "requirement_ids": [
+        "G04"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "上层通道为高度 3 米的平台段，入口必须设 1.5 米中继台阶（每次垂直上升 ≤2.2 米）"
+    },
+    {
+      "id": "expanded.G.s0004",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.01",
+      "frozen_subcheck_id": "G.s0004",
+      "frozen_text": "前 50 米为无障碍教学段（仅光件）",
+      "requirement_ids": [
+        "G04"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "前 50 米为无障碍教学段（仅光件）"
+    },
+    {
+      "id": "expanded.G.s0005",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.01",
+      "frozen_subcheck_id": "G.s0005",
+      "frozen_text": "冻结布局须提供至少一条有效输入轨迹。",
+      "requirement_ids": [
+        "G04"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "冻结布局须提供至少一条有效输入轨迹。"
+    },
+    {
+      "id": "expanded.G.s0014",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.02",
+      "frozen_subcheck_id": "G.s0014",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 滑铲 | 滑铲尘土（slide_dust） | 滑铲摩擦音 | 0.7 秒动作结束 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【滑铲】实际发生时可视表现为【滑铲尘土（slide_dust）】，结束条件【0.7 秒动作结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0015",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.02",
+      "frozen_subcheck_id": "G.s0015",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 收集光件 | 收集火花（collect_spark）＋计数跳动 | 收集叮响 | 火花 0.2s 消散 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【收集光件】实际发生时可视表现为【收集火花（collect_spark）＋计数跳动】，结束条件【火花 0.2s 消散】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0016",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.02",
+      "frozen_subcheck_id": "G.s0016",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 碰撞 | 全屏短闪白（crash_flash）＋0.06s 镜头抖动 | 碰撞闷响 | 闪白 0.1s 结束 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【碰撞】实际发生时可视表现为【全屏短闪白（crash_flash）＋0.06s 镜头抖动】，结束条件【闪白 0.1s 结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0017",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.02",
+      "frozen_subcheck_id": "G.s0017",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 检查点复位 | 检查点灯标点亮（checkpoint_beacon）＋角色入场淡入 | 检查点上扬音 | 玩家可控即停 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【检查点复位】实际发生时可视表现为【检查点灯标点亮（checkpoint_beacon）＋角色入场淡入】，结束条件【玩家可控即停】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0018",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.02",
+      "frozen_subcheck_id": "G.s0018",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 无敌期 | 角色半透明闪烁 | 无 | 1 秒结束 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【无敌期】实际发生时可视表现为【角色半透明闪烁】，结束条件【1 秒结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0019",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.02",
+      "frozen_subcheck_id": "G.s0019",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 进入上层通道 | 通道入口光柱（C02 触发点） | 上升风声 | — |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【进入上层通道】实际发生时可视表现为【通道入口光柱（C02 触发点）】，结束条件【—】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0020",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.02",
+      "frozen_subcheck_id": "G.s0020",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 抵达终点 | 终点绽放（finish_burst）＋灯塔点亮 | 胜利钟声 | 进入结算 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【抵达终点】实际发生时可视表现为【终点绽放（finish_burst）＋灯塔点亮】，结束条件【进入结算】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0021",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.02",
+      "frozen_subcheck_id": "G.s0021",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 判负 | 急件散落演出 | 低沉失败音 | 进入结算 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【判负】实际发生时可视表现为【急件散落演出】，结束条件【进入结算】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0011",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.03",
+      "frozen_subcheck_id": "G.s0011",
+      "frozen_text": "顿帧不改变计时口径。",
+      "requirement_ids": [
+        "F03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "顿帧不改变计时口径。",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0029",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.04",
+      "frozen_subcheck_id": "G.s0029",
+      "frozen_text": "- F10 前端界面：标题（开始/设置/退出）→ 跑酷 HUD（I06 全项）→ 结算面板（收集/距离/碰撞/总分/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- F10 前端界面：标题（开始/设置/退出）→ 跑酷 HUD（I06 全项）→ 结算面板（收集/距离/碰撞/总分/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）"
+    },
+    {
+      "id": "expanded.G.s0030",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.04",
+      "frozen_subcheck_id": "G.s0030",
+      "frozen_text": "关键状态图标+文字并用",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "关键状态图标+文字并用"
+    },
+    {
+      "id": "expanded.G.s0031",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.04",
+      "frozen_subcheck_id": "G.s0031",
+      "frozen_text": "窗口失焦自动暂停",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "窗口失焦自动暂停",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0032",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.04",
+      "frozen_subcheck_id": "G.s0032",
+      "frozen_text": "叙事节拍提示不阻断控制。",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "叙事节拍提示不阻断控制。"
+    },
+    {
+      "id": "expanded.G.s0007",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.04",
+      "frozen_subcheck_id": "G.s0007",
+      "frozen_text": "- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（光件、检查点、终点）逐类存在且运行时可进入",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（光件、检查点、终点）逐类存在且运行时可进入"
+    },
+    {
+      "id": "expanded.G.s0008",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.04",
+      "frozen_subcheck_id": "G.s0008",
+      "frozen_text": "数量与属性以对应 G·M 条目为准。",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "数量与属性以对应 G·M 条目为准。"
+    },
+    {
+      "id": "expanded.G.s0027",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.04",
+      "frozen_subcheck_id": "G.s0027",
+      "frozen_text": "暂停/结算/重开取消未结束的震动与特效，不影响碰撞判定",
+      "requirement_ids": [
+        "F09"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "暂停/结算/重开取消未结束的震动与特效，不影响碰撞判定"
+    },
+    {
+      "id": "expanded.G.s0028",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.04",
+      "frozen_subcheck_id": "G.s0028",
+      "frozen_text": "设置可关闭。",
+      "requirement_ids": [
+        "F09"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "设置可关闭。"
+    },
+    {
+      "id": "expanded.G.s0036",
+      "frozen_assertion_id": "G011_cloud_mail_runner.WB.G.04",
+      "frozen_subcheck_id": "G.s0036",
+      "frozen_text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。"
+    }
+  ],
+  "unselected_policy": "Retained for traceability/diagnostics; no implicit extra scored checks",
+  "selection_basis": "Original requirement/rubric only; no author implementation, runtime or scores",
+  "aggregation": "Equal mean of layout/guidance/feedback group means; unchanged 10/50/100 levels",
+  "prior_results": "Preserved under their original rubric; not relabeled or arithmetically converted",
+  "revision_sha256": "10720192172fc7d64521facd5546b804241549b75d3855bd104899601af26254"
+}

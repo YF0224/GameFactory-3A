@@ -1,0 +1,7 @@
+{
+  "contract_id": "G009_blackout_stealth.whitebox.final",
+  "version": "final",
+  "content_sha256": "a8e550c571667d0758d00688508c99ce57d6e5172ab2532495d7bf484deabd94",
+  "rubric_json_sha256": "117ea2b832e243b857ea18432eeebb8e87402f13909e011e670d4419e7badd97",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

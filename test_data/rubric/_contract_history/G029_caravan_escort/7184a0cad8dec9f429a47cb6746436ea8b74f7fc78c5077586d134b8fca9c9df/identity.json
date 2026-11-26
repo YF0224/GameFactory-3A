@@ -1,0 +1,7 @@
+{
+  "contract_id": "G029_caravan_escort.whitebox.final",
+  "version": "final",
+  "content_sha256": "7184a0cad8dec9f429a47cb6746436ea8b74f7fc78c5077586d134b8fca9c9df",
+  "rubric_json_sha256": "1983d4bc5a40bdfd73ee27ae5427aefecba2d7e01561e36c1d26a5f76efb5caa",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

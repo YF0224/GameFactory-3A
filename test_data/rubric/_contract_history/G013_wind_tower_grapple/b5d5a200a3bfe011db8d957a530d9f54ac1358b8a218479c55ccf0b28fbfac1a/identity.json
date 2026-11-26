@@ -1,0 +1,7 @@
+{
+  "contract_id": "G013_wind_tower_grapple.whitebox.endpoints-v2-candidate.b5d5a200a3bfe011db8d957a530d9f54ac1358b8a218479c55ccf0b28fbfac1a",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "b5d5a200a3bfe011db8d957a530d9f54ac1358b8a218479c55ccf0b28fbfac1a",
+  "rubric_json_sha256": "2ff9b81011c44681bb1beefbdb81ff1b1a804956a6153dd936f6a5dfabf6e4b6",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

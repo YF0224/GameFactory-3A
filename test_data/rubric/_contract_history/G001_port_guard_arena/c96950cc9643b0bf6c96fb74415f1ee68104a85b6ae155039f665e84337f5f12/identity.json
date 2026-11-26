@@ -1,0 +1,7 @@
+{
+  "contract_id": "G001_port_guard_arena.whitebox.final",
+  "version": "final",
+  "content_sha256": "c96950cc9643b0bf6c96fb74415f1ee68104a85b6ae155039f665e84337f5f12",
+  "rubric_json_sha256": "e1d8af1e39e0f7018ba3c4edda71df66981f5486b3b98f786f65b480b3bb4c86",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

@@ -1,0 +1,425 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_endurance_race_obj_001",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 152,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_endurance_race_obj_001.json",
+        "sha256": "ad54fe29e5e5d1284992af2702501b2a3842da8cd216e6af223e2a400c6c1187"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_endurance_race_obj_002",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 153,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_endurance_race_obj_002.json",
+        "sha256": "a2553fdcbeaf235e1f2d58f17b482012186537cee17d640961a9b20b461c9278"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_endurance_race_obj_003",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 154,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_endurance_race_obj_003.json",
+        "sha256": "db54c54e0ca88d026bdf30a020791c8e78f4f5e7614ac49dade00a3e0a83404b"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_endurance_race_obj_004",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 155,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_endurance_race_obj_004.json",
+        "sha256": "5a2d760bfb0ed44db2e4145820fde056688ed719ff216ab57780dab9bf70fe64"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_endurance_race_obj_005",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 156,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_endurance_race_obj_005.json",
+        "sha256": "af89ac82370304a9f87e28cb22b736d777d8aa907ea2841316d28c4deee28436"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_endurance_race_obj_006",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 157,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_endurance_race_obj_006.json",
+        "sha256": "21ea709bca0d3fe56a03262eed5bb7a66c6ea1a300143355a56c322a37b64344"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_endurance_race_obj_007",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 158,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_endurance_race_obj_007.json",
+        "sha256": "ff20bf1b86409f8b915488566274bf533f3ac93b835290e066b02f77640ff819"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_endurance_race_obj_008",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 159,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_endurance_race_obj_008.json",
+        "sha256": "abcf203e335f50602a476a3adc6d82b5e76c1e39510e93ab96c3b1a1bdee0dbc"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_endurance_race_obj_009",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 160,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_endurance_race_obj_009.json",
+        "sha256": "2ad259d77525d40cfdfb115900690a819cadf4e9948b16af6727cd945d7fbf08"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 42,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_scene_001.json",
+        "sha256": "e10e5a2d82d1afe55ad3d7cbb577b36d659f151464468ce8a47cbf3987a130e0"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_scene_002",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 43,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_scene_002.json",
+        "sha256": "3e359494106da9d3abb0ef9410754a021ad31eed54cefdddcdc45460ad7f7fe2"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_scene_003",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 44,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_scene_003.json",
+        "sha256": "846ac72301d468111de54d81639c2955a7329cf0cefef4ff761fbd7fd4400f64"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 443,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_sfx_001.json",
+        "sha256": "b6ba486aea77ae482debb31b99b96efab0435fd2d8720fdbacbaae3072276461"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 444,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_sfx_002.json",
+        "sha256": "695c3e22009fbe9054c2bb0a53283386fff2848fd796ac4b90f6a5b47914d768"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 445,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_sfx_003.json",
+        "sha256": "3730cf9122fbe3f8f3d41633e8116b3c32ffb897ee07d296642cd25c13e7bb23"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 446,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_sfx_004.json",
+        "sha256": "77b5a8a8922d0bc2dc405689960d1ab30b20588cbe432756b5bb5a9fc06c5435"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 447,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_sfx_005.json",
+        "sha256": "df2a59d88ab59d90959779a7c291806b2d1754ac07b556537b73932dbd3912cf"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 448,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_sfx_006.json",
+        "sha256": "541c579a50b1b5457275427d65ad788fb58482604d51e92e1c26a73751c735a2"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 449,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_sfx_007.json",
+        "sha256": "589052fcd3a70fa5481c15ec935f18d64c7eec33ac8b3232e94f2d67b110771d"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 450,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_sfx_008.json",
+        "sha256": "e05a0ed7ed9adabd707eaa628423248d095cc00c50304358f00122a625cea41a"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 451,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_sfx_009.json",
+        "sha256": "b919cd7037712bcdfa4785835e1e629f9e77a7c326e202dd1999f8f55c20f50a"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 452,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_sfx_010.json",
+        "sha256": "1c0d95cdb94eaddb5e5da3606732a6017efc9dec26e512748c1a29d4a76062f4"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 453,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_sfx_011.json",
+        "sha256": "8aa43d3af55860e285f6d04e748413b0baa3d4e3604313c306ace70c79bf45f4"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_sfx_012",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 454,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_sfx_012.json",
+        "sha256": "3fad870dabe7226110f9b0b7306f91d60afe6866abdbbbf698c177f78b3e32a8"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 113,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_cg_001.json",
+        "sha256": "24060372377694893450b58aa94490d9653023c7bae0d57b6dff731e44b48af7"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 114,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_cg_002.json",
+        "sha256": "5fa03567c4c8fa5c5ffdd6b3716307c64a08a2df6cec59b809b36bd0f69a81b2"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 115,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_cg_003.json",
+        "sha256": "ed3cc65cd459f50ab540e37bb4c2cedbf622b0e404ec82d208fd9a6fe1d8dcc6"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_cg_004",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 116,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_cg_004.json",
+        "sha256": "1b441945b51b6546e1f24768362d82f60292e0caf59b57ab1ffab21fb0507c02"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "branch_delivery_review"
+      ]
+    },
+    {
+      "game_id": "G040_endurance_race",
+      "task_id": "G040_endurance_race_mot_001",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 22,
+      "rubric": {
+        "path": "test_data/test_samples/G040_endurance_race/rubric_assets/priority_observable_v2/G040_endurance_race_mot_001.json",
+        "sha256": "440c790248f157948421bd852b101f8a589e7ae6c96bc50267603111b44605da"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "duplicate_asset_requirement_entry"
+      ]
+    }
+  ]
+}

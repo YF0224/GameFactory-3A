@@ -1,0 +1,7 @@
+{
+  "contract_id": "G050_aftermath_holdout.whitebox.final",
+  "version": "final",
+  "content_sha256": "bd5d315fb68a9706b233be4ab4a656adb152e01ec19b129404f80c327a55b79f",
+  "rubric_json_sha256": "0768fd17c1c54f38035376f8b97ab927aa7af3c0d83787de27b3c0ddb20e2a6b",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

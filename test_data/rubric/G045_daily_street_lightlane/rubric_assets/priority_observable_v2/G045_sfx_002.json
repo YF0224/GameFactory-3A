@@ -1,0 +1,370 @@
+{
+  "game_id": "G045_daily_street_lightlane",
+  "task_id": "G045_sfx_002",
+  "asset_type": "audio",
+  "asset_subtype": "sound_effect",
+  "asset_name": "bicycle_bell",
+  "task_input": {
+    "game_id": "G045_daily_street_lightlane",
+    "task_id": "G045_sfx_002",
+    "asset_name": "bicycle_bell",
+    "audio_type": "sound_effect",
+    "sound_category": "one_shot",
+    "prompt": "Classic bicycle bell ring, bright double ding with metal tail",
+    "duration_sec": 0.5,
+    "sample_rate": 48000,
+    "seed": 5452,
+    "trigger": "骑行按铃（车铃动画同帧）",
+    "required_by_spec": true,
+    "spec_ref": "P06,F05,F06",
+    "loop": false,
+    "stop_condition": "natural_end",
+    "priority": "gameplay_critical",
+    "ducking": "none",
+    "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+    "planned_source": "general_audio_llm",
+    "l_tier_repair_target": true
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L56-56",
+      "general:L57-57",
+      "general:L58-58",
+      "general:L60-60"
+    ],
+    "visual_style_source_ids": [
+      "general:L61-61"
+    ],
+    "sound_style_source_ids": [
+      "general:L62-62"
+    ],
+    "asset_description_source_ids": [
+      "general:L203",
+      "general:L213"
+    ],
+    "spec_ref_source_ids": [
+      "general:L143-143",
+      "general:L198-211",
+      "general:L213-213"
+    ],
+    "unresolved_spec_refs": []
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "sha256": "658d571abb647c6b75c2aee4a8cc6975cccf8e5b8187d221a99ad406a9c39fb0",
+      "start_line": 501,
+      "end_line": 501,
+      "quote": "{\"game_id\": \"G045_daily_street_lightlane\", \"task_id\": \"G045_sfx_002\", \"asset_name\": \"bicycle_bell\", \"audio_type\": \"sound_effect\", \"sound_category\": \"one_shot\", \"prompt\": \"Classic bicycle bell ring, bright double ding with metal tail\", \"duration_sec\": 0.5, \"sample_rate\": 48000, \"seed\": 5452, \"trigger\": \"骑行按铃（车铃动画同帧）\", \"required_by_spec\": true, \"spec_ref\": \"P06,F05,F06\", \"loop\": false, \"stop_condition\": \"natural_end\", \"priority\": \"gameplay_critical\", \"ducking\": \"none\", \"sync_contract\": \"one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition\", \"planned_source\": \"general_audio_llm\", \"l_tier_repair_target\": true}"
+    },
+    "general:L56-56": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 56,
+      "end_line": 56,
+      "quote": "- W01 公寓：玩家房间、走廊、邻居门口、房东交互点、公共垃圾区。玩家房间可进入，具休息、洗澡与整理入口。"
+    },
+    "general:L57-57": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 57,
+      "end_line": 57,
+      "quote": "- W02 便利店：可进入的货架、收银台、停车位，提供购买、整理工作与配送。"
+    },
+    "general:L58-58": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 58,
+      "end_line": 58,
+      "quote": "- W03 商业街：小吃摊、售货机、公告栏、二手摊；提供消费、委托和杂物回收入口。"
+    },
+    "general:L60-60": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 60,
+      "end_line": 60,
+      "quote": "- W05 后巷：箱子、围栏、垃圾桶、施工障碍，存在只能步行通过的窄口。"
+    },
+    "general:L61-61": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 61,
+      "end_line": 61,
+      "quote": "- W06 屋顶：通过楼梯/合法平台可达，提供观景点、晾衣区和探索发现。"
+    },
+    "general:L62-62": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 62,
+      "end_line": 62,
+      "quote": "- W07 至少 20 个有真实用途的交互点，每点具有唯一对象 ID；重复实例可计数量但不能拿纯装饰充数。各区域有可识别外观与中文名称。"
+    },
+    "general:L143-143": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 143,
+      "end_line": 143,
+      "quote": "- P06 白天/黄昏/夜间光照变化，夜间道路可见；区域环境声不同。脚步、车铃、收银、门、拾取、任务完成六类音效；首次入场提示启用音频，设置面板提供音量与静音；六类事件音与对应画面表现同帧触发（音画同步按 §16 F08 口径）。"
+    },
+    "general:L198-211": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 198,
+      "end_line": 211,
+      "quote": "- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求；六类事件音按 P06 口径与画面同帧）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 移动/跑步 | 步行/跑步动画＋脚步节奏 | footstep（随速度两档） | 移动停止 |\n| 骑行 | 上车过渡＋车铃提示钮 | bicycle_bell | 下车或按铃 |\n| 购物结账 | 收银台金币滚动＋物品入包 | cash_register | 动画收束 |\n| 开关门/进出建筑 | 门开合动画 | door_open | 门闭合 |\n| 拾取/交付 | 物品飞入背包/交出弧线 | pickup | 动画收束 |\n| 任务完成 | 任务卡打勾＋日志条目高亮 | task_complete | 卡片定格 |\n| 注意度升级 | HUD 注意度色阶变化＋目击者感叹标记 | notice_alert | 等级回落或处理完成 |\n| 处理补救 | 处理选项面板确认反馈 | task_complete（处理档） | 面板关闭 |\n| 睡觉日结 | 屏幕渐暗→日期横幅→晨光亮起 | day_advance | 进入次日 08:00 |\n| 房租结算 | 结算面板＋对应 VC04 意象 | rent_settle | 面板定格 |"
+    },
+    "general:L213-213": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 213,
+      "end_line": 213,
+      "quote": "- F06 关键音效清单（one_shot 8 条＋环境循环 3 条，全部冻结需求）：footstep、bicycle_bell、cash_register、door_open、pickup、task_complete、notice_alert、day_advance（含 rent_settle 档共用）；环境循环：street_day_loop（白天市井）、street_dusk_loop（黄昏路灯与人流）、street_night_loop（夜间虫鸣与远处车流）。无配音需求。"
+    },
+    "general:L203": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 203,
+      "end_line": 203,
+      "quote": "| 骑行 | 上车过渡＋车铃提示钮 | bicycle_bell | 下车或按铃 |"
+    },
+    "general:L213": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 213,
+      "end_line": 213,
+      "quote": "- F06 关键音效清单（one_shot 8 条＋环境循环 3 条，全部冻结需求）：footstep、bicycle_bell、cash_register、door_open、pickup、task_complete、notice_alert、day_advance（含 rent_settle 档共用）；环境循环：street_day_loop（白天市井）、street_dusk_loop（黄昏路灯与人流）、street_night_loop（夜间虫鸣与远处车流）。无配音需求。"
+    },
+    "revision_policy": {
+      "path": "workspaces/priority_rubric_observable_20261026/POLICY.md",
+      "sha256": "581d726dee3f0efba7c72e8616f553a1248d822791a75f42e6d463b81a9312ca",
+      "start_line": 1,
+      "end_line": 34,
+      "quote": "# Priority 资产可观察需求 rubric 修订 v2\n\n此版本只服务资产三列中的第一列需求完整性，不更改原始生成任务、既有分数或历史冻结合同。\n所有七份 priority 清单逐条覆盖，禁止仅用同类代表任务代替。输出位于各游戏 rubric_assets/priority_observable_v2/，游戏内 priority_rubric_current.json 是显式修订索引，不是对生产 evaluator 的隐式切换。\n\n## 第一列保留\n\n任务明确要求的主体类别、部件、形状、轮廓、命名色彩、材质表现、可见标记、姿态、动作阶段、声音事件、声源、情绪、语言及台词内容。\n任务明确要求的上下、左右、内外、中央/周边、前后、连接、环绕、相对大小/深浅、留白和遮挡关系。\nCG 只要求原文明示的事件顺序、状态变化与镜头行为；不能把列表自动解释为严格顺序。动作片段保留循环/单次与原地组织，不设严格时长/帧数/零位移阈值。\n台词或资产名称中的数字可以是实际内容，不是数值验收阈值；不因文本包含数字机械删掉语义。\n对象数量只作原文上下文，不按精确计数通过率评分；保留主次、成组、单体/多体和必要的关系含义。\n\n## 第一列不计分\n\n绝对坐标、原点、尺寸、距离、速度、时长、角度、帧数、分辨率、面数、数值颜色/色差、采样率、响度和频率阈值，以及机制数值、随机种子、容量、库存、伤害、时间窗。\n这些字段和原始引文完整保留在 task_input、sources 或 excluded_field_values 中，不伪称已经满足，也不当作第一列隐藏门槛。\n引擎导入、碰撞、导航、触发、跳过、暂停、同步、状态机与游戏内混音另属交付/集成验证，不凭离线素材判通过。\n\n## 三列分工\n\nC：当前任务明确指定什么，实际内容是否呈现。\nG：与角色/场景参考及游戏整体世界/美术/声音方向是否相容，不重复扣C的缺失。\nQ：内在感知/技术质量，不重复内容语义或世界适配。\n已有逐资产 rubric 的 G/Q 维度原样保留。此前未建逐资产文件的自然音效/T-pose只补源文支持的G/Q草稿，不能假称复用了已验证分数。\n参考图只按明确绑定使用；image_path 的存在不是生成模型实际收到图片的证明。T-pose中的参考身份/比例比较放G，不在C重复。\n\n## 来源与状态\n\n先遵从原有来源优先级；保留 canonical/分资产原文与任务JSONL。定性投影不得补造“附近”“左侧”等源文不支持的位置。\n场景 layout_constraints 已逐条整理为可见关系；原始标定与运行时要求另存。不宣称精确坐标被视觉验证。\n相互矛盾的要求保留并报审查警告，不用PARTIAL掩盖来源冲突，不把两种胜负分支强行串为一条时间线。\n每条判词必须给视角、帧或音频时间证据。观察不清/未取证为UNKNOWN，调用/配置故障为ERROR，均不填0或100、不删除分母；报告coverage和上下界，证据不足的得分只能PROVISIONAL。\n本次为有来源的修订版与结构/来源校验，不宣布所有1305条人工语义审核完成，不自动冻结，不自动启动评测。"
+    }
+  },
+  "references": [],
+  "objective_specs": {},
+  "authoring_warnings": [],
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求完整性（可观察内容）",
+      "checks": [
+        {
+          "id": "C001",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：Classic bicycle bell ring",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "Classic bicycle bell ring",
+              "text": "Classic bicycle bell ring"
+            }
+          ],
+          "modality": "audio_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C002",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：bright double ding with metal tail",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "bright double ding with metal tail",
+              "text": "bright double ding with metal tail"
+            }
+          ],
+          "modality": "audio_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "游戏世界与用途相容性",
+          "assertion": "仅评价与当前游戏世界及本资产用途的相容性；不重复第一列声源、姿态、部件或事件缺失。",
+          "targets": [
+            {
+              "source_id": "general:L56-56",
+              "text": "- W01 公寓：玩家房间、走廊、邻居门口、房东交互点、公共垃圾区。玩家房间可进入，具休息、洗澡与整理入口。"
+            },
+            {
+              "source_id": "general:L57-57",
+              "text": "- W02 便利店：可进入的货架、收银台、停车位，提供购买、整理工作与配送。"
+            },
+            {
+              "source_id": "general:L58-58",
+              "text": "- W03 商业街：小吃摊、售货机、公告栏、二手摊；提供消费、委托和杂物回收入口。"
+            },
+            {
+              "source_id": "general:L60-60",
+              "text": "- W05 后巷：箱子、围栏、垃圾桶、施工障碍，存在只能步行通过的窄口。"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "适用的声音/美术语言相容性",
+          "assertion": "按资产角色判断与所引游戏声音或美术方向是否相容；不要求单资产包含全部世界元素，不重复质量缺陷。",
+          "targets": [
+            {
+              "source_id": "general:L62-62",
+              "text": "- W07 至少 20 个有真实用途的交互点，每点具有唯一对象 ID；重复实例可计数量但不能拿纯装饰充数。各区域有可识别外观与中文名称。"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "基础质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "音色与信号感知质量",
+          "assertion": "只评完整音频中音色解析、非预期噪声、失真、削波与断裂；不评价指定声源是否正确。",
+          "rating_anchors": {
+            "1": "严重缺陷，主要内容难以辨识",
+            "2": "明显缺陷反复影响观察",
+            "3": "基本清楚，局部缺陷可见",
+            "4": "整体良好，仅轻微瑕疵",
+            "5": "在所给证据中未见明显缺陷"
+          },
+          "unknown_rule": "缺证据为 UNKNOWN，不给默认分。"
+        },
+        {
+          "id": "Q02",
+          "title": "时间与动态感知质量",
+          "assertion": "只评起止、衰减、动态清晰度及适用时的持续声纹稳定性。不按绝对时长/响度阈值评分。无语音不设对白要求；无持续纹理不得凭片长推断。",
+          "rating_anchors": {
+            "1": "严重缺陷，主要内容难以辨识",
+            "2": "明显缺陷反复影响观察",
+            "3": "基本清楚，局部缺陷可见",
+            "4": "整体良好，仅轻微瑕疵",
+            "5": "在所给证据中未见明显缺陷"
+          },
+          "unknown_rule": "缺证据为 UNKNOWN，不给默认分。"
+        }
+      ]
+    }
+  ],
+  "schema_version": "gamefactory3a.asset_rubric.observable.v2",
+  "authoring_protocol": "priority_observable_v2",
+  "status": "source_grounded_revision_not_judged",
+  "scope": "priority gen 独立资产三列口径；第一列仅可观察需求内容，排除标定数值及运行时验收。",
+  "requirement_revision": {
+    "version": "priority_observable_v2",
+    "old_rubric": null,
+    "original_other_dimensions_preserved": false,
+    "original_task_input_unchanged": true,
+    "numerical_policy": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+    "reference_ownership": "任务指定姿态/部件/颜色归C，参考角色匹配/全局世界适配归G，内在感知质量归Q；同一事实不重复扣分。",
+    "baseline": "Old frozen aggregate rubric and historical scores untouched; new path requires explicit evaluator support for this schema.",
+    "freeze_status": "规则修订已生成并校验，未声明逐任务人工语义审核完成，不自动冻结或发布分数。",
+    "source_rebinding_audit": [],
+    "clause_ledger": [
+      {
+        "field": "prompt",
+        "source_quote": "Classic bicycle bell ring",
+        "action": "RETAINED",
+        "normalized": "Classic bicycle bell ring",
+        "check_id": "C001"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "bright double ding with metal tail",
+        "action": "RETAINED",
+        "normalized": "bright double ding with metal tail",
+        "check_id": "C002"
+      }
+    ],
+    "excluded_field_values": {
+      "sound_category": "one_shot",
+      "duration_sec": 0.5,
+      "sample_rate": 48000,
+      "seed": 5452,
+      "trigger": "骑行按铃（车铃动画同帧）",
+      "required_by_spec": true,
+      "spec_ref": "P06,F05,F06",
+      "loop": false,
+      "stop_condition": "natural_end",
+      "priority": "gameplay_critical",
+      "ducking": "none",
+      "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition",
+      "planned_source": "general_audio_llm",
+      "l_tier_repair_target": true
+    },
+    "excluded_fields_policy": "保留来源，不作为第一列附加验收。loop/root_motion等只使用上述C条目所述的定性部分。"
+  },
+  "scoring_policy": {
+    "requirement_completeness_v2": {
+      "column": "requirement_reference",
+      "score": "100*mean(verified C item scores); PASS=1, PARTIAL=0.5, FAIL=0",
+      "coverage": "verified applicable C count / frozen applicable C count; UNKNOWN/ERROR retained in denominator and bounds, not converted to zero or full credit.",
+      "lower_bound": "100*sum(verified scores)/all applicable C count",
+      "upper_bound": "100*(sum(verified scores)+unknown applicable C count)/all applicable C count",
+      "status": "Any incomplete applicable C coverage => PROVISIONAL; no verified C => null.",
+      "overall": "三列等权；没有任一列不得给总分。此修订不重新计算历史结果。"
+    }
+  },
+  "evidence_requirements": [
+    "完整音频听评及具体时间段；循环内容另听未修改的双周期。"
+  ],
+  "objective_metric_policy": "原始数值和输出格式仅作独立交付/诊断信息；不并入本版第一列。不改变其他列既有实现。"
+}

@@ -1,0 +1,179 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G019_clockwork_clones",
+      "task_id": "G019_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 53,
+      "rubric": {
+        "path": "test_data/test_samples/G019_clockwork_clones/rubric_assets/priority_observable_v2/G019_scene_001.json",
+        "sha256": "0b2a2e3f7a1bacf1ad537b55f446fecf5943ad52143cb261f8f0ea4cc4810bf1"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G019_clockwork_clones",
+      "task_id": "G019_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 533,
+      "rubric": {
+        "path": "test_data/test_samples/G019_clockwork_clones/rubric_assets/priority_observable_v2/G019_sfx_001.json",
+        "sha256": "c0ca2a726cd2ec21d29a591e7355b55bc07ee4559bdfc9e1b7c9ca618af01378"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G019_clockwork_clones",
+      "task_id": "G019_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 534,
+      "rubric": {
+        "path": "test_data/test_samples/G019_clockwork_clones/rubric_assets/priority_observable_v2/G019_sfx_002.json",
+        "sha256": "42c613ba5ddbc9e83d9c4cd3e1f6eb059f9f9fe2ace0c06ab0113f77de34bc7b"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G019_clockwork_clones",
+      "task_id": "G019_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 535,
+      "rubric": {
+        "path": "test_data/test_samples/G019_clockwork_clones/rubric_assets/priority_observable_v2/G019_sfx_003.json",
+        "sha256": "1db2ebd5ac99db71167e6ad6d7c23c960d29b6bc7a3b9d4994cb66b8e19a4d49"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G019_clockwork_clones",
+      "task_id": "G019_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 536,
+      "rubric": {
+        "path": "test_data/test_samples/G019_clockwork_clones/rubric_assets/priority_observable_v2/G019_sfx_004.json",
+        "sha256": "c95dbfcf563ebe2f958849a773d738dfb499434fd6ea3d560a00cad4120d9245"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G019_clockwork_clones",
+      "task_id": "G019_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 537,
+      "rubric": {
+        "path": "test_data/test_samples/G019_clockwork_clones/rubric_assets/priority_observable_v2/G019_sfx_005.json",
+        "sha256": "4947ad101d1ea5b4e4d85dc5f8fbe17b0fb4901946e2f2a58c71eb0abc36d30b"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G019_clockwork_clones",
+      "task_id": "G019_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 538,
+      "rubric": {
+        "path": "test_data/test_samples/G019_clockwork_clones/rubric_assets/priority_observable_v2/G019_sfx_006.json",
+        "sha256": "24f578425c2a6fe9572bc404e0f80c58cd514a565bc22488dd48a48647827689"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G019_clockwork_clones",
+      "task_id": "G019_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 539,
+      "rubric": {
+        "path": "test_data/test_samples/G019_clockwork_clones/rubric_assets/priority_observable_v2/G019_sfx_007.json",
+        "sha256": "1275a916a330e487aa0bd1bcbe998febf8fc2c26cd6e3c6e2907d43c2e53531d"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G019_clockwork_clones",
+      "task_id": "G019_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 540,
+      "rubric": {
+        "path": "test_data/test_samples/G019_clockwork_clones/rubric_assets/priority_observable_v2/G019_sfx_008.json",
+        "sha256": "be15588693855bb396c9738e12ba771c73f4635168191e89370933f3c8cb53d0"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G019_clockwork_clones",
+      "task_id": "G019_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 140,
+      "rubric": {
+        "path": "test_data/test_samples/G019_clockwork_clones/rubric_assets/priority_observable_v2/G019_cg_001.json",
+        "sha256": "04199f9dff9656b59e68c8a2fafb258e7433273a8bd32ee04355a76720aabfa7"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G019_clockwork_clones",
+      "task_id": "G019_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 141,
+      "rubric": {
+        "path": "test_data/test_samples/G019_clockwork_clones/rubric_assets/priority_observable_v2/G019_cg_002.json",
+        "sha256": "b264dacc60cafb9ca830190438fbf292782cdf73495c693eb8268fa2f11bfd51"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G019_clockwork_clones",
+      "task_id": "G019_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 142,
+      "rubric": {
+        "path": "test_data/test_samples/G019_clockwork_clones/rubric_assets/priority_observable_v2/G019_cg_003.json",
+        "sha256": "e79df0761459b1a63b52c6a0eb7e28c4e331b5124708d04461c97736034855ea"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    }
+  ]
+}

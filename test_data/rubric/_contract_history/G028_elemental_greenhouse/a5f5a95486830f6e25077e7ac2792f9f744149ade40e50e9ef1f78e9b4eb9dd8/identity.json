@@ -1,0 +1,7 @@
+{
+  "contract_id": "G028_elemental_greenhouse.whitebox.final",
+  "version": "final",
+  "content_sha256": "a5f5a95486830f6e25077e7ac2792f9f744149ade40e50e9ef1f78e9b4eb9dd8",
+  "rubric_json_sha256": "6365c886dcc72c5042289d47687b7b4026b6acf2ccd83bc5f36d36ba92f5fa69",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

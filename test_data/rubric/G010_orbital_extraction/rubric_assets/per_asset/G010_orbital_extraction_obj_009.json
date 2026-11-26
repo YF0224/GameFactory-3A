@@ -1,0 +1,388 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.v1",
+  "authoring_protocol": "priority_asset_rubrics.v1",
+  "status": "source_grounded_draft",
+  "game_id": "G010_orbital_extraction",
+  "task_id": "G010_orbital_extraction_obj_009",
+  "asset_type": "3d_object",
+  "asset_subtype": "prop",
+  "asset_name": "弹药拾取物",
+  "scope": "Track B：独立资产；不含 T-pose、自然音效或引擎导入/playtest。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G010_orbital_extraction",
+    "task_id": "G010_orbital_extraction_obj_009",
+    "asset_name": "ammo_pickup",
+    "name_zh": "弹药拾取物",
+    "role": "prop",
+    "input_mode": "text_to_3d",
+    "prompt": "Magazine ammo pickup crate with open lid and brass rounds visible, small glowing rim, no text, low-poly style, minimal triangle count, flat faceted surfaces, clean silhouette, no fine surface detail",
+    "seed": 2019,
+    "decimation_target": 6000,
+    "texture_size": 1024,
+    "rig": "none",
+    "animation_strategy": "procedural",
+    "spec_ref": "L01",
+    "poly_policy": "low_poly_priority"
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L199-199",
+      "general:L200-200",
+      "general:L201-201",
+      "general:L203-203"
+    ],
+    "visual_style_source_ids": [
+      "general:L204-204"
+    ],
+    "sound_style_source_ids": [
+      "general:L205-205"
+    ],
+    "asset_description_source_ids": [
+      "general:L114",
+      "general:L301"
+    ],
+    "spec_ref_source_ids": [
+      "general:L114-114"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L14",
+    "canonical_asset_content_source_ids": []
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "sha256": "a6a9b03f45ab40197fbb18aaf9614638a9691890a7824c137aef95fcd79868f9",
+      "start_line": 43,
+      "end_line": 43,
+      "quote": "{\"game_id\": \"G010_orbital_extraction\", \"task_id\": \"G010_orbital_extraction_obj_009\", \"asset_name\": \"ammo_pickup\", \"name_zh\": \"弹药拾取物\", \"role\": \"prop\", \"input_mode\": \"text_to_3d\", \"prompt\": \"Magazine ammo pickup crate with open lid and brass rounds visible, small glowing rim, no text, low-poly style, minimal triangle count, flat faceted surfaces, clean silhouette, no fine surface detail\", \"seed\": 2019, \"decimation_target\": 6000, \"texture_size\": 1024, \"rig\": \"none\", \"animation_strategy\": \"procedural\", \"spec_ref\": \"L01\", \"poly_policy\": \"low_poly_priority\"}"
+    },
+    "general:L199-199": {
+      "path": "test_data/test_samples/G010_orbital_extraction/general_requirement.txt",
+      "sha256": "aa1a7d25ea6a8b86abddec7cb3da6c0fc0f8f6b282a62a8040fe3ed9d45801c3",
+      "start_line": 199,
+      "end_line": 199,
+      "quote": "- W01 世界与时代背景：近未来轨道商业化时代，「环枢七号」研究站因深区一次失败的样品实验与地面失联。"
+    },
+    "general:L200-200": {
+      "path": "test_data/test_samples/G010_orbital_extraction/general_requirement.txt",
+      "sha256": "aa1a7d25ea6a8b86abddec7cb3da6c0fc0f8f6b282a62a8040fe3ed9d45801c3",
+      "start_line": 200,
+      "end_line": 200,
+      "quote": "- W02 场景所在地：环枢七号——浅区气闸室、实验舱群、深区库房的三段线性结构；舷窗外地球始终可见。"
+    },
+    "general:L201-201": {
+      "path": "test_data/test_samples/G010_orbital_extraction/general_requirement.txt",
+      "sha256": "aa1a7d25ea6a8b86abddec7cb3da6c0fc0f8f6b282a62a8040fe3ed9d45801c3",
+      "start_line": 201,
+      "end_line": 201,
+      "quote": "- W03 玩家身份与当前任务动机：玩家是受雇的回收撤离者，趁 station AI 维护窗口潜入搜刮高价值样件，并在轨道站再入大气层前的撤离窗口离开。"
+    },
+    "general:L203-203": {
+      "path": "test_data/test_samples/G010_orbital_extraction/general_requirement.txt",
+      "sha256": "aa1a7d25ea6a8b86abddec7cb3da6c0fc0f8f6b282a62a8040fe3ed9d45801c3",
+      "start_line": 203,
+      "end_line": 203,
+      "quote": "- W05 叙事来源：守卫=站内安保自动化系统在失联后转入的敌对协议；深区危险=样品实验破坏了舱段密封；门禁卡=库房主管的遗留权限。全部原创。"
+    },
+    "general:L204-204": {
+      "path": "test_data/test_samples/G010_orbital_extraction/general_requirement.txt",
+      "sha256": "aa1a7d25ea6a8b86abddec7cb3da6c0fc0f8f6b282a62a8040fe3ed9d45801c3",
+      "start_line": 204,
+      "end_line": 204,
+      "quote": "- W06 视觉风格与色彩材质：硬科幻工业风；主色=舷窗蓝 #2E5E8C、舱壁灰 #9AA3AB、警示红 #D64541、核心辉金 #FFC46B、深区紫黑 #1B1626；材质为拉丝金属、聚合物面板、结霜管路。"
+    },
+    "general:L205-205": {
+      "path": "test_data/test_samples/G010_orbital_extraction/general_requirement.txt",
+      "sha256": "aa1a7d25ea6a8b86abddec7cb3da6c0fc0f8f6b282a62a8040fe3ed9d45801c3",
+      "start_line": 205,
+      "end_line": 205,
+      "quote": "- W07 环境氛围与声音语言：低鸣空气循环 + 电子提示音；关键声音优先级：撤离倒计时、失压警报、脚步方位必须可辨（见 F07）。"
+    },
+    "general:L114-114": {
+      "path": "test_data/test_samples/G010_orbital_extraction/general_requirement.txt",
+      "sha256": "aa1a7d25ea6a8b86abddec7cb3da6c0fc0f8f6b282a62a8040fe3ed9d45801c3",
+      "start_line": 114,
+      "end_line": 114,
+      "quote": "- L01 生成对象：撤离者（第一人称手部与武器模型）1、巡逻守卫 6、精锐守卫 2、增援守卫 2（气闸开启后）、容器柜 17（浅 6/实验 6/深 5）、深区库房门禁卡 1、气闸撤离点 1、维修井撤离点 1、弹药拾取物若干、核心库房工作台 1。"
+    },
+    "general:L114": {
+      "path": "test_data/test_samples/G010_orbital_extraction/general_requirement.txt",
+      "sha256": "aa1a7d25ea6a8b86abddec7cb3da6c0fc0f8f6b282a62a8040fe3ed9d45801c3",
+      "start_line": 114,
+      "end_line": 114,
+      "quote": "- L01 生成对象：撤离者（第一人称手部与武器模型）1、巡逻守卫 6、精锐守卫 2、增援守卫 2（气闸开启后）、容器柜 17（浅 6/实验 6/深 5）、深区库房门禁卡 1、气闸撤离点 1、维修井撤离点 1、弹药拾取物若干、核心库房工作台 1。"
+    },
+    "general:L301": {
+      "path": "test_data/test_samples/G010_orbital_extraction/general_requirement.txt",
+      "sha256": "aa1a7d25ea6a8b86abddec7cb3da6c0fc0f8f6b282a62a8040fe3ed9d45801c3",
+      "start_line": 301,
+      "end_line": 301,
+      "quote": "- object：10 个（text-to-3D 7，image-to-3D 3）；object 任务资产为：patrol_guard, elite_guard, core_vault_workbench, storage_cabinet, airlock_pod, maintenance_well, orbital_rifle, door_keycard, ammo_pickup, sample_canister。每项只允许一个物体；组合物必须拆成独立任务。"
+    },
+    "asset_requirement:L14": {
+      "path": "test_data/test_samples/G010_orbital_extraction/3D_object/requirement.txt",
+      "sha256": "55692ee716bea7f1462bc04ef5856c541ab99393e5cc0d2985460623cf2e4c7f",
+      "start_line": 14,
+      "end_line": 14,
+      "quote": "- ammo_pickup: Magazine ammo pickup crate with open lid and brass rounds visible, small glowing rim, no text"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+      "start_line": 78,
+      "end_line": 82,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "Magazine ammo pickup crate with open lid and brass rounds visible",
+      "small glowing rim",
+      "no text"
+    ],
+    "style": [
+      "low-poly style",
+      "minimal triangle count",
+      "flat faceted surfaces",
+      "clean silhouette",
+      "no fine surface detail"
+    ],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求符合度",
+      "checks": [
+        {
+          "id": "C01",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：Magazine ammo pickup crate；with open lid and brass rounds visible",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "Magazine ammo pickup crate",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "with open lid and brass rounds visible",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "C02",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：small glowing rim",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "small glowing rim",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C03",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：no text",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "no text",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L199-199",
+              "text": "- W01 世界与时代背景：近未来轨道商业化时代，「环枢七号」研究站因深区一次失败的样品实验与地面失联。"
+            },
+            {
+              "source_id": "general:L200-200",
+              "text": "- W02 场景所在地：环枢七号——浅区气闸室、实验舱群、深区库房的三段线性结构；舷窗外地球始终可见。"
+            },
+            {
+              "source_id": "general:L114",
+              "text": "- L01 生成对象：撤离者（第一人称手部与武器模型）1、巡逻守卫 6、精锐守卫 2、增援守卫 2（气闸开启后）、容器柜 17（浅 6/实验 6/深 5）、深区库房门禁卡 1、气闸撤离点 1、维修井撤离点 1、弹药拾取物若干、核心库房工作台 1。"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L204-204",
+              "text": "- W06 视觉风格与色彩材质：硬科幻工业风；主色=舷窗蓝 #2E5E8C、舱壁灰 #9AA3AB、警示红 #D64541、核心辉金 #FFC46B、深区紫黑 #1B1626；材质为拉丝金属、聚合物面板、结霜管路。"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "low-poly style",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "minimal triangle count",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "flat faceted surfaces",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "clean silhouette",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "no fine surface detail",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "几何结构质量",
+          "assertion": "只评几何/形体自身缺陷，不重复评分所需部件是否存在。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "大范围塌陷、破面或融合，主体结构不可辨",
+            "2": "多处明显破损/漂浮/穿插，严重影响辨识",
+            "3": "主体结构完整，局部破面或穿插可见",
+            "4": "只有轻微局部瑕疵，不影响轮廓与结构",
+            "5": "多视角下结构完整，未见明显破面、漂浮或异常穿插"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "材质与表面质量",
+          "assertion": "只评表面清晰、材质连贯和伪影；低多边形/平面着色本身不是缺陷。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "大面积错误贴图/糊化/污染，表面不可读",
+            "2": "明显接缝、拉伸或材质错乱覆盖主要区域",
+            "3": "主体表面可读，但存在局部接缝/拉伸/涂抹",
+            "4": "仅有轻微接缝或局部表面瑕疵",
+            "5": "材质与色块连贯，多视角下未见明显接缝、拉伸或生成伪影"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。"
+  },
+  "evidence_requirements": [
+    "实际三维产物的固定光照多视角渲染（正/侧/背及细节）",
+    "必要时的网格、尺度和材质探针；不是任务描述或文件名"
+  ],
+  "objective_specs": {
+    "decimation_target": 6000,
+    "texture_size": 1024,
+    "rig": "none"
+  },
+  "objective_metric_policy": "规格与传统指标单独由探针/脚本报告原始值，不与三维 rubric 分数混合；本文件不代表已计算任何指标。",
+  "authoring_warnings": []
+}

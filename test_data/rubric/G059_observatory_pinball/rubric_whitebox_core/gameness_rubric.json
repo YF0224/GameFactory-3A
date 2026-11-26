@@ -1,0 +1,564 @@
+{
+  "version": "gameness-tiered-core-v1",
+  "case_id": "G059_observatory_pinball",
+  "tier": "M",
+  "target_count": 12,
+  "mechanic_target_count": 12,
+  "group_quotas": {
+    "layout": 4,
+    "guidance": 3,
+    "feedback": 5
+  },
+  "authorized_change": "Gameness only: align count with same-case same-tier Mechanic",
+  "source_bindings": {
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G059_observatory_pinball/rubric_whitebox_core/rubric.json": "8494f236d42ba637766cc87d7b36690d87b3daed7670768d61998131d23f8fb0",
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G059_observatory_pinball/general_requirement.txt": "6782235b28b148a3057a90f2b01de1e1948ac1bbdf886b902b6a18788c30968f"
+  },
+  "source_contract_id": "G059_observatory_pinball.whitebox.tiered-core-v1.9763c04efddc21ba43a1d1819476687b1ec5351b50a6ab65026300b6c58d2483",
+  "criteria": [
+    {
+      "id": "gameness.tiered.layout.01",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法阶段的核心状态信息可见，玩家能理解对象与状态的含义；无需全阶段同屏。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0001",
+        "frozen_assertion_id": "G059_observatory_pinball.WB.G.05",
+        "frozen_subcheck_id": "G.s0001",
+        "frozen_text": "- I06 UI 必须显示的状态：分数、倍率、发球机会、组链进度（A/B/C 三组）、场上球数",
+        "requirement_ids": [
+          "I06"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "- I06 UI 必须显示的状态：分数、倍率、发球机会、组链进度（A/B/C 三组）、场上球数"
+      }
+    },
+    {
+      "id": "gameness.tiered.layout.02",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法阶段的核心状态信息可见，玩家能理解对象与状态的含义；无需全阶段同屏。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0002",
+        "frozen_assertion_id": "G059_observatory_pinball.WB.G.05",
+        "frozen_subcheck_id": "G.s0002",
+        "frozen_text": "HUD 对照见 rubric。",
+        "requirement_ids": [
+          "I06"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "HUD 对照见 rubric。"
+      }
+    },
+    {
+      "id": "gameness.tiered.layout.03",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法界面的主要状态与次要信息层级清楚，玩家能辨认重点。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.hierarchy",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。"
+      }
+    },
+    {
+      "id": "gameness.tiered.layout.04",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法界面的关键文字和控件可辨认、可使用，不因遮挡或重叠而无法理解。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.readable",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。"
+      }
+    },
+    {
+      "id": "gameness.tiered.guidance.01",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "游戏内清楚传达一项推进当前玩法所必需的核心操作方法。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.guidance.controls",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "guidance",
+        "requirement": "实际游戏展示或清楚传达必要操作方法。"
+      }
+    },
+    {
+      "id": "gameness.tiered.guidance.02",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "玩家在当前真实玩法阶段能理解当前目标或下一步可执行操作。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0033",
+        "frozen_assertion_id": "G059_observatory_pinball.WB.G.06",
+        "frozen_subcheck_id": "G.s0033",
+        "frozen_text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。"
+      }
+    },
+    {
+      "id": "gameness.tiered.guidance.03",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "一项实际玩法选择具有可理解的代价或收益提示，提示对象与选择相符。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0036",
+        "frozen_assertion_id": "G059_observatory_pinball.WB.G.07",
+        "frozen_subcheck_id": "G.s0036",
+        "frozen_text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.01",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "一项代表性核心操作发生后，玩家能辨认操作成功、失败或被正确拒绝的结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0034",
+        "frozen_assertion_id": "G059_observatory_pinball.WB.G.06",
+        "frozen_subcheck_id": "G.s0034",
+        "frozen_text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "requirement": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.02",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "一次真实进度更新、阶段切换或终局结果被清楚传达，信息与实际状态相符。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0035",
+        "frozen_assertion_id": "G059_observatory_pinball.WB.G.06",
+        "frozen_subcheck_id": "G.s0035",
+        "frozen_text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "requirement": "目标进度、阶段变化与终局结果向玩家明确呈现。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.03",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "真实发生“发射蓄力”时，反馈让玩家辨认该事件及其对应对象和结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0009",
+        "frozen_assertion_id": "G059_observatory_pinball.WB.G.02",
+        "frozen_subcheck_id": "G.s0009",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 发射蓄力 | 蓄力弧光沿轨道亮起 | 蓄力嗡声（按住循环） | 发射 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【发射蓄力】实际发生时可视表现为【蓄力弧光沿轨道亮起】，结束条件【发射】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.04",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "真实发生“弹射入台”时，反馈让玩家辨认该事件及其对应对象和结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0010",
+        "frozen_assertion_id": "G059_observatory_pinball.WB.G.02",
+        "frozen_subcheck_id": "G.s0010",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 弹射入台 | 球弹出＋星光尾迹启动 | 弹射砰声 | 尾迹常驻 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【弹射入台】实际发生时可视表现为【球弹出＋星光尾迹启动】，结束条件【尾迹常驻】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.05",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "真实发生“靶标命中”时，反馈让玩家辨认该事件及其对应对象和结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0011",
+        "frozen_assertion_id": "G059_observatory_pinball.WB.G.02",
+        "frozen_subcheck_id": "G.s0011",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 靶标命中 | 靶标星徽点亮＋撞击闪光 | 撞击铛声（按组分档） | 0.3s |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【靶标命中】实际发生时可视表现为【靶标星徽点亮＋撞击闪光】，结束条件【0.3s】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      }
+    }
+  ],
+  "unselected_source_criteria": [
+    {
+      "id": "expanded.G.s0004",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.01",
+      "frozen_subcheck_id": "G.s0004",
+      "frozen_text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入"
+    },
+    {
+      "id": "expanded.G.s0005",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.01",
+      "frozen_subcheck_id": "G.s0005",
+      "frozen_text": "数量与属性以 L01/L02 与 G 系为准。",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "数量与属性以 L01/L02 与 G 系为准。"
+    },
+    {
+      "id": "expanded.G.s0003",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.01",
+      "frozen_subcheck_id": "G.s0003",
+      "frozen_text": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。",
+      "requirement_ids": [
+        "L01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- L01 生成对象：弹珠台 1（原创造型）、靶标 8（A×3、B×2、C×3）、左右挡板、发射轨道、返回通道、HUD（分数/倍率/机会/组链/球数）。"
+    },
+    {
+      "id": "expanded.G.s0012",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.02",
+      "frozen_subcheck_id": "G.s0012",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 组链推进 | 组链进度灯逐级点亮 | 进度叮声 | 常亮 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【组链推进】实际发生时可视表现为【组链进度灯逐级点亮】，结束条件【常亮】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0013",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.02",
+      "frozen_subcheck_id": "G.s0013",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 乱序重置 | 该组进度灯熄灭＋红闪一次 | 低沉否定音 | 0.3s |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【乱序重置】实际发生时可视表现为【该组进度灯熄灭＋红闪一次】，结束条件【0.3s】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0014",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.02",
+      "frozen_subcheck_id": "G.s0014",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 倍率提升 | 倍率数字放大弹跳＋金光圈 | 倍率上扬音 | 弹跳完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【倍率提升】实际发生时可视表现为【倍率数字放大弹跳＋金光圈】，结束条件【弹跳完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0015",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.02",
+      "frozen_subcheck_id": "G.s0015",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 多球解锁 | 灯带全亮＋双球入场星光 | 群星合鸣音 | 入场完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【多球解锁】实际发生时可视表现为【灯带全亮＋双球入场星光】，结束条件【入场完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0016",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.02",
+      "frozen_subcheck_id": "G.s0016",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 返回通道射入 | 通道流光＋250×倍率飘分 | 通道滑音 | 完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【返回通道射入】实际发生时可视表现为【通道流光＋250×倍率飘分】，结束条件【完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0017",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.02",
+      "frozen_subcheck_id": "G.s0017",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 逐球回收 | 球坠出界灰化＋球标识归档 | 落袋闷响 | 完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【逐球回收】实际发生时可视表现为【球坠出界灰化＋球标识归档】，结束条件【完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0018",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.02",
+      "frozen_subcheck_id": "G.s0018",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 同帧多球出界 | 双球同时灰化＋「合并计 1」提示 | 双响合并声 | 完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【同帧多球出界】实际发生时可视表现为【双球同时灰化＋「合并计 1」提示】，结束条件【完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0019",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.02",
+      "frozen_subcheck_id": "G.s0019",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 达标线突破 | 分数栏金光爆发＋「记录已破」横幅 | 纪录钟声 | 进入结算淡出 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【达标线突破】实际发生时可视表现为【分数栏金光爆发＋「记录已破」横幅】，结束条件【进入结算淡出】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0020",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.02",
+      "frozen_subcheck_id": "G.s0020",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 判负 | 灯光渐暗 | 低沉收束音 | 进入结算 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【判负】实际发生时可视表现为【灯光渐暗】，结束条件【进入结算】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0030",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.05",
+      "frozen_subcheck_id": "G.s0030",
+      "frozen_text": "- F10 前端界面：标题（开始/目标提示/设置/退出）→ HUD（分数、倍率、发球机会、A/B/C 组链进度、场上球数）→ 结算（总分/最高倍率/多球时长/达标状态/重开/返回）→ 暂停面板（继续/重开/设置）",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- F10 前端界面：标题（开始/目标提示/设置/退出）→ HUD（分数、倍率、发球机会、A/B/C 组链进度、场上球数）→ 结算（总分/最高倍率/多球时长/达标状态/重开/返回）→ 暂停面板（继续/重开/设置）"
+    },
+    {
+      "id": "expanded.G.s0031",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.05",
+      "frozen_subcheck_id": "G.s0031",
+      "frozen_text": "关键状态附图标＋文字（组链、多球数、合并计 1 提示），不只靠颜色区分",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "关键状态附图标＋文字（组链、多球数、合并计 1 提示），不只靠颜色区分"
+    },
+    {
+      "id": "expanded.G.s0032",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.05",
+      "frozen_subcheck_id": "G.s0032",
+      "frozen_text": "窗口失焦自动暂停。",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "窗口失焦自动暂停。",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0025",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.05",
+      "frozen_subcheck_id": "G.s0025",
+      "frozen_text": "- F07 VFX 信息性与遮挡约束：组链进度灯与倍率数字承担机关信息",
+      "requirement_ids": [
+        "F07"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- F07 VFX 信息性与遮挡约束：组链进度灯与倍率数字承担机关信息"
+    },
+    {
+      "id": "expanded.G.s0026",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.05",
+      "frozen_subcheck_id": "G.s0026",
+      "frozen_text": "球标识（HUD 多球计数）承担多球信息",
+      "requirement_ids": [
+        "F07"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "球标识（HUD 多球计数）承担多球信息"
+    },
+    {
+      "id": "expanded.G.s0037",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.06",
+      "frozen_subcheck_id": "G.s0037",
+      "frozen_text": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因。"
+    },
+    {
+      "id": "expanded.G.s0038",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.06",
+      "frozen_subcheck_id": "G.s0038",
+      "frozen_text": "危险预警与恢复入口可发现，玩家能据此调整操作。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "危险预警与恢复入口可发现，玩家能据此调整操作。"
+    },
+    {
+      "id": "expanded.G.s0039",
+      "frozen_assertion_id": "G059_observatory_pinball.WB.G.07",
+      "frozen_subcheck_id": "G.s0039",
+      "frozen_text": "并发单位或多个事件同时发生时，关键反馈仍能对应到正确对象。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "并发单位或多个事件同时发生时，关键反馈仍能对应到正确对象。"
+    }
+  ],
+  "unselected_policy": "Retained for traceability/diagnostics; no implicit extra scored checks",
+  "selection_basis": "Original requirement/rubric only; no author implementation, runtime or scores",
+  "aggregation": "Equal mean of layout/guidance/feedback group means; unchanged 10/50/100 levels",
+  "prior_results": "Preserved under their original rubric; not relabeled or arithmetically converted",
+  "revision_sha256": "1f5158296d97602c8b73b40d71518d1b512f37614be667cf58e1d3d2e07d800a"
+}

@@ -1,0 +1,7 @@
+{
+  "contract_id": "G016_theater_sorting.whitebox.endpoints-v2-candidate.c196e9815c8ea936afeedb832c97f4ee0726da0e772d01a1116eb563e5cd9357",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "c196e9815c8ea936afeedb832c97f4ee0726da0e772d01a1116eb563e5cd9357",
+  "rubric_json_sha256": "b46fc821c53d5ceff6bf0241d10049aa59e5664219954f24e94ae2504c028a21",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

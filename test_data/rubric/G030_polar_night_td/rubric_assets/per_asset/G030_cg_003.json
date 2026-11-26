@@ -1,0 +1,381 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.v1",
+  "authoring_protocol": "priority_asset_rubrics.v1",
+  "status": "source_grounded_draft",
+  "game_id": "G030_polar_night_td",
+  "task_id": "G030_cg_003",
+  "asset_type": "cg_video",
+  "asset_subtype": "cg_video",
+  "asset_name": "寒潮",
+  "scope": "Track B：独立资产；不含 T-pose、自然音效或引擎导入/playtest。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G030_polar_night_td",
+    "task_id": "G030_cg_003",
+    "cg_type": "Event",
+    "cg_name": "寒潮",
+    "mode": "text_to_video",
+    "prompt": "寒潮前锋横扫聚落、发电机外壳结霜转速变慢、负载栏数字下坠（剧情解释第三夜供能 −30% 与核心额外耗电 5）；无 UI、无文字",
+    "duration_sec": 6,
+    "resolution": "1280x720",
+    "fps": 24,
+    "seed": 6303,
+    "trigger": "第三夜攻势期开始时，每局一次；Esc/Enter 跳过→直接进入第三夜攻势；播放期间不推进任何游戏计时",
+    "skippable": true,
+    "spec_ref": "C03",
+    "start_condition": "第三夜攻势期开始时，每局一次；Esc/Enter 跳过→直接进入第三夜攻势；播放期间不推进任何游戏计时",
+    "end_condition": "natural playback end or skip input",
+    "skip_behavior": "skip_to_declared_next_state",
+    "next_state": "直接进入第三夜攻势",
+    "planned_source": "closed_source_video_api",
+    "l_tier_repair_target": true
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L180-180",
+      "general:L181-181",
+      "general:L182-182",
+      "general:L184-184"
+    ],
+    "visual_style_source_ids": [
+      "general:L185-185"
+    ],
+    "sound_style_source_ids": [
+      "general:L186-186"
+    ],
+    "asset_description_source_ids": [],
+    "spec_ref_source_ids": [
+      "general:L235-240"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L8",
+    "canonical_asset_content_source_ids": [
+      "general:L237"
+    ]
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "sha256": "94b96f71d2d9684d0746b5c3d70633028fad9317dcf578377ccafbe214233eac",
+      "start_line": 83,
+      "end_line": 83,
+      "quote": "{\"game_id\": \"G030_polar_night_td\", \"task_id\": \"G030_cg_003\", \"cg_type\": \"Event\", \"cg_name\": \"寒潮\", \"mode\": \"text_to_video\", \"prompt\": \"寒潮前锋横扫聚落、发电机外壳结霜转速变慢、负载栏数字下坠（剧情解释第三夜供能 −30% 与核心额外耗电 5）；无 UI、无文字\", \"duration_sec\": 6, \"resolution\": \"1280x720\", \"fps\": 24, \"seed\": 6303, \"trigger\": \"第三夜攻势期开始时，每局一次；Esc/Enter 跳过→直接进入第三夜攻势；播放期间不推进任何游戏计时\", \"skippable\": true, \"spec_ref\": \"C03\", \"start_condition\": \"第三夜攻势期开始时，每局一次；Esc/Enter 跳过→直接进入第三夜攻势；播放期间不推进任何游戏计时\", \"end_condition\": \"natural playback end or skip input\", \"skip_behavior\": \"skip_to_declared_next_state\", \"next_state\": \"直接进入第三夜攻势\", \"planned_source\": \"closed_source_video_api\", \"l_tier_repair_target\": true}"
+    },
+    "general:L180-180": {
+      "path": "test_data/test_samples/G030_polar_night_td/general_requirement.txt",
+      "sha256": "9ad0b123778df20fbed528f1971847cf3dba8c6f4f67a983d3d27f2b07bfd56f",
+      "start_line": 180,
+      "end_line": 180,
+      "quote": "- W01 世界与时代背景：极夜降临的 72 小时——北境最北的北炉镇靠一座暖炉核心维持全部热量，电网是聚落唯一的防线；掠食者循热源而来，碎线兽专咬供电线路。"
+    },
+    "general:L181-181": {
+      "path": "test_data/test_samples/G030_polar_night_td/general_requirement.txt",
+      "sha256": "9ad0b123778df20fbed528f1971847cf3dba8c6f4f67a983d3d27f2b07bfd56f",
+      "start_line": 181,
+      "end_line": 181,
+      "quote": "- W02 场景所在地：24×16 格的极夜聚落地图——中央暖炉核心、四向入口（东/南/西/北）、可建造区与敌人行进路径格，攻势脚本由 seed 冻结。"
+    },
+    "general:L182-182": {
+      "path": "test_data/test_samples/G030_polar_night_td/general_requirement.txt",
+      "sha256": "9ad0b123778df20fbed528f1971847cf3dba8c6f4f67a983d3d27f2b07bfd56f",
+      "start_line": 182,
+      "end_line": 182,
+      "quote": "- W03 玩家身份与当前任务动机：玩家是北炉镇的能源官；镇长老钳把电网钥匙交给你——昼间建设与扩建电网、夜间按优先级保住火力，撑过三夜极寒。"
+    },
+    "general:L184-184": {
+      "path": "test_data/test_samples/G030_polar_night_td/general_requirement.txt",
+      "sha256": "9ad0b123778df20fbed528f1971847cf3dba8c6f4f67a983d3d27f2b07bfd56f",
+      "start_line": 184,
+      "end_line": 184,
+      "quote": "- W05 叙事来源：暖炉核心=北炉镇的火种方舟、发电机=聚落锅炉、电杆=冻土木杆线、箭塔/减速塔=哨位弩架与凝冰栅、采矿机=冻矿钻、掠食者=循热的霜狼兽群、碎线兽=噬缆的啮齿群。人物：镇长老钳。全部原创，不用商业作品命名。"
+    },
+    "general:L185-185": {
+      "path": "test_data/test_samples/G030_polar_night_td/general_requirement.txt",
+      "sha256": "9ad0b123778df20fbed528f1971847cf3dba8c6f4f67a983d3d27f2b07bfd56f",
+      "start_line": 185,
+      "end_line": 185,
+      "quote": "- W06 视觉风格与色彩材质：极夜工业风；主色＝极夜蓝 #2C3E5D、暖炉橙 #E0653A、极光青 #6FD9C7、雪原白 #EDF2F5；材质为冻土、木杆铜线、铁皮锅炉与冰晶。"
+    },
+    "general:L186-186": {
+      "path": "test_data/test_samples/G030_polar_night_td/general_requirement.txt",
+      "sha256": "9ad0b123778df20fbed528f1971847cf3dba8c6f4f67a983d3d27f2b07bfd56f",
+      "start_line": 186,
+      "end_line": 186,
+      "quote": "- W07 环境氛围与声音语言：暴风雪与暖炉低鸣为底；音效语言＝电网嗡鸣/啃咬警报/焊花修复/昼夜钟声/跳闸火花（F06 冻结清单）；混音优先级：核心警报与超载 ＞ 啃咬/修复 ＞ 战斗命中 ＞ 昼夜钟声 ＞ 暴风雪底噪。"
+    },
+    "general:L235-240": {
+      "path": "test_data/test_samples/G030_polar_night_td/general_requirement.txt",
+      "sha256": "9ad0b123778df20fbed528f1971847cf3dba8c6f4f67a983d3d27f2b07bfd56f",
+      "start_line": 235,
+      "end_line": 240,
+      "quote": "- C03 寒潮（Event，6 秒，1280×720@24fps）\n  - 触发时机：第三夜攻势期开始时，每局一次\n  - 内容与角色场景：寒潮前锋横扫聚落、发电机外壳结霜转速变慢、负载栏数字下坠——剧情解释第三夜供能 −30% 与核心额外耗电 5\n  - 资产对应：发电机、暖炉核心与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入第三夜攻势；自然播完 → 进入第三夜攻势\n  - 状态一致：播放期间不推进任何游戏计时"
+    },
+    "asset_requirement:L8": {
+      "path": "test_data/test_samples/G030_polar_night_td/cg_video/requirement.txt",
+      "sha256": "e517f924482bd5dd20a238042a9b3458fcdb83e6057c9bf54d0ae41250231ac5",
+      "start_line": 8,
+      "end_line": 8,
+      "quote": "- G030_cg_003: 寒潮前锋横扫聚落、发电机外壳结霜转速变慢、负载栏数字下坠（剧情解释第三夜供能 −30% 与核心额外耗电 5）；无 UI、无文字"
+    },
+    "general:L237": {
+      "path": "test_data/test_samples/G030_polar_night_td/general_requirement.txt",
+      "sha256": "9ad0b123778df20fbed528f1971847cf3dba8c6f4f67a983d3d27f2b07bfd56f",
+      "start_line": 237,
+      "end_line": 237,
+      "quote": "  - 内容与角色场景：寒潮前锋横扫聚落、发电机外壳结霜转速变慢、负载栏数字下坠——剧情解释第三夜供能 −30% 与核心额外耗电 5"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+      "start_line": 78,
+      "end_line": 82,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "寒潮前锋横扫聚落",
+      "发电机外壳结霜转速变慢",
+      "负载栏数字下坠（剧情解释第三夜供能 −30% 与核心额外耗电 5）",
+      "无 UI",
+      "无文字"
+    ],
+    "style": [],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求符合度",
+      "checks": [
+        {
+          "id": "C01",
+          "title": "指定主体、事件或镜头片段",
+          "assertion": "实际产物可观察地满足：寒潮前锋横扫聚落；发电机外壳结霜转速变慢",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "寒潮前锋横扫聚落",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "发电机外壳结霜转速变慢",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          },
+          "canonical_content_source_ids": [
+            "general:L237"
+          ],
+          "canonical_override_rule": "上述 canonical 内容原文优先解释本项所涉对象/事件；priority prompt 只能补充不矛盾的镜头细节。原文中与本项无关的片段不在本项重复评分。",
+          "temporal_rule": "仅按原文明示的先后、因果或同步关系核对；列举不等于严格时间顺序。双意象/胜负分支是不同版本，不要求胜利与失败连续发生在同一时间线。"
+        },
+        {
+          "id": "C02",
+          "title": "指定主体、事件或镜头片段",
+          "assertion": "实际产物可观察地满足：负载栏数字下坠（剧情解释第三夜供能 −30% 与核心额外耗电 5）；无 UI",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "负载栏数字下坠（剧情解释第三夜供能 −30% 与核心额外耗电 5）",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "无 UI",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          },
+          "canonical_content_source_ids": [
+            "general:L237"
+          ],
+          "canonical_override_rule": "上述 canonical 内容原文优先解释本项所涉对象/事件；priority prompt 只能补充不矛盾的镜头细节。原文中与本项无关的片段不在本项重复评分。",
+          "temporal_rule": "仅按原文明示的先后、因果或同步关系核对；列举不等于严格时间顺序。双意象/胜负分支是不同版本，不要求胜利与失败连续发生在同一时间线。"
+        },
+        {
+          "id": "C03",
+          "title": "指定主体、事件或镜头片段",
+          "assertion": "实际产物可观察地满足：无文字",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "无文字",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          },
+          "canonical_content_source_ids": [
+            "general:L237"
+          ],
+          "canonical_override_rule": "上述 canonical 内容原文优先解释本项所涉对象/事件；priority prompt 只能补充不矛盾的镜头细节。原文中与本项无关的片段不在本项重复评分。",
+          "temporal_rule": "仅按原文明示的先后、因果或同步关系核对；列举不等于严格时间顺序。双意象/胜负分支是不同版本，不要求胜利与失败连续发生在同一时间线。"
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L180-180",
+              "text": "- W01 世界与时代背景：极夜降临的 72 小时——北境最北的北炉镇靠一座暖炉核心维持全部热量，电网是聚落唯一的防线；掠食者循热源而来，碎线兽专咬供电线路。"
+            },
+            {
+              "source_id": "general:L181-181",
+              "text": "- W02 场景所在地：24×16 格的极夜聚落地图——中央暖炉核心、四向入口（东/南/西/北）、可建造区与敌人行进路径格，攻势脚本由 seed 冻结。"
+            },
+            {
+              "source_id": "general:L235-240",
+              "text": "- C03 寒潮（Event，6 秒，1280×720@24fps）\n  - 触发时机：第三夜攻势期开始时，每局一次\n  - 内容与角色场景：寒潮前锋横扫聚落、发电机外壳结霜转速变慢、负载栏数字下坠——剧情解释第三夜供能 −30% 与核心额外耗电 5\n  - 资产对应：发电机、暖炉核心与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入第三夜攻势；自然播完 → 进入第三夜攻势\n  - 状态一致：播放期间不推进任何游戏计时"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L185-185",
+              "text": "- W06 视觉风格与色彩材质：极夜工业风；主色＝极夜蓝 #2C3E5D、暖炉橙 #E0653A、极光青 #6FD9C7、雪原白 #EDF2F5；材质为冻土、木杆铜线、铁皮锅炉与冰晶。"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "单帧视觉质量",
+          "assertion": "只评实际帧中的形体、细节和生成伪影；不重复检查主体/风格是否符合输入。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "多数关键帧严重畸变或不可辨",
+            "2": "关键主体多处明显变形/涂抹/破碎",
+            "3": "关键帧可读，局部畸变或细节伪影可见",
+            "4": "整体清楚，仅有轻微局部伪影",
+            "5": "全片关键帧清楚，未见明显畸变、涂抹或非设计性形体破损"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "时间连续性",
+          "assertion": "需跨全片时序证据；只评闪烁、身份漂移、跳变和运动断裂，不重复评分剧情顺序。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "持续闪烁/身份崩解/运动断裂，无法跟随主体",
+            "2": "频繁身份漂移、空间跳变或不合理形变",
+            "3": "主线连续，局部闪烁/跳变/形变可见",
+            "4": "时间上连贯，仅有少量轻微不稳定",
+            "5": "主体身份、空间和运动连贯；未见明显非设计性闪烁、跳变或形变"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。"
+  },
+  "evidence_requirements": [
+    "完整实际视频，或覆盖全片并附时间戳的连续帧序列",
+    "时间顺序和连续性需足够密集的时序证据；声音要求需实际音轨"
+  ],
+  "objective_specs": {
+    "duration_sec": 6,
+    "resolution": "1280x720",
+    "fps": 24
+  },
+  "objective_metric_policy": "规格与传统指标单独由探针/脚本报告原始值，不与三维 rubric 分数混合；本文件不代表已计算任何指标。",
+  "authoring_warnings": [
+    {
+      "code": "no_literal_asset_mention_in_general",
+      "detail": "general 中未找到资产名/ID的逐字匹配；采用已解析 spec_ref 与分资产原文，不伪造独立描述。"
+    }
+  ]
+}

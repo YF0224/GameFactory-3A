@@ -1,0 +1,1050 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_001",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 68,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_001.json",
+        "sha256": "a28d46cc73dfb48ead556b6aa525b90e3fa726314cb7db788756db9098b85d95"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_002",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 69,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_002.json",
+        "sha256": "439a2975872420e2929e536a95f2bfa15d0037e02b485b62b521817245388e1d"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_003",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 70,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_003.json",
+        "sha256": "be21d5bcb48268ae4a3e4aee1c63905c3aa6d3033926cf66ca0f74ff2cf405b7"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_004",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 71,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_004.json",
+        "sha256": "647d738aaf98770574a8b7698056acb6b8b4e9fe68054bf5c86129c12c234dfa"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_005",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 72,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_005.json",
+        "sha256": "bb2eb98c647bdd2524806e6de09b20ee5582f0df93973aeded493abc0060bdee"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_006",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 73,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_006.json",
+        "sha256": "9058c8521a2e47973f057c1ccd4bf6ebb0c20d136f7d4267409a163d774b21a7"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_007",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 74,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_007.json",
+        "sha256": "ff3f4950fcfdd7aadf6d3095f269a340726a4bc68bd76254f678a24b600873ee"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_008",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 75,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_008.json",
+        "sha256": "e9b1a6f2c016f71aeaa6c3f4201500b647c5b2f802440c9dbbe02e3f9d9eaf83"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_009",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 76,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_009.json",
+        "sha256": "129fc9c41a2e70a56af51e3ce87155f76ac8cfccd1056475f4f72cd4473e2e42"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_010",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 77,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_010.json",
+        "sha256": "3ff51f2c7c413835c346552264a40ef4564ac0e5302b9ceab9867eaf77069b1b"
+      },
+      "C_checks": 2,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_011",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 78,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_011.json",
+        "sha256": "22733aae4f6d905415e51a539686cfc053f3055c0f9f13025ade16139be846c8"
+      },
+      "C_checks": 2,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_012",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 79,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_012.json",
+        "sha256": "9cdcbb50dc2a7d8fefea000617bcbe9fc368ce3e7f373c03b01067b837bfe40e"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_013",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 80,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_013.json",
+        "sha256": "00afe815a647b7a491745204d496f68d58127f64e07c2cf2bb9585741389f1a6"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_014",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 81,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_014.json",
+        "sha256": "eec16b3e96e043faee74a970d23af25544619d2931de39adaa22f28c9e68e30a"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_015",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 82,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_015.json",
+        "sha256": "fdb28adc48be0ee6f4d06900b6c92942391fe7ee51025747cbd1602b9f2dfc75"
+      },
+      "C_checks": 2,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_016",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 83,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_016.json",
+        "sha256": "0400cfa4dd5666b5f4f59bd7b3bcdbd246ef6304af8b7b52fd241b2a79b7ca8a"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_017",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 84,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_017.json",
+        "sha256": "42f1abed577ec6c824fc9184b2b5e0284d3a3bdab1fd7de2d05c9b706d748ad2"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_018",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 85,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_018.json",
+        "sha256": "2d47a66ee08e164afb4698f6678e1c147a86d3a50d1882b9de154e570aed4928"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_019",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 86,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_019.json",
+        "sha256": "2f42680f7943db61426eaed0a43a86597f8e1ce2a7ab865bfa50427070aa5678"
+      },
+      "C_checks": 2,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_020",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 87,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_020.json",
+        "sha256": "7dcbbcb1fae6e94cc2a3eb7837ff71ee9368186da915136a68a783d749828c5c"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_021",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 88,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_021.json",
+        "sha256": "71b37bd33b2b62175f4c9f6f98d95b86fd81428c4cdf295345d912f92509d6ff"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_022",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 89,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_022.json",
+        "sha256": "e36063a858eb3312c50837621aa1dd4fbfd7f39fe4a19e045cfec31595f81e03"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_023",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 90,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_023.json",
+        "sha256": "6ced01c3317e6b3792f1050a286db62f8ad1e0dee2c942178c0192806a5af503"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_024",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 91,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_024.json",
+        "sha256": "9755b31e77c334dce77e3a63e93542916a0ce8786536e8eba6eeffb376c7dfed"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_025",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 92,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_025.json",
+        "sha256": "6f0078538df3211f896ef61ba847246fa2a5c556c2be8851d383108fdf3aa0d8"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_026",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 93,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_026.json",
+        "sha256": "68105df31a71bf6f1e2f7771b45765722d7ba0a08ef1558654a518d384d3f0b3"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_027",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 94,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_027.json",
+        "sha256": "b69da0a3d5a81682c230d40e3fa36afd532609bf3a255f989cde3547a0e1f34c"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_028",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 95,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_028.json",
+        "sha256": "34d42956b835bdc66f9ca8c28f15a7b1e99e347ce26541816900444e651c75ca"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_029",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 96,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_029.json",
+        "sha256": "cc526cd4109f9bcfce0f644d20dd1ea2a29c8fd12693cd4dc3f512fdcbe2fe08"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_broken_continent_rts_obj_030",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 97,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_broken_continent_rts_obj_030.json",
+        "sha256": "4aac523f46cab12aa1ad4a70ff2a858581d71dd2a682742ffdbfe7ec75b8a98d"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 21,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_scene_001.json",
+        "sha256": "c0f791cc5f2eb997a48d78b6bfc0bd19a4d88f9658a3e938382947d7185f8e3b"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 230,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_sfx_001.json",
+        "sha256": "3739221b9d82aa2b4f8afea78bcbeee14d4ff20adbc65d9b9d69b6436c5518d8"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 231,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_sfx_002.json",
+        "sha256": "05f93539d46f035932d1d73921f40e4684c1f508345793c764d0be1e9ea542c1"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 232,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_sfx_003.json",
+        "sha256": "de9b9fb54e4415da481b729d78f3b9daadb9e0df3b6258c6fb8b464ef6bfe640"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 233,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_sfx_004.json",
+        "sha256": "15d60e44ed5dbb64daa585f795982091cca58392fa66ad0b048840a473c6f82b"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 234,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_sfx_005.json",
+        "sha256": "41fff510ddb2dc6030e0a1a3d102dd12692c13c8fdde96b8ddec6bdc70cc4e73"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 235,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_sfx_006.json",
+        "sha256": "88002013e2809384dc33c6814454257540d4a84e59a05036294314c816a6cb50"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 236,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_sfx_007.json",
+        "sha256": "957039e73323953fd603e383fcbaed458bea9b57397f5829fd7e108c9a6d5d1a"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 237,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_sfx_008.json",
+        "sha256": "1781240dbe6fe386c322c0892c4b1de2d4db031bfdfd7bc5720b6379839046a9"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 238,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_sfx_009.json",
+        "sha256": "4ac5dc2c3d3d0ba715a6f9d926822048cd6cdd987c6c63f2a2113179bc40a313"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 239,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_sfx_010.json",
+        "sha256": "8680b1858112cebbc62c65d4533b9453361b3260fd693ccb3297cef46b36cf57"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 240,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_sfx_011.json",
+        "sha256": "52bbff4dc6f9b5ae831f479b046c17db1c2428f753f77a36b34ae397d3ca7b43"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_sfx_012",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 241,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_sfx_012.json",
+        "sha256": "b937bdf656601eaabd8bd51b6ea2e097a55e68a67b3617ecdb7176743d88bd42"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 64,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_cg_001.json",
+        "sha256": "0b72e5b9abd96bc46161d81653aa4e2b0e364e747544ed1ee69c918fc7c58d50"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 65,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_cg_002.json",
+        "sha256": "9e4b470c886a0a9a06b15f85e9b92d817e5138f63aef4570fa532752f05217ee"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 66,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_cg_003.json",
+        "sha256": "e50b20dbdfeabc9f753fab6eec7db26ea17e0606563bd6b44ef1d452bcbf377b"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_cg_004",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 67,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_cg_004.json",
+        "sha256": "99def8cbc2fc7c3792f018a20a5432c0b3ef1ef124929dc8d689414b193f97c0"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_cg_005",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 68,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_cg_005.json",
+        "sha256": "936d038618483a52886fed5edd41f04061eb0544e0cf0134cf3e5cd2cd9201a7"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "multi_variant_cg_requires_delivery_convention",
+        "branch_delivery_review"
+      ]
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_001",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 43,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_001.json",
+        "sha256": "d837aca3cd24c6254b012307245e2fce5a6000cf590002e529ac41d692bc7c7d"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_002",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 44,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_002.json",
+        "sha256": "5697f7de38221fdda2638e77739cf5ae0cb417f03a291c6787fbe3167c774ff2"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_003",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 45,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_003.json",
+        "sha256": "175c2fce95b1afc4f125a65a0b5506ad807ed4734f6b179be4f28068e6272e86"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_004",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 46,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_004.json",
+        "sha256": "527d76790466fff76f9d877e1bc824acaab9b3e3916eef3e4b54f971643656fb"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_005",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 47,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_005.json",
+        "sha256": "619d7f55a14065fca41880d466d03cbd4a14e4bb6c1d40770f20bc185f22da68"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_006",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 48,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_006.json",
+        "sha256": "5a9059821a4b12b80ce7d096a01f161f06c987e48924fcef8b6a84a2305213df"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_007",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 49,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_007.json",
+        "sha256": "09d8ddcf0b5d7400b94f180fb3e3f89425e6182369d353941e35d7fc23b2e3ac"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_008",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 50,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_008.json",
+        "sha256": "3d923d53dd07599bf39ca6d8867ffa43f90555200584021e387ff0d4e14e228d"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_009",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 51,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_009.json",
+        "sha256": "9e5aea5120a577415c0b407c909dd67dc63970942ef44a941a7453f4ea93948c"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_010",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 52,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_010.json",
+        "sha256": "e54681f428ee73bdbbe8cae3d042e5dc88e71d7bf33c56c9771472ee0285adf9"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_011",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 53,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_011.json",
+        "sha256": "1970a01ce21bb0fdb8a2269ef6bd7ecc782ff0bfadb5194b3e48ea45ea6abbb2"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_012",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 54,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_012.json",
+        "sha256": "73b36b9903ed6d9b0ed47245b771704e0938d5d99a4a0cc35368e896802ca02f"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_013",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 55,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_013.json",
+        "sha256": "49c46ebdab926143197bf3ade66d3b8dc82ffb28ee1a68f8a137c466196ed0d1"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_014",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 56,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_014.json",
+        "sha256": "5c4bf1190cb004da233d6456de6be791be92eec53989efd8fb3968934bb3dda6"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_015",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 57,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_015.json",
+        "sha256": "9f3f2dbe4435a9fb687a5a25800d9eb8d5e6b4ac8202f4285aa41c0d27f9fdc9"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_016",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 58,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_016.json",
+        "sha256": "86dc9735e4ae6b14ac197da8bd8afaba0bfa456bfa96a8fff1efa62898252126"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_017",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 59,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_017.json",
+        "sha256": "6f42255bfe452b0e6f15557ef1ae5238a7380f8789344ca35fc4017f417f1ba0"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_018",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 60,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_018.json",
+        "sha256": "222c71348efc1994c33ef8ed0511d6ec64ee42a02091cd2f4e7111b580815d6c"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_019",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 61,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_019.json",
+        "sha256": "570e2dad224a999be9634afefa8e4ae52636258cc7ac027a1c5cd49f1bb3efed"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_020",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 62,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_020.json",
+        "sha256": "be53f43b52395e26f9f6c525f8722fe2273ed1bbddd83551da8451b031722493"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_021",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 63,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_021.json",
+        "sha256": "7977dabf963a53c15875aea69a47fd9b7bfe38a32244cd95e4276eed4b909564"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_022",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 64,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_022.json",
+        "sha256": "63a3b03b648606954d65421f8fa0dfecea05a2e07a9dbc3980a3f43dff4e399f"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_023",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 65,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_023.json",
+        "sha256": "3ad70df1509af86e8232cba39a36ed71d0976ef61385845240c9789a12428964"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_mot_024",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 66,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_mot_024.json",
+        "sha256": "29bf5001960ca86566bf1250382e4cbbb941220953e0716b5e7aafcd10234681"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_tpose_001",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 6,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_tpose_001.json",
+        "sha256": "c8e90d2c4acf3715a704cf6204d59479e268dcdd6085c08f2ac065c816aefdc1"
+      },
+      "C_checks": 4,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G025_broken_continent_rts",
+      "task_id": "G025_tpose_002",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 7,
+      "rubric": {
+        "path": "test_data/test_samples/G025_broken_continent_rts/rubric_assets/priority_observable_v2/G025_tpose_002.json",
+        "sha256": "2b6e1321e9d1257af14c0327c10f96bd561a024ebd1cb92a0a65373710d47735"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    }
+  ]
+}

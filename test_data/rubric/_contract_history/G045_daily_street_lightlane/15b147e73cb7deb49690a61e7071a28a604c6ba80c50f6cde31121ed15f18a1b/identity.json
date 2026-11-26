@@ -1,0 +1,7 @@
+{
+  "contract_id": "G045_daily_street_lightlane.whitebox.endpoints-v2-candidate.15b147e73cb7deb49690a61e7071a28a604c6ba80c50f6cde31121ed15f18a1b",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "15b147e73cb7deb49690a61e7071a28a604c6ba80c50f6cde31121ed15f18a1b",
+  "rubric_json_sha256": "71ef511bc6a566623a730ac2c1c31ec4a8c2c9271650c150501808fb69dee181",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

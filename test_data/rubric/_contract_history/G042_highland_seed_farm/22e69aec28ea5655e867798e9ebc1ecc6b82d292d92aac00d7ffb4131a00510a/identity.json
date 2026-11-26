@@ -1,0 +1,7 @@
+{
+  "contract_id": "G042_highland_seed_farm.whitebox.final",
+  "version": "final",
+  "content_sha256": "22e69aec28ea5655e867798e9ebc1ecc6b82d292d92aac00d7ffb4131a00510a",
+  "rubric_json_sha256": "1742ad46ca80778d9e2c8e3eacb265bd1786b4684d63d82396042168354a474d",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

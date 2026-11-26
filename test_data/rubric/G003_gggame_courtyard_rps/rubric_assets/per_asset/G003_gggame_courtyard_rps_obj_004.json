@@ -1,0 +1,420 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.v1",
+  "authoring_protocol": "priority_asset_rubrics.v1",
+  "status": "source_grounded_draft",
+  "game_id": "G003_gggame_courtyard_rps",
+  "task_id": "G003_gggame_courtyard_rps_obj_004",
+  "asset_type": "3d_object",
+  "asset_subtype": "character",
+  "asset_name": "023 闪电法师",
+  "scope": "Track B：独立资产；不含 T-pose、自然音效或引擎导入/playtest。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G003_gggame_courtyard_rps",
+    "task_id": "G003_gggame_courtyard_rps_obj_004",
+    "asset_name": "storm_mage",
+    "name_zh": "023 闪电法师",
+    "role": "character",
+    "input_mode": "text_to_3d",
+    "prompt": "Anime-style wizard with black vertical hair and a beard, blue-and-gold robed outfit, lightning motifs as surface decoration only baked into cloth pattern, no electric effects on body geometry, five-head anime proportions, single character, Y-up, pivot at feet, low-poly style, minimal triangle count, flat faceted surfaces, clean silhouette, no fine surface detail",
+    "seed": 1034,
+    "decimation_target": 8000,
+    "texture_size": 2048,
+    "rig": "humanoid",
+    "animation_strategy": "humanoid_motion",
+    "spec_ref": "V05",
+    "poly_policy": "low_poly_priority",
+    "l_tier_repair_target": true
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L138-138",
+      "general:L139-139",
+      "general:L140-140",
+      "general:L142-142"
+    ],
+    "visual_style_source_ids": [
+      "general:L143-143"
+    ],
+    "sound_style_source_ids": [
+      "general:L144-144"
+    ],
+    "asset_description_source_ids": [
+      "general:L38",
+      "general:L222",
+      "general:L255"
+    ],
+    "spec_ref_source_ids": [
+      "general:L90-90"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L9",
+    "canonical_asset_content_source_ids": []
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "sha256": "a6a9b03f45ab40197fbb18aaf9614638a9691890a7824c137aef95fcd79868f9",
+      "start_line": 9,
+      "end_line": 9,
+      "quote": "{\"game_id\": \"G003_gggame_courtyard_rps\", \"task_id\": \"G003_gggame_courtyard_rps_obj_004\", \"asset_name\": \"storm_mage\", \"name_zh\": \"023 闪电法师\", \"role\": \"character\", \"input_mode\": \"text_to_3d\", \"prompt\": \"Anime-style wizard with black vertical hair and a beard, blue-and-gold robed outfit, lightning motifs as surface decoration only baked into cloth pattern, no electric effects on body geometry, five-head anime proportions, single character, Y-up, pivot at feet, low-poly style, minimal triangle count, flat faceted surfaces, clean silhouette, no fine surface detail\", \"seed\": 1034, \"decimation_target\": 8000, \"texture_size\": 2048, \"rig\": \"humanoid\", \"animation_strategy\": \"humanoid_motion\", \"spec_ref\": \"V05\", \"poly_policy\": \"low_poly_priority\", \"l_tier_repair_target\": true}"
+    },
+    "general:L138-138": {
+      "path": "test_data/test_samples/G003_gggame_courtyard_rps/general_requirement.txt",
+      "sha256": "f217541c1fee55b034acc86c44ab7aff1120b4e48ac5da95693e28c143b4b6da",
+      "start_line": 138,
+      "end_line": 138,
+      "quote": "- W01 世界与时代背景：「裁拳巷」——一座闹中取静的四合小院街区，街坊间流传着以猜拳定输赢、赢家得步数、持刀者可「割」掉输家裤子的传统游戏；GGgame 工作室把这项传统办成了小院联赛。"
+    },
+    "general:L139-139": {
+      "path": "test_data/test_samples/G003_gggame_courtyard_rps/general_requirement.txt",
+      "sha256": "f217541c1fee55b034acc86c44ab7aff1120b4e48ac5da95693e28c143b4b6da",
+      "start_line": 139,
+      "end_line": 139,
+      "quote": "- W02 场景所在地：裁拳巷中央的四合院赛场——每位玩家一间可识别的独立小院，青砖矮墙、石板路相连，院子之间有长凳与花植；中央设揭晓台。"
+    },
+    "general:L140-140": {
+      "path": "test_data/test_samples/G003_gggame_courtyard_rps/general_requirement.txt",
+      "sha256": "f217541c1fee55b034acc86c44ab7aff1120b4e48ac5da95693e28c143b4b6da",
+      "start_line": 140,
+      "end_line": 140,
+      "quote": "- W03 玩家身份与当前任务动机：玩家扮演四名参赛者之一（GG大师/大资本家/电磁炮/闪电法师）参赛，以淘汰其余对手、成为本巷「拳王」为动机；角色只影响外观与出拳个性演出，不改变规则数值（V06）。"
+    },
+    "general:L142-142": {
+      "path": "test_data/test_samples/G003_gggame_courtyard_rps/general_requirement.txt",
+      "sha256": "f217541c1fee55b034acc86c44ab7aff1120b4e48ac5da95693e28c143b4b6da",
+      "start_line": 142,
+      "end_line": 142,
+      "quote": "- W05 叙事来源：裤子＝巷内规矩的计数防护（输家掉裤、0 裤仍存活）；刀＝淘汰权（持刀且对手 0 裤方可割，A04）；连败保底＝巷口老人们对连败者的照顾（G04）；电脑席位＝观赛的街坊临时上场补位（N01）。全部原创，不使用商业作品命名或造型。"
+    },
+    "general:L143-143": {
+      "path": "test_data/test_samples/G003_gggame_courtyard_rps/general_requirement.txt",
+      "sha256": "f217541c1fee55b034acc86c44ab7aff1120b4e48ac5da95693e28c143b4b6da",
+      "start_line": 143,
+      "end_line": 143,
+      "quote": "- W06 视觉风格与色彩材质：统一日式动画风（V01）；主色=砖红 #B3574A、青瓦灰 #6E7B8A、院落绿 #7FA46B、揭示金 #E8C559；材质为青砖、木凳、布幔与花植。"
+    },
+    "general:L144-144": {
+      "path": "test_data/test_samples/G003_gggame_courtyard_rps/general_requirement.txt",
+      "sha256": "f217541c1fee55b034acc86c44ab7aff1120b4e48ac5da95693e28c143b4b6da",
+      "start_line": 144,
+      "end_line": 144,
+      "quote": "- W07 环境氛围与声音语言：午后小院的闲适与揭晓时刻的紧张反差——常驻巷院环境声（风拂花植＋远处街坊人声衬底）；出拳、揭晓、割、淘汰与胜利配专属短音效，全部按 §9 F06 冻结清单交付；失败反馈与胜利反馈听感明确区分（V11）。"
+    },
+    "general:L90-90": {
+      "path": "test_data/test_samples/G003_gggame_courtyard_rps/general_requirement.txt",
+      "sha256": "f217541c1fee55b034acc86c44ab7aff1120b4e48ac5da95693e28c143b4b6da",
+      "start_line": 90,
+      "end_line": 90,
+      "quote": "- V05 闪电法师：黑色竖发、胡须、蓝金服装。电光不烘焙成身体几何，不因外观赋予伤害技能。旧参考只约束身份，画风以 V01 为准。（商业形象参考方向见 G003 种子卡 reference_policy.R）"
+    },
+    "general:L38": {
+      "path": "test_data/test_samples/G003_gggame_courtyard_rps/general_requirement.txt",
+      "sha256": "f217541c1fee55b034acc86c44ab7aff1120b4e48ac5da95693e28c143b4b6da",
+      "start_line": 38,
+      "end_line": 38,
+      "quote": "- S03 暂按四位角色纳入设计：002 GG大师、007 大资本家、012 电磁炮、023 闪电法师。角色只影响外观，不改变属性/出拳/步数/耗时；技能未定义，按冻结口径交付。"
+    },
+    "general:L222": {
+      "path": "test_data/test_samples/G003_gggame_courtyard_rps/general_requirement.txt",
+      "sha256": "f217541c1fee55b034acc86c44ab7aff1120b4e48ac5da95693e28c143b4b6da",
+      "start_line": 222,
+      "end_line": 222,
+      "quote": "- L02 角色：002 GG大师、007 大资本家、012 电磁炮、023 闪电法师四角色（只影响外观，不改属性；V06–V08）；八类动作目标集合（待机/移动/拿刀/穿裤/脱裤/割/出局/获胜，V07）。"
+    },
+    "general:L255": {
+      "path": "test_data/test_samples/G003_gggame_courtyard_rps/general_requirement.txt",
+      "sha256": "f217541c1fee55b034acc86c44ab7aff1120b4e48ac5da95693e28c143b4b6da",
+      "start_line": 255,
+      "end_line": 255,
+      "quote": "- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：gg_master, rail_tycoon, rail_gunner, storm_mage, duel_knife, pants_layer_marker。每项只允许一个物体；组合物必须拆成独立任务。"
+    },
+    "asset_requirement:L9": {
+      "path": "test_data/test_samples/G003_gggame_courtyard_rps/3D_object/requirement.txt",
+      "sha256": "880cc2118bff051d1dae8c5230f9f6a5df942f7bab1b520646c6aa92f0317f35",
+      "start_line": 9,
+      "end_line": 9,
+      "quote": "- storm_mage: Anime-style wizard with black vertical hair and a beard, blue-and-gold robed outfit, lightning motifs as surface decoration only baked into cloth pattern, no electric effects on body geometry, five-head anime proportions, single character, Y-up, pivot at feet"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+      "start_line": 78,
+      "end_line": 82,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "Anime-style wizard with black vertical hair and a beard",
+      "blue-and-gold robed outfit",
+      "lightning motifs as surface decoration only baked into cloth pattern",
+      "no electric effects on body geometry",
+      "five-head anime proportions",
+      "single character"
+    ],
+    "style": [
+      "low-poly style",
+      "minimal triangle count",
+      "flat faceted surfaces",
+      "clean silhouette",
+      "no fine surface detail"
+    ],
+    "technical": [
+      "Y-up",
+      "pivot at feet"
+    ],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求符合度",
+      "checks": [
+        {
+          "id": "C01",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：Anime-style wizard；with black vertical hair and a beard；blue-and-gold robed outfit",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "Anime-style wizard",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "with black vertical hair and a beard",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "blue-and-gold robed outfit",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "C02",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：lightning motifs as surface decoration only baked into cloth pattern；no electric effects on body geometry",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "lightning motifs as surface decoration only baked into cloth pattern",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "no electric effects on body geometry",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "C03",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：five-head anime proportions；single character",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "five-head anime proportions",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "single character",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L138-138",
+              "text": "- W01 世界与时代背景：「裁拳巷」——一座闹中取静的四合小院街区，街坊间流传着以猜拳定输赢、赢家得步数、持刀者可「割」掉输家裤子的传统游戏；GGgame 工作室把这项传统办成了小院联赛。"
+            },
+            {
+              "source_id": "general:L139-139",
+              "text": "- W02 场景所在地：裁拳巷中央的四合院赛场——每位玩家一间可识别的独立小院，青砖矮墙、石板路相连，院子之间有长凳与花植；中央设揭晓台。"
+            },
+            {
+              "source_id": "general:L38",
+              "text": "- S03 暂按四位角色纳入设计：002 GG大师、007 大资本家、012 电磁炮、023 闪电法师。角色只影响外观，不改变属性/出拳/步数/耗时；技能未定义，按冻结口径交付。"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L143-143",
+              "text": "- W06 视觉风格与色彩材质：统一日式动画风（V01）；主色=砖红 #B3574A、青瓦灰 #6E7B8A、院落绿 #7FA46B、揭示金 #E8C559；材质为青砖、木凳、布幔与花植。"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "low-poly style",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "minimal triangle count",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "flat faceted surfaces",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "clean silhouette",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "no fine surface detail",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "几何结构质量",
+          "assertion": "只评几何/形体自身缺陷，不重复评分所需部件是否存在。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "大范围塌陷、破面或融合，主体结构不可辨",
+            "2": "多处明显破损/漂浮/穿插，严重影响辨识",
+            "3": "主体结构完整，局部破面或穿插可见",
+            "4": "只有轻微局部瑕疵，不影响轮廓与结构",
+            "5": "多视角下结构完整，未见明显破面、漂浮或异常穿插"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "材质与表面质量",
+          "assertion": "只评表面清晰、材质连贯和伪影；低多边形/平面着色本身不是缺陷。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "大面积错误贴图/糊化/污染，表面不可读",
+            "2": "明显接缝、拉伸或材质错乱覆盖主要区域",
+            "3": "主体表面可读，但存在局部接缝/拉伸/涂抹",
+            "4": "仅有轻微接缝或局部表面瑕疵",
+            "5": "材质与色块连贯，多视角下未见明显接缝、拉伸或生成伪影"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。"
+  },
+  "evidence_requirements": [
+    "实际三维产物的固定光照多视角渲染（正/侧/背及细节）",
+    "必要时的网格、尺度和材质探针；不是任务描述或文件名"
+  ],
+  "objective_specs": {
+    "decimation_target": 8000,
+    "texture_size": 2048,
+    "rig": "humanoid"
+  },
+  "objective_metric_policy": "规格与传统指标单独由探针/脚本报告原始值，不与三维 rubric 分数混合；本文件不代表已计算任何指标。",
+  "authoring_warnings": []
+}

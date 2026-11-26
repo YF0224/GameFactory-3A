@@ -1,0 +1,7 @@
+{
+  "contract_id": "G033_card_caravan.whitebox.final",
+  "version": "final",
+  "content_sha256": "7450376c533b8e8e72ed99186ab146e0bdfc859f0640ba8d342f26f03643e36c",
+  "rubric_json_sha256": "54a134411ffda3d9aa84678ae7b9353599b01e607f0898ea899d97e9068f8df2",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

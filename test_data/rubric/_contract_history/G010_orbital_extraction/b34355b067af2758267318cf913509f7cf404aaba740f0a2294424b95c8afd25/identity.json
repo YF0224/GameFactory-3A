@@ -1,0 +1,7 @@
+{
+  "contract_id": "G010_orbital_extraction.whitebox.final",
+  "version": "final",
+  "content_sha256": "b34355b067af2758267318cf913509f7cf404aaba740f0a2294424b95c8afd25",
+  "rubric_json_sha256": "ac42f37ef76fb129ef0e61867bab973666bc2b904ad50e8b6647225fe74acd09",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

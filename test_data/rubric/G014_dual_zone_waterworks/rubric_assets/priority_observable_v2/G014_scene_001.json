@@ -1,0 +1,725 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.observable.v2",
+  "authoring_protocol": "priority_observable_v2",
+  "status": "source_grounded_revision_not_judged",
+  "game_id": "G014_dual_zone_waterworks",
+  "task_id": "G014_scene_001",
+  "asset_type": "3d_scene",
+  "asset_subtype": "3d_scene",
+  "asset_name": "G014_scene_001",
+  "scope": "priority gen 独立资产三列口径；第一列仅可观察需求内容，排除标定数值及运行时验收。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G014_dual_zone_waterworks",
+    "task_id": "G014_scene_001",
+    "prompt": "Split hydro facility in a high mountain: upstream sluice zone with two pressure plates, discharge channel and gate A1; downstream pump-house zone with lever station and two doors; convergence terminal zone with joint-goal platform; wet concrete, steel rails and water light bands, industrial palette",
+    "seed": 4141,
+    "output_format": "glb",
+    "texture_size": 2048,
+    "layout_constraints": "双分离区＋汇合终点区：LV1 水闸区（压板 PLATE_W1/PLATE_W2、水道闸门 GATE_A1、泄洪水道）、LV2 泵房区（拉杆 LEVER_P1、门 GATE_B1/GATE_B2）、LV3 汇合终点区（终点格 GOAL）；共享检查点 CP1–CP4；两端检查点各设本端安全出生锚点（A 仅水闸区、B 仅泵房区，AUD14）；机关路径在 4m/s 移动、1.5m 跳高、0.8s 跳跃时长边界内可达；机关布置候选与重生点微调由 seed=1014 冻结；碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）",
+    "spec_ref": "L02",
+    "comparison_sources": [
+      "hunyuan_worldplay",
+      "llm_combo"
+    ]
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L161-161",
+      "general:L162-162",
+      "general:L163-163",
+      "general:L165-165"
+    ],
+    "visual_style_source_ids": [
+      "general:L166-166"
+    ],
+    "sound_style_source_ids": [
+      "general:L167-167"
+    ],
+    "asset_description_source_ids": [],
+    "spec_ref_source_ids": [
+      "general:L107-117"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L6",
+    "canonical_asset_content_source_ids": [],
+    "track_c_only_layout_clauses": [
+      "碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）"
+    ]
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "sha256": "b2078680d8eecfe6289960a046b337eb8774cec2e1759b59928be48420a42ede",
+      "start_line": 15,
+      "end_line": 15,
+      "quote": "{\"game_id\": \"G014_dual_zone_waterworks\", \"task_id\": \"G014_scene_001\", \"prompt\": \"Split hydro facility in a high mountain: upstream sluice zone with two pressure plates, discharge channel and gate A1; downstream pump-house zone with lever station and two doors; convergence terminal zone with joint-goal platform; wet concrete, steel rails and water light bands, industrial palette\", \"seed\": 4141, \"output_format\": \"glb\", \"texture_size\": 2048, \"layout_constraints\": \"双分离区＋汇合终点区：LV1 水闸区（压板 PLATE_W1/PLATE_W2、水道闸门 GATE_A1、泄洪水道）、LV2 泵房区（拉杆 LEVER_P1、门 GATE_B1/GATE_B2）、LV3 汇合终点区（终点格 GOAL）；共享检查点 CP1–CP4；两端检查点各设本端安全出生锚点（A 仅水闸区、B 仅泵房区，AUD14）；机关路径在 4m/s 移动、1.5m 跳高、0.8s 跳跃时长边界内可达；机关布置候选与重生点微调由 seed=1014 冻结；碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）\", \"spec_ref\": \"L02\", \"comparison_sources\": [\"hunyuan_worldplay\", \"llm_combo\"]}"
+    },
+    "general:L161-161": {
+      "path": "test_data/test_samples/G014_dual_zone_waterworks/general_requirement.txt",
+      "sha256": "1ca35747fc9c58bb086c0399c3a4318f5b419dc71be89730266d66b5a052d105",
+      "start_line": 161,
+      "end_line": 161,
+      "quote": "- W01 世界与时代背景：两端同一条水线——季风年久失修的高山水利枢纽，远程检修队承接的最后一单；水闸区与泵房区被山体隔断，只有靠对端配合才能放行彼此的水路。"
+    },
+    "general:L162-162": {
+      "path": "test_data/test_samples/G014_dual_zone_waterworks/general_requirement.txt",
+      "sha256": "1ca35747fc9c58bb086c0399c3a4318f5b419dc71be89730266d66b5a052d105",
+      "start_line": 162,
+      "end_line": 162,
+      "quote": "- W02 场景所在地：分离的双区设施（上游水闸区＝泄洪水道与压板平台；下游泵房区＝拉杆机房与双门走廊）与汇合终点区（双端汇流的检修终点台）。"
+    },
+    "general:L163-163": {
+      "path": "test_data/test_samples/G014_dual_zone_waterworks/general_requirement.txt",
+      "sha256": "1ca35747fc9c58bb086c0399c3a4318f5b419dc71be89730266d66b5a052d105",
+      "start_line": 163,
+      "end_line": 163,
+      "quote": "- W03 玩家身份与当前任务动机：两名水利检修员 A/B，各守一区；动机是在 1200 秒检修窗口内互通信息（ping 标注）、同步打开终点水道，共同抵达汇合终点。"
+    },
+    "general:L165-165": {
+      "path": "test_data/test_samples/G014_dual_zone_waterworks/general_requirement.txt",
+      "sha256": "1ca35747fc9c58bb086c0399c3a4318f5b419dc71be89730266d66b5a052d105",
+      "start_line": 165,
+      "end_line": 165,
+      "quote": "- W05 叙事来源：压板=配重检修平台；拉杆=泄流阀杆；闸门=泄洪水道/泵房双门；检查点=检修灯站（过机关点亮）；急流=检修期开闸放水的失控水流。全部原创。"
+    },
+    "general:L166-166": {
+      "path": "test_data/test_samples/G014_dual_zone_waterworks/general_requirement.txt",
+      "sha256": "1ca35747fc9c58bb086c0399c3a4318f5b419dc71be89730266d66b5a052d105",
+      "start_line": 166,
+      "end_line": 166,
+      "quote": "- W06 视觉风格与色彩材质：工业水利风；主色=钢青 #4A6F8C、安全橙 #E4762C、水线蓝绿 #7FD8E8、混凝土灰 #9AA3AB、警示黄 #E8C559；材质为湿混凝土、防滑钢板、阀门黄铜与水流。"
+    },
+    "general:L167-167": {
+      "path": "test_data/test_samples/G014_dual_zone_waterworks/general_requirement.txt",
+      "sha256": "1ca35747fc9c58bb086c0399c3a4318f5b419dc71be89730266d66b5a052d105",
+      "start_line": 167,
+      "end_line": 167,
+      "quote": "- W07 环境氛围与声音语言：水流与机房低鸣为底；音效语言为「压板下沉＋门铰上扬＋拉杆机械＋ping 提示＋重生溶解」，全部音效按 §9 F06 冻结清单交付；混音优先级：deadlock/timeout 警报 ＞ 门与机关反馈 ＞ ping ＞ 环境水流。"
+    },
+    "general:L107-117": {
+      "path": "test_data/test_samples/G014_dual_zone_waterworks/general_requirement.txt",
+      "sha256": "1ca35747fc9c58bb086c0399c3a4318f5b419dc71be89730266d66b5a052d105",
+      "start_line": 107,
+      "end_line": 117,
+      "quote": "- L02 关卡（代码块冻结口径）：\n\n```text\n分离区域 2＋汇合终点区 1：LV1 水闸区（客户端A：压板 PLATE_W1/PLATE_W2、水道闸门 GATE_A1、泄洪水道）\nLV2 泵房区（客户端B：拉杆 LEVER_P1、门 GATE_B1/GATE_B2）\nLV3 汇合终点区（双端汇流走廊＋终点格 GOAL）\n共享检查点 CP1–CP4：CP1 水闸区入口、CP2 水闸区机关后、CP3 泵房区入口、CP4 泵房区机关后\n两端检查点各有本端安全出生锚点：客户端A 只能重生到水闸区锚点（CP1/CP2），B 只能重生到泵房区锚点（CP3/CP4）\n（AUD14：不得让客户端A 重生到 B 的封闭区域）\n机关布置候选与重生点微调由 seed=1014 冻结；机关路径须在 G02 移动参数边界内可达\n```"
+    },
+    "asset_requirement:L6": {
+      "path": "test_data/test_samples/G014_dual_zone_waterworks/3D_scene/requirement.txt",
+      "sha256": "644434002f20be2cc05d7f269ceaeda2b399ac878d061a93b334150e391443e9",
+      "start_line": 6,
+      "end_line": 6,
+      "quote": "- G014_scene_001: Split hydro facility in a high mountain: upstream sluice zone with two pressure plates, discharge channel and gate A1; downstream pump-house zone with lever station and two doors; convergence terminal zone with joint-goal platform; wet concrete, steel rails and water light bands, industrial palette"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "1570088e54280dfb58b5516ab111066597b31c5bc34e887cfd5cae85534f95f6",
+      "start_line": 82,
+      "end_line": 86,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    },
+    "revision_policy": {
+      "path": "workspaces/priority_rubric_observable_20261026/POLICY.md",
+      "sha256": "581d726dee3f0efba7c72e8616f553a1248d822791a75f42e6d463b81a9312ca",
+      "start_line": 1,
+      "end_line": 34,
+      "quote": "# Priority 资产可观察需求 rubric 修订 v2\n\n此版本只服务资产三列中的第一列需求完整性，不更改原始生成任务、既有分数或历史冻结合同。\n所有七份 priority 清单逐条覆盖，禁止仅用同类代表任务代替。输出位于各游戏 rubric_assets/priority_observable_v2/，游戏内 priority_rubric_current.json 是显式修订索引，不是对生产 evaluator 的隐式切换。\n\n## 第一列保留\n\n任务明确要求的主体类别、部件、形状、轮廓、命名色彩、材质表现、可见标记、姿态、动作阶段、声音事件、声源、情绪、语言及台词内容。\n任务明确要求的上下、左右、内外、中央/周边、前后、连接、环绕、相对大小/深浅、留白和遮挡关系。\nCG 只要求原文明示的事件顺序、状态变化与镜头行为；不能把列表自动解释为严格顺序。动作片段保留循环/单次与原地组织，不设严格时长/帧数/零位移阈值。\n台词或资产名称中的数字可以是实际内容，不是数值验收阈值；不因文本包含数字机械删掉语义。\n对象数量只作原文上下文，不按精确计数通过率评分；保留主次、成组、单体/多体和必要的关系含义。\n\n## 第一列不计分\n\n绝对坐标、原点、尺寸、距离、速度、时长、角度、帧数、分辨率、面数、数值颜色/色差、采样率、响度和频率阈值，以及机制数值、随机种子、容量、库存、伤害、时间窗。\n这些字段和原始引文完整保留在 task_input、sources 或 excluded_field_values 中，不伪称已经满足，也不当作第一列隐藏门槛。\n引擎导入、碰撞、导航、触发、跳过、暂停、同步、状态机与游戏内混音另属交付/集成验证，不凭离线素材判通过。\n\n## 三列分工\n\nC：当前任务明确指定什么，实际内容是否呈现。\nG：与角色/场景参考及游戏整体世界/美术/声音方向是否相容，不重复扣C的缺失。\nQ：内在感知/技术质量，不重复内容语义或世界适配。\n已有逐资产 rubric 的 G/Q 维度原样保留。此前未建逐资产文件的自然音效/T-pose只补源文支持的G/Q草稿，不能假称复用了已验证分数。\n参考图只按明确绑定使用；image_path 的存在不是生成模型实际收到图片的证明。T-pose中的参考身份/比例比较放G，不在C重复。\n\n## 来源与状态\n\n先遵从原有来源优先级；保留 canonical/分资产原文与任务JSONL。定性投影不得补造“附近”“左侧”等源文不支持的位置。\n场景 layout_constraints 已逐条整理为可见关系；原始标定与运行时要求另存。不宣称精确坐标被视觉验证。\n相互矛盾的要求保留并报审查警告，不用PARTIAL掩盖来源冲突，不把两种胜负分支强行串为一条时间线。\n每条判词必须给视角、帧或音频时间证据。观察不清/未取证为UNKNOWN，调用/配置故障为ERROR，均不填0或100、不删除分母；报告coverage和上下界，证据不足的得分只能PROVISIONAL。\n本次为有来源的修订版与结构/来源校验，不宣布所有1305条人工语义审核完成，不自动冻结，不自动启动评测。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "Split hydro facility in a high mountain: upstream sluice zone with two pressure plates",
+      "discharge channel and gate A1",
+      "downstream pump-house zone with lever station and two doors",
+      "convergence terminal zone with joint-goal platform",
+      "wet concrete",
+      "steel rails and water light bands"
+    ],
+    "style": [
+      "industrial palette"
+    ],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求完整性（可观察内容）",
+      "checks": [
+        {
+          "id": "C001",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：Split hydro facility in a high mountain: upstream sluice zone with two pressure plates",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "Split hydro facility in a high mountain: upstream sluice zone with two pressure plates",
+              "text": "Split hydro facility in a high mountain: upstream sluice zone with two pressure plates"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C002",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：discharge channel and gate A1",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "discharge channel and gate A1",
+              "text": "discharge channel and gate A1"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C003",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：downstream pump-house zone with lever station and two doors",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "downstream pump-house zone with lever station and two doors",
+              "text": "downstream pump-house zone with lever station and two doors"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C004",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：convergence terminal zone with joint-goal platform",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "convergence terminal zone with joint-goal platform",
+              "text": "convergence terminal zone with joint-goal platform"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C005",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：wet concrete",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "wet concrete",
+              "text": "wet concrete"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C006",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：steel rails and water light bands",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "steel rails and water light bands",
+              "text": "steel rails and water light bands"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C007",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：industrial palette",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "industrial palette",
+              "text": "industrial palette"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C008",
+          "title": "可见布局与相对空间关系",
+          "assertion": "可观察地呈现：水闸区与泵房区相互分离，并通向汇合终点区",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "layout_constraints",
+              "source_quote": "双分离区＋汇合终点区：LV1 水闸区（压板 PLATE_W1/PLATE_W2、水道闸门 GATE_A1、泄洪水道）、LV2 泵房区（拉杆 LEVER_P1、门 GATE_B1/GATE_B2）、LV3 汇合终点区（终点格 GOAL）；共享检查点 CP1–CP4；两端检查点各设本端安全出生锚点（A 仅水闸区、B 仅泵房区，AUD14）；机关路径在 4m/s 移动、1.5m 跳高、0.8s 跳跃时长边界内可达；机关布置候选与重生点微调由 seed=1014 冻结；碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）",
+              "text": "水闸区与泵房区相互分离，并通向汇合终点区"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C009",
+          "title": "可见布局与相对空间关系",
+          "assertion": "可观察地呈现：水闸区具有压板、水道闸门和泄洪水道",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "layout_constraints",
+              "source_quote": "双分离区＋汇合终点区：LV1 水闸区（压板 PLATE_W1/PLATE_W2、水道闸门 GATE_A1、泄洪水道）、LV2 泵房区（拉杆 LEVER_P1、门 GATE_B1/GATE_B2）、LV3 汇合终点区（终点格 GOAL）；共享检查点 CP1–CP4；两端检查点各设本端安全出生锚点（A 仅水闸区、B 仅泵房区，AUD14）；机关路径在 4m/s 移动、1.5m 跳高、0.8s 跳跃时长边界内可达；机关布置候选与重生点微调由 seed=1014 冻结；碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）",
+              "text": "水闸区具有压板、水道闸门和泄洪水道"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C010",
+          "title": "可见布局与相对空间关系",
+          "assertion": "可观察地呈现：泵房区具有拉杆和门",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "layout_constraints",
+              "source_quote": "双分离区＋汇合终点区：LV1 水闸区（压板 PLATE_W1/PLATE_W2、水道闸门 GATE_A1、泄洪水道）、LV2 泵房区（拉杆 LEVER_P1、门 GATE_B1/GATE_B2）、LV3 汇合终点区（终点格 GOAL）；共享检查点 CP1–CP4；两端检查点各设本端安全出生锚点（A 仅水闸区、B 仅泵房区，AUD14）；机关路径在 4m/s 移动、1.5m 跳高、0.8s 跳跃时长边界内可达；机关布置候选与重生点微调由 seed=1014 冻结；碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）",
+              "text": "泵房区具有拉杆和门"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C011",
+          "title": "可见布局与相对空间关系",
+          "assertion": "可观察地呈现：终点区与检查点具有可见标识；不验收共享或激活机制",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "layout_constraints",
+              "source_quote": "双分离区＋汇合终点区：LV1 水闸区（压板 PLATE_W1/PLATE_W2、水道闸门 GATE_A1、泄洪水道）、LV2 泵房区（拉杆 LEVER_P1、门 GATE_B1/GATE_B2）、LV3 汇合终点区（终点格 GOAL）；共享检查点 CP1–CP4；两端检查点各设本端安全出生锚点（A 仅水闸区、B 仅泵房区，AUD14）；机关路径在 4m/s 移动、1.5m 跳高、0.8s 跳跃时长边界内可达；机关布置候选与重生点微调由 seed=1014 冻结；碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）",
+              "text": "终点区与检查点具有可见标识；不验收共享或激活机制"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L161-161",
+              "text": "- W01 世界与时代背景：两端同一条水线——季风年久失修的高山水利枢纽，远程检修队承接的最后一单；水闸区与泵房区被山体隔断，只有靠对端配合才能放行彼此的水路。"
+            },
+            {
+              "source_id": "general:L162-162",
+              "text": "- W02 场景所在地：分离的双区设施（上游水闸区＝泄洪水道与压板平台；下游泵房区＝拉杆机房与双门走廊）与汇合终点区（双端汇流的检修终点台）。"
+            },
+            {
+              "source_id": "general:L107-117",
+              "text": "- L02 关卡（代码块冻结口径）：\n\n```text\n分离区域 2＋汇合终点区 1：LV1 水闸区（客户端A：压板 PLATE_W1/PLATE_W2、水道闸门 GATE_A1、泄洪水道）\nLV2 泵房区（客户端B：拉杆 LEVER_P1、门 GATE_B1/GATE_B2）\nLV3 汇合终点区（双端汇流走廊＋终点格 GOAL）\n共享检查点 CP1–CP4：CP1 水闸区入口、CP2 水闸区机关后、CP3 泵房区入口、CP4 泵房区机关后\n两端检查点各有本端安全出生锚点：客户端A 只能重生到水闸区锚点（CP1/CP2），B 只能重生到泵房区锚点（CP3/CP4）\n（AUD14：不得让客户端A 重生到 B 的封闭区域）\n机关布置候选与重生点微调由 seed=1014 冻结；机关路径须在 G02 移动参数边界内可达\n```"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L166-166",
+              "text": "- W06 视觉风格与色彩材质：工业水利风；主色=钢青 #4A6F8C、安全橙 #E4762C、水线蓝绿 #7FD8E8、混凝土灰 #9AA3AB、警示黄 #E8C559；材质为湿混凝土、防滑钢板、阀门黄铜与水流。"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "industrial palette",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "场景几何完整性",
+          "assertion": "只评场景自身断裂、漂浮、交叠与尺度突变，不验证碰撞或导航。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "主要场景崩坏或大面积缺面，空间不可辨",
+            "2": "主要区域存在明显断裂/悬浮/异常尺度突变",
+            "3": "场景整体完整，局部连接或几何有可见瑕疵",
+            "4": "仅有轻微局部几何瑕疵",
+            "5": "全景与近景均完整，未见明显断裂、漂浮或非设计性穿插"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "整体视觉组织与表面质量",
+          "assertion": "只评构图可读性、光照及材质连贯；不重复检查地标数量与布局需求。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "画面混乱或严重伪影，主要空间无法辨识",
+            "2": "光照/材质错乱显著，空间层次难辨",
+            "3": "空间层次可辨，局部拥挤/涂抹/光照接缝可见",
+            "4": "空间组织清晰，仅少量视觉瑕疵",
+            "5": "空间层次、光照与材质连贯，全景和近景均无明显伪影"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。",
+    "requirement_completeness_v2": {
+      "column": "requirement_reference",
+      "score": "100*mean(verified C item scores); PASS=1, PARTIAL=0.5, FAIL=0",
+      "coverage": "verified applicable C count / frozen applicable C count; UNKNOWN/ERROR retained in denominator and bounds, not converted to zero or full credit.",
+      "lower_bound": "100*sum(verified scores)/all applicable C count",
+      "upper_bound": "100*(sum(verified scores)+unknown applicable C count)/all applicable C count",
+      "status": "Any incomplete applicable C coverage => PROVISIONAL; no verified C => null.",
+      "overall": "三列等权；没有任一列不得给总分。此修订不重新计算历史结果。"
+    }
+  },
+  "evidence_requirements": [
+    "覆盖可见主体的适用视角，不因遮挡或缺视角推断缺失。"
+  ],
+  "objective_specs": {
+    "output_format": "glb",
+    "texture_size": 2048
+  },
+  "objective_metric_policy": "原始数值和输出格式仅作独立交付/诊断信息；不并入本版第一列。不改变其他列既有实现。",
+  "authoring_warnings": [
+    {
+      "code": "no_literal_asset_mention_in_general",
+      "detail": "general 中未找到资产名/ID的逐字匹配；采用已解析 spec_ref 与分资产原文，不伪造独立描述。"
+    }
+  ],
+  "requirement_revision": {
+    "version": "priority_observable_v2",
+    "old_rubric": {
+      "path": "test_data/test_samples/G014_dual_zone_waterworks/rubric_assets/per_asset/G014_scene_001.json",
+      "sha256": "bf800c2e87d379f70bd12068a172333e4b94707217ecf0e63fafc667096ae283"
+    },
+    "original_other_dimensions_preserved": true,
+    "original_task_input_unchanged": true,
+    "numerical_policy": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+    "reference_ownership": "任务指定姿态/部件/颜色归C，参考角色匹配/全局世界适配归G，内在感知质量归Q；同一事实不重复扣分。",
+    "baseline": "Old frozen aggregate rubric and historical scores untouched; new path requires explicit evaluator support for this schema.",
+    "freeze_status": "规则修订已生成并校验，未声明逐任务人工语义审核完成，不自动冻结或发布分数。",
+    "source_rebinding_audit": [
+      {
+        "source_id": "quality_protocol",
+        "prior": {
+          "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+          "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+          "start_line": 78,
+          "end_line": 82,
+          "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+        },
+        "resolution": "EXACT_QUOTE_REBOUND_TO_CURRENT_FILE"
+      }
+    ],
+    "clause_ledger": [
+      {
+        "field": "prompt",
+        "source_quote": "Split hydro facility in a high mountain: upstream sluice zone with two pressure plates",
+        "action": "RETAINED",
+        "normalized": "Split hydro facility in a high mountain: upstream sluice zone with two pressure plates",
+        "check_id": "C001"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "discharge channel and gate A1",
+        "action": "RETAINED",
+        "normalized": "discharge channel and gate A1",
+        "check_id": "C002"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "downstream pump-house zone with lever station and two doors",
+        "action": "RETAINED",
+        "normalized": "downstream pump-house zone with lever station and two doors",
+        "check_id": "C003"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "convergence terminal zone with joint-goal platform",
+        "action": "RETAINED",
+        "normalized": "convergence terminal zone with joint-goal platform",
+        "check_id": "C004"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "wet concrete",
+        "action": "RETAINED",
+        "normalized": "wet concrete",
+        "check_id": "C005"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "steel rails and water light bands",
+        "action": "RETAINED",
+        "normalized": "steel rails and water light bands",
+        "check_id": "C006"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "industrial palette",
+        "action": "RETAINED",
+        "normalized": "industrial palette",
+        "check_id": "C007"
+      },
+      {
+        "field": "layout_constraints",
+        "source_quote": "双分离区＋汇合终点区：LV1 水闸区（压板 PLATE_W1/PLATE_W2、水道闸门 GATE_A1、泄洪水道）、LV2 泵房区（拉杆 LEVER_P1、门 GATE_B1/GATE_B2）、LV3 汇合终点区（终点格 GOAL）；共享检查点 CP1–CP4；两端检查点各设本端安全出生锚点（A 仅水闸区、B 仅泵房区，AUD14）；机关路径在 4m/s 移动、1.5m 跳高、0.8s 跳跃时长边界内可达；机关布置候选与重生点微调由 seed=1014 冻结；碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）",
+        "action": "QUALITATIVE_PROJECTION",
+        "normalized": "水闸区与泵房区相互分离，并通向汇合终点区",
+        "check_id": "C008"
+      },
+      {
+        "field": "layout_constraints",
+        "source_quote": "双分离区＋汇合终点区：LV1 水闸区（压板 PLATE_W1/PLATE_W2、水道闸门 GATE_A1、泄洪水道）、LV2 泵房区（拉杆 LEVER_P1、门 GATE_B1/GATE_B2）、LV3 汇合终点区（终点格 GOAL）；共享检查点 CP1–CP4；两端检查点各设本端安全出生锚点（A 仅水闸区、B 仅泵房区，AUD14）；机关路径在 4m/s 移动、1.5m 跳高、0.8s 跳跃时长边界内可达；机关布置候选与重生点微调由 seed=1014 冻结；碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）",
+        "action": "QUALITATIVE_PROJECTION",
+        "normalized": "水闸区具有压板、水道闸门和泄洪水道",
+        "check_id": "C009"
+      },
+      {
+        "field": "layout_constraints",
+        "source_quote": "双分离区＋汇合终点区：LV1 水闸区（压板 PLATE_W1/PLATE_W2、水道闸门 GATE_A1、泄洪水道）、LV2 泵房区（拉杆 LEVER_P1、门 GATE_B1/GATE_B2）、LV3 汇合终点区（终点格 GOAL）；共享检查点 CP1–CP4；两端检查点各设本端安全出生锚点（A 仅水闸区、B 仅泵房区，AUD14）；机关路径在 4m/s 移动、1.5m 跳高、0.8s 跳跃时长边界内可达；机关布置候选与重生点微调由 seed=1014 冻结；碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）",
+        "action": "QUALITATIVE_PROJECTION",
+        "normalized": "泵房区具有拉杆和门",
+        "check_id": "C010"
+      },
+      {
+        "field": "layout_constraints",
+        "source_quote": "双分离区＋汇合终点区：LV1 水闸区（压板 PLATE_W1/PLATE_W2、水道闸门 GATE_A1、泄洪水道）、LV2 泵房区（拉杆 LEVER_P1、门 GATE_B1/GATE_B2）、LV3 汇合终点区（终点格 GOAL）；共享检查点 CP1–CP4；两端检查点各设本端安全出生锚点（A 仅水闸区、B 仅泵房区，AUD14）；机关路径在 4m/s 移动、1.5m 跳高、0.8s 跳跃时长边界内可达；机关布置候选与重生点微调由 seed=1014 冻结；碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）",
+        "action": "QUALITATIVE_PROJECTION",
+        "normalized": "终点区与检查点具有可见标识；不验收共享或激活机制",
+        "check_id": "C011"
+      },
+      {
+        "field": "layout_constraints",
+        "source_quote": "双分离区＋汇合终点区：LV1 水闸区（压板 PLATE_W1/PLATE_W2、水道闸门 GATE_A1、泄洪水道）、LV2 泵房区（拉杆 LEVER_P1、门 GATE_B1/GATE_B2）、LV3 汇合终点区（终点格 GOAL）；共享检查点 CP1–CP4；两端检查点各设本端安全出生锚点（A 仅水闸区、B 仅泵房区，AUD14）；机关路径在 4m/s 移动、1.5m 跳高、0.8s 跳跃时长边界内可达；机关布置候选与重生点微调由 seed=1014 冻结；碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）",
+        "action": "LAYOUT_REVIEWED_PROJECTION",
+        "reason": "逐任务保留可见关系；绝对标定、容量、时间与运行时逻辑均不计分。"
+      }
+    ],
+    "excluded_field_values": {
+      "seed": 4141,
+      "output_format": "glb",
+      "texture_size": 2048,
+      "spec_ref": "L02",
+      "comparison_sources": [
+        "hunyuan_worldplay",
+        "llm_combo"
+      ]
+    },
+    "excluded_fields_policy": "保留来源，不作为第一列附加验收。loop/root_motion等只使用上述C条目所述的定性部分。"
+  }
+}

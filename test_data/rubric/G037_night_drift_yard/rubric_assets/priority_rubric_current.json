@@ -1,0 +1,266 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_night_drift_yard_obj_008",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 147,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_night_drift_yard_obj_008.json",
+        "sha256": "04086dd33858e4d824490180970c25b89572ea7c86520f091f3dc1558ce33850"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_night_drift_yard_obj_009",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 148,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_night_drift_yard_obj_009.json",
+        "sha256": "50b2b3c74acb38caae955942efb1eb2817bd837ab9adecde5003040961845cc3"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 39,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_scene_001.json",
+        "sha256": "9bc4dbd071f940e627d3fe13332240b24982232e38ae16a54565fff189e87a37"
+      },
+      "C_checks": 11,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 403,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_sfx_001.json",
+        "sha256": "ee11c6fa069ab468c0731b346911098dce07eddc141ac14c1a99759247ea2f85"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 404,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_sfx_002.json",
+        "sha256": "e112c6c4ebe8a349c9d29d27b390daa51952af5eb6ca16a0bd508fafaae5211a"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 405,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_sfx_003.json",
+        "sha256": "952a0274c65023c5e0109465cd5be5df8d4d7cc0576779d3dd093c20d8e59ddd"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 406,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_sfx_004.json",
+        "sha256": "e0a2e9208303b0db713497244e8ef9bb1b287f20bfd33f9be6c92f08ef9386e7"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 407,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_sfx_005.json",
+        "sha256": "7a41d30443cc017fe933aeae514edf2248afdbf0bb8feadc30f9b06a1de0c561"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 408,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_sfx_006.json",
+        "sha256": "af3efd9f71aefea637c0a260bbdf29de0dad42f1e97716be377861fb87701052"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 409,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_sfx_007.json",
+        "sha256": "98876301e38564ee538624238d78ad2b20aefe31529422e46404a8e5f8610539"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 410,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_sfx_008.json",
+        "sha256": "929adb124d99fc37ff1c70c6bf45515705f923e67d764df1f988f0c4d0c52467"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 411,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_sfx_009.json",
+        "sha256": "2048dc03c3c28a30eaf5deffa83fa9f2b682ba8769d8c7bb2f9005835a584517"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 412,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_sfx_010.json",
+        "sha256": "66dbdd41eda1a4e02dfe8397da5cc14820c37db87717c7584ce246adee0f0793"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 413,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_sfx_011.json",
+        "sha256": "a043eebd8d08d26b962608b4111b3c4cfb4f87dfe150bc85b5f0a920d09a2cda"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_sfx_012",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 414,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_sfx_012.json",
+        "sha256": "52907e061b65f985a0859ce5ee90db428b6961549df52a27a9ede1dede97f531"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 104,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_cg_001.json",
+        "sha256": "71c7dccfcea9d02c601ee65dbb0c88bd8f10f76eabfad51e3041875e1b03929a"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 105,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_cg_002.json",
+        "sha256": "d08f459ecec0c409c7b25fd714eb6977907ea9753d5d61990aa3b2e210b242e0"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G037_night_drift_yard",
+      "task_id": "G037_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 106,
+      "rubric": {
+        "path": "test_data/test_samples/G037_night_drift_yard/rubric_assets/priority_observable_v2/G037_cg_003.json",
+        "sha256": "7211b881f857a6fde6ec98d868a31ec1045a7329f5924e76a0f709da4ced1ec7"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "multi_variant_cg_requires_delivery_convention",
+        "branch_delivery_review"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "contract_id": "G054_identity_trial.whitebox.final",
+  "version": "final",
+  "content_sha256": "c787b8a872ae8dda248401a0c6460aa55bd553d378f68d9a2afea95bde94d0c0",
+  "rubric_json_sha256": "01e32acae356ee4526181d2356e1a8f5d548b03ff8776b5f2531eafb088fe5a5",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

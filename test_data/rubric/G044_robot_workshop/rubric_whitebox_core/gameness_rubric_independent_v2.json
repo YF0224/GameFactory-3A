@@ -1,0 +1,688 @@
+{
+  "version": "gameness-tiered-independent-v2",
+  "case_id": "G044_robot_workshop",
+  "tier": "M",
+  "target_count": 12,
+  "mechanic_target_count": 12,
+  "group_quotas": {
+    "layout": 4,
+    "guidance": 3,
+    "feedback": 5
+  },
+  "criteria": [
+    {
+      "id": "gameness.independent.layout.01",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- I06 UI 必须显示的状态：剩余指令槽（14 上限与已用）、剩余时间（600 秒）、交付口累计躯干数（x/20）、堵塞高亮格坐标与原因、当前产能（台/分钟或最近 60 秒交付数）、损耗台账入口、采矿口节奏提示。\n固定范围：原文I06列出的当前玩法阶段核心状态内容及其正确对象；同阶段适用字段不能任取一项代替\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0008",
+        "frozen_assertion_id": "G044_robot_workshop.WB.G.01",
+        "frozen_subcheck_id": "G.s0008",
+        "frozen_text": "- I06 UI 必须显示的状态：剩余指令槽（14 上限与已用）、剩余时间（600 秒）、交付口累计躯干数（x/20）、堵塞高亮格坐标与原因、当前产能（台/分钟或最近 60 秒交付数）、损耗台账入口、采矿口节奏提示。",
+        "requirement_ids": [
+          "I06"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "- I06 UI 必须显示的状态：剩余指令槽（14 上限与已用）、剩余时间（600 秒）、交付口累计躯干数（x/20）、堵塞高亮格坐标与原因、当前产能（台/分钟或最近 60 秒交付数）、损耗台账入口、采矿口节奏提示。"
+      },
+      "independence": {
+        "key": "layout:required-gameplay-state",
+        "fixed_target": "原文I06列出的当前玩法阶段核心状态内容及其正确对象；同阶段适用字段不能任取一项代替",
+        "source_criterion_id": "expanded.G.s0008"
+      }
+    },
+    {
+      "id": "gameness.independent.layout.02",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。\n固定范围：作者真实玩法界面中主要状态与次要信息的层级关系（不改成标题页）\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.hierarchy",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。"
+      },
+      "independence": {
+        "key": "layout:hierarchy",
+        "fixed_target": "作者真实玩法界面中主要状态与次要信息的层级关系（不改成标题页）",
+        "source_criterion_id": "game.layout.hierarchy"
+      }
+    },
+    {
+      "id": "gameness.independent.layout.03",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。\n固定范围：作者真实玩法界面的关键文字/控件可辨识可用，不以只读到标题按钮代替\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.readable",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。"
+      },
+      "independence": {
+        "key": "layout:readability",
+        "fixed_target": "作者真实玩法界面的关键文字/控件可辨识可用，不以只读到标题按钮代替",
+        "source_criterion_id": "game.layout.readable"
+      }
+    },
+    {
+      "id": "gameness.independent.layout.04",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "关键状态图标＋文字并用\n固定范围：严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F10"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0036",
+        "frozen_assertion_id": "G044_robot_workshop.WB.G.06",
+        "frozen_subcheck_id": "G.s0036",
+        "frozen_text": "关键状态图标＋文字并用",
+        "requirement_ids": [
+          "F10"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "关键状态图标＋文字并用"
+      },
+      "independence": {
+        "key": "layout:expanded.G.s0036",
+        "fixed_target": "严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件",
+        "source_criterion_id": "expanded.G.s0036"
+      }
+    },
+    {
+      "id": "gameness.independent.guidance.01",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "实际游戏展示或清楚传达必要操作方法。\n固定范围：作者核心玩法所必需的操作方式在操作前可知，不能只以操作后反馈证明\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.guidance.controls",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "guidance",
+        "requirement": "实际游戏展示或清楚传达必要操作方法。"
+      },
+      "independence": {
+        "key": "guidance:controls-before-action",
+        "fixed_target": "作者核心玩法所必需的操作方式在操作前可知，不能只以操作后反馈证明",
+        "source_criterion_id": "game.guidance.controls"
+      }
+    },
+    {
+      "id": "gameness.independent.guidance.02",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。\n固定范围：严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0038",
+        "frozen_assertion_id": "G044_robot_workshop.WB.G.07",
+        "frozen_subcheck_id": "G.s0038",
+        "frozen_text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。"
+      },
+      "independence": {
+        "key": "guidance:expanded.G.s0038",
+        "fixed_target": "严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件",
+        "source_criterion_id": "expanded.G.s0038"
+      }
+    },
+    {
+      "id": "gameness.independent.guidance.03",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。\n固定范围：严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0041",
+        "frozen_assertion_id": "G044_robot_workshop.WB.G.07",
+        "frozen_subcheck_id": "G.s0041",
+        "frozen_text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。"
+      },
+      "independence": {
+        "key": "guidance:expanded.G.s0041",
+        "fixed_target": "严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件",
+        "source_criterion_id": "expanded.G.s0041"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.01",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【配方完成】实际发生时可视表现为【成品亮起弹跳】，结束条件【物品离台】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【配方完成】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0018",
+        "frozen_assertion_id": "G044_robot_workshop.WB.G.03",
+        "frozen_subcheck_id": "G.s0018",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 配方完成 | 成品亮起弹跳 | assemble_complete | 物品离台 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【配方完成】实际发生时可视表现为【成品亮起弹跳】，结束条件【物品离台】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:配方完成",
+        "fixed_target": "仅事件【配方完成】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0018"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.02",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【达标结算】实际发生时可视表现为【C03 胜利意象＋结算面板】，结束条件【进入结算面板】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【达标结算】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0024",
+        "frozen_assertion_id": "G044_robot_workshop.WB.G.03",
+        "frozen_subcheck_id": "G.s0024",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 达标结算 | C03 胜利意象＋结算面板 | victory_sting | 进入结算面板 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【达标结算】实际发生时可视表现为【C03 胜利意象＋结算面板】，结束条件【进入结算面板】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:达标结算",
+        "fixed_target": "仅事件【达标结算】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0024"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.03",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【放置设备/带格】实际发生时可视表现为【落位闪光＋槽位计数刷新】，结束条件【闪光收束】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【放置设备/带格】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0015",
+        "frozen_assertion_id": "G044_robot_workshop.WB.G.03",
+        "frozen_subcheck_id": "G.s0015",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 放置设备/带格 | 落位闪光＋槽位计数刷新 | place_part | 闪光收束 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【放置设备/带格】实际发生时可视表现为【落位闪光＋槽位计数刷新】，结束条件【闪光收束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:放置设备/带格",
+        "fixed_target": "仅事件【放置设备/带格】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0015"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.04",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【删除设备/带格】实际发生时可视表现为【拆解碎屑＋损耗台账角标＋1】，结束条件【碎屑收束】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【删除设备/带格】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0016",
+        "frozen_assertion_id": "G044_robot_workshop.WB.G.03",
+        "frozen_subcheck_id": "G.s0016",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 删除设备/带格 | 拆解碎屑＋损耗台账角标＋1 | delete_part | 碎屑收束 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【删除设备/带格】实际发生时可视表现为【拆解碎屑＋损耗台账角标＋1】，结束条件【碎屑收束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:删除设备/带格",
+        "fixed_target": "仅事件【删除设备/带格】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0016"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.05",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【加工步进】实际发生时可视表现为【组装台火花迸溅】，结束条件【步进结束】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【加工步进】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0017",
+        "frozen_assertion_id": "G044_robot_workshop.WB.G.03",
+        "frozen_subcheck_id": "G.s0017",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 加工步进 | 组装台火花迸溅 | assemble_step | 步进结束 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【加工步进】实际发生时可视表现为【组装台火花迸溅】，结束条件【步进结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:加工步进",
+        "fixed_target": "仅事件【加工步进】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0017"
+      }
+    }
+  ],
+  "source_bindings": {
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G044_robot_workshop/rubric_whitebox_core/rubric.json": "dca628c80ba0ceaa050258fd0fac509e2ab20e28aeb26e6bc1a9dd37f35e5064",
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G044_robot_workshop/general_requirement.txt": "00db190a69a8faa880709df2fe5afde5379fbf23c9e0265fdcd2e18f55715775"
+  },
+  "source_contract_id": "G044_robot_workshop.whitebox.tiered-core-v1.f50458acb0f1715d3e678db973a6949492ceecee227d66851215feebc886c108",
+  "selection_basis": "Original requirements only; fixed event roles then authored order; no scores/runtime/source implementation",
+  "unselected_source_criteria": [
+    {
+      "id": "expanded.G.s0002",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.01",
+      "frozen_subcheck_id": "G.s0002",
+      "frozen_text": "- I01 键鼠：左键点击网格＋设备钮＝放置（放置时可选配方与输出向）",
+      "requirement_ids": [
+        "I01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- I01 键鼠：左键点击网格＋设备钮＝放置（放置时可选配方与输出向）"
+    },
+    {
+      "id": "expanded.G.s0003",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.01",
+      "frozen_subcheck_id": "G.s0003",
+      "frozen_text": "点击带格/分流格＝转向或切换分流输出向（4 向循环）",
+      "requirement_ids": [
+        "I01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "点击带格/分流格＝转向或切换分流输出向（4 向循环）"
+    },
+    {
+      "id": "expanded.G.s0004",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.01",
+      "frozen_subcheck_id": "G.s0004",
+      "frozen_text": "右键＝删除回收槽位（物料入损耗台账）",
+      "requirement_ids": [
+        "I01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "右键＝删除回收槽位（物料入损耗台账）"
+    },
+    {
+      "id": "expanded.G.s0005",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.01",
+      "frozen_subcheck_id": "G.s0005",
+      "frozen_text": "Esc＝暂停",
+      "requirement_ids": [
+        "I01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "Esc＝暂停"
+    },
+    {
+      "id": "expanded.G.s0006",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.01",
+      "frozen_subcheck_id": "G.s0006",
+      "frozen_text": "结算界面 Enter＝重开",
+      "requirement_ids": [
+        "I01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "结算界面 Enter＝重开"
+    },
+    {
+      "id": "expanded.G.s0007",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.01",
+      "frozen_subcheck_id": "G.s0007",
+      "frozen_text": "HUD「重置产线」钮。",
+      "requirement_ids": [
+        "I01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "HUD「重置产线」钮。"
+    },
+    {
+      "id": "expanded.G.s0001",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.01",
+      "frozen_subcheck_id": "G.s0001",
+      "frozen_text": "- S04 最低完整流程：放置/转向/删除指令、物流运转、诊断提示、交付口计数、结算、重开必须全部存在且有真实入口。",
+      "requirement_ids": [
+        "S04"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- S04 最低完整流程：放置/转向/删除指令、物流运转、诊断提示、交付口计数、结算、重开必须全部存在且有真实入口。"
+    },
+    {
+      "id": "expanded.G.s0019",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.03",
+      "frozen_subcheck_id": "G.s0019",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 物料入交付口 | 计数滚动＋躯干入库滑轨 | deliver_tick | 动画收束 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【物料入交付口】实际发生时可视表现为【计数滚动＋躯干入库滑轨】，结束条件【动画收束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0020",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.03",
+      "frozen_subcheck_id": "G.s0020",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 局部堵塞高亮 | 目标格红色脉冲＋原因浮标（20 秒判据） | jam_alert | 堵塞解除或保持提示 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【局部堵塞高亮】实际发生时可视表现为【目标格红色脉冲＋原因浮标（20 秒判据）】，结束条件【堵塞解除或保持提示】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0021",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.03",
+      "frozen_subcheck_id": "G.s0021",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 恢复指令可用 | 「清空下游缓冲」钮亮起 | recovery_flush | 执行或再次冷却 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【恢复指令可用】实际发生时可视表现为【「清空下游缓冲」钮亮起】，结束条件【执行或再次冷却】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0022",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.03",
+      "frozen_subcheck_id": "G.s0022",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 产线重置 | 全带段清空闪光＋曲线中断标记 | recovery_flush（重置档） | 重置完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【产线重置】实际发生时可视表现为【全带段清空闪光＋曲线中断标记】，结束条件【重置完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0023",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.03",
+      "frozen_subcheck_id": "G.s0023",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 红线死锁 | 全屏红框＋判负结算入口 | defeat_sting（死锁档） | 进入判负结算 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【红线死锁】实际发生时可视表现为【全屏红框＋判负结算入口】，结束条件【进入判负结算】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0025",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.03",
+      "frozen_subcheck_id": "G.s0025",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 产能不足结算 | C03 失败意象＋结算面板 | defeat_sting | 进入结算面板 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【产能不足结算】实际发生时可视表现为【C03 失败意象＋结算面板】，结束条件【进入结算面板】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0013",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.04",
+      "frozen_subcheck_id": "G.s0013",
+      "frozen_text": "顿帧不改变计时口径。",
+      "requirement_ids": [
+        "F03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "顿帧不改变计时口径。",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0032",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.04",
+      "frozen_subcheck_id": "G.s0032",
+      "frozen_text": "- F09 屏幕震动：本作无震动需求（俯视编排固定机位）",
+      "requirement_ids": [
+        "F09"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- F09 屏幕震动：本作无震动需求（俯视编排固定机位）",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0033",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.04",
+      "frozen_subcheck_id": "G.s0033",
+      "frozen_text": "表现层自由，不设冻结项。",
+      "requirement_ids": [
+        "F09"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "表现层自由，不设冻结项。"
+    },
+    {
+      "id": "expanded.G.s0034",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.06",
+      "frozen_subcheck_id": "G.s0034",
+      "frozen_text": "- F10 前端界面：标题（开工/设置/退出）→ 编排 HUD（I06 全项＋设备钮盘）→ 诊断面板（堵塞列表/损耗台账）→ 产能曲线面板 → 暂停面板（继续/重置产线/重开/返回）→ 结算面板（交付数/产能曲线/堵塞总时长/损耗台账",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- F10 前端界面：标题（开工/设置/退出）→ 编排 HUD（I06 全项＋设备钮盘）→ 诊断面板（堵塞列表/损耗台账）→ 产能曲线面板 → 暂停面板（继续/重置产线/重开/返回）→ 结算面板（交付数/产能曲线/堵塞总时长/损耗台账"
+    },
+    {
+      "id": "expanded.G.s0035",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.06",
+      "frozen_subcheck_id": "G.s0035",
+      "frozen_text": "Enter 重开）",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "Enter 重开）"
+    },
+    {
+      "id": "expanded.G.s0037",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.06",
+      "frozen_subcheck_id": "G.s0037",
+      "frozen_text": "窗口失焦自动暂停。",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "窗口失焦自动暂停。",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0042",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.07",
+      "frozen_subcheck_id": "G.s0042",
+      "frozen_text": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因。"
+    },
+    {
+      "id": "expanded.G.s0040",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.07",
+      "frozen_subcheck_id": "G.s0040",
+      "frozen_text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "目标进度、阶段变化与终局结果向玩家明确呈现。"
+    },
+    {
+      "id": "expanded.G.s0043",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.07",
+      "frozen_subcheck_id": "G.s0043",
+      "frozen_text": "危险预警与恢复入口可发现，玩家能据此调整操作。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "危险预警与恢复入口可发现，玩家能据此调整操作。"
+    },
+    {
+      "id": "expanded.G.s0039",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.07",
+      "frozen_subcheck_id": "G.s0039",
+      "frozen_text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。"
+    },
+    {
+      "id": "expanded.G.s0044",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.07",
+      "frozen_subcheck_id": "G.s0044",
+      "frozen_text": "并发单位或多个事件同时发生时，关键反馈仍能对应到正确对象。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "并发单位或多个事件同时发生时，关键反馈仍能对应到正确对象。"
+    },
+    {
+      "id": "expanded.G.s0009",
+      "frozen_assertion_id": "G044_robot_workshop.WB.G.07",
+      "frozen_subcheck_id": "G.s0009",
+      "frozen_text": "数量与属性以对应 G·M 条目为准。",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "数量与属性以对应 G·M 条目为准。"
+    }
+  ],
+  "authorized_change": "Gameness-only independent concrete targets; exact time/fine space diagnostic",
+  "aggregation": "Unchanged equal mean of layout/guidance/feedback; 10/50/100 highest level",
+  "prior_results": "Preserved; new policy requires independent contract, source review and runtime judge",
+  "revision_sha256": "c0f3c3e28d1f14319d7424601a5f8c263af7955562c5d42c749b19f52e0e930e"
+}

@@ -1,0 +1,409 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_caravan_escort_obj_004",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 108,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_caravan_escort_obj_004.json",
+        "sha256": "251d162019d1605f34628475b5d45ed9a5848b4972a275ad8aea30cab9b58d17"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 25,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_scene_001.json",
+        "sha256": "3cd4d080152c89e5f47afa6bf44bda0c7efa49e942f4eb3a449ca6d31bca5be8"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_scene_002",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 26,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_scene_002.json",
+        "sha256": "f01d41f5f87903f6ada30c915cf02fc39b1981686e04a48791c081b09ce577fe"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_scene_003",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 27,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_scene_003.json",
+        "sha256": "6ffda6f5c2c8425f6ba1db2f0d97a16248cd6068e6be35a1148c1121be7a3f51"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_vo_015",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 11,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_vo_015.json",
+        "sha256": "d735997a8f9c1f2e157e995d9b71a4e242f5328ce5b08483ca8981461b1d3c2b"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_vo_016",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 12,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_vo_016.json",
+        "sha256": "420f6c343ea4fdf9f7e9f098a415779ecb33c82879aac23bd86dc204cb4cdce9"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_vo_017",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 13,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_vo_017.json",
+        "sha256": "4e6cc7456297f86e0ed7a60d970c47c16c71303a0991a7e558ba3d0690de6d16"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_vo_018",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 14,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_vo_018.json",
+        "sha256": "1fecd00dc4906bbe78a939322c697292f80dc634e748f989d8c005c71ce918f3"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_vo_019",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 15,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_vo_019.json",
+        "sha256": "9805fed341d65324e67f2c563f33d2f902461e93c8297533dc09b196efb79bf8"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 281,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_001.json",
+        "sha256": "2bd343a901e45974694fe37af638cfddccc959769a9e0e3bcad4fc7975f461d9"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 282,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_002.json",
+        "sha256": "29b77200508723d8ad63926a3c666f3dbf4813f74162ee236ec45f87201628af"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 283,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_003.json",
+        "sha256": "8f46afa5a470d57cd07fc71f1b0d429cec61c49848736b2792d12a94f8a96b2d"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 284,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_004.json",
+        "sha256": "dfc5fa69d3535b290bfd878704d597ccd8986922750d7e0d34ae0869b141797f"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 285,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_005.json",
+        "sha256": "33c0dd1f5ecb8d34c29a6140e19409b8bfadf952db9637de3d7e5ec004ca4aea"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 286,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_006.json",
+        "sha256": "55989ff19750366ffda68f2ecf9b58c811ccd2047dcb324cc9b8b60f4e119ed2"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 287,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_007.json",
+        "sha256": "f7c3549bf62557e4ff92d3b7389aa26d51dee0c25a538f66d49161db62d1766e"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 288,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_008.json",
+        "sha256": "a29cf6088fbb6b9d9a57f5ae927328f4e79952d2c828577574eec445b387ffca"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 289,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_009.json",
+        "sha256": "26905c8bb0696936d66e02c752c5b2c6d0ef9c6973ac7d6cd8408532cecfbd81"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 290,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_010.json",
+        "sha256": "03c2db3c523c2e4ae09669790ef19ea1cc238b254cc3ed4dfe20de39a9db6224"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 291,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_011.json",
+        "sha256": "fa615174d02264c0d0a38e75db60976adaf794f6bb67a0fbdcceb789974ee04c"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_012",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 292,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_012.json",
+        "sha256": "278627bcb7d0afcebfc4a32779cf1c9c9261117686db5cba4555dc9cf36198eb"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_013",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 293,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_013.json",
+        "sha256": "ae4579ac5ee9a913c87b57c732c1bce3d8ec4555934ce64b79a7a4704299d398"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_sfx_014",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 294,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_sfx_014.json",
+        "sha256": "e602869f2aab7784ba3e968fe0cbf38774baf6d3a0dbff15870195146b22bd2a"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 77,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_cg_001.json",
+        "sha256": "3251f1e8e126b2d4d21b647da6bbec41f0fad8e788d5e2669fe7f33c8f3fb196"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 78,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_cg_002.json",
+        "sha256": "290348cb05df8630cff42d90cd1e3182963adc5b0f93769a0e7c541721b6f2af"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 79,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_cg_003.json",
+        "sha256": "074c7aa22a24524582672a64ad922ecb79f036515fff08ea722b75c70dbc5f5e"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G029_caravan_escort",
+      "task_id": "G029_cg_004",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 80,
+      "rubric": {
+        "path": "test_data/test_samples/G029_caravan_escort/rubric_assets/priority_observable_v2/G029_cg_004.json",
+        "sha256": "ea8919933c03d55cf0d362645d82df85775670794f7ed64d4c70275b66e15d5d"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general",
+        "multi_variant_cg_requires_delivery_convention",
+        "branch_delivery_review"
+      ]
+    }
+  ]
+}

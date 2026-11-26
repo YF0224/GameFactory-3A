@@ -1,0 +1,7 @@
+{
+  "contract_id": "G035_rift_expedition.whitebox.endpoints-v2-candidate.87a682b8a53f628298eb748750fb3baccc5b60c775e59f11395f0cbd15084b10",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "87a682b8a53f628298eb748750fb3baccc5b60c775e59f11395f0cbd15084b10",
+  "rubric_json_sha256": "339cffe311cfc8aadc7555582a5276df877588cdb57a33673840f78787813e6f",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

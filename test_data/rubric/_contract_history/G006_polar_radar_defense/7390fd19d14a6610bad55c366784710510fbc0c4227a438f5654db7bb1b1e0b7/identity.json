@@ -1,0 +1,7 @@
+{
+  "contract_id": "G006_polar_radar_defense.whitebox.final",
+  "version": "final",
+  "content_sha256": "7390fd19d14a6610bad55c366784710510fbc0c4227a438f5654db7bb1b1e0b7",
+  "rubric_json_sha256": "bc1b1b6f607f1867be245659b40c1ce934900d2f7faef42d57294cb19516b691",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

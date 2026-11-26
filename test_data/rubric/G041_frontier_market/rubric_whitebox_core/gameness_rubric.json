@@ -1,0 +1,515 @@
+{
+  "version": "gameness-tiered-core-v1",
+  "case_id": "G041_frontier_market",
+  "tier": "S",
+  "target_count": 8,
+  "mechanic_target_count": 8,
+  "group_quotas": {
+    "layout": 3,
+    "guidance": 2,
+    "feedback": 3
+  },
+  "authorized_change": "Gameness only: align count with same-case same-tier Mechanic",
+  "source_bindings": {
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G041_frontier_market/rubric_whitebox_core/rubric.json": "914381351cbf63675f5a5842738191984d6702049596318698016d10025e7833",
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G041_frontier_market/general_requirement.txt": "96b8504eb5128b8f582da6e6f888621b85ff8e5727195417b5f282c80f5a9943"
+  },
+  "source_contract_id": "G041_frontier_market.whitebox.tiered-core-v1.fa55ec65758faa0b8c2ffcb27505e38a4c0046b26a817f724d9e16e42857e4bf",
+  "criteria": [
+    {
+      "id": "gameness.tiered.layout.01",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法阶段的核心状态信息可见，玩家能理解对象与状态的含义；无需全阶段同屏。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0001",
+        "frozen_assertion_id": "G041_frontier_market.WB.G.04",
+        "frozen_subcheck_id": "G.s0001",
+        "frozen_text": "- I06 UI 必须显示的状态：资金、库存（四商品分列与容量占用）、当前售价、营业剩余时间、队列人数（0–3）、候补人数、当日成交笔数、当日流失分类计数（转身离店/断货/候补超时）。",
+        "requirement_ids": [
+          "I06"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "- I06 UI 必须显示的状态：资金、库存（四商品分列与容量占用）、当前售价、营业剩余时间、队列人数（0–3）、候补人数、当日成交笔数、当日流失分类计数（转身离店/断货/候补超时）。"
+      }
+    },
+    {
+      "id": "gameness.tiered.layout.02",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法界面的主要状态与次要信息层级清楚，玩家能辨认重点。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.hierarchy",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。"
+      }
+    },
+    {
+      "id": "gameness.tiered.layout.03",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法界面的关键文字和控件可辨认、可使用，不因遮挡或重叠而无法理解。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.readable",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。"
+      }
+    },
+    {
+      "id": "gameness.tiered.guidance.01",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "游戏内清楚传达一项推进当前玩法所必需的核心操作方法。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.guidance.controls",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "guidance",
+        "requirement": "实际游戏展示或清楚传达必要操作方法。"
+      }
+    },
+    {
+      "id": "gameness.tiered.guidance.02",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "玩家在当前真实玩法阶段能理解当前目标或下一步可执行操作。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0035",
+        "frozen_assertion_id": "G041_frontier_market.WB.G.04",
+        "frozen_subcheck_id": "G.s0035",
+        "frozen_text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.01",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "一项代表性核心操作发生后，玩家能辨认操作成功、失败或被正确拒绝的结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0036",
+        "frozen_assertion_id": "G041_frontier_market.WB.G.04",
+        "frozen_subcheck_id": "G.s0036",
+        "frozen_text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "requirement": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.02",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "一次真实进度更新、阶段切换或终局结果被清楚传达，信息与实际状态相符。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0037",
+        "frozen_assertion_id": "G041_frontier_market.WB.G.04",
+        "frozen_subcheck_id": "G.s0037",
+        "frozen_text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "requirement": "目标进度、阶段变化与终局结果向玩家明确呈现。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.03",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "真实发生“顾客到店（意愿通过）”时，反馈让玩家辨认该事件及其对应对象和结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0010",
+        "frozen_assertion_id": "G041_frontier_market.WB.G.01",
+        "frozen_subcheck_id": "G.s0010",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 顾客到店（意愿通过） | 顾客走向队列/候补区 | customer_enter | 入队或候补就位 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【顾客到店（意愿通过）】实际发生时可视表现为【顾客走向队列/候补区】，结束条件【入队或候补就位】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      }
+    }
+  ],
+  "unselected_source_criteria": [
+    {
+      "id": "expanded.G.s0011",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.01",
+      "frozen_subcheck_id": "G.s0011",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 顾客到店（意愿不通过） | 顾客原地摇头转身离店 | customer_enter（离店档） | 出画面 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【顾客到店（意愿不通过）】实际发生时可视表现为【顾客原地摇头转身离店】，结束条件【出画面】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0012",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.01",
+      "frozen_subcheck_id": "G.s0012",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 断货流失 | 目标商品红标闪 0.8 秒＋顾客离店 | stockout_alert | 顾客出画面 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【断货流失】实际发生时可视表现为【目标商品红标闪 0.8 秒＋顾客离店】，结束条件【顾客出画面】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0013",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.01",
+      "frozen_subcheck_id": "G.s0013",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 入队 | 队列槽位框亮起 | customer_enter（队列档） | 队列满员提示 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【入队】实际发生时可视表现为【队列槽位框亮起】，结束条件【队列满员提示】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0014",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.01",
+      "frozen_subcheck_id": "G.s0014",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 候补等待 | 顾客头顶沙漏图标（剩余耐心环形缩短） | queue_wait_loop（候补≥1 常驻低音量） | 入队或超时 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【候补等待】实际发生时可视表现为【顾客头顶沙漏图标（剩余耐心环形缩短）】，结束条件【入队或超时】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0015",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.01",
+      "frozen_subcheck_id": "G.s0015",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 候补超时流失 | 沙漏碎裂图标＋顾客离店 | queue_timeout | 顾客出画面 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【候补超时流失】实际发生时可视表现为【沙漏碎裂图标＋顾客离店】，结束条件【顾客出画面】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0016",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.01",
+      "frozen_subcheck_id": "G.s0016",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 柜台结算 | 柜台灯光聚焦结算顾客 | counter_process_loop（3 秒结算音） | 结算完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【柜台结算】实际发生时可视表现为【柜台灯光聚焦结算顾客】，结束条件【结算完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0017",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.01",
+      "frozen_subcheck_id": "G.s0017",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 成交 | 金币弹出动画＋资金数字滚动 | coin_chime | 金币动画收束 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【成交】实际发生时可视表现为【金币弹出动画＋资金数字滚动】，结束条件【金币动画收束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0018",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.01",
+      "frozen_subcheck_id": "G.s0018",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 营业中改价 | 商品价签高亮＋价签数字滚动 | price_tick | 高亮结束 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【营业中改价】实际发生时可视表现为【商品价签高亮＋价签数字滚动】，结束条件【高亮结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0019",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.01",
+      "frozen_subcheck_id": "G.s0019",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 打烊 | 卷帘门板动画＋在场顾客散场 | door_close | 散场完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【打烊】实际发生时可视表现为【卷帘门板动画＋在场顾客散场】，结束条件【散场完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0020",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.01",
+      "frozen_subcheck_id": "G.s0020",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 日结对账 | 算盘式逐笔滚动条目 | day_settle | 面板定格 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【日结对账】实际发生时可视表现为【算盘式逐笔滚动条目】，结束条件【面板定格】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0021",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.01",
+      "frozen_subcheck_id": "G.s0021",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 达标结算 | C03 胜利意象前置＋结算面板 | victory_sting | 进入结算面板 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【达标结算】实际发生时可视表现为【C03 胜利意象前置＋结算面板】，结束条件【进入结算面板】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0022",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.01",
+      "frozen_subcheck_id": "G.s0022",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 失败结算 | C03 失败意象前置＋分类结算面板 | defeat_sting | 进入结算面板 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【失败结算】实际发生时可视表现为【C03 失败意象前置＋分类结算面板】，结束条件【进入结算面板】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0008",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.02",
+      "frozen_subcheck_id": "G.s0008",
+      "frozen_text": "顿帧不改变计时口径。",
+      "requirement_ids": [
+        "F03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "顿帧不改变计时口径。",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0029",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.02",
+      "frozen_subcheck_id": "G.s0029",
+      "frozen_text": "- F09 屏幕震动：本作无震动需求（经营题固定机位）",
+      "requirement_ids": [
+        "F09"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- F09 屏幕震动：本作无震动需求（经营题固定机位）",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0030",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.02",
+      "frozen_subcheck_id": "G.s0030",
+      "frozen_text": "表现层自由，不设冻结项。",
+      "requirement_ids": [
+        "F09"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "表现层自由，不设冻结项。"
+    },
+    {
+      "id": "expanded.G.s0031",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.04",
+      "frozen_subcheck_id": "G.s0031",
+      "frozen_text": "- F10 前端界面：标题（开始经营/设置/退出）→ 进货界面（四商品数量/资金/容量）→ 定价界面（四商品价签 ±1/±5 与基准区间提示）→ 营业 HUD（I06 全项）→ 暂停面板（继续/重开/返回）→ 日结面板 → 结算面板（胜利/失败分类明细",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- F10 前端界面：标题（开始经营/设置/退出）→ 进货界面（四商品数量/资金/容量）→ 定价界面（四商品价签 ±1/±5 与基准区间提示）→ 营业 HUD（I06 全项）→ 暂停面板（继续/重开/返回）→ 日结面板 → 结算面板（胜利/失败分类明细"
+    },
+    {
+      "id": "expanded.G.s0032",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.04",
+      "frozen_subcheck_id": "G.s0032",
+      "frozen_text": "Enter 重开）",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "Enter 重开）"
+    },
+    {
+      "id": "expanded.G.s0033",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.04",
+      "frozen_subcheck_id": "G.s0033",
+      "frozen_text": "关键状态图标＋文字并用",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "关键状态图标＋文字并用"
+    },
+    {
+      "id": "expanded.G.s0034",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.04",
+      "frozen_subcheck_id": "G.s0034",
+      "frozen_text": "窗口失焦自动暂停。",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "窗口失焦自动暂停。",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0002",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.04",
+      "frozen_subcheck_id": "G.s0002",
+      "frozen_text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/进货/定价/HUD/日结/结算面板）与交互物（进货钮、调价钮、柜台结算位、队列槽、候补区）逐类存在且运行时可进入",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/进货/定价/HUD/日结/结算面板）与交互物（进货钮、调价钮、柜台结算位、队列槽、候补区）逐类存在且运行时可进入"
+    },
+    {
+      "id": "expanded.G.s0003",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.04",
+      "frozen_subcheck_id": "G.s0003",
+      "frozen_text": "柜台结算节奏由引擎计时器驱动，装饰模型不得替代计时逻辑",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "柜台结算节奏由引擎计时器驱动，装饰模型不得替代计时逻辑"
+    },
+    {
+      "id": "expanded.G.s0004",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.04",
+      "frozen_subcheck_id": "G.s0004",
+      "frozen_text": "数量与属性以对应 G·M 条目为准。",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "数量与属性以对应 G·M 条目为准。"
+    },
+    {
+      "id": "expanded.G.s0038",
+      "frozen_assertion_id": "G041_frontier_market.WB.G.04",
+      "frozen_subcheck_id": "G.s0038",
+      "frozen_text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。"
+    }
+  ],
+  "unselected_policy": "Retained for traceability/diagnostics; no implicit extra scored checks",
+  "selection_basis": "Original requirement/rubric only; no author implementation, runtime or scores",
+  "aggregation": "Equal mean of layout/guidance/feedback group means; unchanged 10/50/100 levels",
+  "prior_results": "Preserved under their original rubric; not relabeled or arithmetically converted",
+  "revision_sha256": "fbe07336da52148a676c5c276426d414b081009f217d3d13cd6458bab9933d4b"
+}

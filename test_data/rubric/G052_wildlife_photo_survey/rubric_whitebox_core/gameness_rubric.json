@@ -1,0 +1,513 @@
+{
+  "version": "gameness-tiered-core-v1",
+  "case_id": "G052_wildlife_photo_survey",
+  "tier": "S",
+  "target_count": 8,
+  "mechanic_target_count": 8,
+  "group_quotas": {
+    "layout": 3,
+    "guidance": 2,
+    "feedback": 3
+  },
+  "authorized_change": "Gameness only: align count with same-case same-tier Mechanic",
+  "source_bindings": {
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G052_wildlife_photo_survey/rubric_whitebox_core/rubric.json": "9e32c0f924147485a7dd07face0a26a1102dab1d2ce69d6b89f49040e55c495c",
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G052_wildlife_photo_survey/general_requirement.txt": "18ec4f4160eda281f966757a21b23b1c4aecf15dadff3ea21ea0ed1aa961c490"
+  },
+  "source_contract_id": "G052_wildlife_photo_survey.whitebox.tiered-core-v1.b8b5ef2858da01c77367d9c6e28394607438ac19c9d9694460e124590fcea499",
+  "criteria": [
+    {
+      "id": "gameness.tiered.layout.01",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法阶段的核心状态信息可见，玩家能理解对象与状态的含义；无需全阶段同屏。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0006",
+        "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.04",
+        "frozen_subcheck_id": "G.s0006",
+        "frozen_text": "- I06 UI 必须显示的状态：快门余量、当前焦距与距离、取景框、行为标签选择、证据册条目与质量、惊扰提示",
+        "requirement_ids": [
+          "I06"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "- I06 UI 必须显示的状态：快门余量、当前焦距与距离、取景框、行为标签选择、证据册条目与质量、惊扰提示"
+      }
+    },
+    {
+      "id": "gameness.tiered.layout.02",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法阶段的核心状态信息可见，玩家能理解对象与状态的含义；无需全阶段同屏。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0007",
+        "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.04",
+        "frozen_subcheck_id": "G.s0007",
+        "frozen_text": "HUD 对照见 rubric。",
+        "requirement_ids": [
+          "I06"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "HUD 对照见 rubric。"
+      }
+    },
+    {
+      "id": "gameness.tiered.layout.03",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "当前真实玩法界面的主要状态与次要信息层级清楚，玩家能辨认重点。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.hierarchy",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。"
+      }
+    },
+    {
+      "id": "gameness.tiered.guidance.01",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "游戏内清楚传达一项推进当前玩法所必需的核心操作方法。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.guidance.controls",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "guidance",
+        "requirement": "实际游戏展示或清楚传达必要操作方法。"
+      }
+    },
+    {
+      "id": "gameness.tiered.guidance.02",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "玩家在当前真实玩法阶段能理解当前目标或下一步可执行操作。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0035",
+        "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.01",
+        "frozen_subcheck_id": "G.s0035",
+        "frozen_text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.01",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "一项代表性核心操作发生后，玩家能辨认操作成功、失败或被正确拒绝的结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0036",
+        "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.01",
+        "frozen_subcheck_id": "G.s0036",
+        "frozen_text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "requirement": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.02",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "一次真实进度更新、阶段切换或终局结果被清楚传达，信息与实际状态相符。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0037",
+        "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.01",
+        "frozen_subcheck_id": "G.s0037",
+        "frozen_text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "requirement": "目标进度、阶段变化与终局结果向玩家明确呈现。"
+      }
+    },
+    {
+      "id": "gameness.tiered.feedback.03",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "真实发生“进入取景”时，反馈让玩家辨认该事件及其对应对象和结果。\n每条只评价其代表性沟通目标；不要求遍历全部对象、界面、事件或分支。源码只支持10%；实际触发且基本功能正常支持50%；真实原生结果帧清楚、核心信息和对象大致正确支持100%。精确时间、空间、数值及全部细规格仅诊断。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0011",
+        "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+        "frozen_subcheck_id": "G.s0011",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 进入取景 | 取景框展开＋焦距/距离显示 | 相机开镜声 | 退出取景 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【进入取景】实际发生时可视表现为【取景框展开＋焦距/距离显示】，结束条件【退出取景】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      }
+    }
+  ],
+  "unselected_source_criteria": [
+    {
+      "id": "expanded.G.s0001",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.01",
+      "frozen_subcheck_id": "G.s0001",
+      "frozen_text": "- G05 焦距与取景（本包冻结值）：取景模式下滚轮切换焦距 2 档（1×/3×）",
+      "requirement_ids": [
+        "G05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- G05 焦距与取景（本包冻结值）：取景模式下滚轮切换焦距 2 档（1×/3×）"
+    },
+    {
+      "id": "expanded.G.s0002",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.01",
+      "frozen_subcheck_id": "G.s0002",
+      "frozen_text": "1× 视场 40°、3× 视场 15°",
+      "requirement_ids": [
+        "G05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "1× 视场 40°、3× 视场 15°"
+    },
+    {
+      "id": "expanded.G.s0003",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.01",
+      "frozen_subcheck_id": "G.s0003",
+      "frozen_text": "HUD 取景框旁显示当前焦距（图标＋文字「1×/3×」）与实际距离。",
+      "requirement_ids": [
+        "G05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "HUD 取景框旁显示当前焦距（图标＋文字「1×/3×」）与实际距离。"
+    },
+    {
+      "id": "expanded.G.s0004",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.01",
+      "frozen_subcheck_id": "G.s0004",
+      "frozen_text": "- G09 惊扰与回归（本包冻结值）：跑动进入动物 8 米范围 → 当次行为中断并离开当前观测点，被惊扰动物 60 秒不回归该点，HUD 提示「目标受惊，建议转移观测点」（图标＋文字）",
+      "requirement_ids": [
+        "G09"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- G09 惊扰与回归（本包冻结值）：跑动进入动物 8 米范围 → 当次行为中断并离开当前观测点，被惊扰动物 60 秒不回归该点，HUD 提示「目标受惊，建议转移观测点」（图标＋文字）"
+    },
+    {
+      "id": "expanded.G.s0005",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.01",
+      "frozen_subcheck_id": "G.s0005",
+      "frozen_text": "蹲伏移动本身不触发惊扰。",
+      "requirement_ids": [
+        "G09"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "蹲伏移动本身不触发惊扰。"
+    },
+    {
+      "id": "expanded.G.s0038",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.01",
+      "frozen_subcheck_id": "G.s0038",
+      "frozen_text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。"
+    },
+    {
+      "id": "expanded.G.s0012",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+      "frozen_subcheck_id": "G.s0012",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 切换焦距 | 视场缩放动画 0.2s＋档位标签跳动 | 变焦轻响 | 完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【切换焦距】实际发生时可视表现为【视场缩放动画 0.2s＋档位标签跳动】，结束条件【完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0013",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+      "frozen_subcheck_id": "G.s0013",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 对焦锁定 | 目标描边微亮＋对焦标记 | 对焦提示音 | 目标离开或拍摄 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【对焦锁定】实际发生时可视表现为【目标描边微亮＋对焦标记】，结束条件【目标离开或拍摄】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0014",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+      "frozen_subcheck_id": "G.s0014",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 拍摄有效 | 闪光禁用快照框＋照片飞入证据册＋质量徽标弹出 | 快门轻响＋入册叮声 | 完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【拍摄有效】实际发生时可视表现为【闪光禁用快照框＋照片飞入证据册＋质量徽标弹出】，结束条件【完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0015",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+      "frozen_subcheck_id": "G.s0015",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 拍摄无效 | 灰色快照框＋失效原因文字（距离/遮挡/标签） | 快门轻响＋短促提示音 | 0.5s |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【拍摄无效】实际发生时可视表现为【灰色快照框＋失效原因文字（距离/遮挡/标签）】，结束条件【0.5s】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0016",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+      "frozen_subcheck_id": "G.s0016",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 重复样本 | 照片存档不入册＋「重复样本」提示 | 存档沙沙声 | 0.5s |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【重复样本】实际发生时可视表现为【照片存档不入册＋「重复样本」提示】，结束条件【0.5s】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0017",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+      "frozen_subcheck_id": "G.s0017",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 惊扰触发 | 动物急速逃离＋羽毛/水花粒子＋HUD 受惊提示 | 惊飞振翅声＋动物鸣叫 | 离开视野 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【惊扰触发】实际发生时可视表现为【动物急速逃离＋羽毛/水花粒子＋HUD 受惊提示】，结束条件【离开视野】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0018",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+      "frozen_subcheck_id": "G.s0018",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 蹲伏隐蔽 | 角色压低姿态＋芦苇半掩描边＋「隐蔽」图标 | 衣料摩擦声 | 状态常驻 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【蹲伏隐蔽】实际发生时可视表现为【角色压低姿态＋芦苇半掩描边＋「隐蔽」图标】，结束条件【状态常驻】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0019",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+      "frozen_subcheck_id": "G.s0019",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 证据入册整理 | 条目卡片排布＋质量徽标高亮 | 纸页翻动声 | 完成 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【证据入册整理】实际发生时可视表现为【条目卡片排布＋质量徽标高亮】，结束条件【完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0020",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+      "frozen_subcheck_id": "G.s0020",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 提交成立 | 报告页盖章＋结论字样弹出 | 盖章声＋上扬音 | 进入结算 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【提交成立】实际发生时可视表现为【报告页盖章＋结论字样弹出】，结束条件【进入结算】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0021",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+      "frozen_subcheck_id": "G.s0021",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 提交不成立 | 报告页打回红标＋缺项提示 | 纸页回卷声 | 续拍开始 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【提交不成立】实际发生时可视表现为【报告页打回红标＋缺项提示】，结束条件【续拍开始】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0022",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.02",
+      "frozen_subcheck_id": "G.s0022",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 快门耗尽 | 相机下垂＋「样张不足」面板 | 低提示音 | 自动重开 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【快门耗尽】实际发生时可视表现为【相机下垂＋「样张不足」面板】，结束条件【自动重开】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0032",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.04",
+      "frozen_subcheck_id": "G.s0032",
+      "frozen_text": "- F10 前端界面：标题（任务简报/开始/设置/退出）→ HUD（快门余量、焦距、距离、惊扰提示、隐蔽图标）→ 取景 UI（取景框/标签选择/对焦标记）→ 证据册（条目/质量/去重提示）→ 提交界面（勾选/确认）→ 结算报告（结论/照片数/质量分布/重开/返回）→ 暂停面板（继续/重开/设置）",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- F10 前端界面：标题（任务简报/开始/设置/退出）→ HUD（快门余量、焦距、距离、惊扰提示、隐蔽图标）→ 取景 UI（取景框/标签选择/对焦标记）→ 证据册（条目/质量/去重提示）→ 提交界面（勾选/确认）→ 结算报告（结论/照片数/质量分布/重开/返回）→ 暂停面板（继续/重开/设置）"
+    },
+    {
+      "id": "expanded.G.s0033",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.04",
+      "frozen_subcheck_id": "G.s0033",
+      "frozen_text": "关键状态附图标＋文字（焦距档、受惊、重复样本），不只靠颜色区分",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "关键状态附图标＋文字（焦距档、受惊、重复样本），不只靠颜色区分"
+    },
+    {
+      "id": "expanded.G.s0034",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.04",
+      "frozen_subcheck_id": "G.s0034",
+      "frozen_text": "窗口失焦自动暂停。",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "窗口失焦自动暂停。",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0027",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.04",
+      "frozen_subcheck_id": "G.s0027",
+      "frozen_text": "- F07 VFX 信息性与遮挡约束：取景框、对焦标记与惊扰提示承担调查信息",
+      "requirement_ids": [
+        "F07"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- F07 VFX 信息性与遮挡约束：取景框、对焦标记与惊扰提示承担调查信息"
+    },
+    {
+      "id": "expanded.G.s0028",
+      "frozen_assertion_id": "G052_wildlife_photo_survey.WB.G.04",
+      "frozen_subcheck_id": "G.s0028",
+      "frozen_text": "质量徽标承担证据信息",
+      "requirement_ids": [
+        "F07"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "质量徽标承担证据信息"
+    },
+    {
+      "id": "game.layout.readable",
+      "column": "Gameness",
+      "mode": "visual",
+      "group": "layout",
+      "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。"
+    }
+  ],
+  "unselected_policy": "Retained for traceability/diagnostics; no implicit extra scored checks",
+  "selection_basis": "Original requirement/rubric only; no author implementation, runtime or scores",
+  "aggregation": "Equal mean of layout/guidance/feedback group means; unchanged 10/50/100 levels",
+  "prior_results": "Preserved under their original rubric; not relabeled or arithmetically converted",
+  "revision_sha256": "2af4d9fa306151261008e136dada989f81ab23605fcf1113796bc3c7a81657fc"
+}

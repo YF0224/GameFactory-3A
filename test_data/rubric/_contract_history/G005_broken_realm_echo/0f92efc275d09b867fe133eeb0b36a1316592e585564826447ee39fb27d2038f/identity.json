@@ -1,0 +1,7 @@
+{
+  "contract_id": "G005_broken_realm_echo.whitebox.endpoints-v2-candidate.0f92efc275d09b867fe133eeb0b36a1316592e585564826447ee39fb27d2038f",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "0f92efc275d09b867fe133eeb0b36a1316592e585564826447ee39fb27d2038f",
+  "rubric_json_sha256": "29ef32d0d6853df7fff70632a3772c391c7c59a858224f43166af083f6d989d0",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

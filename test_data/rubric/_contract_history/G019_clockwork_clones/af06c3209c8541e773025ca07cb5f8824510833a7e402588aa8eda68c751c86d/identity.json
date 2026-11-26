@@ -1,0 +1,7 @@
+{
+  "contract_id": "G019_clockwork_clones.whitebox.final",
+  "version": "final",
+  "content_sha256": "af06c3209c8541e773025ca07cb5f8824510833a7e402588aa8eda68c751c86d",
+  "rubric_json_sha256": "10d6ddf67f90bae0d3f3b82ac54651ed6a6c9d32edd7d71a0ec7600ebfa7e1b5",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

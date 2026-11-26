@@ -1,0 +1,308 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_polar_radar_defense_obj_005",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 25,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_polar_radar_defense_obj_005.json",
+        "sha256": "e94d660e5194056c8b9880d561d1bde85149551e862b525212cf1b423f7ccf03"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_polar_radar_defense_obj_007",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 26,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_polar_radar_defense_obj_007.json",
+        "sha256": "2f6c63c94a3576c10fdf9390503ffaa9d90f7245baa02cc5e0ad27b06f64aa28"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_polar_radar_defense_obj_008",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 27,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_polar_radar_defense_obj_008.json",
+        "sha256": "05c5b2c96a49dfa5d3c12c4b7bb3cea96a5b3493f412457079efd87812f2ad1c"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_polar_radar_defense_obj_009",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 28,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_polar_radar_defense_obj_009.json",
+        "sha256": "ac0d91468e813391c1e7eccf869d134d41a9674131c3615e5c38f187a926295d"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 7,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_scene_001.json",
+        "sha256": "df8c2937d2e995aa7cf55b8855883e092b34a9ed742428a14f28688bc10d3e60"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 60,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_sfx_001.json",
+        "sha256": "ca84d9fd14465ac8dccf45c73ef79e7bb3de773b09b3774215185cf7c35c9c38"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 61,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_sfx_002.json",
+        "sha256": "894811313a706142fd7d4b572ff183c5b59e76c46f049ff662135ed2f28924a8"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 62,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_sfx_003.json",
+        "sha256": "cf27e1ba01fb78c5083202b0015ea788c32c14d72be0c22076ffb4c937ae510c"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 63,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_sfx_004.json",
+        "sha256": "2308ef4e4d56b094f9f0b594ab222aa96cbf2cb1e2e1b9fd2731e5c8f50c9719"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 64,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_sfx_005.json",
+        "sha256": "859c2dc07d2e0061d68413e88af380ca6bbc556fba79f61d5666c1dc50fc8d67"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 65,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_sfx_006.json",
+        "sha256": "baef8ea792783fbfbdbdd062e5211d59e6634d92ba1169ac8f1aa9594494a420"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 66,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_sfx_007.json",
+        "sha256": "85af9330842a301f5b49b5369349513bdb03789696cc7b30ed64cc229a958d0f"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 67,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_sfx_008.json",
+        "sha256": "2787ee0989badfb943ee071bc15cc31233f2aa59e9c3ab78028a731e5b828f5d"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 68,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_sfx_009.json",
+        "sha256": "2b069bcf0c84df4fff679ade4f0ff9efed34dad97c36f03bc8db2fe70d85cf78"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 69,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_sfx_010.json",
+        "sha256": "8d6d26a8a5d31cfee990833843c8f33160b99fa2f8640ace9f1bdaa6da492369"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 70,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_sfx_011.json",
+        "sha256": "68256a181bd6e03207f0540e4b0c63557a76c66659e567042636765f8947416d"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_sfx_012",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 71,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_sfx_012.json",
+        "sha256": "75f6184c256d5d918366a63b45434090688b13324b1a6b13e83bbd8497dd8336"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_sfx_013",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 72,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_sfx_013.json",
+        "sha256": "b745e5521a94c1e9b2331ed8ec6cd89177a04fda79ac3220e46c043c17656c4f"
+      },
+      "C_checks": 4,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 18,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_cg_001.json",
+        "sha256": "c923060464749ecf30440f3d875f42a05758578d9ce36bbc56e2528f4a23b597"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 19,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_cg_002.json",
+        "sha256": "c05e8210fe6c98100d9e32a0c38803b1dbd3373c773b7ede814ea42b20a402b7"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G006_polar_radar_defense",
+      "task_id": "G006_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 20,
+      "rubric": {
+        "path": "test_data/test_samples/G006_polar_radar_defense/rubric_assets/priority_observable_v2/G006_cg_003.json",
+        "sha256": "f80822dfca9c05ef805db84e0534ac0fb471635b9b3d9410513e1ada133f989b"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "multi_variant_cg_requires_delivery_convention",
+        "branch_delivery_review"
+      ]
+    }
+  ]
+}

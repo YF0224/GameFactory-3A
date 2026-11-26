@@ -1,0 +1,940 @@
+{
+  "version": "gameness-tiered-independent-v2",
+  "case_id": "G060_volcano_stunt_route",
+  "tier": "L-Regular",
+  "target_count": 20,
+  "mechanic_target_count": 20,
+  "group_quotas": {
+    "layout": 5,
+    "guidance": 5,
+    "feedback": 10
+  },
+  "criteria": [
+    {
+      "id": "gameness.independent.layout.01",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- I06 UI 必须显示的状态：连招链与倍率、分段得分与达标线、检查点进度、姿态偏差提示、路面状态（雪/灰/熔岩警示）、摔倒计数\n固定范围：原文I06列出的当前玩法阶段核心状态内容及其正确对象；同阶段适用字段不能任取一项代替\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0012",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.02",
+        "frozen_subcheck_id": "G.s0012",
+        "frozen_text": "- I06 UI 必须显示的状态：连招链与倍率、分段得分与达标线、检查点进度、姿态偏差提示、路面状态（雪/灰/熔岩警示）、摔倒计数",
+        "requirement_ids": [
+          "I06"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "- I06 UI 必须显示的状态：连招链与倍率、分段得分与达标线、检查点进度、姿态偏差提示、路面状态（雪/灰/熔岩警示）、摔倒计数"
+      },
+      "independence": {
+        "key": "layout:required-gameplay-state",
+        "fixed_target": "原文I06列出的当前玩法阶段核心状态内容及其正确对象；同阶段适用字段不能任取一项代替",
+        "source_criterion_id": "expanded.G.s0012"
+      }
+    },
+    {
+      "id": "gameness.independent.layout.02",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。\n固定范围：作者真实玩法界面中主要状态与次要信息的层级关系（不改成标题页）\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.hierarchy",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI信息层级清楚，主要状态与次要信息可区分。"
+      },
+      "independence": {
+        "key": "layout:hierarchy",
+        "fixed_target": "作者真实玩法界面中主要状态与次要信息的层级关系（不改成标题页）",
+        "source_criterion_id": "game.layout.hierarchy"
+      }
+    },
+    {
+      "id": "gameness.independent.layout.03",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。\n固定范围：作者真实玩法界面的关键文字/控件可辨识可用，不以只读到标题按钮代替\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.layout.readable",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "layout",
+        "requirement": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。"
+      },
+      "independence": {
+        "key": "layout:readability",
+        "fixed_target": "作者真实玩法界面的关键文字/控件可辨识可用，不以只读到标题按钮代替",
+        "source_criterion_id": "game.layout.readable"
+      }
+    },
+    {
+      "id": "gameness.independent.layout.04",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "关键状态附图标＋文字（路面、链徽、预警），不只靠颜色区分\n固定范围：严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F10"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0045",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.07",
+        "frozen_subcheck_id": "G.s0045",
+        "frozen_text": "关键状态附图标＋文字（路面、链徽、预警），不只靠颜色区分",
+        "requirement_ids": [
+          "F10"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "关键状态附图标＋文字（路面、链徽、预警），不只靠颜色区分"
+      },
+      "independence": {
+        "key": "layout:expanded.G.s0045",
+        "fixed_target": "严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件",
+        "source_criterion_id": "expanded.G.s0045"
+      }
+    },
+    {
+      "id": "gameness.independent.layout.05",
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- F10 前端界面：标题（开始训练/评级说明/设置/退出）→ HUD（连招链与倍率、分段得分与达标线、检查点、姿态偏差、路面状态、摔倒数）→ 分段结算（段分/达标状态/段重开/继续）→ 总评（各段分/总分/最长链/摔倒数/评级/重开/返回）→ 暂停面板（继续/段重开/全路线重开/设置）\n固定范围：严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F10"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0044",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.07",
+        "frozen_subcheck_id": "G.s0044",
+        "frozen_text": "- F10 前端界面：标题（开始训练/评级说明/设置/退出）→ HUD（连招链与倍率、分段得分与达标线、检查点、姿态偏差、路面状态、摔倒数）→ 分段结算（段分/达标状态/段重开/继续）→ 总评（各段分/总分/最长链/摔倒数/评级/重开/返回）→ 暂停面板（继续/段重开/全路线重开/设置）",
+        "requirement_ids": [
+          "F10"
+        ],
+        "column": "Gameness",
+        "group": "layout",
+        "mode": "visual",
+        "requirement": "- F10 前端界面：标题（开始训练/评级说明/设置/退出）→ HUD（连招链与倍率、分段得分与达标线、检查点、姿态偏差、路面状态、摔倒数）→ 分段结算（段分/达标状态/段重开/继续）→ 总评（各段分/总分/最长链/摔倒数/评级/重开/返回）→ 暂停面板（继续/段重开/全路线重开/设置）"
+      },
+      "independence": {
+        "key": "layout:expanded.G.s0044",
+        "fixed_target": "严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件",
+        "source_criterion_id": "expanded.G.s0044"
+      }
+    },
+    {
+      "id": "gameness.independent.guidance.01",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "实际游戏展示或清楚传达必要操作方法。\n固定范围：作者核心玩法所必需的操作方式在操作前可知，不能只以操作后反馈证明\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [],
+      "source_criterion": {
+        "id": "game.guidance.controls",
+        "column": "Gameness",
+        "mode": "visual",
+        "group": "guidance",
+        "requirement": "实际游戏展示或清楚传达必要操作方法。"
+      },
+      "independence": {
+        "key": "guidance:controls-before-action",
+        "fixed_target": "作者核心玩法所必需的操作方式在操作前可知，不能只以操作后反馈证明",
+        "source_criterion_id": "game.guidance.controls"
+      }
+    },
+    {
+      "id": "gameness.independent.guidance.02",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。\n固定范围：严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0047",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.08",
+        "frozen_subcheck_id": "G.s0047",
+        "frozen_text": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。"
+      },
+      "independence": {
+        "key": "guidance:expanded.G.s0047",
+        "fixed_target": "严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件",
+        "source_criterion_id": "expanded.G.s0047"
+      }
+    },
+    {
+      "id": "gameness.independent.guidance.03",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。\n固定范围：严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0050",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.08",
+        "frozen_subcheck_id": "G.s0050",
+        "frozen_text": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。"
+      },
+      "independence": {
+        "key": "guidance:expanded.G.s0050",
+        "fixed_target": "严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件",
+        "source_criterion_id": "expanded.G.s0050"
+      }
+    },
+    {
+      "id": "gameness.independent.guidance.04",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因。\n固定范围：严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0051",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.08",
+        "frozen_subcheck_id": "G.s0051",
+        "frozen_text": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因。"
+      },
+      "independence": {
+        "key": "guidance:expanded.G.s0051",
+        "fixed_target": "严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件",
+        "source_criterion_id": "expanded.G.s0051"
+      }
+    },
+    {
+      "id": "gameness.independent.guidance.05",
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "危险预警与恢复入口可发现，玩家能据此调整操作。\n固定范围：严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0052",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.08",
+        "frozen_subcheck_id": "G.s0052",
+        "frozen_text": "危险预警与恢复入口可发现，玩家能据此调整操作。",
+        "requirement_ids": [
+          "evaluation_plan_table.md#G"
+        ],
+        "column": "Gameness",
+        "group": "guidance",
+        "mode": "visual",
+        "requirement": "危险预警与恢复入口可发现，玩家能据此调整操作。"
+      },
+      "independence": {
+        "key": "guidance:expanded.G.s0052",
+        "fixed_target": "严格按本条原文的独立沟通用途冻结具体对象/场景/信息，不换成任意其他UI或事件",
+        "source_criterion_id": "expanded.G.s0052"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.01",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【连招升级】实际发生时可视表现为【链徽亮档＋倍率数字弹跳】，结束条件【完成】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【连招升级】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0026",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.04",
+        "frozen_subcheck_id": "G.s0026",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 连招升级 | 链徽亮档＋倍率数字弹跳 | 链音阶上行 | 完成 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【连招升级】实际发生时可视表现为【链徽亮档＋倍率数字弹跳】，结束条件【完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:连招升级",
+        "fixed_target": "仅事件【连招升级】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0026"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.02",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【加速滑行】实际发生时可视表现为【雪痕/灰痕拖出＋速度线粒子】，结束条件【减速即停】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【加速滑行】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0023",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.04",
+        "frozen_subcheck_id": "G.s0023",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 加速滑行 | 雪痕/灰痕拖出＋速度线粒子 | 风线掠过声（随速度增强） | 减速即停 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【加速滑行】实际发生时可视表现为【雪痕/灰痕拖出＋速度线粒子】，结束条件【减速即停】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:加速滑行",
+        "fixed_target": "仅事件【加速滑行】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0023"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.03",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【起跳】实际发生时可视表现为【蹬雪粒子＋镜头上摇】，结束条件【腾空完成】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【起跳】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0024",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.04",
+        "frozen_subcheck_id": "G.s0024",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 起跳 | 蹬雪粒子＋镜头上摇 | 蹬雪闷响 | 腾空完成 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【起跳】实际发生时可视表现为【蹬雪粒子＋镜头上摇】，结束条件【腾空完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:起跳",
+        "fixed_target": "仅事件【起跳】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0024"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.04",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【空中动作】实际发生时可视表现为【动作残影（0.3 秒）＋动作名弹出】，结束条件【动作完成】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【空中动作】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0025",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.04",
+        "frozen_subcheck_id": "G.s0025",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 空中动作 | 动作残影（0.3 秒）＋动作名弹出 | 动作呼啸声（分档） | 动作完成 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【空中动作】实际发生时可视表现为【动作残影（0.3 秒）＋动作名弹出】，结束条件【动作完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:空中动作",
+        "fixed_target": "仅事件【空中动作】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0025"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.05",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【落地站稳】实际发生时可视表现为【雪雾环＋姿态修正微动画】，结束条件【0.3s】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【落地站稳】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0027",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.04",
+        "frozen_subcheck_id": "G.s0027",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 落地站稳 | 雪雾环＋姿态修正微动画 | 落地闷响 | 0.3s |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【落地站稳】实际发生时可视表现为【雪雾环＋姿态修正微动画】，结束条件【0.3s】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:落地站稳",
+        "fixed_target": "仅事件【落地站稳】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0027"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.06",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【QTE 触发】实际发生时可视表现为【提示键序列弹出＋姿态预警框】，结束条件【站稳或摔倒】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【QTE 触发】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0028",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.04",
+        "frozen_subcheck_id": "G.s0028",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | QTE 触发 | 提示键序列弹出＋姿态预警框 | QTE 滴答声（窗口循环） | 站稳或摔倒 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【QTE 触发】实际发生时可视表现为【提示键序列弹出＋姿态预警框】，结束条件【站稳或摔倒】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:QTE 触发",
+        "fixed_target": "仅事件【QTE 触发】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0028"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.07",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【摔倒】实际发生时可视表现为【滑手翻滚＋雪雾/灰雾扑起】，结束条件【2 秒倒地结束】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【摔倒】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0029",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.04",
+        "frozen_subcheck_id": "G.s0029",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 摔倒 | 滑手翻滚＋雪雾/灰雾扑起 | 摔倒闷响＋护坡哨声 | 2 秒倒地结束 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【摔倒】实际发生时可视表现为【滑手翻滚＋雪雾/灰雾扑起】，结束条件【2 秒倒地结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:摔倒",
+        "fixed_target": "仅事件【摔倒】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0029"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.08",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【熔岩摔倒】实际发生时可视表现为【熔岩溅射红光＋镜头红染】，结束条件【复位完成】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【熔岩摔倒】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0030",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.04",
+        "frozen_subcheck_id": "G.s0030",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 熔岩摔倒 | 熔岩溅射红光＋镜头红染 | 熔岩嘶声＋警报短音 | 复位完成 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【熔岩摔倒】实际发生时可视表现为【熔岩溅射红光＋镜头红染】，结束条件【复位完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:熔岩摔倒",
+        "fixed_target": "仅事件【熔岩摔倒】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0030"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.09",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【路面切换】实际发生时可视表现为【HUD 路面状态图标切换（雪/灰/熔岩）＋`surface_change`】，结束条件【状态常驻】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【路面切换】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0031",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.04",
+        "frozen_subcheck_id": "G.s0031",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 路面切换 | HUD 路面状态图标切换（雪/灰/熔岩）＋`surface_change` | 地面摩擦声分档 | 状态常驻 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【路面切换】实际发生时可视表现为【HUD 路面状态图标切换（雪/灰/熔岩）＋`surface_change`】，结束条件【状态常驻】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:路面切换",
+        "fixed_target": "仅事件【路面切换】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0031"
+      }
+    },
+    {
+      "id": "gameness.independent.feedback.10",
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "事件【检查点通过】实际发生时可视表现为【哨位灯亮起＋检查点进度 +1】，结束条件【常亮】。仅评价可视投影，音频未评。未触发事件不能PASS。\n固定范围：仅事件【检查点通过】实际发生后的对应可见反馈\n只豁免精确时间和细致空间测量；原文指定的事件、对象、核心信息及反馈用途保留。不得换成任意一项代表性操作、任意成功或拒绝。布局、引导、反馈分别证明不同事实；同帧可证明不同事实，同一事实不可重复计分。10%须有接入玩法的作者源码；50%须实际触发本条指定功能且基本正常；100%须真实原生画面证明本条冻结的核心可见事实。核心数值信息不得错误，但不以截图测量精确时间、距离、尺寸或运动参数。不要求无关界面、未选事件或全部替代分支，单帧清楚即可。",
+      "requirement_ids": [
+        "F05"
+      ],
+      "source_criterion": {
+        "id": "expanded.G.s0032",
+        "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.04",
+        "frozen_subcheck_id": "G.s0032",
+        "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 检查点通过 | 哨位灯亮起＋检查点进度 +1 | 哨位铃声 | 常亮 |",
+        "requirement_ids": [
+          "F05"
+        ],
+        "column": "Gameness",
+        "group": "feedback",
+        "mode": "visual",
+        "visual_projection": true,
+        "requires_temporal_evidence": true,
+        "requirement": "事件【检查点通过】实际发生时可视表现为【哨位灯亮起＋检查点进度 +1】，结束条件【常亮】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+      },
+      "independence": {
+        "key": "feedback:event:检查点通过",
+        "fixed_target": "仅事件【检查点通过】实际发生后的对应可见反馈",
+        "source_criterion_id": "expanded.G.s0032"
+      }
+    }
+  ],
+  "source_bindings": {
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G060_volcano_stunt_route/rubric_whitebox_core/rubric.json": "41aa274b16db91a1e74b72234d28a219da89cf25c0e9f74b3a27c41d6b9cc56a",
+    "/Users/yifanyang/Desktop/bench/test_data/test_samples/G060_volcano_stunt_route/general_requirement.txt": "a4aaec8fbc5971eb22a15c5a188023f10e6b38b759583de7f4c205fa60060310"
+  },
+  "source_contract_id": "G060_volcano_stunt_route.whitebox.tiered-core-v1.d6fe8e600a2f1314f34076baa92dcdf9154630aab8c7132009bc909b2b36a5d7",
+  "selection_basis": "Original requirements only; fixed event roles then authored order; no scores/runtime/source implementation",
+  "unselected_source_criteria": [
+    {
+      "id": "expanded.G.s0003",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.01",
+      "frozen_subcheck_id": "G.s0003",
+      "frozen_text": "- I01 键鼠：W/A/S/D＝移动",
+      "requirement_ids": [
+        "I01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- I01 键鼠：W/A/S/D＝移动"
+    },
+    {
+      "id": "expanded.G.s0004",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.01",
+      "frozen_subcheck_id": "G.s0004",
+      "frozen_text": "Space＝起跳",
+      "requirement_ids": [
+        "I01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "Space＝起跳"
+    },
+    {
+      "id": "expanded.G.s0005",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.01",
+      "frozen_subcheck_id": "G.s0005",
+      "frozen_text": "J/K/L＝空中动作",
+      "requirement_ids": [
+        "I01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "J/K/L＝空中动作"
+    },
+    {
+      "id": "expanded.G.s0006",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.01",
+      "frozen_subcheck_id": "G.s0006",
+      "frozen_text": "QTE 窗口内按提示键",
+      "requirement_ids": [
+        "I01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "QTE 窗口内按提示键"
+    },
+    {
+      "id": "expanded.G.s0007",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.01",
+      "frozen_subcheck_id": "G.s0007",
+      "frozen_text": "R＝摔倒后立即回检查点",
+      "requirement_ids": [
+        "I01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "R＝摔倒后立即回检查点"
+    },
+    {
+      "id": "expanded.G.s0008",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.01",
+      "frozen_subcheck_id": "G.s0008",
+      "frozen_text": "Esc＝暂停",
+      "requirement_ids": [
+        "I01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "Esc＝暂停"
+    },
+    {
+      "id": "expanded.G.s0009",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.01",
+      "frozen_subcheck_id": "G.s0009",
+      "frozen_text": "结算界面 Enter＝继续，R＝重开。",
+      "requirement_ids": [
+        "I01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "结算界面 Enter＝继续，R＝重开。"
+    },
+    {
+      "id": "expanded.G.s0013",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.02",
+      "frozen_subcheck_id": "G.s0013",
+      "frozen_text": "HUD 对照见 rubric。",
+      "requirement_ids": [
+        "I06"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "HUD 对照见 rubric。"
+    },
+    {
+      "id": "expanded.G.s0010",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.02",
+      "frozen_subcheck_id": "G.s0010",
+      "frozen_text": "- I03 无手柄需求",
+      "requirement_ids": [
+        "I03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- I03 无手柄需求"
+    },
+    {
+      "id": "expanded.G.s0011",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.02",
+      "frozen_subcheck_id": "G.s0011",
+      "frozen_text": "当前连招链、链倍率、分段得分、检查点、姿态偏差提示、路面状态须常驻显示。",
+      "requirement_ids": [
+        "I03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "当前连招链、链倍率、分段得分、检查点、姿态偏差提示、路面状态须常驻显示。"
+    },
+    {
+      "id": "expanded.G.s0017",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.03",
+      "frozen_subcheck_id": "G.s0017",
+      "frozen_text": "- E03 from_system=路面系统 → to_system=滑行与风险系统",
+      "requirement_ids": [
+        "E03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- E03 from_system=路面系统 → to_system=滑行与风险系统"
+    },
+    {
+      "id": "expanded.G.s0018",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.03",
+      "frozen_subcheck_id": "G.s0018",
+      "frozen_text": "changed_state=火山灰摩擦 ×0.85 改变滑行距离与落地打滑提示、熔岩接触直接摔倒改变推进与路线选择",
+      "requirement_ids": [
+        "E03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "changed_state=火山灰摩擦 ×0.85 改变滑行距离与落地打滑提示、熔岩接触直接摔倒改变推进与路线选择"
+    },
+    {
+      "id": "expanded.G.s0019",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.03",
+      "frozen_subcheck_id": "G.s0019",
+      "frozen_text": "验证方式=两路面滑行距离差分与熔岩摔倒事件对照。",
+      "requirement_ids": [
+        "E03"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "验证方式=两路面滑行距离差分与熔岩摔倒事件对照。"
+    },
+    {
+      "id": "expanded.G.s0001",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.03",
+      "frozen_subcheck_id": "G.s0001",
+      "frozen_text": "分段二火山灰地面（摩擦 ×0.85，滑行更远、落地打滑时 HUD 提示「地面湿滑」并留灰痕）",
+      "requirement_ids": [
+        "G08"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "分段二火山灰地面（摩擦 ×0.85，滑行更远、落地打滑时 HUD 提示「地面湿滑」并留灰痕）"
+    },
+    {
+      "id": "expanded.G.s0002",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.03",
+      "frozen_subcheck_id": "G.s0002",
+      "frozen_text": "熔岩池位置由 seed 冻结并在地面有红光警示标记）",
+      "requirement_ids": [
+        "G08"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "熔岩池位置由 seed 冻结并在地面有红光警示标记）"
+    },
+    {
+      "id": "expanded.G.s0033",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.04",
+      "frozen_subcheck_id": "G.s0033",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 分段达标 | 段末横幅＋达标分数定格 | 达标号角 | 进入下段淡出 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【分段达标】实际发生时可视表现为【段末横幅＋达标分数定格】，结束条件【进入下段淡出】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0034",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.04",
+      "frozen_subcheck_id": "G.s0034",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 分段未达标 | 灰色横幅＋段重开入口高亮 | 低沉提示音 | 进入段结算 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【分段未达标】实际发生时可视表现为【灰色横幅＋段重开入口高亮】，结束条件【进入段结算】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0035",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.04",
+      "frozen_subcheck_id": "G.s0035",
+      "frozen_text": "占位声音验收（须有实际游戏音频；验下列事件/环境角色和信息语义，不要求最终音色、录音或混音品质）：表字段 | 事件 | 画面表现 | 音效 | 结束条件 |\n要求行 | 总评授证 | 授证台展开＋评级徽章（金/银/铜/未达标） | 授证号角 | 进入总评面板 |",
+      "requirement_ids": [
+        "F05"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "visual_projection": true,
+      "requires_temporal_evidence": true,
+      "requirement": "事件【总评授证】实际发生时可视表现为【授证台展开＋评级徽章（金/银/铜/未达标）】，结束条件【进入总评面板】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    {
+      "id": "expanded.G.s0046",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.07",
+      "frozen_subcheck_id": "G.s0046",
+      "frozen_text": "窗口失焦自动暂停。",
+      "requirement_ids": [
+        "F10"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "窗口失焦自动暂停。",
+      "requires_temporal_evidence": true
+    },
+    {
+      "id": "expanded.G.s0040",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.07",
+      "frozen_subcheck_id": "G.s0040",
+      "frozen_text": "- F07 VFX 信息性与遮挡约束：链徽与倍率、姿态偏差预警框、路面状态图标与熔岩红光警示承担玩法信息（均附文字标签）",
+      "requirement_ids": [
+        "F07"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- F07 VFX 信息性与遮挡约束：链徽与倍率、姿态偏差预警框、路面状态图标与熔岩红光警示承担玩法信息（均附文字标签）"
+    },
+    {
+      "id": "expanded.G.s0015",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.07",
+      "frozen_subcheck_id": "G.s0015",
+      "frozen_text": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/分段结算/总评/暂停/视频播放层）与交互物逐类存在且运行时可进入",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/分段结算/总评/暂停/视频播放层）与交互物逐类存在且运行时可进入"
+    },
+    {
+      "id": "expanded.G.s0016",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.07",
+      "frozen_subcheck_id": "G.s0016",
+      "frozen_text": "数量与属性以 L01/L02 与 G 系为准。",
+      "requirement_ids": [
+        "L03"
+      ],
+      "column": "Gameness",
+      "group": "layout",
+      "mode": "visual",
+      "requirement": "数量与属性以 L01/L02 与 G 系为准。"
+    },
+    {
+      "id": "expanded.G.s0014",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.07",
+      "frozen_subcheck_id": "G.s0014",
+      "frozen_text": "- L01 生成对象：滑手 1（原创造型）、火山三段路线（缓坡/熔岩跳台/火山口）、跳台与机关带、熔岩池与警示标记、检查点 12、连招链与倍率 HUD、分段结算与总评面板。",
+      "requirement_ids": [
+        "L01"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "- L01 生成对象：滑手 1（原创造型）、火山三段路线（缓坡/熔岩跳台/火山口）、跳台与机关带、熔岩池与警示标记、检查点 12、连招链与倍率 HUD、分段结算与总评面板。"
+    },
+    {
+      "id": "expanded.G.s0049",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.08",
+      "frozen_subcheck_id": "G.s0049",
+      "frozen_text": "目标进度、阶段变化与终局结果向玩家明确呈现。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "目标进度、阶段变化与终局结果向玩家明确呈现。"
+    },
+    {
+      "id": "expanded.G.s0054",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.08",
+      "frozen_subcheck_id": "G.s0054",
+      "frozen_text": "长期后果、跨阶段保留或失去的状态有可观察的解释；仅在需求存在时判断。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "guidance",
+      "mode": "visual",
+      "requirement": "长期后果、跨阶段保留或失去的状态有可观察的解释；仅在需求存在时判断。"
+    },
+    {
+      "id": "expanded.G.s0048",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.08",
+      "frozen_subcheck_id": "G.s0048",
+      "frozen_text": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。"
+    },
+    {
+      "id": "expanded.G.s0053",
+      "frozen_assertion_id": "G060_volcano_stunt_route.WB.G.08",
+      "frozen_subcheck_id": "G.s0053",
+      "frozen_text": "并发单位或多个事件同时发生时，关键反馈仍能对应到正确对象。",
+      "requirement_ids": [
+        "evaluation_plan_table.md#G"
+      ],
+      "column": "Gameness",
+      "group": "feedback",
+      "mode": "visual",
+      "requirement": "并发单位或多个事件同时发生时，关键反馈仍能对应到正确对象。"
+    }
+  ],
+  "authorized_change": "Gameness-only independent concrete targets; exact time/fine space diagnostic",
+  "aggregation": "Unchanged equal mean of layout/guidance/feedback; 10/50/100 highest level",
+  "prior_results": "Preserved; new policy requires independent contract, source review and runtime judge",
+  "revision_sha256": "aaa1b8d1f520902347f70063bfd224813edc71bd2d2dc6573333afa16f24b8d1"
+}

@@ -1,0 +1,419 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_broken_realm_echo_obj_006",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 16,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_broken_realm_echo_obj_006.json",
+        "sha256": "945a0845cb5a8497facd9b7ae22a862234f676d179ac852e119dae92371ec9e7"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_broken_realm_echo_obj_007",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 17,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_broken_realm_echo_obj_007.json",
+        "sha256": "e683d398d96e0671c03ad1d8c4b7f535815bfbecd1e9ae8cce204a40eca0e1f2"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_broken_realm_echo_obj_008",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 18,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_broken_realm_echo_obj_008.json",
+        "sha256": "22ac8770e0df8a8f2d19d0511ea6014f5358b74bae99e015ff0727327334024e"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_broken_realm_echo_obj_009",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 19,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_broken_realm_echo_obj_009.json",
+        "sha256": "84b569f174de4f44273d09d4c6cf535dc27d5449654a1d3c9ff078dc19202f7d"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_broken_realm_echo_obj_010",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 20,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_broken_realm_echo_obj_010.json",
+        "sha256": "771ba6928e4ab8dd9aea796d9268dc88127ece1e777964fa795e00819cdd1352"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_broken_realm_echo_obj_011",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 21,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_broken_realm_echo_obj_011.json",
+        "sha256": "e3b1ea7b8ba3ce51d2e5f2b74d41ded28629c10631ec572b184bbbae818a22a8"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_broken_realm_echo_obj_012",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 22,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_broken_realm_echo_obj_012.json",
+        "sha256": "8c01fcf995ced0bcccd862c7f336a346b8ffe34fd9ac70fbd7d2ba459f2423ac"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_broken_realm_echo_obj_013",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 23,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_broken_realm_echo_obj_013.json",
+        "sha256": "1ff032a0955070a39132957f41bb900172c3c6faa5898eaefbd267048be2aa29"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_broken_realm_echo_obj_015",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 24,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_broken_realm_echo_obj_015.json",
+        "sha256": "a3aa30ec88034c43c26748349d8db89cad17ef3a658dab84be84c644b0c6ae30"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 5,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_scene_001.json",
+        "sha256": "bf9938bbd9adf0c088eaa9c451b47fcc97382e2ec83c4dc8dbc1256de3867e7c"
+      },
+      "C_checks": 10,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_scene_002",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 6,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_scene_002.json",
+        "sha256": "da53778cedfe7569cb995ce80be9c1cd7fc9efc73571b0deb959a5d7097caea6"
+      },
+      "C_checks": 10,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 45,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_001.json",
+        "sha256": "c46926decefab3a5da94ad7a7d3b643bed8060f2689f8079d772f805d11c1b80"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 46,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_002.json",
+        "sha256": "fe994269f118e2c9281b293600abbc67e7b7eef1f120c72c6e25f3f70b072fa5"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 47,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_003.json",
+        "sha256": "6637264837faae69847e249221fe7bf476ee6ce4e55ba9da6904943acc7f7474"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 48,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_004.json",
+        "sha256": "44d6a808968064dfc0161ce39ac717f5fa70daef8769c356ba91bd85c49bbc43"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 49,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_005.json",
+        "sha256": "742a6ae1dcee62e95d328be26160ed1a99e120c73cf0ef4303653350da80b470"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 50,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_006.json",
+        "sha256": "cabb28860ed89c3babb8d38f0e4d1b2e171908488a2441894e547d62a185dc4f"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 51,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_007.json",
+        "sha256": "babb65f07f1d29238006e9b3c82dd51a5b6582dacd144401b3467dd34c79c528"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 52,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_008.json",
+        "sha256": "380dd6a0182dcf26a35e3242da1933a5e09761f4e054dc1343275e3a3c3ae88f"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 53,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_009.json",
+        "sha256": "73c3e02ede365def2f649ba4a4650de6f11c13ec0fd1581d09561d6249bbae6b"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 54,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_010.json",
+        "sha256": "66ac92b0319b6d7c1cec78f06741d228bfe6a43760ed104e9a4e9be6feff6d24"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 55,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_011.json",
+        "sha256": "ae5baf828a14b2a7267e29191fe0357660b3891df66aa9a3a9fff7f257533b81"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_012",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 56,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_012.json",
+        "sha256": "a6b45d4e60955ad2b1f130c2dc69eac80ce4c44f48aebff9d9d820669c8e5116"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_013",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 57,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_013.json",
+        "sha256": "c2f967708880318c5dc07c8762e6a96a319fb593610135363babb675abb37070"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_014",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 58,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_014.json",
+        "sha256": "08774db5823365c6aef608cf9e68af091f3cd42e8afae60a20ae53f2510bdaf5"
+      },
+      "C_checks": 4,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_sfx_015",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 59,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_sfx_015.json",
+        "sha256": "0508e206d20c3a16e660b27f181bdfe02b2dc8926362ae995dbdc1e476c50344"
+      },
+      "C_checks": 4,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 15,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_cg_001.json",
+        "sha256": "05d24d22400a8518682a75add0995c40b4c88cc162efbd7996ed108038fca8d7"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 16,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_cg_002.json",
+        "sha256": "e7b3437f136e146bdbeecae215300fe4da54277cd527440d988f78d52e310771"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G005_broken_realm_echo",
+      "task_id": "G005_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 17,
+      "rubric": {
+        "path": "test_data/test_samples/G005_broken_realm_echo/rubric_assets/priority_observable_v2/G005_cg_003.json",
+        "sha256": "749ba9ea715ed5d532ea708f6f7ffb9be91d628977059c11c3dbd213c882424d"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    }
+  ]
+}

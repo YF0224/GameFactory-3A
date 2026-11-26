@@ -1,0 +1,422 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.v1",
+  "authoring_protocol": "priority_asset_rubrics.v1",
+  "status": "source_grounded_draft",
+  "game_id": "G045_daily_street_lightlane",
+  "task_id": "G045_daily_street_lightlane_obj_009",
+  "asset_type": "3d_object",
+  "asset_subtype": "character",
+  "asset_name": "N04 插画师",
+  "scope": "Track B：独立资产；不含 T-pose、自然音效或引擎导入/playtest。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G045_daily_street_lightlane",
+    "task_id": "G045_daily_street_lightlane_obj_009",
+    "asset_name": "npc_illustrator",
+    "name_zh": "N04 插画师",
+    "role": "character",
+    "input_mode": "text_to_3d",
+    "prompt": "Young illustrator with beret, sketchbook under one arm and ink-stained fingerless gloves, thoughtful posture distinguishable from player, stylized low-poly, single character, Y-up, pivot at base, humanoid rig ready, low-poly style, minimal triangle count, flat faceted surfaces, clean silhouette, no fine surface detail",
+    "seed": 1053,
+    "decimation_target": 8000,
+    "texture_size": 2048,
+    "rig": "humanoid",
+    "animation_strategy": "retarget",
+    "spec_ref": "N01,N03,Q05",
+    "poly_policy": "low_poly_priority",
+    "l_tier_repair_target": true
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L56-56",
+      "general:L57-57",
+      "general:L58-58",
+      "general:L60-60"
+    ],
+    "visual_style_source_ids": [
+      "general:L61-61"
+    ],
+    "sound_style_source_ids": [
+      "general:L62-62"
+    ],
+    "asset_description_source_ids": [
+      "general:L78",
+      "general:L303"
+    ],
+    "spec_ref_source_ids": [
+      "general:L78-78",
+      "general:L80-80",
+      "general:L122-122"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L14",
+    "canonical_asset_content_source_ids": []
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "sha256": "a6a9b03f45ab40197fbb18aaf9614638a9691890a7824c137aef95fcd79868f9",
+      "start_line": 176,
+      "end_line": 176,
+      "quote": "{\"game_id\": \"G045_daily_street_lightlane\", \"task_id\": \"G045_daily_street_lightlane_obj_009\", \"asset_name\": \"npc_illustrator\", \"name_zh\": \"N04 插画师\", \"role\": \"character\", \"input_mode\": \"text_to_3d\", \"prompt\": \"Young illustrator with beret, sketchbook under one arm and ink-stained fingerless gloves, thoughtful posture distinguishable from player, stylized low-poly, single character, Y-up, pivot at base, humanoid rig ready, low-poly style, minimal triangle count, flat faceted surfaces, clean silhouette, no fine surface detail\", \"seed\": 1053, \"decimation_target\": 8000, \"texture_size\": 2048, \"rig\": \"humanoid\", \"animation_strategy\": \"retarget\", \"spec_ref\": \"N01,N03,Q05\", \"poly_policy\": \"low_poly_priority\", \"l_tier_repair_target\": true}"
+    },
+    "general:L56-56": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 56,
+      "end_line": 56,
+      "quote": "- W01 公寓：玩家房间、走廊、邻居门口、房东交互点、公共垃圾区。玩家房间可进入，具休息、洗澡与整理入口。"
+    },
+    "general:L57-57": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 57,
+      "end_line": 57,
+      "quote": "- W02 便利店：可进入的货架、收银台、停车位，提供购买、整理工作与配送。"
+    },
+    "general:L58-58": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 58,
+      "end_line": 58,
+      "quote": "- W03 商业街：小吃摊、售货机、公告栏、二手摊；提供消费、委托和杂物回收入口。"
+    },
+    "general:L60-60": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 60,
+      "end_line": 60,
+      "quote": "- W05 后巷：箱子、围栏、垃圾桶、施工障碍，存在只能步行通过的窄口。"
+    },
+    "general:L61-61": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 61,
+      "end_line": 61,
+      "quote": "- W06 屋顶：通过楼梯/合法平台可达，提供观景点、晾衣区和探索发现。"
+    },
+    "general:L62-62": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 62,
+      "end_line": 62,
+      "quote": "- W07 至少 20 个有真实用途的交互点，每点具有唯一对象 ID；重复实例可计数量但不能拿纯装饰充数。各区域有可识别外观与中文名称。"
+    },
+    "general:L78-78": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 78,
+      "end_line": 78,
+      "quote": "- N01 六个原创关键 NPC 及稳定 ID：N01 家务熟手邻居、N02 好奇邻居、N03 散步伙伴、N04 插画师、N05 房东、N06 店员。只使用功能身份与原创对白，没有原作人物的亲属/履历要求。"
+    },
+    "general:L80-80": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 80,
+      "end_line": 80,
+      "quote": "- N03 每个 NPC 至少两个可观察的日程位置，公布出现时段；离开时显示常见出现时间和最后已知位置。任务 NPC 不得永久失联。时段、坐标是实现配置，不同 NPC 不必完全相同。"
+    },
+    "general:L122-122": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 122,
+      "end_line": 122,
+      "quote": "- Q05 赶在截稿前：插画师送稿期限 60 游戏分钟；合法捷径或已解锁人情帮助两种方式，准时 650；迟到进入补救委托，稿件不可误卖/丢弃。补救报酬公开为配置，不强行设成原定 650。"
+    },
+    "general:L78": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 78,
+      "end_line": 78,
+      "quote": "- N01 六个原创关键 NPC 及稳定 ID：N01 家务熟手邻居、N02 好奇邻居、N03 散步伙伴、N04 插画师、N05 房东、N06 店员。只使用功能身份与原创对白，没有原作人物的亲属/履历要求。"
+    },
+    "general:L303": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/general_requirement.txt",
+      "sha256": "e1cb6fc397e6ab64857b8d2ab601c8ca383e07eaee15f6fa5460a02fb23bf9b4",
+      "start_line": 303,
+      "end_line": 303,
+      "quote": "- object：15 个（text-to-3D 10，image-to-3D 5）；object 任务资产为：cat_resident_player, street_bicycle, apartment_building, convenience_store, maintenance_toolkit_set, npc_housekeeper_neighbor, npc_curious_neighbor, npc_stroll_partner, npc_illustrator, npc_landlord, npc_store_clerk, environment_delivery_car, street_lamp_post, riverside_park_bench, street_vending_machine。每项只允许一个物体；组合物必须拆成独立任务。"
+    },
+    "asset_requirement:L14": {
+      "path": "test_data/test_samples/G045_daily_street_lightlane/3D_object/requirement.txt",
+      "sha256": "aae932cf9767b908746fea02d62c8d820b24b43acc9a4fb933a819fb370e45dd",
+      "start_line": 14,
+      "end_line": 14,
+      "quote": "- npc_illustrator: Young illustrator with beret, sketchbook under one arm and ink-stained fingerless gloves, thoughtful posture distinguishable from player, stylized low-poly, single character, Y-up, pivot at base, humanoid rig ready"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+      "start_line": 78,
+      "end_line": 82,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "Young illustrator with beret",
+      "sketchbook under one arm and ink-stained fingerless gloves",
+      "thoughtful posture distinguishable from player",
+      "single character"
+    ],
+    "style": [
+      "stylized low-poly",
+      "low-poly style",
+      "minimal triangle count",
+      "flat faceted surfaces",
+      "clean silhouette",
+      "no fine surface detail"
+    ],
+    "technical": [
+      "Y-up",
+      "pivot at base",
+      "humanoid rig ready"
+    ],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求符合度",
+      "checks": [
+        {
+          "id": "C01",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：Young illustrator；with beret",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "Young illustrator",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "with beret",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "C02",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：sketchbook under one arm and ink-stained fingerless gloves；thoughtful posture distinguishable from player",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "sketchbook under one arm and ink-stained fingerless gloves",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "thoughtful posture distinguishable from player",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "C03",
+          "title": "对象类别、部件或明确规格",
+          "assertion": "实际产物可观察地满足：single character",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "single character",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L56-56",
+              "text": "- W01 公寓：玩家房间、走廊、邻居门口、房东交互点、公共垃圾区。玩家房间可进入，具休息、洗澡与整理入口。"
+            },
+            {
+              "source_id": "general:L57-57",
+              "text": "- W02 便利店：可进入的货架、收银台、停车位，提供购买、整理工作与配送。"
+            },
+            {
+              "source_id": "general:L78",
+              "text": "- N01 六个原创关键 NPC 及稳定 ID：N01 家务熟手邻居、N02 好奇邻居、N03 散步伙伴、N04 插画师、N05 房东、N06 店员。只使用功能身份与原创对白，没有原作人物的亲属/履历要求。"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L61-61",
+              "text": "- W06 屋顶：通过楼梯/合法平台可达，提供观景点、晾衣区和探索发现。"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "stylized low-poly",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "low-poly style",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "minimal triangle count",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "flat faceted surfaces",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "clean silhouette",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "no fine surface detail",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "几何结构质量",
+          "assertion": "只评几何/形体自身缺陷，不重复评分所需部件是否存在。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "大范围塌陷、破面或融合，主体结构不可辨",
+            "2": "多处明显破损/漂浮/穿插，严重影响辨识",
+            "3": "主体结构完整，局部破面或穿插可见",
+            "4": "只有轻微局部瑕疵，不影响轮廓与结构",
+            "5": "多视角下结构完整，未见明显破面、漂浮或异常穿插"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "材质与表面质量",
+          "assertion": "只评表面清晰、材质连贯和伪影；低多边形/平面着色本身不是缺陷。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "大面积错误贴图/糊化/污染，表面不可读",
+            "2": "明显接缝、拉伸或材质错乱覆盖主要区域",
+            "3": "主体表面可读，但存在局部接缝/拉伸/涂抹",
+            "4": "仅有轻微接缝或局部表面瑕疵",
+            "5": "材质与色块连贯，多视角下未见明显接缝、拉伸或生成伪影"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。"
+  },
+  "evidence_requirements": [
+    "实际三维产物的固定光照多视角渲染（正/侧/背及细节）",
+    "必要时的网格、尺度和材质探针；不是任务描述或文件名"
+  ],
+  "objective_specs": {
+    "decimation_target": 8000,
+    "texture_size": 2048,
+    "rig": "humanoid"
+  },
+  "objective_metric_policy": "规格与传统指标单独由探针/脚本报告原始值，不与三维 rubric 分数混合；本文件不代表已计算任何指标。",
+  "authoring_warnings": []
+}

@@ -1,0 +1,7 @@
+{
+  "contract_id": "G044_robot_workshop.whitebox.final",
+  "version": "final",
+  "content_sha256": "5769785d317599551aad31364fbdd72540123a73a85f842032f9f3a88a6740fc",
+  "rubric_json_sha256": "41df43ed071a8ee23a9f519e859484953039d5487babde2a3fef79801c2647a0",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

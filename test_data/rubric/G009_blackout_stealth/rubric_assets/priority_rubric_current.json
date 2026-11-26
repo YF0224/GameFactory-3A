@@ -1,0 +1,291 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_blackout_stealth_obj_003",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 38,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_blackout_stealth_obj_003.json",
+        "sha256": "e4a1b13914cd0b537dc97bb3988defdde17c26db0194a8d52e45f7d4d10deb42"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_blackout_stealth_obj_004",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 39,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_blackout_stealth_obj_004.json",
+        "sha256": "34b72ec928131feaa603a9a3800c9d5a1e41c84984e1f625ad2389153ab30d13"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 10,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_scene_001.json",
+        "sha256": "6095d93b3926dc39cae1a761cc69b1e3d349946be681089b44d1c9b8125dfc80"
+      },
+      "C_checks": 10,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 100,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_sfx_001.json",
+        "sha256": "e41c28e6078aee800e4fc501953b06b749b8a11f72a94b395cc8d8c5a4098549"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 101,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_sfx_002.json",
+        "sha256": "b776c6e6f80edcfd16d50c79d1af621fbcfa8163e246d76ac281d8747b15412b"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 102,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_sfx_003.json",
+        "sha256": "8737b59be9dd79c4ca57c7e33d2080c52203dc130374c5a206da3a34b611ab46"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 103,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_sfx_004.json",
+        "sha256": "9d6f8a5a42421a76357eb91f5d3b6d64c9877e04bf759ba772c2369f32705a61"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 104,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_sfx_005.json",
+        "sha256": "274a6c65e2d1bc1fc60d723c57b3ef08737c2859936472c08c38ee9547958caf"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 105,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_sfx_006.json",
+        "sha256": "eb818ea129adaff75a732d8fc120530ec02c1922615ae12a9fb04a853a434d31"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 106,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_sfx_007.json",
+        "sha256": "d1213697012d458c75355c6df4c99528274a32e8423160c0326e372851829b8a"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 107,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_sfx_008.json",
+        "sha256": "93957c56634ea0351be827ab26a6ace8563adfe3de2f1270287ca60ac326c2b1"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 108,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_sfx_009.json",
+        "sha256": "09fb8e140478ee2fc9c26f47a968c00d33a015c999f1cfb7571f0de06408ed7a"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 109,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_sfx_010.json",
+        "sha256": "43dadaac797c8952fef6250c69c4a05f4cddc544c1538e1400536c97847b015c"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 110,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_sfx_011.json",
+        "sha256": "854602ddb2addd21459b2a8600aaa93b94ca02e1b1d40aacab72e6b415c9e4af"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_sfx_012",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 111,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_sfx_012.json",
+        "sha256": "a685269e24699ee997029b8b15c7c658ae256d3c3ba5162a3ed98fed1db8a867"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_sfx_013",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 112,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_sfx_013.json",
+        "sha256": "74ae5494ae3f77e93cd5d8d7bda91323de7c424714dae3e0ddf16be692b435ae"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 28,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_cg_001.json",
+        "sha256": "094a4df3dcd0d81a7dfa605af8c5775d89dd8e73034a4a6edd8ecf45528778bb"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 29,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_cg_002.json",
+        "sha256": "9ae7f80e3467696718616fa77e0128376544d35938b9c66b2ad9cb0b9dce45bb"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 30,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_cg_003.json",
+        "sha256": "ae6e8099e980aba9a2a2e4fcab63c837d6337ad645b715b7500ed0b193521396"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G009_blackout_stealth",
+      "task_id": "G009_cg_004",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 31,
+      "rubric": {
+        "path": "test_data/test_samples/G009_blackout_stealth/rubric_assets/priority_observable_v2/G009_cg_004.json",
+        "sha256": "d2b49e1ad44aca6b0a7e60bfab2aa2c9bc3ddd945a19a81f39f740d18ec75550"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    }
+  ]
+}

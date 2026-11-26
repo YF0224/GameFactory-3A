@@ -1,0 +1,7 @@
+{
+  "contract_id": "G050_aftermath_holdout.whitebox.endpoints-v2-candidate.919ca5067c516589e6dc59a4249569b8afb210ddfb2410ddcd345e84f6c3e029",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "919ca5067c516589e6dc59a4249569b8afb210ddfb2410ddcd345e84f6c3e029",
+  "rubric_json_sha256": "298578e479441676d69cd6354fef319a2a46f0723518fc630cb6de29d4670bd3",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

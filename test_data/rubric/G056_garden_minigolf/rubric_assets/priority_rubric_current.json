@@ -1,0 +1,207 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_garden_minigolf_obj_002",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 194,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_garden_minigolf_obj_002.json",
+        "sha256": "e29c67e5b717ca8ba7dc8aca65eb26d1fa378ccdd206bb7a22eae58140f6f5be"
+      },
+      "C_checks": 2,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_garden_minigolf_obj_003",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 195,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_garden_minigolf_obj_003.json",
+        "sha256": "74d5edf9d144311f1d113face413e720e5dcd5cf1e76617fc2f234916899879a"
+      },
+      "C_checks": 2,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 64,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_scene_001.json",
+        "sha256": "23ea1f35de1a450d41e02e88af02d2a76eea146e9d1aead985fca6d7e53c7fd0"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 653,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_sfx_001.json",
+        "sha256": "9efbd44ab41aa5b8940b5b946b671190bbc8095f375a6d20a24948cb6c2e5b86"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 654,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_sfx_002.json",
+        "sha256": "b3ede2974b613d324f67deb82bd07dce5f82bda16c01a483ab6bc5e0b7ea386d"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 655,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_sfx_003.json",
+        "sha256": "8febd63a2257c974219428b4a8f07b99ae8c26c0b3be383462d2dda5eb4b1362"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 656,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_sfx_004.json",
+        "sha256": "0b8294261da9f930271f128b87ad818fdd50f95e587fbdd3dc17a549e9294762"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 657,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_sfx_005.json",
+        "sha256": "db0f473b75b404b13c67ba9ddfabb24a639e0c42aea59d9dd89808843d146ccc"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 658,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_sfx_006.json",
+        "sha256": "90be78462c4a19a131d2d235dad37d3d6b8ff93e57c78ef7cf61d831015fbf01"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 659,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_sfx_007.json",
+        "sha256": "5c5ca9f9f2336ae64128040feaa418053e2b224eb00f41f6cdafb4e4ba2dec81"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 660,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_sfx_008.json",
+        "sha256": "b3df7c2f851541402ae404bb15aeb936df50ab6bbbb28f9a2fb6210a62207955"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 661,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_sfx_009.json",
+        "sha256": "6355ff8e326a69ee4ab3245dbc21ad7d03362f1717ea6d3f750df642da506ef9"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 179,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_cg_001.json",
+        "sha256": "daa358d77e7c13884a38e528ef93c7a9b85cb9eb8f0374e599132dd5b60aca08"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G056_garden_minigolf",
+      "task_id": "G056_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 180,
+      "rubric": {
+        "path": "test_data/test_samples/G056_garden_minigolf/rubric_assets/priority_observable_v2/G056_cg_002.json",
+        "sha256": "04d99b7b5ff08da25b621dba7edc66e8509a4a8e40aaa688855ca102c310c002"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    }
+  ]
+}

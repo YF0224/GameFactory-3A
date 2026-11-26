@@ -1,0 +1,7 @@
+{
+  "contract_id": "G022_isle_comm_nodes.whitebox.final",
+  "version": "final",
+  "content_sha256": "7d50a08c2654548a51e2a9839d44f1f1f90f9fe3b71a76b86d9c7fe65f8fb4a4",
+  "rubric_json_sha256": "35a8bdcad027c374f34de4c70f13dcb3d83fcbc0ae70befb3d236e4b6ecb9b52",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

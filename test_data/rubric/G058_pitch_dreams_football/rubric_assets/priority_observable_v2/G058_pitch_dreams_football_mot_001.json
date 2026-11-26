@@ -1,0 +1,603 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.observable.v2",
+  "authoring_protocol": "priority_observable_v2",
+  "status": "source_grounded_revision_not_judged",
+  "game_id": "G058_pitch_dreams_football",
+  "task_id": "G058_pitch_dreams_football_mot_001",
+  "asset_type": "motion",
+  "asset_subtype": "humanoid",
+  "asset_name": "pass_and_shoot",
+  "scope": "priority gen 独立资产三列口径；第一列仅可观察需求内容，排除标定数值及运行时验收。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G058_pitch_dreams_football",
+    "task_id": "G058_pitch_dreams_football_mot_001",
+    "task_type": "humanoid",
+    "character": "football_match",
+    "motion_name": "pass_and_shoot",
+    "action_name": "pass_and_shoot",
+    "prompt": "Player receives a pass, takes one controlled touch, swings through a shot, and follows through toward the goal.",
+    "seed": 9058,
+    "target_mesh_path": "test_data/outputs/G058_pitch_dreams_football/default/assets/3d_object/G058_pitch_dreams_football_obj_001/model.glb",
+    "target_glb_path": "test_data/outputs/G058_pitch_dreams_football/default/assets/3d_object/G058_pitch_dreams_football_obj_001/model.glb",
+    "fps": 20,
+    "motion_length": 28,
+    "duration_sec": 1.4,
+    "use_ik": true,
+    "in_place": true,
+    "in_place_lock_height": true,
+    "loop": false,
+    "stationary": true,
+    "export_anim_only": true,
+    "clip_type": "oneshot",
+    "root_motion_mode": "in_place_xz",
+    "trigger": "shot_input",
+    "start_condition": "ball is within controllable distance and shot input is pressed",
+    "end_condition": "ball leaves the foot and follow-through ends",
+    "cancel_behavior": "cancel_on_tackle",
+    "source_asset": "football_match",
+    "spec_ref": "F05,L01",
+    "event_binding": "shot_input; source_asset=football_match",
+    "planned_source": "motion_comparison",
+    "comparison_sources": [
+      "momask_puppeteer",
+      "llm_direct_motion"
+    ],
+    "l_tier_repair_target": true
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L111-111",
+      "general:L112-112",
+      "general:L113-113",
+      "general:L115-115"
+    ],
+    "visual_style_source_ids": [
+      "general:L116-116"
+    ],
+    "sound_style_source_ids": [
+      "general:L117-117"
+    ],
+    "asset_description_source_ids": [],
+    "spec_ref_source_ids": [
+      "general:L126-142",
+      "general:L89-89"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L1",
+    "canonical_asset_content_source_ids": [],
+    "character_description_source_ids": []
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "sha256": "ee8512be63a9458a4dc70324e63952f5ab49bd7aa80c6394956d5a6d072ffc50",
+      "start_line": 15,
+      "end_line": 15,
+      "quote": "{\"game_id\": \"G058_pitch_dreams_football\", \"task_id\": \"G058_pitch_dreams_football_mot_001\", \"task_type\": \"humanoid\", \"character\": \"football_match\", \"motion_name\": \"pass_and_shoot\", \"action_name\": \"pass_and_shoot\", \"prompt\": \"Player receives a pass, takes one controlled touch, swings through a shot, and follows through toward the goal.\", \"seed\": 9058, \"target_mesh_path\": \"test_data/outputs/G058_pitch_dreams_football/default/assets/3d_object/G058_pitch_dreams_football_obj_001/model.glb\", \"target_glb_path\": \"test_data/outputs/G058_pitch_dreams_football/default/assets/3d_object/G058_pitch_dreams_football_obj_001/model.glb\", \"fps\": 20, \"motion_length\": 28, \"duration_sec\": 1.4, \"use_ik\": true, \"in_place\": true, \"in_place_lock_height\": true, \"loop\": false, \"stationary\": true, \"export_anim_only\": true, \"clip_type\": \"oneshot\", \"root_motion_mode\": \"in_place_xz\", \"trigger\": \"shot_input\", \"start_condition\": \"ball is within controllable distance and shot input is pressed\", \"end_condition\": \"ball leaves the foot and follow-through ends\", \"cancel_behavior\": \"cancel_on_tackle\", \"source_asset\": \"football_match\", \"spec_ref\": \"F05,L01\", \"event_binding\": \"shot_input; source_asset=football_match\", \"planned_source\": \"motion_comparison\", \"comparison_sources\": [\"momask_puppeteer\", \"llm_direct_motion\"], \"l_tier_repair_target\": true}"
+    },
+    "general:L111-111": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 111,
+      "end_line": 111,
+      "quote": "- W01 世界与时代背景：架空的现代社区足球时代；小城「青藤镇」的社区球队「绿茵俱乐部」正冲击城市冠军联赛，六轮赛季定成败。"
+    },
+    "general:L112-112": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 112,
+      "end_line": 112,
+      "quote": "- W02 场景所在地：青藤镇社区球场——俯视视角下的 5v5 球场、看台与俱乐部板凳席；俱乐部界面（抽卡室/转会办公室/训练场）环绕展开。"
+    },
+    "general:L113-113": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 113,
+      "end_line": 113,
+      "quote": "- W03 玩家身份与当前任务：玩家是绿茵俱乐部的代理主教练兼经理；当前任务：以 17 种攻防动作赢下六轮赛季，经营阵容冲上冠军联赛。"
+    },
+    "general:L115-115": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 115,
+      "end_line": 115,
+      "quote": "- W05 叙事来源：16 名虚构球员各有位置与成长线；六支对手按城市街区命名构成赛季叙事；抽卡室＝俱乐部青训选拔；转会办公室＝市场窗口。全部原创。"
+    },
+    "general:L116-116": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 116,
+      "end_line": 116,
+      "quote": "- W06 视觉风格与色彩材质：明快程序化俯视画风；主色＝草场绿（#5FA753 系）＋界线白（#EAEFEA 系）＋俱乐部青（#2E8C86 系）；材质以平整草皮、清晰球衣色块为主，保证窄屏可读。"
+    },
+    "general:L117-117": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 117,
+      "end_line": 117,
+      "quote": "- W07 环境氛围与声音语言：小城球场的午后氛围——常驻看台环境声与哨声底噪；音效语言为「哨声＋踢球闷响＋进球欢呼＋界面确认」，全部音效按 §9 F06 冻结清单交付。"
+    },
+    "general:L126-142": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 126,
+      "end_line": 142,
+      "quote": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 开球 | 中圈球静止＋裁判哨动画＋球员就位 | 开场哨声 | 开球完成 |\n| 球权转换 | 持球光环换色（绿/红/黄）＋HUD 球权图标切换 | 短促切换音 | 状态常驻 |\n| 动作选择 | 按钮高亮＋可用性描边（概率条显示） | 界面确认音 | 提交 |\n| 动作成功 | 球轨迹线（0.4 秒渐隐）＋推进/换位动画 | 踢球闷响（按动作分档） | 结算完成 |\n| 动作失败 | 球轨迹断线＋红闪提示 | 低沉失误音 | 结算完成 |\n| 进球 | 球入网定格推近＋球轨迹残影＋比分跳动 | 进球欢呼＋哨声 | 2 秒后回全景 |\n| 扑救成功 | 门将扑救动画＋「扑救」标签弹出 | 扑救掌声 | 结算完成 |\n| 犯规/定位球 | 犯规图标＋定位球点位高亮 | 裁判哨声（两短一长） | 定位球开出 |\n| 中场窗口 | 中场横幅＋换人/战术面板 | 中场哨声 | 推进下半场 |\n| 体力不足 | 球员头顶体力环变红闪烁＋动作禁用 | 低提示音 | 恢复或换人 |\n| 资源入账 | 招募点/训练币/资金图标飞向资源栏 | 入账叮声 | 到位即停 |\n| 抽卡/转会完成 | 卡面翻转/合同盖章动画 | 卡片翻动/盖章声 | 完成 |\n| 赛季结算 | 战绩榜展开＋尾帧按夺冠变体 | 赛季终哨＋欢呼/低音 | 进入结界面板 |"
+    },
+    "general:L89-89": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 89,
+      "end_line": 89,
+      "quote": "- L01 阵容与赛季：初始 8 名球员、5 人首发，可调整阵型、战术与核心；赛季六轮，结束后可进入新赛季并保留培养。"
+    },
+    "asset_requirement:L1": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/motion/requirement.txt",
+      "sha256": "2b9a2779c1ee00fe5a43973de1566f0ae6b33e3eb19a1f8c6f88c888b4c5ede9",
+      "start_line": 1,
+      "end_line": 1,
+      "quote": "- pass_and_shoot: Player receives a pass, takes one controlled touch, swings through a shot, and follows through toward the goal.; trigger=shot_input; start=ball is within controllable distance and shot input is pressed; end=ball leaves the foot and follow-through ends; cancel=cancel_on_tackle"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "1570088e54280dfb58b5516ab111066597b31c5bc34e887cfd5cae85534f95f6",
+      "start_line": 82,
+      "end_line": 86,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    },
+    "revision_policy": {
+      "path": "workspaces/priority_rubric_observable_20261026/POLICY.md",
+      "sha256": "581d726dee3f0efba7c72e8616f553a1248d822791a75f42e6d463b81a9312ca",
+      "start_line": 1,
+      "end_line": 34,
+      "quote": "# Priority 资产可观察需求 rubric 修订 v2\n\n此版本只服务资产三列中的第一列需求完整性，不更改原始生成任务、既有分数或历史冻结合同。\n所有七份 priority 清单逐条覆盖，禁止仅用同类代表任务代替。输出位于各游戏 rubric_assets/priority_observable_v2/，游戏内 priority_rubric_current.json 是显式修订索引，不是对生产 evaluator 的隐式切换。\n\n## 第一列保留\n\n任务明确要求的主体类别、部件、形状、轮廓、命名色彩、材质表现、可见标记、姿态、动作阶段、声音事件、声源、情绪、语言及台词内容。\n任务明确要求的上下、左右、内外、中央/周边、前后、连接、环绕、相对大小/深浅、留白和遮挡关系。\nCG 只要求原文明示的事件顺序、状态变化与镜头行为；不能把列表自动解释为严格顺序。动作片段保留循环/单次与原地组织，不设严格时长/帧数/零位移阈值。\n台词或资产名称中的数字可以是实际内容，不是数值验收阈值；不因文本包含数字机械删掉语义。\n对象数量只作原文上下文，不按精确计数通过率评分；保留主次、成组、单体/多体和必要的关系含义。\n\n## 第一列不计分\n\n绝对坐标、原点、尺寸、距离、速度、时长、角度、帧数、分辨率、面数、数值颜色/色差、采样率、响度和频率阈值，以及机制数值、随机种子、容量、库存、伤害、时间窗。\n这些字段和原始引文完整保留在 task_input、sources 或 excluded_field_values 中，不伪称已经满足，也不当作第一列隐藏门槛。\n引擎导入、碰撞、导航、触发、跳过、暂停、同步、状态机与游戏内混音另属交付/集成验证，不凭离线素材判通过。\n\n## 三列分工\n\nC：当前任务明确指定什么，实际内容是否呈现。\nG：与角色/场景参考及游戏整体世界/美术/声音方向是否相容，不重复扣C的缺失。\nQ：内在感知/技术质量，不重复内容语义或世界适配。\n已有逐资产 rubric 的 G/Q 维度原样保留。此前未建逐资产文件的自然音效/T-pose只补源文支持的G/Q草稿，不能假称复用了已验证分数。\n参考图只按明确绑定使用；image_path 的存在不是生成模型实际收到图片的证明。T-pose中的参考身份/比例比较放G，不在C重复。\n\n## 来源与状态\n\n先遵从原有来源优先级；保留 canonical/分资产原文与任务JSONL。定性投影不得补造“附近”“左侧”等源文不支持的位置。\n场景 layout_constraints 已逐条整理为可见关系；原始标定与运行时要求另存。不宣称精确坐标被视觉验证。\n相互矛盾的要求保留并报审查警告，不用PARTIAL掩盖来源冲突，不把两种胜负分支强行串为一条时间线。\n每条判词必须给视角、帧或音频时间证据。观察不清/未取证为UNKNOWN，调用/配置故障为ERROR，均不填0或100、不删除分母；报告coverage和上下界，证据不足的得分只能PROVISIONAL。\n本次为有来源的修订版与结构/来源校验，不宣布所有1305条人工语义审核完成，不自动冻结，不自动启动评测。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "Player receives a pass",
+      "takes one controlled touch",
+      "swings through a shot",
+      "and follows through toward the goal."
+    ],
+    "style": [],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求完整性（可观察内容）",
+      "checks": [
+        {
+          "id": "C001",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：Player receives a pass",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "Player receives a pass",
+              "text": "Player receives a pass"
+            }
+          ],
+          "modality": "motion_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C002",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：takes one controlled touch",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "takes one controlled touch",
+              "text": "takes one controlled touch"
+            }
+          ],
+          "modality": "motion_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C003",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：swings through a shot",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "swings through a shot",
+              "text": "swings through a shot"
+            }
+          ],
+          "modality": "motion_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C004",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：and follows through toward the goal",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "and follows through toward the goal.",
+              "text": "and follows through toward the goal"
+            }
+          ],
+          "modality": "motion_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C005",
+          "title": "动作片段组织",
+          "assertion": "可观察地呈现：单次动作具有可辨起始、过程与结束；不设绝对时长门槛。",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "loop",
+              "source_quote": "False",
+              "text": "单次动作具有可辨起始、过程与结束；不设绝对时长门槛。"
+            }
+          ],
+          "modality": "motion_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C006",
+          "title": "相对根位移",
+          "assertion": "可观察地呈现：整体保持原地表演的组织，不以零位移容差判定；跳跃等任务所需的垂直运动允许保留。",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "root_motion_mode",
+              "source_quote": "in_place_xz",
+              "text": "整体保持原地表演的组织，不以零位移容差判定；跳跃等任务所需的垂直运动允许保留。"
+            }
+          ],
+          "modality": "motion_full",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L111-111",
+              "text": "- W01 世界与时代背景：架空的现代社区足球时代；小城「青藤镇」的社区球队「绿茵俱乐部」正冲击城市冠军联赛，六轮赛季定成败。"
+            },
+            {
+              "source_id": "general:L112-112",
+              "text": "- W02 场景所在地：青藤镇社区球场——俯视视角下的 5v5 球场、看台与俱乐部板凳席；俱乐部界面（抽卡室/转会办公室/训练场）环绕展开。"
+            },
+            {
+              "source_id": "general:L126-142",
+              "text": "- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 开球 | 中圈球静止＋裁判哨动画＋球员就位 | 开场哨声 | 开球完成 |\n| 球权转换 | 持球光环换色（绿/红/黄）＋HUD 球权图标切换 | 短促切换音 | 状态常驻 |\n| 动作选择 | 按钮高亮＋可用性描边（概率条显示） | 界面确认音 | 提交 |\n| 动作成功 | 球轨迹线（0.4 秒渐隐）＋推进/换位动画 | 踢球闷响（按动作分档） | 结算完成 |\n| 动作失败 | 球轨迹断线＋红闪提示 | 低沉失误音 | 结算完成 |\n| 进球 | 球入网定格推近＋球轨迹残影＋比分跳动 | 进球欢呼＋哨声 | 2 秒后回全景 |\n| 扑救成功 | 门将扑救动画＋「扑救」标签弹出 | 扑救掌声 | 结算完成 |\n| 犯规/定位球 | 犯规图标＋定位球点位高亮 | 裁判哨声（两短一长） | 定位球开出 |\n| 中场窗口 | 中场横幅＋换人/战术面板 | 中场哨声 | 推进下半场 |\n| 体力不足 | 球员头顶体力环变红闪烁＋动作禁用 | 低提示音 | 恢复或换人 |\n| 资源入账 | 招募点/训练币/资金图标飞向资源栏 | 入账叮声 | 到位即停 |\n| 抽卡/转会完成 | 卡面翻转/合同盖章动画 | 卡片翻动/盖章声 | 完成 |\n| 赛季结算 | 战绩榜展开＋尾帧按夺冠变体 | 赛季终哨＋欢呼/低音 | 进入结界面板 |"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "动作的幅度、力度和节奏与角色的体量/职业及游戏用途相容；只评价动作表现体系，不评价目标角色材质/服装颜色/渲染风格，不重复核对 C 中的动作类别、阶段和位移约束。",
+          "targets": [
+            {
+              "source_id": "general:L113-113",
+              "text": "- W03 玩家身份与当前任务：玩家是绿茵俱乐部的代理主教练兼经理；当前任务：以 17 种攻防动作赢下六轮赛季，经营阵容冲上冠军联赛。"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "动作连续与平滑度",
+          "assertion": "只评速度/加速度异常和关节跳变，不把有意的冲击或停顿当成缺陷。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "动作多处断裂/跳帧，无法辨识连续运动",
+            "2": "频繁突兀抖动或非设计性速度突变",
+            "3": "动作可连贯观看，局部顿挫可见",
+            "4": "整体平滑，仅有轻微局部顿挫",
+            "5": "全段运动连续，节奏转换自然，无明显关节跳变或非设计性抖动"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "形体与接触合理性",
+          "assertion": "按实际对象评定：人形看关节/重心/脚手接触，非人形看部件连接和支撑；不重复评分动作类别。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "严重肢体/部件扭折或大面积穿透，运动不可用",
+            "2": "多处明显反关节、滑移、漂浮或错误支撑",
+            "3": "形体基本合理，局部接触/重心/穿插问题可见",
+            "4": "形体和接触可信，仅有轻微局部瑕疵",
+            "5": "对象结构、支撑和接触可信，无明显扭折、非设计性滑移或穿透"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。",
+    "requirement_completeness_v2": {
+      "column": "requirement_reference",
+      "score": "100*mean(verified C item scores); PASS=1, PARTIAL=0.5, FAIL=0",
+      "coverage": "verified applicable C count / frozen applicable C count; UNKNOWN/ERROR retained in denominator and bounds, not converted to zero or full credit.",
+      "lower_bound": "100*sum(verified scores)/all applicable C count",
+      "upper_bound": "100*(sum(verified scores)+unknown applicable C count)/all applicable C count",
+      "status": "Any incomplete applicable C coverage => PROVISIONAL; no verified C => null.",
+      "overall": "三列等权；没有任一列不得给总分。此修订不重新计算历史结果。"
+    }
+  },
+  "evidence_requirements": [
+    "完整动作预览，检查阶段与相对位移，不设标定速度/角度/时长门槛。"
+  ],
+  "objective_specs": {
+    "fps": 20,
+    "motion_length": 28,
+    "duration_sec": 1.4,
+    "export_anim_only": true,
+    "use_ik": true,
+    "in_place_lock_height": true
+  },
+  "objective_metric_policy": "原始数值和输出格式仅作独立交付/诊断信息；不并入本版第一列。不改变其他列既有实现。",
+  "authoring_warnings": [
+    {
+      "code": "duplicate_asset_requirement_entry",
+      "detail": {
+        "lines": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "policy": "相同原文只引用一次，不重复生成检查项。"
+      }
+    },
+    {
+      "code": "no_literal_asset_mention_in_general",
+      "detail": "general 中未找到资产名/ID的逐字匹配；采用已解析 spec_ref 与分资产原文，不伪造独立描述。"
+    }
+  ],
+  "requirement_revision": {
+    "version": "priority_observable_v2",
+    "old_rubric": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/per_asset/G058_pitch_dreams_football_mot_001.json",
+      "sha256": "aeffdc4a5fa5a07e1ccafbefed7f620bcb5ec8557a40a980e12ba73e8506dfbd"
+    },
+    "original_other_dimensions_preserved": true,
+    "original_task_input_unchanged": true,
+    "numerical_policy": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+    "reference_ownership": "任务指定姿态/部件/颜色归C，参考角色匹配/全局世界适配归G，内在感知质量归Q；同一事实不重复扣分。",
+    "baseline": "Old frozen aggregate rubric and historical scores untouched; new path requires explicit evaluator support for this schema.",
+    "freeze_status": "规则修订已生成并校验，未声明逐任务人工语义审核完成，不自动冻结或发布分数。",
+    "source_rebinding_audit": [
+      {
+        "source_id": "quality_protocol",
+        "prior": {
+          "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+          "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+          "start_line": 78,
+          "end_line": 82,
+          "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+        },
+        "resolution": "EXACT_QUOTE_REBOUND_TO_CURRENT_FILE"
+      }
+    ],
+    "clause_ledger": [
+      {
+        "field": "prompt",
+        "source_quote": "Player receives a pass",
+        "action": "RETAINED",
+        "normalized": "Player receives a pass",
+        "check_id": "C001"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "takes one controlled touch",
+        "action": "RETAINED",
+        "normalized": "takes one controlled touch",
+        "check_id": "C002"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "swings through a shot",
+        "action": "RETAINED",
+        "normalized": "swings through a shot",
+        "check_id": "C003"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "and follows through toward the goal.",
+        "action": "QUALITATIVE_PROJECTION",
+        "normalized": "and follows through toward the goal",
+        "check_id": "C004"
+      },
+      {
+        "field": "loop",
+        "source_quote": "False",
+        "action": "QUALITATIVE_PROJECTION",
+        "normalized": "单次动作具有可辨起始、过程与结束；不设绝对时长门槛。",
+        "check_id": "C005"
+      },
+      {
+        "field": "root_motion_mode",
+        "source_quote": "in_place_xz",
+        "action": "QUALITATIVE_PROJECTION",
+        "normalized": "整体保持原地表演的组织，不以零位移容差判定；跳跃等任务所需的垂直运动允许保留。",
+        "check_id": "C006"
+      }
+    ],
+    "excluded_field_values": {
+      "character": "football_match",
+      "action_name": "pass_and_shoot",
+      "seed": 9058,
+      "target_mesh_path": "test_data/outputs/G058_pitch_dreams_football/default/assets/3d_object/G058_pitch_dreams_football_obj_001/model.glb",
+      "target_glb_path": "test_data/outputs/G058_pitch_dreams_football/default/assets/3d_object/G058_pitch_dreams_football_obj_001/model.glb",
+      "fps": 20,
+      "motion_length": 28,
+      "duration_sec": 1.4,
+      "use_ik": true,
+      "in_place": true,
+      "in_place_lock_height": true,
+      "loop": false,
+      "stationary": true,
+      "export_anim_only": true,
+      "clip_type": "oneshot",
+      "root_motion_mode": "in_place_xz",
+      "trigger": "shot_input",
+      "start_condition": "ball is within controllable distance and shot input is pressed",
+      "end_condition": "ball leaves the foot and follow-through ends",
+      "cancel_behavior": "cancel_on_tackle",
+      "source_asset": "football_match",
+      "spec_ref": "F05,L01",
+      "event_binding": "shot_input; source_asset=football_match",
+      "planned_source": "motion_comparison",
+      "comparison_sources": [
+        "momask_puppeteer",
+        "llm_direct_motion"
+      ],
+      "l_tier_repair_target": true
+    },
+    "excluded_fields_policy": "保留来源，不作为第一列附加验收。loop/root_motion等只使用上述C条目所述的定性部分。"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "contract_id": "G054_identity_trial.whitebox.endpoints-v2-candidate.7400cfab5ce51e4ebce6414ef2ee093d5c0d501ef51cbf1013acdc14cb1d1f75",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "7400cfab5ce51e4ebce6414ef2ee093d5c0d501ef51cbf1013acdc14cb1d1f75",
+  "rubric_json_sha256": "a834cabe8d8b06c9692fba270d165656d110e2f6760b832f292680fc6554508b",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

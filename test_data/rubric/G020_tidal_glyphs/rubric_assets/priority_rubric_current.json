@@ -1,0 +1,389 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_tidal_glyphs_obj_001",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 59,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_tidal_glyphs_obj_001.json",
+        "sha256": "b754ad2fed36c7e6b1f9c2a0a1bf81710f21f81f7da7ab80b4ae10b32b8fdcfd"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_tidal_glyphs_obj_002",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 60,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_tidal_glyphs_obj_002.json",
+        "sha256": "093f6b46ce4c11cb90a8ab0f3b8520af349e133601f2e790a6c1dc569691729a"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_tidal_glyphs_obj_003",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 61,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_tidal_glyphs_obj_003.json",
+        "sha256": "005d8b334e91ac5b32c147ac9d9761670efaf5990e4b8ac57d2897939e6fc96b"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_tidal_glyphs_obj_004",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 62,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_tidal_glyphs_obj_004.json",
+        "sha256": "cfe3478f4ca8c030c10d6d44019c94536b0f6b8d386753e72cace880b10e3c86"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_tidal_glyphs_obj_005",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 63,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_tidal_glyphs_obj_005.json",
+        "sha256": "81721d8a6905f5607aeb2073bac36b8cc8ac2497e3cd86b1b4c6a3d59e19a07e"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 54,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_scene_001.json",
+        "sha256": "52766717ea77722dca8224a0694924aa286f30a7fbddec1cd9e1cae1772a9b5d"
+      },
+      "C_checks": 9,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 541,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_sfx_001.json",
+        "sha256": "8067e56b71ad60fa9147c1bbdd0717b48d0953aee59da3999515fc6185c27490"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 542,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_sfx_002.json",
+        "sha256": "807d6925d840c8871d87b55ff9dc174fcf88f04d4a9489517cb709dab1fe9e1f"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 543,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_sfx_003.json",
+        "sha256": "c677c7374628f36b6d782199d9c2bb6fa2a205162babee39b60b2d78132115c3"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 544,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_sfx_004.json",
+        "sha256": "c8509e7d87658e1120994043454c24ecebd980992d834ec9a6d85ecee77b6c5d"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 545,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_sfx_005.json",
+        "sha256": "f8585bad35680c379423e4b4f7c64e1a9d77d20feb5e425ad42e937daa34d69c"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 546,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_sfx_006.json",
+        "sha256": "917ebaa89cbff8218edd8c0fa1997bbc26c1af9d76e5340dfe744bdd67863003"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 547,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_sfx_007.json",
+        "sha256": "9649b7f037c5f92e0cd4852c28eafda5b265da37539dcb33fcb15b5bee19fcda"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 548,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_sfx_008.json",
+        "sha256": "33ac0166f05ae6e552ea66affe30c3b7bedd4f5a2ef121c8386ad4d8e2935680"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 549,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_sfx_009.json",
+        "sha256": "ea380134c55671af1b7e694dc739b059e6d66bcca93864b7c9c290aed1991ade"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 550,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_sfx_010.json",
+        "sha256": "4055887902ad234da141d0ce37106bed891adf057bbc32780036e60b56614a77"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 551,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_sfx_011.json",
+        "sha256": "a0cd92e2c06a176899be79fca9985b4a9fb955dab8e078df68412ed681360302"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_sfx_012",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 552,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_sfx_012.json",
+        "sha256": "509934844e94daba87ba3234cc2886c7492b559f7e1d5b4da9a00e7d86843b5e"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_sfx_013",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 553,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_sfx_013.json",
+        "sha256": "202ae1da1c31f1227ccc4e69f516835229ce4a52ef732dcc3bb7189f7058e6c9"
+      },
+      "C_checks": 4,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 143,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_cg_001.json",
+        "sha256": "e16c226097bc3c7b207867b7e05ec461c9b38cacffbe1562f0b06d929508aa6b"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 144,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_cg_002.json",
+        "sha256": "cf84cd5d3b0f995db464ef1f346797edcaf41c147e68eb0e69f789f5bddf0a5c"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 145,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_cg_003.json",
+        "sha256": "6fa93b1bbeb2d81fe4c1831709f2589dd73ad7e4f90fb3f336ae9e212be28eee"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_cg_004",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 146,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_cg_004.json",
+        "sha256": "95c5d4d89974e47b0a833779cb5dd2c0ae78bd23e3cfa0c289d57a67370341c3"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_mot_001",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 1,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_mot_001.json",
+        "sha256": "5caf945fcf474d5b59244fad59edd553d7798fba706af689a3615eb4ec250324"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_mot_002",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 2,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_mot_002.json",
+        "sha256": "23e310a37e62e785b4556eb553717563007d5840a18a05ddde2f6592c970425f"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_mot_003",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 3,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_mot_003.json",
+        "sha256": "cc89d162167fe6fb3d25410538aaf8a64e662822e65b9e49172bc8b67f372522"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G020_tidal_glyphs",
+      "task_id": "G020_tpose_001",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 18,
+      "rubric": {
+        "path": "test_data/test_samples/G020_tidal_glyphs/rubric_assets/priority_observable_v2/G020_tpose_001.json",
+        "sha256": "e6c411f7955e95e852fc6b8986c05eff3fc288017b42c2553c6615cc6a1bafd4"
+      },
+      "C_checks": 5,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    }
+  ]
+}

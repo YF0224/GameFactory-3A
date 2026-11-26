@@ -1,0 +1,7 @@
+{
+  "contract_id": "G046_storm_isle_survival.whitebox.endpoints-v2-candidate.a1615a3fc10de3b0b45b8e460ab4e8270457e0ff30dc6b5619504302e7ed7534",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "a1615a3fc10de3b0b45b8e460ab4e8270457e0ff30dc6b5619504302e7ed7534",
+  "rubric_json_sha256": "089ce9f311596fc5a24cfb3d9d4702cdf56934cb4471369a956cc2d7e1c09250",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

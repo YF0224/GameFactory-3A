@@ -1,0 +1,7 @@
+{
+  "contract_id": "G031_dream_archive.whitebox.endpoints-v2-candidate.1e1fd8e594d4dfb72979347ac3ccc59aa8fdfcb30bd063fbcd68af6163674483",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "1e1fd8e594d4dfb72979347ac3ccc59aa8fdfcb30bd063fbcd68af6163674483",
+  "rubric_json_sha256": "3eb318c2be41ff4d4d162bbcd95e5cd95236d26057a153001fbeb1fb96df629c",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

@@ -1,0 +1,410 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.v1",
+  "authoring_protocol": "priority_asset_rubrics.v1",
+  "status": "source_grounded_draft",
+  "game_id": "G011_cloud_mail_runner",
+  "task_id": "G011_scene_001",
+  "asset_type": "3d_scene",
+  "asset_subtype": "3d_scene",
+  "asset_name": "G011_scene_001",
+  "scope": "Track B：独立资产；不含 T-pose、自然音效或引擎导入/playtest。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G011_cloud_mail_runner",
+    "task_id": "G011_scene_001",
+    "prompt": "500-meter finite side-view sky mail route with upper 3m storm-ridge platform route, lower safe cloud-deck route, five checkpoint beacons and a distant lighthouse, drifting sea of clouds below, hand-painted bright palette",
+    "seed": 4111,
+    "output_format": "glb",
+    "texture_size": 2048,
+    "layout_constraints": "单条 500m 有限路段（seed=1011 冻结拼接）；前 50m 无障碍教学段；上层通道高 3m、入口 1.5m 中继台阶、每次垂直上升 ≤2.2m；连续障组高-低-高、中心间距 9m、沿跑向碰撞宽 0.8m；检查点 0/100/200/300/400m 共 5 个；冻结布局须含至少一条有效输入轨迹；碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）",
+    "spec_ref": "L02",
+    "comparison_sources": [
+      "hunyuan_worldplay",
+      "llm_combo"
+    ]
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L162-162",
+      "general:L163-163",
+      "general:L164-164",
+      "general:L166-166"
+    ],
+    "visual_style_source_ids": [
+      "general:L167-167"
+    ],
+    "sound_style_source_ids": [
+      "general:L168-168"
+    ],
+    "asset_description_source_ids": [],
+    "spec_ref_source_ids": [
+      "general:L99-108"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L6",
+    "canonical_asset_content_source_ids": [],
+    "track_c_only_layout_clauses": [
+      "沿跑向碰撞宽 0.8m",
+      "碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）"
+    ]
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "sha256": "b2078680d8eecfe6289960a046b337eb8774cec2e1759b59928be48420a42ede",
+      "start_line": 12,
+      "end_line": 12,
+      "quote": "{\"game_id\": \"G011_cloud_mail_runner\", \"task_id\": \"G011_scene_001\", \"prompt\": \"500-meter finite side-view sky mail route with upper 3m storm-ridge platform route, lower safe cloud-deck route, five checkpoint beacons and a distant lighthouse, drifting sea of clouds below, hand-painted bright palette\", \"seed\": 4111, \"output_format\": \"glb\", \"texture_size\": 2048, \"layout_constraints\": \"单条 500m 有限路段（seed=1011 冻结拼接）；前 50m 无障碍教学段；上层通道高 3m、入口 1.5m 中继台阶、每次垂直上升 ≤2.2m；连续障组高-低-高、中心间距 9m、沿跑向碰撞宽 0.8m；检查点 0/100/200/300/400m 共 5 个；冻结布局须含至少一条有效输入轨迹；碰撞体与数值关卡由 mechanic 阶段按 spec 制作（L04）\", \"spec_ref\": \"L02\", \"comparison_sources\": [\"hunyuan_worldplay\", \"llm_combo\"]}"
+    },
+    "general:L162-162": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 162,
+      "end_line": 162,
+      "quote": "- W01 世界与时代背景：云端邮路的最后一班信——暴风云带正在吞没这条悬于天际的邮路，这是云邮时代结束前的最后一次投递。"
+    },
+    "general:L163-163": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 163,
+      "end_line": 163,
+      "quote": "- W02 场景所在地：500 米悬空邮路，云海在其下翻涌；上层 3 米高的暴风脊线通道（高收集密度）与下层云面稳妥栈道并行，尽头是云端灯塔。"
+    },
+    "general:L164-164": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 164,
+      "end_line": 164,
+      "quote": "- W03 玩家身份与当前任务动机：玩家是最后一位云端邮差，背着最后一批急件；动机是在邮路被暴风吞没前，把每一件光件（邮路信标）安全送到灯塔。"
+    },
+    "general:L166-166": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 166,
+      "end_line": 166,
+      "quote": "- W05 叙事来源：光件=邮路信标件（收集目标）；高障/低障/连续障=暴风卷起的云岩与断裂横梁；检查点=沿途补给灯站；上层通道=邮路的暴风脊线（高风险高收益）。全部原创，不使用商业作品命名或造型。"
+    },
+    "general:L167-167": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 167,
+      "end_line": 167,
+      "quote": "- W06 视觉风格与色彩材质：明快手绘感的云海世界；主色=云白 #EAF2F8、信件金 #E8C559、暴风灰蓝 #6E8FA3、灯塔橙 #E4762C、光件青 #7FD8E8；材质为云岩、木质栈道、帆布邮包。"
+    },
+    "general:L168-168": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 168,
+      "end_line": 168,
+      "quote": "- W07 环境氛围与声音语言：风声与云层低鸣为底；音效语言为「跳跃风切+滑铲摩擦+收集叮响+碰撞闷响+灯塔钟声」，全部音效按 §9 F06 冻结清单交付。"
+    },
+    "general:L99-108": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/general_requirement.txt",
+      "sha256": "70015ed407ae57bbc2d7843a0bc131c55eaea85f9055794eb64de1b862c27a8f",
+      "start_line": 99,
+      "end_line": 108,
+      "quote": "- L02 路段（代码块冻结口径）：\n\n```text\n单条 500 米有限路段，由 seed=1011 拼接\n前 50 米：无障碍教学段（仅光件）\n上层通道：高度 3 米平台段，入口 1.5 米中继台阶，每次垂直上升 ≤2.2 米\n连续障组：高-低-高实例化，中心间距 9 米，沿跑向碰撞宽 0.8 米\n检查点：0/100/200/300/400 米共 5 个\n冻结布局须提供至少一条有效输入轨迹（可通关性证明随 layout_manifest 交付）\n```"
+    },
+    "asset_requirement:L6": {
+      "path": "test_data/test_samples/G011_cloud_mail_runner/3D_scene/requirement.txt",
+      "sha256": "b39e9ced17456c45dd1ba81a737a0b934a9ff213380ebc822a51e33b0c905830",
+      "start_line": 6,
+      "end_line": 6,
+      "quote": "- G011_scene_001: 500-meter finite side-view sky mail route with upper 3m storm-ridge platform route, lower safe cloud-deck route, five checkpoint beacons and a distant lighthouse, drifting sea of clouds below, hand-painted bright palette"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+      "start_line": 78,
+      "end_line": 82,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "500-meter finite side-view sky mail route with upper 3m storm-ridge platform route",
+      "lower safe cloud-deck route",
+      "five checkpoint beacons and a distant lighthouse",
+      "drifting sea of clouds below"
+    ],
+    "style": [
+      "hand-painted bright palette"
+    ],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求符合度",
+      "checks": [
+        {
+          "id": "C01",
+          "title": "场景区域、地标或可见内容",
+          "assertion": "实际产物可观察地满足：500-meter finite side-view sky mail route with upper 3m storm-ridge platform route；lower safe cloud-deck route",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "500-meter finite side-view sky mail route with upper 3m storm-ridge platform route",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "lower safe cloud-deck route",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "这里只核对场景区域/地标的存在、类别与外观。layout_constraints 已声明的数量、尺寸及空间位置由布局项核对，不在此重复计分。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "C02",
+          "title": "场景区域、地标或可见内容",
+          "assertion": "实际产物可观察地满足：five checkpoint beacons and a distant lighthouse",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "five checkpoint beacons and a distant lighthouse",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "这里只核对场景区域/地标的存在、类别与外观。layout_constraints 已声明的数量、尺寸及空间位置由布局项核对，不在此重复计分。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C03",
+          "title": "场景区域、地标或可见内容",
+          "assertion": "实际产物可观察地满足：drifting sea of clouds below",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "drifting sea of clouds below",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "这里只核对场景区域/地标的存在、类别与外观。layout_constraints 已声明的数量、尺寸及空间位置由布局项核对，不在此重复计分。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": false,
+          "partial_rule": "不适用：单目标项只判 PASS / FAIL / UNKNOWN。",
+          "fail_rule": "证据充分，且本项目标明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C04",
+          "title": "明确空间布局",
+          "assertion": "场景外观与可量测空间关系满足：单条 500m 有限路段（seed=1011 冻结拼接）；前 50m 无障碍教学段；上层通道高 3m、入口 1.5m 中继台阶、每次垂直上升 ≤2.2m；连续障组高-低-高；中心间距 9m；检查点 0/100/200/300/400m 共 5 个；冻结布局须含至少一条有效输入轨迹",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "text": "单条 500m 有限路段（seed=1011 冻结拼接）",
+              "field": "layout_constraints"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "前 50m 无障碍教学段",
+              "field": "layout_constraints"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "上层通道高 3m、入口 1.5m 中继台阶、每次垂直上升 ≤2.2m",
+              "field": "layout_constraints"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "连续障组高-低-高",
+              "field": "layout_constraints"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "中心间距 9m",
+              "field": "layout_constraints"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "检查点 0/100/200/300/400m 共 5 个",
+              "field": "layout_constraints"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "冻结布局须含至少一条有效输入轨迹",
+              "field": "layout_constraints"
+            }
+          ],
+          "scope_exclusions": "不验收碰撞、导航、时间脚本、出生触发与运行时判定；保留视觉空间要求。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [
+            "精确距离/尺寸必须由场景尺度与坐标探针证明，不从单帧估算。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L162-162",
+              "text": "- W01 世界与时代背景：云端邮路的最后一班信——暴风云带正在吞没这条悬于天际的邮路，这是云邮时代结束前的最后一次投递。"
+            },
+            {
+              "source_id": "general:L163-163",
+              "text": "- W02 场景所在地：500 米悬空邮路，云海在其下翻涌；上层 3 米高的暴风脊线通道（高收集密度）与下层云面稳妥栈道并行，尽头是云端灯塔。"
+            },
+            {
+              "source_id": "general:L99-108",
+              "text": "- L02 路段（代码块冻结口径）：\n\n```text\n单条 500 米有限路段，由 seed=1011 拼接\n前 50 米：无障碍教学段（仅光件）\n上层通道：高度 3 米平台段，入口 1.5 米中继台阶，每次垂直上升 ≤2.2 米\n连续障组：高-低-高实例化，中心间距 9 米，沿跑向碰撞宽 0.8 米\n检查点：0/100/200/300/400 米共 5 个\n冻结布局须提供至少一条有效输入轨迹（可通关性证明随 layout_manifest 交付）\n```"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L167-167",
+              "text": "- W06 视觉风格与色彩材质：明快手绘感的云海世界；主色=云白 #EAF2F8、信件金 #E8C559、暴风灰蓝 #6E8FA3、灯塔橙 #E4762C、光件青 #7FD8E8；材质为云岩、木质栈道、帆布邮包。"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "hand-painted bright palette",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "场景几何完整性",
+          "assertion": "只评场景自身断裂、漂浮、交叠与尺度突变，不验证碰撞或导航。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "主要场景崩坏或大面积缺面，空间不可辨",
+            "2": "主要区域存在明显断裂/悬浮/异常尺度突变",
+            "3": "场景整体完整，局部连接或几何有可见瑕疵",
+            "4": "仅有轻微局部几何瑕疵",
+            "5": "全景与近景均完整，未见明显断裂、漂浮或非设计性穿插"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "整体视觉组织与表面质量",
+          "assertion": "只评构图可读性、光照及材质连贯；不重复检查地标数量与布局需求。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "画面混乱或严重伪影，主要空间无法辨识",
+            "2": "光照/材质错乱显著，空间层次难辨",
+            "3": "空间层次可辨，局部拥挤/涂抹/光照接缝可见",
+            "4": "空间组织清晰，仅少量视觉瑕疵",
+            "5": "空间层次、光照与材质连贯，全景和近景均无明显伪影"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。"
+  },
+  "evidence_requirements": [
+    "实际三维场景的俯视全景、地标及区域近景",
+    "空间关系需场景坐标/尺寸探针；截图不能证明精确米数"
+  ],
+  "objective_specs": {
+    "output_format": "glb",
+    "texture_size": 2048
+  },
+  "objective_metric_policy": "规格与传统指标单独由探针/脚本报告原始值，不与三维 rubric 分数混合；本文件不代表已计算任何指标。",
+  "authoring_warnings": [
+    {
+      "code": "no_literal_asset_mention_in_general",
+      "detail": "general 中未找到资产名/ID的逐字匹配；采用已解析 spec_ref 与分资产原文，不伪造独立描述。"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "contract_id": "G004_desert_observatory.whitebox.final",
+  "version": "final",
+  "content_sha256": "945b67d45f54e2556e8ddf6cc4a522100c474ff5a7c1b4ee9b745e726649be7b",
+  "rubric_json_sha256": "9c94d4fe61c8e9ebc8e38e7da6afbdf2cf481dc89c11cd7de81d99637e4c8a01",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

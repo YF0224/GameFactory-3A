@@ -1,0 +1,557 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.observable.v2",
+  "authoring_protocol": "priority_observable_v2",
+  "status": "source_grounded_revision_not_judged",
+  "game_id": "G040_endurance_race",
+  "task_id": "G040_endurance_race_obj_008",
+  "asset_type": "3d_object",
+  "asset_subtype": "prop",
+  "asset_name": "发车灯架",
+  "scope": "priority gen 独立资产三列口径；第一列仅可观察需求内容，排除标定数值及运行时验收。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G040_endurance_race",
+    "task_id": "G040_endurance_race_obj_008",
+    "asset_name": "start_light_gantry",
+    "name_zh": "发车灯架",
+    "role": "prop",
+    "input_mode": "text_to_3d",
+    "prompt": "Start line light gantry with five red lamp housings on a graphite steel frame, blank lamp panels for runtime material control, game-ready PBR, single object, Y-up, low-poly style, minimal triangle count, flat faceted surfaces, clean silhouette, no fine surface detail",
+    "seed": 1047,
+    "decimation_target": 8000,
+    "texture_size": 2048,
+    "rig": "none",
+    "animation_strategy": "procedural",
+    "spec_ref": "L01,S09,F05",
+    "poly_policy": "low_poly_priority",
+    "l_tier_repair_target": true
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L218-218",
+      "general:L219-219",
+      "general:L220-220",
+      "general:L222-222"
+    ],
+    "visual_style_source_ids": [
+      "general:L223-223"
+    ],
+    "sound_style_source_ids": [
+      "general:L224-224"
+    ],
+    "asset_description_source_ids": [
+      "general:L122",
+      "general:L261",
+      "general:L262",
+      "general:L333"
+    ],
+    "spec_ref_source_ids": [
+      "general:L122-122",
+      "general:L52-58",
+      "general:L233-249"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L13",
+    "canonical_asset_content_source_ids": []
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "sha256": "a6a9b03f45ab40197fbb18aaf9614638a9691890a7824c137aef95fcd79868f9",
+      "start_line": 159,
+      "end_line": 159,
+      "quote": "{\"game_id\": \"G040_endurance_race\", \"task_id\": \"G040_endurance_race_obj_008\", \"asset_name\": \"start_light_gantry\", \"name_zh\": \"发车灯架\", \"role\": \"prop\", \"input_mode\": \"text_to_3d\", \"prompt\": \"Start line light gantry with five red lamp housings on a graphite steel frame, blank lamp panels for runtime material control, game-ready PBR, single object, Y-up, low-poly style, minimal triangle count, flat faceted surfaces, clean silhouette, no fine surface detail\", \"seed\": 1047, \"decimation_target\": 8000, \"texture_size\": 2048, \"rig\": \"none\", \"animation_strategy\": \"procedural\", \"spec_ref\": \"L01,S09,F05\", \"poly_policy\": \"low_poly_priority\", \"l_tier_repair_target\": true}"
+    },
+    "general:L218-218": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 218,
+      "end_line": 218,
+      "quote": "- W01 世界与时代背景：「环涛耐久赛」——海岸城市涛澜湾一年一度的三日街头耐久锦标赛，独立车队与城市公路共同书写耐久传说；轮胎、油量与耐心同样快的车队才能登顶。"
+    },
+    "general:L219-219": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 219,
+      "end_line": 219,
+      "quote": "- W02 场景所在地：涛澜湾三段赛程——赛段一穿老城街道（干燥午后）、赛段二沿海滨大道（阵雨初歇、湿地反光）、赛段三夜战港口区（夜雨、灯光与积水）；维修区设在滨海直道旁。"
+    },
+    "general:L220-220": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 220,
+      "end_line": 220,
+      "quote": "- W03 玩家身份与当前任务动机：玩家是独立车队「白帆车队」的签约车手，驾驶 07 号耐久赛车，与三支风格鲜明的 AI 车队（红隼/信天翁/灰鸥）争夺三赛段累计积分冠军。"
+    },
+    "general:L222-222": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 222,
+      "end_line": 222,
+      "quote": "- W05 叙事来源：07 号耐久赛车＝白帆车队自制 LMP 风格原型车；红隼/信天翁/灰鸥＝三支 AI 车队的图腾涂装；安全车＝赛会柠檬黄引导车；维修区＝滨海直道的活动板房与胎墙。全部原创，不用商业作品命名。"
+    },
+    "general:L223-223": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 223,
+      "end_line": 223,
+      "quote": "- W06 视觉风格与色彩材质：晴雨交替的城市耐久风；主色＝涛澜青 #2E6E7E、白帆白 #F2F4EF、赛会金 #E8B84B、警示红 #D9553F；材质为沥青湿地反光、护栏钢、胎墙橡胶与港口夜灯。"
+    },
+    "general:L224-224": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 224,
+      "end_line": 224,
+      "quote": "- W07 环境氛围与声音语言：海风与港口低鸣为底，夜雨段转为雨幕；音效语言＝引擎、轮胎、进站扳手、油泵、判罚提示、无线电提示（F06 冻结清单）；混音优先级：判罚/警报 ＞ 无线电 ＞ 进站 ＞ 引擎 ＞ 雨环境。"
+    },
+    "general:L122-122": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 122,
+      "end_line": 122,
+      "quote": "- L01 生成对象：4 台车辆（玩家车＋三 AI，原创造型与涂装可区分）、安全车 1、三条赛道（城市街道/滨海/夜战港口）、维修区建筑与进站设备（胎堆/千斤顶/加油机）、发车灯架、颁奖台、积分榜与升级面板、HUD。"
+    },
+    "general:L52-58": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 52,
+      "end_line": 58,
+      "quote": "- S09 赛段开场与发车\n  - input：系统进入（赛段一前播 C01；赛段二/三前播对应转场；玩家可跳过）\n  - precondition：上一赛段已结算（赛段一为开局/恢复）\n  - state_change：起跑排位确定（赛段一固定第 4 位起跑；后续赛段按上一赛段名次排位）；燃油自动加满 100%；抓地 100、车损 0（车损不跨段保留，磨耗跨段随升级与状态见 G03/G06）；发车灯倒计时\n  - feedback：发车灯与 C 系列视频（F05/F06）\n  - next_actions：绿灯 → S10\n  - outcome：该段 3 圈计时开始"
+    },
+    "general:L233-249": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 233,
+      "end_line": 249,
+      "quote": "- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 发车灯 | 红灯依次亮起 → 绿灯 | start_light_beep | 绿灯起跑 |\n| 完成一圈 | 圈号横幅＋圈速差 | lap_complete_chime | 横幅收起 |\n| 抓地 <40 | HUD 抓地表转橙 | wear_warning（并入 radio_alert 前置提示档） | 进站换胎 |\n| 打滑事件 | 车尾甩动＋烟雾＋镜头甩动 1.5 秒 | tire_squeal_loop 峰值 | 失控 1.5 秒结束 |\n| 燃油 <15% | HUD 油表转黄闪烁 | fuel_warning | 进站加油 |\n| 燃油归零 | 引擎音熄灭＋车辆滑行 | engine_loop 淡出 | 停机退赛 |\n| 切弯判罚 | 判罚横幅（+5 秒） | penalty_beep | 横幅收起 |\n| 碰撞 | 火花＋0.3 秒中震 | collision_crash | 0.3 秒结束 |\n| 进站 | 维修区俯视镜头＋换胎/加油动作（可跳过） | pit_wrench | 出站 |\n| 安全车出动 | 黄旗全屏条幅＋镜头切安全车 1 秒 | radio_alert | deployed 期间常驻黄旗角标 |\n| 安全车退出 | 绿旗角标闪两下 | radio_alert（绿旗档） | green 恢复 |\n| 退赛 | 退赛横幅＋C04 退赛意象 | defeat_sting（退赛档） | 进入段内退赛结算 |\n| 总评结算 | C04 播放（登顶/未登顶意象）＋总评面板 | victory_sting / defeat_sting | 进入总评面板 |"
+    },
+    "general:L122": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 122,
+      "end_line": 122,
+      "quote": "- L01 生成对象：4 台车辆（玩家车＋三 AI，原创造型与涂装可区分）、安全车 1、三条赛道（城市街道/滨海/夜战港口）、维修区建筑与进站设备（胎堆/千斤顶/加油机）、发车灯架、颁奖台、积分榜与升级面板、HUD。"
+    },
+    "general:L261": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 261,
+      "end_line": 261,
+      "quote": "  - 内容与角色场景：涛澜湾清晨、四台原创赛车列队出场、维修区清场、老城街道/滨海大道/港口夜景三段闪切，最后停在发车灯架"
+    },
+    "general:L262": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 262,
+      "end_line": 262,
+      "quote": "  - 资产对应：玩家车、三 AI 车、安全车、发车灯架与游戏内模型同源"
+    },
+    "general:L333": {
+      "path": "test_data/test_samples/G040_endurance_race/general_requirement.txt",
+      "sha256": "c80c1a132fae9f0cc5bb073d09603dbaf38f2d351d5897b981d26adf53f7d536",
+      "start_line": 333,
+      "end_line": 333,
+      "quote": "- object：9 个（text-to-3D 6，image-to-3D 3）；object 任务资产为：endurance_car_player, endurance_car_red_kite, endurance_car_albatross, endurance_car_gull, safety_car_lemon, pit_building_kit, pit_equipment_set, start_light_gantry, podium_stage。每项只允许一个物体；组合物必须拆成独立任务。"
+    },
+    "asset_requirement:L13": {
+      "path": "test_data/test_samples/G040_endurance_race/3D_object/requirement.txt",
+      "sha256": "e0b41be166ff914b74980e2af54e838bb6106a61e4df877268646b51bf8e0e52",
+      "start_line": 13,
+      "end_line": 13,
+      "quote": "- start_light_gantry: Start line light gantry with five red lamp housings on a graphite steel frame, blank lamp panels for runtime material control, game-ready PBR, single object, Y-up"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "1570088e54280dfb58b5516ab111066597b31c5bc34e887cfd5cae85534f95f6",
+      "start_line": 82,
+      "end_line": 86,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    },
+    "revision_policy": {
+      "path": "workspaces/priority_rubric_observable_20261026/POLICY.md",
+      "sha256": "581d726dee3f0efba7c72e8616f553a1248d822791a75f42e6d463b81a9312ca",
+      "start_line": 1,
+      "end_line": 34,
+      "quote": "# Priority 资产可观察需求 rubric 修订 v2\n\n此版本只服务资产三列中的第一列需求完整性，不更改原始生成任务、既有分数或历史冻结合同。\n所有七份 priority 清单逐条覆盖，禁止仅用同类代表任务代替。输出位于各游戏 rubric_assets/priority_observable_v2/，游戏内 priority_rubric_current.json 是显式修订索引，不是对生产 evaluator 的隐式切换。\n\n## 第一列保留\n\n任务明确要求的主体类别、部件、形状、轮廓、命名色彩、材质表现、可见标记、姿态、动作阶段、声音事件、声源、情绪、语言及台词内容。\n任务明确要求的上下、左右、内外、中央/周边、前后、连接、环绕、相对大小/深浅、留白和遮挡关系。\nCG 只要求原文明示的事件顺序、状态变化与镜头行为；不能把列表自动解释为严格顺序。动作片段保留循环/单次与原地组织，不设严格时长/帧数/零位移阈值。\n台词或资产名称中的数字可以是实际内容，不是数值验收阈值；不因文本包含数字机械删掉语义。\n对象数量只作原文上下文，不按精确计数通过率评分；保留主次、成组、单体/多体和必要的关系含义。\n\n## 第一列不计分\n\n绝对坐标、原点、尺寸、距离、速度、时长、角度、帧数、分辨率、面数、数值颜色/色差、采样率、响度和频率阈值，以及机制数值、随机种子、容量、库存、伤害、时间窗。\n这些字段和原始引文完整保留在 task_input、sources 或 excluded_field_values 中，不伪称已经满足，也不当作第一列隐藏门槛。\n引擎导入、碰撞、导航、触发、跳过、暂停、同步、状态机与游戏内混音另属交付/集成验证，不凭离线素材判通过。\n\n## 三列分工\n\nC：当前任务明确指定什么，实际内容是否呈现。\nG：与角色/场景参考及游戏整体世界/美术/声音方向是否相容，不重复扣C的缺失。\nQ：内在感知/技术质量，不重复内容语义或世界适配。\n已有逐资产 rubric 的 G/Q 维度原样保留。此前未建逐资产文件的自然音效/T-pose只补源文支持的G/Q草稿，不能假称复用了已验证分数。\n参考图只按明确绑定使用；image_path 的存在不是生成模型实际收到图片的证明。T-pose中的参考身份/比例比较放G，不在C重复。\n\n## 来源与状态\n\n先遵从原有来源优先级；保留 canonical/分资产原文与任务JSONL。定性投影不得补造“附近”“左侧”等源文不支持的位置。\n场景 layout_constraints 已逐条整理为可见关系；原始标定与运行时要求另存。不宣称精确坐标被视觉验证。\n相互矛盾的要求保留并报审查警告，不用PARTIAL掩盖来源冲突，不把两种胜负分支强行串为一条时间线。\n每条判词必须给视角、帧或音频时间证据。观察不清/未取证为UNKNOWN，调用/配置故障为ERROR，均不填0或100、不删除分母；报告coverage和上下界，证据不足的得分只能PROVISIONAL。\n本次为有来源的修订版与结构/来源校验，不宣布所有1305条人工语义审核完成，不自动冻结，不自动启动评测。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "Start line light gantry with five red lamp housings on a graphite steel frame",
+      "blank lamp panels for runtime material control",
+      "single object"
+    ],
+    "style": [
+      "game-ready PBR",
+      "low-poly style",
+      "minimal triangle count",
+      "flat faceted surfaces",
+      "clean silhouette",
+      "no fine surface detail"
+    ],
+    "technical": [
+      "Y-up"
+    ],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求完整性（可观察内容）",
+      "checks": [
+        {
+          "id": "C001",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：Start line light gantry with five red lamp housings on a graphite steel frame",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "Start line light gantry with five red lamp housings on a graphite steel frame",
+              "text": "Start line light gantry with five red lamp housings on a graphite steel frame"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C002",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：blank lamp panels",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "blank lamp panels for runtime material control",
+              "text": "blank lamp panels"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C003",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：single object",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "single object",
+              "text": "single object"
+            }
+          ],
+          "modality": "visual_views",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L218-218",
+              "text": "- W01 世界与时代背景：「环涛耐久赛」——海岸城市涛澜湾一年一度的三日街头耐久锦标赛，独立车队与城市公路共同书写耐久传说；轮胎、油量与耐心同样快的车队才能登顶。"
+            },
+            {
+              "source_id": "general:L219-219",
+              "text": "- W02 场景所在地：涛澜湾三段赛程——赛段一穿老城街道（干燥午后）、赛段二沿海滨大道（阵雨初歇、湿地反光）、赛段三夜战港口区（夜雨、灯光与积水）；维修区设在滨海直道旁。"
+            },
+            {
+              "source_id": "general:L122",
+              "text": "- L01 生成对象：4 台车辆（玩家车＋三 AI，原创造型与涂装可区分）、安全车 1、三条赛道（城市街道/滨海/夜战港口）、维修区建筑与进站设备（胎堆/千斤顶/加油机）、发车灯架、颁奖台、积分榜与升级面板、HUD。"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L223-223",
+              "text": "- W06 视觉风格与色彩材质：晴雨交替的城市耐久风；主色＝涛澜青 #2E6E7E、白帆白 #F2F4EF、赛会金 #E8B84B、警示红 #D9553F；材质为沥青湿地反光、护栏钢、胎墙橡胶与港口夜灯。"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "game-ready PBR",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "low-poly style",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "minimal triangle count",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "flat faceted surfaces",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "clean silhouette",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "no fine surface detail",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "几何结构质量",
+          "assertion": "只评几何/形体自身缺陷，不重复评分所需部件是否存在。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "大范围塌陷、破面或融合，主体结构不可辨",
+            "2": "多处明显破损/漂浮/穿插，严重影响辨识",
+            "3": "主体结构完整，局部破面或穿插可见",
+            "4": "只有轻微局部瑕疵，不影响轮廓与结构",
+            "5": "多视角下结构完整，未见明显破面、漂浮或异常穿插"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "材质与表面质量",
+          "assertion": "只评表面清晰、材质连贯和伪影；低多边形/平面着色本身不是缺陷。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "大面积错误贴图/糊化/污染，表面不可读",
+            "2": "明显接缝、拉伸或材质错乱覆盖主要区域",
+            "3": "主体表面可读，但存在局部接缝/拉伸/涂抹",
+            "4": "仅有轻微接缝或局部表面瑕疵",
+            "5": "材质与色块连贯，多视角下未见明显接缝、拉伸或生成伪影"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。",
+    "requirement_completeness_v2": {
+      "column": "requirement_reference",
+      "score": "100*mean(verified C item scores); PASS=1, PARTIAL=0.5, FAIL=0",
+      "coverage": "verified applicable C count / frozen applicable C count; UNKNOWN/ERROR retained in denominator and bounds, not converted to zero or full credit.",
+      "lower_bound": "100*sum(verified scores)/all applicable C count",
+      "upper_bound": "100*(sum(verified scores)+unknown applicable C count)/all applicable C count",
+      "status": "Any incomplete applicable C coverage => PROVISIONAL; no verified C => null.",
+      "overall": "三列等权；没有任一列不得给总分。此修订不重新计算历史结果。"
+    }
+  },
+  "evidence_requirements": [
+    "覆盖可见主体的适用视角，不因遮挡或缺视角推断缺失。"
+  ],
+  "objective_specs": {
+    "decimation_target": 8000,
+    "texture_size": 2048,
+    "rig": "none"
+  },
+  "objective_metric_policy": "原始数值和输出格式仅作独立交付/诊断信息；不并入本版第一列。不改变其他列既有实现。",
+  "authoring_warnings": [],
+  "requirement_revision": {
+    "version": "priority_observable_v2",
+    "old_rubric": {
+      "path": "test_data/test_samples/G040_endurance_race/rubric_assets/per_asset/G040_endurance_race_obj_008.json",
+      "sha256": "467faa7ecba8a1092d43094d35e109f23aae78fcbad3a65a5d49e24db0fa54bf"
+    },
+    "original_other_dimensions_preserved": true,
+    "original_task_input_unchanged": true,
+    "numerical_policy": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+    "reference_ownership": "任务指定姿态/部件/颜色归C，参考角色匹配/全局世界适配归G，内在感知质量归Q；同一事实不重复扣分。",
+    "baseline": "Old frozen aggregate rubric and historical scores untouched; new path requires explicit evaluator support for this schema.",
+    "freeze_status": "规则修订已生成并校验，未声明逐任务人工语义审核完成，不自动冻结或发布分数。",
+    "source_rebinding_audit": [
+      {
+        "source_id": "quality_protocol",
+        "prior": {
+          "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+          "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+          "start_line": 78,
+          "end_line": 82,
+          "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+        },
+        "resolution": "EXACT_QUOTE_REBOUND_TO_CURRENT_FILE"
+      }
+    ],
+    "clause_ledger": [
+      {
+        "field": "prompt",
+        "source_quote": "Start line light gantry with five red lamp housings on a graphite steel frame",
+        "action": "RETAINED",
+        "normalized": "Start line light gantry with five red lamp housings on a graphite steel frame",
+        "check_id": "C001"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "blank lamp panels for runtime material control",
+        "action": "QUALITATIVE_PROJECTION",
+        "normalized": "blank lamp panels",
+        "check_id": "C002"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "game-ready PBR",
+        "action": "DEFERRED",
+        "reason": "统一造型/输出政策已在原G/Q或规格中保留，不重复计第一列。"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "single object",
+        "action": "RETAINED",
+        "normalized": "single object",
+        "check_id": "C003"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "Y-up",
+        "action": "DEFERRED",
+        "reason": "统一造型/输出政策已在原G/Q或规格中保留，不重复计第一列。"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "low-poly style",
+        "action": "DEFERRED",
+        "reason": "统一造型/输出政策已在原G/Q或规格中保留，不重复计第一列。"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "minimal triangle count",
+        "action": "DEFERRED",
+        "reason": "统一造型/输出政策已在原G/Q或规格中保留，不重复计第一列。"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "flat faceted surfaces",
+        "action": "DEFERRED",
+        "reason": "统一造型/输出政策已在原G/Q或规格中保留，不重复计第一列。"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "clean silhouette",
+        "action": "DEFERRED",
+        "reason": "统一造型/输出政策已在原G/Q或规格中保留，不重复计第一列。"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "no fine surface detail",
+        "action": "DEFERRED",
+        "reason": "统一造型/输出政策已在原G/Q或规格中保留，不重复计第一列。"
+      }
+    ],
+    "excluded_field_values": {
+      "role": "prop",
+      "input_mode": "text_to_3d",
+      "seed": 1047,
+      "decimation_target": 8000,
+      "texture_size": 2048,
+      "rig": "none",
+      "animation_strategy": "procedural",
+      "spec_ref": "L01,S09,F05",
+      "poly_policy": "low_poly_priority",
+      "l_tier_repair_target": true
+    },
+    "excluded_fields_policy": "保留来源，不作为第一列附加验收。loop/root_motion等只使用上述C条目所述的定性部分。"
+  }
+}

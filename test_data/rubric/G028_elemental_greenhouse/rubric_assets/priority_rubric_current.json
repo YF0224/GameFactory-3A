@@ -1,0 +1,416 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_elemental_greenhouse_obj_012",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 104,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_elemental_greenhouse_obj_012.json",
+        "sha256": "37537b99e4eb657ba9f887518a737338cf641577f8b3ceebcc3134c9451a542a"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_elemental_greenhouse_obj_013",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 105,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_elemental_greenhouse_obj_013.json",
+        "sha256": "c1c15662cba24a31b6f1a8eb131c2f755110623f92b3fd0e5239b2637320aaef"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_elemental_greenhouse_obj_014",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 106,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_elemental_greenhouse_obj_014.json",
+        "sha256": "6463d16e64f8b518777dd9a45b884faa67b85ceeeed70d730e6c0be0481176a7"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_elemental_greenhouse_obj_015",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 107,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_elemental_greenhouse_obj_015.json",
+        "sha256": "14ff8bff5d870e4fd191fae582ae1b9ca031ceb7d7cd4ec222d2e5467ad98a8d"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 24,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_scene_001.json",
+        "sha256": "a14b984ddadb097de947a90b37af15a0bb9651fb232bbb49476a8e253b9e8611"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_vo_015",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 6,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_vo_015.json",
+        "sha256": "a295036b0b4114d34329c140a41a860e239522752dccd4bdee536115e124cb2d"
+      },
+      "C_checks": 7,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_vo_016",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 7,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_vo_016.json",
+        "sha256": "c6747d5c55de5a01d5a11e689e37d36136c0417060d6aa0af15693dc650601f4"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_vo_017",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 8,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_vo_017.json",
+        "sha256": "bf9eb53e043bbb3fec2ee1ec04a991a88515d4b963e8511bdc336fca4016db3e"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_vo_018",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 9,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_vo_018.json",
+        "sha256": "100e6b33c25ededb51dd4f7804ffb93c49a8abd565f43a044dfe065d9e8436e3"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_vo_019",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_dialogue_collect.jsonl",
+      "priority_line": 10,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_vo_019.json",
+        "sha256": "46622b284bf6f815f93e77310addf9194267a9ef92e9569830f69964b1a250ea"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 267,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_001.json",
+        "sha256": "3c76815aa6800d03c26a1ec532503bb4ac0b5ab3ab449c3b2a4df5a47c9a5814"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 268,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_002.json",
+        "sha256": "e527eecff17d8c13fbed6310163614634a13ad4cc57eb5958ff13e41686fcffe"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 269,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_003.json",
+        "sha256": "0d9e44bacd0814bab8a070a85e101afd41d6682cec52053fbbaccf75549095f8"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 270,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_004.json",
+        "sha256": "6939c09d53805481d718851a6417710c730fb5cf180d84bde5c8f01cfd3bcdb6"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 271,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_005.json",
+        "sha256": "797da742f96e68eb799b82570baff99c6e758dfeb7287102bb291aca6ba3d3ce"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 272,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_006.json",
+        "sha256": "ced4bf3c4cd9d49ace16283ea0069c33c6de9d83f5a3e93807ed75f402da9a7c"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 273,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_007.json",
+        "sha256": "18db685d56934d4984b729554a52e4c37e8577e3accd0b96a08f4c22df4071ad"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 274,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_008.json",
+        "sha256": "44988186a949800d1aa6991f15e33ee343c983db2e38c4cb422dab6f8f649d0d"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 275,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_009.json",
+        "sha256": "2442161e5fee9dba41991cca4b744ad046731595f41de9c9467401f83fe987b3"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 276,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_010.json",
+        "sha256": "8000915cc137574a9487f5d9bb3cd5cd6efd3b8b8633cdd1718e6e90b7e22b48"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 277,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_011.json",
+        "sha256": "889d7d4229c0382be45f15348b1a6ad973b8313454f48e610d0c76599655c862"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_012",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 278,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_012.json",
+        "sha256": "13ee37f950e5b8f27d7fc413215cf126eb16bd1c2ec63c1b97dccd80b9528a8c"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_013",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 279,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_013.json",
+        "sha256": "481bd1781373e640af968616cd4503cb87a8a5a70ec2f0758cb1e054ee496fab"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_sfx_014",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 280,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_sfx_014.json",
+        "sha256": "9edb3cb13d7fcb401949b78e9abee7159ec80504151bd581d11428ccebd9389a"
+      },
+      "C_checks": 4,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 73,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_cg_001.json",
+        "sha256": "734397a752aa55329fe482ec3287d917851b42c6b2200c03c27183f17a1b425b"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 74,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_cg_002.json",
+        "sha256": "210b4d1852d4f678584b43cd25a4fc67a4d0633919b018558f578644c21546ad"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 75,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_cg_003.json",
+        "sha256": "675f6b2d163cf9de876262675db013ecce6f8728965df163ea36c3dbfa9bbbb9"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G028_elemental_greenhouse",
+      "task_id": "G028_cg_004",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 76,
+      "rubric": {
+        "path": "test_data/test_samples/G028_elemental_greenhouse/rubric_assets/priority_observable_v2/G028_cg_004.json",
+        "sha256": "86568e18c7c8184598d34aa67ebc212b2045b911e474b20127fb8d95dc55b332"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "multi_variant_cg_requires_delivery_convention",
+        "branch_delivery_review"
+      ]
+    }
+  ]
+}

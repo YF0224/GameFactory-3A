@@ -1,0 +1,7 @@
+{
+  "contract_id": "G049_underwater_salvage.whitebox.final",
+  "version": "final",
+  "content_sha256": "63d2a8434c5f122990edc5a545bd4ecb7811e6c1dc4994d4d6fbc23fc373c1bb",
+  "rubric_json_sha256": "a5fb54accb841bfe867a2581e59d5964157ad4c526d869446440662643b29da4",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

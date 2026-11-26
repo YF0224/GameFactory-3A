@@ -1,0 +1,7 @@
+{
+  "contract_id": "G047_oldtown_fire_rescue.whitebox.final",
+  "version": "final",
+  "content_sha256": "6faec7617c01035469f183bc6d1cf7887e3fc8e4055b1d8faa0c035382dfc643",
+  "rubric_json_sha256": "9a107c5337a462d3d42e69067b8b516949d0b9d3161a5fc5bdfbec9da1d019d2",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

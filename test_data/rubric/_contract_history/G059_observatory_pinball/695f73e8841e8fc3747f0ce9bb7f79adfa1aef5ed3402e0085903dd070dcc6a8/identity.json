@@ -1,0 +1,7 @@
+{
+  "contract_id": "G059_observatory_pinball.whitebox.final",
+  "version": "final",
+  "content_sha256": "695f73e8841e8fc3747f0ce9bb7f79adfa1aef5ed3402e0085903dd070dcc6a8",
+  "rubric_json_sha256": "84aad8bb0f469ce6962cb4b00568bd5e1e2fa9f8ed152c7fd4733f958ee57d57",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

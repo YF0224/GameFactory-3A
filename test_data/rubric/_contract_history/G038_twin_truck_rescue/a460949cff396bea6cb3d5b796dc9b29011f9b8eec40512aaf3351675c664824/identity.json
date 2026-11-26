@@ -1,0 +1,7 @@
+{
+  "contract_id": "G038_twin_truck_rescue.whitebox.final",
+  "version": "final",
+  "content_sha256": "a460949cff396bea6cb3d5b796dc9b29011f9b8eec40512aaf3351675c664824",
+  "rubric_json_sha256": "8cf39bd35b13b054a498a7b863382c2aedbe3a7071d36d6f9f2636489820104a",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

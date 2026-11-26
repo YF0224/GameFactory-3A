@@ -1,0 +1,627 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_001",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 168,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_001.json",
+        "sha256": "ee78606c0a2c0a64079f54034d342e5dfebfbf368069a8d6fd7740bcd82a4d7c"
+      },
+      "C_checks": 10,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_002",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 169,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_002.json",
+        "sha256": "241a04ac4ea3eae065ef79a21fa256f0eef99aa149e96657a8b705a514c36345"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_003",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 170,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_003.json",
+        "sha256": "fdca40b130326aa5cc47ada92e02e0f80734cf09c11a595d70c8e62ec8829d0b"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_004",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 171,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_004.json",
+        "sha256": "b78df4aec33c47489fe04e79a40aa4cb401882b7827ed76219e290127bdec47d"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_005",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 172,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_005.json",
+        "sha256": "21acd5603060f21c1e5441448957778509d4364d596ead3a09409efbcbdac533"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_006",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 173,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_006.json",
+        "sha256": "1f9fdd95a34891a7c6c9d3dc680ee8eb1cd3e2408cac3a15c985370094f8bc19"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_007",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 174,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_007.json",
+        "sha256": "7bc310c96a6089e34c35d2c18e323e0a31340ffa6baf1a121bea02cf51feceeb"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_008",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 175,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_008.json",
+        "sha256": "3bff40c5b8c1dfdc47229901d024e53ed5d1bc912a445aecad2475e58db371f7"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_009",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 176,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_009.json",
+        "sha256": "a3658a1de35aec467d513789e87ad157536f0d586e158c6b9ead5308450eda3f"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_010",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 177,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_010.json",
+        "sha256": "9cdd915357753c10a024b07eb099bac76efbf925bf20f10ebc1e4233f03d9e06"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_011",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 178,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_011.json",
+        "sha256": "4a9dd625df98b12053143abdfbe913dcdf9900d1de91685a18cfbb75e3e84038"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_012",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 179,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_012.json",
+        "sha256": "7dbfa198fd853d74b3fe1b6769d83bead530b3b18ec65f2cd700e979b1b12c7a"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_013",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 180,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_013.json",
+        "sha256": "a61a11b900a4f075fe8e6020768ed8ab09bfb383b7f0802c537c7bc0c7f1aba4"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_014",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 181,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_014.json",
+        "sha256": "4190f07b55ffc1602f8b576b56f9c7b16673fcabbee776085797a53e304a8bde"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_daily_street_lightlane_obj_015",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 182,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_daily_street_lightlane_obj_015.json",
+        "sha256": "a21b86731c600b453e77e94032a9e64030fc7a08f72e121a3f772019dbe8186f"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 49,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_scene_001.json",
+        "sha256": "f4e848e674fcffc69b4305547d8b5c0aa663e2ff13188f78b606e00c85f56c94"
+      },
+      "C_checks": 10,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 500,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_sfx_001.json",
+        "sha256": "9db38f2e57166aec8193b126dc4be7b57597592c8b8e4f17a1d78719a1777507"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 501,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_sfx_002.json",
+        "sha256": "a8b1fe270f1471253f7af45a9bb3d9c0ea3693590c85cd0dcc018a79f5cfbc6f"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 502,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_sfx_003.json",
+        "sha256": "7c4dd8a63b8036c3ed1fe526163caba1b2b6ce96255a24570958ae1f8b8a40ef"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 503,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_sfx_004.json",
+        "sha256": "43fab3ccc307b8fd7054db0d9f43d406e4990305de0bd08e9dd87a9e6568ab3c"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 504,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_sfx_005.json",
+        "sha256": "bf9efa32952f3e539af048f9e380a6a0d97e6dc52f28ad6da7b15b81e92d31cd"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 505,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_sfx_006.json",
+        "sha256": "d839a6d39ea5d75e812372875ec25fb6b2ff3adf717a16b65fb5d4787526c465"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 506,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_sfx_007.json",
+        "sha256": "288cfda1007b2181a03b29457dcefc341cd99584e9abecd85f72ac89a4e98fc9"
+      },
+      "C_checks": 1,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 507,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_sfx_008.json",
+        "sha256": "5ed93357efc992f3e2e560501199f6840fda1a3ac279717c92c4dc4ad4922eaa"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 508,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_sfx_009.json",
+        "sha256": "acfc04da119d8f9d3b9e904c7626a3e0b6a596f6ee245b6a1a700d57348cca83"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 509,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_sfx_010.json",
+        "sha256": "f82e5e45d1d004fe09cf326224c75d3f1d6ad4db372719927c3a27dfc39ff4e7"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 510,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_sfx_011.json",
+        "sha256": "e4db6f4f7cfe9dd3d1efe1c9c3e5bdfa9315bf4f3f339bbe763435852d1d4b12"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 129,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_cg_001.json",
+        "sha256": "8a5e75c6f17ef4f1b19c07f96ac9f0005406a06bd4c09f64158fdcc9170aff32"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 130,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_cg_002.json",
+        "sha256": "585a7ea3bf6271bc26bf17cb4e90dc492fd6a186838292c4b559d6d9f630f9f8"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 131,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_cg_003.json",
+        "sha256": "0e2e7f2ab7cd6b866a6d124bd07f075d7ef598812b5eb0bcd81e8668f4730dcf"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_cg_004",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 132,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_cg_004.json",
+        "sha256": "f323ce7f0e4634fe167680cfd1d7d8c18c40291709abb723daf53f20275fe269"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_mot_001",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 16,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_mot_001.json",
+        "sha256": "abc77653c97bf35f2c49c4489a084c556b07b63c55da8a3b9aefb23760d023d2"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_mot_002",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 17,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_mot_002.json",
+        "sha256": "b2aae96e4ef1fd54722655aff67a0f4405fd89ef1f3eca570b304f437e88571c"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_mot_003",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 18,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_mot_003.json",
+        "sha256": "95548c813a7da6155e8cfd689156a5c113a3740ac84d09a730cfd1095bfd6142"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_mot_004",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 19,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_mot_004.json",
+        "sha256": "70cfd35b1f982160c2357a43ccb508fd233175a5d64b1ee7590873e9f5ba13ee"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_mot_005",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 20,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_mot_005.json",
+        "sha256": "302a5c18f81c306bc506ba13b0c5fe0dfe911cd3fed1043a4a5cbef4d56df32c"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_mot_006",
+      "asset_type": "motion",
+      "priority_file": "test_data/priority_gen/motion_L_tier_collect.jsonl",
+      "priority_line": 21,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_mot_006.json",
+        "sha256": "e024c20557c9de169d0a5194885df43f22ed8c95b6d8272ecaf25a28f9c98eca"
+      },
+      "C_checks": 5,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_tpose_001",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 11,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_tpose_001.json",
+        "sha256": "c6a651c38414b79f7432eb2eed21324911487ce70059159444885970589dc561"
+      },
+      "C_checks": 8,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_tpose_002",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 12,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_tpose_002.json",
+        "sha256": "95d01753591232653727b41771759f5b7d28dda0414a306bc8f5dee67dc8e9e7"
+      },
+      "C_checks": 6,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_tpose_003",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 13,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_tpose_003.json",
+        "sha256": "813be423f9eac21a954acde8f74479bb698f90008fb32d166039070d349bfe8b"
+      },
+      "C_checks": 6,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_tpose_004",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 14,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_tpose_004.json",
+        "sha256": "eea6cd3609157921b25a47012c1cf3bf3e7512b533044d053229a3e25d5cc746"
+      },
+      "C_checks": 6,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_tpose_005",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 15,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_tpose_005.json",
+        "sha256": "8ed85a7aeb0b62a4fce9263d485eb46bf9a1a04a8f8b91a5a11dba70ce1c6517"
+      },
+      "C_checks": 7,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_tpose_006",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 16,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_tpose_006.json",
+        "sha256": "f3571fb2cff3b71e79305dc0f8c94ed9108b327fd20c3a73f67caac9f8a10767"
+      },
+      "C_checks": 7,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G045_daily_street_lightlane",
+      "task_id": "G045_tpose_007",
+      "asset_type": "tpose",
+      "priority_file": "test_data/priority_gen/tpose_L_tier_collect.jsonl",
+      "priority_line": 17,
+      "rubric": {
+        "path": "test_data/test_samples/G045_daily_street_lightlane/rubric_assets/priority_observable_v2/G045_tpose_007.json",
+        "sha256": "981f0971e98f614c991f1af5dfcf3989335756ded63c04e57783ac93ee5c09fa"
+      },
+      "C_checks": 6,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    }
+  ]
+}

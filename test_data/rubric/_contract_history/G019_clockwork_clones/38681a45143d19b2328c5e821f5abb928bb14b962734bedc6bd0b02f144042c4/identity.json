@@ -1,0 +1,7 @@
+{
+  "contract_id": "G019_clockwork_clones.whitebox.endpoints-v2-candidate.38681a45143d19b2328c5e821f5abb928bb14b962734bedc6bd0b02f144042c4",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "38681a45143d19b2328c5e821f5abb928bb14b962734bedc6bd0b02f144042c4",
+  "rubric_json_sha256": "677911b801c05055330f30df887ca002bf7fb0d6032da91a8d95100baac45df5",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

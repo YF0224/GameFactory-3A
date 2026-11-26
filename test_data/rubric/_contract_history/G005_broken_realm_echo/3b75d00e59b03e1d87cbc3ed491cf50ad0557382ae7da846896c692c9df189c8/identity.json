@@ -1,0 +1,7 @@
+{
+  "contract_id": "G005_broken_realm_echo.whitebox.final",
+  "version": "final",
+  "content_sha256": "3b75d00e59b03e1d87cbc3ed491cf50ad0557382ae7da846896c692c9df189c8",
+  "rubric_json_sha256": "2c22fb3fa09524e21f7ba364722106a9bec7aacc8eb930eddea3bd69e7d0e9d8",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

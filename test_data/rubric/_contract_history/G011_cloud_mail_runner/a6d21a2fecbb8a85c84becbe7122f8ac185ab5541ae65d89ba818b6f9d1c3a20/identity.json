@@ -1,0 +1,7 @@
+{
+  "contract_id": "G011_cloud_mail_runner.whitebox.final",
+  "version": "final",
+  "content_sha256": "a6d21a2fecbb8a85c84becbe7122f8ac185ab5541ae65d89ba818b6f9d1c3a20",
+  "rubric_json_sha256": "9d457f147aa66784795d43df467eb83239fe45a2cdd8438d2cc4c5b2e01bc13c",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

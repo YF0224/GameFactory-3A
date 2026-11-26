@@ -1,0 +1,528 @@
+{
+  "schema_version": "gamefactory3a.asset_rubric.observable.v2",
+  "authoring_protocol": "priority_observable_v2",
+  "status": "source_grounded_revision_not_judged",
+  "game_id": "G058_pitch_dreams_football",
+  "task_id": "G058_cg_004",
+  "asset_type": "cg_video",
+  "asset_subtype": "cg_video",
+  "asset_name": "赛季结束",
+  "scope": "priority gen 独立资产三列口径；第一列仅可观察需求内容，排除标定数值及运行时验收。",
+  "source_priority": [
+    "canonical general_requirement.txt",
+    "per-kind requirement.txt",
+    "priority task JSONL"
+  ],
+  "conflict_policy": "同一事实冲突时按 source_priority；不能同时按矛盾标准扣分。未能明确消解则相关项 UNKNOWN 并报源输入冲突。priority 的 low-poly 表示统一的细节预算，不改变 canonical 身份、用途和主美术基线；不以未声明的精细建模要求惩罚 low-poly，也不编造尺寸/时长/相似度阈值。",
+  "task_input": {
+    "game_id": "G058_pitch_dreams_football",
+    "task_id": "G058_cg_004",
+    "cg_type": "Ending",
+    "cg_name": "赛季结束",
+    "mode": "text_to_video",
+    "prompt": "The season table unfurls; ending frame variant: our flag rises onto the champion league board / the squad huddles waving to the stands, cinematic, original design, no text",
+    "duration_sec": 12,
+    "resolution": "1280x720",
+    "fps": 24,
+    "seed": 6584,
+    "trigger": "第六轮终场结算后（每局一次）",
+    "skippable": true,
+    "spec_ref": "C04",
+    "start_condition": "第六轮终场结算后（每局一次）",
+    "end_condition": "natural playback end or skip input",
+    "skip_behavior": "skip_to_declared_next_state",
+    "next_state": "declared_result_panel_state",
+    "planned_source": "closed_source_video_api",
+    "l_tier_repair_target": true
+  },
+  "game_context": {
+    "world_source_ids": [
+      "general:L111-111",
+      "general:L112-112",
+      "general:L113-113",
+      "general:L115-115"
+    ],
+    "visual_style_source_ids": [
+      "general:L116-116"
+    ],
+    "sound_style_source_ids": [
+      "general:L117-117"
+    ],
+    "asset_description_source_ids": [
+      "general:L114",
+      "general:L170",
+      "general:L197"
+    ],
+    "spec_ref_source_ids": [
+      "general:L170-175"
+    ],
+    "unresolved_spec_refs": [],
+    "per_kind_description_source_id": "asset_requirement:L9",
+    "canonical_asset_content_source_ids": [
+      "general:L172"
+    ]
+  },
+  "sources": {
+    "priority_task": {
+      "path": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "sha256": "94b96f71d2d9684d0746b5c3d70633028fad9317dcf578377ccafbe214233eac",
+      "start_line": 187,
+      "end_line": 187,
+      "quote": "{\"game_id\": \"G058_pitch_dreams_football\", \"task_id\": \"G058_cg_004\", \"cg_type\": \"Ending\", \"cg_name\": \"赛季结束\", \"mode\": \"text_to_video\", \"prompt\": \"The season table unfurls; ending frame variant: our flag rises onto the champion league board / the squad huddles waving to the stands, cinematic, original design, no text\", \"duration_sec\": 12, \"resolution\": \"1280x720\", \"fps\": 24, \"seed\": 6584, \"trigger\": \"第六轮终场结算后（每局一次）\", \"skippable\": true, \"spec_ref\": \"C04\", \"start_condition\": \"第六轮终场结算后（每局一次）\", \"end_condition\": \"natural playback end or skip input\", \"skip_behavior\": \"skip_to_declared_next_state\", \"next_state\": \"declared_result_panel_state\", \"planned_source\": \"closed_source_video_api\", \"l_tier_repair_target\": true}"
+    },
+    "general:L111-111": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 111,
+      "end_line": 111,
+      "quote": "- W01 世界与时代背景：架空的现代社区足球时代；小城「青藤镇」的社区球队「绿茵俱乐部」正冲击城市冠军联赛，六轮赛季定成败。"
+    },
+    "general:L112-112": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 112,
+      "end_line": 112,
+      "quote": "- W02 场景所在地：青藤镇社区球场——俯视视角下的 5v5 球场、看台与俱乐部板凳席；俱乐部界面（抽卡室/转会办公室/训练场）环绕展开。"
+    },
+    "general:L113-113": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 113,
+      "end_line": 113,
+      "quote": "- W03 玩家身份与当前任务：玩家是绿茵俱乐部的代理主教练兼经理；当前任务：以 17 种攻防动作赢下六轮赛季，经营阵容冲上冠军联赛。"
+    },
+    "general:L115-115": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 115,
+      "end_line": 115,
+      "quote": "- W05 叙事来源：16 名虚构球员各有位置与成长线；六支对手按城市街区命名构成赛季叙事；抽卡室＝俱乐部青训选拔；转会办公室＝市场窗口。全部原创。"
+    },
+    "general:L116-116": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 116,
+      "end_line": 116,
+      "quote": "- W06 视觉风格与色彩材质：明快程序化俯视画风；主色＝草场绿（#5FA753 系）＋界线白（#EAEFEA 系）＋俱乐部青（#2E8C86 系）；材质以平整草皮、清晰球衣色块为主，保证窄屏可读。"
+    },
+    "general:L117-117": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 117,
+      "end_line": 117,
+      "quote": "- W07 环境氛围与声音语言：小城球场的午后氛围——常驻看台环境声与哨声底噪；音效语言为「哨声＋踢球闷响＋进球欢呼＋界面确认」，全部音效按 §9 F06 冻结清单交付。"
+    },
+    "general:L170-175": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 170,
+      "end_line": 175,
+      "quote": "- C04 赛季结束（Ending，12 秒，1280×720@24fps，尾帧按夺冠变体）\n  - 触发时机：第六轮终场结算后、赛季结界面板之前，每局一次\n  - 内容与角色场景：赛季战绩榜展开；尾帧按分支——夺冠（绿茵队旗升上冠军联赛榜、「冲甲成功」字样）/留级（球员围圈致意看台、「来年再战」字样）\n  - 资产对应：战绩榜、队旗、球员与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结界面板；自然播完 → 同\n  - 状态一致：尾帧与真实赛季战绩一致"
+    },
+    "general:L114": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 114,
+      "end_line": 114,
+      "quote": "- W04 失败代价与结局表达：单场失利只损失奖励差额（无硬失败态）；赛季结束按战绩出结算——夺冠升级（C04 尾帧「冲甲成功」）或留级再战（「来年再战」）。"
+    },
+    "general:L170": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 170,
+      "end_line": 170,
+      "quote": "- C04 赛季结束（Ending，12 秒，1280×720@24fps，尾帧按夺冠变体）"
+    },
+    "general:L197": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 197,
+      "end_line": 197,
+      "quote": "  rationale: \"升档理由（M→L-Regular，2026-10-11 复核）：按 prompt 要求检查跨轮/赛季/阵容持久状态——L01 冻结『赛季结束后进入新赛季并保留培养』、L08/K01-K05 冻结『培养/星级/等级跨会话存档导入导出持久』，且培养状态直接改变后续比赛动作概率（M05 等概率输入）与转会价格（G03 公式），满足 difficulty_design §5.2『早期资源/装备/成长状态跨场景保留并改变后续目标、规则、可用行动或策略』门槛（E03 跨阶段链）；附加复杂度来源：C2 经济↔比赛耦合、P3 跨赛季持久、R2 多级恢复。若仅按单场比赛口径（无跨场培养）则为 M——但持久培养为团队包冻结需求，不可删除，故升 L-Regular\""
+    },
+    "asset_requirement:L9": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/cg_video/requirement.txt",
+      "sha256": "70fd41d9af64d41f4c9d861101fdb12d35a897faddd9f5cbd11d0742763202db",
+      "start_line": 9,
+      "end_line": 9,
+      "quote": "- G058_cg_004: The season table unfurls; ending frame variant: our flag rises onto the champion league board / the squad huddles waving to the stands, cinematic, original design, no text"
+    },
+    "general:L172": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/general_requirement.txt",
+      "sha256": "73172e9037394153a63fdddd06e29332ffe4b1cd695894cdbdc2ad9a01132425",
+      "start_line": 172,
+      "end_line": 172,
+      "quote": "  - 内容与角色场景：赛季战绩榜展开；尾帧按分支——夺冠（绿茵队旗升上冠军联赛榜、「冲甲成功」字样）/留级（球员围圈致意看台、「来年再战」字样）"
+    },
+    "quality_protocol": {
+      "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+      "sha256": "1570088e54280dfb58b5516ab111066597b31c5bc34e887cfd5cae85534f95f6",
+      "start_line": 82,
+      "end_line": 86,
+      "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+    },
+    "revision_policy": {
+      "path": "workspaces/priority_rubric_observable_20261026/POLICY.md",
+      "sha256": "581d726dee3f0efba7c72e8616f553a1248d822791a75f42e6d463b81a9312ca",
+      "start_line": 1,
+      "end_line": 34,
+      "quote": "# Priority 资产可观察需求 rubric 修订 v2\n\n此版本只服务资产三列中的第一列需求完整性，不更改原始生成任务、既有分数或历史冻结合同。\n所有七份 priority 清单逐条覆盖，禁止仅用同类代表任务代替。输出位于各游戏 rubric_assets/priority_observable_v2/，游戏内 priority_rubric_current.json 是显式修订索引，不是对生产 evaluator 的隐式切换。\n\n## 第一列保留\n\n任务明确要求的主体类别、部件、形状、轮廓、命名色彩、材质表现、可见标记、姿态、动作阶段、声音事件、声源、情绪、语言及台词内容。\n任务明确要求的上下、左右、内外、中央/周边、前后、连接、环绕、相对大小/深浅、留白和遮挡关系。\nCG 只要求原文明示的事件顺序、状态变化与镜头行为；不能把列表自动解释为严格顺序。动作片段保留循环/单次与原地组织，不设严格时长/帧数/零位移阈值。\n台词或资产名称中的数字可以是实际内容，不是数值验收阈值；不因文本包含数字机械删掉语义。\n对象数量只作原文上下文，不按精确计数通过率评分；保留主次、成组、单体/多体和必要的关系含义。\n\n## 第一列不计分\n\n绝对坐标、原点、尺寸、距离、速度、时长、角度、帧数、分辨率、面数、数值颜色/色差、采样率、响度和频率阈值，以及机制数值、随机种子、容量、库存、伤害、时间窗。\n这些字段和原始引文完整保留在 task_input、sources 或 excluded_field_values 中，不伪称已经满足，也不当作第一列隐藏门槛。\n引擎导入、碰撞、导航、触发、跳过、暂停、同步、状态机与游戏内混音另属交付/集成验证，不凭离线素材判通过。\n\n## 三列分工\n\nC：当前任务明确指定什么，实际内容是否呈现。\nG：与角色/场景参考及游戏整体世界/美术/声音方向是否相容，不重复扣C的缺失。\nQ：内在感知/技术质量，不重复内容语义或世界适配。\n已有逐资产 rubric 的 G/Q 维度原样保留。此前未建逐资产文件的自然音效/T-pose只补源文支持的G/Q草稿，不能假称复用了已验证分数。\n参考图只按明确绑定使用；image_path 的存在不是生成模型实际收到图片的证明。T-pose中的参考身份/比例比较放G，不在C重复。\n\n## 来源与状态\n\n先遵从原有来源优先级；保留 canonical/分资产原文与任务JSONL。定性投影不得补造“附近”“左侧”等源文不支持的位置。\n场景 layout_constraints 已逐条整理为可见关系；原始标定与运行时要求另存。不宣称精确坐标被视觉验证。\n相互矛盾的要求保留并报审查警告，不用PARTIAL掩盖来源冲突，不把两种胜负分支强行串为一条时间线。\n每条判词必须给视角、帧或音频时间证据。观察不清/未取证为UNKNOWN，调用/配置故障为ERROR，均不填0或100、不删除分母；报告coverage和上下界，证据不足的得分只能PROVISIONAL。\n本次为有来源的修订版与结构/来源校验，不宣布所有1305条人工语义审核完成，不自动冻结，不自动启动评测。"
+    }
+  },
+  "references": [],
+  "prompt_clause_assignment": {
+    "content": [
+      "The season table unfurls",
+      "ending frame variant: our flag rises onto the champion league board / the squad huddles waving to the stands",
+      "no text"
+    ],
+    "style": [
+      "cinematic",
+      "original design"
+    ],
+    "technical": [],
+    "context_only": []
+  },
+  "dimensions": [
+    {
+      "id": "requirement_compliance",
+      "name": "需求完整性（可观察内容）",
+      "checks": [
+        {
+          "id": "C001",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：The season table unfurls",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "The season table unfurls",
+              "text": "The season table unfurls"
+            }
+          ],
+          "modality": "video_sequence",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C002",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：ending frame variant: our flag rises onto the champion league board / the squad huddles waving to the stands",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "ending frame variant: our flag rises onto the champion league board / the squad huddles waving to the stands",
+              "text": "ending frame variant: our flag rises onto the champion league board / the squad huddles waving to the stands"
+            }
+          ],
+          "modality": "video_sequence",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C003",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：cinematic",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "cinematic",
+              "text": "cinematic"
+            }
+          ],
+          "modality": "video_sequence",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        },
+        {
+          "id": "C004",
+          "title": "任务指定内容、外观或动作",
+          "assertion": "可观察地呈现：no text",
+          "targets": [
+            {
+              "source_id": "priority_task",
+              "field": "prompt",
+              "source_quote": "no text",
+              "text": "no text"
+            }
+          ],
+          "modality": "video_sequence",
+          "scope_exclusions": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+          "pass_rule": "证据充分，列明的内容与属性均有明确支持；允许不改变要求含义的表现差异。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分且主要内容达成，但部分明确属性或动作阶段不符；必须指出具体满足与不满足之处。未知不能当作部分满足。",
+          "fail_rule": "证据充分，要求的主要内容缺失或明显相反；不能仅凭遮挡、听不清或取证失败判缺失。",
+          "unknown_rule": "证据或来源不足、条件冲突无法消解时 UNKNOWN，不记零分、不静默删除分母。",
+          "evidence_requirements": [
+            "给出可复核视角/帧ID/完整音频时间段/动作阶段及具体理由。"
+          ],
+          "scoring": {
+            "PASS": 1,
+            "PARTIAL": 0.5,
+            "FAIL": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "game_input_consistency",
+      "name": "游戏输入一致性",
+      "checks": [
+        {
+          "id": "G01",
+          "title": "世界、身份与用途一致性",
+          "assertion": "只核对当前资产表达是否与引用的世界/时代、所属场景及角色/道具用途相容，不要求一个资产呈现整段剧情或同一游戏的其他资产。不重复扣本资产 C 项中的部件/台词/动作缺失。",
+          "targets": [
+            {
+              "source_id": "general:L111-111",
+              "text": "- W01 世界与时代背景：架空的现代社区足球时代；小城「青藤镇」的社区球队「绿茵俱乐部」正冲击城市冠军联赛，六轮赛季定成败。"
+            },
+            {
+              "source_id": "general:L112-112",
+              "text": "- W02 场景所在地：青藤镇社区球场——俯视视角下的 5v5 球场、看台与俱乐部板凳席；俱乐部界面（抽卡室/转会办公室/训练场）环绕展开。"
+            },
+            {
+              "source_id": "general:L114",
+              "text": "- W04 失败代价与结局表达：单场失利只损失奖励差额（无硬失败态）；赛季结束按战绩出结算——夺冠升级（C04 尾帧「冲甲成功」）或留级再战（「来年再战」）。"
+            }
+          ],
+          "scope_exclusions": "引用中的引擎机制/触发/碰撞仅作用途上下文，不是本项验收内容。",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        },
+        {
+          "id": "G02",
+          "title": "美术/动作风格一致性",
+          "assertion": "表现体系符合游戏的视觉/时代基线及本任务适用的风格要求；只评当前资产适用的造型语言、材质/配色与动作表现，不要求出现整套场景调色板。低多边形任务允许降低细节，不能因此改掉角色身份、关键部件或世界观。不重复扣 C 中明确部件/动作，也不把 Q 中的生成瑕疵再次扣分。",
+          "targets": [
+            {
+              "source_id": "general:L116-116",
+              "text": "- W06 视觉风格与色彩材质：明快程序化俯视画风；主色＝草场绿（#5FA753 系）＋界线白（#EAEFEA 系）＋俱乐部青（#2E8C86 系）；材质以平整草皮、清晰球衣色块为主，保证窄屏可读。"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "cinematic",
+              "field": "prompt"
+            },
+            {
+              "source_id": "priority_task",
+              "text": "original design",
+              "field": "prompt"
+            }
+          ],
+          "scope_exclusions": "",
+          "pass_rule": "证据充分，且本项列出的全部目标均满足。",
+          "partial_allowed": true,
+          "partial_rule": "证据充分；列出的目标中至少一项满足、至少一项明确不满足，记 0.5；缺证据不能作为部分满足。",
+          "fail_rule": "证据充分，且本项列出的目标均明确不满足。",
+          "unknown_rule": "实际产物、适用参照或模态证据不足，无法判断；不记零分。",
+          "evidence_requirements": [],
+          "scoring": {
+            "PASS": 1,
+            "FAIL": 0,
+            "PARTIAL": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "intrinsic_quality",
+      "name": "资产自身质量",
+      "checks": [
+        {
+          "id": "Q01",
+          "title": "单帧视觉质量",
+          "assertion": "只评实际帧中的形体、细节和生成伪影；不重复检查主体/风格是否符合输入。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "多数关键帧严重畸变或不可辨",
+            "2": "关键主体多处明显变形/涂抹/破碎",
+            "3": "关键帧可读，局部畸变或细节伪影可见",
+            "4": "整体清楚，仅有轻微局部伪影",
+            "5": "全片关键帧清楚，未见明显畸变、涂抹或非设计性形体破损"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        },
+        {
+          "id": "Q02",
+          "title": "时间连续性",
+          "assertion": "需跨全片时序证据；只评闪烁、身份漂移、跳变和运动断裂，不重复评分剧情顺序。",
+          "source_ids": [
+            "quality_protocol"
+          ],
+          "rating_anchors": {
+            "1": "持续闪烁/身份崩解/运动断裂，无法跟随主体",
+            "2": "频繁身份漂移、空间跳变或不合理形变",
+            "3": "主线连续，局部闪烁/跳变/形变可见",
+            "4": "时间上连贯，仅有少量轻微不稳定",
+            "5": "主体身份、空间和运动连贯；未见明显非设计性闪烁、跳变或形变"
+          },
+          "score_transform": "25 * (rating - 1)",
+          "unknown_rule": "实际模态证据不足则 UNKNOWN；禁止只读元数据、文件名或任务文字推断质量。"
+        }
+      ]
+    }
+  ],
+  "scoring_policy": {
+    "requirement_and_consistency": "100 * mean(applicable checklist scores); each check equal weight",
+    "quality": "mean(25 * (rating - 1)); two items equal weight",
+    "overall": "三维分别报告，本轮不合成总分。",
+    "unknown_and_error": "不赋零、不删除冻结分母；仅报 provisional 已知项均值及 known/applicable coverage；有未完成项不得发布正式维度分。",
+    "not_applicable": "只由生成前输入决定；无参考则不生成 G03。不可因生成失败/缺证据事后改 N/A。",
+    "delivery": "未生成、已尝试但交付失败、可解码交付单独记录；不得用交付率冒充质量分。",
+    "evidence": "每个判定必须给 reason 和可复核 evidence_id/时间戳/视角；配置或评审调用故障为 ERROR。",
+    "requirement_completeness_v2": {
+      "column": "requirement_reference",
+      "score": "100*mean(verified C item scores); PASS=1, PARTIAL=0.5, FAIL=0",
+      "coverage": "verified applicable C count / frozen applicable C count; UNKNOWN/ERROR retained in denominator and bounds, not converted to zero or full credit.",
+      "lower_bound": "100*sum(verified scores)/all applicable C count",
+      "upper_bound": "100*(sum(verified scores)+unknown applicable C count)/all applicable C count",
+      "status": "Any incomplete applicable C coverage => PROVISIONAL; no verified C => null.",
+      "overall": "三列等权；没有任一列不得给总分。此修订不重新计算历史结果。"
+    }
+  },
+  "evidence_requirements": [
+    "全片固定时间网格与实际首末帧；动作与顺序另核查完整视频或事件邻域，不以稀疏帧证明未发生。"
+  ],
+  "objective_specs": {
+    "duration_sec": 12,
+    "resolution": "1280x720",
+    "fps": 24
+  },
+  "objective_metric_policy": "原始数值和输出格式仅作独立交付/诊断信息；不并入本版第一列。不改变其他列既有实现。",
+  "authoring_warnings": [],
+  "requirement_revision": {
+    "version": "priority_observable_v2",
+    "old_rubric": {
+      "path": "test_data/test_samples/G058_pitch_dreams_football/rubric_assets/per_asset/G058_cg_004.json",
+      "sha256": "bb9958136c365393cfda1e6cd372c9a1184616b31661fc812fd2fe6f3fb707ac"
+    },
+    "original_other_dimensions_preserved": true,
+    "original_task_input_unchanged": true,
+    "numerical_policy": "第一列仅评可观察的任务内容；不按精确坐标、距离、绝对尺寸、角度、时长、速度、频率、响度、RGB/色差、分辨率、帧数、面数或计数阈值判分。原始数值保留作来源/诊断，不是隐含验收条件。保留相对位置、形状、部件、命名色彩、材质表现、动作、事件及明示顺序。第一列不验收游戏触发/跳过/同步、碰撞/导航、导入与状态机；不重复评价整体世界适配或内在质量。",
+    "reference_ownership": "任务指定姿态/部件/颜色归C，参考角色匹配/全局世界适配归G，内在感知质量归Q；同一事实不重复扣分。",
+    "baseline": "Old frozen aggregate rubric and historical scores untouched; new path requires explicit evaluator support for this schema.",
+    "freeze_status": "规则修订已生成并校验，未声明逐任务人工语义审核完成，不自动冻结或发布分数。",
+    "source_rebinding_audit": [
+      {
+        "source_id": "quality_protocol",
+        "prior": {
+          "path": "GameFactory-3A/eval/asset_evaluation_plan.md",
+          "sha256": "652cb04ada1cd50885a60d8242c6e7477aa0383ef2236ea6264fe07ff39e7d06",
+          "start_line": 78,
+          "end_line": 82,
+          "quote": "资产自身质量使用下文各资产的两个质量子项。每项由固定评审器按 1–5 分锚点评价：\n`1=严重缺陷，2=明显缺陷，3=基本可接受，4=轻微缺陷，5=无明显缺陷`，\n以 `25 × (rating - 1)` 转为 0–100，然后等权平均。质量锚点须针对资产类型细化。\n本轮全部语义判定由固定多模态评审模型完成，标为 **Judge Rating**；不使用 human scoring 或人工回退，也不标为 MOS。\n传统/确定性指标单独输出原始值，不与 Rubric rating 相加。"
+        },
+        "resolution": "EXACT_QUOTE_REBOUND_TO_CURRENT_FILE"
+      }
+    ],
+    "clause_ledger": [
+      {
+        "field": "prompt",
+        "source_quote": "The season table unfurls",
+        "action": "RETAINED",
+        "normalized": "The season table unfurls",
+        "check_id": "C001"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "ending frame variant: our flag rises onto the champion league board / the squad huddles waving to the stands",
+        "action": "RETAINED",
+        "normalized": "ending frame variant: our flag rises onto the champion league board / the squad huddles waving to the stands",
+        "check_id": "C002"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "cinematic",
+        "action": "RETAINED",
+        "normalized": "cinematic",
+        "check_id": "C003"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "original design",
+        "action": "DEFERRED",
+        "reason": "统一造型/输出政策已在原G/Q或规格中保留，不重复计第一列。"
+      },
+      {
+        "field": "prompt",
+        "source_quote": "no text",
+        "action": "RETAINED",
+        "normalized": "no text",
+        "check_id": "C004"
+      }
+    ],
+    "excluded_field_values": {
+      "cg_type": "Ending",
+      "mode": "text_to_video",
+      "duration_sec": 12,
+      "resolution": "1280x720",
+      "fps": 24,
+      "seed": 6584,
+      "trigger": "第六轮终场结算后（每局一次）",
+      "skippable": true,
+      "spec_ref": "C04",
+      "start_condition": "第六轮终场结算后（每局一次）",
+      "end_condition": "natural playback end or skip input",
+      "skip_behavior": "skip_to_declared_next_state",
+      "next_state": "declared_result_panel_state",
+      "planned_source": "closed_source_video_api",
+      "l_tier_repair_target": true
+    },
+    "excluded_fields_policy": "保留来源，不作为第一列附加验收。loop/root_motion等只使用上述C条目所述的定性部分。",
+    "temporal_policy": "只核对原文明示的先后/同步/状态变化，列举不等于严格顺序；互斥胜负分支不得强行串为同一事件链。",
+    "canonical_content_sources": [
+      "general:L172"
+    ]
+  }
+}

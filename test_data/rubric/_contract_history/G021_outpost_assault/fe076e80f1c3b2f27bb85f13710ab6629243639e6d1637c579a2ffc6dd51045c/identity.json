@@ -1,0 +1,7 @@
+{
+  "contract_id": "G021_outpost_assault.whitebox.endpoints-v2-candidate.fe076e80f1c3b2f27bb85f13710ab6629243639e6d1637c579a2ffc6dd51045c",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "fe076e80f1c3b2f27bb85f13710ab6629243639e6d1637c579a2ffc6dd51045c",
+  "rubric_json_sha256": "9f91f1fb9212d49196aa004dc0ff886cac6833ef5aa9f41f9011966096bf6ccb",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

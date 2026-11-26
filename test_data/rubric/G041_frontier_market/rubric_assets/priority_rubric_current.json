@@ -1,0 +1,266 @@
+{
+  "protocol": "priority_observable_v2",
+  "status": "revised_not_judged_not_final_frozen",
+  "scope": "priority gen only",
+  "legacy_game_rubric": "rubric.json is preserved historical contract, NOT silently rewritten or switched by an evaluator.",
+  "evaluator_integration": "Explicit schema support/selection required; this index alone does not change production evaluators.",
+  "tasks": [
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_frontier_market_obj_008",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 161,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_frontier_market_obj_008.json",
+        "sha256": "e3b7a0310126da0baca4500b68da775f8a8f68bb397a047baebe7cb3c79d6a79"
+      },
+      "C_checks": 3,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_frontier_market_obj_009",
+      "asset_type": "3d_object",
+      "priority_file": "test_data/priority_gen/3d_object_priority_lowpoly_collect.jsonl",
+      "priority_line": 162,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_frontier_market_obj_009.json",
+        "sha256": "446f5753760631f263dd578b2eeba30e50f74d1581867cdf1ba7227fb286cb6b"
+      },
+      "C_checks": 4,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_scene_001",
+      "asset_type": "3d_scene",
+      "priority_file": "test_data/priority_gen/3d_scene_priority_collect.jsonl",
+      "priority_line": 45,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_scene_001.json",
+        "sha256": "91330fb2d668e8d4dbcf65f7c9184a48d06fe70828bb6bc3b83ea3bba67fbfed"
+      },
+      "C_checks": 10,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "no_literal_asset_mention_in_general"
+      ]
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_sfx_001",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 455,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_sfx_001.json",
+        "sha256": "88ca0491c08db7c3aab869476e5292bc7000fadf506b5c6f188c22d6f925d16b"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_sfx_002",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 456,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_sfx_002.json",
+        "sha256": "9d53fd53d656da48bdbcc3b8bc4e4017b40b324387aa3951983dc7479117c019"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_sfx_003",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 457,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_sfx_003.json",
+        "sha256": "8831e9807f0357a5ae007f79611e7fdbf1d602a965a4524ca42a0f65bb98c4fe"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_sfx_004",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 458,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_sfx_004.json",
+        "sha256": "84b5e02e6b358812c8330244694e93cdb28155a08ef64404945d3f303fb8c9b8"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_sfx_005",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 459,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_sfx_005.json",
+        "sha256": "47eb6b24951ceb4b4ed8b2b31638e2eea04d333588504f0fab8b03ce8be3c403"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_sfx_006",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 460,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_sfx_006.json",
+        "sha256": "102727adbc0f4794e4ee174d1ba6ab621c0779341cd4aded5717050016df0375"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_sfx_007",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 461,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_sfx_007.json",
+        "sha256": "7b3dc7167026a60361ab27d0c1084fb58e037b6d9a66f1c07fd4f1bf12ad366a"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_sfx_008",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 462,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_sfx_008.json",
+        "sha256": "55243aae166921dd25d6619ebcdde4b05df8e134d61b27cd806ba3cabe3dfa7a"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_sfx_009",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 463,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_sfx_009.json",
+        "sha256": "e1cf7b948bacbf36c965a950e92c77d59e18abe20a9c10a81da15b012ced3f1c"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_sfx_010",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 464,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_sfx_010.json",
+        "sha256": "f1e6b3fe6f47aed066a03167abf794c91a4a0e3cd5ad7319c5a87424563856a2"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_sfx_011",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 465,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_sfx_011.json",
+        "sha256": "6109d45195f9a852cb1c28c0499b2c5328b6bf71c6f6095482ae5e75f432f5b6"
+      },
+      "C_checks": 3,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_sfx_012",
+      "asset_type": "audio",
+      "priority_file": "test_data/priority_gen/audio_priority_natural_collect.jsonl",
+      "priority_line": 466,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_sfx_012.json",
+        "sha256": "f51bed7f740d5248bc33010c272746635ff53ad6f8493521a56fe72a5bbd3341"
+      },
+      "C_checks": 2,
+      "GQ": "NEW_SOURCE_GROUNDED",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_cg_001",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 117,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_cg_001.json",
+        "sha256": "1df0f6c8275839017b7510c7ed74e9818eaed7b093c59052138e3e54fc0630db"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_cg_002",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 118,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_cg_002.json",
+        "sha256": "052ff0f08b2da1d5127b32dae976acbab71145905f5e6e5bf2e0dd825d690291"
+      },
+      "C_checks": 6,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": []
+    },
+    {
+      "game_id": "G041_frontier_market",
+      "task_id": "G041_cg_003",
+      "asset_type": "cg_video",
+      "priority_file": "test_data/priority_gen/cg_video_priority_collect.jsonl",
+      "priority_line": 119,
+      "rubric": {
+        "path": "test_data/test_samples/G041_frontier_market/rubric_assets/priority_observable_v2/G041_cg_003.json",
+        "sha256": "b6162354f696e13f101ba9d89504f6d58e950813b84f104cb76a9ad1357c7a42"
+      },
+      "C_checks": 8,
+      "GQ": "PRESERVED_EXACT",
+      "warnings": [
+        "multi_variant_cg_requires_delivery_convention",
+        "branch_delivery_review"
+      ]
+    }
+  ]
+}

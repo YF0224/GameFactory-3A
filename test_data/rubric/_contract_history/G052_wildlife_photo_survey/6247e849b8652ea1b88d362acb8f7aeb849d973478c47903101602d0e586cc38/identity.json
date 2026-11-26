@@ -1,0 +1,7 @@
+{
+  "contract_id": "G052_wildlife_photo_survey.whitebox.endpoints-v2-candidate.6247e849b8652ea1b88d362acb8f7aeb849d973478c47903101602d0e586cc38",
+  "version": "endpoints-v2-candidate",
+  "content_sha256": "6247e849b8652ea1b88d362acb8f7aeb849d973478c47903101602d0e586cc38",
+  "rubric_json_sha256": "d590d54b739ac7bcc93233283a193650a4790b44c52227d3d90f3563e90ac388",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}

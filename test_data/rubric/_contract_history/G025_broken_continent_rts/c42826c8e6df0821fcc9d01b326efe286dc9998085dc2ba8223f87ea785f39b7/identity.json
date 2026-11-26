@@ -1,0 +1,7 @@
+{
+  "contract_id": "G025_broken_continent_rts.whitebox.final",
+  "version": "final",
+  "content_sha256": "c42826c8e6df0821fcc9d01b326efe286dc9998085dc2ba8223f87ea785f39b7",
+  "rubric_json_sha256": "d323d6808e6d3fec946c77f4031269d5433b4d15c425bd8aacb3b27a422442ca",
+  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
+}
