@@ -1,7 +1,0 @@
-{
-  "contract_id": "G058_pitch_dreams_football.whitebox.endpoints-v2-candidate.e4d386ba04dc2db37aa60b664fa213755d9ef8c477b6bf825a97948bf9566490",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "e4d386ba04dc2db37aa60b664fa213755d9ef8c477b6bf825a97948bf9566490",
-  "rubric_json_sha256": "97dc39c1f11af6f2f5ede23e9856d341d6dd6df00e5c1530638d797b03825457",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

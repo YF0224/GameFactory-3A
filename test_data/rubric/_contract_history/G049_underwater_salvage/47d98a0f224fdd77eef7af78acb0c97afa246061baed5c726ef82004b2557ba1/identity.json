@@ -1,7 +1,0 @@
-{
-  "contract_id": "G049_underwater_salvage.whitebox.endpoints-v2-candidate.47d98a0f224fdd77eef7af78acb0c97afa246061baed5c726ef82004b2557ba1",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "47d98a0f224fdd77eef7af78acb0c97afa246061baed5c726ef82004b2557ba1",
-  "rubric_json_sha256": "51c021fe6f53329c247b040a159ab5a73cd8c714946de3cdf61aa377806b2594",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

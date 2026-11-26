@@ -1,7 +1,0 @@
-{
-  "contract_id": "G053_field_investigation.whitebox.endpoints-v2-candidate.55d5f424b800232b12e5d6131cdfab3262740de69b15cdf30566e63522466636",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "55d5f424b800232b12e5d6131cdfab3262740de69b15cdf30566e63522466636",
-  "rubric_json_sha256": "31e23b92d3c1f8000b14682342541e5638424192b2a16ccf767365c9e9cbf1f9",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

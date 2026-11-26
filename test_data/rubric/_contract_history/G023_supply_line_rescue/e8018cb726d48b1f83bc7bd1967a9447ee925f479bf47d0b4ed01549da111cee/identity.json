@@ -1,7 +1,0 @@
-{
-  "contract_id": "G023_supply_line_rescue.whitebox.endpoints-v2-candidate.e8018cb726d48b1f83bc7bd1967a9447ee925f479bf47d0b4ed01549da111cee",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "e8018cb726d48b1f83bc7bd1967a9447ee925f479bf47d0b4ed01549da111cee",
-  "rubric_json_sha256": "0b2503ee04eefc8b5cf38daf92aad959f325b84f351e8752c559698b620fc719",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

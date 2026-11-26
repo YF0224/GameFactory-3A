@@ -1,7 +1,0 @@
-{
-  "contract_id": "G016_theater_sorting.whitebox.final",
-  "version": "final",
-  "content_sha256": "9022068824f8bd9076ece804e53d655b8e49b22bf5276c225fba31918080fb36",
-  "rubric_json_sha256": "8e03a57a924ef3660ff107d84ff6c805d24b413cb7ca2431f0eac17c63129eb2",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

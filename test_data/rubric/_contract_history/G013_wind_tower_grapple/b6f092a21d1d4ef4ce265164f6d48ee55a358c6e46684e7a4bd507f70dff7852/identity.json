@@ -1,7 +1,0 @@
-{
-  "contract_id": "G013_wind_tower_grapple.whitebox.final",
-  "version": "final",
-  "content_sha256": "b6f092a21d1d4ef4ce265164f6d48ee55a358c6e46684e7a4bd507f70dff7852",
-  "rubric_json_sha256": "341d78e4bcddde6d11ec573fcce66db01674a7c475cefb35af36e2f581cfc6e2",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

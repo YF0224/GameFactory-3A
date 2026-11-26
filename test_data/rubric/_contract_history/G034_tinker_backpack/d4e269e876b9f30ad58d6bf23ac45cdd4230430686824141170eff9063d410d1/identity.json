@@ -1,7 +1,0 @@
-{
-  "contract_id": "G034_tinker_backpack.whitebox.final",
-  "version": "final",
-  "content_sha256": "d4e269e876b9f30ad58d6bf23ac45cdd4230430686824141170eff9063d410d1",
-  "rubric_json_sha256": "b73fab200070eb9f389c0035bae99ae76a4bf53fac5328892c22241fa42c4ba7",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

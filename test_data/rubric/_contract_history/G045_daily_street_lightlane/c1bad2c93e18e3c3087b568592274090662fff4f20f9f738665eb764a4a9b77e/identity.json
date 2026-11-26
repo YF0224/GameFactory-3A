@@ -1,7 +1,0 @@
-{
-  "contract_id": "G045_daily_street_lightlane.whitebox.final",
-  "version": "final",
-  "content_sha256": "c1bad2c93e18e3c3087b568592274090662fff4f20f9f738665eb764a4a9b77e",
-  "rubric_json_sha256": "b77d887cad2f438cfcd9f23eac29ad6a1ab0efbd44bd6ad30a72e447117a25d1",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

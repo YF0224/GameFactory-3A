@@ -1,7 +1,0 @@
-{
-  "contract_id": "G036_salt_flat_timetrial.whitebox.endpoints-v2-candidate.a9a62b9ea38884e95213c482a3861d8458ba3b14877093062a24e2a202977025",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "a9a62b9ea38884e95213c482a3861d8458ba3b14877093062a24e2a202977025",
-  "rubric_json_sha256": "42c6384f596e10a51a89bb6b0dd8f7385c4b683576b4c67c0ff93a2fe51126ae",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

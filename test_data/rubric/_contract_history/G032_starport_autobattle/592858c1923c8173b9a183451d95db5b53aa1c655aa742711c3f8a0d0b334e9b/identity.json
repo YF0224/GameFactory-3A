@@ -1,7 +1,0 @@
-{
-  "contract_id": "G032_starport_autobattle.whitebox.endpoints-v2-candidate.592858c1923c8173b9a183451d95db5b53aa1c655aa742711c3f8a0d0b334e9b",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "592858c1923c8173b9a183451d95db5b53aa1c655aa742711c3f8a0d0b334e9b",
-  "rubric_json_sha256": "d451763efc9e40409414f05e891e62e58f1ae5f175114f3d6fe278d6cffdaea7",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

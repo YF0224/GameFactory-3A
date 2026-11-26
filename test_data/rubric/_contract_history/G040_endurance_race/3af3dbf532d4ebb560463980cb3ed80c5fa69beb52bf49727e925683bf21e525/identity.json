@@ -1,7 +1,0 @@
-{
-  "contract_id": "G040_endurance_race.whitebox.endpoints-v2-candidate.3af3dbf532d4ebb560463980cb3ed80c5fa69beb52bf49727e925683bf21e525",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "3af3dbf532d4ebb560463980cb3ed80c5fa69beb52bf49727e925683bf21e525",
-  "rubric_json_sha256": "9f8efb846082212ff80d93fce8ceedf377985041810e2c483dfdc221f5c53a10",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

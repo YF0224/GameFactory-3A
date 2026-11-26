@@ -1,7 +1,0 @@
-{
-  "contract_id": "G018_portal_freight.whitebox.endpoints-v2-candidate.b1363ad1092ece3acf087a2cbc192a2c1652614913d8c05d199d4b11f5fdc521",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "b1363ad1092ece3acf087a2cbc192a2c1652614913d8c05d199d4b11f5fdc521",
-  "rubric_json_sha256": "5224e024090166633728bcf8156f66b0e81214ca9685e8278a9f7996d5f4f05c",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

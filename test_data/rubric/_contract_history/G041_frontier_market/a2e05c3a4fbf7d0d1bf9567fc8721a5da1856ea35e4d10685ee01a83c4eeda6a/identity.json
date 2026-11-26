@@ -1,7 +1,0 @@
-{
-  "contract_id": "G041_frontier_market.whitebox.endpoints-v2-candidate.a2e05c3a4fbf7d0d1bf9567fc8721a5da1856ea35e4d10685ee01a83c4eeda6a",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "a2e05c3a4fbf7d0d1bf9567fc8721a5da1856ea35e4d10685ee01a83c4eeda6a",
-  "rubric_json_sha256": "65046f2731d61702bed31cab789a049fe635cd60dc3f86c6d00b6b4160e4de45",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

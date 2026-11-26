@@ -1,7 +1,0 @@
-{
-  "contract_id": "G030_polar_night_td.whitebox.endpoints-v2-candidate.7d06c90a415f01bb3a8564654714e22b754b83abb6331b08a62a9efac6a984d1",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "7d06c90a415f01bb3a8564654714e22b754b83abb6331b08a62a9efac6a984d1",
-  "rubric_json_sha256": "b5907e6435696c9c1aebab276778fb7e09d1b5d5cc9e66531af26dc4d17df5ad",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

@@ -1,7 +1,0 @@
-{
-  "contract_id": "G051_village_lost_found.whitebox.endpoints-v2-candidate.4a079a749a7e8a6f97df302bb9afc74f545eb1a64c6c4263567949c717afe372",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "4a079a749a7e8a6f97df302bb9afc74f545eb1a64c6c4263567949c717afe372",
-  "rubric_json_sha256": "1abbc57048bdf27dccd11b6f5e866773049482a3cd1120db414375d13d853f57",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

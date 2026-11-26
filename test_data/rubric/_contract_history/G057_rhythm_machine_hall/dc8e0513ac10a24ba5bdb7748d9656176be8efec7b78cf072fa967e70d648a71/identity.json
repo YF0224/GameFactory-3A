@@ -1,7 +1,0 @@
-{
-  "contract_id": "G057_rhythm_machine_hall.whitebox.final",
-  "version": "final",
-  "content_sha256": "dc8e0513ac10a24ba5bdb7748d9656176be8efec7b78cf072fa967e70d648a71",
-  "rubric_json_sha256": "54ff61a560edc9a6779aaf1d4f6566a77a545cdb1d832a590b1b7574dc6280cd",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

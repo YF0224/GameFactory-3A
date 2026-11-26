@@ -1,7 +1,0 @@
-{
-  "contract_id": "G020_tidal_glyphs.whitebox.final",
-  "version": "final",
-  "content_sha256": "d6bd4ef89054ceee593f874b427da3efe80174275459c65dd57bbac3f3e78291",
-  "rubric_json_sha256": "ae9323c9044213a9994c3fa7f5a9bd745a56520e16c51ef9a736e89ec99072b2",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

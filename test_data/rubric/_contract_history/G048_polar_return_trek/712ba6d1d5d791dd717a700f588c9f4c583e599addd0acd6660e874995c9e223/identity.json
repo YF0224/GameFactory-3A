@@ -1,7 +1,0 @@
-{
-  "contract_id": "G048_polar_return_trek.whitebox.final",
-  "version": "final",
-  "content_sha256": "712ba6d1d5d791dd717a700f588c9f4c583e599addd0acd6660e874995c9e223",
-  "rubric_json_sha256": "8f21257001d2c473805b75dc1b1496497ee0ec0a2d90b08023ac91011b6686ac",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

@@ -1,7 +1,0 @@
-{
-  "contract_id": "G055_inner_court_investigation.whitebox.endpoints-v2-candidate.cee1d8b6bd8538aa0a5ea93cbd8e10c74ed70a51352b94033b3307250bf5ad9d",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "cee1d8b6bd8538aa0a5ea93cbd8e10c74ed70a51352b94033b3307250bf5ad9d",
-  "rubric_json_sha256": "457d8c6f8fc47afe12c743acbdf5ed9114e962bbfec9d10a56f564eee5d5d081",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

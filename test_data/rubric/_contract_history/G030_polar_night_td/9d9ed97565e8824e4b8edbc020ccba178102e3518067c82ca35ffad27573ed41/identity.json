@@ -1,7 +1,0 @@
-{
-  "contract_id": "G030_polar_night_td.whitebox.final",
-  "version": "final",
-  "content_sha256": "9d9ed97565e8824e4b8edbc020ccba178102e3518067c82ca35ffad27573ed41",
-  "rubric_json_sha256": "f11319d65da5a1aab0a2609e8278867c9c9cf7f863e0078b9f2654326b9d1025",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

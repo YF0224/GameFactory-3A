@@ -1,7 +1,0 @@
-{
-  "contract_id": "G051_village_lost_found.whitebox.final",
-  "version": "final",
-  "content_sha256": "562edb8d4152ddf16e5dab5dc4d0774f03e2eae3da12de8f911c46c891f9e46a",
-  "rubric_json_sha256": "eda3cd5cb64681cb0fe5e99127626757b223379d28067ce4b5639e4bccd789d7",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

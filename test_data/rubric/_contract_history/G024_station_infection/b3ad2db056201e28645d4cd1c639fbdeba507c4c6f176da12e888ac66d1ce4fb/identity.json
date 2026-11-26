@@ -1,7 +1,0 @@
-{
-  "contract_id": "G024_station_infection.whitebox.final",
-  "version": "final",
-  "content_sha256": "b3ad2db056201e28645d4cd1c639fbdeba507c4c6f176da12e888ac66d1ce4fb",
-  "rubric_json_sha256": "3e0df917facdf55a6c5ed0fb0ee7095b4473f10b64b5258ede2efa81ae0fe742",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

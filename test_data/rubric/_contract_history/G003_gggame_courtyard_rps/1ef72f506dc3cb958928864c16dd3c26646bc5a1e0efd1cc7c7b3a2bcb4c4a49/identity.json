@@ -1,7 +1,0 @@
-{
-  "contract_id": "G003_gggame_courtyard_rps.whitebox.endpoints-v2-candidate.1ef72f506dc3cb958928864c16dd3c26646bc5a1e0efd1cc7c7b3a2bcb4c4a49",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "1ef72f506dc3cb958928864c16dd3c26646bc5a1e0efd1cc7c7b3a2bcb4c4a49",
-  "rubric_json_sha256": "226815f44235e7191703a3b1230595db7d2b3527189e26f72b472275a3dad9bb",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

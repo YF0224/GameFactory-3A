@@ -1,7 +1,0 @@
-{
-  "contract_id": "G007_crystal_probe_run.whitebox.final",
-  "version": "final",
-  "content_sha256": "fafd538053b5dac0ff39a32b6df5a2849ae699c07a08271ebbe3f600cc172d1e",
-  "rubric_json_sha256": "7fee9c74083666e8cbad1bb449a70c1a5f0b5b72823622a8db5f45ff0028797f",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

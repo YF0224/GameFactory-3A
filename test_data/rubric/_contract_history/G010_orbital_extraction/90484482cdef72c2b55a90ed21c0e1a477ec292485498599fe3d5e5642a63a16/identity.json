@@ -1,7 +1,0 @@
-{
-  "contract_id": "G010_orbital_extraction.whitebox.endpoints-v2-candidate.90484482cdef72c2b55a90ed21c0e1a477ec292485498599fe3d5e5642a63a16",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "90484482cdef72c2b55a90ed21c0e1a477ec292485498599fe3d5e5642a63a16",
-  "rubric_json_sha256": "6a5fe401ccbe0c658d0c0e02b5d2355b091c4fa589ba0acbb74e9e345cc86981",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

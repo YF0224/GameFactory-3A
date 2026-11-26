@@ -1,7 +1,0 @@
-{
-  "contract_id": "G039_sky_ring_flight.whitebox.endpoints-v2-candidate.1433d0585fb850d0ee02d964bb669c6b6f8e24b4a627d31c37e24c3b6aeb5520",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "1433d0585fb850d0ee02d964bb669c6b6f8e24b4a627d31c37e24c3b6aeb5520",
-  "rubric_json_sha256": "d1718b88cbcdb1b850095e8615793a6113bae621a419f5cdcf36882cb0080378",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

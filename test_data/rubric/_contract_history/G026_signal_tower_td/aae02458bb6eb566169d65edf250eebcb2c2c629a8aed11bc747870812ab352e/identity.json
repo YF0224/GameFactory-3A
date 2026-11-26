@@ -1,7 +1,0 @@
-{
-  "contract_id": "G026_signal_tower_td.whitebox.endpoints-v2-candidate.aae02458bb6eb566169d65edf250eebcb2c2c629a8aed11bc747870812ab352e",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "aae02458bb6eb566169d65edf250eebcb2c2c629a8aed11bc747870812ab352e",
-  "rubric_json_sha256": "e2b6be111a63722f529d192734d6a0da831790ad8cd3f4732cced6f924d95b2b",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

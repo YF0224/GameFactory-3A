@@ -1,7 +1,0 @@
-{
-  "contract_id": "G004_desert_observatory.whitebox.endpoints-v2-candidate.985611692bca1a2b534224eb03285a5945d41ca1ccf180012ac5dcf6f67153a8",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "985611692bca1a2b534224eb03285a5945d41ca1ccf180012ac5dcf6f67153a8",
-  "rubric_json_sha256": "b937e3877b312c2a3788c5768ddf57777460de33a423bfedc588e2d84e314095",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

@@ -1,7 +1,0 @@
-{
-  "contract_id": "G035_rift_expedition.whitebox.final",
-  "version": "final",
-  "content_sha256": "3df47b647bfa6cca2df27dd6f8374e8ff67e597de2ecc91777770039a2422e01",
-  "rubric_json_sha256": "b8495a60a2f35cddcce83dde364b82ff1da3a6b0587ce4aac9b94de8bdaabdd8",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

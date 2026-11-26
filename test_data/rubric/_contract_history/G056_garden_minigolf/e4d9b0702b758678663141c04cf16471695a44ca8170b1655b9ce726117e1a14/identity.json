@@ -1,7 +1,0 @@
-{
-  "contract_id": "G056_garden_minigolf.whitebox.final",
-  "version": "final",
-  "content_sha256": "e4d9b0702b758678663141c04cf16471695a44ca8170b1655b9ce726117e1a14",
-  "rubric_json_sha256": "1513cebf42f3b0fbc16cb8133888f88570d328872d84762b00e6b99ce19d5d28",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

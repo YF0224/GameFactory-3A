@@ -1,7 +1,0 @@
-{
-  "contract_id": "G006_polar_radar_defense.whitebox.endpoints-v2-candidate.3bbeba169998075f5270b52314219398df55b6166eddafc304488b9ded2205d7",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "3bbeba169998075f5270b52314219398df55b6166eddafc304488b9ded2205d7",
-  "rubric_json_sha256": "82abf812f137ad116bf15c2d704f64c9d96b08d3120e23cb7a9491cc71a1cad1",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

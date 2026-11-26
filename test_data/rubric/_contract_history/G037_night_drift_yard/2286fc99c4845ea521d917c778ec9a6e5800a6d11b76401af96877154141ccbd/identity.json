@@ -1,7 +1,0 @@
-{
-  "contract_id": "G037_night_drift_yard.whitebox.final",
-  "version": "final",
-  "content_sha256": "2286fc99c4845ea521d917c778ec9a6e5800a6d11b76401af96877154141ccbd",
-  "rubric_json_sha256": "d685abd908c3c3802aaa6287bc56a5377d4728ca1a3aa41a9c189fabb0eedc7a",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

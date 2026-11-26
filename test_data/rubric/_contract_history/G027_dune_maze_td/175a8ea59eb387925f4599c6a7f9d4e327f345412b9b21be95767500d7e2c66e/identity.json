@@ -1,7 +1,0 @@
-{
-  "contract_id": "G027_dune_maze_td.whitebox.endpoints-v2-candidate.175a8ea59eb387925f4599c6a7f9d4e327f345412b9b21be95767500d7e2c66e",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "175a8ea59eb387925f4599c6a7f9d4e327f345412b9b21be95767500d7e2c66e",
-  "rubric_json_sha256": "e883ff08e06d5272055ff9ceb081196b95f7532ff3fdb0792487950282e84499",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

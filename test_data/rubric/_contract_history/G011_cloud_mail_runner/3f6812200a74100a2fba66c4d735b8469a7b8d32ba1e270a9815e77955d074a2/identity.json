@@ -1,7 +1,0 @@
-{
-  "contract_id": "G011_cloud_mail_runner.whitebox.endpoints-v2-candidate.3f6812200a74100a2fba66c4d735b8469a7b8d32ba1e270a9815e77955d074a2",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "3f6812200a74100a2fba66c4d735b8469a7b8d32ba1e270a9815e77955d074a2",
-  "rubric_json_sha256": "5f5103de772532b9b03592aa81e82a3db6443ee72de2527be25a1786923106ee",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

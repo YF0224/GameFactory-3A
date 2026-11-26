@@ -1,7 +1,0 @@
-{
-  "contract_id": "G022_isle_comm_nodes.whitebox.endpoints-v2-candidate.e33c1b6cf6cca21e59993ccb59be673b96837187f64a735d4fb544efa7adeea1",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "e33c1b6cf6cca21e59993ccb59be673b96837187f64a735d4fb544efa7adeea1",
-  "rubric_json_sha256": "202d7c93bffdde762a0b787f9e36d85a6a40df3e6710289aac404b0e49079be4",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

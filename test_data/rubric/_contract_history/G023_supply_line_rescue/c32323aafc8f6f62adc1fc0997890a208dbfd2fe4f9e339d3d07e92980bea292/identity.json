@@ -1,7 +1,0 @@
-{
-  "contract_id": "G023_supply_line_rescue.whitebox.final",
-  "version": "final",
-  "content_sha256": "c32323aafc8f6f62adc1fc0997890a208dbfd2fe4f9e339d3d07e92980bea292",
-  "rubric_json_sha256": "78af5b87984f069385b549bff90fbeda721300b4c7f49603b5503dd4456550f9",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

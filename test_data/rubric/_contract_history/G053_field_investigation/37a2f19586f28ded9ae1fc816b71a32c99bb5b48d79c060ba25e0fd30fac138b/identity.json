@@ -1,7 +1,0 @@
-{
-  "contract_id": "G053_field_investigation.whitebox.final",
-  "version": "final",
-  "content_sha256": "37a2f19586f28ded9ae1fc816b71a32c99bb5b48d79c060ba25e0fd30fac138b",
-  "rubric_json_sha256": "11de133e723cc403630a2295f62576360a7acfe1efeedeafeca0df64a67b40aa",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

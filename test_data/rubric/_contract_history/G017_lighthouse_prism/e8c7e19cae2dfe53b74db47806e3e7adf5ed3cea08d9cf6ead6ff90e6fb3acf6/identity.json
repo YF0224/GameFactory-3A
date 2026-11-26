@@ -1,7 +1,0 @@
-{
-  "contract_id": "G017_lighthouse_prism.whitebox.final",
-  "version": "final",
-  "content_sha256": "e8c7e19cae2dfe53b74db47806e3e7adf5ed3cea08d9cf6ead6ff90e6fb3acf6",
-  "rubric_json_sha256": "4c4d0f5975af074ab4d81afdade65733ec17cbd3621126c28f537a6c32724e5b",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

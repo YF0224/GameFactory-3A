@@ -1,7 +1,0 @@
-{
-  "contract_id": "G033_card_caravan.whitebox.endpoints-v2-candidate.d84916aad4e9faaf831455f45941817b143dd68c23eee1ee7ba0ba8ebc542003",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "d84916aad4e9faaf831455f45941817b143dd68c23eee1ee7ba0ba8ebc542003",
-  "rubric_json_sha256": "84e051dcbc06f203542140f743256b077a0e9888d5a7502648430a1ef5bc9572",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

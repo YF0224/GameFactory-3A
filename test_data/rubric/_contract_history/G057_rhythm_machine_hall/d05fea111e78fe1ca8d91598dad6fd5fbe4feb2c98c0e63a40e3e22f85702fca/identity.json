@@ -1,7 +1,0 @@
-{
-  "contract_id": "G057_rhythm_machine_hall.whitebox.endpoints-v2-candidate.d05fea111e78fe1ca8d91598dad6fd5fbe4feb2c98c0e63a40e3e22f85702fca",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "d05fea111e78fe1ca8d91598dad6fd5fbe4feb2c98c0e63a40e3e22f85702fca",
-  "rubric_json_sha256": "68102ffdffb6909416df1504f2ddbf57a63047e9bebc6e3d8efb19df6c292825",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

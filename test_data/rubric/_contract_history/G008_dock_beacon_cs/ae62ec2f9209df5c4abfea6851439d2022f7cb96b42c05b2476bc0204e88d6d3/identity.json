@@ -1,7 +1,0 @@
-{
-  "contract_id": "G008_dock_beacon_cs.whitebox.final",
-  "version": "final",
-  "content_sha256": "ae62ec2f9209df5c4abfea6851439d2022f7cb96b42c05b2476bc0204e88d6d3",
-  "rubric_json_sha256": "7e8fe41537f21b6cf3c0c1dafe8770f0eeb137a21acfaf9b3bcbade6fa1d76e9",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

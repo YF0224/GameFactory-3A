@@ -1,7 +1,0 @@
-{
-  "contract_id": "G008_dock_beacon_cs.whitebox.endpoints-v2-candidate.8f28b4a2dc58400a70572044b4d74d6b66f82eec3b7125c232b1bf604fa727ec",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "8f28b4a2dc58400a70572044b4d74d6b66f82eec3b7125c232b1bf604fa727ec",
-  "rubric_json_sha256": "7e6740cd98a5a7710fb32bb9442b5f21ce76d419e3fbcc45898a2c4e972d4b5b",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

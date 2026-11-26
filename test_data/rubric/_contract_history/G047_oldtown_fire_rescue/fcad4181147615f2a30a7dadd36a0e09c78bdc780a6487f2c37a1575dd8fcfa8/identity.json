@@ -1,7 +1,0 @@
-{
-  "contract_id": "G047_oldtown_fire_rescue.whitebox.endpoints-v2-candidate.fcad4181147615f2a30a7dadd36a0e09c78bdc780a6487f2c37a1575dd8fcfa8",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "fcad4181147615f2a30a7dadd36a0e09c78bdc780a6487f2c37a1575dd8fcfa8",
-  "rubric_json_sha256": "3eaebac2c251f7a7ba8d7772470154573b1b871b748b7a57b0acc10bfac980f7",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}

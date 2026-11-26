@@ -1,7 +1,0 @@
-{
-  "contract_id": "G009_blackout_stealth.whitebox.endpoints-v2-candidate.3e9ef60e5cdfb83a76f60ef35f3c701ac15731200f084754b909133f097ee3ba",
-  "version": "endpoints-v2-candidate",
-  "content_sha256": "3e9ef60e5cdfb83a76f60ef35f3c701ac15731200f084754b909133f097ee3ba",
-  "rubric_json_sha256": "8fd318c692c10b2dcd3b5f9c22f12a53f7ade6b5a03deece8fcd5f46a0d843fd",
-  "policy": "original labels and bytes preserved; content hash disambiguates legacy final IDs"
-}
