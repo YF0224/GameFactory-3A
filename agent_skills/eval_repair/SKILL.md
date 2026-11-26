@@ -1,5 +1,5 @@
 ---
-name: eval_repair
+name: eval-repair
 description: "Agent 在 eval 链路（plan→record→evidence→judge）中自动诊断 HARNESS_ERROR 和引擎故障，分类处置，写恢复脚本到 pipeline/eval/repair/ 注册后续跑，不改评分语义，不动作者原始交付。"
 ---
 
