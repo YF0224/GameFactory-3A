@@ -1,5 +1,5 @@
 ---
-name: eval-repair
+name: eval_repair
 description: "Eval 完整链路闭环与自修复：agent 启动任意引擎（Unity/UE5/Godot/Three.js）执行 plan→record→evidence→judge，遇到 HARNESS_ERROR 或引擎问题时分类诊断、自己写恢复脚本注册到 REGISTRY 并重试，区分工具链故障与作者交付问题，保留证据不改评分语义。"
 ---
 
