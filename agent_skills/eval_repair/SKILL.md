@@ -5,7 +5,50 @@ description: "Agent 在 eval 链路（plan→record→evidence→judge）中自�
 
 # Eval 自动修复
 
-**触发条件**：eval 链路出现 `HARNESS_ERROR`、工具链报错、引擎启动失败、录制超时、传输截断。
+**触发条件**：负责看护 eval 链路，或链路出现 `HARNESS_ERROR`、工具链报错、引擎启动失败、录制超时、传输截断。
+
+---
+
+## 0. 正常推进完整 eval 链路
+
+每个游戏的完整链路是：
+
+```
+prepare → static_judge → plan → record → evidence → judge → score
+```
+
+**先找最后合格阶段，从那里续接，不从头重跑：**
+
+| 已有状态 | 下一步 |
+|---|---|
+| 有完整有效 `score.json`（`complete=true`） | 已完成，跳过 |
+| 有合格 `verdicts_evidence_t*.json` | 直接 score |
+| 有合格 `record_result.json` | 从 evidence/judge 续 |
+| 有合格 `plan.json` | 从 record 续 |
+| 有 `delivery.json` | 从 prepare 开始 |
+
+**启动完整评估：**
+
+```bash
+# Stage1（whitebox）完整评估
+python scripts/eval/evaluate.py --stage 1 \
+  --run-dir <delivery_dir> \
+  --planner gpt-6.1-sol --judge gpt-6.1-sol
+
+# Stage3（refinement）完整评估
+python scripts/eval/run_stage3_refine_eval.py \
+  --model sol --games G001,G002 \
+  --planner gpt-6.1-sol --judge gpt-6.1-sol
+```
+
+**看护时每 30 分钟检查一次：**
+
+```bash
+python scripts/eval/run_status.py --model sol
+df -h /   # 低于 20GiB 停下
+```
+
+**一个游戏卡超过 40 分钟**：看 `model_calls/` 下最新目录的 `events.jsonl` 是否还在增长——增长说明在等模型调用（正常）；不增长说明卡死，按第 1 节分类处理。
 
 ---
 
