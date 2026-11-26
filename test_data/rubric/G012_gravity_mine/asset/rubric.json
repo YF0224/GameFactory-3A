@@ -19,5 +19,1272 @@
     "G012_scene_001": {
       "assertions": []
     }
+  },
+  "audio": {
+    "G012_sfx_001": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G012_gravity_mine",
+          "task_id": "G012_sfx_001",
+          "asset_name": "gravity_flip_hum",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Low resonant gravity-flip hum with a metallic click of the two-state wrench",
+          "duration_sec": 0.8,
+          "sample_rate": 48000,
+          "seed": 5121,
+          "trigger": "重力反转（光圈同帧）",
+          "required_by_spec": true,
+          "spec_ref": "F05",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《翻转矿井的重力维修》｜重力反转平台机制输入规范\n\n```yaml\ncase_id: G012\nbase_case_id: G012\ntitle: 翻转矿井的重力维修\ncategory: Platformer / Runner\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1012\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《翻转矿井的重力维修》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 zkx 复核裁决——地面/顶面双检查点锚点与复位语义（AUD10）、三段距离与上下接触面间距、陷阱周期冻结（AUD11）、反转条件与镜头/角色旋转口径（AUD12）；补世界设定、镜头输入、演出反馈、过场视频与正向范围清单）；运行引擎：**Three.js（WebGL）**——选择理由：二态重力的短程物理翻转、上下行走面判定与矿井粒子以 Three.js 场景图＋轻量自研物理实现可控，浏览器即开即玩交付，目标平台桌面浏览器（Chrome/Edge 最新稳定版）；摄像机：2.5D 侧视固定水平（角色旋转、镜头不旋转）；输入：键盘；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：重力反转的公有领域机制可复用；本作全部名称、角色、场景、文案与美术原创。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的侧视重力反转平台游戏；文档存在不等于玩法完成。fixed_seed=1012 冻结三段陷阱与物资布置序列及相位。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2.5D 侧视重力反转平台，单人单局，3 段垂直矿井。本测例包含的能力：重力二态反转与上下接触面行走、定向陷阱与周期规避、地面/顶面双锚点检查点、坠落计数与判负、终点装置交互、开场/反转事件/结算视频、重力手感演出层。\n- S02 核心循环一句话：观察陷阱周期与重力方向 → 在正确接触面反转 → 落到对侧安全面 → 通过三段抵达终点。\n- S03 流程：开始界面 → 进入矿井（首次进入前播 C01）→ 段1 教学 → 段2 长竖井 → 段3 精密段 → 终点装置交互 → 结算（面板前播 C03）→ 重开或返回。\n- S04 最低完整流程：开始界面、可操作矿井、结算界面、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：坠落回最近检查点对应锚点继续（计数保留）；第 6 次坠落判负；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成\n  - state_change：进入「标题」状态；首次开始时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「段1」\n  - outcome：无跨局状态写入\n- S07 段1（教学 40 米）\n  - input：A/D 或 ←/→＝移动、Space/W＝重力反转、Esc＝暂停（触发方：玩家）；陷阱周期由 seed 相位驱动（触发方：系统）\n  - precondition：处于段1 状态\n  - state_change：按 §6 M01–M03 结算每次输入；重力方向、朝向、坠落计数实时更新\n  - feedback：按 §9 F05（反转光圈、落面尘土、陷阱红闪）\n  - next_actions：通过段1 →「段2」；坠落 → M03 复位；第 6 次坠落 →「失败结算」\n  - outcome：按 §7 V01/V02 判定\n- S08 段2（长竖井 60 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段1 已通过\n  - state_change：长竖井内定向陷阱迫使按重力方向选择反转时机；检查点锚点按 AUD10 双面记录\n  - feedback：同 S07\n  - next_actions：通过段2 →「段3」\n  - outcome：局内状态演进\n- S09 段3（精密 50 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段2 已通过\n  - state_change：蒸汽组（两态生效）加入精密规避；通过后抵达终点装置\n  - feedback：同 S07\n  - next_actions：终点装置交互完成 →「胜利结算」\n  - outcome：按 §7 V01 判定\n- S10 结算\n  - input：Enter=重开 / Esc=返回（触发方：玩家）\n  - precondition：V01 或 V02 成立\n  - state_change：进入对应结算；面板出现前按 §10 C03 播放结算视频（每局一次，胜负共用双意象）\n  - feedback：胜利面板显示用时与坠落次数；失败面板注明「坠落超限」\n  - next_actions：重开（全量重置）或返回标题\n  - outcome：无跨局状态写入\n- S11 暂停\n  - input：Esc（触发方：玩家）；窗口失焦自动触发（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，移动、重力、陷阱周期与计时全部冻结\n  - feedback：暂停面板（继续/重开/返回/设置）\n  - next_actions：恢复回到游玩\n  - outcome：恢复后状态逐字段一致\n\n## 3. 数值口径与全局规则 [G01–G06]\n\n- G01 统一刻度：米制；时间用游戏模拟秒（暂停冻结）；坠落计数为非负整数。\n- G02 数值（本包冻结值）：跑速 4.0 米/秒；反转后重力加速度 12 米/秒²；无跳跃键——反转即唯一腾空手段；反转键冷却 0.5 秒且滞空中不可再按（仅接触合法支撑面且冷却到期可反转，AUD12）；检查点 3 个（每段起点）；坠落次数上限 5 次（第 6 次判负）。\n- G03 状态转移 oracle：初始「正常重力·立于地面」，输入序列〔跑动 2 秒 → 按反转 → 滞空 → 落到顶部〕必然产生事件流 `flip(dir: normal→inverted)`、`airborne_enter`、`land(surface=ceiling, orientation=inverted)`、角色行走朝向翻转；任何偏离即 FAIL。\n- G04 关卡与接触面（zkx 裁决冻结）：三段推进距离 40/60/50 米；上下接触面间距 **6 米**（上下两面均为可行走接触面）；三段结构与陷阱布置由 seed=1012 冻结并导出相位。\n- G05 陷阱周期（zkx 裁决冻结）：压锤 4 秒周期＝前 3 秒收起、后 1 秒危险；蒸汽 3 秒周期＝前 2 秒关闭、后 1 秒喷射；尖刺常驻；生效重力态按 M02 判定表；相位由 seed 固定并随 layout_manifest 导出。\n- G06 暂停与复位裁决：Esc 冻结移动、重力与陷阱计时；窗口失焦自动暂停。检查点双锚点（AUD10）：每个检查点记录一对安全地面/顶面锚点；坠落复位保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪；锚点不得与陷阱重叠。坠落与终点交互同帧 → 判负优先。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：A/D 或 ←/→＝移动；Space 或 W＝重力反转；Esc＝暂停；Enter＝结算界面重开；终点装置交互由抵达触发（无独立按键）。\n- I02 输入语义边界：冷却中/滞空中按反转无效且无副作用；暂停/结算期间玩法键无效；被拒输入不产生事件。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；同帧互斥动作按 I01 列举顺序取首个。\n- I05 焦点与失焦：点击画布捕获输入焦点；窗口失焦自动暂停。\n- I06 UI 必显状态：当前重力方向（正常/反转）、朝向、坠落计数（0–5）、当前检查点编号、已用时间。\n- I07 输入延迟目标：按键到画面反馈 ≤100 毫秒（P95，≥30 次采样/类别）。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：维修工角色 1（按 A02 参考图）；三类陷阱若干（尖刺组 A、压锤组 B、蒸汽喷口组 C）；检查点基座 3（地面/顶面同网格实例，共 6 个锚点）；终点维修装置 1；矿井背景装饰为表现层。\n- L02 场地（代码块冻结口径）：\n\n```text\n1 座矿井 × 3 段垂直区（米制，沿推进方向）：\n  段1 教学 40m；段2 长竖井 60m；段3 精密 50m\n上下接触面间距 6m，两面均为可行走接触面\n检查点：每段起点 1 个（双锚点：地面/顶面各一，锚点不与陷阱重叠）\n陷阱与物资布置、周期相位由 seed=1012 冻结并导出\n```\n\n- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（陷阱、检查点、终点装置）逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的装饰造型、配色、粒子参数与音色为生成自由度，不得评估为缺失；按 zkx 裁决交付 layout_manifest.json（实例 ID、坐标、碰撞体、通行关系、陷阱相位表、seed 与 hash；同版本同 seed 重开 diff=0；装饰 scene.glb 不替代数值关卡与碰撞体）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 重力切换与接触面（主机制）\n  - input：反转键（触发方：玩家）\n  - precondition：接触合法支撑面（地面或顶面）且 0.5 秒冷却已到期（AUD12）\n  - state_change：重力方向二态翻转 → 离地滞空（重力加速度 12 m/s²）→ 落到原「对侧」接触面并更新行走朝向（角色在 0.2 秒内旋转朝向，镜头保持水平，AUD12）\n  - observable：重力向量状态、朝向事件、落点事件（见 G03 oracle）\n  - invalid_case：滞空中或冷却中按反转 → 拒绝且无副作用\n  - recovery：坠落走 M03 复位\n- M02 定向陷阱\n  - input：接触判定（触发方：系统）\n  - precondition：处于游玩状态且陷阱相位按 G05 周期运行\n  - state_change：按判定表（本包冻结值）——尖刺组 A 仅对「正常重力·立地面」生效；顶部压锤组 B 仅对「反转重力·立顶面」生效（危险窗为 4 秒周期的后 1 秒）；侧向蒸汽组 C 两态均生效（仅段3，喷射窗为 3 秒周期的后 1 秒）；错误状态接触陷阱造成坠落（计 M03）\n  - observable：陷阱命中事件含重力方向与陷阱类型字段、周期相位时间戳\n  - invalid_case：收起/关闭相位接触不造成坠落\n  - recovery：坠落后回检查点锚点复位\n- M03 坠落复位\n  - input：掉出安全区或陷阱命中（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：回最近检查点对应重力方向的锚点（保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪，AUD10）、坠落计数 +1；第 6 次判负结算\n  - observable：reset 事件（含检查点 ID 与锚点面）、fall_count 流水\n  - invalid_case：结算后坠落不再触发复位\n  - recovery：判负走 V02；结算界面重开为最终出路\n- M04 胜负与重开\n  - input：终点装置交互完成 / 第 6 次坠落 / 结算界面（触发方：系统判定/玩家）\n  - precondition：处于游玩状态或结算状态\n  - state_change：终点交互完成 → 胜利结算（显示用时与坠落次数）；第 6 次坠落 → 失败结算（注明原因）；结算后玩法冻结；同帧裁决按 G06（判负优先）\n  - observable：win / lose(reason) 事件与结算面板\n  - invalid_case：结算后再触发判定被拒绝（每局一次）\n  - recovery：重开=全量重置（重力回正常、计数清零、相位按 seed 复现）\n\n## 7. 成功、失败与恢复 [V01–V06]\n\n- V01 成功条件：按序通过三段并完成终点装置交互 → 结算（显示用时与坠落次数）。\n- V02 失败条件：坠落计数达 6 次（超上限 5）→ 判负结算（注明「坠落超限」）；与终点同帧按 G06 判负优先。\n- V03 恢复语义：单次坠落回最近检查点对应重力方向锚点继续（计数保留、重力方向保留）；判负后一键重开。\n- V04 persistent_state：无（重开全量清空；检查点仅记录双锚点位置）。\n- V05 persistent_state 生命周期：动作级即时结算；局内状态（计数/时间）局内保留、重开清空；无跨局保留。\n- V06 软锁与不可达处理：不设永久软锁——陷阱周期与双锚点保证任一重力方向均有复位出路；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：矿井里的反向救援——深井中央的主重力核失控，矿道上下两面翻转不定，矿井濒临坍缩。\n- W02 场景所在地：一座三段垂直矿井（教学巷道 40 米、长竖井 60 米、精密检修段 50 米），上下两面均可行走，尽头是失稳的主重力核终点装置。\n- W03 玩家身份与当前任务动机：玩家是重力维修工，携带着反转扳手下井；动机是在矿道彻底坍缩前重启主重力核，让矿井恢复秩序。\n- W04 失败代价与结局表达：失败=第六次坠落，维修工被矿井引力乱流卷回井口（C03 失败意象）；胜利=主重力核重启、矿井灯光逐层亮起（C03 胜利意象）。\n- W05 叙事来源：重力反转=维修扳手的二态扳动（唯一腾空手段）；定向陷阱=失控引力对不同接触面的定向反噬（尖刺咬地面、压锤咬顶面、蒸汽两态皆险）；双锚点检查点=维修工安装的双面安全栓。全部原创。\n- W06 视觉风格与色彩材质：深矿井工业风＋暖色灯光点缀；主色=岩黑 #2B2F36、铜金 #C9A876、危险红 #C43B2F、重力青 #4FC3C9、灯暖橙 #E8A25C；材质为湿岩、锈铁、蒸汽铜管。\n- W07 环境氛围与声音语言：矿井低鸣与滴水为底；音效语言为「重力反转嗡鸣+金属陷阱+落面闷响」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代下井与失控主核 → 反转事件视频（C02）承载重力机制的过程叙事 → 结算视频（C03）收束；叙事提示不阻断控制、不改变数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：2.5D 侧视固定水平镜头（不随重力旋转）；前视安全区 ≥ 屏宽 30%；镜头仅位移不旋转；镜头重置仅在明确切场/复位时。\n- F02 关键操作镜头变化：反转瞬间镜头不旋转（仅角色 0.2 秒旋转朝向，AUD12）；落面短促下沉 0.05 秒；陷阱命中 0.08 秒轻微抖动（≤ 画面高度 1.5%）。设置提供「镜头震动开/关」与「减少动态效果」。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：矿井雾尘粒子、顶部吊灯摇晃、蒸汽管余热微光、滴水。纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 重力反转 | 角色离地＋0.2s 旋转朝向＋青色重力光圈扩散 | 重力反转嗡鸣 | 落面即停 |\n| 滞空失重 | 角色残影拖尾＋尘屑上扬 | 失重风切音 | 落面即停 |\n| 落面 | 落面尘土＋短促下沉 0.05s | 落面闷响 | 0.1s 结束 |\n| 陷阱命中 | 全屏红闪＋0.08s 镜头抖动 | 陷阱命中锐响 | 闪红 0.1s 结束 |\n| 坠落复位 | 角色淡入对应锚点＋检查点基座点亮 | 坠落复位音 | 玩家可控即停 |\n| 检查点激活 | 基座灯环亮起 | 检查点音 | 常亮 |\n| 压锤危险窗 | 压锤下落阴影预警 | 压锤机械预警音 | 危险窗结束 |\n| 蒸汽喷射 | 蒸汽喷射柱 | 蒸汽喷射音 | 喷射窗结束 |\n| 终点装置重启 | 装置点亮＋矿井灯光逐层亮起 | 胜利上扬音 | 进入结算 |\n| 判负 | 画面降饱和 | 低沉失败音 | 进入结算 |\n\n- F06 关键音效清单（one_shot 8 条，全部冻结需求）：重力反转嗡鸣、失重风切、落面闷响、陷阱命中锐响、坠落复位音、压锤机械预警音、蒸汽喷射音、胜利/失败结算音（胜利上扬/失败低沉各一）。混音优先级：陷阱与压锤/蒸汽预警 ＞ 反转/落面 ＞ 其余；环境循环：矿井低鸣（常驻，暂停静音、结算淡出 0.5 秒，接缝无爆音；恒低于预警音）。无配音需求。震动事件到调度日志 ≤50ms（含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available），无硬件时验证调度与禁用行为。\n- F07 VFX 信息性与遮挡约束：双锚点检查点基座与陷阱危险相位为信息类 VFX，必须清晰可辨（压锤收起/危险、蒸汽关闭/喷射可辨）；反转光圈不遮挡陷阱轮廓与 HUD；闪红 ≤0.1 秒不遮挡后续判定输入；隐藏状态（陷阱下一相位）不得被特效泄露。\n- F08 音画同步：反转嗡鸣与光圈同帧；落面闷响与尘土同帧；预警音与危险窗起始同帧。\n- F09 屏幕震动：仅陷阱命中 0.08 秒轻微抖动；暂停/结算/重开取消未结束的震动与特效；设置可关闭（关闭不影响判定与数值）。\n- F10 前端界面：标题（开始/设置/退出）→ 矿井 HUD（I06 全项）→ 结算面板（用时/坠落次数/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）；关键状态图标+文字并用（重力方向、坠落计数）；窗口失焦自动暂停；叙事节拍提示不阻断控制。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 深井下井（Opening，5 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入矿井之前，每局一次\n  - 内容与角色场景：矿井升降笼载着维修工沉入井道，头顶吊灯摇晃；镜头掠过上下双接触面，尽头失稳的主重力核泛着乱流红光\n  - 资产对应：维修工、矿井巷道与游戏内模型/贴图同源设计\n  - 可跳过：Enter/Space 或跳过按钮 → 直接进入段1；自然播完 → 进入段1\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 第一次翻转（Event，5 秒，1280×720@24fps）\n  - 触发时机：每局首次成功反转并落到顶面（G03 oracle 的首次 land(surface=ceiling)）时，每局一次\n  - 内容与角色场景：维修工扳动反转扳手，青色重力光圈荡开，镜头保持水平而角色旋转——上方变成脚下，顶面巷道在视野中展开\n  - 资产对应：维修工、顶面接触面与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接继续游玩（重力状态保持反转）；自然播完 → 继续游玩\n  - 状态一致：播放期间重力、移动与陷阱计时冻结，播放结束瞬间按冻结前状态恢复\n- C03 重力核重启（Ending，6 秒，1280×720@24fps，胜负共用双意象）\n  - 触发时机：V01 或 V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象=主重力核重启、矿井灯光逐层亮起、维修工收起扳手；失败意象=引力乱流卷起尘土、维修工被吊回井口、灯光逐层熄灭\n  - 资产对应：维修工、终点装置、矿井与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以在上下接触面间反转重力（M01）、按周期规避三类定向陷阱（M02）、坠落后从双锚点检查点复位续跑（M03），并重启终点装置获胜（V01）。\n- N02 流程与界面能力：标题、三段矿井、胜利/失败结算（区分原因）、暂停（含失焦自动暂停）、设置（震动/减少动态效果开关）、一键重开。\n- N03 演出能力：C01–C03 视频、F04–F09 全部事件反馈与音效（反转光圈/失重残影/落面尘土/陷阱红闪/双锚点基座）、矿井工业氛围层。\n- N04 输入范围：键盘为完整输入方式（A/D/←/→/Space/W/Esc/Enter）；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：§9 F06 冻结音效清单（8 条 one_shot＋1 条环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失；二段跳/蹲滑/抓钩等扩展平台机制与无限地图不在本轮验收分母（原收敛清单口径以此正向承载）。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 `images/generated_ref_01.png` → 尖刺陷阱 image-to-3D 输入与陷阱外观参考。\n- A02 `images/generated_ref_02.png` → 维修工角色 image-to-3D 输入与 T-pose 参考。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（跑动→反转→落面→过陷阱）；定向陷阱仍属移动系统内部规则，无跨系统因果链；双锚点检查点是唯一恢复路径（R1）；AUD10–12 的双锚点/接触面间距/周期冻结是可达性与状态边界修复，不改变难度档\"\n  downgrade_boundary: \"去掉定向陷阱判定表后仍为 S（更简）\"\n  upgrade_boundary: \"若反转状态改变陷阱系统之外的经济/成长系统，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：mine_mechanic, spike_trap, ceiling_hammer, steam_vent, dual_anchor_checkpoint, gravity_core_console。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：4 个；覆盖动作：run, gravity_flip, trap_react, fall_reset。\n- video/audio/mechanic/UI：分别为 3/10/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "fd0f043f7b937e05a92a18d52973d6187cd43f898c9468cccfb3af0e16e72628"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Low resonant gravity-flip hum with a metallic click of the two-state wrench",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G012_sfx_002": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G012_gravity_mine",
+          "task_id": "G012_sfx_002",
+          "asset_name": "weightless_whoosh",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Falling weightless whoosh while airborne between surfaces",
+          "duration_sec": 0.8,
+          "sample_rate": 48000,
+          "seed": 5122,
+          "trigger": "反转后滞空（残影同帧）",
+          "required_by_spec": true,
+          "spec_ref": "F05",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《翻转矿井的重力维修》｜重力反转平台机制输入规范\n\n```yaml\ncase_id: G012\nbase_case_id: G012\ntitle: 翻转矿井的重力维修\ncategory: Platformer / Runner\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1012\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《翻转矿井的重力维修》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 zkx 复核裁决——地面/顶面双检查点锚点与复位语义（AUD10）、三段距离与上下接触面间距、陷阱周期冻结（AUD11）、反转条件与镜头/角色旋转口径（AUD12）；补世界设定、镜头输入、演出反馈、过场视频与正向范围清单）；运行引擎：**Three.js（WebGL）**——选择理由：二态重力的短程物理翻转、上下行走面判定与矿井粒子以 Three.js 场景图＋轻量自研物理实现可控，浏览器即开即玩交付，目标平台桌面浏览器（Chrome/Edge 最新稳定版）；摄像机：2.5D 侧视固定水平（角色旋转、镜头不旋转）；输入：键盘；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：重力反转的公有领域机制可复用；本作全部名称、角色、场景、文案与美术原创。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的侧视重力反转平台游戏；文档存在不等于玩法完成。fixed_seed=1012 冻结三段陷阱与物资布置序列及相位。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2.5D 侧视重力反转平台，单人单局，3 段垂直矿井。本测例包含的能力：重力二态反转与上下接触面行走、定向陷阱与周期规避、地面/顶面双锚点检查点、坠落计数与判负、终点装置交互、开场/反转事件/结算视频、重力手感演出层。\n- S02 核心循环一句话：观察陷阱周期与重力方向 → 在正确接触面反转 → 落到对侧安全面 → 通过三段抵达终点。\n- S03 流程：开始界面 → 进入矿井（首次进入前播 C01）→ 段1 教学 → 段2 长竖井 → 段3 精密段 → 终点装置交互 → 结算（面板前播 C03）→ 重开或返回。\n- S04 最低完整流程：开始界面、可操作矿井、结算界面、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：坠落回最近检查点对应锚点继续（计数保留）；第 6 次坠落判负；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成\n  - state_change：进入「标题」状态；首次开始时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「段1」\n  - outcome：无跨局状态写入\n- S07 段1（教学 40 米）\n  - input：A/D 或 ←/→＝移动、Space/W＝重力反转、Esc＝暂停（触发方：玩家）；陷阱周期由 seed 相位驱动（触发方：系统）\n  - precondition：处于段1 状态\n  - state_change：按 §6 M01–M03 结算每次输入；重力方向、朝向、坠落计数实时更新\n  - feedback：按 §9 F05（反转光圈、落面尘土、陷阱红闪）\n  - next_actions：通过段1 →「段2」；坠落 → M03 复位；第 6 次坠落 →「失败结算」\n  - outcome：按 §7 V01/V02 判定\n- S08 段2（长竖井 60 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段1 已通过\n  - state_change：长竖井内定向陷阱迫使按重力方向选择反转时机；检查点锚点按 AUD10 双面记录\n  - feedback：同 S07\n  - next_actions：通过段2 →「段3」\n  - outcome：局内状态演进\n- S09 段3（精密 50 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段2 已通过\n  - state_change：蒸汽组（两态生效）加入精密规避；通过后抵达终点装置\n  - feedback：同 S07\n  - next_actions：终点装置交互完成 →「胜利结算」\n  - outcome：按 §7 V01 判定\n- S10 结算\n  - input：Enter=重开 / Esc=返回（触发方：玩家）\n  - precondition：V01 或 V02 成立\n  - state_change：进入对应结算；面板出现前按 §10 C03 播放结算视频（每局一次，胜负共用双意象）\n  - feedback：胜利面板显示用时与坠落次数；失败面板注明「坠落超限」\n  - next_actions：重开（全量重置）或返回标题\n  - outcome：无跨局状态写入\n- S11 暂停\n  - input：Esc（触发方：玩家）；窗口失焦自动触发（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，移动、重力、陷阱周期与计时全部冻结\n  - feedback：暂停面板（继续/重开/返回/设置）\n  - next_actions：恢复回到游玩\n  - outcome：恢复后状态逐字段一致\n\n## 3. 数值口径与全局规则 [G01–G06]\n\n- G01 统一刻度：米制；时间用游戏模拟秒（暂停冻结）；坠落计数为非负整数。\n- G02 数值（本包冻结值）：跑速 4.0 米/秒；反转后重力加速度 12 米/秒²；无跳跃键——反转即唯一腾空手段；反转键冷却 0.5 秒且滞空中不可再按（仅接触合法支撑面且冷却到期可反转，AUD12）；检查点 3 个（每段起点）；坠落次数上限 5 次（第 6 次判负）。\n- G03 状态转移 oracle：初始「正常重力·立于地面」，输入序列〔跑动 2 秒 → 按反转 → 滞空 → 落到顶部〕必然产生事件流 `flip(dir: normal→inverted)`、`airborne_enter`、`land(surface=ceiling, orientation=inverted)`、角色行走朝向翻转；任何偏离即 FAIL。\n- G04 关卡与接触面（zkx 裁决冻结）：三段推进距离 40/60/50 米；上下接触面间距 **6 米**（上下两面均为可行走接触面）；三段结构与陷阱布置由 seed=1012 冻结并导出相位。\n- G05 陷阱周期（zkx 裁决冻结）：压锤 4 秒周期＝前 3 秒收起、后 1 秒危险；蒸汽 3 秒周期＝前 2 秒关闭、后 1 秒喷射；尖刺常驻；生效重力态按 M02 判定表；相位由 seed 固定并随 layout_manifest 导出。\n- G06 暂停与复位裁决：Esc 冻结移动、重力与陷阱计时；窗口失焦自动暂停。检查点双锚点（AUD10）：每个检查点记录一对安全地面/顶面锚点；坠落复位保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪；锚点不得与陷阱重叠。坠落与终点交互同帧 → 判负优先。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：A/D 或 ←/→＝移动；Space 或 W＝重力反转；Esc＝暂停；Enter＝结算界面重开；终点装置交互由抵达触发（无独立按键）。\n- I02 输入语义边界：冷却中/滞空中按反转无效且无副作用；暂停/结算期间玩法键无效；被拒输入不产生事件。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；同帧互斥动作按 I01 列举顺序取首个。\n- I05 焦点与失焦：点击画布捕获输入焦点；窗口失焦自动暂停。\n- I06 UI 必显状态：当前重力方向（正常/反转）、朝向、坠落计数（0–5）、当前检查点编号、已用时间。\n- I07 输入延迟目标：按键到画面反馈 ≤100 毫秒（P95，≥30 次采样/类别）。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：维修工角色 1（按 A02 参考图）；三类陷阱若干（尖刺组 A、压锤组 B、蒸汽喷口组 C）；检查点基座 3（地面/顶面同网格实例，共 6 个锚点）；终点维修装置 1；矿井背景装饰为表现层。\n- L02 场地（代码块冻结口径）：\n\n```text\n1 座矿井 × 3 段垂直区（米制，沿推进方向）：\n  段1 教学 40m；段2 长竖井 60m；段3 精密 50m\n上下接触面间距 6m，两面均为可行走接触面\n检查点：每段起点 1 个（双锚点：地面/顶面各一，锚点不与陷阱重叠）\n陷阱与物资布置、周期相位由 seed=1012 冻结并导出\n```\n\n- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（陷阱、检查点、终点装置）逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的装饰造型、配色、粒子参数与音色为生成自由度，不得评估为缺失；按 zkx 裁决交付 layout_manifest.json（实例 ID、坐标、碰撞体、通行关系、陷阱相位表、seed 与 hash；同版本同 seed 重开 diff=0；装饰 scene.glb 不替代数值关卡与碰撞体）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 重力切换与接触面（主机制）\n  - input：反转键（触发方：玩家）\n  - precondition：接触合法支撑面（地面或顶面）且 0.5 秒冷却已到期（AUD12）\n  - state_change：重力方向二态翻转 → 离地滞空（重力加速度 12 m/s²）→ 落到原「对侧」接触面并更新行走朝向（角色在 0.2 秒内旋转朝向，镜头保持水平，AUD12）\n  - observable：重力向量状态、朝向事件、落点事件（见 G03 oracle）\n  - invalid_case：滞空中或冷却中按反转 → 拒绝且无副作用\n  - recovery：坠落走 M03 复位\n- M02 定向陷阱\n  - input：接触判定（触发方：系统）\n  - precondition：处于游玩状态且陷阱相位按 G05 周期运行\n  - state_change：按判定表（本包冻结值）——尖刺组 A 仅对「正常重力·立地面」生效；顶部压锤组 B 仅对「反转重力·立顶面」生效（危险窗为 4 秒周期的后 1 秒）；侧向蒸汽组 C 两态均生效（仅段3，喷射窗为 3 秒周期的后 1 秒）；错误状态接触陷阱造成坠落（计 M03）\n  - observable：陷阱命中事件含重力方向与陷阱类型字段、周期相位时间戳\n  - invalid_case：收起/关闭相位接触不造成坠落\n  - recovery：坠落后回检查点锚点复位\n- M03 坠落复位\n  - input：掉出安全区或陷阱命中（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：回最近检查点对应重力方向的锚点（保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪，AUD10）、坠落计数 +1；第 6 次判负结算\n  - observable：reset 事件（含检查点 ID 与锚点面）、fall_count 流水\n  - invalid_case：结算后坠落不再触发复位\n  - recovery：判负走 V02；结算界面重开为最终出路\n- M04 胜负与重开\n  - input：终点装置交互完成 / 第 6 次坠落 / 结算界面（触发方：系统判定/玩家）\n  - precondition：处于游玩状态或结算状态\n  - state_change：终点交互完成 → 胜利结算（显示用时与坠落次数）；第 6 次坠落 → 失败结算（注明原因）；结算后玩法冻结；同帧裁决按 G06（判负优先）\n  - observable：win / lose(reason) 事件与结算面板\n  - invalid_case：结算后再触发判定被拒绝（每局一次）\n  - recovery：重开=全量重置（重力回正常、计数清零、相位按 seed 复现）\n\n## 7. 成功、失败与恢复 [V01–V06]\n\n- V01 成功条件：按序通过三段并完成终点装置交互 → 结算（显示用时与坠落次数）。\n- V02 失败条件：坠落计数达 6 次（超上限 5）→ 判负结算（注明「坠落超限」）；与终点同帧按 G06 判负优先。\n- V03 恢复语义：单次坠落回最近检查点对应重力方向锚点继续（计数保留、重力方向保留）；判负后一键重开。\n- V04 persistent_state：无（重开全量清空；检查点仅记录双锚点位置）。\n- V05 persistent_state 生命周期：动作级即时结算；局内状态（计数/时间）局内保留、重开清空；无跨局保留。\n- V06 软锁与不可达处理：不设永久软锁——陷阱周期与双锚点保证任一重力方向均有复位出路；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：矿井里的反向救援——深井中央的主重力核失控，矿道上下两面翻转不定，矿井濒临坍缩。\n- W02 场景所在地：一座三段垂直矿井（教学巷道 40 米、长竖井 60 米、精密检修段 50 米），上下两面均可行走，尽头是失稳的主重力核终点装置。\n- W03 玩家身份与当前任务动机：玩家是重力维修工，携带着反转扳手下井；动机是在矿道彻底坍缩前重启主重力核，让矿井恢复秩序。\n- W04 失败代价与结局表达：失败=第六次坠落，维修工被矿井引力乱流卷回井口（C03 失败意象）；胜利=主重力核重启、矿井灯光逐层亮起（C03 胜利意象）。\n- W05 叙事来源：重力反转=维修扳手的二态扳动（唯一腾空手段）；定向陷阱=失控引力对不同接触面的定向反噬（尖刺咬地面、压锤咬顶面、蒸汽两态皆险）；双锚点检查点=维修工安装的双面安全栓。全部原创。\n- W06 视觉风格与色彩材质：深矿井工业风＋暖色灯光点缀；主色=岩黑 #2B2F36、铜金 #C9A876、危险红 #C43B2F、重力青 #4FC3C9、灯暖橙 #E8A25C；材质为湿岩、锈铁、蒸汽铜管。\n- W07 环境氛围与声音语言：矿井低鸣与滴水为底；音效语言为「重力反转嗡鸣+金属陷阱+落面闷响」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代下井与失控主核 → 反转事件视频（C02）承载重力机制的过程叙事 → 结算视频（C03）收束；叙事提示不阻断控制、不改变数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：2.5D 侧视固定水平镜头（不随重力旋转）；前视安全区 ≥ 屏宽 30%；镜头仅位移不旋转；镜头重置仅在明确切场/复位时。\n- F02 关键操作镜头变化：反转瞬间镜头不旋转（仅角色 0.2 秒旋转朝向，AUD12）；落面短促下沉 0.05 秒；陷阱命中 0.08 秒轻微抖动（≤ 画面高度 1.5%）。设置提供「镜头震动开/关」与「减少动态效果」。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：矿井雾尘粒子、顶部吊灯摇晃、蒸汽管余热微光、滴水。纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 重力反转 | 角色离地＋0.2s 旋转朝向＋青色重力光圈扩散 | 重力反转嗡鸣 | 落面即停 |\n| 滞空失重 | 角色残影拖尾＋尘屑上扬 | 失重风切音 | 落面即停 |\n| 落面 | 落面尘土＋短促下沉 0.05s | 落面闷响 | 0.1s 结束 |\n| 陷阱命中 | 全屏红闪＋0.08s 镜头抖动 | 陷阱命中锐响 | 闪红 0.1s 结束 |\n| 坠落复位 | 角色淡入对应锚点＋检查点基座点亮 | 坠落复位音 | 玩家可控即停 |\n| 检查点激活 | 基座灯环亮起 | 检查点音 | 常亮 |\n| 压锤危险窗 | 压锤下落阴影预警 | 压锤机械预警音 | 危险窗结束 |\n| 蒸汽喷射 | 蒸汽喷射柱 | 蒸汽喷射音 | 喷射窗结束 |\n| 终点装置重启 | 装置点亮＋矿井灯光逐层亮起 | 胜利上扬音 | 进入结算 |\n| 判负 | 画面降饱和 | 低沉失败音 | 进入结算 |\n\n- F06 关键音效清单（one_shot 8 条，全部冻结需求）：重力反转嗡鸣、失重风切、落面闷响、陷阱命中锐响、坠落复位音、压锤机械预警音、蒸汽喷射音、胜利/失败结算音（胜利上扬/失败低沉各一）。混音优先级：陷阱与压锤/蒸汽预警 ＞ 反转/落面 ＞ 其余；环境循环：矿井低鸣（常驻，暂停静音、结算淡出 0.5 秒，接缝无爆音；恒低于预警音）。无配音需求。震动事件到调度日志 ≤50ms（含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available），无硬件时验证调度与禁用行为。\n- F07 VFX 信息性与遮挡约束：双锚点检查点基座与陷阱危险相位为信息类 VFX，必须清晰可辨（压锤收起/危险、蒸汽关闭/喷射可辨）；反转光圈不遮挡陷阱轮廓与 HUD；闪红 ≤0.1 秒不遮挡后续判定输入；隐藏状态（陷阱下一相位）不得被特效泄露。\n- F08 音画同步：反转嗡鸣与光圈同帧；落面闷响与尘土同帧；预警音与危险窗起始同帧。\n- F09 屏幕震动：仅陷阱命中 0.08 秒轻微抖动；暂停/结算/重开取消未结束的震动与特效；设置可关闭（关闭不影响判定与数值）。\n- F10 前端界面：标题（开始/设置/退出）→ 矿井 HUD（I06 全项）→ 结算面板（用时/坠落次数/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）；关键状态图标+文字并用（重力方向、坠落计数）；窗口失焦自动暂停；叙事节拍提示不阻断控制。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 深井下井（Opening，5 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入矿井之前，每局一次\n  - 内容与角色场景：矿井升降笼载着维修工沉入井道，头顶吊灯摇晃；镜头掠过上下双接触面，尽头失稳的主重力核泛着乱流红光\n  - 资产对应：维修工、矿井巷道与游戏内模型/贴图同源设计\n  - 可跳过：Enter/Space 或跳过按钮 → 直接进入段1；自然播完 → 进入段1\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 第一次翻转（Event，5 秒，1280×720@24fps）\n  - 触发时机：每局首次成功反转并落到顶面（G03 oracle 的首次 land(surface=ceiling)）时，每局一次\n  - 内容与角色场景：维修工扳动反转扳手，青色重力光圈荡开，镜头保持水平而角色旋转——上方变成脚下，顶面巷道在视野中展开\n  - 资产对应：维修工、顶面接触面与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接继续游玩（重力状态保持反转）；自然播完 → 继续游玩\n  - 状态一致：播放期间重力、移动与陷阱计时冻结，播放结束瞬间按冻结前状态恢复\n- C03 重力核重启（Ending，6 秒，1280×720@24fps，胜负共用双意象）\n  - 触发时机：V01 或 V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象=主重力核重启、矿井灯光逐层亮起、维修工收起扳手；失败意象=引力乱流卷起尘土、维修工被吊回井口、灯光逐层熄灭\n  - 资产对应：维修工、终点装置、矿井与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以在上下接触面间反转重力（M01）、按周期规避三类定向陷阱（M02）、坠落后从双锚点检查点复位续跑（M03），并重启终点装置获胜（V01）。\n- N02 流程与界面能力：标题、三段矿井、胜利/失败结算（区分原因）、暂停（含失焦自动暂停）、设置（震动/减少动态效果开关）、一键重开。\n- N03 演出能力：C01–C03 视频、F04–F09 全部事件反馈与音效（反转光圈/失重残影/落面尘土/陷阱红闪/双锚点基座）、矿井工业氛围层。\n- N04 输入范围：键盘为完整输入方式（A/D/←/→/Space/W/Esc/Enter）；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：§9 F06 冻结音效清单（8 条 one_shot＋1 条环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失；二段跳/蹲滑/抓钩等扩展平台机制与无限地图不在本轮验收分母（原收敛清单口径以此正向承载）。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 `images/generated_ref_01.png` → 尖刺陷阱 image-to-3D 输入与陷阱外观参考。\n- A02 `images/generated_ref_02.png` → 维修工角色 image-to-3D 输入与 T-pose 参考。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（跑动→反转→落面→过陷阱）；定向陷阱仍属移动系统内部规则，无跨系统因果链；双锚点检查点是唯一恢复路径（R1）；AUD10–12 的双锚点/接触面间距/周期冻结是可达性与状态边界修复，不改变难度档\"\n  downgrade_boundary: \"去掉定向陷阱判定表后仍为 S（更简）\"\n  upgrade_boundary: \"若反转状态改变陷阱系统之外的经济/成长系统，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：mine_mechanic, spike_trap, ceiling_hammer, steam_vent, dual_anchor_checkpoint, gravity_core_console。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：4 个；覆盖动作：run, gravity_flip, trap_react, fall_reset。\n- video/audio/mechanic/UI：分别为 3/10/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "fd0f043f7b937e05a92a18d52973d6187cd43f898c9468cccfb3af0e16e72628"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Falling weightless whoosh while airborne between surfaces",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G012_sfx_003": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G012_gravity_mine",
+          "task_id": "G012_sfx_003",
+          "asset_name": "land_thud",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Heavy landing thud with dust puff tail on either surface",
+          "duration_sec": 0.5,
+          "sample_rate": 48000,
+          "seed": 5123,
+          "trigger": "落面（尘土同帧）",
+          "required_by_spec": true,
+          "spec_ref": "F05",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《翻转矿井的重力维修》｜重力反转平台机制输入规范\n\n```yaml\ncase_id: G012\nbase_case_id: G012\ntitle: 翻转矿井的重力维修\ncategory: Platformer / Runner\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1012\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《翻转矿井的重力维修》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 zkx 复核裁决——地面/顶面双检查点锚点与复位语义（AUD10）、三段距离与上下接触面间距、陷阱周期冻结（AUD11）、反转条件与镜头/角色旋转口径（AUD12）；补世界设定、镜头输入、演出反馈、过场视频与正向范围清单）；运行引擎：**Three.js（WebGL）**——选择理由：二态重力的短程物理翻转、上下行走面判定与矿井粒子以 Three.js 场景图＋轻量自研物理实现可控，浏览器即开即玩交付，目标平台桌面浏览器（Chrome/Edge 最新稳定版）；摄像机：2.5D 侧视固定水平（角色旋转、镜头不旋转）；输入：键盘；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：重力反转的公有领域机制可复用；本作全部名称、角色、场景、文案与美术原创。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的侧视重力反转平台游戏；文档存在不等于玩法完成。fixed_seed=1012 冻结三段陷阱与物资布置序列及相位。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2.5D 侧视重力反转平台，单人单局，3 段垂直矿井。本测例包含的能力：重力二态反转与上下接触面行走、定向陷阱与周期规避、地面/顶面双锚点检查点、坠落计数与判负、终点装置交互、开场/反转事件/结算视频、重力手感演出层。\n- S02 核心循环一句话：观察陷阱周期与重力方向 → 在正确接触面反转 → 落到对侧安全面 → 通过三段抵达终点。\n- S03 流程：开始界面 → 进入矿井（首次进入前播 C01）→ 段1 教学 → 段2 长竖井 → 段3 精密段 → 终点装置交互 → 结算（面板前播 C03）→ 重开或返回。\n- S04 最低完整流程：开始界面、可操作矿井、结算界面、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：坠落回最近检查点对应锚点继续（计数保留）；第 6 次坠落判负；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成\n  - state_change：进入「标题」状态；首次开始时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「段1」\n  - outcome：无跨局状态写入\n- S07 段1（教学 40 米）\n  - input：A/D 或 ←/→＝移动、Space/W＝重力反转、Esc＝暂停（触发方：玩家）；陷阱周期由 seed 相位驱动（触发方：系统）\n  - precondition：处于段1 状态\n  - state_change：按 §6 M01–M03 结算每次输入；重力方向、朝向、坠落计数实时更新\n  - feedback：按 §9 F05（反转光圈、落面尘土、陷阱红闪）\n  - next_actions：通过段1 →「段2」；坠落 → M03 复位；第 6 次坠落 →「失败结算」\n  - outcome：按 §7 V01/V02 判定\n- S08 段2（长竖井 60 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段1 已通过\n  - state_change：长竖井内定向陷阱迫使按重力方向选择反转时机；检查点锚点按 AUD10 双面记录\n  - feedback：同 S07\n  - next_actions：通过段2 →「段3」\n  - outcome：局内状态演进\n- S09 段3（精密 50 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段2 已通过\n  - state_change：蒸汽组（两态生效）加入精密规避；通过后抵达终点装置\n  - feedback：同 S07\n  - next_actions：终点装置交互完成 →「胜利结算」\n  - outcome：按 §7 V01 判定\n- S10 结算\n  - input：Enter=重开 / Esc=返回（触发方：玩家）\n  - precondition：V01 或 V02 成立\n  - state_change：进入对应结算；面板出现前按 §10 C03 播放结算视频（每局一次，胜负共用双意象）\n  - feedback：胜利面板显示用时与坠落次数；失败面板注明「坠落超限」\n  - next_actions：重开（全量重置）或返回标题\n  - outcome：无跨局状态写入\n- S11 暂停\n  - input：Esc（触发方：玩家）；窗口失焦自动触发（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，移动、重力、陷阱周期与计时全部冻结\n  - feedback：暂停面板（继续/重开/返回/设置）\n  - next_actions：恢复回到游玩\n  - outcome：恢复后状态逐字段一致\n\n## 3. 数值口径与全局规则 [G01–G06]\n\n- G01 统一刻度：米制；时间用游戏模拟秒（暂停冻结）；坠落计数为非负整数。\n- G02 数值（本包冻结值）：跑速 4.0 米/秒；反转后重力加速度 12 米/秒²；无跳跃键——反转即唯一腾空手段；反转键冷却 0.5 秒且滞空中不可再按（仅接触合法支撑面且冷却到期可反转，AUD12）；检查点 3 个（每段起点）；坠落次数上限 5 次（第 6 次判负）。\n- G03 状态转移 oracle：初始「正常重力·立于地面」，输入序列〔跑动 2 秒 → 按反转 → 滞空 → 落到顶部〕必然产生事件流 `flip(dir: normal→inverted)`、`airborne_enter`、`land(surface=ceiling, orientation=inverted)`、角色行走朝向翻转；任何偏离即 FAIL。\n- G04 关卡与接触面（zkx 裁决冻结）：三段推进距离 40/60/50 米；上下接触面间距 **6 米**（上下两面均为可行走接触面）；三段结构与陷阱布置由 seed=1012 冻结并导出相位。\n- G05 陷阱周期（zkx 裁决冻结）：压锤 4 秒周期＝前 3 秒收起、后 1 秒危险；蒸汽 3 秒周期＝前 2 秒关闭、后 1 秒喷射；尖刺常驻；生效重力态按 M02 判定表；相位由 seed 固定并随 layout_manifest 导出。\n- G06 暂停与复位裁决：Esc 冻结移动、重力与陷阱计时；窗口失焦自动暂停。检查点双锚点（AUD10）：每个检查点记录一对安全地面/顶面锚点；坠落复位保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪；锚点不得与陷阱重叠。坠落与终点交互同帧 → 判负优先。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：A/D 或 ←/→＝移动；Space 或 W＝重力反转；Esc＝暂停；Enter＝结算界面重开；终点装置交互由抵达触发（无独立按键）。\n- I02 输入语义边界：冷却中/滞空中按反转无效且无副作用；暂停/结算期间玩法键无效；被拒输入不产生事件。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；同帧互斥动作按 I01 列举顺序取首个。\n- I05 焦点与失焦：点击画布捕获输入焦点；窗口失焦自动暂停。\n- I06 UI 必显状态：当前重力方向（正常/反转）、朝向、坠落计数（0–5）、当前检查点编号、已用时间。\n- I07 输入延迟目标：按键到画面反馈 ≤100 毫秒（P95，≥30 次采样/类别）。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：维修工角色 1（按 A02 参考图）；三类陷阱若干（尖刺组 A、压锤组 B、蒸汽喷口组 C）；检查点基座 3（地面/顶面同网格实例，共 6 个锚点）；终点维修装置 1；矿井背景装饰为表现层。\n- L02 场地（代码块冻结口径）：\n\n```text\n1 座矿井 × 3 段垂直区（米制，沿推进方向）：\n  段1 教学 40m；段2 长竖井 60m；段3 精密 50m\n上下接触面间距 6m，两面均为可行走接触面\n检查点：每段起点 1 个（双锚点：地面/顶面各一，锚点不与陷阱重叠）\n陷阱与物资布置、周期相位由 seed=1012 冻结并导出\n```\n\n- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（陷阱、检查点、终点装置）逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的装饰造型、配色、粒子参数与音色为生成自由度，不得评估为缺失；按 zkx 裁决交付 layout_manifest.json（实例 ID、坐标、碰撞体、通行关系、陷阱相位表、seed 与 hash；同版本同 seed 重开 diff=0；装饰 scene.glb 不替代数值关卡与碰撞体）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 重力切换与接触面（主机制）\n  - input：反转键（触发方：玩家）\n  - precondition：接触合法支撑面（地面或顶面）且 0.5 秒冷却已到期（AUD12）\n  - state_change：重力方向二态翻转 → 离地滞空（重力加速度 12 m/s²）→ 落到原「对侧」接触面并更新行走朝向（角色在 0.2 秒内旋转朝向，镜头保持水平，AUD12）\n  - observable：重力向量状态、朝向事件、落点事件（见 G03 oracle）\n  - invalid_case：滞空中或冷却中按反转 → 拒绝且无副作用\n  - recovery：坠落走 M03 复位\n- M02 定向陷阱\n  - input：接触判定（触发方：系统）\n  - precondition：处于游玩状态且陷阱相位按 G05 周期运行\n  - state_change：按判定表（本包冻结值）——尖刺组 A 仅对「正常重力·立地面」生效；顶部压锤组 B 仅对「反转重力·立顶面」生效（危险窗为 4 秒周期的后 1 秒）；侧向蒸汽组 C 两态均生效（仅段3，喷射窗为 3 秒周期的后 1 秒）；错误状态接触陷阱造成坠落（计 M03）\n  - observable：陷阱命中事件含重力方向与陷阱类型字段、周期相位时间戳\n  - invalid_case：收起/关闭相位接触不造成坠落\n  - recovery：坠落后回检查点锚点复位\n- M03 坠落复位\n  - input：掉出安全区或陷阱命中（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：回最近检查点对应重力方向的锚点（保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪，AUD10）、坠落计数 +1；第 6 次判负结算\n  - observable：reset 事件（含检查点 ID 与锚点面）、fall_count 流水\n  - invalid_case：结算后坠落不再触发复位\n  - recovery：判负走 V02；结算界面重开为最终出路\n- M04 胜负与重开\n  - input：终点装置交互完成 / 第 6 次坠落 / 结算界面（触发方：系统判定/玩家）\n  - precondition：处于游玩状态或结算状态\n  - state_change：终点交互完成 → 胜利结算（显示用时与坠落次数）；第 6 次坠落 → 失败结算（注明原因）；结算后玩法冻结；同帧裁决按 G06（判负优先）\n  - observable：win / lose(reason) 事件与结算面板\n  - invalid_case：结算后再触发判定被拒绝（每局一次）\n  - recovery：重开=全量重置（重力回正常、计数清零、相位按 seed 复现）\n\n## 7. 成功、失败与恢复 [V01–V06]\n\n- V01 成功条件：按序通过三段并完成终点装置交互 → 结算（显示用时与坠落次数）。\n- V02 失败条件：坠落计数达 6 次（超上限 5）→ 判负结算（注明「坠落超限」）；与终点同帧按 G06 判负优先。\n- V03 恢复语义：单次坠落回最近检查点对应重力方向锚点继续（计数保留、重力方向保留）；判负后一键重开。\n- V04 persistent_state：无（重开全量清空；检查点仅记录双锚点位置）。\n- V05 persistent_state 生命周期：动作级即时结算；局内状态（计数/时间）局内保留、重开清空；无跨局保留。\n- V06 软锁与不可达处理：不设永久软锁——陷阱周期与双锚点保证任一重力方向均有复位出路；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：矿井里的反向救援——深井中央的主重力核失控，矿道上下两面翻转不定，矿井濒临坍缩。\n- W02 场景所在地：一座三段垂直矿井（教学巷道 40 米、长竖井 60 米、精密检修段 50 米），上下两面均可行走，尽头是失稳的主重力核终点装置。\n- W03 玩家身份与当前任务动机：玩家是重力维修工，携带着反转扳手下井；动机是在矿道彻底坍缩前重启主重力核，让矿井恢复秩序。\n- W04 失败代价与结局表达：失败=第六次坠落，维修工被矿井引力乱流卷回井口（C03 失败意象）；胜利=主重力核重启、矿井灯光逐层亮起（C03 胜利意象）。\n- W05 叙事来源：重力反转=维修扳手的二态扳动（唯一腾空手段）；定向陷阱=失控引力对不同接触面的定向反噬（尖刺咬地面、压锤咬顶面、蒸汽两态皆险）；双锚点检查点=维修工安装的双面安全栓。全部原创。\n- W06 视觉风格与色彩材质：深矿井工业风＋暖色灯光点缀；主色=岩黑 #2B2F36、铜金 #C9A876、危险红 #C43B2F、重力青 #4FC3C9、灯暖橙 #E8A25C；材质为湿岩、锈铁、蒸汽铜管。\n- W07 环境氛围与声音语言：矿井低鸣与滴水为底；音效语言为「重力反转嗡鸣+金属陷阱+落面闷响」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代下井与失控主核 → 反转事件视频（C02）承载重力机制的过程叙事 → 结算视频（C03）收束；叙事提示不阻断控制、不改变数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：2.5D 侧视固定水平镜头（不随重力旋转）；前视安全区 ≥ 屏宽 30%；镜头仅位移不旋转；镜头重置仅在明确切场/复位时。\n- F02 关键操作镜头变化：反转瞬间镜头不旋转（仅角色 0.2 秒旋转朝向，AUD12）；落面短促下沉 0.05 秒；陷阱命中 0.08 秒轻微抖动（≤ 画面高度 1.5%）。设置提供「镜头震动开/关」与「减少动态效果」。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：矿井雾尘粒子、顶部吊灯摇晃、蒸汽管余热微光、滴水。纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 重力反转 | 角色离地＋0.2s 旋转朝向＋青色重力光圈扩散 | 重力反转嗡鸣 | 落面即停 |\n| 滞空失重 | 角色残影拖尾＋尘屑上扬 | 失重风切音 | 落面即停 |\n| 落面 | 落面尘土＋短促下沉 0.05s | 落面闷响 | 0.1s 结束 |\n| 陷阱命中 | 全屏红闪＋0.08s 镜头抖动 | 陷阱命中锐响 | 闪红 0.1s 结束 |\n| 坠落复位 | 角色淡入对应锚点＋检查点基座点亮 | 坠落复位音 | 玩家可控即停 |\n| 检查点激活 | 基座灯环亮起 | 检查点音 | 常亮 |\n| 压锤危险窗 | 压锤下落阴影预警 | 压锤机械预警音 | 危险窗结束 |\n| 蒸汽喷射 | 蒸汽喷射柱 | 蒸汽喷射音 | 喷射窗结束 |\n| 终点装置重启 | 装置点亮＋矿井灯光逐层亮起 | 胜利上扬音 | 进入结算 |\n| 判负 | 画面降饱和 | 低沉失败音 | 进入结算 |\n\n- F06 关键音效清单（one_shot 8 条，全部冻结需求）：重力反转嗡鸣、失重风切、落面闷响、陷阱命中锐响、坠落复位音、压锤机械预警音、蒸汽喷射音、胜利/失败结算音（胜利上扬/失败低沉各一）。混音优先级：陷阱与压锤/蒸汽预警 ＞ 反转/落面 ＞ 其余；环境循环：矿井低鸣（常驻，暂停静音、结算淡出 0.5 秒，接缝无爆音；恒低于预警音）。无配音需求。震动事件到调度日志 ≤50ms（含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available），无硬件时验证调度与禁用行为。\n- F07 VFX 信息性与遮挡约束：双锚点检查点基座与陷阱危险相位为信息类 VFX，必须清晰可辨（压锤收起/危险、蒸汽关闭/喷射可辨）；反转光圈不遮挡陷阱轮廓与 HUD；闪红 ≤0.1 秒不遮挡后续判定输入；隐藏状态（陷阱下一相位）不得被特效泄露。\n- F08 音画同步：反转嗡鸣与光圈同帧；落面闷响与尘土同帧；预警音与危险窗起始同帧。\n- F09 屏幕震动：仅陷阱命中 0.08 秒轻微抖动；暂停/结算/重开取消未结束的震动与特效；设置可关闭（关闭不影响判定与数值）。\n- F10 前端界面：标题（开始/设置/退出）→ 矿井 HUD（I06 全项）→ 结算面板（用时/坠落次数/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）；关键状态图标+文字并用（重力方向、坠落计数）；窗口失焦自动暂停；叙事节拍提示不阻断控制。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 深井下井（Opening，5 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入矿井之前，每局一次\n  - 内容与角色场景：矿井升降笼载着维修工沉入井道，头顶吊灯摇晃；镜头掠过上下双接触面，尽头失稳的主重力核泛着乱流红光\n  - 资产对应：维修工、矿井巷道与游戏内模型/贴图同源设计\n  - 可跳过：Enter/Space 或跳过按钮 → 直接进入段1；自然播完 → 进入段1\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 第一次翻转（Event，5 秒，1280×720@24fps）\n  - 触发时机：每局首次成功反转并落到顶面（G03 oracle 的首次 land(surface=ceiling)）时，每局一次\n  - 内容与角色场景：维修工扳动反转扳手，青色重力光圈荡开，镜头保持水平而角色旋转——上方变成脚下，顶面巷道在视野中展开\n  - 资产对应：维修工、顶面接触面与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接继续游玩（重力状态保持反转）；自然播完 → 继续游玩\n  - 状态一致：播放期间重力、移动与陷阱计时冻结，播放结束瞬间按冻结前状态恢复\n- C03 重力核重启（Ending，6 秒，1280×720@24fps，胜负共用双意象）\n  - 触发时机：V01 或 V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象=主重力核重启、矿井灯光逐层亮起、维修工收起扳手；失败意象=引力乱流卷起尘土、维修工被吊回井口、灯光逐层熄灭\n  - 资产对应：维修工、终点装置、矿井与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以在上下接触面间反转重力（M01）、按周期规避三类定向陷阱（M02）、坠落后从双锚点检查点复位续跑（M03），并重启终点装置获胜（V01）。\n- N02 流程与界面能力：标题、三段矿井、胜利/失败结算（区分原因）、暂停（含失焦自动暂停）、设置（震动/减少动态效果开关）、一键重开。\n- N03 演出能力：C01–C03 视频、F04–F09 全部事件反馈与音效（反转光圈/失重残影/落面尘土/陷阱红闪/双锚点基座）、矿井工业氛围层。\n- N04 输入范围：键盘为完整输入方式（A/D/←/→/Space/W/Esc/Enter）；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：§9 F06 冻结音效清单（8 条 one_shot＋1 条环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失；二段跳/蹲滑/抓钩等扩展平台机制与无限地图不在本轮验收分母（原收敛清单口径以此正向承载）。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 `images/generated_ref_01.png` → 尖刺陷阱 image-to-3D 输入与陷阱外观参考。\n- A02 `images/generated_ref_02.png` → 维修工角色 image-to-3D 输入与 T-pose 参考。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（跑动→反转→落面→过陷阱）；定向陷阱仍属移动系统内部规则，无跨系统因果链；双锚点检查点是唯一恢复路径（R1）；AUD10–12 的双锚点/接触面间距/周期冻结是可达性与状态边界修复，不改变难度档\"\n  downgrade_boundary: \"去掉定向陷阱判定表后仍为 S（更简）\"\n  upgrade_boundary: \"若反转状态改变陷阱系统之外的经济/成长系统，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：mine_mechanic, spike_trap, ceiling_hammer, steam_vent, dual_anchor_checkpoint, gravity_core_console。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：4 个；覆盖动作：run, gravity_flip, trap_react, fall_reset。\n- video/audio/mechanic/UI：分别为 3/10/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "fd0f043f7b937e05a92a18d52973d6187cd43f898c9468cccfb3af0e16e72628"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Heavy landing thud with dust puff tail on either surface",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G012_sfx_004": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G012_gravity_mine",
+          "task_id": "G012_sfx_004",
+          "asset_name": "trap_hit_shriek",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Sharp metallic trap-hit shriek, hazard contact",
+          "duration_sec": 0.5,
+          "sample_rate": 48000,
+          "seed": 5124,
+          "trigger": "陷阱命中（红闪同帧）",
+          "required_by_spec": true,
+          "spec_ref": "F05",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《翻转矿井的重力维修》｜重力反转平台机制输入规范\n\n```yaml\ncase_id: G012\nbase_case_id: G012\ntitle: 翻转矿井的重力维修\ncategory: Platformer / Runner\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1012\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《翻转矿井的重力维修》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 zkx 复核裁决——地面/顶面双检查点锚点与复位语义（AUD10）、三段距离与上下接触面间距、陷阱周期冻结（AUD11）、反转条件与镜头/角色旋转口径（AUD12）；补世界设定、镜头输入、演出反馈、过场视频与正向范围清单）；运行引擎：**Three.js（WebGL）**——选择理由：二态重力的短程物理翻转、上下行走面判定与矿井粒子以 Three.js 场景图＋轻量自研物理实现可控，浏览器即开即玩交付，目标平台桌面浏览器（Chrome/Edge 最新稳定版）；摄像机：2.5D 侧视固定水平（角色旋转、镜头不旋转）；输入：键盘；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：重力反转的公有领域机制可复用；本作全部名称、角色、场景、文案与美术原创。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的侧视重力反转平台游戏；文档存在不等于玩法完成。fixed_seed=1012 冻结三段陷阱与物资布置序列及相位。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2.5D 侧视重力反转平台，单人单局，3 段垂直矿井。本测例包含的能力：重力二态反转与上下接触面行走、定向陷阱与周期规避、地面/顶面双锚点检查点、坠落计数与判负、终点装置交互、开场/反转事件/结算视频、重力手感演出层。\n- S02 核心循环一句话：观察陷阱周期与重力方向 → 在正确接触面反转 → 落到对侧安全面 → 通过三段抵达终点。\n- S03 流程：开始界面 → 进入矿井（首次进入前播 C01）→ 段1 教学 → 段2 长竖井 → 段3 精密段 → 终点装置交互 → 结算（面板前播 C03）→ 重开或返回。\n- S04 最低完整流程：开始界面、可操作矿井、结算界面、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：坠落回最近检查点对应锚点继续（计数保留）；第 6 次坠落判负；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成\n  - state_change：进入「标题」状态；首次开始时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「段1」\n  - outcome：无跨局状态写入\n- S07 段1（教学 40 米）\n  - input：A/D 或 ←/→＝移动、Space/W＝重力反转、Esc＝暂停（触发方：玩家）；陷阱周期由 seed 相位驱动（触发方：系统）\n  - precondition：处于段1 状态\n  - state_change：按 §6 M01–M03 结算每次输入；重力方向、朝向、坠落计数实时更新\n  - feedback：按 §9 F05（反转光圈、落面尘土、陷阱红闪）\n  - next_actions：通过段1 →「段2」；坠落 → M03 复位；第 6 次坠落 →「失败结算」\n  - outcome：按 §7 V01/V02 判定\n- S08 段2（长竖井 60 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段1 已通过\n  - state_change：长竖井内定向陷阱迫使按重力方向选择反转时机；检查点锚点按 AUD10 双面记录\n  - feedback：同 S07\n  - next_actions：通过段2 →「段3」\n  - outcome：局内状态演进\n- S09 段3（精密 50 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段2 已通过\n  - state_change：蒸汽组（两态生效）加入精密规避；通过后抵达终点装置\n  - feedback：同 S07\n  - next_actions：终点装置交互完成 →「胜利结算」\n  - outcome：按 §7 V01 判定\n- S10 结算\n  - input：Enter=重开 / Esc=返回（触发方：玩家）\n  - precondition：V01 或 V02 成立\n  - state_change：进入对应结算；面板出现前按 §10 C03 播放结算视频（每局一次，胜负共用双意象）\n  - feedback：胜利面板显示用时与坠落次数；失败面板注明「坠落超限」\n  - next_actions：重开（全量重置）或返回标题\n  - outcome：无跨局状态写入\n- S11 暂停\n  - input：Esc（触发方：玩家）；窗口失焦自动触发（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，移动、重力、陷阱周期与计时全部冻结\n  - feedback：暂停面板（继续/重开/返回/设置）\n  - next_actions：恢复回到游玩\n  - outcome：恢复后状态逐字段一致\n\n## 3. 数值口径与全局规则 [G01–G06]\n\n- G01 统一刻度：米制；时间用游戏模拟秒（暂停冻结）；坠落计数为非负整数。\n- G02 数值（本包冻结值）：跑速 4.0 米/秒；反转后重力加速度 12 米/秒²；无跳跃键——反转即唯一腾空手段；反转键冷却 0.5 秒且滞空中不可再按（仅接触合法支撑面且冷却到期可反转，AUD12）；检查点 3 个（每段起点）；坠落次数上限 5 次（第 6 次判负）。\n- G03 状态转移 oracle：初始「正常重力·立于地面」，输入序列〔跑动 2 秒 → 按反转 → 滞空 → 落到顶部〕必然产生事件流 `flip(dir: normal→inverted)`、`airborne_enter`、`land(surface=ceiling, orientation=inverted)`、角色行走朝向翻转；任何偏离即 FAIL。\n- G04 关卡与接触面（zkx 裁决冻结）：三段推进距离 40/60/50 米；上下接触面间距 **6 米**（上下两面均为可行走接触面）；三段结构与陷阱布置由 seed=1012 冻结并导出相位。\n- G05 陷阱周期（zkx 裁决冻结）：压锤 4 秒周期＝前 3 秒收起、后 1 秒危险；蒸汽 3 秒周期＝前 2 秒关闭、后 1 秒喷射；尖刺常驻；生效重力态按 M02 判定表；相位由 seed 固定并随 layout_manifest 导出。\n- G06 暂停与复位裁决：Esc 冻结移动、重力与陷阱计时；窗口失焦自动暂停。检查点双锚点（AUD10）：每个检查点记录一对安全地面/顶面锚点；坠落复位保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪；锚点不得与陷阱重叠。坠落与终点交互同帧 → 判负优先。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：A/D 或 ←/→＝移动；Space 或 W＝重力反转；Esc＝暂停；Enter＝结算界面重开；终点装置交互由抵达触发（无独立按键）。\n- I02 输入语义边界：冷却中/滞空中按反转无效且无副作用；暂停/结算期间玩法键无效；被拒输入不产生事件。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；同帧互斥动作按 I01 列举顺序取首个。\n- I05 焦点与失焦：点击画布捕获输入焦点；窗口失焦自动暂停。\n- I06 UI 必显状态：当前重力方向（正常/反转）、朝向、坠落计数（0–5）、当前检查点编号、已用时间。\n- I07 输入延迟目标：按键到画面反馈 ≤100 毫秒（P95，≥30 次采样/类别）。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：维修工角色 1（按 A02 参考图）；三类陷阱若干（尖刺组 A、压锤组 B、蒸汽喷口组 C）；检查点基座 3（地面/顶面同网格实例，共 6 个锚点）；终点维修装置 1；矿井背景装饰为表现层。\n- L02 场地（代码块冻结口径）：\n\n```text\n1 座矿井 × 3 段垂直区（米制，沿推进方向）：\n  段1 教学 40m；段2 长竖井 60m；段3 精密 50m\n上下接触面间距 6m，两面均为可行走接触面\n检查点：每段起点 1 个（双锚点：地面/顶面各一，锚点不与陷阱重叠）\n陷阱与物资布置、周期相位由 seed=1012 冻结并导出\n```\n\n- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（陷阱、检查点、终点装置）逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的装饰造型、配色、粒子参数与音色为生成自由度，不得评估为缺失；按 zkx 裁决交付 layout_manifest.json（实例 ID、坐标、碰撞体、通行关系、陷阱相位表、seed 与 hash；同版本同 seed 重开 diff=0；装饰 scene.glb 不替代数值关卡与碰撞体）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 重力切换与接触面（主机制）\n  - input：反转键（触发方：玩家）\n  - precondition：接触合法支撑面（地面或顶面）且 0.5 秒冷却已到期（AUD12）\n  - state_change：重力方向二态翻转 → 离地滞空（重力加速度 12 m/s²）→ 落到原「对侧」接触面并更新行走朝向（角色在 0.2 秒内旋转朝向，镜头保持水平，AUD12）\n  - observable：重力向量状态、朝向事件、落点事件（见 G03 oracle）\n  - invalid_case：滞空中或冷却中按反转 → 拒绝且无副作用\n  - recovery：坠落走 M03 复位\n- M02 定向陷阱\n  - input：接触判定（触发方：系统）\n  - precondition：处于游玩状态且陷阱相位按 G05 周期运行\n  - state_change：按判定表（本包冻结值）——尖刺组 A 仅对「正常重力·立地面」生效；顶部压锤组 B 仅对「反转重力·立顶面」生效（危险窗为 4 秒周期的后 1 秒）；侧向蒸汽组 C 两态均生效（仅段3，喷射窗为 3 秒周期的后 1 秒）；错误状态接触陷阱造成坠落（计 M03）\n  - observable：陷阱命中事件含重力方向与陷阱类型字段、周期相位时间戳\n  - invalid_case：收起/关闭相位接触不造成坠落\n  - recovery：坠落后回检查点锚点复位\n- M03 坠落复位\n  - input：掉出安全区或陷阱命中（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：回最近检查点对应重力方向的锚点（保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪，AUD10）、坠落计数 +1；第 6 次判负结算\n  - observable：reset 事件（含检查点 ID 与锚点面）、fall_count 流水\n  - invalid_case：结算后坠落不再触发复位\n  - recovery：判负走 V02；结算界面重开为最终出路\n- M04 胜负与重开\n  - input：终点装置交互完成 / 第 6 次坠落 / 结算界面（触发方：系统判定/玩家）\n  - precondition：处于游玩状态或结算状态\n  - state_change：终点交互完成 → 胜利结算（显示用时与坠落次数）；第 6 次坠落 → 失败结算（注明原因）；结算后玩法冻结；同帧裁决按 G06（判负优先）\n  - observable：win / lose(reason) 事件与结算面板\n  - invalid_case：结算后再触发判定被拒绝（每局一次）\n  - recovery：重开=全量重置（重力回正常、计数清零、相位按 seed 复现）\n\n## 7. 成功、失败与恢复 [V01–V06]\n\n- V01 成功条件：按序通过三段并完成终点装置交互 → 结算（显示用时与坠落次数）。\n- V02 失败条件：坠落计数达 6 次（超上限 5）→ 判负结算（注明「坠落超限」）；与终点同帧按 G06 判负优先。\n- V03 恢复语义：单次坠落回最近检查点对应重力方向锚点继续（计数保留、重力方向保留）；判负后一键重开。\n- V04 persistent_state：无（重开全量清空；检查点仅记录双锚点位置）。\n- V05 persistent_state 生命周期：动作级即时结算；局内状态（计数/时间）局内保留、重开清空；无跨局保留。\n- V06 软锁与不可达处理：不设永久软锁——陷阱周期与双锚点保证任一重力方向均有复位出路；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：矿井里的反向救援——深井中央的主重力核失控，矿道上下两面翻转不定，矿井濒临坍缩。\n- W02 场景所在地：一座三段垂直矿井（教学巷道 40 米、长竖井 60 米、精密检修段 50 米），上下两面均可行走，尽头是失稳的主重力核终点装置。\n- W03 玩家身份与当前任务动机：玩家是重力维修工，携带着反转扳手下井；动机是在矿道彻底坍缩前重启主重力核，让矿井恢复秩序。\n- W04 失败代价与结局表达：失败=第六次坠落，维修工被矿井引力乱流卷回井口（C03 失败意象）；胜利=主重力核重启、矿井灯光逐层亮起（C03 胜利意象）。\n- W05 叙事来源：重力反转=维修扳手的二态扳动（唯一腾空手段）；定向陷阱=失控引力对不同接触面的定向反噬（尖刺咬地面、压锤咬顶面、蒸汽两态皆险）；双锚点检查点=维修工安装的双面安全栓。全部原创。\n- W06 视觉风格与色彩材质：深矿井工业风＋暖色灯光点缀；主色=岩黑 #2B2F36、铜金 #C9A876、危险红 #C43B2F、重力青 #4FC3C9、灯暖橙 #E8A25C；材质为湿岩、锈铁、蒸汽铜管。\n- W07 环境氛围与声音语言：矿井低鸣与滴水为底；音效语言为「重力反转嗡鸣+金属陷阱+落面闷响」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代下井与失控主核 → 反转事件视频（C02）承载重力机制的过程叙事 → 结算视频（C03）收束；叙事提示不阻断控制、不改变数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：2.5D 侧视固定水平镜头（不随重力旋转）；前视安全区 ≥ 屏宽 30%；镜头仅位移不旋转；镜头重置仅在明确切场/复位时。\n- F02 关键操作镜头变化：反转瞬间镜头不旋转（仅角色 0.2 秒旋转朝向，AUD12）；落面短促下沉 0.05 秒；陷阱命中 0.08 秒轻微抖动（≤ 画面高度 1.5%）。设置提供「镜头震动开/关」与「减少动态效果」。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：矿井雾尘粒子、顶部吊灯摇晃、蒸汽管余热微光、滴水。纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 重力反转 | 角色离地＋0.2s 旋转朝向＋青色重力光圈扩散 | 重力反转嗡鸣 | 落面即停 |\n| 滞空失重 | 角色残影拖尾＋尘屑上扬 | 失重风切音 | 落面即停 |\n| 落面 | 落面尘土＋短促下沉 0.05s | 落面闷响 | 0.1s 结束 |\n| 陷阱命中 | 全屏红闪＋0.08s 镜头抖动 | 陷阱命中锐响 | 闪红 0.1s 结束 |\n| 坠落复位 | 角色淡入对应锚点＋检查点基座点亮 | 坠落复位音 | 玩家可控即停 |\n| 检查点激活 | 基座灯环亮起 | 检查点音 | 常亮 |\n| 压锤危险窗 | 压锤下落阴影预警 | 压锤机械预警音 | 危险窗结束 |\n| 蒸汽喷射 | 蒸汽喷射柱 | 蒸汽喷射音 | 喷射窗结束 |\n| 终点装置重启 | 装置点亮＋矿井灯光逐层亮起 | 胜利上扬音 | 进入结算 |\n| 判负 | 画面降饱和 | 低沉失败音 | 进入结算 |\n\n- F06 关键音效清单（one_shot 8 条，全部冻结需求）：重力反转嗡鸣、失重风切、落面闷响、陷阱命中锐响、坠落复位音、压锤机械预警音、蒸汽喷射音、胜利/失败结算音（胜利上扬/失败低沉各一）。混音优先级：陷阱与压锤/蒸汽预警 ＞ 反转/落面 ＞ 其余；环境循环：矿井低鸣（常驻，暂停静音、结算淡出 0.5 秒，接缝无爆音；恒低于预警音）。无配音需求。震动事件到调度日志 ≤50ms（含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available），无硬件时验证调度与禁用行为。\n- F07 VFX 信息性与遮挡约束：双锚点检查点基座与陷阱危险相位为信息类 VFX，必须清晰可辨（压锤收起/危险、蒸汽关闭/喷射可辨）；反转光圈不遮挡陷阱轮廓与 HUD；闪红 ≤0.1 秒不遮挡后续判定输入；隐藏状态（陷阱下一相位）不得被特效泄露。\n- F08 音画同步：反转嗡鸣与光圈同帧；落面闷响与尘土同帧；预警音与危险窗起始同帧。\n- F09 屏幕震动：仅陷阱命中 0.08 秒轻微抖动；暂停/结算/重开取消未结束的震动与特效；设置可关闭（关闭不影响判定与数值）。\n- F10 前端界面：标题（开始/设置/退出）→ 矿井 HUD（I06 全项）→ 结算面板（用时/坠落次数/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）；关键状态图标+文字并用（重力方向、坠落计数）；窗口失焦自动暂停；叙事节拍提示不阻断控制。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 深井下井（Opening，5 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入矿井之前，每局一次\n  - 内容与角色场景：矿井升降笼载着维修工沉入井道，头顶吊灯摇晃；镜头掠过上下双接触面，尽头失稳的主重力核泛着乱流红光\n  - 资产对应：维修工、矿井巷道与游戏内模型/贴图同源设计\n  - 可跳过：Enter/Space 或跳过按钮 → 直接进入段1；自然播完 → 进入段1\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 第一次翻转（Event，5 秒，1280×720@24fps）\n  - 触发时机：每局首次成功反转并落到顶面（G03 oracle 的首次 land(surface=ceiling)）时，每局一次\n  - 内容与角色场景：维修工扳动反转扳手，青色重力光圈荡开，镜头保持水平而角色旋转——上方变成脚下，顶面巷道在视野中展开\n  - 资产对应：维修工、顶面接触面与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接继续游玩（重力状态保持反转）；自然播完 → 继续游玩\n  - 状态一致：播放期间重力、移动与陷阱计时冻结，播放结束瞬间按冻结前状态恢复\n- C03 重力核重启（Ending，6 秒，1280×720@24fps，胜负共用双意象）\n  - 触发时机：V01 或 V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象=主重力核重启、矿井灯光逐层亮起、维修工收起扳手；失败意象=引力乱流卷起尘土、维修工被吊回井口、灯光逐层熄灭\n  - 资产对应：维修工、终点装置、矿井与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以在上下接触面间反转重力（M01）、按周期规避三类定向陷阱（M02）、坠落后从双锚点检查点复位续跑（M03），并重启终点装置获胜（V01）。\n- N02 流程与界面能力：标题、三段矿井、胜利/失败结算（区分原因）、暂停（含失焦自动暂停）、设置（震动/减少动态效果开关）、一键重开。\n- N03 演出能力：C01–C03 视频、F04–F09 全部事件反馈与音效（反转光圈/失重残影/落面尘土/陷阱红闪/双锚点基座）、矿井工业氛围层。\n- N04 输入范围：键盘为完整输入方式（A/D/←/→/Space/W/Esc/Enter）；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：§9 F06 冻结音效清单（8 条 one_shot＋1 条环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失；二段跳/蹲滑/抓钩等扩展平台机制与无限地图不在本轮验收分母（原收敛清单口径以此正向承载）。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 `images/generated_ref_01.png` → 尖刺陷阱 image-to-3D 输入与陷阱外观参考。\n- A02 `images/generated_ref_02.png` → 维修工角色 image-to-3D 输入与 T-pose 参考。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（跑动→反转→落面→过陷阱）；定向陷阱仍属移动系统内部规则，无跨系统因果链；双锚点检查点是唯一恢复路径（R1）；AUD10–12 的双锚点/接触面间距/周期冻结是可达性与状态边界修复，不改变难度档\"\n  downgrade_boundary: \"去掉定向陷阱判定表后仍为 S（更简）\"\n  upgrade_boundary: \"若反转状态改变陷阱系统之外的经济/成长系统，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：mine_mechanic, spike_trap, ceiling_hammer, steam_vent, dual_anchor_checkpoint, gravity_core_console。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：4 个；覆盖动作：run, gravity_flip, trap_react, fall_reset。\n- video/audio/mechanic/UI：分别为 3/10/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "fd0f043f7b937e05a92a18d52973d6187cd43f898c9468cccfb3af0e16e72628"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Sharp metallic trap-hit shriek, hazard contact",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G012_sfx_005": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G012_gravity_mine",
+          "task_id": "G012_sfx_005",
+          "asset_name": "fall_reset_chime",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Recovering two-note chime as the mechanic re-anchors at the checkpoint",
+          "duration_sec": 0.8,
+          "sample_rate": 48000,
+          "seed": 5125,
+          "trigger": "坠落复位（锚点淡入同帧）",
+          "required_by_spec": true,
+          "spec_ref": "F05",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《翻转矿井的重力维修》｜重力反转平台机制输入规范\n\n```yaml\ncase_id: G012\nbase_case_id: G012\ntitle: 翻转矿井的重力维修\ncategory: Platformer / Runner\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1012\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《翻转矿井的重力维修》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 zkx 复核裁决——地面/顶面双检查点锚点与复位语义（AUD10）、三段距离与上下接触面间距、陷阱周期冻结（AUD11）、反转条件与镜头/角色旋转口径（AUD12）；补世界设定、镜头输入、演出反馈、过场视频与正向范围清单）；运行引擎：**Three.js（WebGL）**——选择理由：二态重力的短程物理翻转、上下行走面判定与矿井粒子以 Three.js 场景图＋轻量自研物理实现可控，浏览器即开即玩交付，目标平台桌面浏览器（Chrome/Edge 最新稳定版）；摄像机：2.5D 侧视固定水平（角色旋转、镜头不旋转）；输入：键盘；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：重力反转的公有领域机制可复用；本作全部名称、角色、场景、文案与美术原创。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的侧视重力反转平台游戏；文档存在不等于玩法完成。fixed_seed=1012 冻结三段陷阱与物资布置序列及相位。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2.5D 侧视重力反转平台，单人单局，3 段垂直矿井。本测例包含的能力：重力二态反转与上下接触面行走、定向陷阱与周期规避、地面/顶面双锚点检查点、坠落计数与判负、终点装置交互、开场/反转事件/结算视频、重力手感演出层。\n- S02 核心循环一句话：观察陷阱周期与重力方向 → 在正确接触面反转 → 落到对侧安全面 → 通过三段抵达终点。\n- S03 流程：开始界面 → 进入矿井（首次进入前播 C01）→ 段1 教学 → 段2 长竖井 → 段3 精密段 → 终点装置交互 → 结算（面板前播 C03）→ 重开或返回。\n- S04 最低完整流程：开始界面、可操作矿井、结算界面、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：坠落回最近检查点对应锚点继续（计数保留）；第 6 次坠落判负；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成\n  - state_change：进入「标题」状态；首次开始时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「段1」\n  - outcome：无跨局状态写入\n- S07 段1（教学 40 米）\n  - input：A/D 或 ←/→＝移动、Space/W＝重力反转、Esc＝暂停（触发方：玩家）；陷阱周期由 seed 相位驱动（触发方：系统）\n  - precondition：处于段1 状态\n  - state_change：按 §6 M01–M03 结算每次输入；重力方向、朝向、坠落计数实时更新\n  - feedback：按 §9 F05（反转光圈、落面尘土、陷阱红闪）\n  - next_actions：通过段1 →「段2」；坠落 → M03 复位；第 6 次坠落 →「失败结算」\n  - outcome：按 §7 V01/V02 判定\n- S08 段2（长竖井 60 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段1 已通过\n  - state_change：长竖井内定向陷阱迫使按重力方向选择反转时机；检查点锚点按 AUD10 双面记录\n  - feedback：同 S07\n  - next_actions：通过段2 →「段3」\n  - outcome：局内状态演进\n- S09 段3（精密 50 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段2 已通过\n  - state_change：蒸汽组（两态生效）加入精密规避；通过后抵达终点装置\n  - feedback：同 S07\n  - next_actions：终点装置交互完成 →「胜利结算」\n  - outcome：按 §7 V01 判定\n- S10 结算\n  - input：Enter=重开 / Esc=返回（触发方：玩家）\n  - precondition：V01 或 V02 成立\n  - state_change：进入对应结算；面板出现前按 §10 C03 播放结算视频（每局一次，胜负共用双意象）\n  - feedback：胜利面板显示用时与坠落次数；失败面板注明「坠落超限」\n  - next_actions：重开（全量重置）或返回标题\n  - outcome：无跨局状态写入\n- S11 暂停\n  - input：Esc（触发方：玩家）；窗口失焦自动触发（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，移动、重力、陷阱周期与计时全部冻结\n  - feedback：暂停面板（继续/重开/返回/设置）\n  - next_actions：恢复回到游玩\n  - outcome：恢复后状态逐字段一致\n\n## 3. 数值口径与全局规则 [G01–G06]\n\n- G01 统一刻度：米制；时间用游戏模拟秒（暂停冻结）；坠落计数为非负整数。\n- G02 数值（本包冻结值）：跑速 4.0 米/秒；反转后重力加速度 12 米/秒²；无跳跃键——反转即唯一腾空手段；反转键冷却 0.5 秒且滞空中不可再按（仅接触合法支撑面且冷却到期可反转，AUD12）；检查点 3 个（每段起点）；坠落次数上限 5 次（第 6 次判负）。\n- G03 状态转移 oracle：初始「正常重力·立于地面」，输入序列〔跑动 2 秒 → 按反转 → 滞空 → 落到顶部〕必然产生事件流 `flip(dir: normal→inverted)`、`airborne_enter`、`land(surface=ceiling, orientation=inverted)`、角色行走朝向翻转；任何偏离即 FAIL。\n- G04 关卡与接触面（zkx 裁决冻结）：三段推进距离 40/60/50 米；上下接触面间距 **6 米**（上下两面均为可行走接触面）；三段结构与陷阱布置由 seed=1012 冻结并导出相位。\n- G05 陷阱周期（zkx 裁决冻结）：压锤 4 秒周期＝前 3 秒收起、后 1 秒危险；蒸汽 3 秒周期＝前 2 秒关闭、后 1 秒喷射；尖刺常驻；生效重力态按 M02 判定表；相位由 seed 固定并随 layout_manifest 导出。\n- G06 暂停与复位裁决：Esc 冻结移动、重力与陷阱计时；窗口失焦自动暂停。检查点双锚点（AUD10）：每个检查点记录一对安全地面/顶面锚点；坠落复位保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪；锚点不得与陷阱重叠。坠落与终点交互同帧 → 判负优先。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：A/D 或 ←/→＝移动；Space 或 W＝重力反转；Esc＝暂停；Enter＝结算界面重开；终点装置交互由抵达触发（无独立按键）。\n- I02 输入语义边界：冷却中/滞空中按反转无效且无副作用；暂停/结算期间玩法键无效；被拒输入不产生事件。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；同帧互斥动作按 I01 列举顺序取首个。\n- I05 焦点与失焦：点击画布捕获输入焦点；窗口失焦自动暂停。\n- I06 UI 必显状态：当前重力方向（正常/反转）、朝向、坠落计数（0–5）、当前检查点编号、已用时间。\n- I07 输入延迟目标：按键到画面反馈 ≤100 毫秒（P95，≥30 次采样/类别）。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：维修工角色 1（按 A02 参考图）；三类陷阱若干（尖刺组 A、压锤组 B、蒸汽喷口组 C）；检查点基座 3（地面/顶面同网格实例，共 6 个锚点）；终点维修装置 1；矿井背景装饰为表现层。\n- L02 场地（代码块冻结口径）：\n\n```text\n1 座矿井 × 3 段垂直区（米制，沿推进方向）：\n  段1 教学 40m；段2 长竖井 60m；段3 精密 50m\n上下接触面间距 6m，两面均为可行走接触面\n检查点：每段起点 1 个（双锚点：地面/顶面各一，锚点不与陷阱重叠）\n陷阱与物资布置、周期相位由 seed=1012 冻结并导出\n```\n\n- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（陷阱、检查点、终点装置）逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的装饰造型、配色、粒子参数与音色为生成自由度，不得评估为缺失；按 zkx 裁决交付 layout_manifest.json（实例 ID、坐标、碰撞体、通行关系、陷阱相位表、seed 与 hash；同版本同 seed 重开 diff=0；装饰 scene.glb 不替代数值关卡与碰撞体）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 重力切换与接触面（主机制）\n  - input：反转键（触发方：玩家）\n  - precondition：接触合法支撑面（地面或顶面）且 0.5 秒冷却已到期（AUD12）\n  - state_change：重力方向二态翻转 → 离地滞空（重力加速度 12 m/s²）→ 落到原「对侧」接触面并更新行走朝向（角色在 0.2 秒内旋转朝向，镜头保持水平，AUD12）\n  - observable：重力向量状态、朝向事件、落点事件（见 G03 oracle）\n  - invalid_case：滞空中或冷却中按反转 → 拒绝且无副作用\n  - recovery：坠落走 M03 复位\n- M02 定向陷阱\n  - input：接触判定（触发方：系统）\n  - precondition：处于游玩状态且陷阱相位按 G05 周期运行\n  - state_change：按判定表（本包冻结值）——尖刺组 A 仅对「正常重力·立地面」生效；顶部压锤组 B 仅对「反转重力·立顶面」生效（危险窗为 4 秒周期的后 1 秒）；侧向蒸汽组 C 两态均生效（仅段3，喷射窗为 3 秒周期的后 1 秒）；错误状态接触陷阱造成坠落（计 M03）\n  - observable：陷阱命中事件含重力方向与陷阱类型字段、周期相位时间戳\n  - invalid_case：收起/关闭相位接触不造成坠落\n  - recovery：坠落后回检查点锚点复位\n- M03 坠落复位\n  - input：掉出安全区或陷阱命中（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：回最近检查点对应重力方向的锚点（保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪，AUD10）、坠落计数 +1；第 6 次判负结算\n  - observable：reset 事件（含检查点 ID 与锚点面）、fall_count 流水\n  - invalid_case：结算后坠落不再触发复位\n  - recovery：判负走 V02；结算界面重开为最终出路\n- M04 胜负与重开\n  - input：终点装置交互完成 / 第 6 次坠落 / 结算界面（触发方：系统判定/玩家）\n  - precondition：处于游玩状态或结算状态\n  - state_change：终点交互完成 → 胜利结算（显示用时与坠落次数）；第 6 次坠落 → 失败结算（注明原因）；结算后玩法冻结；同帧裁决按 G06（判负优先）\n  - observable：win / lose(reason) 事件与结算面板\n  - invalid_case：结算后再触发判定被拒绝（每局一次）\n  - recovery：重开=全量重置（重力回正常、计数清零、相位按 seed 复现）\n\n## 7. 成功、失败与恢复 [V01–V06]\n\n- V01 成功条件：按序通过三段并完成终点装置交互 → 结算（显示用时与坠落次数）。\n- V02 失败条件：坠落计数达 6 次（超上限 5）→ 判负结算（注明「坠落超限」）；与终点同帧按 G06 判负优先。\n- V03 恢复语义：单次坠落回最近检查点对应重力方向锚点继续（计数保留、重力方向保留）；判负后一键重开。\n- V04 persistent_state：无（重开全量清空；检查点仅记录双锚点位置）。\n- V05 persistent_state 生命周期：动作级即时结算；局内状态（计数/时间）局内保留、重开清空；无跨局保留。\n- V06 软锁与不可达处理：不设永久软锁——陷阱周期与双锚点保证任一重力方向均有复位出路；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：矿井里的反向救援——深井中央的主重力核失控，矿道上下两面翻转不定，矿井濒临坍缩。\n- W02 场景所在地：一座三段垂直矿井（教学巷道 40 米、长竖井 60 米、精密检修段 50 米），上下两面均可行走，尽头是失稳的主重力核终点装置。\n- W03 玩家身份与当前任务动机：玩家是重力维修工，携带着反转扳手下井；动机是在矿道彻底坍缩前重启主重力核，让矿井恢复秩序。\n- W04 失败代价与结局表达：失败=第六次坠落，维修工被矿井引力乱流卷回井口（C03 失败意象）；胜利=主重力核重启、矿井灯光逐层亮起（C03 胜利意象）。\n- W05 叙事来源：重力反转=维修扳手的二态扳动（唯一腾空手段）；定向陷阱=失控引力对不同接触面的定向反噬（尖刺咬地面、压锤咬顶面、蒸汽两态皆险）；双锚点检查点=维修工安装的双面安全栓。全部原创。\n- W06 视觉风格与色彩材质：深矿井工业风＋暖色灯光点缀；主色=岩黑 #2B2F36、铜金 #C9A876、危险红 #C43B2F、重力青 #4FC3C9、灯暖橙 #E8A25C；材质为湿岩、锈铁、蒸汽铜管。\n- W07 环境氛围与声音语言：矿井低鸣与滴水为底；音效语言为「重力反转嗡鸣+金属陷阱+落面闷响」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代下井与失控主核 → 反转事件视频（C02）承载重力机制的过程叙事 → 结算视频（C03）收束；叙事提示不阻断控制、不改变数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：2.5D 侧视固定水平镜头（不随重力旋转）；前视安全区 ≥ 屏宽 30%；镜头仅位移不旋转；镜头重置仅在明确切场/复位时。\n- F02 关键操作镜头变化：反转瞬间镜头不旋转（仅角色 0.2 秒旋转朝向，AUD12）；落面短促下沉 0.05 秒；陷阱命中 0.08 秒轻微抖动（≤ 画面高度 1.5%）。设置提供「镜头震动开/关」与「减少动态效果」。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：矿井雾尘粒子、顶部吊灯摇晃、蒸汽管余热微光、滴水。纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 重力反转 | 角色离地＋0.2s 旋转朝向＋青色重力光圈扩散 | 重力反转嗡鸣 | 落面即停 |\n| 滞空失重 | 角色残影拖尾＋尘屑上扬 | 失重风切音 | 落面即停 |\n| 落面 | 落面尘土＋短促下沉 0.05s | 落面闷响 | 0.1s 结束 |\n| 陷阱命中 | 全屏红闪＋0.08s 镜头抖动 | 陷阱命中锐响 | 闪红 0.1s 结束 |\n| 坠落复位 | 角色淡入对应锚点＋检查点基座点亮 | 坠落复位音 | 玩家可控即停 |\n| 检查点激活 | 基座灯环亮起 | 检查点音 | 常亮 |\n| 压锤危险窗 | 压锤下落阴影预警 | 压锤机械预警音 | 危险窗结束 |\n| 蒸汽喷射 | 蒸汽喷射柱 | 蒸汽喷射音 | 喷射窗结束 |\n| 终点装置重启 | 装置点亮＋矿井灯光逐层亮起 | 胜利上扬音 | 进入结算 |\n| 判负 | 画面降饱和 | 低沉失败音 | 进入结算 |\n\n- F06 关键音效清单（one_shot 8 条，全部冻结需求）：重力反转嗡鸣、失重风切、落面闷响、陷阱命中锐响、坠落复位音、压锤机械预警音、蒸汽喷射音、胜利/失败结算音（胜利上扬/失败低沉各一）。混音优先级：陷阱与压锤/蒸汽预警 ＞ 反转/落面 ＞ 其余；环境循环：矿井低鸣（常驻，暂停静音、结算淡出 0.5 秒，接缝无爆音；恒低于预警音）。无配音需求。震动事件到调度日志 ≤50ms（含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available），无硬件时验证调度与禁用行为。\n- F07 VFX 信息性与遮挡约束：双锚点检查点基座与陷阱危险相位为信息类 VFX，必须清晰可辨（压锤收起/危险、蒸汽关闭/喷射可辨）；反转光圈不遮挡陷阱轮廓与 HUD；闪红 ≤0.1 秒不遮挡后续判定输入；隐藏状态（陷阱下一相位）不得被特效泄露。\n- F08 音画同步：反转嗡鸣与光圈同帧；落面闷响与尘土同帧；预警音与危险窗起始同帧。\n- F09 屏幕震动：仅陷阱命中 0.08 秒轻微抖动；暂停/结算/重开取消未结束的震动与特效；设置可关闭（关闭不影响判定与数值）。\n- F10 前端界面：标题（开始/设置/退出）→ 矿井 HUD（I06 全项）→ 结算面板（用时/坠落次数/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）；关键状态图标+文字并用（重力方向、坠落计数）；窗口失焦自动暂停；叙事节拍提示不阻断控制。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 深井下井（Opening，5 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入矿井之前，每局一次\n  - 内容与角色场景：矿井升降笼载着维修工沉入井道，头顶吊灯摇晃；镜头掠过上下双接触面，尽头失稳的主重力核泛着乱流红光\n  - 资产对应：维修工、矿井巷道与游戏内模型/贴图同源设计\n  - 可跳过：Enter/Space 或跳过按钮 → 直接进入段1；自然播完 → 进入段1\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 第一次翻转（Event，5 秒，1280×720@24fps）\n  - 触发时机：每局首次成功反转并落到顶面（G03 oracle 的首次 land(surface=ceiling)）时，每局一次\n  - 内容与角色场景：维修工扳动反转扳手，青色重力光圈荡开，镜头保持水平而角色旋转——上方变成脚下，顶面巷道在视野中展开\n  - 资产对应：维修工、顶面接触面与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接继续游玩（重力状态保持反转）；自然播完 → 继续游玩\n  - 状态一致：播放期间重力、移动与陷阱计时冻结，播放结束瞬间按冻结前状态恢复\n- C03 重力核重启（Ending，6 秒，1280×720@24fps，胜负共用双意象）\n  - 触发时机：V01 或 V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象=主重力核重启、矿井灯光逐层亮起、维修工收起扳手；失败意象=引力乱流卷起尘土、维修工被吊回井口、灯光逐层熄灭\n  - 资产对应：维修工、终点装置、矿井与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以在上下接触面间反转重力（M01）、按周期规避三类定向陷阱（M02）、坠落后从双锚点检查点复位续跑（M03），并重启终点装置获胜（V01）。\n- N02 流程与界面能力：标题、三段矿井、胜利/失败结算（区分原因）、暂停（含失焦自动暂停）、设置（震动/减少动态效果开关）、一键重开。\n- N03 演出能力：C01–C03 视频、F04–F09 全部事件反馈与音效（反转光圈/失重残影/落面尘土/陷阱红闪/双锚点基座）、矿井工业氛围层。\n- N04 输入范围：键盘为完整输入方式（A/D/←/→/Space/W/Esc/Enter）；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：§9 F06 冻结音效清单（8 条 one_shot＋1 条环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失；二段跳/蹲滑/抓钩等扩展平台机制与无限地图不在本轮验收分母（原收敛清单口径以此正向承载）。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 `images/generated_ref_01.png` → 尖刺陷阱 image-to-3D 输入与陷阱外观参考。\n- A02 `images/generated_ref_02.png` → 维修工角色 image-to-3D 输入与 T-pose 参考。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（跑动→反转→落面→过陷阱）；定向陷阱仍属移动系统内部规则，无跨系统因果链；双锚点检查点是唯一恢复路径（R1）；AUD10–12 的双锚点/接触面间距/周期冻结是可达性与状态边界修复，不改变难度档\"\n  downgrade_boundary: \"去掉定向陷阱判定表后仍为 S（更简）\"\n  upgrade_boundary: \"若反转状态改变陷阱系统之外的经济/成长系统，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：mine_mechanic, spike_trap, ceiling_hammer, steam_vent, dual_anchor_checkpoint, gravity_core_console。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：4 个；覆盖动作：run, gravity_flip, trap_react, fall_reset。\n- video/audio/mechanic/UI：分别为 3/10/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "fd0f043f7b937e05a92a18d52973d6187cd43f898c9468cccfb3af0e16e72628"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Recovering two-note chime as the mechanic re-anchors at the checkpoint",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G012_sfx_006": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G012_gravity_mine",
+          "task_id": "G012_sfx_006",
+          "asset_name": "hammer_warning",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Rhythmic mechanical warning clunk as the ceiling hammer enters its danger second",
+          "duration_sec": 0.6,
+          "sample_rate": 48000,
+          "seed": 5126,
+          "trigger": "压锤危险窗起始（预警同帧）",
+          "required_by_spec": true,
+          "spec_ref": "F05",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《翻转矿井的重力维修》｜重力反转平台机制输入规范\n\n```yaml\ncase_id: G012\nbase_case_id: G012\ntitle: 翻转矿井的重力维修\ncategory: Platformer / Runner\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1012\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《翻转矿井的重力维修》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 zkx 复核裁决——地面/顶面双检查点锚点与复位语义（AUD10）、三段距离与上下接触面间距、陷阱周期冻结（AUD11）、反转条件与镜头/角色旋转口径（AUD12）；补世界设定、镜头输入、演出反馈、过场视频与正向范围清单）；运行引擎：**Three.js（WebGL）**——选择理由：二态重力的短程物理翻转、上下行走面判定与矿井粒子以 Three.js 场景图＋轻量自研物理实现可控，浏览器即开即玩交付，目标平台桌面浏览器（Chrome/Edge 最新稳定版）；摄像机：2.5D 侧视固定水平（角色旋转、镜头不旋转）；输入：键盘；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：重力反转的公有领域机制可复用；本作全部名称、角色、场景、文案与美术原创。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的侧视重力反转平台游戏；文档存在不等于玩法完成。fixed_seed=1012 冻结三段陷阱与物资布置序列及相位。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2.5D 侧视重力反转平台，单人单局，3 段垂直矿井。本测例包含的能力：重力二态反转与上下接触面行走、定向陷阱与周期规避、地面/顶面双锚点检查点、坠落计数与判负、终点装置交互、开场/反转事件/结算视频、重力手感演出层。\n- S02 核心循环一句话：观察陷阱周期与重力方向 → 在正确接触面反转 → 落到对侧安全面 → 通过三段抵达终点。\n- S03 流程：开始界面 → 进入矿井（首次进入前播 C01）→ 段1 教学 → 段2 长竖井 → 段3 精密段 → 终点装置交互 → 结算（面板前播 C03）→ 重开或返回。\n- S04 最低完整流程：开始界面、可操作矿井、结算界面、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：坠落回最近检查点对应锚点继续（计数保留）；第 6 次坠落判负；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成\n  - state_change：进入「标题」状态；首次开始时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「段1」\n  - outcome：无跨局状态写入\n- S07 段1（教学 40 米）\n  - input：A/D 或 ←/→＝移动、Space/W＝重力反转、Esc＝暂停（触发方：玩家）；陷阱周期由 seed 相位驱动（触发方：系统）\n  - precondition：处于段1 状态\n  - state_change：按 §6 M01–M03 结算每次输入；重力方向、朝向、坠落计数实时更新\n  - feedback：按 §9 F05（反转光圈、落面尘土、陷阱红闪）\n  - next_actions：通过段1 →「段2」；坠落 → M03 复位；第 6 次坠落 →「失败结算」\n  - outcome：按 §7 V01/V02 判定\n- S08 段2（长竖井 60 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段1 已通过\n  - state_change：长竖井内定向陷阱迫使按重力方向选择反转时机；检查点锚点按 AUD10 双面记录\n  - feedback：同 S07\n  - next_actions：通过段2 →「段3」\n  - outcome：局内状态演进\n- S09 段3（精密 50 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段2 已通过\n  - state_change：蒸汽组（两态生效）加入精密规避；通过后抵达终点装置\n  - feedback：同 S07\n  - next_actions：终点装置交互完成 →「胜利结算」\n  - outcome：按 §7 V01 判定\n- S10 结算\n  - input：Enter=重开 / Esc=返回（触发方：玩家）\n  - precondition：V01 或 V02 成立\n  - state_change：进入对应结算；面板出现前按 §10 C03 播放结算视频（每局一次，胜负共用双意象）\n  - feedback：胜利面板显示用时与坠落次数；失败面板注明「坠落超限」\n  - next_actions：重开（全量重置）或返回标题\n  - outcome：无跨局状态写入\n- S11 暂停\n  - input：Esc（触发方：玩家）；窗口失焦自动触发（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，移动、重力、陷阱周期与计时全部冻结\n  - feedback：暂停面板（继续/重开/返回/设置）\n  - next_actions：恢复回到游玩\n  - outcome：恢复后状态逐字段一致\n\n## 3. 数值口径与全局规则 [G01–G06]\n\n- G01 统一刻度：米制；时间用游戏模拟秒（暂停冻结）；坠落计数为非负整数。\n- G02 数值（本包冻结值）：跑速 4.0 米/秒；反转后重力加速度 12 米/秒²；无跳跃键——反转即唯一腾空手段；反转键冷却 0.5 秒且滞空中不可再按（仅接触合法支撑面且冷却到期可反转，AUD12）；检查点 3 个（每段起点）；坠落次数上限 5 次（第 6 次判负）。\n- G03 状态转移 oracle：初始「正常重力·立于地面」，输入序列〔跑动 2 秒 → 按反转 → 滞空 → 落到顶部〕必然产生事件流 `flip(dir: normal→inverted)`、`airborne_enter`、`land(surface=ceiling, orientation=inverted)`、角色行走朝向翻转；任何偏离即 FAIL。\n- G04 关卡与接触面（zkx 裁决冻结）：三段推进距离 40/60/50 米；上下接触面间距 **6 米**（上下两面均为可行走接触面）；三段结构与陷阱布置由 seed=1012 冻结并导出相位。\n- G05 陷阱周期（zkx 裁决冻结）：压锤 4 秒周期＝前 3 秒收起、后 1 秒危险；蒸汽 3 秒周期＝前 2 秒关闭、后 1 秒喷射；尖刺常驻；生效重力态按 M02 判定表；相位由 seed 固定并随 layout_manifest 导出。\n- G06 暂停与复位裁决：Esc 冻结移动、重力与陷阱计时；窗口失焦自动暂停。检查点双锚点（AUD10）：每个检查点记录一对安全地面/顶面锚点；坠落复位保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪；锚点不得与陷阱重叠。坠落与终点交互同帧 → 判负优先。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：A/D 或 ←/→＝移动；Space 或 W＝重力反转；Esc＝暂停；Enter＝结算界面重开；终点装置交互由抵达触发（无独立按键）。\n- I02 输入语义边界：冷却中/滞空中按反转无效且无副作用；暂停/结算期间玩法键无效；被拒输入不产生事件。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；同帧互斥动作按 I01 列举顺序取首个。\n- I05 焦点与失焦：点击画布捕获输入焦点；窗口失焦自动暂停。\n- I06 UI 必显状态：当前重力方向（正常/反转）、朝向、坠落计数（0–5）、当前检查点编号、已用时间。\n- I07 输入延迟目标：按键到画面反馈 ≤100 毫秒（P95，≥30 次采样/类别）。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：维修工角色 1（按 A02 参考图）；三类陷阱若干（尖刺组 A、压锤组 B、蒸汽喷口组 C）；检查点基座 3（地面/顶面同网格实例，共 6 个锚点）；终点维修装置 1；矿井背景装饰为表现层。\n- L02 场地（代码块冻结口径）：\n\n```text\n1 座矿井 × 3 段垂直区（米制，沿推进方向）：\n  段1 教学 40m；段2 长竖井 60m；段3 精密 50m\n上下接触面间距 6m，两面均为可行走接触面\n检查点：每段起点 1 个（双锚点：地面/顶面各一，锚点不与陷阱重叠）\n陷阱与物资布置、周期相位由 seed=1012 冻结并导出\n```\n\n- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（陷阱、检查点、终点装置）逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的装饰造型、配色、粒子参数与音色为生成自由度，不得评估为缺失；按 zkx 裁决交付 layout_manifest.json（实例 ID、坐标、碰撞体、通行关系、陷阱相位表、seed 与 hash；同版本同 seed 重开 diff=0；装饰 scene.glb 不替代数值关卡与碰撞体）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 重力切换与接触面（主机制）\n  - input：反转键（触发方：玩家）\n  - precondition：接触合法支撑面（地面或顶面）且 0.5 秒冷却已到期（AUD12）\n  - state_change：重力方向二态翻转 → 离地滞空（重力加速度 12 m/s²）→ 落到原「对侧」接触面并更新行走朝向（角色在 0.2 秒内旋转朝向，镜头保持水平，AUD12）\n  - observable：重力向量状态、朝向事件、落点事件（见 G03 oracle）\n  - invalid_case：滞空中或冷却中按反转 → 拒绝且无副作用\n  - recovery：坠落走 M03 复位\n- M02 定向陷阱\n  - input：接触判定（触发方：系统）\n  - precondition：处于游玩状态且陷阱相位按 G05 周期运行\n  - state_change：按判定表（本包冻结值）——尖刺组 A 仅对「正常重力·立地面」生效；顶部压锤组 B 仅对「反转重力·立顶面」生效（危险窗为 4 秒周期的后 1 秒）；侧向蒸汽组 C 两态均生效（仅段3，喷射窗为 3 秒周期的后 1 秒）；错误状态接触陷阱造成坠落（计 M03）\n  - observable：陷阱命中事件含重力方向与陷阱类型字段、周期相位时间戳\n  - invalid_case：收起/关闭相位接触不造成坠落\n  - recovery：坠落后回检查点锚点复位\n- M03 坠落复位\n  - input：掉出安全区或陷阱命中（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：回最近检查点对应重力方向的锚点（保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪，AUD10）、坠落计数 +1；第 6 次判负结算\n  - observable：reset 事件（含检查点 ID 与锚点面）、fall_count 流水\n  - invalid_case：结算后坠落不再触发复位\n  - recovery：判负走 V02；结算界面重开为最终出路\n- M04 胜负与重开\n  - input：终点装置交互完成 / 第 6 次坠落 / 结算界面（触发方：系统判定/玩家）\n  - precondition：处于游玩状态或结算状态\n  - state_change：终点交互完成 → 胜利结算（显示用时与坠落次数）；第 6 次坠落 → 失败结算（注明原因）；结算后玩法冻结；同帧裁决按 G06（判负优先）\n  - observable：win / lose(reason) 事件与结算面板\n  - invalid_case：结算后再触发判定被拒绝（每局一次）\n  - recovery：重开=全量重置（重力回正常、计数清零、相位按 seed 复现）\n\n## 7. 成功、失败与恢复 [V01–V06]\n\n- V01 成功条件：按序通过三段并完成终点装置交互 → 结算（显示用时与坠落次数）。\n- V02 失败条件：坠落计数达 6 次（超上限 5）→ 判负结算（注明「坠落超限」）；与终点同帧按 G06 判负优先。\n- V03 恢复语义：单次坠落回最近检查点对应重力方向锚点继续（计数保留、重力方向保留）；判负后一键重开。\n- V04 persistent_state：无（重开全量清空；检查点仅记录双锚点位置）。\n- V05 persistent_state 生命周期：动作级即时结算；局内状态（计数/时间）局内保留、重开清空；无跨局保留。\n- V06 软锁与不可达处理：不设永久软锁——陷阱周期与双锚点保证任一重力方向均有复位出路；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：矿井里的反向救援——深井中央的主重力核失控，矿道上下两面翻转不定，矿井濒临坍缩。\n- W02 场景所在地：一座三段垂直矿井（教学巷道 40 米、长竖井 60 米、精密检修段 50 米），上下两面均可行走，尽头是失稳的主重力核终点装置。\n- W03 玩家身份与当前任务动机：玩家是重力维修工，携带着反转扳手下井；动机是在矿道彻底坍缩前重启主重力核，让矿井恢复秩序。\n- W04 失败代价与结局表达：失败=第六次坠落，维修工被矿井引力乱流卷回井口（C03 失败意象）；胜利=主重力核重启、矿井灯光逐层亮起（C03 胜利意象）。\n- W05 叙事来源：重力反转=维修扳手的二态扳动（唯一腾空手段）；定向陷阱=失控引力对不同接触面的定向反噬（尖刺咬地面、压锤咬顶面、蒸汽两态皆险）；双锚点检查点=维修工安装的双面安全栓。全部原创。\n- W06 视觉风格与色彩材质：深矿井工业风＋暖色灯光点缀；主色=岩黑 #2B2F36、铜金 #C9A876、危险红 #C43B2F、重力青 #4FC3C9、灯暖橙 #E8A25C；材质为湿岩、锈铁、蒸汽铜管。\n- W07 环境氛围与声音语言：矿井低鸣与滴水为底；音效语言为「重力反转嗡鸣+金属陷阱+落面闷响」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代下井与失控主核 → 反转事件视频（C02）承载重力机制的过程叙事 → 结算视频（C03）收束；叙事提示不阻断控制、不改变数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：2.5D 侧视固定水平镜头（不随重力旋转）；前视安全区 ≥ 屏宽 30%；镜头仅位移不旋转；镜头重置仅在明确切场/复位时。\n- F02 关键操作镜头变化：反转瞬间镜头不旋转（仅角色 0.2 秒旋转朝向，AUD12）；落面短促下沉 0.05 秒；陷阱命中 0.08 秒轻微抖动（≤ 画面高度 1.5%）。设置提供「镜头震动开/关」与「减少动态效果」。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：矿井雾尘粒子、顶部吊灯摇晃、蒸汽管余热微光、滴水。纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 重力反转 | 角色离地＋0.2s 旋转朝向＋青色重力光圈扩散 | 重力反转嗡鸣 | 落面即停 |\n| 滞空失重 | 角色残影拖尾＋尘屑上扬 | 失重风切音 | 落面即停 |\n| 落面 | 落面尘土＋短促下沉 0.05s | 落面闷响 | 0.1s 结束 |\n| 陷阱命中 | 全屏红闪＋0.08s 镜头抖动 | 陷阱命中锐响 | 闪红 0.1s 结束 |\n| 坠落复位 | 角色淡入对应锚点＋检查点基座点亮 | 坠落复位音 | 玩家可控即停 |\n| 检查点激活 | 基座灯环亮起 | 检查点音 | 常亮 |\n| 压锤危险窗 | 压锤下落阴影预警 | 压锤机械预警音 | 危险窗结束 |\n| 蒸汽喷射 | 蒸汽喷射柱 | 蒸汽喷射音 | 喷射窗结束 |\n| 终点装置重启 | 装置点亮＋矿井灯光逐层亮起 | 胜利上扬音 | 进入结算 |\n| 判负 | 画面降饱和 | 低沉失败音 | 进入结算 |\n\n- F06 关键音效清单（one_shot 8 条，全部冻结需求）：重力反转嗡鸣、失重风切、落面闷响、陷阱命中锐响、坠落复位音、压锤机械预警音、蒸汽喷射音、胜利/失败结算音（胜利上扬/失败低沉各一）。混音优先级：陷阱与压锤/蒸汽预警 ＞ 反转/落面 ＞ 其余；环境循环：矿井低鸣（常驻，暂停静音、结算淡出 0.5 秒，接缝无爆音；恒低于预警音）。无配音需求。震动事件到调度日志 ≤50ms（含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available），无硬件时验证调度与禁用行为。\n- F07 VFX 信息性与遮挡约束：双锚点检查点基座与陷阱危险相位为信息类 VFX，必须清晰可辨（压锤收起/危险、蒸汽关闭/喷射可辨）；反转光圈不遮挡陷阱轮廓与 HUD；闪红 ≤0.1 秒不遮挡后续判定输入；隐藏状态（陷阱下一相位）不得被特效泄露。\n- F08 音画同步：反转嗡鸣与光圈同帧；落面闷响与尘土同帧；预警音与危险窗起始同帧。\n- F09 屏幕震动：仅陷阱命中 0.08 秒轻微抖动；暂停/结算/重开取消未结束的震动与特效；设置可关闭（关闭不影响判定与数值）。\n- F10 前端界面：标题（开始/设置/退出）→ 矿井 HUD（I06 全项）→ 结算面板（用时/坠落次数/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）；关键状态图标+文字并用（重力方向、坠落计数）；窗口失焦自动暂停；叙事节拍提示不阻断控制。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 深井下井（Opening，5 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入矿井之前，每局一次\n  - 内容与角色场景：矿井升降笼载着维修工沉入井道，头顶吊灯摇晃；镜头掠过上下双接触面，尽头失稳的主重力核泛着乱流红光\n  - 资产对应：维修工、矿井巷道与游戏内模型/贴图同源设计\n  - 可跳过：Enter/Space 或跳过按钮 → 直接进入段1；自然播完 → 进入段1\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 第一次翻转（Event，5 秒，1280×720@24fps）\n  - 触发时机：每局首次成功反转并落到顶面（G03 oracle 的首次 land(surface=ceiling)）时，每局一次\n  - 内容与角色场景：维修工扳动反转扳手，青色重力光圈荡开，镜头保持水平而角色旋转——上方变成脚下，顶面巷道在视野中展开\n  - 资产对应：维修工、顶面接触面与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接继续游玩（重力状态保持反转）；自然播完 → 继续游玩\n  - 状态一致：播放期间重力、移动与陷阱计时冻结，播放结束瞬间按冻结前状态恢复\n- C03 重力核重启（Ending，6 秒，1280×720@24fps，胜负共用双意象）\n  - 触发时机：V01 或 V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象=主重力核重启、矿井灯光逐层亮起、维修工收起扳手；失败意象=引力乱流卷起尘土、维修工被吊回井口、灯光逐层熄灭\n  - 资产对应：维修工、终点装置、矿井与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以在上下接触面间反转重力（M01）、按周期规避三类定向陷阱（M02）、坠落后从双锚点检查点复位续跑（M03），并重启终点装置获胜（V01）。\n- N02 流程与界面能力：标题、三段矿井、胜利/失败结算（区分原因）、暂停（含失焦自动暂停）、设置（震动/减少动态效果开关）、一键重开。\n- N03 演出能力：C01–C03 视频、F04–F09 全部事件反馈与音效（反转光圈/失重残影/落面尘土/陷阱红闪/双锚点基座）、矿井工业氛围层。\n- N04 输入范围：键盘为完整输入方式（A/D/←/→/Space/W/Esc/Enter）；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：§9 F06 冻结音效清单（8 条 one_shot＋1 条环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失；二段跳/蹲滑/抓钩等扩展平台机制与无限地图不在本轮验收分母（原收敛清单口径以此正向承载）。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 `images/generated_ref_01.png` → 尖刺陷阱 image-to-3D 输入与陷阱外观参考。\n- A02 `images/generated_ref_02.png` → 维修工角色 image-to-3D 输入与 T-pose 参考。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（跑动→反转→落面→过陷阱）；定向陷阱仍属移动系统内部规则，无跨系统因果链；双锚点检查点是唯一恢复路径（R1）；AUD10–12 的双锚点/接触面间距/周期冻结是可达性与状态边界修复，不改变难度档\"\n  downgrade_boundary: \"去掉定向陷阱判定表后仍为 S（更简）\"\n  upgrade_boundary: \"若反转状态改变陷阱系统之外的经济/成长系统，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：mine_mechanic, spike_trap, ceiling_hammer, steam_vent, dual_anchor_checkpoint, gravity_core_console。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：4 个；覆盖动作：run, gravity_flip, trap_react, fall_reset。\n- video/audio/mechanic/UI：分别为 3/10/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "fd0f043f7b937e05a92a18d52973d6187cd43f898c9468cccfb3af0e16e72628"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Rhythmic mechanical warning clunk as the ceiling hammer enters its danger second",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G012_sfx_007": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G012_gravity_mine",
+          "task_id": "G012_sfx_007",
+          "asset_name": "steam_blast",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Pressured steam blast hiss from a wall vent during its jet second",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5127,
+          "trigger": "蒸汽喷射窗（喷射柱同帧）",
+          "required_by_spec": true,
+          "spec_ref": "F05",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《翻转矿井的重力维修》｜重力反转平台机制输入规范\n\n```yaml\ncase_id: G012\nbase_case_id: G012\ntitle: 翻转矿井的重力维修\ncategory: Platformer / Runner\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1012\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《翻转矿井的重力维修》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 zkx 复核裁决——地面/顶面双检查点锚点与复位语义（AUD10）、三段距离与上下接触面间距、陷阱周期冻结（AUD11）、反转条件与镜头/角色旋转口径（AUD12）；补世界设定、镜头输入、演出反馈、过场视频与正向范围清单）；运行引擎：**Three.js（WebGL）**——选择理由：二态重力的短程物理翻转、上下行走面判定与矿井粒子以 Three.js 场景图＋轻量自研物理实现可控，浏览器即开即玩交付，目标平台桌面浏览器（Chrome/Edge 最新稳定版）；摄像机：2.5D 侧视固定水平（角色旋转、镜头不旋转）；输入：键盘；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：重力反转的公有领域机制可复用；本作全部名称、角色、场景、文案与美术原创。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的侧视重力反转平台游戏；文档存在不等于玩法完成。fixed_seed=1012 冻结三段陷阱与物资布置序列及相位。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2.5D 侧视重力反转平台，单人单局，3 段垂直矿井。本测例包含的能力：重力二态反转与上下接触面行走、定向陷阱与周期规避、地面/顶面双锚点检查点、坠落计数与判负、终点装置交互、开场/反转事件/结算视频、重力手感演出层。\n- S02 核心循环一句话：观察陷阱周期与重力方向 → 在正确接触面反转 → 落到对侧安全面 → 通过三段抵达终点。\n- S03 流程：开始界面 → 进入矿井（首次进入前播 C01）→ 段1 教学 → 段2 长竖井 → 段3 精密段 → 终点装置交互 → 结算（面板前播 C03）→ 重开或返回。\n- S04 最低完整流程：开始界面、可操作矿井、结算界面、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：坠落回最近检查点对应锚点继续（计数保留）；第 6 次坠落判负；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成\n  - state_change：进入「标题」状态；首次开始时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「段1」\n  - outcome：无跨局状态写入\n- S07 段1（教学 40 米）\n  - input：A/D 或 ←/→＝移动、Space/W＝重力反转、Esc＝暂停（触发方：玩家）；陷阱周期由 seed 相位驱动（触发方：系统）\n  - precondition：处于段1 状态\n  - state_change：按 §6 M01–M03 结算每次输入；重力方向、朝向、坠落计数实时更新\n  - feedback：按 §9 F05（反转光圈、落面尘土、陷阱红闪）\n  - next_actions：通过段1 →「段2」；坠落 → M03 复位；第 6 次坠落 →「失败结算」\n  - outcome：按 §7 V01/V02 判定\n- S08 段2（长竖井 60 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段1 已通过\n  - state_change：长竖井内定向陷阱迫使按重力方向选择反转时机；检查点锚点按 AUD10 双面记录\n  - feedback：同 S07\n  - next_actions：通过段2 →「段3」\n  - outcome：局内状态演进\n- S09 段3（精密 50 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段2 已通过\n  - state_change：蒸汽组（两态生效）加入精密规避；通过后抵达终点装置\n  - feedback：同 S07\n  - next_actions：终点装置交互完成 →「胜利结算」\n  - outcome：按 §7 V01 判定\n- S10 结算\n  - input：Enter=重开 / Esc=返回（触发方：玩家）\n  - precondition：V01 或 V02 成立\n  - state_change：进入对应结算；面板出现前按 §10 C03 播放结算视频（每局一次，胜负共用双意象）\n  - feedback：胜利面板显示用时与坠落次数；失败面板注明「坠落超限」\n  - next_actions：重开（全量重置）或返回标题\n  - outcome：无跨局状态写入\n- S11 暂停\n  - input：Esc（触发方：玩家）；窗口失焦自动触发（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，移动、重力、陷阱周期与计时全部冻结\n  - feedback：暂停面板（继续/重开/返回/设置）\n  - next_actions：恢复回到游玩\n  - outcome：恢复后状态逐字段一致\n\n## 3. 数值口径与全局规则 [G01–G06]\n\n- G01 统一刻度：米制；时间用游戏模拟秒（暂停冻结）；坠落计数为非负整数。\n- G02 数值（本包冻结值）：跑速 4.0 米/秒；反转后重力加速度 12 米/秒²；无跳跃键——反转即唯一腾空手段；反转键冷却 0.5 秒且滞空中不可再按（仅接触合法支撑面且冷却到期可反转，AUD12）；检查点 3 个（每段起点）；坠落次数上限 5 次（第 6 次判负）。\n- G03 状态转移 oracle：初始「正常重力·立于地面」，输入序列〔跑动 2 秒 → 按反转 → 滞空 → 落到顶部〕必然产生事件流 `flip(dir: normal→inverted)`、`airborne_enter`、`land(surface=ceiling, orientation=inverted)`、角色行走朝向翻转；任何偏离即 FAIL。\n- G04 关卡与接触面（zkx 裁决冻结）：三段推进距离 40/60/50 米；上下接触面间距 **6 米**（上下两面均为可行走接触面）；三段结构与陷阱布置由 seed=1012 冻结并导出相位。\n- G05 陷阱周期（zkx 裁决冻结）：压锤 4 秒周期＝前 3 秒收起、后 1 秒危险；蒸汽 3 秒周期＝前 2 秒关闭、后 1 秒喷射；尖刺常驻；生效重力态按 M02 判定表；相位由 seed 固定并随 layout_manifest 导出。\n- G06 暂停与复位裁决：Esc 冻结移动、重力与陷阱计时；窗口失焦自动暂停。检查点双锚点（AUD10）：每个检查点记录一对安全地面/顶面锚点；坠落复位保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪；锚点不得与陷阱重叠。坠落与终点交互同帧 → 判负优先。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：A/D 或 ←/→＝移动；Space 或 W＝重力反转；Esc＝暂停；Enter＝结算界面重开；终点装置交互由抵达触发（无独立按键）。\n- I02 输入语义边界：冷却中/滞空中按反转无效且无副作用；暂停/结算期间玩法键无效；被拒输入不产生事件。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；同帧互斥动作按 I01 列举顺序取首个。\n- I05 焦点与失焦：点击画布捕获输入焦点；窗口失焦自动暂停。\n- I06 UI 必显状态：当前重力方向（正常/反转）、朝向、坠落计数（0–5）、当前检查点编号、已用时间。\n- I07 输入延迟目标：按键到画面反馈 ≤100 毫秒（P95，≥30 次采样/类别）。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：维修工角色 1（按 A02 参考图）；三类陷阱若干（尖刺组 A、压锤组 B、蒸汽喷口组 C）；检查点基座 3（地面/顶面同网格实例，共 6 个锚点）；终点维修装置 1；矿井背景装饰为表现层。\n- L02 场地（代码块冻结口径）：\n\n```text\n1 座矿井 × 3 段垂直区（米制，沿推进方向）：\n  段1 教学 40m；段2 长竖井 60m；段3 精密 50m\n上下接触面间距 6m，两面均为可行走接触面\n检查点：每段起点 1 个（双锚点：地面/顶面各一，锚点不与陷阱重叠）\n陷阱与物资布置、周期相位由 seed=1012 冻结并导出\n```\n\n- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（陷阱、检查点、终点装置）逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的装饰造型、配色、粒子参数与音色为生成自由度，不得评估为缺失；按 zkx 裁决交付 layout_manifest.json（实例 ID、坐标、碰撞体、通行关系、陷阱相位表、seed 与 hash；同版本同 seed 重开 diff=0；装饰 scene.glb 不替代数值关卡与碰撞体）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 重力切换与接触面（主机制）\n  - input：反转键（触发方：玩家）\n  - precondition：接触合法支撑面（地面或顶面）且 0.5 秒冷却已到期（AUD12）\n  - state_change：重力方向二态翻转 → 离地滞空（重力加速度 12 m/s²）→ 落到原「对侧」接触面并更新行走朝向（角色在 0.2 秒内旋转朝向，镜头保持水平，AUD12）\n  - observable：重力向量状态、朝向事件、落点事件（见 G03 oracle）\n  - invalid_case：滞空中或冷却中按反转 → 拒绝且无副作用\n  - recovery：坠落走 M03 复位\n- M02 定向陷阱\n  - input：接触判定（触发方：系统）\n  - precondition：处于游玩状态且陷阱相位按 G05 周期运行\n  - state_change：按判定表（本包冻结值）——尖刺组 A 仅对「正常重力·立地面」生效；顶部压锤组 B 仅对「反转重力·立顶面」生效（危险窗为 4 秒周期的后 1 秒）；侧向蒸汽组 C 两态均生效（仅段3，喷射窗为 3 秒周期的后 1 秒）；错误状态接触陷阱造成坠落（计 M03）\n  - observable：陷阱命中事件含重力方向与陷阱类型字段、周期相位时间戳\n  - invalid_case：收起/关闭相位接触不造成坠落\n  - recovery：坠落后回检查点锚点复位\n- M03 坠落复位\n  - input：掉出安全区或陷阱命中（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：回最近检查点对应重力方向的锚点（保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪，AUD10）、坠落计数 +1；第 6 次判负结算\n  - observable：reset 事件（含检查点 ID 与锚点面）、fall_count 流水\n  - invalid_case：结算后坠落不再触发复位\n  - recovery：判负走 V02；结算界面重开为最终出路\n- M04 胜负与重开\n  - input：终点装置交互完成 / 第 6 次坠落 / 结算界面（触发方：系统判定/玩家）\n  - precondition：处于游玩状态或结算状态\n  - state_change：终点交互完成 → 胜利结算（显示用时与坠落次数）；第 6 次坠落 → 失败结算（注明原因）；结算后玩法冻结；同帧裁决按 G06（判负优先）\n  - observable：win / lose(reason) 事件与结算面板\n  - invalid_case：结算后再触发判定被拒绝（每局一次）\n  - recovery：重开=全量重置（重力回正常、计数清零、相位按 seed 复现）\n\n## 7. 成功、失败与恢复 [V01–V06]\n\n- V01 成功条件：按序通过三段并完成终点装置交互 → 结算（显示用时与坠落次数）。\n- V02 失败条件：坠落计数达 6 次（超上限 5）→ 判负结算（注明「坠落超限」）；与终点同帧按 G06 判负优先。\n- V03 恢复语义：单次坠落回最近检查点对应重力方向锚点继续（计数保留、重力方向保留）；判负后一键重开。\n- V04 persistent_state：无（重开全量清空；检查点仅记录双锚点位置）。\n- V05 persistent_state 生命周期：动作级即时结算；局内状态（计数/时间）局内保留、重开清空；无跨局保留。\n- V06 软锁与不可达处理：不设永久软锁——陷阱周期与双锚点保证任一重力方向均有复位出路；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：矿井里的反向救援——深井中央的主重力核失控，矿道上下两面翻转不定，矿井濒临坍缩。\n- W02 场景所在地：一座三段垂直矿井（教学巷道 40 米、长竖井 60 米、精密检修段 50 米），上下两面均可行走，尽头是失稳的主重力核终点装置。\n- W03 玩家身份与当前任务动机：玩家是重力维修工，携带着反转扳手下井；动机是在矿道彻底坍缩前重启主重力核，让矿井恢复秩序。\n- W04 失败代价与结局表达：失败=第六次坠落，维修工被矿井引力乱流卷回井口（C03 失败意象）；胜利=主重力核重启、矿井灯光逐层亮起（C03 胜利意象）。\n- W05 叙事来源：重力反转=维修扳手的二态扳动（唯一腾空手段）；定向陷阱=失控引力对不同接触面的定向反噬（尖刺咬地面、压锤咬顶面、蒸汽两态皆险）；双锚点检查点=维修工安装的双面安全栓。全部原创。\n- W06 视觉风格与色彩材质：深矿井工业风＋暖色灯光点缀；主色=岩黑 #2B2F36、铜金 #C9A876、危险红 #C43B2F、重力青 #4FC3C9、灯暖橙 #E8A25C；材质为湿岩、锈铁、蒸汽铜管。\n- W07 环境氛围与声音语言：矿井低鸣与滴水为底；音效语言为「重力反转嗡鸣+金属陷阱+落面闷响」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代下井与失控主核 → 反转事件视频（C02）承载重力机制的过程叙事 → 结算视频（C03）收束；叙事提示不阻断控制、不改变数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：2.5D 侧视固定水平镜头（不随重力旋转）；前视安全区 ≥ 屏宽 30%；镜头仅位移不旋转；镜头重置仅在明确切场/复位时。\n- F02 关键操作镜头变化：反转瞬间镜头不旋转（仅角色 0.2 秒旋转朝向，AUD12）；落面短促下沉 0.05 秒；陷阱命中 0.08 秒轻微抖动（≤ 画面高度 1.5%）。设置提供「镜头震动开/关」与「减少动态效果」。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：矿井雾尘粒子、顶部吊灯摇晃、蒸汽管余热微光、滴水。纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 重力反转 | 角色离地＋0.2s 旋转朝向＋青色重力光圈扩散 | 重力反转嗡鸣 | 落面即停 |\n| 滞空失重 | 角色残影拖尾＋尘屑上扬 | 失重风切音 | 落面即停 |\n| 落面 | 落面尘土＋短促下沉 0.05s | 落面闷响 | 0.1s 结束 |\n| 陷阱命中 | 全屏红闪＋0.08s 镜头抖动 | 陷阱命中锐响 | 闪红 0.1s 结束 |\n| 坠落复位 | 角色淡入对应锚点＋检查点基座点亮 | 坠落复位音 | 玩家可控即停 |\n| 检查点激活 | 基座灯环亮起 | 检查点音 | 常亮 |\n| 压锤危险窗 | 压锤下落阴影预警 | 压锤机械预警音 | 危险窗结束 |\n| 蒸汽喷射 | 蒸汽喷射柱 | 蒸汽喷射音 | 喷射窗结束 |\n| 终点装置重启 | 装置点亮＋矿井灯光逐层亮起 | 胜利上扬音 | 进入结算 |\n| 判负 | 画面降饱和 | 低沉失败音 | 进入结算 |\n\n- F06 关键音效清单（one_shot 8 条，全部冻结需求）：重力反转嗡鸣、失重风切、落面闷响、陷阱命中锐响、坠落复位音、压锤机械预警音、蒸汽喷射音、胜利/失败结算音（胜利上扬/失败低沉各一）。混音优先级：陷阱与压锤/蒸汽预警 ＞ 反转/落面 ＞ 其余；环境循环：矿井低鸣（常驻，暂停静音、结算淡出 0.5 秒，接缝无爆音；恒低于预警音）。无配音需求。震动事件到调度日志 ≤50ms（含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available），无硬件时验证调度与禁用行为。\n- F07 VFX 信息性与遮挡约束：双锚点检查点基座与陷阱危险相位为信息类 VFX，必须清晰可辨（压锤收起/危险、蒸汽关闭/喷射可辨）；反转光圈不遮挡陷阱轮廓与 HUD；闪红 ≤0.1 秒不遮挡后续判定输入；隐藏状态（陷阱下一相位）不得被特效泄露。\n- F08 音画同步：反转嗡鸣与光圈同帧；落面闷响与尘土同帧；预警音与危险窗起始同帧。\n- F09 屏幕震动：仅陷阱命中 0.08 秒轻微抖动；暂停/结算/重开取消未结束的震动与特效；设置可关闭（关闭不影响判定与数值）。\n- F10 前端界面：标题（开始/设置/退出）→ 矿井 HUD（I06 全项）→ 结算面板（用时/坠落次数/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）；关键状态图标+文字并用（重力方向、坠落计数）；窗口失焦自动暂停；叙事节拍提示不阻断控制。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 深井下井（Opening，5 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入矿井之前，每局一次\n  - 内容与角色场景：矿井升降笼载着维修工沉入井道，头顶吊灯摇晃；镜头掠过上下双接触面，尽头失稳的主重力核泛着乱流红光\n  - 资产对应：维修工、矿井巷道与游戏内模型/贴图同源设计\n  - 可跳过：Enter/Space 或跳过按钮 → 直接进入段1；自然播完 → 进入段1\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 第一次翻转（Event，5 秒，1280×720@24fps）\n  - 触发时机：每局首次成功反转并落到顶面（G03 oracle 的首次 land(surface=ceiling)）时，每局一次\n  - 内容与角色场景：维修工扳动反转扳手，青色重力光圈荡开，镜头保持水平而角色旋转——上方变成脚下，顶面巷道在视野中展开\n  - 资产对应：维修工、顶面接触面与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接继续游玩（重力状态保持反转）；自然播完 → 继续游玩\n  - 状态一致：播放期间重力、移动与陷阱计时冻结，播放结束瞬间按冻结前状态恢复\n- C03 重力核重启（Ending，6 秒，1280×720@24fps，胜负共用双意象）\n  - 触发时机：V01 或 V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象=主重力核重启、矿井灯光逐层亮起、维修工收起扳手；失败意象=引力乱流卷起尘土、维修工被吊回井口、灯光逐层熄灭\n  - 资产对应：维修工、终点装置、矿井与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以在上下接触面间反转重力（M01）、按周期规避三类定向陷阱（M02）、坠落后从双锚点检查点复位续跑（M03），并重启终点装置获胜（V01）。\n- N02 流程与界面能力：标题、三段矿井、胜利/失败结算（区分原因）、暂停（含失焦自动暂停）、设置（震动/减少动态效果开关）、一键重开。\n- N03 演出能力：C01–C03 视频、F04–F09 全部事件反馈与音效（反转光圈/失重残影/落面尘土/陷阱红闪/双锚点基座）、矿井工业氛围层。\n- N04 输入范围：键盘为完整输入方式（A/D/←/→/Space/W/Esc/Enter）；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：§9 F06 冻结音效清单（8 条 one_shot＋1 条环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失；二段跳/蹲滑/抓钩等扩展平台机制与无限地图不在本轮验收分母（原收敛清单口径以此正向承载）。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 `images/generated_ref_01.png` → 尖刺陷阱 image-to-3D 输入与陷阱外观参考。\n- A02 `images/generated_ref_02.png` → 维修工角色 image-to-3D 输入与 T-pose 参考。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（跑动→反转→落面→过陷阱）；定向陷阱仍属移动系统内部规则，无跨系统因果链；双锚点检查点是唯一恢复路径（R1）；AUD10–12 的双锚点/接触面间距/周期冻结是可达性与状态边界修复，不改变难度档\"\n  downgrade_boundary: \"去掉定向陷阱判定表后仍为 S（更简）\"\n  upgrade_boundary: \"若反转状态改变陷阱系统之外的经济/成长系统，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：mine_mechanic, spike_trap, ceiling_hammer, steam_vent, dual_anchor_checkpoint, gravity_core_console。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：4 个；覆盖动作：run, gravity_flip, trap_react, fall_reset。\n- video/audio/mechanic/UI：分别为 3/10/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "fd0f043f7b937e05a92a18d52973d6187cd43f898c9468cccfb3af0e16e72628"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Pressured steam blast hiss from a wall vent during its jet second",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G012_sfx_008": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G012_gravity_mine",
+          "task_id": "G012_sfx_008",
+          "asset_name": "victory_sting",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Rising industrial victory sting as the gravity core reboots",
+          "duration_sec": 2.0,
+          "sample_rate": 48000,
+          "seed": 5128,
+          "trigger": "终点装置重启（胜利意象）",
+          "required_by_spec": true,
+          "spec_ref": "F05",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《翻转矿井的重力维修》｜重力反转平台机制输入规范\n\n```yaml\ncase_id: G012\nbase_case_id: G012\ntitle: 翻转矿井的重力维修\ncategory: Platformer / Runner\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1012\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《翻转矿井的重力维修》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 zkx 复核裁决——地面/顶面双检查点锚点与复位语义（AUD10）、三段距离与上下接触面间距、陷阱周期冻结（AUD11）、反转条件与镜头/角色旋转口径（AUD12）；补世界设定、镜头输入、演出反馈、过场视频与正向范围清单）；运行引擎：**Three.js（WebGL）**——选择理由：二态重力的短程物理翻转、上下行走面判定与矿井粒子以 Three.js 场景图＋轻量自研物理实现可控，浏览器即开即玩交付，目标平台桌面浏览器（Chrome/Edge 最新稳定版）；摄像机：2.5D 侧视固定水平（角色旋转、镜头不旋转）；输入：键盘；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：重力反转的公有领域机制可复用；本作全部名称、角色、场景、文案与美术原创。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的侧视重力反转平台游戏；文档存在不等于玩法完成。fixed_seed=1012 冻结三段陷阱与物资布置序列及相位。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2.5D 侧视重力反转平台，单人单局，3 段垂直矿井。本测例包含的能力：重力二态反转与上下接触面行走、定向陷阱与周期规避、地面/顶面双锚点检查点、坠落计数与判负、终点装置交互、开场/反转事件/结算视频、重力手感演出层。\n- S02 核心循环一句话：观察陷阱周期与重力方向 → 在正确接触面反转 → 落到对侧安全面 → 通过三段抵达终点。\n- S03 流程：开始界面 → 进入矿井（首次进入前播 C01）→ 段1 教学 → 段2 长竖井 → 段3 精密段 → 终点装置交互 → 结算（面板前播 C03）→ 重开或返回。\n- S04 最低完整流程：开始界面、可操作矿井、结算界面、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：坠落回最近检查点对应锚点继续（计数保留）；第 6 次坠落判负；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成\n  - state_change：进入「标题」状态；首次开始时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「段1」\n  - outcome：无跨局状态写入\n- S07 段1（教学 40 米）\n  - input：A/D 或 ←/→＝移动、Space/W＝重力反转、Esc＝暂停（触发方：玩家）；陷阱周期由 seed 相位驱动（触发方：系统）\n  - precondition：处于段1 状态\n  - state_change：按 §6 M01–M03 结算每次输入；重力方向、朝向、坠落计数实时更新\n  - feedback：按 §9 F05（反转光圈、落面尘土、陷阱红闪）\n  - next_actions：通过段1 →「段2」；坠落 → M03 复位；第 6 次坠落 →「失败结算」\n  - outcome：按 §7 V01/V02 判定\n- S08 段2（长竖井 60 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段1 已通过\n  - state_change：长竖井内定向陷阱迫使按重力方向选择反转时机；检查点锚点按 AUD10 双面记录\n  - feedback：同 S07\n  - next_actions：通过段2 →「段3」\n  - outcome：局内状态演进\n- S09 段3（精密 50 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段2 已通过\n  - state_change：蒸汽组（两态生效）加入精密规避；通过后抵达终点装置\n  - feedback：同 S07\n  - next_actions：终点装置交互完成 →「胜利结算」\n  - outcome：按 §7 V01 判定\n- S10 结算\n  - input：Enter=重开 / Esc=返回（触发方：玩家）\n  - precondition：V01 或 V02 成立\n  - state_change：进入对应结算；面板出现前按 §10 C03 播放结算视频（每局一次，胜负共用双意象）\n  - feedback：胜利面板显示用时与坠落次数；失败面板注明「坠落超限」\n  - next_actions：重开（全量重置）或返回标题\n  - outcome：无跨局状态写入\n- S11 暂停\n  - input：Esc（触发方：玩家）；窗口失焦自动触发（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，移动、重力、陷阱周期与计时全部冻结\n  - feedback：暂停面板（继续/重开/返回/设置）\n  - next_actions：恢复回到游玩\n  - outcome：恢复后状态逐字段一致\n\n## 3. 数值口径与全局规则 [G01–G06]\n\n- G01 统一刻度：米制；时间用游戏模拟秒（暂停冻结）；坠落计数为非负整数。\n- G02 数值（本包冻结值）：跑速 4.0 米/秒；反转后重力加速度 12 米/秒²；无跳跃键——反转即唯一腾空手段；反转键冷却 0.5 秒且滞空中不可再按（仅接触合法支撑面且冷却到期可反转，AUD12）；检查点 3 个（每段起点）；坠落次数上限 5 次（第 6 次判负）。\n- G03 状态转移 oracle：初始「正常重力·立于地面」，输入序列〔跑动 2 秒 → 按反转 → 滞空 → 落到顶部〕必然产生事件流 `flip(dir: normal→inverted)`、`airborne_enter`、`land(surface=ceiling, orientation=inverted)`、角色行走朝向翻转；任何偏离即 FAIL。\n- G04 关卡与接触面（zkx 裁决冻结）：三段推进距离 40/60/50 米；上下接触面间距 **6 米**（上下两面均为可行走接触面）；三段结构与陷阱布置由 seed=1012 冻结并导出相位。\n- G05 陷阱周期（zkx 裁决冻结）：压锤 4 秒周期＝前 3 秒收起、后 1 秒危险；蒸汽 3 秒周期＝前 2 秒关闭、后 1 秒喷射；尖刺常驻；生效重力态按 M02 判定表；相位由 seed 固定并随 layout_manifest 导出。\n- G06 暂停与复位裁决：Esc 冻结移动、重力与陷阱计时；窗口失焦自动暂停。检查点双锚点（AUD10）：每个检查点记录一对安全地面/顶面锚点；坠落复位保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪；锚点不得与陷阱重叠。坠落与终点交互同帧 → 判负优先。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：A/D 或 ←/→＝移动；Space 或 W＝重力反转；Esc＝暂停；Enter＝结算界面重开；终点装置交互由抵达触发（无独立按键）。\n- I02 输入语义边界：冷却中/滞空中按反转无效且无副作用；暂停/结算期间玩法键无效；被拒输入不产生事件。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；同帧互斥动作按 I01 列举顺序取首个。\n- I05 焦点与失焦：点击画布捕获输入焦点；窗口失焦自动暂停。\n- I06 UI 必显状态：当前重力方向（正常/反转）、朝向、坠落计数（0–5）、当前检查点编号、已用时间。\n- I07 输入延迟目标：按键到画面反馈 ≤100 毫秒（P95，≥30 次采样/类别）。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：维修工角色 1（按 A02 参考图）；三类陷阱若干（尖刺组 A、压锤组 B、蒸汽喷口组 C）；检查点基座 3（地面/顶面同网格实例，共 6 个锚点）；终点维修装置 1；矿井背景装饰为表现层。\n- L02 场地（代码块冻结口径）：\n\n```text\n1 座矿井 × 3 段垂直区（米制，沿推进方向）：\n  段1 教学 40m；段2 长竖井 60m；段3 精密 50m\n上下接触面间距 6m，两面均为可行走接触面\n检查点：每段起点 1 个（双锚点：地面/顶面各一，锚点不与陷阱重叠）\n陷阱与物资布置、周期相位由 seed=1012 冻结并导出\n```\n\n- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（陷阱、检查点、终点装置）逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的装饰造型、配色、粒子参数与音色为生成自由度，不得评估为缺失；按 zkx 裁决交付 layout_manifest.json（实例 ID、坐标、碰撞体、通行关系、陷阱相位表、seed 与 hash；同版本同 seed 重开 diff=0；装饰 scene.glb 不替代数值关卡与碰撞体）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 重力切换与接触面（主机制）\n  - input：反转键（触发方：玩家）\n  - precondition：接触合法支撑面（地面或顶面）且 0.5 秒冷却已到期（AUD12）\n  - state_change：重力方向二态翻转 → 离地滞空（重力加速度 12 m/s²）→ 落到原「对侧」接触面并更新行走朝向（角色在 0.2 秒内旋转朝向，镜头保持水平，AUD12）\n  - observable：重力向量状态、朝向事件、落点事件（见 G03 oracle）\n  - invalid_case：滞空中或冷却中按反转 → 拒绝且无副作用\n  - recovery：坠落走 M03 复位\n- M02 定向陷阱\n  - input：接触判定（触发方：系统）\n  - precondition：处于游玩状态且陷阱相位按 G05 周期运行\n  - state_change：按判定表（本包冻结值）——尖刺组 A 仅对「正常重力·立地面」生效；顶部压锤组 B 仅对「反转重力·立顶面」生效（危险窗为 4 秒周期的后 1 秒）；侧向蒸汽组 C 两态均生效（仅段3，喷射窗为 3 秒周期的后 1 秒）；错误状态接触陷阱造成坠落（计 M03）\n  - observable：陷阱命中事件含重力方向与陷阱类型字段、周期相位时间戳\n  - invalid_case：收起/关闭相位接触不造成坠落\n  - recovery：坠落后回检查点锚点复位\n- M03 坠落复位\n  - input：掉出安全区或陷阱命中（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：回最近检查点对应重力方向的锚点（保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪，AUD10）、坠落计数 +1；第 6 次判负结算\n  - observable：reset 事件（含检查点 ID 与锚点面）、fall_count 流水\n  - invalid_case：结算后坠落不再触发复位\n  - recovery：判负走 V02；结算界面重开为最终出路\n- M04 胜负与重开\n  - input：终点装置交互完成 / 第 6 次坠落 / 结算界面（触发方：系统判定/玩家）\n  - precondition：处于游玩状态或结算状态\n  - state_change：终点交互完成 → 胜利结算（显示用时与坠落次数）；第 6 次坠落 → 失败结算（注明原因）；结算后玩法冻结；同帧裁决按 G06（判负优先）\n  - observable：win / lose(reason) 事件与结算面板\n  - invalid_case：结算后再触发判定被拒绝（每局一次）\n  - recovery：重开=全量重置（重力回正常、计数清零、相位按 seed 复现）\n\n## 7. 成功、失败与恢复 [V01–V06]\n\n- V01 成功条件：按序通过三段并完成终点装置交互 → 结算（显示用时与坠落次数）。\n- V02 失败条件：坠落计数达 6 次（超上限 5）→ 判负结算（注明「坠落超限」）；与终点同帧按 G06 判负优先。\n- V03 恢复语义：单次坠落回最近检查点对应重力方向锚点继续（计数保留、重力方向保留）；判负后一键重开。\n- V04 persistent_state：无（重开全量清空；检查点仅记录双锚点位置）。\n- V05 persistent_state 生命周期：动作级即时结算；局内状态（计数/时间）局内保留、重开清空；无跨局保留。\n- V06 软锁与不可达处理：不设永久软锁——陷阱周期与双锚点保证任一重力方向均有复位出路；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：矿井里的反向救援——深井中央的主重力核失控，矿道上下两面翻转不定，矿井濒临坍缩。\n- W02 场景所在地：一座三段垂直矿井（教学巷道 40 米、长竖井 60 米、精密检修段 50 米），上下两面均可行走，尽头是失稳的主重力核终点装置。\n- W03 玩家身份与当前任务动机：玩家是重力维修工，携带着反转扳手下井；动机是在矿道彻底坍缩前重启主重力核，让矿井恢复秩序。\n- W04 失败代价与结局表达：失败=第六次坠落，维修工被矿井引力乱流卷回井口（C03 失败意象）；胜利=主重力核重启、矿井灯光逐层亮起（C03 胜利意象）。\n- W05 叙事来源：重力反转=维修扳手的二态扳动（唯一腾空手段）；定向陷阱=失控引力对不同接触面的定向反噬（尖刺咬地面、压锤咬顶面、蒸汽两态皆险）；双锚点检查点=维修工安装的双面安全栓。全部原创。\n- W06 视觉风格与色彩材质：深矿井工业风＋暖色灯光点缀；主色=岩黑 #2B2F36、铜金 #C9A876、危险红 #C43B2F、重力青 #4FC3C9、灯暖橙 #E8A25C；材质为湿岩、锈铁、蒸汽铜管。\n- W07 环境氛围与声音语言：矿井低鸣与滴水为底；音效语言为「重力反转嗡鸣+金属陷阱+落面闷响」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代下井与失控主核 → 反转事件视频（C02）承载重力机制的过程叙事 → 结算视频（C03）收束；叙事提示不阻断控制、不改变数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：2.5D 侧视固定水平镜头（不随重力旋转）；前视安全区 ≥ 屏宽 30%；镜头仅位移不旋转；镜头重置仅在明确切场/复位时。\n- F02 关键操作镜头变化：反转瞬间镜头不旋转（仅角色 0.2 秒旋转朝向，AUD12）；落面短促下沉 0.05 秒；陷阱命中 0.08 秒轻微抖动（≤ 画面高度 1.5%）。设置提供「镜头震动开/关」与「减少动态效果」。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：矿井雾尘粒子、顶部吊灯摇晃、蒸汽管余热微光、滴水。纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 重力反转 | 角色离地＋0.2s 旋转朝向＋青色重力光圈扩散 | 重力反转嗡鸣 | 落面即停 |\n| 滞空失重 | 角色残影拖尾＋尘屑上扬 | 失重风切音 | 落面即停 |\n| 落面 | 落面尘土＋短促下沉 0.05s | 落面闷响 | 0.1s 结束 |\n| 陷阱命中 | 全屏红闪＋0.08s 镜头抖动 | 陷阱命中锐响 | 闪红 0.1s 结束 |\n| 坠落复位 | 角色淡入对应锚点＋检查点基座点亮 | 坠落复位音 | 玩家可控即停 |\n| 检查点激活 | 基座灯环亮起 | 检查点音 | 常亮 |\n| 压锤危险窗 | 压锤下落阴影预警 | 压锤机械预警音 | 危险窗结束 |\n| 蒸汽喷射 | 蒸汽喷射柱 | 蒸汽喷射音 | 喷射窗结束 |\n| 终点装置重启 | 装置点亮＋矿井灯光逐层亮起 | 胜利上扬音 | 进入结算 |\n| 判负 | 画面降饱和 | 低沉失败音 | 进入结算 |\n\n- F06 关键音效清单（one_shot 8 条，全部冻结需求）：重力反转嗡鸣、失重风切、落面闷响、陷阱命中锐响、坠落复位音、压锤机械预警音、蒸汽喷射音、胜利/失败结算音（胜利上扬/失败低沉各一）。混音优先级：陷阱与压锤/蒸汽预警 ＞ 反转/落面 ＞ 其余；环境循环：矿井低鸣（常驻，暂停静音、结算淡出 0.5 秒，接缝无爆音；恒低于预警音）。无配音需求。震动事件到调度日志 ≤50ms（含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available），无硬件时验证调度与禁用行为。\n- F07 VFX 信息性与遮挡约束：双锚点检查点基座与陷阱危险相位为信息类 VFX，必须清晰可辨（压锤收起/危险、蒸汽关闭/喷射可辨）；反转光圈不遮挡陷阱轮廓与 HUD；闪红 ≤0.1 秒不遮挡后续判定输入；隐藏状态（陷阱下一相位）不得被特效泄露。\n- F08 音画同步：反转嗡鸣与光圈同帧；落面闷响与尘土同帧；预警音与危险窗起始同帧。\n- F09 屏幕震动：仅陷阱命中 0.08 秒轻微抖动；暂停/结算/重开取消未结束的震动与特效；设置可关闭（关闭不影响判定与数值）。\n- F10 前端界面：标题（开始/设置/退出）→ 矿井 HUD（I06 全项）→ 结算面板（用时/坠落次数/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）；关键状态图标+文字并用（重力方向、坠落计数）；窗口失焦自动暂停；叙事节拍提示不阻断控制。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 深井下井（Opening，5 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入矿井之前，每局一次\n  - 内容与角色场景：矿井升降笼载着维修工沉入井道，头顶吊灯摇晃；镜头掠过上下双接触面，尽头失稳的主重力核泛着乱流红光\n  - 资产对应：维修工、矿井巷道与游戏内模型/贴图同源设计\n  - 可跳过：Enter/Space 或跳过按钮 → 直接进入段1；自然播完 → 进入段1\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 第一次翻转（Event，5 秒，1280×720@24fps）\n  - 触发时机：每局首次成功反转并落到顶面（G03 oracle 的首次 land(surface=ceiling)）时，每局一次\n  - 内容与角色场景：维修工扳动反转扳手，青色重力光圈荡开，镜头保持水平而角色旋转——上方变成脚下，顶面巷道在视野中展开\n  - 资产对应：维修工、顶面接触面与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接继续游玩（重力状态保持反转）；自然播完 → 继续游玩\n  - 状态一致：播放期间重力、移动与陷阱计时冻结，播放结束瞬间按冻结前状态恢复\n- C03 重力核重启（Ending，6 秒，1280×720@24fps，胜负共用双意象）\n  - 触发时机：V01 或 V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象=主重力核重启、矿井灯光逐层亮起、维修工收起扳手；失败意象=引力乱流卷起尘土、维修工被吊回井口、灯光逐层熄灭\n  - 资产对应：维修工、终点装置、矿井与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以在上下接触面间反转重力（M01）、按周期规避三类定向陷阱（M02）、坠落后从双锚点检查点复位续跑（M03），并重启终点装置获胜（V01）。\n- N02 流程与界面能力：标题、三段矿井、胜利/失败结算（区分原因）、暂停（含失焦自动暂停）、设置（震动/减少动态效果开关）、一键重开。\n- N03 演出能力：C01–C03 视频、F04–F09 全部事件反馈与音效（反转光圈/失重残影/落面尘土/陷阱红闪/双锚点基座）、矿井工业氛围层。\n- N04 输入范围：键盘为完整输入方式（A/D/←/→/Space/W/Esc/Enter）；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：§9 F06 冻结音效清单（8 条 one_shot＋1 条环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失；二段跳/蹲滑/抓钩等扩展平台机制与无限地图不在本轮验收分母（原收敛清单口径以此正向承载）。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 `images/generated_ref_01.png` → 尖刺陷阱 image-to-3D 输入与陷阱外观参考。\n- A02 `images/generated_ref_02.png` → 维修工角色 image-to-3D 输入与 T-pose 参考。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（跑动→反转→落面→过陷阱）；定向陷阱仍属移动系统内部规则，无跨系统因果链；双锚点检查点是唯一恢复路径（R1）；AUD10–12 的双锚点/接触面间距/周期冻结是可达性与状态边界修复，不改变难度档\"\n  downgrade_boundary: \"去掉定向陷阱判定表后仍为 S（更简）\"\n  upgrade_boundary: \"若反转状态改变陷阱系统之外的经济/成长系统，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：mine_mechanic, spike_trap, ceiling_hammer, steam_vent, dual_anchor_checkpoint, gravity_core_console。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：4 个；覆盖动作：run, gravity_flip, trap_react, fall_reset。\n- video/audio/mechanic/UI：分别为 3/10/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "fd0f043f7b937e05a92a18d52973d6187cd43f898c9468cccfb3af0e16e72628"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Rising industrial victory sting as the gravity core reboots",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G012_sfx_009": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G012_gravity_mine",
+          "task_id": "G012_sfx_009",
+          "asset_name": "defeat_sting",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Low collapsing defeat tone with a fading lamp hum",
+          "duration_sec": 1.5,
+          "sample_rate": 48000,
+          "seed": 5129,
+          "trigger": "判负结算",
+          "required_by_spec": true,
+          "spec_ref": "F05",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《翻转矿井的重力维修》｜重力反转平台机制输入规范\n\n```yaml\ncase_id: G012\nbase_case_id: G012\ntitle: 翻转矿井的重力维修\ncategory: Platformer / Runner\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1012\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《翻转矿井的重力维修》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 zkx 复核裁决——地面/顶面双检查点锚点与复位语义（AUD10）、三段距离与上下接触面间距、陷阱周期冻结（AUD11）、反转条件与镜头/角色旋转口径（AUD12）；补世界设定、镜头输入、演出反馈、过场视频与正向范围清单）；运行引擎：**Three.js（WebGL）**——选择理由：二态重力的短程物理翻转、上下行走面判定与矿井粒子以 Three.js 场景图＋轻量自研物理实现可控，浏览器即开即玩交付，目标平台桌面浏览器（Chrome/Edge 最新稳定版）；摄像机：2.5D 侧视固定水平（角色旋转、镜头不旋转）；输入：键盘；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：重力反转的公有领域机制可复用；本作全部名称、角色、场景、文案与美术原创。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的侧视重力反转平台游戏；文档存在不等于玩法完成。fixed_seed=1012 冻结三段陷阱与物资布置序列及相位。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2.5D 侧视重力反转平台，单人单局，3 段垂直矿井。本测例包含的能力：重力二态反转与上下接触面行走、定向陷阱与周期规避、地面/顶面双锚点检查点、坠落计数与判负、终点装置交互、开场/反转事件/结算视频、重力手感演出层。\n- S02 核心循环一句话：观察陷阱周期与重力方向 → 在正确接触面反转 → 落到对侧安全面 → 通过三段抵达终点。\n- S03 流程：开始界面 → 进入矿井（首次进入前播 C01）→ 段1 教学 → 段2 长竖井 → 段3 精密段 → 终点装置交互 → 结算（面板前播 C03）→ 重开或返回。\n- S04 最低完整流程：开始界面、可操作矿井、结算界面、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：坠落回最近检查点对应锚点继续（计数保留）；第 6 次坠落判负；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成\n  - state_change：进入「标题」状态；首次开始时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「段1」\n  - outcome：无跨局状态写入\n- S07 段1（教学 40 米）\n  - input：A/D 或 ←/→＝移动、Space/W＝重力反转、Esc＝暂停（触发方：玩家）；陷阱周期由 seed 相位驱动（触发方：系统）\n  - precondition：处于段1 状态\n  - state_change：按 §6 M01–M03 结算每次输入；重力方向、朝向、坠落计数实时更新\n  - feedback：按 §9 F05（反转光圈、落面尘土、陷阱红闪）\n  - next_actions：通过段1 →「段2」；坠落 → M03 复位；第 6 次坠落 →「失败结算」\n  - outcome：按 §7 V01/V02 判定\n- S08 段2（长竖井 60 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段1 已通过\n  - state_change：长竖井内定向陷阱迫使按重力方向选择反转时机；检查点锚点按 AUD10 双面记录\n  - feedback：同 S07\n  - next_actions：通过段2 →「段3」\n  - outcome：局内状态演进\n- S09 段3（精密 50 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段2 已通过\n  - state_change：蒸汽组（两态生效）加入精密规避；通过后抵达终点装置\n  - feedback：同 S07\n  - next_actions：终点装置交互完成 →「胜利结算」\n  - outcome：按 §7 V01 判定\n- S10 结算\n  - input：Enter=重开 / Esc=返回（触发方：玩家）\n  - precondition：V01 或 V02 成立\n  - state_change：进入对应结算；面板出现前按 §10 C03 播放结算视频（每局一次，胜负共用双意象）\n  - feedback：胜利面板显示用时与坠落次数；失败面板注明「坠落超限」\n  - next_actions：重开（全量重置）或返回标题\n  - outcome：无跨局状态写入\n- S11 暂停\n  - input：Esc（触发方：玩家）；窗口失焦自动触发（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，移动、重力、陷阱周期与计时全部冻结\n  - feedback：暂停面板（继续/重开/返回/设置）\n  - next_actions：恢复回到游玩\n  - outcome：恢复后状态逐字段一致\n\n## 3. 数值口径与全局规则 [G01–G06]\n\n- G01 统一刻度：米制；时间用游戏模拟秒（暂停冻结）；坠落计数为非负整数。\n- G02 数值（本包冻结值）：跑速 4.0 米/秒；反转后重力加速度 12 米/秒²；无跳跃键——反转即唯一腾空手段；反转键冷却 0.5 秒且滞空中不可再按（仅接触合法支撑面且冷却到期可反转，AUD12）；检查点 3 个（每段起点）；坠落次数上限 5 次（第 6 次判负）。\n- G03 状态转移 oracle：初始「正常重力·立于地面」，输入序列〔跑动 2 秒 → 按反转 → 滞空 → 落到顶部〕必然产生事件流 `flip(dir: normal→inverted)`、`airborne_enter`、`land(surface=ceiling, orientation=inverted)`、角色行走朝向翻转；任何偏离即 FAIL。\n- G04 关卡与接触面（zkx 裁决冻结）：三段推进距离 40/60/50 米；上下接触面间距 **6 米**（上下两面均为可行走接触面）；三段结构与陷阱布置由 seed=1012 冻结并导出相位。\n- G05 陷阱周期（zkx 裁决冻结）：压锤 4 秒周期＝前 3 秒收起、后 1 秒危险；蒸汽 3 秒周期＝前 2 秒关闭、后 1 秒喷射；尖刺常驻；生效重力态按 M02 判定表；相位由 seed 固定并随 layout_manifest 导出。\n- G06 暂停与复位裁决：Esc 冻结移动、重力与陷阱计时；窗口失焦自动暂停。检查点双锚点（AUD10）：每个检查点记录一对安全地面/顶面锚点；坠落复位保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪；锚点不得与陷阱重叠。坠落与终点交互同帧 → 判负优先。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：A/D 或 ←/→＝移动；Space 或 W＝重力反转；Esc＝暂停；Enter＝结算界面重开；终点装置交互由抵达触发（无独立按键）。\n- I02 输入语义边界：冷却中/滞空中按反转无效且无副作用；暂停/结算期间玩法键无效；被拒输入不产生事件。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；同帧互斥动作按 I01 列举顺序取首个。\n- I05 焦点与失焦：点击画布捕获输入焦点；窗口失焦自动暂停。\n- I06 UI 必显状态：当前重力方向（正常/反转）、朝向、坠落计数（0–5）、当前检查点编号、已用时间。\n- I07 输入延迟目标：按键到画面反馈 ≤100 毫秒（P95，≥30 次采样/类别）。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：维修工角色 1（按 A02 参考图）；三类陷阱若干（尖刺组 A、压锤组 B、蒸汽喷口组 C）；检查点基座 3（地面/顶面同网格实例，共 6 个锚点）；终点维修装置 1；矿井背景装饰为表现层。\n- L02 场地（代码块冻结口径）：\n\n```text\n1 座矿井 × 3 段垂直区（米制，沿推进方向）：\n  段1 教学 40m；段2 长竖井 60m；段3 精密 50m\n上下接触面间距 6m，两面均为可行走接触面\n检查点：每段起点 1 个（双锚点：地面/顶面各一，锚点不与陷阱重叠）\n陷阱与物资布置、周期相位由 seed=1012 冻结并导出\n```\n\n- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（陷阱、检查点、终点装置）逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的装饰造型、配色、粒子参数与音色为生成自由度，不得评估为缺失；按 zkx 裁决交付 layout_manifest.json（实例 ID、坐标、碰撞体、通行关系、陷阱相位表、seed 与 hash；同版本同 seed 重开 diff=0；装饰 scene.glb 不替代数值关卡与碰撞体）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 重力切换与接触面（主机制）\n  - input：反转键（触发方：玩家）\n  - precondition：接触合法支撑面（地面或顶面）且 0.5 秒冷却已到期（AUD12）\n  - state_change：重力方向二态翻转 → 离地滞空（重力加速度 12 m/s²）→ 落到原「对侧」接触面并更新行走朝向（角色在 0.2 秒内旋转朝向，镜头保持水平，AUD12）\n  - observable：重力向量状态、朝向事件、落点事件（见 G03 oracle）\n  - invalid_case：滞空中或冷却中按反转 → 拒绝且无副作用\n  - recovery：坠落走 M03 复位\n- M02 定向陷阱\n  - input：接触判定（触发方：系统）\n  - precondition：处于游玩状态且陷阱相位按 G05 周期运行\n  - state_change：按判定表（本包冻结值）——尖刺组 A 仅对「正常重力·立地面」生效；顶部压锤组 B 仅对「反转重力·立顶面」生效（危险窗为 4 秒周期的后 1 秒）；侧向蒸汽组 C 两态均生效（仅段3，喷射窗为 3 秒周期的后 1 秒）；错误状态接触陷阱造成坠落（计 M03）\n  - observable：陷阱命中事件含重力方向与陷阱类型字段、周期相位时间戳\n  - invalid_case：收起/关闭相位接触不造成坠落\n  - recovery：坠落后回检查点锚点复位\n- M03 坠落复位\n  - input：掉出安全区或陷阱命中（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：回最近检查点对应重力方向的锚点（保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪，AUD10）、坠落计数 +1；第 6 次判负结算\n  - observable：reset 事件（含检查点 ID 与锚点面）、fall_count 流水\n  - invalid_case：结算后坠落不再触发复位\n  - recovery：判负走 V02；结算界面重开为最终出路\n- M04 胜负与重开\n  - input：终点装置交互完成 / 第 6 次坠落 / 结算界面（触发方：系统判定/玩家）\n  - precondition：处于游玩状态或结算状态\n  - state_change：终点交互完成 → 胜利结算（显示用时与坠落次数）；第 6 次坠落 → 失败结算（注明原因）；结算后玩法冻结；同帧裁决按 G06（判负优先）\n  - observable：win / lose(reason) 事件与结算面板\n  - invalid_case：结算后再触发判定被拒绝（每局一次）\n  - recovery：重开=全量重置（重力回正常、计数清零、相位按 seed 复现）\n\n## 7. 成功、失败与恢复 [V01–V06]\n\n- V01 成功条件：按序通过三段并完成终点装置交互 → 结算（显示用时与坠落次数）。\n- V02 失败条件：坠落计数达 6 次（超上限 5）→ 判负结算（注明「坠落超限」）；与终点同帧按 G06 判负优先。\n- V03 恢复语义：单次坠落回最近检查点对应重力方向锚点继续（计数保留、重力方向保留）；判负后一键重开。\n- V04 persistent_state：无（重开全量清空；检查点仅记录双锚点位置）。\n- V05 persistent_state 生命周期：动作级即时结算；局内状态（计数/时间）局内保留、重开清空；无跨局保留。\n- V06 软锁与不可达处理：不设永久软锁——陷阱周期与双锚点保证任一重力方向均有复位出路；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：矿井里的反向救援——深井中央的主重力核失控，矿道上下两面翻转不定，矿井濒临坍缩。\n- W02 场景所在地：一座三段垂直矿井（教学巷道 40 米、长竖井 60 米、精密检修段 50 米），上下两面均可行走，尽头是失稳的主重力核终点装置。\n- W03 玩家身份与当前任务动机：玩家是重力维修工，携带着反转扳手下井；动机是在矿道彻底坍缩前重启主重力核，让矿井恢复秩序。\n- W04 失败代价与结局表达：失败=第六次坠落，维修工被矿井引力乱流卷回井口（C03 失败意象）；胜利=主重力核重启、矿井灯光逐层亮起（C03 胜利意象）。\n- W05 叙事来源：重力反转=维修扳手的二态扳动（唯一腾空手段）；定向陷阱=失控引力对不同接触面的定向反噬（尖刺咬地面、压锤咬顶面、蒸汽两态皆险）；双锚点检查点=维修工安装的双面安全栓。全部原创。\n- W06 视觉风格与色彩材质：深矿井工业风＋暖色灯光点缀；主色=岩黑 #2B2F36、铜金 #C9A876、危险红 #C43B2F、重力青 #4FC3C9、灯暖橙 #E8A25C；材质为湿岩、锈铁、蒸汽铜管。\n- W07 环境氛围与声音语言：矿井低鸣与滴水为底；音效语言为「重力反转嗡鸣+金属陷阱+落面闷响」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代下井与失控主核 → 反转事件视频（C02）承载重力机制的过程叙事 → 结算视频（C03）收束；叙事提示不阻断控制、不改变数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：2.5D 侧视固定水平镜头（不随重力旋转）；前视安全区 ≥ 屏宽 30%；镜头仅位移不旋转；镜头重置仅在明确切场/复位时。\n- F02 关键操作镜头变化：反转瞬间镜头不旋转（仅角色 0.2 秒旋转朝向，AUD12）；落面短促下沉 0.05 秒；陷阱命中 0.08 秒轻微抖动（≤ 画面高度 1.5%）。设置提供「镜头震动开/关」与「减少动态效果」。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：矿井雾尘粒子、顶部吊灯摇晃、蒸汽管余热微光、滴水。纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 重力反转 | 角色离地＋0.2s 旋转朝向＋青色重力光圈扩散 | 重力反转嗡鸣 | 落面即停 |\n| 滞空失重 | 角色残影拖尾＋尘屑上扬 | 失重风切音 | 落面即停 |\n| 落面 | 落面尘土＋短促下沉 0.05s | 落面闷响 | 0.1s 结束 |\n| 陷阱命中 | 全屏红闪＋0.08s 镜头抖动 | 陷阱命中锐响 | 闪红 0.1s 结束 |\n| 坠落复位 | 角色淡入对应锚点＋检查点基座点亮 | 坠落复位音 | 玩家可控即停 |\n| 检查点激活 | 基座灯环亮起 | 检查点音 | 常亮 |\n| 压锤危险窗 | 压锤下落阴影预警 | 压锤机械预警音 | 危险窗结束 |\n| 蒸汽喷射 | 蒸汽喷射柱 | 蒸汽喷射音 | 喷射窗结束 |\n| 终点装置重启 | 装置点亮＋矿井灯光逐层亮起 | 胜利上扬音 | 进入结算 |\n| 判负 | 画面降饱和 | 低沉失败音 | 进入结算 |\n\n- F06 关键音效清单（one_shot 8 条，全部冻结需求）：重力反转嗡鸣、失重风切、落面闷响、陷阱命中锐响、坠落复位音、压锤机械预警音、蒸汽喷射音、胜利/失败结算音（胜利上扬/失败低沉各一）。混音优先级：陷阱与压锤/蒸汽预警 ＞ 反转/落面 ＞ 其余；环境循环：矿井低鸣（常驻，暂停静音、结算淡出 0.5 秒，接缝无爆音；恒低于预警音）。无配音需求。震动事件到调度日志 ≤50ms（含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available），无硬件时验证调度与禁用行为。\n- F07 VFX 信息性与遮挡约束：双锚点检查点基座与陷阱危险相位为信息类 VFX，必须清晰可辨（压锤收起/危险、蒸汽关闭/喷射可辨）；反转光圈不遮挡陷阱轮廓与 HUD；闪红 ≤0.1 秒不遮挡后续判定输入；隐藏状态（陷阱下一相位）不得被特效泄露。\n- F08 音画同步：反转嗡鸣与光圈同帧；落面闷响与尘土同帧；预警音与危险窗起始同帧。\n- F09 屏幕震动：仅陷阱命中 0.08 秒轻微抖动；暂停/结算/重开取消未结束的震动与特效；设置可关闭（关闭不影响判定与数值）。\n- F10 前端界面：标题（开始/设置/退出）→ 矿井 HUD（I06 全项）→ 结算面板（用时/坠落次数/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）；关键状态图标+文字并用（重力方向、坠落计数）；窗口失焦自动暂停；叙事节拍提示不阻断控制。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 深井下井（Opening，5 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入矿井之前，每局一次\n  - 内容与角色场景：矿井升降笼载着维修工沉入井道，头顶吊灯摇晃；镜头掠过上下双接触面，尽头失稳的主重力核泛着乱流红光\n  - 资产对应：维修工、矿井巷道与游戏内模型/贴图同源设计\n  - 可跳过：Enter/Space 或跳过按钮 → 直接进入段1；自然播完 → 进入段1\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 第一次翻转（Event，5 秒，1280×720@24fps）\n  - 触发时机：每局首次成功反转并落到顶面（G03 oracle 的首次 land(surface=ceiling)）时，每局一次\n  - 内容与角色场景：维修工扳动反转扳手，青色重力光圈荡开，镜头保持水平而角色旋转——上方变成脚下，顶面巷道在视野中展开\n  - 资产对应：维修工、顶面接触面与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接继续游玩（重力状态保持反转）；自然播完 → 继续游玩\n  - 状态一致：播放期间重力、移动与陷阱计时冻结，播放结束瞬间按冻结前状态恢复\n- C03 重力核重启（Ending，6 秒，1280×720@24fps，胜负共用双意象）\n  - 触发时机：V01 或 V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象=主重力核重启、矿井灯光逐层亮起、维修工收起扳手；失败意象=引力乱流卷起尘土、维修工被吊回井口、灯光逐层熄灭\n  - 资产对应：维修工、终点装置、矿井与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以在上下接触面间反转重力（M01）、按周期规避三类定向陷阱（M02）、坠落后从双锚点检查点复位续跑（M03），并重启终点装置获胜（V01）。\n- N02 流程与界面能力：标题、三段矿井、胜利/失败结算（区分原因）、暂停（含失焦自动暂停）、设置（震动/减少动态效果开关）、一键重开。\n- N03 演出能力：C01–C03 视频、F04–F09 全部事件反馈与音效（反转光圈/失重残影/落面尘土/陷阱红闪/双锚点基座）、矿井工业氛围层。\n- N04 输入范围：键盘为完整输入方式（A/D/←/→/Space/W/Esc/Enter）；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：§9 F06 冻结音效清单（8 条 one_shot＋1 条环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失；二段跳/蹲滑/抓钩等扩展平台机制与无限地图不在本轮验收分母（原收敛清单口径以此正向承载）。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 `images/generated_ref_01.png` → 尖刺陷阱 image-to-3D 输入与陷阱外观参考。\n- A02 `images/generated_ref_02.png` → 维修工角色 image-to-3D 输入与 T-pose 参考。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（跑动→反转→落面→过陷阱）；定向陷阱仍属移动系统内部规则，无跨系统因果链；双锚点检查点是唯一恢复路径（R1）；AUD10–12 的双锚点/接触面间距/周期冻结是可达性与状态边界修复，不改变难度档\"\n  downgrade_boundary: \"去掉定向陷阱判定表后仍为 S（更简）\"\n  upgrade_boundary: \"若反转状态改变陷阱系统之外的经济/成长系统，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：mine_mechanic, spike_trap, ceiling_hammer, steam_vent, dual_anchor_checkpoint, gravity_core_console。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：4 个；覆盖动作：run, gravity_flip, trap_react, fall_reset。\n- video/audio/mechanic/UI：分别为 3/10/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "fd0f043f7b937e05a92a18d52973d6187cd43f898c9468cccfb3af0e16e72628"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Low collapsing defeat tone with a fading lamp hum",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G012_sfx_010": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G012_gravity_mine",
+          "task_id": "G012_sfx_010",
+          "asset_name": "mine_ambient_loop",
+          "audio_type": "sound_effect",
+          "sound_category": "ambient_loop",
+          "prompt": "Deep mine ambience, low structural drone with water drips and distant creaks, seamless loop, no music",
+          "duration_sec": 30.0,
+          "sample_rate": 48000,
+          "seed": 5130,
+          "trigger": "常驻环境音（暂停静音、结算淡出；恒低于预警音）",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": true,
+          "stop_condition": "pause_or_scene_exit",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《翻转矿井的重力维修》｜重力反转平台机制输入规范\n\n```yaml\ncase_id: G012\nbase_case_id: G012\ntitle: 翻转矿井的重力维修\ncategory: Platformer / Runner\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1012\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《翻转矿井的重力维修》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 zkx 复核裁决——地面/顶面双检查点锚点与复位语义（AUD10）、三段距离与上下接触面间距、陷阱周期冻结（AUD11）、反转条件与镜头/角色旋转口径（AUD12）；补世界设定、镜头输入、演出反馈、过场视频与正向范围清单）；运行引擎：**Three.js（WebGL）**——选择理由：二态重力的短程物理翻转、上下行走面判定与矿井粒子以 Three.js 场景图＋轻量自研物理实现可控，浏览器即开即玩交付，目标平台桌面浏览器（Chrome/Edge 最新稳定版）；摄像机：2.5D 侧视固定水平（角色旋转、镜头不旋转）；输入：键盘；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：重力反转的公有领域机制可复用；本作全部名称、角色、场景、文案与美术原创。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的侧视重力反转平台游戏；文档存在不等于玩法完成。fixed_seed=1012 冻结三段陷阱与物资布置序列及相位。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2.5D 侧视重力反转平台，单人单局，3 段垂直矿井。本测例包含的能力：重力二态反转与上下接触面行走、定向陷阱与周期规避、地面/顶面双锚点检查点、坠落计数与判负、终点装置交互、开场/反转事件/结算视频、重力手感演出层。\n- S02 核心循环一句话：观察陷阱周期与重力方向 → 在正确接触面反转 → 落到对侧安全面 → 通过三段抵达终点。\n- S03 流程：开始界面 → 进入矿井（首次进入前播 C01）→ 段1 教学 → 段2 长竖井 → 段3 精密段 → 终点装置交互 → 结算（面板前播 C03）→ 重开或返回。\n- S04 最低完整流程：开始界面、可操作矿井、结算界面、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：坠落回最近检查点对应锚点继续（计数保留）；第 6 次坠落判负；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成\n  - state_change：进入「标题」状态；首次开始时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「段1」\n  - outcome：无跨局状态写入\n- S07 段1（教学 40 米）\n  - input：A/D 或 ←/→＝移动、Space/W＝重力反转、Esc＝暂停（触发方：玩家）；陷阱周期由 seed 相位驱动（触发方：系统）\n  - precondition：处于段1 状态\n  - state_change：按 §6 M01–M03 结算每次输入；重力方向、朝向、坠落计数实时更新\n  - feedback：按 §9 F05（反转光圈、落面尘土、陷阱红闪）\n  - next_actions：通过段1 →「段2」；坠落 → M03 复位；第 6 次坠落 →「失败结算」\n  - outcome：按 §7 V01/V02 判定\n- S08 段2（长竖井 60 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段1 已通过\n  - state_change：长竖井内定向陷阱迫使按重力方向选择反转时机；检查点锚点按 AUD10 双面记录\n  - feedback：同 S07\n  - next_actions：通过段2 →「段3」\n  - outcome：局内状态演进\n- S09 段3（精密 50 米）\n  - input：同 S07（触发方：玩家/系统）\n  - precondition：段2 已通过\n  - state_change：蒸汽组（两态生效）加入精密规避；通过后抵达终点装置\n  - feedback：同 S07\n  - next_actions：终点装置交互完成 →「胜利结算」\n  - outcome：按 §7 V01 判定\n- S10 结算\n  - input：Enter=重开 / Esc=返回（触发方：玩家）\n  - precondition：V01 或 V02 成立\n  - state_change：进入对应结算；面板出现前按 §10 C03 播放结算视频（每局一次，胜负共用双意象）\n  - feedback：胜利面板显示用时与坠落次数；失败面板注明「坠落超限」\n  - next_actions：重开（全量重置）或返回标题\n  - outcome：无跨局状态写入\n- S11 暂停\n  - input：Esc（触发方：玩家）；窗口失焦自动触发（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，移动、重力、陷阱周期与计时全部冻结\n  - feedback：暂停面板（继续/重开/返回/设置）\n  - next_actions：恢复回到游玩\n  - outcome：恢复后状态逐字段一致\n\n## 3. 数值口径与全局规则 [G01–G06]\n\n- G01 统一刻度：米制；时间用游戏模拟秒（暂停冻结）；坠落计数为非负整数。\n- G02 数值（本包冻结值）：跑速 4.0 米/秒；反转后重力加速度 12 米/秒²；无跳跃键——反转即唯一腾空手段；反转键冷却 0.5 秒且滞空中不可再按（仅接触合法支撑面且冷却到期可反转，AUD12）；检查点 3 个（每段起点）；坠落次数上限 5 次（第 6 次判负）。\n- G03 状态转移 oracle：初始「正常重力·立于地面」，输入序列〔跑动 2 秒 → 按反转 → 滞空 → 落到顶部〕必然产生事件流 `flip(dir: normal→inverted)`、`airborne_enter`、`land(surface=ceiling, orientation=inverted)`、角色行走朝向翻转；任何偏离即 FAIL。\n- G04 关卡与接触面（zkx 裁决冻结）：三段推进距离 40/60/50 米；上下接触面间距 **6 米**（上下两面均为可行走接触面）；三段结构与陷阱布置由 seed=1012 冻结并导出相位。\n- G05 陷阱周期（zkx 裁决冻结）：压锤 4 秒周期＝前 3 秒收起、后 1 秒危险；蒸汽 3 秒周期＝前 2 秒关闭、后 1 秒喷射；尖刺常驻；生效重力态按 M02 判定表；相位由 seed 固定并随 layout_manifest 导出。\n- G06 暂停与复位裁决：Esc 冻结移动、重力与陷阱计时；窗口失焦自动暂停。检查点双锚点（AUD10）：每个检查点记录一对安全地面/顶面锚点；坠落复位保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪；锚点不得与陷阱重叠。坠落与终点交互同帧 → 判负优先。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：A/D 或 ←/→＝移动；Space 或 W＝重力反转；Esc＝暂停；Enter＝结算界面重开；终点装置交互由抵达触发（无独立按键）。\n- I02 输入语义边界：冷却中/滞空中按反转无效且无副作用；暂停/结算期间玩法键无效；被拒输入不产生事件。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；同帧互斥动作按 I01 列举顺序取首个。\n- I05 焦点与失焦：点击画布捕获输入焦点；窗口失焦自动暂停。\n- I06 UI 必显状态：当前重力方向（正常/反转）、朝向、坠落计数（0–5）、当前检查点编号、已用时间。\n- I07 输入延迟目标：按键到画面反馈 ≤100 毫秒（P95，≥30 次采样/类别）。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：维修工角色 1（按 A02 参考图）；三类陷阱若干（尖刺组 A、压锤组 B、蒸汽喷口组 C）；检查点基座 3（地面/顶面同网格实例，共 6 个锚点）；终点维修装置 1；矿井背景装饰为表现层。\n- L02 场地（代码块冻结口径）：\n\n```text\n1 座矿井 × 3 段垂直区（米制，沿推进方向）：\n  段1 教学 40m；段2 长竖井 60m；段3 精密 50m\n上下接触面间距 6m，两面均为可行走接触面\n检查点：每段起点 1 个（双锚点：地面/顶面各一，锚点不与陷阱重叠）\n陷阱与物资布置、周期相位由 seed=1012 冻结并导出\n```\n\n- L03 目标物/交互物/场景/UI 对象：§3–§9 引用的界面元素（标题/HUD/结算/暂停面板、视频播放层）与交互物（陷阱、检查点、终点装置）逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的装饰造型、配色、粒子参数与音色为生成自由度，不得评估为缺失；按 zkx 裁决交付 layout_manifest.json（实例 ID、坐标、碰撞体、通行关系、陷阱相位表、seed 与 hash；同版本同 seed 重开 diff=0；装饰 scene.glb 不替代数值关卡与碰撞体）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 重力切换与接触面（主机制）\n  - input：反转键（触发方：玩家）\n  - precondition：接触合法支撑面（地面或顶面）且 0.5 秒冷却已到期（AUD12）\n  - state_change：重力方向二态翻转 → 离地滞空（重力加速度 12 m/s²）→ 落到原「对侧」接触面并更新行走朝向（角色在 0.2 秒内旋转朝向，镜头保持水平，AUD12）\n  - observable：重力向量状态、朝向事件、落点事件（见 G03 oracle）\n  - invalid_case：滞空中或冷却中按反转 → 拒绝且无副作用\n  - recovery：坠落走 M03 复位\n- M02 定向陷阱\n  - input：接触判定（触发方：系统）\n  - precondition：处于游玩状态且陷阱相位按 G05 周期运行\n  - state_change：按判定表（本包冻结值）——尖刺组 A 仅对「正常重力·立地面」生效；顶部压锤组 B 仅对「反转重力·立顶面」生效（危险窗为 4 秒周期的后 1 秒）；侧向蒸汽组 C 两态均生效（仅段3，喷射窗为 3 秒周期的后 1 秒）；错误状态接触陷阱造成坠落（计 M03）\n  - observable：陷阱命中事件含重力方向与陷阱类型字段、周期相位时间戳\n  - invalid_case：收起/关闭相位接触不造成坠落\n  - recovery：坠落后回检查点锚点复位\n- M03 坠落复位\n  - input：掉出安全区或陷阱命中（触发方：系统）\n  - precondition：处于游玩状态\n  - state_change：回最近检查点对应重力方向的锚点（保留重力方向并选对应锚点，速度归零、动作解除、翻转冷却就绪，AUD10）、坠落计数 +1；第 6 次判负结算\n  - observable：reset 事件（含检查点 ID 与锚点面）、fall_count 流水\n  - invalid_case：结算后坠落不再触发复位\n  - recovery：判负走 V02；结算界面重开为最终出路\n- M04 胜负与重开\n  - input：终点装置交互完成 / 第 6 次坠落 / 结算界面（触发方：系统判定/玩家）\n  - precondition：处于游玩状态或结算状态\n  - state_change：终点交互完成 → 胜利结算（显示用时与坠落次数）；第 6 次坠落 → 失败结算（注明原因）；结算后玩法冻结；同帧裁决按 G06（判负优先）\n  - observable：win / lose(reason) 事件与结算面板\n  - invalid_case：结算后再触发判定被拒绝（每局一次）\n  - recovery：重开=全量重置（重力回正常、计数清零、相位按 seed 复现）\n\n## 7. 成功、失败与恢复 [V01–V06]\n\n- V01 成功条件：按序通过三段并完成终点装置交互 → 结算（显示用时与坠落次数）。\n- V02 失败条件：坠落计数达 6 次（超上限 5）→ 判负结算（注明「坠落超限」）；与终点同帧按 G06 判负优先。\n- V03 恢复语义：单次坠落回最近检查点对应重力方向锚点继续（计数保留、重力方向保留）；判负后一键重开。\n- V04 persistent_state：无（重开全量清空；检查点仅记录双锚点位置）。\n- V05 persistent_state 生命周期：动作级即时结算；局内状态（计数/时间）局内保留、重开清空；无跨局保留。\n- V06 软锁与不可达处理：不设永久软锁——陷阱周期与双锚点保证任一重力方向均有复位出路；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：矿井里的反向救援——深井中央的主重力核失控，矿道上下两面翻转不定，矿井濒临坍缩。\n- W02 场景所在地：一座三段垂直矿井（教学巷道 40 米、长竖井 60 米、精密检修段 50 米），上下两面均可行走，尽头是失稳的主重力核终点装置。\n- W03 玩家身份与当前任务动机：玩家是重力维修工，携带着反转扳手下井；动机是在矿道彻底坍缩前重启主重力核，让矿井恢复秩序。\n- W04 失败代价与结局表达：失败=第六次坠落，维修工被矿井引力乱流卷回井口（C03 失败意象）；胜利=主重力核重启、矿井灯光逐层亮起（C03 胜利意象）。\n- W05 叙事来源：重力反转=维修扳手的二态扳动（唯一腾空手段）；定向陷阱=失控引力对不同接触面的定向反噬（尖刺咬地面、压锤咬顶面、蒸汽两态皆险）；双锚点检查点=维修工安装的双面安全栓。全部原创。\n- W06 视觉风格与色彩材质：深矿井工业风＋暖色灯光点缀；主色=岩黑 #2B2F36、铜金 #C9A876、危险红 #C43B2F、重力青 #4FC3C9、灯暖橙 #E8A25C；材质为湿岩、锈铁、蒸汽铜管。\n- W07 环境氛围与声音语言：矿井低鸣与滴水为底；音效语言为「重力反转嗡鸣+金属陷阱+落面闷响」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代下井与失控主核 → 反转事件视频（C02）承载重力机制的过程叙事 → 结算视频（C03）收束；叙事提示不阻断控制、不改变数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：2.5D 侧视固定水平镜头（不随重力旋转）；前视安全区 ≥ 屏宽 30%；镜头仅位移不旋转；镜头重置仅在明确切场/复位时。\n- F02 关键操作镜头变化：反转瞬间镜头不旋转（仅角色 0.2 秒旋转朝向，AUD12）；落面短促下沉 0.05 秒；陷阱命中 0.08 秒轻微抖动（≤ 画面高度 1.5%）。设置提供「镜头震动开/关」与「减少动态效果」。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：矿井雾尘粒子、顶部吊灯摇晃、蒸汽管余热微光、滴水。纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 重力反转 | 角色离地＋0.2s 旋转朝向＋青色重力光圈扩散 | 重力反转嗡鸣 | 落面即停 |\n| 滞空失重 | 角色残影拖尾＋尘屑上扬 | 失重风切音 | 落面即停 |\n| 落面 | 落面尘土＋短促下沉 0.05s | 落面闷响 | 0.1s 结束 |\n| 陷阱命中 | 全屏红闪＋0.08s 镜头抖动 | 陷阱命中锐响 | 闪红 0.1s 结束 |\n| 坠落复位 | 角色淡入对应锚点＋检查点基座点亮 | 坠落复位音 | 玩家可控即停 |\n| 检查点激活 | 基座灯环亮起 | 检查点音 | 常亮 |\n| 压锤危险窗 | 压锤下落阴影预警 | 压锤机械预警音 | 危险窗结束 |\n| 蒸汽喷射 | 蒸汽喷射柱 | 蒸汽喷射音 | 喷射窗结束 |\n| 终点装置重启 | 装置点亮＋矿井灯光逐层亮起 | 胜利上扬音 | 进入结算 |\n| 判负 | 画面降饱和 | 低沉失败音 | 进入结算 |\n\n- F06 关键音效清单（one_shot 8 条，全部冻结需求）：重力反转嗡鸣、失重风切、落面闷响、陷阱命中锐响、坠落复位音、压锤机械预警音、蒸汽喷射音、胜利/失败结算音（胜利上扬/失败低沉各一）。混音优先级：陷阱与压锤/蒸汽预警 ＞ 反转/落面 ＞ 其余；环境循环：矿井低鸣（常驻，暂停静音、结算淡出 0.5 秒，接缝无爆音；恒低于预警音）。无配音需求。震动事件到调度日志 ≤50ms（含 source_event_id/单调时间/amplitude/duration_ms/channel/device_available），无硬件时验证调度与禁用行为。\n- F07 VFX 信息性与遮挡约束：双锚点检查点基座与陷阱危险相位为信息类 VFX，必须清晰可辨（压锤收起/危险、蒸汽关闭/喷射可辨）；反转光圈不遮挡陷阱轮廓与 HUD；闪红 ≤0.1 秒不遮挡后续判定输入；隐藏状态（陷阱下一相位）不得被特效泄露。\n- F08 音画同步：反转嗡鸣与光圈同帧；落面闷响与尘土同帧；预警音与危险窗起始同帧。\n- F09 屏幕震动：仅陷阱命中 0.08 秒轻微抖动；暂停/结算/重开取消未结束的震动与特效；设置可关闭（关闭不影响判定与数值）。\n- F10 前端界面：标题（开始/设置/退出）→ 矿井 HUD（I06 全项）→ 结算面板（用时/坠落次数/原因/重开/返回）→ 暂停面板（继续/重开/返回/设置）；关键状态图标+文字并用（重力方向、坠落计数）；窗口失焦自动暂停；叙事节拍提示不阻断控制。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 深井下井（Opening，5 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入矿井之前，每局一次\n  - 内容与角色场景：矿井升降笼载着维修工沉入井道，头顶吊灯摇晃；镜头掠过上下双接触面，尽头失稳的主重力核泛着乱流红光\n  - 资产对应：维修工、矿井巷道与游戏内模型/贴图同源设计\n  - 可跳过：Enter/Space 或跳过按钮 → 直接进入段1；自然播完 → 进入段1\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 第一次翻转（Event，5 秒，1280×720@24fps）\n  - 触发时机：每局首次成功反转并落到顶面（G03 oracle 的首次 land(surface=ceiling)）时，每局一次\n  - 内容与角色场景：维修工扳动反转扳手，青色重力光圈荡开，镜头保持水平而角色旋转——上方变成脚下，顶面巷道在视野中展开\n  - 资产对应：维修工、顶面接触面与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接继续游玩（重力状态保持反转）；自然播完 → 继续游玩\n  - 状态一致：播放期间重力、移动与陷阱计时冻结，播放结束瞬间按冻结前状态恢复\n- C03 重力核重启（Ending，6 秒，1280×720@24fps，胜负共用双意象）\n  - 触发时机：V01 或 V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象=主重力核重启、矿井灯光逐层亮起、维修工收起扳手；失败意象=引力乱流卷起尘土、维修工被吊回井口、灯光逐层熄灭\n  - 资产对应：维修工、终点装置、矿井与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以在上下接触面间反转重力（M01）、按周期规避三类定向陷阱（M02）、坠落后从双锚点检查点复位续跑（M03），并重启终点装置获胜（V01）。\n- N02 流程与界面能力：标题、三段矿井、胜利/失败结算（区分原因）、暂停（含失焦自动暂停）、设置（震动/减少动态效果开关）、一键重开。\n- N03 演出能力：C01–C03 视频、F04–F09 全部事件反馈与音效（反转光圈/失重残影/落面尘土/陷阱红闪/双锚点基座）、矿井工业氛围层。\n- N04 输入范围：键盘为完整输入方式（A/D/←/→/Space/W/Esc/Enter）；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：§9 F06 冻结音效清单（8 条 one_shot＋1 条环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失；二段跳/蹲滑/抓钩等扩展平台机制与无限地图不在本轮验收分母（原收敛清单口径以此正向承载）。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 `images/generated_ref_01.png` → 尖刺陷阱 image-to-3D 输入与陷阱外观参考。\n- A02 `images/generated_ref_02.png` → 维修工角色 image-to-3D 输入与 T-pose 参考。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（跑动→反转→落面→过陷阱）；定向陷阱仍属移动系统内部规则，无跨系统因果链；双锚点检查点是唯一恢复路径（R1）；AUD10–12 的双锚点/接触面间距/周期冻结是可达性与状态边界修复，不改变难度档\"\n  downgrade_boundary: \"去掉定向陷阱判定表后仍为 S（更简）\"\n  upgrade_boundary: \"若反转状态改变陷阱系统之外的经济/成长系统，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：mine_mechanic, spike_trap, ceiling_hammer, steam_vent, dual_anchor_checkpoint, gravity_core_console。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：4 个；覆盖动作：run, gravity_flip, trap_react, fall_reset。\n- video/audio/mechanic/UI：分别为 3/10/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "fd0f043f7b937e05a92a18d52973d6187cd43f898c9468cccfb3af0e16e72628"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Deep mine ambience, low structural drone with water drips and distant creaks, seamless loop, no music",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    }
+  },
+  "cg": {},
+  "3d": {
+    "G012_scene_001": {
+      "schema": "generated_per_asset_req.v1",
+      "task_id": "G012_scene_001",
+      "game_id": "G012_gravity_mine",
+      "sources_sha256": "3ff867d07f78419c04a4bb482265d2fddd6bff85c525341fadb8d77fa426879a",
+      "policy": {
+        "version": "generated_req.v1",
+        "model": "gpt-6.1-sol",
+        "rubric_source": "full general_requirement.txt and exact priority task JSON prompt; generated without asset evidence",
+        "score_supported": "100 * PASS / (PASS + FAIL); null if denominator is zero",
+        "score_all_lower_bound": "100 * PASS / all_checks; UNVERIFIED is not a confirmed failure",
+        "coverage": "100 * (PASS + FAIL) / all_checks",
+        "comparison": "same frozen rubric across providers; report counts and coverage",
+        "req_vs_fidelity": "requirement checks are separate from DINO image similarity",
+        "static_limit": "metric units, rigging, physics, runtime behavior require additional evidence; do not infer from screenshots"
+      },
+      "dimensions": [
+        {
+          "id": "requirement_compliance",
+          "checks": [
+            {
+              "fail_criterion": "场景明确不是深矿井，或呈现多座彼此独立的矿井。",
+              "id": "R01",
+              "pass_criterion": "场景主体可辨识为一座具有深井空间特征的矿井。",
+              "requirement": "场景主体为一座深矿井。",
+              "sources": [
+                {
+                  "quote": "One deep mine",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "视图仅展示局部岩壁或外壳，无法判断矿井身份及整体数量。"
+            },
+            {
+              "fail_criterion": "整体结构展示充分，明确不是三个区段，或不具有垂直矿井区段结构。",
+              "id": "R02",
+              "pass_criterion": "整体结构可辨为三个垂直矿井区段；不以实际米制长度作为图像判据。",
+              "requirement": "矿井具有三个垂直区段。",
+              "sources": [
+                {
+                  "quote": "three vertical sections of 40/60/50 meters",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "区段被遮挡、裁切或边界无法辨识，不能确认数量与结构。"
+            },
+            {
+              "fail_criterion": "相关空间展示充分，但缺失地面或顶面，或二者没有形成上下相对的矿道结构。",
+              "id": "R03",
+              "pass_criterion": "可见上下相对、其间留有矿道空间的地面与顶面表面。",
+              "requirement": "矿道具有上下相对的地面与顶面结构。",
+              "sources": [
+                {
+                  "quote": "walkable floor and walkable ceiling 6 meters apart",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "内部表面不可见，无法确认地面与顶面的空间关系；实际可行走性及间距另行核验。"
+            },
+            {
+              "fail_criterion": "矿道上部展示充分但没有吊灯，或灯具明确仅为落地、壁装等非悬挂形式。",
+              "id": "R04",
+              "pass_criterion": "可辨识灯具悬挂于矿井上方结构的形态。",
+              "requirement": "矿井内设有悬挂式灯具。",
+              "sources": [
+                {
+                  "quote": "hanging lamps",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "灯具或悬挂关系被遮挡，无法确认安装形式。"
+            },
+            {
+              "fail_criterion": "岩面明确表现为干燥材质，或完整可见的矿井中缺少岩石表面。",
+              "id": "R05",
+              "pass_criterion": "岩石表面具有可辨的湿润材质观感。",
+              "requirement": "矿井岩石呈现湿润材质。",
+              "sources": [
+                {
+                  "quote": "wet rock",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "照明或表面可见程度不足以区分湿润与干燥材质。"
+            },
+            {
+              "fail_criterion": "场景展示充分但没有管道，或管道明确呈非铜材质。",
+              "id": "R06",
+              "pass_criterion": "可辨识铜质金属外观的管道构件；不要求静态图证明其输送蒸汽的功能。",
+              "requirement": "矿井中具有铜质蒸汽管道的可见构件。",
+              "sources": [
+                {
+                  "quote": "copper steam pipes",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "管道被遮挡，或照明使铜材质无法辨认。"
+            },
+            {
+              "fail_criterion": "照明明确为整体均匀明亮，或局部工作照明明确仅呈冷色，缺少暗环境中的暖光区域。",
+              "id": "R07",
+              "pass_criterion": "较暗的矿井环境中可见局部暖色工作照明区域。",
+              "requirement": "暗环境中形成局部暖色工作灯光。",
+              "sources": [
+                {
+                  "quote": "warm work-light pockets in the dark",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "渲染使用覆盖资产照明的统一展示光，无法判断场景原有明暗与灯光色调。"
+            },
+            {
+              "fail_criterion": "可见空间与设施的设计明确不符合矿井工业风。",
+              "id": "R08",
+              "pass_criterion": "矿井空间及设施整体体现工业作业环境的设计风格，不额外限定装饰数量或造型。",
+              "requirement": "场景采用深矿井工业风。",
+              "sources": [
+                {
+                  "quote": "深矿井工业风",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "仅能看到缺乏风格辨识信息的局部表面。"
+            },
+            {
+              "fail_criterion": "出现由场景资产自带、布置于画面下半部的文字展示区域。",
+              "id": "R09",
+              "pass_criterion": "六视角中未见资产自带的下半部文字展示区域。",
+              "requirement": "场景不得包含下半部文字展示。",
+              "sources": [
+                {
+                  "quote": "不得出现下半部文字、拼贴面板、物体 lineup 或 UI。",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "无法区分文字来自资产本身还是渲染器的外部标注。"
+            },
+            {
+              "fail_criterion": "场景以多个拼贴面板组织矿井内容。",
+              "id": "R10",
+              "pass_criterion": "场景空间直接呈现，未采用拼贴面板形式。",
+              "requirement": "场景不得采用拼贴面板形式。",
+              "sources": [
+                {
+                  "quote": "不得出现下半部文字、拼贴面板、物体 lineup 或 UI。",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "视图不足以判断面板属于资产内容还是外部展示排版。"
+            },
+            {
+              "fail_criterion": "矿井部件被作为脱离场景空间关系的独立物体陈列。",
+              "id": "R11",
+              "pass_criterion": "物件按连贯矿井空间关系布置，未呈现独立物体 lineup。",
+              "requirement": "场景不得呈现物体 lineup。",
+              "sources": [
+                {
+                  "quote": "必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "仅见局部物件，无法判断其是否属于连贯矿井空间。"
+            },
+            {
+              "fail_criterion": "场景资产本身包含界面面板、HUD 或其他 UI 内容。",
+              "id": "R12",
+              "pass_criterion": "六视角中未见场景资产自带的 UI 内容。",
+              "requirement": "场景不得包含 UI。",
+              "sources": [
+                {
+                  "quote": "不得出现下半部文字、拼贴面板、物体 lineup 或 UI。",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "无法区分界面内容来自场景资产还是外部渲染工具。"
+            }
+          ]
+        }
+      ],
+      "deferred_requirements": [
+        {
+          "reason": "固定六视角缺少可靠的米制标定，不能证明绝对长度与间距；需核验场景坐标或尺寸数据。",
+          "requirement": "三个区段的推进距离分别为40、60、50米，上下接触面间距为6米。",
+          "sources": [
+            {
+              "quote": "three vertical sections of 40/60/50 meters",
+              "source": "task_prompt"
+            },
+            {
+              "quote": "walkable floor and walkable ceiling 6 meters apart",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "表面可见不等于实际可行走；通行、支撑判定与碰撞体需在机制阶段核验。",
+          "requirement": "地面和顶面均可行走，碰撞体由mechanic阶段按规范制作。",
+          "sources": [
+            {
+              "quote": "walkable floor and walkable ceiling",
+              "source": "task_prompt"
+            },
+            {
+              "quote": "碰撞体由 mechanic 阶段按 spec 制作（L04）",
+              "source": "task_json"
+            }
+          ]
+        },
+        {
+          "reason": "检查点锚点属于布局与运行数据，未要求必须有可见标记；其坐标及与陷阱的重叠关系需数据核验，不据此要求本场景包含独立检查点模型。",
+          "requirement": "每段起点设置一个检查点，具有地面、顶面双锚点，且锚点不与陷阱重叠。",
+          "sources": [
+            {
+              "quote": "检查点每段起点 1 个（地面/顶面双锚点，锚点不与陷阱重叠）",
+              "source": "task_json"
+            }
+          ]
+        },
+        {
+          "reason": "固定静态视图不能证明随机种子、导出数据或重开后的布局一致性。",
+          "requirement": "布局使用seed=1012冻结，并通过布局清单验证同版本同seed重开一致性。",
+          "sources": [
+            {
+              "quote": "1 座矿井×3 段（40/60/50m，seed=1012 冻结）",
+              "source": "task_json"
+            },
+            {
+              "quote": "同版本同 seed 重开 diff=0",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "周期、危险窗口、常驻行为及相位导出需要时间序列与运行数据，不能由静态视图证明；不作为本场景造型检查。",
+          "requirement": "陷阱按指定周期运行，尖刺常驻，且固定并导出相位。",
+          "sources": [
+            {
+              "quote": "压锤 4s 周期（3 收 1 危）、蒸汽 3s 周期（2 关 1 喷）、尖刺常驻，相位 seed 固定并导出",
+              "source": "task_json"
+            }
+          ]
+        }
+      ],
+      "conflicts": []
+    },
+    "G012_gravity_mine_obj_004": {
+      "schema": "generated_per_asset_req.v1",
+      "task_id": "G012_gravity_mine_obj_004",
+      "game_id": "G012_gravity_mine",
+      "sources_sha256": "4a3d8aa3bc746df9346fe88a1e1f1715aad1d89c093f020d30e405adda6b2d51",
+      "policy": {
+        "version": "generated_req.v1",
+        "model": "gpt-6.1-sol",
+        "rubric_source": "full general_requirement.txt and exact priority task JSON prompt; generated without asset evidence",
+        "score_supported": "100 * PASS / (PASS + FAIL); null if denominator is zero",
+        "score_all_lower_bound": "100 * PASS / all_checks; UNVERIFIED is not a confirmed failure",
+        "coverage": "100 * (PASS + FAIL) / all_checks",
+        "comparison": "same frozen rubric across providers; report counts and coverage",
+        "req_vs_fidelity": "requirement checks are separate from DINO image similarity",
+        "static_limit": "metric units, rigging, physics, runtime behavior require additional evidence; do not infer from screenshots"
+      },
+      "dimensions": [
+        {
+          "id": "requirement_compliance",
+          "checks": [
+            {
+              "fail_criterion": "完整视图显示资产明显属于其他物件，无法辨认为蒸汽阀门喷口。",
+              "id": "R01",
+              "pass_criterion": "整体可辨认为带有阀门设备特征的蒸汽喷口，不限定阀门的具体控制构件形状。",
+              "requirement": "资产身份为蒸汽阀门喷口。",
+              "sources": [
+                {
+                  "quote": "steam valve vent",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "主体被遮挡或视图不足，无法判断设备身份。"
+            },
+            {
+              "fail_criterion": "出现多套独立设备、设备陈列或与喷口无关的独立物体。",
+              "id": "R02",
+              "pass_criterion": "六视角呈现一套完整设备，其必要构件共同组成同一个蒸汽喷口。",
+              "requirement": "仅包含一个蒸汽喷口设备。",
+              "sources": [
+                {
+                  "quote": "single object",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "裁切或遮挡使设备数量及构件归属无法确认。"
+            },
+            {
+              "fail_criterion": "完整视图显示设备采用独立落地等其他安装结构，且不具备壁挂安装关系或界面。",
+              "id": "R03",
+              "pass_criterion": "可见明确的贴墙安装关系，或可辨认的壁挂安装界面；无需附带完整墙体。",
+              "requirement": "设备采用壁挂式结构。",
+              "sources": [
+                {
+                  "quote": "wall-mounted",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "安装侧不可见，无法确认壁挂结构。"
+            },
+            {
+              "fail_criterion": "设备各侧清楚可见，但缺少可辨认的喷嘴部件。",
+              "id": "R04",
+              "pass_criterion": "设备具有可辨认的喷嘴部件，不限定其具体截面、长度或开口形状。",
+              "requirement": "设备必须包含喷嘴。",
+              "sources": [
+                {
+                  "quote": "with a brass nozzle",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "喷嘴所在区域被遮挡或显示过小，无法确认部件是否存在。"
+            },
+            {
+              "fail_criterion": "喷嘴明显表现为塑料、石材等其他材质，或呈现与黄铜明显不符的金属外观。",
+              "id": "R05",
+              "pass_criterion": "喷嘴具有可辨认的黄铜色泽与金属表面表现，不要求特定反射强度或精确色值。",
+              "requirement": "喷嘴呈现黄铜材质。",
+              "sources": [
+                {
+                  "quote": "brass nozzle",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "光照、曝光或材质显示方式使喷嘴色泽及金属属性无法判断。"
+            },
+            {
+              "fail_criterion": "整体采用高度细分、连续圆润的精细造型，缺乏低多边形的形体简化特征。",
+              "id": "R06",
+              "pass_criterion": "主要体块经过明显简化，以低多边形造型表达设备，不据此推断实际三角面数。",
+              "requirement": "整体采用低多边形设计风格。",
+              "sources": [
+                {
+                  "quote": "low-poly style",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "渲染尺寸或遮挡导致主要体块的简化程度无法辨认。"
+            },
+            {
+              "fail_criterion": "主要表面呈连续光滑过渡，缺少要求的平面切面表现。",
+              "id": "R07",
+              "pass_criterion": "主要表面可见平坦面片及明确的面间转折。",
+              "requirement": "表面采用平坦切面表现。",
+              "sources": [
+                {
+                  "quote": "flat faceted surfaces",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "光照过平、过曝或分辨率不足，无法区分平面切面与平滑表面。"
+            },
+            {
+              "fail_criterion": "外轮廓被细碎突起或复杂交叠打散，主要体块难以辨认。",
+              "id": "R08",
+              "pass_criterion": "外轮廓简洁清楚，主体和喷嘴等主要体块易于分辨。",
+              "requirement": "设备具有清晰简洁的轮廓。",
+              "sources": [
+                {
+                  "quote": "clean silhouette",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "背景、裁切或遮挡使外轮廓无法辨认。"
+            },
+            {
+              "fail_criterion": "可见精细雕刻、细密划痕、密集微小纹理等细表面细节。",
+              "id": "R09",
+              "pass_criterion": "表面保持简化，以大块色面和粗尺度构造表达，没有精细表面装饰。",
+              "requirement": "不添加精细表面细节。",
+              "sources": [
+                {
+                  "quote": "no fine surface detail",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "表面显示过小或模糊，无法确认是否存在精细细节。"
+            },
+            {
+              "fail_criterion": "设备明显采用与矿井工业主题不相容的装饰或造型风格。",
+              "id": "R10",
+              "pass_criterion": "设备呈现适用于深矿井的实用工业机械设计语言；不要求附带矿井环境或灯光。",
+              "requirement": "设备符合深矿井工业风格。",
+              "sources": [
+                {
+                  "quote": "深矿井工业风",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "可见形体信息不足，无法判断工业设计风格。"
+            }
+          ]
+        }
+      ],
+      "deferred_requirements": [
+        {
+          "reason": "静态渲染无法可靠区分喷流来自运行时特效、固定几何或贴图，也无法证明其生成方式；未显示喷流同样不能证明运行时实现符合要求。",
+          "requirement": "蒸汽喷流仅由运行时VFX生成。",
+          "sources": [
+            {
+              "quote": "jet made by runtime VFX only",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "周期长度与关闭、喷射阶段的持续时间需要连续运行或时间记录验证，固定六视角无法证明。",
+          "requirement": "蒸汽危险周期为3秒，其中前2秒关闭、后1秒喷射。",
+          "sources": [
+            {
+              "quote": "3-second cycle hazard",
+              "source": "task_prompt"
+            },
+            {
+              "quote": "蒸汽 3 秒周期＝前 2 秒关闭、后 1 秒喷射",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "重力态下的危险判定与段落放置属于运行时机制和关卡配置，不能由单个喷口的静态外观证明。",
+          "requirement": "蒸汽陷阱仅用于段3，并对两种重力态生效。",
+          "sources": [
+            {
+              "quote": "侧向蒸汽组 C 两态均生效（仅段3，喷射窗为 3 秒周期的后 1 秒）",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "实际三角面数及其是否已尽量精简需要网格数据验证；静态图像只能检查低多边形外观，且该表述未提供可判定的数值阈值。",
+          "requirement": "尽量减少三角面数量。",
+          "sources": [
+            {
+              "quote": "minimal triangle count",
+              "source": "task_prompt"
+            }
+          ]
+        }
+      ],
+      "conflicts": []
+    },
+    "G012_gravity_mine_obj_005": {
+      "schema": "generated_per_asset_req.v1",
+      "task_id": "G012_gravity_mine_obj_005",
+      "game_id": "G012_gravity_mine",
+      "sources_sha256": "13c77641370da5a79fc7774fca3f265f518cd7bdea082c29fd154f62087b1057",
+      "policy": {
+        "version": "generated_req.v1",
+        "model": "gpt-6.1-sol",
+        "rubric_source": "full general_requirement.txt and exact priority task JSON prompt; generated without asset evidence",
+        "score_supported": "100 * PASS / (PASS + FAIL); null if denominator is zero",
+        "score_all_lower_bound": "100 * PASS / all_checks; UNVERIFIED is not a confirmed failure",
+        "coverage": "100 * (PASS + FAIL) / all_checks",
+        "comparison": "same frozen rubric across providers; report counts and coverage",
+        "req_vs_fidelity": "requirement checks are separate from DINO image similarity",
+        "static_limit": "metric units, rigging, physics, runtime behavior require additional evidence; do not infer from screenshots"
+      },
+      "dimensions": [
+        {
+          "id": "requirement_compliance",
+          "checks": [
+            {
+              "fail_criterion": "主体明确不是基座，或缺少基座主体。",
+              "id": "R01",
+              "pass_criterion": "六视角中可识别出作为检查点主体的基座形态。",
+              "requirement": "资产主体应为检查点基座。",
+              "sources": [
+                {
+                  "quote": "Single checkpoint pedestal base",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "主体被遮挡或呈现不完整，无法判断是否为基座。"
+            },
+            {
+              "fail_criterion": "资产包含多个独立基座，或呈现为多个独立物体的陈列组合。",
+              "id": "R02",
+              "pass_criterion": "资产呈现为一个完整基座物体，灯环等部件属于该物体。",
+              "requirement": "仅提供一个基座物体。",
+              "sources": [
+                {
+                  "quote": "single object",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "无法区分画面中的其他物体属于资产本体还是渲染布景。"
+            },
+            {
+              "fail_criterion": "相关表面充分可见，但没有灯环，或仅有不构成环形的灯点。",
+              "id": "R03",
+              "pass_criterion": "至少一个视角能清楚辨认基座上的环形灯部件或环形灯区。",
+              "requirement": "基座应具有可辨认的灯环。",
+              "sources": [
+                {
+                  "quote": "warm lamp ring",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "基座灯环亮起",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "灯环所在区域不可见，或分辨率不足以辨认其形状。"
+            },
+            {
+              "fail_criterion": "灯环的灯色充分可见，但明确呈冷色或其他不符合暖橙灯色的外观。",
+              "id": "R04",
+              "pass_criterion": "灯环呈可辨认的暖橙色灯光材质外观。",
+              "requirement": "灯环应呈现暖橙色灯光材质外观。",
+              "sources": [
+                {
+                  "quote": "warm lamp ring state shown by material",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "灯暖橙 #E8A25C",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "灯环未显现灯色，或照明、曝光使其材质颜色无法判断；不凭渲染像素核验精确色值。"
+            },
+            {
+              "fail_criterion": "整体明确采用繁复、精密写实的几何造型，与低多边形风格不符。",
+              "id": "R05",
+              "pass_criterion": "主体以简化的几何体块表达，整体具有明确的低多边形风格。",
+              "requirement": "整体造型应采用低多边形风格。",
+              "sources": [
+                {
+                  "quote": "low-poly style",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "视角、遮挡或分辨率不足以辨认造型风格。"
+            },
+            {
+              "fail_criterion": "主要可见表面均呈连续圆滑外观，没有要求的平直分面表现。",
+              "id": "R06",
+              "pass_criterion": "主要可见表面呈平面化、分面式外观，面与面之间的方向变化可辨。",
+              "requirement": "表面应具有平直分面的视觉表现。",
+              "sources": [
+                {
+                  "quote": "flat faceted surfaces",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "照明过平、过曝或画面过小，无法判断表面分面特征。"
+            },
+            {
+              "fail_criterion": "外轮廓存在明显杂乱的细碎突出或纠缠，使基座整体形态难以辨认。",
+              "id": "R07",
+              "pass_criterion": "各视角中的外轮廓明确、简洁，主体形态容易辨认。",
+              "requirement": "基座应具有干净清晰的轮廓。",
+              "sources": [
+                {
+                  "quote": "clean silhouette",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "资产与背景无法分离，或裁切、遮挡导致轮廓不可判断。"
+            },
+            {
+              "fail_criterion": "表面明显包含精细刻纹、密集微小构件或细密纹理等细节表现。",
+              "id": "R08",
+              "pass_criterion": "可见表面保持简化，没有精细表面细节。",
+              "requirement": "不应添加精细表面细节。",
+              "sources": [
+                {
+                  "quote": "no fine surface detail",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "画面清晰度不足，无法区分表面简化与细节未被显示。"
+            },
+            {
+              "fail_criterion": "整体明确采用与矿井工业设施不相容的设计风格。",
+              "id": "R09",
+              "pass_criterion": "基座的整体设计可识别为矿井工业设施，并与低多边形表达相容。",
+              "requirement": "基座应符合深矿井工业风。",
+              "sources": [
+                {
+                  "quote": "深矿井工业风",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "可见设计信息不足以判断工业风格。"
+            }
+          ]
+        }
+      ],
+      "deferred_requirements": [
+        {
+          "reason": "六视角只能检查外观，不能证明地面与顶面的安装、支撑及安全锚点功能；原文也未规定可据此检查的对称结构或安装接口。",
+          "requirement": "同一基座可用于地面和顶面的安全锚点。",
+          "sources": [
+            {
+              "quote": "used as both floor and ceiling safety anchor",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "是否共享同一网格并采用实例化，需要检查场景或资源结构，不能从单个资产的静态渲染证明。",
+          "requirement": "地面与顶面使用同一网格实例。",
+          "sources": [
+            {
+              "quote": "same mesh instance on both surfaces",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "实际三角面数量与是否达到最少需要网格统计；原文没有给出可用于视觉验收的数量阈值。",
+          "requirement": "尽量减少三角面数量。",
+          "sources": [
+            {
+              "quote": "minimal triangle count",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "静态渲染可检查当前灯环外观，但不能证明状态由材质参数驱动，也不能验证激活时点亮及持续常亮的行为。",
+          "requirement": "通过材质表达灯环状态，并在检查点激活后保持灯环亮起。",
+          "sources": [
+            {
+              "quote": "warm lamp ring state shown by material",
+              "source": "task_prompt"
+            },
+            {
+              "quote": "| 检查点激活 | 基座灯环亮起 | 检查点音 | 常亮 |",
+              "source": "general_requirement"
+            }
+          ]
+        }
+      ],
+      "conflicts": []
+    }
   }
 }

@@ -13,5 +13,920 @@
     "G057_scene_001": {
       "assertions": []
     }
+  },
+  "audio": {
+    "G057_sfx_001": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G057_rhythm_machine_hall",
+          "task_id": "G057_sfx_001",
+          "asset_name": "note_burst_perfect",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Crisp bright chime burst with a warm tail, rhythm-game hit",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5571,
+          "trigger": "PERFECT 判定",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《机械音乐厅的节奏演奏》｜下落式节奏判定机制输入规范\n\n```yaml\ncase_id: G057\nbase_case_id: G057\ntitle: 机械音乐厅的节奏演奏\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1057\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《机械音乐厅的节奏演奏》；版本：mechanics-v3（2026-10-11 完整性修订：补谱面乐段、触屏/手柄统一判定、输入延迟红线、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘、触屏（HTML5）与手柄（可选）。\n- 原创边界：本作全部名称、场景、文案与美术必须原创；**音频必须为原创或公有领域曲目，不得使用任何商业作品的乐曲、录音或谱面**；不使用任何商业作品的名称、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 谱面实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的下落式节奏游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：下落式单谱面节奏游戏，单人。本测例包含的能力：三乐段谱面（热身/主题/终曲）、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、三设备统一判定管线、开场/终曲/结算视频。\n- S02 核心循环一句话：音符下落 → 判定窗口输入 → 命中评级 → 连击累积 → 结算。\n- S03 流程：开始界面 →（可选）校准 → 演奏单谱面 → 结算（评级/得分/最大连击）→ 重开。\n- S04 最低完整流程：开始界面、演奏、结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：血条归零即刻判负并可直接重开；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与开始界面 → 校准（可选）→ 演奏（热身/主题/终曲三段）→ 结算 → 重开。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与开始界面\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始演奏」\n  - precondition：构建可启动且谱面/音频按 seed=1057 冻结加载\n  - state_change：进入「开始界面」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：开始界面按 §9 F10 呈现（演奏/校准/设置/当前输入设备图标）\n  - next_actions：进入「校准（可选）」或「演奏」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 校准（可选）\n  - input：跟随 8 次提示节拍点击（触发方：玩家）\n  - precondition：从开始界面进入校准\n  - state_change：测得全局补偿值并即时生效（G06）\n  - feedback：每次点击显示 Δt 与当前中位值\n  - next_actions：返回开始界面或直接进入「演奏」\n  - outcome：补偿值存入设置（非局内状态）\n- S08 热身段（0–15 秒）\n  - input：D/F/J/K（或触屏四分区/手柄面键）（触发方：玩家）\n  - precondition：演奏开始且当前乐段＝热身\n  - state_change：仅点击型音符、密度低；判定/得分/连击/血条按 G03–G05 结算\n  - feedback：节拍灯与音符判定反馈按 §9 F05\n  - next_actions：15 秒边界 → `section_change` →「主题段」\n  - outcome：得分与连击局内累计\n- S09 主题段（15–70 秒）\n  - input：同 S08（触发方：玩家）\n  - precondition：热身段结束\n  - state_change：全型音符（点击＋长按）按谱面推进\n  - feedback：齿轮转动与轨道灯光随节奏脉动\n  - next_actions：70 秒边界 → `section_change`（提前 2 秒「终曲」提示）→「终曲段」\n  - outcome：局内状态持续\n- S10 终曲段（70 秒–曲尾）\n  - input：同 S08（触发方：玩家）\n  - precondition：主题段结束且终曲提示已显示\n  - state_change：密度较主题段 +50%、出现双押、下落速度 ×1.15（G08）；首次进入时按 §10 C02 触发终曲演出视频（每局一次）\n  - feedback：终曲灯光全亮与更强的命中反馈\n  - next_actions：谱面完成 →「结算」（先播 C03）；血条归零 → 即刻判负界面\n  - outcome：按 V01/V02 判定\n- S11 结算与重开\n  - input：Enter＝重开 / Esc＝返回开始界面（触发方：玩家）\n  - precondition：V01（完成且达标）或 V02（判负/未达标）达成\n  - state_change：进入「结算」状态；谱面推进冻结\n  - feedback：结算面板显示评级、得分、最大连击、Perfect/Good/Miss 统计\n  - next_actions：重开（谱面/血条/连击/得分全量重置，校准值保留）或返回\n  - outcome：无跨局写入\n\n## 3. 数值口径与全局规则 [G01–G08]\n\n- G01 统一刻度：时间为毫秒；得分、连击、血条为数值；血条百分比上限 100、下限 0。\n- G02 谱面与轨道：单曲 1 首（时长 90–120 秒，原创或公有领域音频）；4 条下落轨道（D/F/J/K 对应）；音符两型：点击、长按；谱面为时间轴数据（音符时间、轨道、类型、长按时长），由 fixed_seed=1057 冻结生成，同 seed 下谱面逐项可复现；音符总数 ≥ 80（建议点击 64、长按 16 分布）。\n- G03 判定窗口（按时间差 Δt=输入时刻−音符时刻，经 G06 校准补偿后）：|Δt| ≤ 50 毫秒 → PERFECT；50 < |Δt| ≤ 120 毫秒 → GOOD；|Δt| > 120 毫秒或未按 → MISS。\n- G04 得分与连击倍率：单次判定 PERFECT=300、GOOD=150、MISS=0；长按头、尾各一次判定、各计一次分。倍率 m = 1 + 0.02 × min(combo, 50)（上限 2.0），**按命中前当前连击数取值，命中后 combo+1；MISS 归零**。独立 oracle 数例：开局连续 10 个 PERFECT，第 k 个得分 300×(1+0.02×(k−1))，合计 300×(10+0.02×45) = **3270**，其中第 1 个为 300。结算对账：总分=逐音符加权之和，容差 0。\n- G05 血条：初始 70%；PERFECT +2%、GOOD +0.5%、MISS −8%；到达上限 100 后不再增加；归零 → 即刻判负。\n- G06 音画偏移校准：设置内提供校准流程——跟随 8 次提示节拍点击，取 |Δt| 中位数作为全局补偿值（默认 0）；**判定用 Δt = 原始时间差 − 补偿值**；校准值可随时重测并立即生效；校准只改判定时间差与谱面显示偏移，不改音符时刻本身。\n- G07 评级与暂停：评级按得分率（总分/理论满分，理论满分=全 PERFECT 总分）：S ≥ 95%、A ≥ 85%、B ≥ 70%、C ≥ 60%，< 60% 为未达标；Esc 暂停冻结音频与谱面推进，恢复后音画同步继续；窗口失焦自动暂停。\n- G08 谱面乐段（本包冻结值）：单曲三段——热身段（0–15 秒，仅点击型、密度低）、主题段（15–70 秒，全型音符）、终曲段（70 秒–曲尾，密度较主题段 +50%、出现双押、下落速度 ×1.15）；进入终曲段前 2 秒 HUD 显示「终曲」提示（图标＋文字）；段边界事件 `section_change` 可观测；乐段不改变 G03–G05 判定与计分规则。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：D/F/J/K＝对应轨道判定（点击型按一下；长按型按住至尾）；Esc＝暂停/继续；结算界面 Enter＝重开。\n- I02 输入语义边界：空轨按键不产生判定（不计 MISS、不加连击）；长按中途松开触发断连（M02）；暂停/结算期间输入无效。\n- I03 无鼠标玩法需求；菜单可键盘完整操作。\n- I04 输入设备与统一判定管线（本包冻结值）：键盘 D/F/J/K；触屏（HTML5 环境）四分区点击映射 D/F/J/K；手柄（可选开启）面键 A/B/X/Y 映射 D/F/J/K；三种设备汇入**同一判定管线**（同一 Δt 计算、同一窗口分档、同一连击/得分结算），设备切换即时生效并在 HUD 显示当前设备图标＋文字。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：连击数、血条、谱面进度、当前乐段名、判定反馈（P/G/M 图标＋文字）、当前输入设备；HUD 对照见 rubric。\n- I07 输入延迟红线（本包冻结值）：判定输入到对应评级反馈 ≤ **50 毫秒**（音游手感红线）；设置界面显示当前音频-视频偏移补偿值；超红线记为缺陷（rubric D4 断言）。\n\n## 5. 谱面与内容清单 [L01–L04]\n\n- L01 生成对象：单谱面 1（时间轴数据，seed=1057 冻结）、音频 1（原创或公有领域）、音符两型（点击 ≥ 64、长按 ≥ 16）、轨道 4、机械音乐厅场景与判定线 UI、三乐段结构。\n- L02 谱面结构：前 10 秒为低密度热身段（仅点击型）；谱面须通过「全 PERFECT 可达理论满分」的可解性自查；长按不与同轨其他音符重叠。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（开始界面/演奏 HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的机械厅装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 判定窗口（主机制）\n  - input：轨道键（键盘/触屏/手柄统一管线）\n  - precondition：处于演奏状态且该轨存在待判定音符\n  - state_change：按 G03 窗口将输入分档为 PERFECT/GOOD/MISS\n  - observable：逐音符判定事件含 Δt 字段与档位、输入设备字段\n  - invalid_case：空轨按键不产生判定事件\n  - recovery：—\n- M02 长按音符\n  - input：按住对应轨道键\n  - precondition：长按头部判定已成立\n  - state_change：头部判定（同 G03）→ 按住期间 → 尾部判定；中途松开 → 断连（尾部记 MISS、连击归零）\n  - observable：长按完成率事件、断连事件\n  - invalid_case：头部 MISS 后按住不产生尾部判定\n  - recovery：后续音符继续\n- M03 音画偏移校准\n  - input：校准流程中的 8 次点击\n  - precondition：处于校准流程\n  - state_change：测得补偿值 → 全局判定时间差与显示偏移生效\n  - observable：校准前后同输入序列的判定差分\n  - invalid_case：—\n  - recovery：重测即覆盖\n- M04 连击与结算\n  - input：逐次判定 / 结算画面\n  - precondition：处于演奏/结算状态\n  - state_change：命中按 G04 计倍率与得分并累计连击；MISS 归零；结算按加权和与评级阈值出分\n  - observable：连击事件、结算对账（容差 0）、评级事件\n  - invalid_case：—\n  - recovery：重开全量重置\n- M05 血条与胜负\n  - input：逐次判定\n  - precondition：处于演奏状态\n  - state_change：按 G05 增减血条；归零即刻判负；谱面走完 → 结算评级\n  - observable：血条事件、win/lose 事件与结算面板\n  - invalid_case：—\n  - recovery：判负即刻重开\n- M06 乐段推进\n  - input：谱面时间推进（系统）\n  - precondition：演奏进行中\n  - state_change：按 G08 三段边界切换乐段（密度/双押/下落速度规则生效）；`section_change` 事件与「终曲」提示\n  - observable：段边界事件、终曲段下落速度 ×1.15 采样、密度对照\n  - invalid_case：乐段切换不重置连击/血条\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成整首谱面（血条未归零）且结算评级 ≥ C（得分率 ≥ 60%）。\n- V02 失败条件：血条归零（即刻判负），或谱面完成但得分率 < 60%（结算显示未达标）。\n- V03 恢复语义：失败/未达标即刻重开；重开后谱面、血条、连击、得分全量重置（校准值保留，因其属于设置而非局内状态）。\n- V04 persistent_state：无（重开全量清空；最好成绩可作展示但不作为验收需求、不要求跨会话保存）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（得分/连击/血条）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设软锁——判负即刻重开、谱面按 seed 复现；判定输入始终可达。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：发条与蒸汽驱动的架空时代，「谐律厅」是城市的心脏——巨型机械音乐厅每晚以合奏钟声为全城报时。\n- W02 场景所在地：谐律厅的独奏台——四条黄铜音轨沿齿轮墙垂落，判定线是一排待击音簧。\n- W03 玩家身份与当前任务：玩家是调律师学徒「聆」；当前任务：在钟枢校准夜完成独奏，让报时大合奏如期奏响。\n- W04 失败代价与结局表达：血条归零＝校准中断需重来（判负界面文案）；完成则 C03 呈现大合奏钟声齐鸣、全城灯火应和的场面。\n- W05 叙事来源：四轨道＝钟枢的四根音簧；双押＝和音；终曲段＝校准夜的收束乐章；节拍灯＝音乐厅的呼吸。全部原创。\n- W06 视觉风格与色彩材质：黄铜与暗木的机械美感；主色＝黄铜金（#B08D4F 系）＋暗胡桃（#4A3A2C 系）＋判定青光（#57C9B8 系）；材质以黄铜、蒸汽管、磨砂玻璃为主。\n- W07 环境氛围与声音语言：齿轮低鸣的音乐厅——常驻机械运转声；音效语言为「节拍灯咔哒＋音符爆裂＋断连闷响＋终曲钟声」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代校准夜 → 终曲段视频（C02）作为高潮节点 → 结算视频（C03）收束报时；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正面舞台视角（演奏 UI 全屏），无跟随；判定线轻微随低频节奏起伏（幅度 ≤4 像素，不改变判定位置）；镜头边界＝演奏 UI 外框。\n- F02 关键操作镜头变化：连击达 25/50 时舞台灯光短暂扫过（0.5 秒）；终曲段进入时灯光全亮＋轻微 FOV 变化 +5°（0.5 秒）；无慢动作。\n- F03 输入与延迟：见 I07（≤50 毫秒红线）；判定反馈与音符爆裂在判定帧同帧呈现。\n- F04 环境常驻效果：齿轮墙缓慢转动、蒸汽微雾、节拍灯随节拍明暗；不遮挡轨道与判定线。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| PERFECT | 音符青光爆裂＋判定线火花＋「P」字弹出 | 清脆爆裂音 | 0.2s |\n| GOOD | 音符黄光散开＋「G」字弹出 | 较柔爆裂音 | 0.2s |\n| MISS | 音符灰化坠落＋判定线红闪＋「M」字 | 低沉闷响 | 0.3s |\n| 长按完成 | 尾焰沿轨道拉出光带 | 尾音清响 | 完成 |\n| 长按断连 | 光带断裂灰化 | 断连闷响 | 0.3s |\n| 连击档位升级 | 连击数字放大弹跳＋齿轮徽标点亮 | 连击咔哒声 | 弹跳完成 |\n| 血条增减 | 血条平滑移动＋数字跳动 | 增/减微音 | 移动完成 |\n| 段落切换 | 段名横幅（热身/主题/终曲）＋灯光变化 | 转段钟声短句 | 横幅结束 |\n| 终曲提示 | 「终曲」图标＋文字提前 2 秒显示 | 提示钟声 | 进入终曲段 |\n| 双押命中 | 双轨同步爆裂＋和音光环 | 和音爆裂音 | 0.2s |\n| 判负 | 灯光骤暗＋谱面停格 | 失谐低鸣 | 进入判负界面 |\n| 完成 | 谱面收束光带＋大合奏预演灯光 | 终曲钟声 | 进入结算 |\n\n- F06 关键音效清单：爆裂音（P/G 两档）、尾音、断连闷响、连击咔哒、转段钟声、提示钟声、和音爆裂、失谐低鸣、终曲钟声；环境音：齿轮低鸣＋蒸汽嘶声（常驻循环，演奏中低音量）；循环音开始/结束：环境声随开始界面进入、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：判定反馈（P/G/M）文字＋图形双通道承担判定信息；爆裂粒子单帧 ≤ 30 且不遮挡相邻轨道与判定线。\n- F08 音画同步：判定音效与判定帧同步（受 G06 补偿影响时以补偿后对齐）；转段钟声与 `section_change` 帧同步；终曲钟声与完成帧同步。\n- F09 屏幕震动：MISS 0.05 秒微幅（可关闭）；设置界面提供「判定线起伏开/关」「震动开/关」（关闭不影响判定）。\n- F10 前端界面：开始界面（演奏/校准/设置/退出＋当前输入设备图标）→ 演奏 HUD（连击、血条、进度、段名、判定反馈、设备图标）→ 结算（评级/得分/最大连击/P-G-M 统计/重开/返回）→ 判负界面（即刻重开）→ 暂停面板（继续/重开/设置）；关键状态附图标＋文字（P/G/M、段名、设备），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 开场演出（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由开始界面进入演奏之前，每局一次\n  - 内容与角色场景：夜幕中的谐律厅灯火通明，调律师学徒「聆」登上独奏台，四条黄铜音轨次第亮起，齿轮墙开始转动\n  - 资产对应：谐律厅、独奏台、音轨与游戏内场景同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入演奏（谱面从 0 秒起算）；自然播完 → 同\n  - 状态一致：播放期间不推进谱面与计时；进入状态＝热身段起点\n- C02 终曲段演出（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次进入终曲段（70 秒边界 `section_change` 事件）时短暂插入，每局一次\n  - 内容与角色场景：舞台灯光全亮，报时大钟的钟枢开始旋转，双轨和音音簧并列弹起\n  - 资产对应：钟枢、音簧、舞台与游戏内一致\n  - 可跳过：Esc 跳过 → 终曲段从边界点继续（谱面按已计时间推进，跳过不回溯）；自然播完 → 同\n  - 状态一致：仅在真实段边界后触发；跳过不改变得分/连击/血条\n- C03 演奏完成结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：V01 达成后、结算面板之前，每局一次\n  - 内容与角色场景：大合奏钟声齐鸣，谐律厅灯光如潮涌向全城，「聆」在掌声中收起音锤\n  - 资产对应：谐律厅、大钟、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：评级字样与真实结算一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三乐段单谱面演奏、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、键盘/触屏/手柄统一判定管线。\n- N02 本测例包含的流程与界面：开始界面、校准、演奏、结算与判负、暂停（含失焦自动暂停）、即刻重开。\n- N03 本测例包含的演出能力：开场/终曲/结算视频（C01–C03）、§9 F04–F09 全部事件反馈与音效、机械音乐厅氛围。\n- N04 输入范围：键盘（D/F/J/K/Esc/Enter）＋触屏四分区＋手柄面键（可选，统一判定管线）；无多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋原创/公有领域曲目（来源声明可追溯）；无配音需求。\n- N06 表现层自由度：§9 未冻结的机械厅装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（调律师学徒「聆」、齿轮墙舞台、音簧判定线等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（下落→判定→评级→连击→结算）；判定/倍率/血条均为同一判定系统的内部规则，无跨系统因果链；谱面时间轴与判定并发（B1）；判负即刻重开为恢复路径；新增乐段、统一输入管线与演出为表现/输入层，不改变难度档\"\n  downgrade_boundary: \"去掉长按与血条（纯点击判定无限重试）后仍为 S（更简）\"\n  upgrade_boundary: \"若成绩跨局保留并解锁曲目难度规则或多谱面联赛，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：2 个（text-to-3D 1，image-to-3D 1）；object 任务资产为：tuner_ling, chime_judgeline。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, strike_conduct。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "7f0f9f7c887ca98082287168c1e5c8363c89012da01aae212ce685ae974b4b64"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Crisp bright chime burst with a warm tail, rhythm-game hit",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G057_sfx_002": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G057_rhythm_machine_hall",
+          "task_id": "G057_sfx_002",
+          "asset_name": "note_burst_good",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Softer round chime burst",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5572,
+          "trigger": "GOOD 判定",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《机械音乐厅的节奏演奏》｜下落式节奏判定机制输入规范\n\n```yaml\ncase_id: G057\nbase_case_id: G057\ntitle: 机械音乐厅的节奏演奏\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1057\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《机械音乐厅的节奏演奏》；版本：mechanics-v3（2026-10-11 完整性修订：补谱面乐段、触屏/手柄统一判定、输入延迟红线、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘、触屏（HTML5）与手柄（可选）。\n- 原创边界：本作全部名称、场景、文案与美术必须原创；**音频必须为原创或公有领域曲目，不得使用任何商业作品的乐曲、录音或谱面**；不使用任何商业作品的名称、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 谱面实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的下落式节奏游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：下落式单谱面节奏游戏，单人。本测例包含的能力：三乐段谱面（热身/主题/终曲）、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、三设备统一判定管线、开场/终曲/结算视频。\n- S02 核心循环一句话：音符下落 → 判定窗口输入 → 命中评级 → 连击累积 → 结算。\n- S03 流程：开始界面 →（可选）校准 → 演奏单谱面 → 结算（评级/得分/最大连击）→ 重开。\n- S04 最低完整流程：开始界面、演奏、结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：血条归零即刻判负并可直接重开；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与开始界面 → 校准（可选）→ 演奏（热身/主题/终曲三段）→ 结算 → 重开。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与开始界面\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始演奏」\n  - precondition：构建可启动且谱面/音频按 seed=1057 冻结加载\n  - state_change：进入「开始界面」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：开始界面按 §9 F10 呈现（演奏/校准/设置/当前输入设备图标）\n  - next_actions：进入「校准（可选）」或「演奏」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 校准（可选）\n  - input：跟随 8 次提示节拍点击（触发方：玩家）\n  - precondition：从开始界面进入校准\n  - state_change：测得全局补偿值并即时生效（G06）\n  - feedback：每次点击显示 Δt 与当前中位值\n  - next_actions：返回开始界面或直接进入「演奏」\n  - outcome：补偿值存入设置（非局内状态）\n- S08 热身段（0–15 秒）\n  - input：D/F/J/K（或触屏四分区/手柄面键）（触发方：玩家）\n  - precondition：演奏开始且当前乐段＝热身\n  - state_change：仅点击型音符、密度低；判定/得分/连击/血条按 G03–G05 结算\n  - feedback：节拍灯与音符判定反馈按 §9 F05\n  - next_actions：15 秒边界 → `section_change` →「主题段」\n  - outcome：得分与连击局内累计\n- S09 主题段（15–70 秒）\n  - input：同 S08（触发方：玩家）\n  - precondition：热身段结束\n  - state_change：全型音符（点击＋长按）按谱面推进\n  - feedback：齿轮转动与轨道灯光随节奏脉动\n  - next_actions：70 秒边界 → `section_change`（提前 2 秒「终曲」提示）→「终曲段」\n  - outcome：局内状态持续\n- S10 终曲段（70 秒–曲尾）\n  - input：同 S08（触发方：玩家）\n  - precondition：主题段结束且终曲提示已显示\n  - state_change：密度较主题段 +50%、出现双押、下落速度 ×1.15（G08）；首次进入时按 §10 C02 触发终曲演出视频（每局一次）\n  - feedback：终曲灯光全亮与更强的命中反馈\n  - next_actions：谱面完成 →「结算」（先播 C03）；血条归零 → 即刻判负界面\n  - outcome：按 V01/V02 判定\n- S11 结算与重开\n  - input：Enter＝重开 / Esc＝返回开始界面（触发方：玩家）\n  - precondition：V01（完成且达标）或 V02（判负/未达标）达成\n  - state_change：进入「结算」状态；谱面推进冻结\n  - feedback：结算面板显示评级、得分、最大连击、Perfect/Good/Miss 统计\n  - next_actions：重开（谱面/血条/连击/得分全量重置，校准值保留）或返回\n  - outcome：无跨局写入\n\n## 3. 数值口径与全局规则 [G01–G08]\n\n- G01 统一刻度：时间为毫秒；得分、连击、血条为数值；血条百分比上限 100、下限 0。\n- G02 谱面与轨道：单曲 1 首（时长 90–120 秒，原创或公有领域音频）；4 条下落轨道（D/F/J/K 对应）；音符两型：点击、长按；谱面为时间轴数据（音符时间、轨道、类型、长按时长），由 fixed_seed=1057 冻结生成，同 seed 下谱面逐项可复现；音符总数 ≥ 80（建议点击 64、长按 16 分布）。\n- G03 判定窗口（按时间差 Δt=输入时刻−音符时刻，经 G06 校准补偿后）：|Δt| ≤ 50 毫秒 → PERFECT；50 < |Δt| ≤ 120 毫秒 → GOOD；|Δt| > 120 毫秒或未按 → MISS。\n- G04 得分与连击倍率：单次判定 PERFECT=300、GOOD=150、MISS=0；长按头、尾各一次判定、各计一次分。倍率 m = 1 + 0.02 × min(combo, 50)（上限 2.0），**按命中前当前连击数取值，命中后 combo+1；MISS 归零**。独立 oracle 数例：开局连续 10 个 PERFECT，第 k 个得分 300×(1+0.02×(k−1))，合计 300×(10+0.02×45) = **3270**，其中第 1 个为 300。结算对账：总分=逐音符加权之和，容差 0。\n- G05 血条：初始 70%；PERFECT +2%、GOOD +0.5%、MISS −8%；到达上限 100 后不再增加；归零 → 即刻判负。\n- G06 音画偏移校准：设置内提供校准流程——跟随 8 次提示节拍点击，取 |Δt| 中位数作为全局补偿值（默认 0）；**判定用 Δt = 原始时间差 − 补偿值**；校准值可随时重测并立即生效；校准只改判定时间差与谱面显示偏移，不改音符时刻本身。\n- G07 评级与暂停：评级按得分率（总分/理论满分，理论满分=全 PERFECT 总分）：S ≥ 95%、A ≥ 85%、B ≥ 70%、C ≥ 60%，< 60% 为未达标；Esc 暂停冻结音频与谱面推进，恢复后音画同步继续；窗口失焦自动暂停。\n- G08 谱面乐段（本包冻结值）：单曲三段——热身段（0–15 秒，仅点击型、密度低）、主题段（15–70 秒，全型音符）、终曲段（70 秒–曲尾，密度较主题段 +50%、出现双押、下落速度 ×1.15）；进入终曲段前 2 秒 HUD 显示「终曲」提示（图标＋文字）；段边界事件 `section_change` 可观测；乐段不改变 G03–G05 判定与计分规则。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：D/F/J/K＝对应轨道判定（点击型按一下；长按型按住至尾）；Esc＝暂停/继续；结算界面 Enter＝重开。\n- I02 输入语义边界：空轨按键不产生判定（不计 MISS、不加连击）；长按中途松开触发断连（M02）；暂停/结算期间输入无效。\n- I03 无鼠标玩法需求；菜单可键盘完整操作。\n- I04 输入设备与统一判定管线（本包冻结值）：键盘 D/F/J/K；触屏（HTML5 环境）四分区点击映射 D/F/J/K；手柄（可选开启）面键 A/B/X/Y 映射 D/F/J/K；三种设备汇入**同一判定管线**（同一 Δt 计算、同一窗口分档、同一连击/得分结算），设备切换即时生效并在 HUD 显示当前设备图标＋文字。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：连击数、血条、谱面进度、当前乐段名、判定反馈（P/G/M 图标＋文字）、当前输入设备；HUD 对照见 rubric。\n- I07 输入延迟红线（本包冻结值）：判定输入到对应评级反馈 ≤ **50 毫秒**（音游手感红线）；设置界面显示当前音频-视频偏移补偿值；超红线记为缺陷（rubric D4 断言）。\n\n## 5. 谱面与内容清单 [L01–L04]\n\n- L01 生成对象：单谱面 1（时间轴数据，seed=1057 冻结）、音频 1（原创或公有领域）、音符两型（点击 ≥ 64、长按 ≥ 16）、轨道 4、机械音乐厅场景与判定线 UI、三乐段结构。\n- L02 谱面结构：前 10 秒为低密度热身段（仅点击型）；谱面须通过「全 PERFECT 可达理论满分」的可解性自查；长按不与同轨其他音符重叠。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（开始界面/演奏 HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的机械厅装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 判定窗口（主机制）\n  - input：轨道键（键盘/触屏/手柄统一管线）\n  - precondition：处于演奏状态且该轨存在待判定音符\n  - state_change：按 G03 窗口将输入分档为 PERFECT/GOOD/MISS\n  - observable：逐音符判定事件含 Δt 字段与档位、输入设备字段\n  - invalid_case：空轨按键不产生判定事件\n  - recovery：—\n- M02 长按音符\n  - input：按住对应轨道键\n  - precondition：长按头部判定已成立\n  - state_change：头部判定（同 G03）→ 按住期间 → 尾部判定；中途松开 → 断连（尾部记 MISS、连击归零）\n  - observable：长按完成率事件、断连事件\n  - invalid_case：头部 MISS 后按住不产生尾部判定\n  - recovery：后续音符继续\n- M03 音画偏移校准\n  - input：校准流程中的 8 次点击\n  - precondition：处于校准流程\n  - state_change：测得补偿值 → 全局判定时间差与显示偏移生效\n  - observable：校准前后同输入序列的判定差分\n  - invalid_case：—\n  - recovery：重测即覆盖\n- M04 连击与结算\n  - input：逐次判定 / 结算画面\n  - precondition：处于演奏/结算状态\n  - state_change：命中按 G04 计倍率与得分并累计连击；MISS 归零；结算按加权和与评级阈值出分\n  - observable：连击事件、结算对账（容差 0）、评级事件\n  - invalid_case：—\n  - recovery：重开全量重置\n- M05 血条与胜负\n  - input：逐次判定\n  - precondition：处于演奏状态\n  - state_change：按 G05 增减血条；归零即刻判负；谱面走完 → 结算评级\n  - observable：血条事件、win/lose 事件与结算面板\n  - invalid_case：—\n  - recovery：判负即刻重开\n- M06 乐段推进\n  - input：谱面时间推进（系统）\n  - precondition：演奏进行中\n  - state_change：按 G08 三段边界切换乐段（密度/双押/下落速度规则生效）；`section_change` 事件与「终曲」提示\n  - observable：段边界事件、终曲段下落速度 ×1.15 采样、密度对照\n  - invalid_case：乐段切换不重置连击/血条\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成整首谱面（血条未归零）且结算评级 ≥ C（得分率 ≥ 60%）。\n- V02 失败条件：血条归零（即刻判负），或谱面完成但得分率 < 60%（结算显示未达标）。\n- V03 恢复语义：失败/未达标即刻重开；重开后谱面、血条、连击、得分全量重置（校准值保留，因其属于设置而非局内状态）。\n- V04 persistent_state：无（重开全量清空；最好成绩可作展示但不作为验收需求、不要求跨会话保存）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（得分/连击/血条）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设软锁——判负即刻重开、谱面按 seed 复现；判定输入始终可达。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：发条与蒸汽驱动的架空时代，「谐律厅」是城市的心脏——巨型机械音乐厅每晚以合奏钟声为全城报时。\n- W02 场景所在地：谐律厅的独奏台——四条黄铜音轨沿齿轮墙垂落，判定线是一排待击音簧。\n- W03 玩家身份与当前任务：玩家是调律师学徒「聆」；当前任务：在钟枢校准夜完成独奏，让报时大合奏如期奏响。\n- W04 失败代价与结局表达：血条归零＝校准中断需重来（判负界面文案）；完成则 C03 呈现大合奏钟声齐鸣、全城灯火应和的场面。\n- W05 叙事来源：四轨道＝钟枢的四根音簧；双押＝和音；终曲段＝校准夜的收束乐章；节拍灯＝音乐厅的呼吸。全部原创。\n- W06 视觉风格与色彩材质：黄铜与暗木的机械美感；主色＝黄铜金（#B08D4F 系）＋暗胡桃（#4A3A2C 系）＋判定青光（#57C9B8 系）；材质以黄铜、蒸汽管、磨砂玻璃为主。\n- W07 环境氛围与声音语言：齿轮低鸣的音乐厅——常驻机械运转声；音效语言为「节拍灯咔哒＋音符爆裂＋断连闷响＋终曲钟声」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代校准夜 → 终曲段视频（C02）作为高潮节点 → 结算视频（C03）收束报时；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正面舞台视角（演奏 UI 全屏），无跟随；判定线轻微随低频节奏起伏（幅度 ≤4 像素，不改变判定位置）；镜头边界＝演奏 UI 外框。\n- F02 关键操作镜头变化：连击达 25/50 时舞台灯光短暂扫过（0.5 秒）；终曲段进入时灯光全亮＋轻微 FOV 变化 +5°（0.5 秒）；无慢动作。\n- F03 输入与延迟：见 I07（≤50 毫秒红线）；判定反馈与音符爆裂在判定帧同帧呈现。\n- F04 环境常驻效果：齿轮墙缓慢转动、蒸汽微雾、节拍灯随节拍明暗；不遮挡轨道与判定线。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| PERFECT | 音符青光爆裂＋判定线火花＋「P」字弹出 | 清脆爆裂音 | 0.2s |\n| GOOD | 音符黄光散开＋「G」字弹出 | 较柔爆裂音 | 0.2s |\n| MISS | 音符灰化坠落＋判定线红闪＋「M」字 | 低沉闷响 | 0.3s |\n| 长按完成 | 尾焰沿轨道拉出光带 | 尾音清响 | 完成 |\n| 长按断连 | 光带断裂灰化 | 断连闷响 | 0.3s |\n| 连击档位升级 | 连击数字放大弹跳＋齿轮徽标点亮 | 连击咔哒声 | 弹跳完成 |\n| 血条增减 | 血条平滑移动＋数字跳动 | 增/减微音 | 移动完成 |\n| 段落切换 | 段名横幅（热身/主题/终曲）＋灯光变化 | 转段钟声短句 | 横幅结束 |\n| 终曲提示 | 「终曲」图标＋文字提前 2 秒显示 | 提示钟声 | 进入终曲段 |\n| 双押命中 | 双轨同步爆裂＋和音光环 | 和音爆裂音 | 0.2s |\n| 判负 | 灯光骤暗＋谱面停格 | 失谐低鸣 | 进入判负界面 |\n| 完成 | 谱面收束光带＋大合奏预演灯光 | 终曲钟声 | 进入结算 |\n\n- F06 关键音效清单：爆裂音（P/G 两档）、尾音、断连闷响、连击咔哒、转段钟声、提示钟声、和音爆裂、失谐低鸣、终曲钟声；环境音：齿轮低鸣＋蒸汽嘶声（常驻循环，演奏中低音量）；循环音开始/结束：环境声随开始界面进入、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：判定反馈（P/G/M）文字＋图形双通道承担判定信息；爆裂粒子单帧 ≤ 30 且不遮挡相邻轨道与判定线。\n- F08 音画同步：判定音效与判定帧同步（受 G06 补偿影响时以补偿后对齐）；转段钟声与 `section_change` 帧同步；终曲钟声与完成帧同步。\n- F09 屏幕震动：MISS 0.05 秒微幅（可关闭）；设置界面提供「判定线起伏开/关」「震动开/关」（关闭不影响判定）。\n- F10 前端界面：开始界面（演奏/校准/设置/退出＋当前输入设备图标）→ 演奏 HUD（连击、血条、进度、段名、判定反馈、设备图标）→ 结算（评级/得分/最大连击/P-G-M 统计/重开/返回）→ 判负界面（即刻重开）→ 暂停面板（继续/重开/设置）；关键状态附图标＋文字（P/G/M、段名、设备），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 开场演出（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由开始界面进入演奏之前，每局一次\n  - 内容与角色场景：夜幕中的谐律厅灯火通明，调律师学徒「聆」登上独奏台，四条黄铜音轨次第亮起，齿轮墙开始转动\n  - 资产对应：谐律厅、独奏台、音轨与游戏内场景同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入演奏（谱面从 0 秒起算）；自然播完 → 同\n  - 状态一致：播放期间不推进谱面与计时；进入状态＝热身段起点\n- C02 终曲段演出（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次进入终曲段（70 秒边界 `section_change` 事件）时短暂插入，每局一次\n  - 内容与角色场景：舞台灯光全亮，报时大钟的钟枢开始旋转，双轨和音音簧并列弹起\n  - 资产对应：钟枢、音簧、舞台与游戏内一致\n  - 可跳过：Esc 跳过 → 终曲段从边界点继续（谱面按已计时间推进，跳过不回溯）；自然播完 → 同\n  - 状态一致：仅在真实段边界后触发；跳过不改变得分/连击/血条\n- C03 演奏完成结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：V01 达成后、结算面板之前，每局一次\n  - 内容与角色场景：大合奏钟声齐鸣，谐律厅灯光如潮涌向全城，「聆」在掌声中收起音锤\n  - 资产对应：谐律厅、大钟、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：评级字样与真实结算一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三乐段单谱面演奏、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、键盘/触屏/手柄统一判定管线。\n- N02 本测例包含的流程与界面：开始界面、校准、演奏、结算与判负、暂停（含失焦自动暂停）、即刻重开。\n- N03 本测例包含的演出能力：开场/终曲/结算视频（C01–C03）、§9 F04–F09 全部事件反馈与音效、机械音乐厅氛围。\n- N04 输入范围：键盘（D/F/J/K/Esc/Enter）＋触屏四分区＋手柄面键（可选，统一判定管线）；无多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋原创/公有领域曲目（来源声明可追溯）；无配音需求。\n- N06 表现层自由度：§9 未冻结的机械厅装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（调律师学徒「聆」、齿轮墙舞台、音簧判定线等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（下落→判定→评级→连击→结算）；判定/倍率/血条均为同一判定系统的内部规则，无跨系统因果链；谱面时间轴与判定并发（B1）；判负即刻重开为恢复路径；新增乐段、统一输入管线与演出为表现/输入层，不改变难度档\"\n  downgrade_boundary: \"去掉长按与血条（纯点击判定无限重试）后仍为 S（更简）\"\n  upgrade_boundary: \"若成绩跨局保留并解锁曲目难度规则或多谱面联赛，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：2 个（text-to-3D 1，image-to-3D 1）；object 任务资产为：tuner_ling, chime_judgeline。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, strike_conduct。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "7f0f9f7c887ca98082287168c1e5c8363c89012da01aae212ce685ae974b4b64"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Softer round chime burst",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G057_sfx_003": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G057_rhythm_machine_hall",
+          "task_id": "G057_sfx_003",
+          "asset_name": "miss_thud",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Dull dropped-mallet thud with a faint detune",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5573,
+          "trigger": "MISS",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《机械音乐厅的节奏演奏》｜下落式节奏判定机制输入规范\n\n```yaml\ncase_id: G057\nbase_case_id: G057\ntitle: 机械音乐厅的节奏演奏\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1057\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《机械音乐厅的节奏演奏》；版本：mechanics-v3（2026-10-11 完整性修订：补谱面乐段、触屏/手柄统一判定、输入延迟红线、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘、触屏（HTML5）与手柄（可选）。\n- 原创边界：本作全部名称、场景、文案与美术必须原创；**音频必须为原创或公有领域曲目，不得使用任何商业作品的乐曲、录音或谱面**；不使用任何商业作品的名称、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 谱面实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的下落式节奏游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：下落式单谱面节奏游戏，单人。本测例包含的能力：三乐段谱面（热身/主题/终曲）、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、三设备统一判定管线、开场/终曲/结算视频。\n- S02 核心循环一句话：音符下落 → 判定窗口输入 → 命中评级 → 连击累积 → 结算。\n- S03 流程：开始界面 →（可选）校准 → 演奏单谱面 → 结算（评级/得分/最大连击）→ 重开。\n- S04 最低完整流程：开始界面、演奏、结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：血条归零即刻判负并可直接重开；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与开始界面 → 校准（可选）→ 演奏（热身/主题/终曲三段）→ 结算 → 重开。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与开始界面\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始演奏」\n  - precondition：构建可启动且谱面/音频按 seed=1057 冻结加载\n  - state_change：进入「开始界面」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：开始界面按 §9 F10 呈现（演奏/校准/设置/当前输入设备图标）\n  - next_actions：进入「校准（可选）」或「演奏」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 校准（可选）\n  - input：跟随 8 次提示节拍点击（触发方：玩家）\n  - precondition：从开始界面进入校准\n  - state_change：测得全局补偿值并即时生效（G06）\n  - feedback：每次点击显示 Δt 与当前中位值\n  - next_actions：返回开始界面或直接进入「演奏」\n  - outcome：补偿值存入设置（非局内状态）\n- S08 热身段（0–15 秒）\n  - input：D/F/J/K（或触屏四分区/手柄面键）（触发方：玩家）\n  - precondition：演奏开始且当前乐段＝热身\n  - state_change：仅点击型音符、密度低；判定/得分/连击/血条按 G03–G05 结算\n  - feedback：节拍灯与音符判定反馈按 §9 F05\n  - next_actions：15 秒边界 → `section_change` →「主题段」\n  - outcome：得分与连击局内累计\n- S09 主题段（15–70 秒）\n  - input：同 S08（触发方：玩家）\n  - precondition：热身段结束\n  - state_change：全型音符（点击＋长按）按谱面推进\n  - feedback：齿轮转动与轨道灯光随节奏脉动\n  - next_actions：70 秒边界 → `section_change`（提前 2 秒「终曲」提示）→「终曲段」\n  - outcome：局内状态持续\n- S10 终曲段（70 秒–曲尾）\n  - input：同 S08（触发方：玩家）\n  - precondition：主题段结束且终曲提示已显示\n  - state_change：密度较主题段 +50%、出现双押、下落速度 ×1.15（G08）；首次进入时按 §10 C02 触发终曲演出视频（每局一次）\n  - feedback：终曲灯光全亮与更强的命中反馈\n  - next_actions：谱面完成 →「结算」（先播 C03）；血条归零 → 即刻判负界面\n  - outcome：按 V01/V02 判定\n- S11 结算与重开\n  - input：Enter＝重开 / Esc＝返回开始界面（触发方：玩家）\n  - precondition：V01（完成且达标）或 V02（判负/未达标）达成\n  - state_change：进入「结算」状态；谱面推进冻结\n  - feedback：结算面板显示评级、得分、最大连击、Perfect/Good/Miss 统计\n  - next_actions：重开（谱面/血条/连击/得分全量重置，校准值保留）或返回\n  - outcome：无跨局写入\n\n## 3. 数值口径与全局规则 [G01–G08]\n\n- G01 统一刻度：时间为毫秒；得分、连击、血条为数值；血条百分比上限 100、下限 0。\n- G02 谱面与轨道：单曲 1 首（时长 90–120 秒，原创或公有领域音频）；4 条下落轨道（D/F/J/K 对应）；音符两型：点击、长按；谱面为时间轴数据（音符时间、轨道、类型、长按时长），由 fixed_seed=1057 冻结生成，同 seed 下谱面逐项可复现；音符总数 ≥ 80（建议点击 64、长按 16 分布）。\n- G03 判定窗口（按时间差 Δt=输入时刻−音符时刻，经 G06 校准补偿后）：|Δt| ≤ 50 毫秒 → PERFECT；50 < |Δt| ≤ 120 毫秒 → GOOD；|Δt| > 120 毫秒或未按 → MISS。\n- G04 得分与连击倍率：单次判定 PERFECT=300、GOOD=150、MISS=0；长按头、尾各一次判定、各计一次分。倍率 m = 1 + 0.02 × min(combo, 50)（上限 2.0），**按命中前当前连击数取值，命中后 combo+1；MISS 归零**。独立 oracle 数例：开局连续 10 个 PERFECT，第 k 个得分 300×(1+0.02×(k−1))，合计 300×(10+0.02×45) = **3270**，其中第 1 个为 300。结算对账：总分=逐音符加权之和，容差 0。\n- G05 血条：初始 70%；PERFECT +2%、GOOD +0.5%、MISS −8%；到达上限 100 后不再增加；归零 → 即刻判负。\n- G06 音画偏移校准：设置内提供校准流程——跟随 8 次提示节拍点击，取 |Δt| 中位数作为全局补偿值（默认 0）；**判定用 Δt = 原始时间差 − 补偿值**；校准值可随时重测并立即生效；校准只改判定时间差与谱面显示偏移，不改音符时刻本身。\n- G07 评级与暂停：评级按得分率（总分/理论满分，理论满分=全 PERFECT 总分）：S ≥ 95%、A ≥ 85%、B ≥ 70%、C ≥ 60%，< 60% 为未达标；Esc 暂停冻结音频与谱面推进，恢复后音画同步继续；窗口失焦自动暂停。\n- G08 谱面乐段（本包冻结值）：单曲三段——热身段（0–15 秒，仅点击型、密度低）、主题段（15–70 秒，全型音符）、终曲段（70 秒–曲尾，密度较主题段 +50%、出现双押、下落速度 ×1.15）；进入终曲段前 2 秒 HUD 显示「终曲」提示（图标＋文字）；段边界事件 `section_change` 可观测；乐段不改变 G03–G05 判定与计分规则。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：D/F/J/K＝对应轨道判定（点击型按一下；长按型按住至尾）；Esc＝暂停/继续；结算界面 Enter＝重开。\n- I02 输入语义边界：空轨按键不产生判定（不计 MISS、不加连击）；长按中途松开触发断连（M02）；暂停/结算期间输入无效。\n- I03 无鼠标玩法需求；菜单可键盘完整操作。\n- I04 输入设备与统一判定管线（本包冻结值）：键盘 D/F/J/K；触屏（HTML5 环境）四分区点击映射 D/F/J/K；手柄（可选开启）面键 A/B/X/Y 映射 D/F/J/K；三种设备汇入**同一判定管线**（同一 Δt 计算、同一窗口分档、同一连击/得分结算），设备切换即时生效并在 HUD 显示当前设备图标＋文字。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：连击数、血条、谱面进度、当前乐段名、判定反馈（P/G/M 图标＋文字）、当前输入设备；HUD 对照见 rubric。\n- I07 输入延迟红线（本包冻结值）：判定输入到对应评级反馈 ≤ **50 毫秒**（音游手感红线）；设置界面显示当前音频-视频偏移补偿值；超红线记为缺陷（rubric D4 断言）。\n\n## 5. 谱面与内容清单 [L01–L04]\n\n- L01 生成对象：单谱面 1（时间轴数据，seed=1057 冻结）、音频 1（原创或公有领域）、音符两型（点击 ≥ 64、长按 ≥ 16）、轨道 4、机械音乐厅场景与判定线 UI、三乐段结构。\n- L02 谱面结构：前 10 秒为低密度热身段（仅点击型）；谱面须通过「全 PERFECT 可达理论满分」的可解性自查；长按不与同轨其他音符重叠。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（开始界面/演奏 HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的机械厅装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 判定窗口（主机制）\n  - input：轨道键（键盘/触屏/手柄统一管线）\n  - precondition：处于演奏状态且该轨存在待判定音符\n  - state_change：按 G03 窗口将输入分档为 PERFECT/GOOD/MISS\n  - observable：逐音符判定事件含 Δt 字段与档位、输入设备字段\n  - invalid_case：空轨按键不产生判定事件\n  - recovery：—\n- M02 长按音符\n  - input：按住对应轨道键\n  - precondition：长按头部判定已成立\n  - state_change：头部判定（同 G03）→ 按住期间 → 尾部判定；中途松开 → 断连（尾部记 MISS、连击归零）\n  - observable：长按完成率事件、断连事件\n  - invalid_case：头部 MISS 后按住不产生尾部判定\n  - recovery：后续音符继续\n- M03 音画偏移校准\n  - input：校准流程中的 8 次点击\n  - precondition：处于校准流程\n  - state_change：测得补偿值 → 全局判定时间差与显示偏移生效\n  - observable：校准前后同输入序列的判定差分\n  - invalid_case：—\n  - recovery：重测即覆盖\n- M04 连击与结算\n  - input：逐次判定 / 结算画面\n  - precondition：处于演奏/结算状态\n  - state_change：命中按 G04 计倍率与得分并累计连击；MISS 归零；结算按加权和与评级阈值出分\n  - observable：连击事件、结算对账（容差 0）、评级事件\n  - invalid_case：—\n  - recovery：重开全量重置\n- M05 血条与胜负\n  - input：逐次判定\n  - precondition：处于演奏状态\n  - state_change：按 G05 增减血条；归零即刻判负；谱面走完 → 结算评级\n  - observable：血条事件、win/lose 事件与结算面板\n  - invalid_case：—\n  - recovery：判负即刻重开\n- M06 乐段推进\n  - input：谱面时间推进（系统）\n  - precondition：演奏进行中\n  - state_change：按 G08 三段边界切换乐段（密度/双押/下落速度规则生效）；`section_change` 事件与「终曲」提示\n  - observable：段边界事件、终曲段下落速度 ×1.15 采样、密度对照\n  - invalid_case：乐段切换不重置连击/血条\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成整首谱面（血条未归零）且结算评级 ≥ C（得分率 ≥ 60%）。\n- V02 失败条件：血条归零（即刻判负），或谱面完成但得分率 < 60%（结算显示未达标）。\n- V03 恢复语义：失败/未达标即刻重开；重开后谱面、血条、连击、得分全量重置（校准值保留，因其属于设置而非局内状态）。\n- V04 persistent_state：无（重开全量清空；最好成绩可作展示但不作为验收需求、不要求跨会话保存）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（得分/连击/血条）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设软锁——判负即刻重开、谱面按 seed 复现；判定输入始终可达。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：发条与蒸汽驱动的架空时代，「谐律厅」是城市的心脏——巨型机械音乐厅每晚以合奏钟声为全城报时。\n- W02 场景所在地：谐律厅的独奏台——四条黄铜音轨沿齿轮墙垂落，判定线是一排待击音簧。\n- W03 玩家身份与当前任务：玩家是调律师学徒「聆」；当前任务：在钟枢校准夜完成独奏，让报时大合奏如期奏响。\n- W04 失败代价与结局表达：血条归零＝校准中断需重来（判负界面文案）；完成则 C03 呈现大合奏钟声齐鸣、全城灯火应和的场面。\n- W05 叙事来源：四轨道＝钟枢的四根音簧；双押＝和音；终曲段＝校准夜的收束乐章；节拍灯＝音乐厅的呼吸。全部原创。\n- W06 视觉风格与色彩材质：黄铜与暗木的机械美感；主色＝黄铜金（#B08D4F 系）＋暗胡桃（#4A3A2C 系）＋判定青光（#57C9B8 系）；材质以黄铜、蒸汽管、磨砂玻璃为主。\n- W07 环境氛围与声音语言：齿轮低鸣的音乐厅——常驻机械运转声；音效语言为「节拍灯咔哒＋音符爆裂＋断连闷响＋终曲钟声」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代校准夜 → 终曲段视频（C02）作为高潮节点 → 结算视频（C03）收束报时；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正面舞台视角（演奏 UI 全屏），无跟随；判定线轻微随低频节奏起伏（幅度 ≤4 像素，不改变判定位置）；镜头边界＝演奏 UI 外框。\n- F02 关键操作镜头变化：连击达 25/50 时舞台灯光短暂扫过（0.5 秒）；终曲段进入时灯光全亮＋轻微 FOV 变化 +5°（0.5 秒）；无慢动作。\n- F03 输入与延迟：见 I07（≤50 毫秒红线）；判定反馈与音符爆裂在判定帧同帧呈现。\n- F04 环境常驻效果：齿轮墙缓慢转动、蒸汽微雾、节拍灯随节拍明暗；不遮挡轨道与判定线。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| PERFECT | 音符青光爆裂＋判定线火花＋「P」字弹出 | 清脆爆裂音 | 0.2s |\n| GOOD | 音符黄光散开＋「G」字弹出 | 较柔爆裂音 | 0.2s |\n| MISS | 音符灰化坠落＋判定线红闪＋「M」字 | 低沉闷响 | 0.3s |\n| 长按完成 | 尾焰沿轨道拉出光带 | 尾音清响 | 完成 |\n| 长按断连 | 光带断裂灰化 | 断连闷响 | 0.3s |\n| 连击档位升级 | 连击数字放大弹跳＋齿轮徽标点亮 | 连击咔哒声 | 弹跳完成 |\n| 血条增减 | 血条平滑移动＋数字跳动 | 增/减微音 | 移动完成 |\n| 段落切换 | 段名横幅（热身/主题/终曲）＋灯光变化 | 转段钟声短句 | 横幅结束 |\n| 终曲提示 | 「终曲」图标＋文字提前 2 秒显示 | 提示钟声 | 进入终曲段 |\n| 双押命中 | 双轨同步爆裂＋和音光环 | 和音爆裂音 | 0.2s |\n| 判负 | 灯光骤暗＋谱面停格 | 失谐低鸣 | 进入判负界面 |\n| 完成 | 谱面收束光带＋大合奏预演灯光 | 终曲钟声 | 进入结算 |\n\n- F06 关键音效清单：爆裂音（P/G 两档）、尾音、断连闷响、连击咔哒、转段钟声、提示钟声、和音爆裂、失谐低鸣、终曲钟声；环境音：齿轮低鸣＋蒸汽嘶声（常驻循环，演奏中低音量）；循环音开始/结束：环境声随开始界面进入、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：判定反馈（P/G/M）文字＋图形双通道承担判定信息；爆裂粒子单帧 ≤ 30 且不遮挡相邻轨道与判定线。\n- F08 音画同步：判定音效与判定帧同步（受 G06 补偿影响时以补偿后对齐）；转段钟声与 `section_change` 帧同步；终曲钟声与完成帧同步。\n- F09 屏幕震动：MISS 0.05 秒微幅（可关闭）；设置界面提供「判定线起伏开/关」「震动开/关」（关闭不影响判定）。\n- F10 前端界面：开始界面（演奏/校准/设置/退出＋当前输入设备图标）→ 演奏 HUD（连击、血条、进度、段名、判定反馈、设备图标）→ 结算（评级/得分/最大连击/P-G-M 统计/重开/返回）→ 判负界面（即刻重开）→ 暂停面板（继续/重开/设置）；关键状态附图标＋文字（P/G/M、段名、设备），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 开场演出（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由开始界面进入演奏之前，每局一次\n  - 内容与角色场景：夜幕中的谐律厅灯火通明，调律师学徒「聆」登上独奏台，四条黄铜音轨次第亮起，齿轮墙开始转动\n  - 资产对应：谐律厅、独奏台、音轨与游戏内场景同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入演奏（谱面从 0 秒起算）；自然播完 → 同\n  - 状态一致：播放期间不推进谱面与计时；进入状态＝热身段起点\n- C02 终曲段演出（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次进入终曲段（70 秒边界 `section_change` 事件）时短暂插入，每局一次\n  - 内容与角色场景：舞台灯光全亮，报时大钟的钟枢开始旋转，双轨和音音簧并列弹起\n  - 资产对应：钟枢、音簧、舞台与游戏内一致\n  - 可跳过：Esc 跳过 → 终曲段从边界点继续（谱面按已计时间推进，跳过不回溯）；自然播完 → 同\n  - 状态一致：仅在真实段边界后触发；跳过不改变得分/连击/血条\n- C03 演奏完成结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：V01 达成后、结算面板之前，每局一次\n  - 内容与角色场景：大合奏钟声齐鸣，谐律厅灯光如潮涌向全城，「聆」在掌声中收起音锤\n  - 资产对应：谐律厅、大钟、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：评级字样与真实结算一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三乐段单谱面演奏、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、键盘/触屏/手柄统一判定管线。\n- N02 本测例包含的流程与界面：开始界面、校准、演奏、结算与判负、暂停（含失焦自动暂停）、即刻重开。\n- N03 本测例包含的演出能力：开场/终曲/结算视频（C01–C03）、§9 F04–F09 全部事件反馈与音效、机械音乐厅氛围。\n- N04 输入范围：键盘（D/F/J/K/Esc/Enter）＋触屏四分区＋手柄面键（可选，统一判定管线）；无多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋原创/公有领域曲目（来源声明可追溯）；无配音需求。\n- N06 表现层自由度：§9 未冻结的机械厅装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（调律师学徒「聆」、齿轮墙舞台、音簧判定线等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（下落→判定→评级→连击→结算）；判定/倍率/血条均为同一判定系统的内部规则，无跨系统因果链；谱面时间轴与判定并发（B1）；判负即刻重开为恢复路径；新增乐段、统一输入管线与演出为表现/输入层，不改变难度档\"\n  downgrade_boundary: \"去掉长按与血条（纯点击判定无限重试）后仍为 S（更简）\"\n  upgrade_boundary: \"若成绩跨局保留并解锁曲目难度规则或多谱面联赛，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：2 个（text-to-3D 1，image-to-3D 1）；object 任务资产为：tuner_ling, chime_judgeline。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, strike_conduct。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "7f0f9f7c887ca98082287168c1e5c8363c89012da01aae212ce685ae974b4b64"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Dull dropped-mallet thud with a faint detune",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G057_sfx_004": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G057_rhythm_machine_hall",
+          "task_id": "G057_sfx_004",
+          "asset_name": "hold_complete",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Clean sustained reed ring completing a hold note",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5574,
+          "trigger": "长按完成",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《机械音乐厅的节奏演奏》｜下落式节奏判定机制输入规范\n\n```yaml\ncase_id: G057\nbase_case_id: G057\ntitle: 机械音乐厅的节奏演奏\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1057\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《机械音乐厅的节奏演奏》；版本：mechanics-v3（2026-10-11 完整性修订：补谱面乐段、触屏/手柄统一判定、输入延迟红线、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘、触屏（HTML5）与手柄（可选）。\n- 原创边界：本作全部名称、场景、文案与美术必须原创；**音频必须为原创或公有领域曲目，不得使用任何商业作品的乐曲、录音或谱面**；不使用任何商业作品的名称、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 谱面实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的下落式节奏游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：下落式单谱面节奏游戏，单人。本测例包含的能力：三乐段谱面（热身/主题/终曲）、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、三设备统一判定管线、开场/终曲/结算视频。\n- S02 核心循环一句话：音符下落 → 判定窗口输入 → 命中评级 → 连击累积 → 结算。\n- S03 流程：开始界面 →（可选）校准 → 演奏单谱面 → 结算（评级/得分/最大连击）→ 重开。\n- S04 最低完整流程：开始界面、演奏、结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：血条归零即刻判负并可直接重开；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与开始界面 → 校准（可选）→ 演奏（热身/主题/终曲三段）→ 结算 → 重开。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与开始界面\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始演奏」\n  - precondition：构建可启动且谱面/音频按 seed=1057 冻结加载\n  - state_change：进入「开始界面」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：开始界面按 §9 F10 呈现（演奏/校准/设置/当前输入设备图标）\n  - next_actions：进入「校准（可选）」或「演奏」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 校准（可选）\n  - input：跟随 8 次提示节拍点击（触发方：玩家）\n  - precondition：从开始界面进入校准\n  - state_change：测得全局补偿值并即时生效（G06）\n  - feedback：每次点击显示 Δt 与当前中位值\n  - next_actions：返回开始界面或直接进入「演奏」\n  - outcome：补偿值存入设置（非局内状态）\n- S08 热身段（0–15 秒）\n  - input：D/F/J/K（或触屏四分区/手柄面键）（触发方：玩家）\n  - precondition：演奏开始且当前乐段＝热身\n  - state_change：仅点击型音符、密度低；判定/得分/连击/血条按 G03–G05 结算\n  - feedback：节拍灯与音符判定反馈按 §9 F05\n  - next_actions：15 秒边界 → `section_change` →「主题段」\n  - outcome：得分与连击局内累计\n- S09 主题段（15–70 秒）\n  - input：同 S08（触发方：玩家）\n  - precondition：热身段结束\n  - state_change：全型音符（点击＋长按）按谱面推进\n  - feedback：齿轮转动与轨道灯光随节奏脉动\n  - next_actions：70 秒边界 → `section_change`（提前 2 秒「终曲」提示）→「终曲段」\n  - outcome：局内状态持续\n- S10 终曲段（70 秒–曲尾）\n  - input：同 S08（触发方：玩家）\n  - precondition：主题段结束且终曲提示已显示\n  - state_change：密度较主题段 +50%、出现双押、下落速度 ×1.15（G08）；首次进入时按 §10 C02 触发终曲演出视频（每局一次）\n  - feedback：终曲灯光全亮与更强的命中反馈\n  - next_actions：谱面完成 →「结算」（先播 C03）；血条归零 → 即刻判负界面\n  - outcome：按 V01/V02 判定\n- S11 结算与重开\n  - input：Enter＝重开 / Esc＝返回开始界面（触发方：玩家）\n  - precondition：V01（完成且达标）或 V02（判负/未达标）达成\n  - state_change：进入「结算」状态；谱面推进冻结\n  - feedback：结算面板显示评级、得分、最大连击、Perfect/Good/Miss 统计\n  - next_actions：重开（谱面/血条/连击/得分全量重置，校准值保留）或返回\n  - outcome：无跨局写入\n\n## 3. 数值口径与全局规则 [G01–G08]\n\n- G01 统一刻度：时间为毫秒；得分、连击、血条为数值；血条百分比上限 100、下限 0。\n- G02 谱面与轨道：单曲 1 首（时长 90–120 秒，原创或公有领域音频）；4 条下落轨道（D/F/J/K 对应）；音符两型：点击、长按；谱面为时间轴数据（音符时间、轨道、类型、长按时长），由 fixed_seed=1057 冻结生成，同 seed 下谱面逐项可复现；音符总数 ≥ 80（建议点击 64、长按 16 分布）。\n- G03 判定窗口（按时间差 Δt=输入时刻−音符时刻，经 G06 校准补偿后）：|Δt| ≤ 50 毫秒 → PERFECT；50 < |Δt| ≤ 120 毫秒 → GOOD；|Δt| > 120 毫秒或未按 → MISS。\n- G04 得分与连击倍率：单次判定 PERFECT=300、GOOD=150、MISS=0；长按头、尾各一次判定、各计一次分。倍率 m = 1 + 0.02 × min(combo, 50)（上限 2.0），**按命中前当前连击数取值，命中后 combo+1；MISS 归零**。独立 oracle 数例：开局连续 10 个 PERFECT，第 k 个得分 300×(1+0.02×(k−1))，合计 300×(10+0.02×45) = **3270**，其中第 1 个为 300。结算对账：总分=逐音符加权之和，容差 0。\n- G05 血条：初始 70%；PERFECT +2%、GOOD +0.5%、MISS −8%；到达上限 100 后不再增加；归零 → 即刻判负。\n- G06 音画偏移校准：设置内提供校准流程——跟随 8 次提示节拍点击，取 |Δt| 中位数作为全局补偿值（默认 0）；**判定用 Δt = 原始时间差 − 补偿值**；校准值可随时重测并立即生效；校准只改判定时间差与谱面显示偏移，不改音符时刻本身。\n- G07 评级与暂停：评级按得分率（总分/理论满分，理论满分=全 PERFECT 总分）：S ≥ 95%、A ≥ 85%、B ≥ 70%、C ≥ 60%，< 60% 为未达标；Esc 暂停冻结音频与谱面推进，恢复后音画同步继续；窗口失焦自动暂停。\n- G08 谱面乐段（本包冻结值）：单曲三段——热身段（0–15 秒，仅点击型、密度低）、主题段（15–70 秒，全型音符）、终曲段（70 秒–曲尾，密度较主题段 +50%、出现双押、下落速度 ×1.15）；进入终曲段前 2 秒 HUD 显示「终曲」提示（图标＋文字）；段边界事件 `section_change` 可观测；乐段不改变 G03–G05 判定与计分规则。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：D/F/J/K＝对应轨道判定（点击型按一下；长按型按住至尾）；Esc＝暂停/继续；结算界面 Enter＝重开。\n- I02 输入语义边界：空轨按键不产生判定（不计 MISS、不加连击）；长按中途松开触发断连（M02）；暂停/结算期间输入无效。\n- I03 无鼠标玩法需求；菜单可键盘完整操作。\n- I04 输入设备与统一判定管线（本包冻结值）：键盘 D/F/J/K；触屏（HTML5 环境）四分区点击映射 D/F/J/K；手柄（可选开启）面键 A/B/X/Y 映射 D/F/J/K；三种设备汇入**同一判定管线**（同一 Δt 计算、同一窗口分档、同一连击/得分结算），设备切换即时生效并在 HUD 显示当前设备图标＋文字。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：连击数、血条、谱面进度、当前乐段名、判定反馈（P/G/M 图标＋文字）、当前输入设备；HUD 对照见 rubric。\n- I07 输入延迟红线（本包冻结值）：判定输入到对应评级反馈 ≤ **50 毫秒**（音游手感红线）；设置界面显示当前音频-视频偏移补偿值；超红线记为缺陷（rubric D4 断言）。\n\n## 5. 谱面与内容清单 [L01–L04]\n\n- L01 生成对象：单谱面 1（时间轴数据，seed=1057 冻结）、音频 1（原创或公有领域）、音符两型（点击 ≥ 64、长按 ≥ 16）、轨道 4、机械音乐厅场景与判定线 UI、三乐段结构。\n- L02 谱面结构：前 10 秒为低密度热身段（仅点击型）；谱面须通过「全 PERFECT 可达理论满分」的可解性自查；长按不与同轨其他音符重叠。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（开始界面/演奏 HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的机械厅装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 判定窗口（主机制）\n  - input：轨道键（键盘/触屏/手柄统一管线）\n  - precondition：处于演奏状态且该轨存在待判定音符\n  - state_change：按 G03 窗口将输入分档为 PERFECT/GOOD/MISS\n  - observable：逐音符判定事件含 Δt 字段与档位、输入设备字段\n  - invalid_case：空轨按键不产生判定事件\n  - recovery：—\n- M02 长按音符\n  - input：按住对应轨道键\n  - precondition：长按头部判定已成立\n  - state_change：头部判定（同 G03）→ 按住期间 → 尾部判定；中途松开 → 断连（尾部记 MISS、连击归零）\n  - observable：长按完成率事件、断连事件\n  - invalid_case：头部 MISS 后按住不产生尾部判定\n  - recovery：后续音符继续\n- M03 音画偏移校准\n  - input：校准流程中的 8 次点击\n  - precondition：处于校准流程\n  - state_change：测得补偿值 → 全局判定时间差与显示偏移生效\n  - observable：校准前后同输入序列的判定差分\n  - invalid_case：—\n  - recovery：重测即覆盖\n- M04 连击与结算\n  - input：逐次判定 / 结算画面\n  - precondition：处于演奏/结算状态\n  - state_change：命中按 G04 计倍率与得分并累计连击；MISS 归零；结算按加权和与评级阈值出分\n  - observable：连击事件、结算对账（容差 0）、评级事件\n  - invalid_case：—\n  - recovery：重开全量重置\n- M05 血条与胜负\n  - input：逐次判定\n  - precondition：处于演奏状态\n  - state_change：按 G05 增减血条；归零即刻判负；谱面走完 → 结算评级\n  - observable：血条事件、win/lose 事件与结算面板\n  - invalid_case：—\n  - recovery：判负即刻重开\n- M06 乐段推进\n  - input：谱面时间推进（系统）\n  - precondition：演奏进行中\n  - state_change：按 G08 三段边界切换乐段（密度/双押/下落速度规则生效）；`section_change` 事件与「终曲」提示\n  - observable：段边界事件、终曲段下落速度 ×1.15 采样、密度对照\n  - invalid_case：乐段切换不重置连击/血条\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成整首谱面（血条未归零）且结算评级 ≥ C（得分率 ≥ 60%）。\n- V02 失败条件：血条归零（即刻判负），或谱面完成但得分率 < 60%（结算显示未达标）。\n- V03 恢复语义：失败/未达标即刻重开；重开后谱面、血条、连击、得分全量重置（校准值保留，因其属于设置而非局内状态）。\n- V04 persistent_state：无（重开全量清空；最好成绩可作展示但不作为验收需求、不要求跨会话保存）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（得分/连击/血条）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设软锁——判负即刻重开、谱面按 seed 复现；判定输入始终可达。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：发条与蒸汽驱动的架空时代，「谐律厅」是城市的心脏——巨型机械音乐厅每晚以合奏钟声为全城报时。\n- W02 场景所在地：谐律厅的独奏台——四条黄铜音轨沿齿轮墙垂落，判定线是一排待击音簧。\n- W03 玩家身份与当前任务：玩家是调律师学徒「聆」；当前任务：在钟枢校准夜完成独奏，让报时大合奏如期奏响。\n- W04 失败代价与结局表达：血条归零＝校准中断需重来（判负界面文案）；完成则 C03 呈现大合奏钟声齐鸣、全城灯火应和的场面。\n- W05 叙事来源：四轨道＝钟枢的四根音簧；双押＝和音；终曲段＝校准夜的收束乐章；节拍灯＝音乐厅的呼吸。全部原创。\n- W06 视觉风格与色彩材质：黄铜与暗木的机械美感；主色＝黄铜金（#B08D4F 系）＋暗胡桃（#4A3A2C 系）＋判定青光（#57C9B8 系）；材质以黄铜、蒸汽管、磨砂玻璃为主。\n- W07 环境氛围与声音语言：齿轮低鸣的音乐厅——常驻机械运转声；音效语言为「节拍灯咔哒＋音符爆裂＋断连闷响＋终曲钟声」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代校准夜 → 终曲段视频（C02）作为高潮节点 → 结算视频（C03）收束报时；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正面舞台视角（演奏 UI 全屏），无跟随；判定线轻微随低频节奏起伏（幅度 ≤4 像素，不改变判定位置）；镜头边界＝演奏 UI 外框。\n- F02 关键操作镜头变化：连击达 25/50 时舞台灯光短暂扫过（0.5 秒）；终曲段进入时灯光全亮＋轻微 FOV 变化 +5°（0.5 秒）；无慢动作。\n- F03 输入与延迟：见 I07（≤50 毫秒红线）；判定反馈与音符爆裂在判定帧同帧呈现。\n- F04 环境常驻效果：齿轮墙缓慢转动、蒸汽微雾、节拍灯随节拍明暗；不遮挡轨道与判定线。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| PERFECT | 音符青光爆裂＋判定线火花＋「P」字弹出 | 清脆爆裂音 | 0.2s |\n| GOOD | 音符黄光散开＋「G」字弹出 | 较柔爆裂音 | 0.2s |\n| MISS | 音符灰化坠落＋判定线红闪＋「M」字 | 低沉闷响 | 0.3s |\n| 长按完成 | 尾焰沿轨道拉出光带 | 尾音清响 | 完成 |\n| 长按断连 | 光带断裂灰化 | 断连闷响 | 0.3s |\n| 连击档位升级 | 连击数字放大弹跳＋齿轮徽标点亮 | 连击咔哒声 | 弹跳完成 |\n| 血条增减 | 血条平滑移动＋数字跳动 | 增/减微音 | 移动完成 |\n| 段落切换 | 段名横幅（热身/主题/终曲）＋灯光变化 | 转段钟声短句 | 横幅结束 |\n| 终曲提示 | 「终曲」图标＋文字提前 2 秒显示 | 提示钟声 | 进入终曲段 |\n| 双押命中 | 双轨同步爆裂＋和音光环 | 和音爆裂音 | 0.2s |\n| 判负 | 灯光骤暗＋谱面停格 | 失谐低鸣 | 进入判负界面 |\n| 完成 | 谱面收束光带＋大合奏预演灯光 | 终曲钟声 | 进入结算 |\n\n- F06 关键音效清单：爆裂音（P/G 两档）、尾音、断连闷响、连击咔哒、转段钟声、提示钟声、和音爆裂、失谐低鸣、终曲钟声；环境音：齿轮低鸣＋蒸汽嘶声（常驻循环，演奏中低音量）；循环音开始/结束：环境声随开始界面进入、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：判定反馈（P/G/M）文字＋图形双通道承担判定信息；爆裂粒子单帧 ≤ 30 且不遮挡相邻轨道与判定线。\n- F08 音画同步：判定音效与判定帧同步（受 G06 补偿影响时以补偿后对齐）；转段钟声与 `section_change` 帧同步；终曲钟声与完成帧同步。\n- F09 屏幕震动：MISS 0.05 秒微幅（可关闭）；设置界面提供「判定线起伏开/关」「震动开/关」（关闭不影响判定）。\n- F10 前端界面：开始界面（演奏/校准/设置/退出＋当前输入设备图标）→ 演奏 HUD（连击、血条、进度、段名、判定反馈、设备图标）→ 结算（评级/得分/最大连击/P-G-M 统计/重开/返回）→ 判负界面（即刻重开）→ 暂停面板（继续/重开/设置）；关键状态附图标＋文字（P/G/M、段名、设备），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 开场演出（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由开始界面进入演奏之前，每局一次\n  - 内容与角色场景：夜幕中的谐律厅灯火通明，调律师学徒「聆」登上独奏台，四条黄铜音轨次第亮起，齿轮墙开始转动\n  - 资产对应：谐律厅、独奏台、音轨与游戏内场景同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入演奏（谱面从 0 秒起算）；自然播完 → 同\n  - 状态一致：播放期间不推进谱面与计时；进入状态＝热身段起点\n- C02 终曲段演出（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次进入终曲段（70 秒边界 `section_change` 事件）时短暂插入，每局一次\n  - 内容与角色场景：舞台灯光全亮，报时大钟的钟枢开始旋转，双轨和音音簧并列弹起\n  - 资产对应：钟枢、音簧、舞台与游戏内一致\n  - 可跳过：Esc 跳过 → 终曲段从边界点继续（谱面按已计时间推进，跳过不回溯）；自然播完 → 同\n  - 状态一致：仅在真实段边界后触发；跳过不改变得分/连击/血条\n- C03 演奏完成结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：V01 达成后、结算面板之前，每局一次\n  - 内容与角色场景：大合奏钟声齐鸣，谐律厅灯光如潮涌向全城，「聆」在掌声中收起音锤\n  - 资产对应：谐律厅、大钟、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：评级字样与真实结算一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三乐段单谱面演奏、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、键盘/触屏/手柄统一判定管线。\n- N02 本测例包含的流程与界面：开始界面、校准、演奏、结算与判负、暂停（含失焦自动暂停）、即刻重开。\n- N03 本测例包含的演出能力：开场/终曲/结算视频（C01–C03）、§9 F04–F09 全部事件反馈与音效、机械音乐厅氛围。\n- N04 输入范围：键盘（D/F/J/K/Esc/Enter）＋触屏四分区＋手柄面键（可选，统一判定管线）；无多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋原创/公有领域曲目（来源声明可追溯）；无配音需求。\n- N06 表现层自由度：§9 未冻结的机械厅装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（调律师学徒「聆」、齿轮墙舞台、音簧判定线等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（下落→判定→评级→连击→结算）；判定/倍率/血条均为同一判定系统的内部规则，无跨系统因果链；谱面时间轴与判定并发（B1）；判负即刻重开为恢复路径；新增乐段、统一输入管线与演出为表现/输入层，不改变难度档\"\n  downgrade_boundary: \"去掉长按与血条（纯点击判定无限重试）后仍为 S（更简）\"\n  upgrade_boundary: \"若成绩跨局保留并解锁曲目难度规则或多谱面联赛，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：2 个（text-to-3D 1，image-to-3D 1）；object 任务资产为：tuner_ling, chime_judgeline。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, strike_conduct。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "7f0f9f7c887ca98082287168c1e5c8363c89012da01aae212ce685ae974b4b64"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Clean sustained reed ring completing a hold note",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G057_sfx_005": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G057_rhythm_machine_hall",
+          "task_id": "G057_sfx_005",
+          "asset_name": "combo_click",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Light brass click as combo tiers rise",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5575,
+          "trigger": "连击档位升级",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《机械音乐厅的节奏演奏》｜下落式节奏判定机制输入规范\n\n```yaml\ncase_id: G057\nbase_case_id: G057\ntitle: 机械音乐厅的节奏演奏\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1057\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《机械音乐厅的节奏演奏》；版本：mechanics-v3（2026-10-11 完整性修订：补谱面乐段、触屏/手柄统一判定、输入延迟红线、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘、触屏（HTML5）与手柄（可选）。\n- 原创边界：本作全部名称、场景、文案与美术必须原创；**音频必须为原创或公有领域曲目，不得使用任何商业作品的乐曲、录音或谱面**；不使用任何商业作品的名称、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 谱面实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的下落式节奏游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：下落式单谱面节奏游戏，单人。本测例包含的能力：三乐段谱面（热身/主题/终曲）、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、三设备统一判定管线、开场/终曲/结算视频。\n- S02 核心循环一句话：音符下落 → 判定窗口输入 → 命中评级 → 连击累积 → 结算。\n- S03 流程：开始界面 →（可选）校准 → 演奏单谱面 → 结算（评级/得分/最大连击）→ 重开。\n- S04 最低完整流程：开始界面、演奏、结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：血条归零即刻判负并可直接重开；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与开始界面 → 校准（可选）→ 演奏（热身/主题/终曲三段）→ 结算 → 重开。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与开始界面\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始演奏」\n  - precondition：构建可启动且谱面/音频按 seed=1057 冻结加载\n  - state_change：进入「开始界面」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：开始界面按 §9 F10 呈现（演奏/校准/设置/当前输入设备图标）\n  - next_actions：进入「校准（可选）」或「演奏」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 校准（可选）\n  - input：跟随 8 次提示节拍点击（触发方：玩家）\n  - precondition：从开始界面进入校准\n  - state_change：测得全局补偿值并即时生效（G06）\n  - feedback：每次点击显示 Δt 与当前中位值\n  - next_actions：返回开始界面或直接进入「演奏」\n  - outcome：补偿值存入设置（非局内状态）\n- S08 热身段（0–15 秒）\n  - input：D/F/J/K（或触屏四分区/手柄面键）（触发方：玩家）\n  - precondition：演奏开始且当前乐段＝热身\n  - state_change：仅点击型音符、密度低；判定/得分/连击/血条按 G03–G05 结算\n  - feedback：节拍灯与音符判定反馈按 §9 F05\n  - next_actions：15 秒边界 → `section_change` →「主题段」\n  - outcome：得分与连击局内累计\n- S09 主题段（15–70 秒）\n  - input：同 S08（触发方：玩家）\n  - precondition：热身段结束\n  - state_change：全型音符（点击＋长按）按谱面推进\n  - feedback：齿轮转动与轨道灯光随节奏脉动\n  - next_actions：70 秒边界 → `section_change`（提前 2 秒「终曲」提示）→「终曲段」\n  - outcome：局内状态持续\n- S10 终曲段（70 秒–曲尾）\n  - input：同 S08（触发方：玩家）\n  - precondition：主题段结束且终曲提示已显示\n  - state_change：密度较主题段 +50%、出现双押、下落速度 ×1.15（G08）；首次进入时按 §10 C02 触发终曲演出视频（每局一次）\n  - feedback：终曲灯光全亮与更强的命中反馈\n  - next_actions：谱面完成 →「结算」（先播 C03）；血条归零 → 即刻判负界面\n  - outcome：按 V01/V02 判定\n- S11 结算与重开\n  - input：Enter＝重开 / Esc＝返回开始界面（触发方：玩家）\n  - precondition：V01（完成且达标）或 V02（判负/未达标）达成\n  - state_change：进入「结算」状态；谱面推进冻结\n  - feedback：结算面板显示评级、得分、最大连击、Perfect/Good/Miss 统计\n  - next_actions：重开（谱面/血条/连击/得分全量重置，校准值保留）或返回\n  - outcome：无跨局写入\n\n## 3. 数值口径与全局规则 [G01–G08]\n\n- G01 统一刻度：时间为毫秒；得分、连击、血条为数值；血条百分比上限 100、下限 0。\n- G02 谱面与轨道：单曲 1 首（时长 90–120 秒，原创或公有领域音频）；4 条下落轨道（D/F/J/K 对应）；音符两型：点击、长按；谱面为时间轴数据（音符时间、轨道、类型、长按时长），由 fixed_seed=1057 冻结生成，同 seed 下谱面逐项可复现；音符总数 ≥ 80（建议点击 64、长按 16 分布）。\n- G03 判定窗口（按时间差 Δt=输入时刻−音符时刻，经 G06 校准补偿后）：|Δt| ≤ 50 毫秒 → PERFECT；50 < |Δt| ≤ 120 毫秒 → GOOD；|Δt| > 120 毫秒或未按 → MISS。\n- G04 得分与连击倍率：单次判定 PERFECT=300、GOOD=150、MISS=0；长按头、尾各一次判定、各计一次分。倍率 m = 1 + 0.02 × min(combo, 50)（上限 2.0），**按命中前当前连击数取值，命中后 combo+1；MISS 归零**。独立 oracle 数例：开局连续 10 个 PERFECT，第 k 个得分 300×(1+0.02×(k−1))，合计 300×(10+0.02×45) = **3270**，其中第 1 个为 300。结算对账：总分=逐音符加权之和，容差 0。\n- G05 血条：初始 70%；PERFECT +2%、GOOD +0.5%、MISS −8%；到达上限 100 后不再增加；归零 → 即刻判负。\n- G06 音画偏移校准：设置内提供校准流程——跟随 8 次提示节拍点击，取 |Δt| 中位数作为全局补偿值（默认 0）；**判定用 Δt = 原始时间差 − 补偿值**；校准值可随时重测并立即生效；校准只改判定时间差与谱面显示偏移，不改音符时刻本身。\n- G07 评级与暂停：评级按得分率（总分/理论满分，理论满分=全 PERFECT 总分）：S ≥ 95%、A ≥ 85%、B ≥ 70%、C ≥ 60%，< 60% 为未达标；Esc 暂停冻结音频与谱面推进，恢复后音画同步继续；窗口失焦自动暂停。\n- G08 谱面乐段（本包冻结值）：单曲三段——热身段（0–15 秒，仅点击型、密度低）、主题段（15–70 秒，全型音符）、终曲段（70 秒–曲尾，密度较主题段 +50%、出现双押、下落速度 ×1.15）；进入终曲段前 2 秒 HUD 显示「终曲」提示（图标＋文字）；段边界事件 `section_change` 可观测；乐段不改变 G03–G05 判定与计分规则。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：D/F/J/K＝对应轨道判定（点击型按一下；长按型按住至尾）；Esc＝暂停/继续；结算界面 Enter＝重开。\n- I02 输入语义边界：空轨按键不产生判定（不计 MISS、不加连击）；长按中途松开触发断连（M02）；暂停/结算期间输入无效。\n- I03 无鼠标玩法需求；菜单可键盘完整操作。\n- I04 输入设备与统一判定管线（本包冻结值）：键盘 D/F/J/K；触屏（HTML5 环境）四分区点击映射 D/F/J/K；手柄（可选开启）面键 A/B/X/Y 映射 D/F/J/K；三种设备汇入**同一判定管线**（同一 Δt 计算、同一窗口分档、同一连击/得分结算），设备切换即时生效并在 HUD 显示当前设备图标＋文字。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：连击数、血条、谱面进度、当前乐段名、判定反馈（P/G/M 图标＋文字）、当前输入设备；HUD 对照见 rubric。\n- I07 输入延迟红线（本包冻结值）：判定输入到对应评级反馈 ≤ **50 毫秒**（音游手感红线）；设置界面显示当前音频-视频偏移补偿值；超红线记为缺陷（rubric D4 断言）。\n\n## 5. 谱面与内容清单 [L01–L04]\n\n- L01 生成对象：单谱面 1（时间轴数据，seed=1057 冻结）、音频 1（原创或公有领域）、音符两型（点击 ≥ 64、长按 ≥ 16）、轨道 4、机械音乐厅场景与判定线 UI、三乐段结构。\n- L02 谱面结构：前 10 秒为低密度热身段（仅点击型）；谱面须通过「全 PERFECT 可达理论满分」的可解性自查；长按不与同轨其他音符重叠。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（开始界面/演奏 HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的机械厅装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 判定窗口（主机制）\n  - input：轨道键（键盘/触屏/手柄统一管线）\n  - precondition：处于演奏状态且该轨存在待判定音符\n  - state_change：按 G03 窗口将输入分档为 PERFECT/GOOD/MISS\n  - observable：逐音符判定事件含 Δt 字段与档位、输入设备字段\n  - invalid_case：空轨按键不产生判定事件\n  - recovery：—\n- M02 长按音符\n  - input：按住对应轨道键\n  - precondition：长按头部判定已成立\n  - state_change：头部判定（同 G03）→ 按住期间 → 尾部判定；中途松开 → 断连（尾部记 MISS、连击归零）\n  - observable：长按完成率事件、断连事件\n  - invalid_case：头部 MISS 后按住不产生尾部判定\n  - recovery：后续音符继续\n- M03 音画偏移校准\n  - input：校准流程中的 8 次点击\n  - precondition：处于校准流程\n  - state_change：测得补偿值 → 全局判定时间差与显示偏移生效\n  - observable：校准前后同输入序列的判定差分\n  - invalid_case：—\n  - recovery：重测即覆盖\n- M04 连击与结算\n  - input：逐次判定 / 结算画面\n  - precondition：处于演奏/结算状态\n  - state_change：命中按 G04 计倍率与得分并累计连击；MISS 归零；结算按加权和与评级阈值出分\n  - observable：连击事件、结算对账（容差 0）、评级事件\n  - invalid_case：—\n  - recovery：重开全量重置\n- M05 血条与胜负\n  - input：逐次判定\n  - precondition：处于演奏状态\n  - state_change：按 G05 增减血条；归零即刻判负；谱面走完 → 结算评级\n  - observable：血条事件、win/lose 事件与结算面板\n  - invalid_case：—\n  - recovery：判负即刻重开\n- M06 乐段推进\n  - input：谱面时间推进（系统）\n  - precondition：演奏进行中\n  - state_change：按 G08 三段边界切换乐段（密度/双押/下落速度规则生效）；`section_change` 事件与「终曲」提示\n  - observable：段边界事件、终曲段下落速度 ×1.15 采样、密度对照\n  - invalid_case：乐段切换不重置连击/血条\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成整首谱面（血条未归零）且结算评级 ≥ C（得分率 ≥ 60%）。\n- V02 失败条件：血条归零（即刻判负），或谱面完成但得分率 < 60%（结算显示未达标）。\n- V03 恢复语义：失败/未达标即刻重开；重开后谱面、血条、连击、得分全量重置（校准值保留，因其属于设置而非局内状态）。\n- V04 persistent_state：无（重开全量清空；最好成绩可作展示但不作为验收需求、不要求跨会话保存）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（得分/连击/血条）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设软锁——判负即刻重开、谱面按 seed 复现；判定输入始终可达。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：发条与蒸汽驱动的架空时代，「谐律厅」是城市的心脏——巨型机械音乐厅每晚以合奏钟声为全城报时。\n- W02 场景所在地：谐律厅的独奏台——四条黄铜音轨沿齿轮墙垂落，判定线是一排待击音簧。\n- W03 玩家身份与当前任务：玩家是调律师学徒「聆」；当前任务：在钟枢校准夜完成独奏，让报时大合奏如期奏响。\n- W04 失败代价与结局表达：血条归零＝校准中断需重来（判负界面文案）；完成则 C03 呈现大合奏钟声齐鸣、全城灯火应和的场面。\n- W05 叙事来源：四轨道＝钟枢的四根音簧；双押＝和音；终曲段＝校准夜的收束乐章；节拍灯＝音乐厅的呼吸。全部原创。\n- W06 视觉风格与色彩材质：黄铜与暗木的机械美感；主色＝黄铜金（#B08D4F 系）＋暗胡桃（#4A3A2C 系）＋判定青光（#57C9B8 系）；材质以黄铜、蒸汽管、磨砂玻璃为主。\n- W07 环境氛围与声音语言：齿轮低鸣的音乐厅——常驻机械运转声；音效语言为「节拍灯咔哒＋音符爆裂＋断连闷响＋终曲钟声」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代校准夜 → 终曲段视频（C02）作为高潮节点 → 结算视频（C03）收束报时；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正面舞台视角（演奏 UI 全屏），无跟随；判定线轻微随低频节奏起伏（幅度 ≤4 像素，不改变判定位置）；镜头边界＝演奏 UI 外框。\n- F02 关键操作镜头变化：连击达 25/50 时舞台灯光短暂扫过（0.5 秒）；终曲段进入时灯光全亮＋轻微 FOV 变化 +5°（0.5 秒）；无慢动作。\n- F03 输入与延迟：见 I07（≤50 毫秒红线）；判定反馈与音符爆裂在判定帧同帧呈现。\n- F04 环境常驻效果：齿轮墙缓慢转动、蒸汽微雾、节拍灯随节拍明暗；不遮挡轨道与判定线。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| PERFECT | 音符青光爆裂＋判定线火花＋「P」字弹出 | 清脆爆裂音 | 0.2s |\n| GOOD | 音符黄光散开＋「G」字弹出 | 较柔爆裂音 | 0.2s |\n| MISS | 音符灰化坠落＋判定线红闪＋「M」字 | 低沉闷响 | 0.3s |\n| 长按完成 | 尾焰沿轨道拉出光带 | 尾音清响 | 完成 |\n| 长按断连 | 光带断裂灰化 | 断连闷响 | 0.3s |\n| 连击档位升级 | 连击数字放大弹跳＋齿轮徽标点亮 | 连击咔哒声 | 弹跳完成 |\n| 血条增减 | 血条平滑移动＋数字跳动 | 增/减微音 | 移动完成 |\n| 段落切换 | 段名横幅（热身/主题/终曲）＋灯光变化 | 转段钟声短句 | 横幅结束 |\n| 终曲提示 | 「终曲」图标＋文字提前 2 秒显示 | 提示钟声 | 进入终曲段 |\n| 双押命中 | 双轨同步爆裂＋和音光环 | 和音爆裂音 | 0.2s |\n| 判负 | 灯光骤暗＋谱面停格 | 失谐低鸣 | 进入判负界面 |\n| 完成 | 谱面收束光带＋大合奏预演灯光 | 终曲钟声 | 进入结算 |\n\n- F06 关键音效清单：爆裂音（P/G 两档）、尾音、断连闷响、连击咔哒、转段钟声、提示钟声、和音爆裂、失谐低鸣、终曲钟声；环境音：齿轮低鸣＋蒸汽嘶声（常驻循环，演奏中低音量）；循环音开始/结束：环境声随开始界面进入、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：判定反馈（P/G/M）文字＋图形双通道承担判定信息；爆裂粒子单帧 ≤ 30 且不遮挡相邻轨道与判定线。\n- F08 音画同步：判定音效与判定帧同步（受 G06 补偿影响时以补偿后对齐）；转段钟声与 `section_change` 帧同步；终曲钟声与完成帧同步。\n- F09 屏幕震动：MISS 0.05 秒微幅（可关闭）；设置界面提供「判定线起伏开/关」「震动开/关」（关闭不影响判定）。\n- F10 前端界面：开始界面（演奏/校准/设置/退出＋当前输入设备图标）→ 演奏 HUD（连击、血条、进度、段名、判定反馈、设备图标）→ 结算（评级/得分/最大连击/P-G-M 统计/重开/返回）→ 判负界面（即刻重开）→ 暂停面板（继续/重开/设置）；关键状态附图标＋文字（P/G/M、段名、设备），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 开场演出（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由开始界面进入演奏之前，每局一次\n  - 内容与角色场景：夜幕中的谐律厅灯火通明，调律师学徒「聆」登上独奏台，四条黄铜音轨次第亮起，齿轮墙开始转动\n  - 资产对应：谐律厅、独奏台、音轨与游戏内场景同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入演奏（谱面从 0 秒起算）；自然播完 → 同\n  - 状态一致：播放期间不推进谱面与计时；进入状态＝热身段起点\n- C02 终曲段演出（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次进入终曲段（70 秒边界 `section_change` 事件）时短暂插入，每局一次\n  - 内容与角色场景：舞台灯光全亮，报时大钟的钟枢开始旋转，双轨和音音簧并列弹起\n  - 资产对应：钟枢、音簧、舞台与游戏内一致\n  - 可跳过：Esc 跳过 → 终曲段从边界点继续（谱面按已计时间推进，跳过不回溯）；自然播完 → 同\n  - 状态一致：仅在真实段边界后触发；跳过不改变得分/连击/血条\n- C03 演奏完成结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：V01 达成后、结算面板之前，每局一次\n  - 内容与角色场景：大合奏钟声齐鸣，谐律厅灯光如潮涌向全城，「聆」在掌声中收起音锤\n  - 资产对应：谐律厅、大钟、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：评级字样与真实结算一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三乐段单谱面演奏、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、键盘/触屏/手柄统一判定管线。\n- N02 本测例包含的流程与界面：开始界面、校准、演奏、结算与判负、暂停（含失焦自动暂停）、即刻重开。\n- N03 本测例包含的演出能力：开场/终曲/结算视频（C01–C03）、§9 F04–F09 全部事件反馈与音效、机械音乐厅氛围。\n- N04 输入范围：键盘（D/F/J/K/Esc/Enter）＋触屏四分区＋手柄面键（可选，统一判定管线）；无多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋原创/公有领域曲目（来源声明可追溯）；无配音需求。\n- N06 表现层自由度：§9 未冻结的机械厅装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（调律师学徒「聆」、齿轮墙舞台、音簧判定线等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（下落→判定→评级→连击→结算）；判定/倍率/血条均为同一判定系统的内部规则，无跨系统因果链；谱面时间轴与判定并发（B1）；判负即刻重开为恢复路径；新增乐段、统一输入管线与演出为表现/输入层，不改变难度档\"\n  downgrade_boundary: \"去掉长按与血条（纯点击判定无限重试）后仍为 S（更简）\"\n  upgrade_boundary: \"若成绩跨局保留并解锁曲目难度规则或多谱面联赛，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：2 个（text-to-3D 1，image-to-3D 1）；object 任务资产为：tuner_ling, chime_judgeline。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, strike_conduct。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "7f0f9f7c887ca98082287168c1e5c8363c89012da01aae212ce685ae974b4b64"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Light brass click as combo tiers rise",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G057_sfx_006": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G057_rhythm_machine_hall",
+          "task_id": "G057_sfx_006",
+          "asset_name": "section_bell",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Two-note turning bell as the song section changes",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5576,
+          "trigger": "M06 段落切换",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《机械音乐厅的节奏演奏》｜下落式节奏判定机制输入规范\n\n```yaml\ncase_id: G057\nbase_case_id: G057\ntitle: 机械音乐厅的节奏演奏\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1057\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《机械音乐厅的节奏演奏》；版本：mechanics-v3（2026-10-11 完整性修订：补谱面乐段、触屏/手柄统一判定、输入延迟红线、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘、触屏（HTML5）与手柄（可选）。\n- 原创边界：本作全部名称、场景、文案与美术必须原创；**音频必须为原创或公有领域曲目，不得使用任何商业作品的乐曲、录音或谱面**；不使用任何商业作品的名称、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 谱面实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的下落式节奏游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：下落式单谱面节奏游戏，单人。本测例包含的能力：三乐段谱面（热身/主题/终曲）、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、三设备统一判定管线、开场/终曲/结算视频。\n- S02 核心循环一句话：音符下落 → 判定窗口输入 → 命中评级 → 连击累积 → 结算。\n- S03 流程：开始界面 →（可选）校准 → 演奏单谱面 → 结算（评级/得分/最大连击）→ 重开。\n- S04 最低完整流程：开始界面、演奏、结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：血条归零即刻判负并可直接重开；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与开始界面 → 校准（可选）→ 演奏（热身/主题/终曲三段）→ 结算 → 重开。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与开始界面\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始演奏」\n  - precondition：构建可启动且谱面/音频按 seed=1057 冻结加载\n  - state_change：进入「开始界面」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：开始界面按 §9 F10 呈现（演奏/校准/设置/当前输入设备图标）\n  - next_actions：进入「校准（可选）」或「演奏」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 校准（可选）\n  - input：跟随 8 次提示节拍点击（触发方：玩家）\n  - precondition：从开始界面进入校准\n  - state_change：测得全局补偿值并即时生效（G06）\n  - feedback：每次点击显示 Δt 与当前中位值\n  - next_actions：返回开始界面或直接进入「演奏」\n  - outcome：补偿值存入设置（非局内状态）\n- S08 热身段（0–15 秒）\n  - input：D/F/J/K（或触屏四分区/手柄面键）（触发方：玩家）\n  - precondition：演奏开始且当前乐段＝热身\n  - state_change：仅点击型音符、密度低；判定/得分/连击/血条按 G03–G05 结算\n  - feedback：节拍灯与音符判定反馈按 §9 F05\n  - next_actions：15 秒边界 → `section_change` →「主题段」\n  - outcome：得分与连击局内累计\n- S09 主题段（15–70 秒）\n  - input：同 S08（触发方：玩家）\n  - precondition：热身段结束\n  - state_change：全型音符（点击＋长按）按谱面推进\n  - feedback：齿轮转动与轨道灯光随节奏脉动\n  - next_actions：70 秒边界 → `section_change`（提前 2 秒「终曲」提示）→「终曲段」\n  - outcome：局内状态持续\n- S10 终曲段（70 秒–曲尾）\n  - input：同 S08（触发方：玩家）\n  - precondition：主题段结束且终曲提示已显示\n  - state_change：密度较主题段 +50%、出现双押、下落速度 ×1.15（G08）；首次进入时按 §10 C02 触发终曲演出视频（每局一次）\n  - feedback：终曲灯光全亮与更强的命中反馈\n  - next_actions：谱面完成 →「结算」（先播 C03）；血条归零 → 即刻判负界面\n  - outcome：按 V01/V02 判定\n- S11 结算与重开\n  - input：Enter＝重开 / Esc＝返回开始界面（触发方：玩家）\n  - precondition：V01（完成且达标）或 V02（判负/未达标）达成\n  - state_change：进入「结算」状态；谱面推进冻结\n  - feedback：结算面板显示评级、得分、最大连击、Perfect/Good/Miss 统计\n  - next_actions：重开（谱面/血条/连击/得分全量重置，校准值保留）或返回\n  - outcome：无跨局写入\n\n## 3. 数值口径与全局规则 [G01–G08]\n\n- G01 统一刻度：时间为毫秒；得分、连击、血条为数值；血条百分比上限 100、下限 0。\n- G02 谱面与轨道：单曲 1 首（时长 90–120 秒，原创或公有领域音频）；4 条下落轨道（D/F/J/K 对应）；音符两型：点击、长按；谱面为时间轴数据（音符时间、轨道、类型、长按时长），由 fixed_seed=1057 冻结生成，同 seed 下谱面逐项可复现；音符总数 ≥ 80（建议点击 64、长按 16 分布）。\n- G03 判定窗口（按时间差 Δt=输入时刻−音符时刻，经 G06 校准补偿后）：|Δt| ≤ 50 毫秒 → PERFECT；50 < |Δt| ≤ 120 毫秒 → GOOD；|Δt| > 120 毫秒或未按 → MISS。\n- G04 得分与连击倍率：单次判定 PERFECT=300、GOOD=150、MISS=0；长按头、尾各一次判定、各计一次分。倍率 m = 1 + 0.02 × min(combo, 50)（上限 2.0），**按命中前当前连击数取值，命中后 combo+1；MISS 归零**。独立 oracle 数例：开局连续 10 个 PERFECT，第 k 个得分 300×(1+0.02×(k−1))，合计 300×(10+0.02×45) = **3270**，其中第 1 个为 300。结算对账：总分=逐音符加权之和，容差 0。\n- G05 血条：初始 70%；PERFECT +2%、GOOD +0.5%、MISS −8%；到达上限 100 后不再增加；归零 → 即刻判负。\n- G06 音画偏移校准：设置内提供校准流程——跟随 8 次提示节拍点击，取 |Δt| 中位数作为全局补偿值（默认 0）；**判定用 Δt = 原始时间差 − 补偿值**；校准值可随时重测并立即生效；校准只改判定时间差与谱面显示偏移，不改音符时刻本身。\n- G07 评级与暂停：评级按得分率（总分/理论满分，理论满分=全 PERFECT 总分）：S ≥ 95%、A ≥ 85%、B ≥ 70%、C ≥ 60%，< 60% 为未达标；Esc 暂停冻结音频与谱面推进，恢复后音画同步继续；窗口失焦自动暂停。\n- G08 谱面乐段（本包冻结值）：单曲三段——热身段（0–15 秒，仅点击型、密度低）、主题段（15–70 秒，全型音符）、终曲段（70 秒–曲尾，密度较主题段 +50%、出现双押、下落速度 ×1.15）；进入终曲段前 2 秒 HUD 显示「终曲」提示（图标＋文字）；段边界事件 `section_change` 可观测；乐段不改变 G03–G05 判定与计分规则。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：D/F/J/K＝对应轨道判定（点击型按一下；长按型按住至尾）；Esc＝暂停/继续；结算界面 Enter＝重开。\n- I02 输入语义边界：空轨按键不产生判定（不计 MISS、不加连击）；长按中途松开触发断连（M02）；暂停/结算期间输入无效。\n- I03 无鼠标玩法需求；菜单可键盘完整操作。\n- I04 输入设备与统一判定管线（本包冻结值）：键盘 D/F/J/K；触屏（HTML5 环境）四分区点击映射 D/F/J/K；手柄（可选开启）面键 A/B/X/Y 映射 D/F/J/K；三种设备汇入**同一判定管线**（同一 Δt 计算、同一窗口分档、同一连击/得分结算），设备切换即时生效并在 HUD 显示当前设备图标＋文字。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：连击数、血条、谱面进度、当前乐段名、判定反馈（P/G/M 图标＋文字）、当前输入设备；HUD 对照见 rubric。\n- I07 输入延迟红线（本包冻结值）：判定输入到对应评级反馈 ≤ **50 毫秒**（音游手感红线）；设置界面显示当前音频-视频偏移补偿值；超红线记为缺陷（rubric D4 断言）。\n\n## 5. 谱面与内容清单 [L01–L04]\n\n- L01 生成对象：单谱面 1（时间轴数据，seed=1057 冻结）、音频 1（原创或公有领域）、音符两型（点击 ≥ 64、长按 ≥ 16）、轨道 4、机械音乐厅场景与判定线 UI、三乐段结构。\n- L02 谱面结构：前 10 秒为低密度热身段（仅点击型）；谱面须通过「全 PERFECT 可达理论满分」的可解性自查；长按不与同轨其他音符重叠。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（开始界面/演奏 HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的机械厅装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 判定窗口（主机制）\n  - input：轨道键（键盘/触屏/手柄统一管线）\n  - precondition：处于演奏状态且该轨存在待判定音符\n  - state_change：按 G03 窗口将输入分档为 PERFECT/GOOD/MISS\n  - observable：逐音符判定事件含 Δt 字段与档位、输入设备字段\n  - invalid_case：空轨按键不产生判定事件\n  - recovery：—\n- M02 长按音符\n  - input：按住对应轨道键\n  - precondition：长按头部判定已成立\n  - state_change：头部判定（同 G03）→ 按住期间 → 尾部判定；中途松开 → 断连（尾部记 MISS、连击归零）\n  - observable：长按完成率事件、断连事件\n  - invalid_case：头部 MISS 后按住不产生尾部判定\n  - recovery：后续音符继续\n- M03 音画偏移校准\n  - input：校准流程中的 8 次点击\n  - precondition：处于校准流程\n  - state_change：测得补偿值 → 全局判定时间差与显示偏移生效\n  - observable：校准前后同输入序列的判定差分\n  - invalid_case：—\n  - recovery：重测即覆盖\n- M04 连击与结算\n  - input：逐次判定 / 结算画面\n  - precondition：处于演奏/结算状态\n  - state_change：命中按 G04 计倍率与得分并累计连击；MISS 归零；结算按加权和与评级阈值出分\n  - observable：连击事件、结算对账（容差 0）、评级事件\n  - invalid_case：—\n  - recovery：重开全量重置\n- M05 血条与胜负\n  - input：逐次判定\n  - precondition：处于演奏状态\n  - state_change：按 G05 增减血条；归零即刻判负；谱面走完 → 结算评级\n  - observable：血条事件、win/lose 事件与结算面板\n  - invalid_case：—\n  - recovery：判负即刻重开\n- M06 乐段推进\n  - input：谱面时间推进（系统）\n  - precondition：演奏进行中\n  - state_change：按 G08 三段边界切换乐段（密度/双押/下落速度规则生效）；`section_change` 事件与「终曲」提示\n  - observable：段边界事件、终曲段下落速度 ×1.15 采样、密度对照\n  - invalid_case：乐段切换不重置连击/血条\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成整首谱面（血条未归零）且结算评级 ≥ C（得分率 ≥ 60%）。\n- V02 失败条件：血条归零（即刻判负），或谱面完成但得分率 < 60%（结算显示未达标）。\n- V03 恢复语义：失败/未达标即刻重开；重开后谱面、血条、连击、得分全量重置（校准值保留，因其属于设置而非局内状态）。\n- V04 persistent_state：无（重开全量清空；最好成绩可作展示但不作为验收需求、不要求跨会话保存）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（得分/连击/血条）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设软锁——判负即刻重开、谱面按 seed 复现；判定输入始终可达。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：发条与蒸汽驱动的架空时代，「谐律厅」是城市的心脏——巨型机械音乐厅每晚以合奏钟声为全城报时。\n- W02 场景所在地：谐律厅的独奏台——四条黄铜音轨沿齿轮墙垂落，判定线是一排待击音簧。\n- W03 玩家身份与当前任务：玩家是调律师学徒「聆」；当前任务：在钟枢校准夜完成独奏，让报时大合奏如期奏响。\n- W04 失败代价与结局表达：血条归零＝校准中断需重来（判负界面文案）；完成则 C03 呈现大合奏钟声齐鸣、全城灯火应和的场面。\n- W05 叙事来源：四轨道＝钟枢的四根音簧；双押＝和音；终曲段＝校准夜的收束乐章；节拍灯＝音乐厅的呼吸。全部原创。\n- W06 视觉风格与色彩材质：黄铜与暗木的机械美感；主色＝黄铜金（#B08D4F 系）＋暗胡桃（#4A3A2C 系）＋判定青光（#57C9B8 系）；材质以黄铜、蒸汽管、磨砂玻璃为主。\n- W07 环境氛围与声音语言：齿轮低鸣的音乐厅——常驻机械运转声；音效语言为「节拍灯咔哒＋音符爆裂＋断连闷响＋终曲钟声」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代校准夜 → 终曲段视频（C02）作为高潮节点 → 结算视频（C03）收束报时；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正面舞台视角（演奏 UI 全屏），无跟随；判定线轻微随低频节奏起伏（幅度 ≤4 像素，不改变判定位置）；镜头边界＝演奏 UI 外框。\n- F02 关键操作镜头变化：连击达 25/50 时舞台灯光短暂扫过（0.5 秒）；终曲段进入时灯光全亮＋轻微 FOV 变化 +5°（0.5 秒）；无慢动作。\n- F03 输入与延迟：见 I07（≤50 毫秒红线）；判定反馈与音符爆裂在判定帧同帧呈现。\n- F04 环境常驻效果：齿轮墙缓慢转动、蒸汽微雾、节拍灯随节拍明暗；不遮挡轨道与判定线。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| PERFECT | 音符青光爆裂＋判定线火花＋「P」字弹出 | 清脆爆裂音 | 0.2s |\n| GOOD | 音符黄光散开＋「G」字弹出 | 较柔爆裂音 | 0.2s |\n| MISS | 音符灰化坠落＋判定线红闪＋「M」字 | 低沉闷响 | 0.3s |\n| 长按完成 | 尾焰沿轨道拉出光带 | 尾音清响 | 完成 |\n| 长按断连 | 光带断裂灰化 | 断连闷响 | 0.3s |\n| 连击档位升级 | 连击数字放大弹跳＋齿轮徽标点亮 | 连击咔哒声 | 弹跳完成 |\n| 血条增减 | 血条平滑移动＋数字跳动 | 增/减微音 | 移动完成 |\n| 段落切换 | 段名横幅（热身/主题/终曲）＋灯光变化 | 转段钟声短句 | 横幅结束 |\n| 终曲提示 | 「终曲」图标＋文字提前 2 秒显示 | 提示钟声 | 进入终曲段 |\n| 双押命中 | 双轨同步爆裂＋和音光环 | 和音爆裂音 | 0.2s |\n| 判负 | 灯光骤暗＋谱面停格 | 失谐低鸣 | 进入判负界面 |\n| 完成 | 谱面收束光带＋大合奏预演灯光 | 终曲钟声 | 进入结算 |\n\n- F06 关键音效清单：爆裂音（P/G 两档）、尾音、断连闷响、连击咔哒、转段钟声、提示钟声、和音爆裂、失谐低鸣、终曲钟声；环境音：齿轮低鸣＋蒸汽嘶声（常驻循环，演奏中低音量）；循环音开始/结束：环境声随开始界面进入、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：判定反馈（P/G/M）文字＋图形双通道承担判定信息；爆裂粒子单帧 ≤ 30 且不遮挡相邻轨道与判定线。\n- F08 音画同步：判定音效与判定帧同步（受 G06 补偿影响时以补偿后对齐）；转段钟声与 `section_change` 帧同步；终曲钟声与完成帧同步。\n- F09 屏幕震动：MISS 0.05 秒微幅（可关闭）；设置界面提供「判定线起伏开/关」「震动开/关」（关闭不影响判定）。\n- F10 前端界面：开始界面（演奏/校准/设置/退出＋当前输入设备图标）→ 演奏 HUD（连击、血条、进度、段名、判定反馈、设备图标）→ 结算（评级/得分/最大连击/P-G-M 统计/重开/返回）→ 判负界面（即刻重开）→ 暂停面板（继续/重开/设置）；关键状态附图标＋文字（P/G/M、段名、设备），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 开场演出（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由开始界面进入演奏之前，每局一次\n  - 内容与角色场景：夜幕中的谐律厅灯火通明，调律师学徒「聆」登上独奏台，四条黄铜音轨次第亮起，齿轮墙开始转动\n  - 资产对应：谐律厅、独奏台、音轨与游戏内场景同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入演奏（谱面从 0 秒起算）；自然播完 → 同\n  - 状态一致：播放期间不推进谱面与计时；进入状态＝热身段起点\n- C02 终曲段演出（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次进入终曲段（70 秒边界 `section_change` 事件）时短暂插入，每局一次\n  - 内容与角色场景：舞台灯光全亮，报时大钟的钟枢开始旋转，双轨和音音簧并列弹起\n  - 资产对应：钟枢、音簧、舞台与游戏内一致\n  - 可跳过：Esc 跳过 → 终曲段从边界点继续（谱面按已计时间推进，跳过不回溯）；自然播完 → 同\n  - 状态一致：仅在真实段边界后触发；跳过不改变得分/连击/血条\n- C03 演奏完成结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：V01 达成后、结算面板之前，每局一次\n  - 内容与角色场景：大合奏钟声齐鸣，谐律厅灯光如潮涌向全城，「聆」在掌声中收起音锤\n  - 资产对应：谐律厅、大钟、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：评级字样与真实结算一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三乐段单谱面演奏、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、键盘/触屏/手柄统一判定管线。\n- N02 本测例包含的流程与界面：开始界面、校准、演奏、结算与判负、暂停（含失焦自动暂停）、即刻重开。\n- N03 本测例包含的演出能力：开场/终曲/结算视频（C01–C03）、§9 F04–F09 全部事件反馈与音效、机械音乐厅氛围。\n- N04 输入范围：键盘（D/F/J/K/Esc/Enter）＋触屏四分区＋手柄面键（可选，统一判定管线）；无多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋原创/公有领域曲目（来源声明可追溯）；无配音需求。\n- N06 表现层自由度：§9 未冻结的机械厅装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（调律师学徒「聆」、齿轮墙舞台、音簧判定线等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（下落→判定→评级→连击→结算）；判定/倍率/血条均为同一判定系统的内部规则，无跨系统因果链；谱面时间轴与判定并发（B1）；判负即刻重开为恢复路径；新增乐段、统一输入管线与演出为表现/输入层，不改变难度档\"\n  downgrade_boundary: \"去掉长按与血条（纯点击判定无限重试）后仍为 S（更简）\"\n  upgrade_boundary: \"若成绩跨局保留并解锁曲目难度规则或多谱面联赛，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：2 个（text-to-3D 1，image-to-3D 1）；object 任务资产为：tuner_ling, chime_judgeline。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, strike_conduct。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "7f0f9f7c887ca98082287168c1e5c8363c89012da01aae212ce685ae974b4b64"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Two-note turning bell as the song section changes",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G057_sfx_007": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G057_rhythm_machine_hall",
+          "task_id": "G057_sfx_007",
+          "asset_name": "finale_warn",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Single deep anticipatory bell for the finale cue",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5577,
+          "trigger": "终曲提示（提前 2 秒）",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《机械音乐厅的节奏演奏》｜下落式节奏判定机制输入规范\n\n```yaml\ncase_id: G057\nbase_case_id: G057\ntitle: 机械音乐厅的节奏演奏\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1057\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《机械音乐厅的节奏演奏》；版本：mechanics-v3（2026-10-11 完整性修订：补谱面乐段、触屏/手柄统一判定、输入延迟红线、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘、触屏（HTML5）与手柄（可选）。\n- 原创边界：本作全部名称、场景、文案与美术必须原创；**音频必须为原创或公有领域曲目，不得使用任何商业作品的乐曲、录音或谱面**；不使用任何商业作品的名称、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 谱面实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的下落式节奏游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：下落式单谱面节奏游戏，单人。本测例包含的能力：三乐段谱面（热身/主题/终曲）、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、三设备统一判定管线、开场/终曲/结算视频。\n- S02 核心循环一句话：音符下落 → 判定窗口输入 → 命中评级 → 连击累积 → 结算。\n- S03 流程：开始界面 →（可选）校准 → 演奏单谱面 → 结算（评级/得分/最大连击）→ 重开。\n- S04 最低完整流程：开始界面、演奏、结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：血条归零即刻判负并可直接重开；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与开始界面 → 校准（可选）→ 演奏（热身/主题/终曲三段）→ 结算 → 重开。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与开始界面\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始演奏」\n  - precondition：构建可启动且谱面/音频按 seed=1057 冻结加载\n  - state_change：进入「开始界面」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：开始界面按 §9 F10 呈现（演奏/校准/设置/当前输入设备图标）\n  - next_actions：进入「校准（可选）」或「演奏」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 校准（可选）\n  - input：跟随 8 次提示节拍点击（触发方：玩家）\n  - precondition：从开始界面进入校准\n  - state_change：测得全局补偿值并即时生效（G06）\n  - feedback：每次点击显示 Δt 与当前中位值\n  - next_actions：返回开始界面或直接进入「演奏」\n  - outcome：补偿值存入设置（非局内状态）\n- S08 热身段（0–15 秒）\n  - input：D/F/J/K（或触屏四分区/手柄面键）（触发方：玩家）\n  - precondition：演奏开始且当前乐段＝热身\n  - state_change：仅点击型音符、密度低；判定/得分/连击/血条按 G03–G05 结算\n  - feedback：节拍灯与音符判定反馈按 §9 F05\n  - next_actions：15 秒边界 → `section_change` →「主题段」\n  - outcome：得分与连击局内累计\n- S09 主题段（15–70 秒）\n  - input：同 S08（触发方：玩家）\n  - precondition：热身段结束\n  - state_change：全型音符（点击＋长按）按谱面推进\n  - feedback：齿轮转动与轨道灯光随节奏脉动\n  - next_actions：70 秒边界 → `section_change`（提前 2 秒「终曲」提示）→「终曲段」\n  - outcome：局内状态持续\n- S10 终曲段（70 秒–曲尾）\n  - input：同 S08（触发方：玩家）\n  - precondition：主题段结束且终曲提示已显示\n  - state_change：密度较主题段 +50%、出现双押、下落速度 ×1.15（G08）；首次进入时按 §10 C02 触发终曲演出视频（每局一次）\n  - feedback：终曲灯光全亮与更强的命中反馈\n  - next_actions：谱面完成 →「结算」（先播 C03）；血条归零 → 即刻判负界面\n  - outcome：按 V01/V02 判定\n- S11 结算与重开\n  - input：Enter＝重开 / Esc＝返回开始界面（触发方：玩家）\n  - precondition：V01（完成且达标）或 V02（判负/未达标）达成\n  - state_change：进入「结算」状态；谱面推进冻结\n  - feedback：结算面板显示评级、得分、最大连击、Perfect/Good/Miss 统计\n  - next_actions：重开（谱面/血条/连击/得分全量重置，校准值保留）或返回\n  - outcome：无跨局写入\n\n## 3. 数值口径与全局规则 [G01–G08]\n\n- G01 统一刻度：时间为毫秒；得分、连击、血条为数值；血条百分比上限 100、下限 0。\n- G02 谱面与轨道：单曲 1 首（时长 90–120 秒，原创或公有领域音频）；4 条下落轨道（D/F/J/K 对应）；音符两型：点击、长按；谱面为时间轴数据（音符时间、轨道、类型、长按时长），由 fixed_seed=1057 冻结生成，同 seed 下谱面逐项可复现；音符总数 ≥ 80（建议点击 64、长按 16 分布）。\n- G03 判定窗口（按时间差 Δt=输入时刻−音符时刻，经 G06 校准补偿后）：|Δt| ≤ 50 毫秒 → PERFECT；50 < |Δt| ≤ 120 毫秒 → GOOD；|Δt| > 120 毫秒或未按 → MISS。\n- G04 得分与连击倍率：单次判定 PERFECT=300、GOOD=150、MISS=0；长按头、尾各一次判定、各计一次分。倍率 m = 1 + 0.02 × min(combo, 50)（上限 2.0），**按命中前当前连击数取值，命中后 combo+1；MISS 归零**。独立 oracle 数例：开局连续 10 个 PERFECT，第 k 个得分 300×(1+0.02×(k−1))，合计 300×(10+0.02×45) = **3270**，其中第 1 个为 300。结算对账：总分=逐音符加权之和，容差 0。\n- G05 血条：初始 70%；PERFECT +2%、GOOD +0.5%、MISS −8%；到达上限 100 后不再增加；归零 → 即刻判负。\n- G06 音画偏移校准：设置内提供校准流程——跟随 8 次提示节拍点击，取 |Δt| 中位数作为全局补偿值（默认 0）；**判定用 Δt = 原始时间差 − 补偿值**；校准值可随时重测并立即生效；校准只改判定时间差与谱面显示偏移，不改音符时刻本身。\n- G07 评级与暂停：评级按得分率（总分/理论满分，理论满分=全 PERFECT 总分）：S ≥ 95%、A ≥ 85%、B ≥ 70%、C ≥ 60%，< 60% 为未达标；Esc 暂停冻结音频与谱面推进，恢复后音画同步继续；窗口失焦自动暂停。\n- G08 谱面乐段（本包冻结值）：单曲三段——热身段（0–15 秒，仅点击型、密度低）、主题段（15–70 秒，全型音符）、终曲段（70 秒–曲尾，密度较主题段 +50%、出现双押、下落速度 ×1.15）；进入终曲段前 2 秒 HUD 显示「终曲」提示（图标＋文字）；段边界事件 `section_change` 可观测；乐段不改变 G03–G05 判定与计分规则。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：D/F/J/K＝对应轨道判定（点击型按一下；长按型按住至尾）；Esc＝暂停/继续；结算界面 Enter＝重开。\n- I02 输入语义边界：空轨按键不产生判定（不计 MISS、不加连击）；长按中途松开触发断连（M02）；暂停/结算期间输入无效。\n- I03 无鼠标玩法需求；菜单可键盘完整操作。\n- I04 输入设备与统一判定管线（本包冻结值）：键盘 D/F/J/K；触屏（HTML5 环境）四分区点击映射 D/F/J/K；手柄（可选开启）面键 A/B/X/Y 映射 D/F/J/K；三种设备汇入**同一判定管线**（同一 Δt 计算、同一窗口分档、同一连击/得分结算），设备切换即时生效并在 HUD 显示当前设备图标＋文字。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：连击数、血条、谱面进度、当前乐段名、判定反馈（P/G/M 图标＋文字）、当前输入设备；HUD 对照见 rubric。\n- I07 输入延迟红线（本包冻结值）：判定输入到对应评级反馈 ≤ **50 毫秒**（音游手感红线）；设置界面显示当前音频-视频偏移补偿值；超红线记为缺陷（rubric D4 断言）。\n\n## 5. 谱面与内容清单 [L01–L04]\n\n- L01 生成对象：单谱面 1（时间轴数据，seed=1057 冻结）、音频 1（原创或公有领域）、音符两型（点击 ≥ 64、长按 ≥ 16）、轨道 4、机械音乐厅场景与判定线 UI、三乐段结构。\n- L02 谱面结构：前 10 秒为低密度热身段（仅点击型）；谱面须通过「全 PERFECT 可达理论满分」的可解性自查；长按不与同轨其他音符重叠。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（开始界面/演奏 HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的机械厅装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 判定窗口（主机制）\n  - input：轨道键（键盘/触屏/手柄统一管线）\n  - precondition：处于演奏状态且该轨存在待判定音符\n  - state_change：按 G03 窗口将输入分档为 PERFECT/GOOD/MISS\n  - observable：逐音符判定事件含 Δt 字段与档位、输入设备字段\n  - invalid_case：空轨按键不产生判定事件\n  - recovery：—\n- M02 长按音符\n  - input：按住对应轨道键\n  - precondition：长按头部判定已成立\n  - state_change：头部判定（同 G03）→ 按住期间 → 尾部判定；中途松开 → 断连（尾部记 MISS、连击归零）\n  - observable：长按完成率事件、断连事件\n  - invalid_case：头部 MISS 后按住不产生尾部判定\n  - recovery：后续音符继续\n- M03 音画偏移校准\n  - input：校准流程中的 8 次点击\n  - precondition：处于校准流程\n  - state_change：测得补偿值 → 全局判定时间差与显示偏移生效\n  - observable：校准前后同输入序列的判定差分\n  - invalid_case：—\n  - recovery：重测即覆盖\n- M04 连击与结算\n  - input：逐次判定 / 结算画面\n  - precondition：处于演奏/结算状态\n  - state_change：命中按 G04 计倍率与得分并累计连击；MISS 归零；结算按加权和与评级阈值出分\n  - observable：连击事件、结算对账（容差 0）、评级事件\n  - invalid_case：—\n  - recovery：重开全量重置\n- M05 血条与胜负\n  - input：逐次判定\n  - precondition：处于演奏状态\n  - state_change：按 G05 增减血条；归零即刻判负；谱面走完 → 结算评级\n  - observable：血条事件、win/lose 事件与结算面板\n  - invalid_case：—\n  - recovery：判负即刻重开\n- M06 乐段推进\n  - input：谱面时间推进（系统）\n  - precondition：演奏进行中\n  - state_change：按 G08 三段边界切换乐段（密度/双押/下落速度规则生效）；`section_change` 事件与「终曲」提示\n  - observable：段边界事件、终曲段下落速度 ×1.15 采样、密度对照\n  - invalid_case：乐段切换不重置连击/血条\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成整首谱面（血条未归零）且结算评级 ≥ C（得分率 ≥ 60%）。\n- V02 失败条件：血条归零（即刻判负），或谱面完成但得分率 < 60%（结算显示未达标）。\n- V03 恢复语义：失败/未达标即刻重开；重开后谱面、血条、连击、得分全量重置（校准值保留，因其属于设置而非局内状态）。\n- V04 persistent_state：无（重开全量清空；最好成绩可作展示但不作为验收需求、不要求跨会话保存）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（得分/连击/血条）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设软锁——判负即刻重开、谱面按 seed 复现；判定输入始终可达。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：发条与蒸汽驱动的架空时代，「谐律厅」是城市的心脏——巨型机械音乐厅每晚以合奏钟声为全城报时。\n- W02 场景所在地：谐律厅的独奏台——四条黄铜音轨沿齿轮墙垂落，判定线是一排待击音簧。\n- W03 玩家身份与当前任务：玩家是调律师学徒「聆」；当前任务：在钟枢校准夜完成独奏，让报时大合奏如期奏响。\n- W04 失败代价与结局表达：血条归零＝校准中断需重来（判负界面文案）；完成则 C03 呈现大合奏钟声齐鸣、全城灯火应和的场面。\n- W05 叙事来源：四轨道＝钟枢的四根音簧；双押＝和音；终曲段＝校准夜的收束乐章；节拍灯＝音乐厅的呼吸。全部原创。\n- W06 视觉风格与色彩材质：黄铜与暗木的机械美感；主色＝黄铜金（#B08D4F 系）＋暗胡桃（#4A3A2C 系）＋判定青光（#57C9B8 系）；材质以黄铜、蒸汽管、磨砂玻璃为主。\n- W07 环境氛围与声音语言：齿轮低鸣的音乐厅——常驻机械运转声；音效语言为「节拍灯咔哒＋音符爆裂＋断连闷响＋终曲钟声」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代校准夜 → 终曲段视频（C02）作为高潮节点 → 结算视频（C03）收束报时；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正面舞台视角（演奏 UI 全屏），无跟随；判定线轻微随低频节奏起伏（幅度 ≤4 像素，不改变判定位置）；镜头边界＝演奏 UI 外框。\n- F02 关键操作镜头变化：连击达 25/50 时舞台灯光短暂扫过（0.5 秒）；终曲段进入时灯光全亮＋轻微 FOV 变化 +5°（0.5 秒）；无慢动作。\n- F03 输入与延迟：见 I07（≤50 毫秒红线）；判定反馈与音符爆裂在判定帧同帧呈现。\n- F04 环境常驻效果：齿轮墙缓慢转动、蒸汽微雾、节拍灯随节拍明暗；不遮挡轨道与判定线。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| PERFECT | 音符青光爆裂＋判定线火花＋「P」字弹出 | 清脆爆裂音 | 0.2s |\n| GOOD | 音符黄光散开＋「G」字弹出 | 较柔爆裂音 | 0.2s |\n| MISS | 音符灰化坠落＋判定线红闪＋「M」字 | 低沉闷响 | 0.3s |\n| 长按完成 | 尾焰沿轨道拉出光带 | 尾音清响 | 完成 |\n| 长按断连 | 光带断裂灰化 | 断连闷响 | 0.3s |\n| 连击档位升级 | 连击数字放大弹跳＋齿轮徽标点亮 | 连击咔哒声 | 弹跳完成 |\n| 血条增减 | 血条平滑移动＋数字跳动 | 增/减微音 | 移动完成 |\n| 段落切换 | 段名横幅（热身/主题/终曲）＋灯光变化 | 转段钟声短句 | 横幅结束 |\n| 终曲提示 | 「终曲」图标＋文字提前 2 秒显示 | 提示钟声 | 进入终曲段 |\n| 双押命中 | 双轨同步爆裂＋和音光环 | 和音爆裂音 | 0.2s |\n| 判负 | 灯光骤暗＋谱面停格 | 失谐低鸣 | 进入判负界面 |\n| 完成 | 谱面收束光带＋大合奏预演灯光 | 终曲钟声 | 进入结算 |\n\n- F06 关键音效清单：爆裂音（P/G 两档）、尾音、断连闷响、连击咔哒、转段钟声、提示钟声、和音爆裂、失谐低鸣、终曲钟声；环境音：齿轮低鸣＋蒸汽嘶声（常驻循环，演奏中低音量）；循环音开始/结束：环境声随开始界面进入、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：判定反馈（P/G/M）文字＋图形双通道承担判定信息；爆裂粒子单帧 ≤ 30 且不遮挡相邻轨道与判定线。\n- F08 音画同步：判定音效与判定帧同步（受 G06 补偿影响时以补偿后对齐）；转段钟声与 `section_change` 帧同步；终曲钟声与完成帧同步。\n- F09 屏幕震动：MISS 0.05 秒微幅（可关闭）；设置界面提供「判定线起伏开/关」「震动开/关」（关闭不影响判定）。\n- F10 前端界面：开始界面（演奏/校准/设置/退出＋当前输入设备图标）→ 演奏 HUD（连击、血条、进度、段名、判定反馈、设备图标）→ 结算（评级/得分/最大连击/P-G-M 统计/重开/返回）→ 判负界面（即刻重开）→ 暂停面板（继续/重开/设置）；关键状态附图标＋文字（P/G/M、段名、设备），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 开场演出（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由开始界面进入演奏之前，每局一次\n  - 内容与角色场景：夜幕中的谐律厅灯火通明，调律师学徒「聆」登上独奏台，四条黄铜音轨次第亮起，齿轮墙开始转动\n  - 资产对应：谐律厅、独奏台、音轨与游戏内场景同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入演奏（谱面从 0 秒起算）；自然播完 → 同\n  - 状态一致：播放期间不推进谱面与计时；进入状态＝热身段起点\n- C02 终曲段演出（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次进入终曲段（70 秒边界 `section_change` 事件）时短暂插入，每局一次\n  - 内容与角色场景：舞台灯光全亮，报时大钟的钟枢开始旋转，双轨和音音簧并列弹起\n  - 资产对应：钟枢、音簧、舞台与游戏内一致\n  - 可跳过：Esc 跳过 → 终曲段从边界点继续（谱面按已计时间推进，跳过不回溯）；自然播完 → 同\n  - 状态一致：仅在真实段边界后触发；跳过不改变得分/连击/血条\n- C03 演奏完成结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：V01 达成后、结算面板之前，每局一次\n  - 内容与角色场景：大合奏钟声齐鸣，谐律厅灯光如潮涌向全城，「聆」在掌声中收起音锤\n  - 资产对应：谐律厅、大钟、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：评级字样与真实结算一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三乐段单谱面演奏、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、键盘/触屏/手柄统一判定管线。\n- N02 本测例包含的流程与界面：开始界面、校准、演奏、结算与判负、暂停（含失焦自动暂停）、即刻重开。\n- N03 本测例包含的演出能力：开场/终曲/结算视频（C01–C03）、§9 F04–F09 全部事件反馈与音效、机械音乐厅氛围。\n- N04 输入范围：键盘（D/F/J/K/Esc/Enter）＋触屏四分区＋手柄面键（可选，统一判定管线）；无多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋原创/公有领域曲目（来源声明可追溯）；无配音需求。\n- N06 表现层自由度：§9 未冻结的机械厅装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（调律师学徒「聆」、齿轮墙舞台、音簧判定线等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（下落→判定→评级→连击→结算）；判定/倍率/血条均为同一判定系统的内部规则，无跨系统因果链；谱面时间轴与判定并发（B1）；判负即刻重开为恢复路径；新增乐段、统一输入管线与演出为表现/输入层，不改变难度档\"\n  downgrade_boundary: \"去掉长按与血条（纯点击判定无限重试）后仍为 S（更简）\"\n  upgrade_boundary: \"若成绩跨局保留并解锁曲目难度规则或多谱面联赛，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：2 个（text-to-3D 1，image-to-3D 1）；object 任务资产为：tuner_ling, chime_judgeline。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, strike_conduct。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "7f0f9f7c887ca98082287168c1e5c8363c89012da01aae212ce685ae974b4b64"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Single deep anticipatory bell for the finale cue",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G057_sfx_008": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G057_rhythm_machine_hall",
+          "task_id": "G057_sfx_008",
+          "asset_name": "dual_pop",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Twin simultaneous chime pop for a dual note",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5578,
+          "trigger": "双押命中",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《机械音乐厅的节奏演奏》｜下落式节奏判定机制输入规范\n\n```yaml\ncase_id: G057\nbase_case_id: G057\ntitle: 机械音乐厅的节奏演奏\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1057\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《机械音乐厅的节奏演奏》；版本：mechanics-v3（2026-10-11 完整性修订：补谱面乐段、触屏/手柄统一判定、输入延迟红线、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘、触屏（HTML5）与手柄（可选）。\n- 原创边界：本作全部名称、场景、文案与美术必须原创；**音频必须为原创或公有领域曲目，不得使用任何商业作品的乐曲、录音或谱面**；不使用任何商业作品的名称、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 谱面实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的下落式节奏游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：下落式单谱面节奏游戏，单人。本测例包含的能力：三乐段谱面（热身/主题/终曲）、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、三设备统一判定管线、开场/终曲/结算视频。\n- S02 核心循环一句话：音符下落 → 判定窗口输入 → 命中评级 → 连击累积 → 结算。\n- S03 流程：开始界面 →（可选）校准 → 演奏单谱面 → 结算（评级/得分/最大连击）→ 重开。\n- S04 最低完整流程：开始界面、演奏、结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：血条归零即刻判负并可直接重开；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与开始界面 → 校准（可选）→ 演奏（热身/主题/终曲三段）→ 结算 → 重开。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与开始界面\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始演奏」\n  - precondition：构建可启动且谱面/音频按 seed=1057 冻结加载\n  - state_change：进入「开始界面」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：开始界面按 §9 F10 呈现（演奏/校准/设置/当前输入设备图标）\n  - next_actions：进入「校准（可选）」或「演奏」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 校准（可选）\n  - input：跟随 8 次提示节拍点击（触发方：玩家）\n  - precondition：从开始界面进入校准\n  - state_change：测得全局补偿值并即时生效（G06）\n  - feedback：每次点击显示 Δt 与当前中位值\n  - next_actions：返回开始界面或直接进入「演奏」\n  - outcome：补偿值存入设置（非局内状态）\n- S08 热身段（0–15 秒）\n  - input：D/F/J/K（或触屏四分区/手柄面键）（触发方：玩家）\n  - precondition：演奏开始且当前乐段＝热身\n  - state_change：仅点击型音符、密度低；判定/得分/连击/血条按 G03–G05 结算\n  - feedback：节拍灯与音符判定反馈按 §9 F05\n  - next_actions：15 秒边界 → `section_change` →「主题段」\n  - outcome：得分与连击局内累计\n- S09 主题段（15–70 秒）\n  - input：同 S08（触发方：玩家）\n  - precondition：热身段结束\n  - state_change：全型音符（点击＋长按）按谱面推进\n  - feedback：齿轮转动与轨道灯光随节奏脉动\n  - next_actions：70 秒边界 → `section_change`（提前 2 秒「终曲」提示）→「终曲段」\n  - outcome：局内状态持续\n- S10 终曲段（70 秒–曲尾）\n  - input：同 S08（触发方：玩家）\n  - precondition：主题段结束且终曲提示已显示\n  - state_change：密度较主题段 +50%、出现双押、下落速度 ×1.15（G08）；首次进入时按 §10 C02 触发终曲演出视频（每局一次）\n  - feedback：终曲灯光全亮与更强的命中反馈\n  - next_actions：谱面完成 →「结算」（先播 C03）；血条归零 → 即刻判负界面\n  - outcome：按 V01/V02 判定\n- S11 结算与重开\n  - input：Enter＝重开 / Esc＝返回开始界面（触发方：玩家）\n  - precondition：V01（完成且达标）或 V02（判负/未达标）达成\n  - state_change：进入「结算」状态；谱面推进冻结\n  - feedback：结算面板显示评级、得分、最大连击、Perfect/Good/Miss 统计\n  - next_actions：重开（谱面/血条/连击/得分全量重置，校准值保留）或返回\n  - outcome：无跨局写入\n\n## 3. 数值口径与全局规则 [G01–G08]\n\n- G01 统一刻度：时间为毫秒；得分、连击、血条为数值；血条百分比上限 100、下限 0。\n- G02 谱面与轨道：单曲 1 首（时长 90–120 秒，原创或公有领域音频）；4 条下落轨道（D/F/J/K 对应）；音符两型：点击、长按；谱面为时间轴数据（音符时间、轨道、类型、长按时长），由 fixed_seed=1057 冻结生成，同 seed 下谱面逐项可复现；音符总数 ≥ 80（建议点击 64、长按 16 分布）。\n- G03 判定窗口（按时间差 Δt=输入时刻−音符时刻，经 G06 校准补偿后）：|Δt| ≤ 50 毫秒 → PERFECT；50 < |Δt| ≤ 120 毫秒 → GOOD；|Δt| > 120 毫秒或未按 → MISS。\n- G04 得分与连击倍率：单次判定 PERFECT=300、GOOD=150、MISS=0；长按头、尾各一次判定、各计一次分。倍率 m = 1 + 0.02 × min(combo, 50)（上限 2.0），**按命中前当前连击数取值，命中后 combo+1；MISS 归零**。独立 oracle 数例：开局连续 10 个 PERFECT，第 k 个得分 300×(1+0.02×(k−1))，合计 300×(10+0.02×45) = **3270**，其中第 1 个为 300。结算对账：总分=逐音符加权之和，容差 0。\n- G05 血条：初始 70%；PERFECT +2%、GOOD +0.5%、MISS −8%；到达上限 100 后不再增加；归零 → 即刻判负。\n- G06 音画偏移校准：设置内提供校准流程——跟随 8 次提示节拍点击，取 |Δt| 中位数作为全局补偿值（默认 0）；**判定用 Δt = 原始时间差 − 补偿值**；校准值可随时重测并立即生效；校准只改判定时间差与谱面显示偏移，不改音符时刻本身。\n- G07 评级与暂停：评级按得分率（总分/理论满分，理论满分=全 PERFECT 总分）：S ≥ 95%、A ≥ 85%、B ≥ 70%、C ≥ 60%，< 60% 为未达标；Esc 暂停冻结音频与谱面推进，恢复后音画同步继续；窗口失焦自动暂停。\n- G08 谱面乐段（本包冻结值）：单曲三段——热身段（0–15 秒，仅点击型、密度低）、主题段（15–70 秒，全型音符）、终曲段（70 秒–曲尾，密度较主题段 +50%、出现双押、下落速度 ×1.15）；进入终曲段前 2 秒 HUD 显示「终曲」提示（图标＋文字）；段边界事件 `section_change` 可观测；乐段不改变 G03–G05 判定与计分规则。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：D/F/J/K＝对应轨道判定（点击型按一下；长按型按住至尾）；Esc＝暂停/继续；结算界面 Enter＝重开。\n- I02 输入语义边界：空轨按键不产生判定（不计 MISS、不加连击）；长按中途松开触发断连（M02）；暂停/结算期间输入无效。\n- I03 无鼠标玩法需求；菜单可键盘完整操作。\n- I04 输入设备与统一判定管线（本包冻结值）：键盘 D/F/J/K；触屏（HTML5 环境）四分区点击映射 D/F/J/K；手柄（可选开启）面键 A/B/X/Y 映射 D/F/J/K；三种设备汇入**同一判定管线**（同一 Δt 计算、同一窗口分档、同一连击/得分结算），设备切换即时生效并在 HUD 显示当前设备图标＋文字。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：连击数、血条、谱面进度、当前乐段名、判定反馈（P/G/M 图标＋文字）、当前输入设备；HUD 对照见 rubric。\n- I07 输入延迟红线（本包冻结值）：判定输入到对应评级反馈 ≤ **50 毫秒**（音游手感红线）；设置界面显示当前音频-视频偏移补偿值；超红线记为缺陷（rubric D4 断言）。\n\n## 5. 谱面与内容清单 [L01–L04]\n\n- L01 生成对象：单谱面 1（时间轴数据，seed=1057 冻结）、音频 1（原创或公有领域）、音符两型（点击 ≥ 64、长按 ≥ 16）、轨道 4、机械音乐厅场景与判定线 UI、三乐段结构。\n- L02 谱面结构：前 10 秒为低密度热身段（仅点击型）；谱面须通过「全 PERFECT 可达理论满分」的可解性自查；长按不与同轨其他音符重叠。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（开始界面/演奏 HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的机械厅装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 判定窗口（主机制）\n  - input：轨道键（键盘/触屏/手柄统一管线）\n  - precondition：处于演奏状态且该轨存在待判定音符\n  - state_change：按 G03 窗口将输入分档为 PERFECT/GOOD/MISS\n  - observable：逐音符判定事件含 Δt 字段与档位、输入设备字段\n  - invalid_case：空轨按键不产生判定事件\n  - recovery：—\n- M02 长按音符\n  - input：按住对应轨道键\n  - precondition：长按头部判定已成立\n  - state_change：头部判定（同 G03）→ 按住期间 → 尾部判定；中途松开 → 断连（尾部记 MISS、连击归零）\n  - observable：长按完成率事件、断连事件\n  - invalid_case：头部 MISS 后按住不产生尾部判定\n  - recovery：后续音符继续\n- M03 音画偏移校准\n  - input：校准流程中的 8 次点击\n  - precondition：处于校准流程\n  - state_change：测得补偿值 → 全局判定时间差与显示偏移生效\n  - observable：校准前后同输入序列的判定差分\n  - invalid_case：—\n  - recovery：重测即覆盖\n- M04 连击与结算\n  - input：逐次判定 / 结算画面\n  - precondition：处于演奏/结算状态\n  - state_change：命中按 G04 计倍率与得分并累计连击；MISS 归零；结算按加权和与评级阈值出分\n  - observable：连击事件、结算对账（容差 0）、评级事件\n  - invalid_case：—\n  - recovery：重开全量重置\n- M05 血条与胜负\n  - input：逐次判定\n  - precondition：处于演奏状态\n  - state_change：按 G05 增减血条；归零即刻判负；谱面走完 → 结算评级\n  - observable：血条事件、win/lose 事件与结算面板\n  - invalid_case：—\n  - recovery：判负即刻重开\n- M06 乐段推进\n  - input：谱面时间推进（系统）\n  - precondition：演奏进行中\n  - state_change：按 G08 三段边界切换乐段（密度/双押/下落速度规则生效）；`section_change` 事件与「终曲」提示\n  - observable：段边界事件、终曲段下落速度 ×1.15 采样、密度对照\n  - invalid_case：乐段切换不重置连击/血条\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成整首谱面（血条未归零）且结算评级 ≥ C（得分率 ≥ 60%）。\n- V02 失败条件：血条归零（即刻判负），或谱面完成但得分率 < 60%（结算显示未达标）。\n- V03 恢复语义：失败/未达标即刻重开；重开后谱面、血条、连击、得分全量重置（校准值保留，因其属于设置而非局内状态）。\n- V04 persistent_state：无（重开全量清空；最好成绩可作展示但不作为验收需求、不要求跨会话保存）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（得分/连击/血条）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设软锁——判负即刻重开、谱面按 seed 复现；判定输入始终可达。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：发条与蒸汽驱动的架空时代，「谐律厅」是城市的心脏——巨型机械音乐厅每晚以合奏钟声为全城报时。\n- W02 场景所在地：谐律厅的独奏台——四条黄铜音轨沿齿轮墙垂落，判定线是一排待击音簧。\n- W03 玩家身份与当前任务：玩家是调律师学徒「聆」；当前任务：在钟枢校准夜完成独奏，让报时大合奏如期奏响。\n- W04 失败代价与结局表达：血条归零＝校准中断需重来（判负界面文案）；完成则 C03 呈现大合奏钟声齐鸣、全城灯火应和的场面。\n- W05 叙事来源：四轨道＝钟枢的四根音簧；双押＝和音；终曲段＝校准夜的收束乐章；节拍灯＝音乐厅的呼吸。全部原创。\n- W06 视觉风格与色彩材质：黄铜与暗木的机械美感；主色＝黄铜金（#B08D4F 系）＋暗胡桃（#4A3A2C 系）＋判定青光（#57C9B8 系）；材质以黄铜、蒸汽管、磨砂玻璃为主。\n- W07 环境氛围与声音语言：齿轮低鸣的音乐厅——常驻机械运转声；音效语言为「节拍灯咔哒＋音符爆裂＋断连闷响＋终曲钟声」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代校准夜 → 终曲段视频（C02）作为高潮节点 → 结算视频（C03）收束报时；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正面舞台视角（演奏 UI 全屏），无跟随；判定线轻微随低频节奏起伏（幅度 ≤4 像素，不改变判定位置）；镜头边界＝演奏 UI 外框。\n- F02 关键操作镜头变化：连击达 25/50 时舞台灯光短暂扫过（0.5 秒）；终曲段进入时灯光全亮＋轻微 FOV 变化 +5°（0.5 秒）；无慢动作。\n- F03 输入与延迟：见 I07（≤50 毫秒红线）；判定反馈与音符爆裂在判定帧同帧呈现。\n- F04 环境常驻效果：齿轮墙缓慢转动、蒸汽微雾、节拍灯随节拍明暗；不遮挡轨道与判定线。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| PERFECT | 音符青光爆裂＋判定线火花＋「P」字弹出 | 清脆爆裂音 | 0.2s |\n| GOOD | 音符黄光散开＋「G」字弹出 | 较柔爆裂音 | 0.2s |\n| MISS | 音符灰化坠落＋判定线红闪＋「M」字 | 低沉闷响 | 0.3s |\n| 长按完成 | 尾焰沿轨道拉出光带 | 尾音清响 | 完成 |\n| 长按断连 | 光带断裂灰化 | 断连闷响 | 0.3s |\n| 连击档位升级 | 连击数字放大弹跳＋齿轮徽标点亮 | 连击咔哒声 | 弹跳完成 |\n| 血条增减 | 血条平滑移动＋数字跳动 | 增/减微音 | 移动完成 |\n| 段落切换 | 段名横幅（热身/主题/终曲）＋灯光变化 | 转段钟声短句 | 横幅结束 |\n| 终曲提示 | 「终曲」图标＋文字提前 2 秒显示 | 提示钟声 | 进入终曲段 |\n| 双押命中 | 双轨同步爆裂＋和音光环 | 和音爆裂音 | 0.2s |\n| 判负 | 灯光骤暗＋谱面停格 | 失谐低鸣 | 进入判负界面 |\n| 完成 | 谱面收束光带＋大合奏预演灯光 | 终曲钟声 | 进入结算 |\n\n- F06 关键音效清单：爆裂音（P/G 两档）、尾音、断连闷响、连击咔哒、转段钟声、提示钟声、和音爆裂、失谐低鸣、终曲钟声；环境音：齿轮低鸣＋蒸汽嘶声（常驻循环，演奏中低音量）；循环音开始/结束：环境声随开始界面进入、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：判定反馈（P/G/M）文字＋图形双通道承担判定信息；爆裂粒子单帧 ≤ 30 且不遮挡相邻轨道与判定线。\n- F08 音画同步：判定音效与判定帧同步（受 G06 补偿影响时以补偿后对齐）；转段钟声与 `section_change` 帧同步；终曲钟声与完成帧同步。\n- F09 屏幕震动：MISS 0.05 秒微幅（可关闭）；设置界面提供「判定线起伏开/关」「震动开/关」（关闭不影响判定）。\n- F10 前端界面：开始界面（演奏/校准/设置/退出＋当前输入设备图标）→ 演奏 HUD（连击、血条、进度、段名、判定反馈、设备图标）→ 结算（评级/得分/最大连击/P-G-M 统计/重开/返回）→ 判负界面（即刻重开）→ 暂停面板（继续/重开/设置）；关键状态附图标＋文字（P/G/M、段名、设备），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 开场演出（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由开始界面进入演奏之前，每局一次\n  - 内容与角色场景：夜幕中的谐律厅灯火通明，调律师学徒「聆」登上独奏台，四条黄铜音轨次第亮起，齿轮墙开始转动\n  - 资产对应：谐律厅、独奏台、音轨与游戏内场景同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入演奏（谱面从 0 秒起算）；自然播完 → 同\n  - 状态一致：播放期间不推进谱面与计时；进入状态＝热身段起点\n- C02 终曲段演出（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次进入终曲段（70 秒边界 `section_change` 事件）时短暂插入，每局一次\n  - 内容与角色场景：舞台灯光全亮，报时大钟的钟枢开始旋转，双轨和音音簧并列弹起\n  - 资产对应：钟枢、音簧、舞台与游戏内一致\n  - 可跳过：Esc 跳过 → 终曲段从边界点继续（谱面按已计时间推进，跳过不回溯）；自然播完 → 同\n  - 状态一致：仅在真实段边界后触发；跳过不改变得分/连击/血条\n- C03 演奏完成结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：V01 达成后、结算面板之前，每局一次\n  - 内容与角色场景：大合奏钟声齐鸣，谐律厅灯光如潮涌向全城，「聆」在掌声中收起音锤\n  - 资产对应：谐律厅、大钟、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：评级字样与真实结算一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三乐段单谱面演奏、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、键盘/触屏/手柄统一判定管线。\n- N02 本测例包含的流程与界面：开始界面、校准、演奏、结算与判负、暂停（含失焦自动暂停）、即刻重开。\n- N03 本测例包含的演出能力：开场/终曲/结算视频（C01–C03）、§9 F04–F09 全部事件反馈与音效、机械音乐厅氛围。\n- N04 输入范围：键盘（D/F/J/K/Esc/Enter）＋触屏四分区＋手柄面键（可选，统一判定管线）；无多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋原创/公有领域曲目（来源声明可追溯）；无配音需求。\n- N06 表现层自由度：§9 未冻结的机械厅装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（调律师学徒「聆」、齿轮墙舞台、音簧判定线等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（下落→判定→评级→连击→结算）；判定/倍率/血条均为同一判定系统的内部规则，无跨系统因果链；谱面时间轴与判定并发（B1）；判负即刻重开为恢复路径；新增乐段、统一输入管线与演出为表现/输入层，不改变难度档\"\n  downgrade_boundary: \"去掉长按与血条（纯点击判定无限重试）后仍为 S（更简）\"\n  upgrade_boundary: \"若成绩跨局保留并解锁曲目难度规则或多谱面联赛，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：2 个（text-to-3D 1，image-to-3D 1）；object 任务资产为：tuner_ling, chime_judgeline。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, strike_conduct。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "7f0f9f7c887ca98082287168c1e5c8363c89012da01aae212ce685ae974b4b64"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Twin simultaneous chime pop for a dual note",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G057_sfx_009": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G057_rhythm_machine_hall",
+          "task_id": "G057_sfx_009",
+          "asset_name": "fail_wash",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Detuned low wash as the performance fails",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5579,
+          "trigger": "判负",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《机械音乐厅的节奏演奏》｜下落式节奏判定机制输入规范\n\n```yaml\ncase_id: G057\nbase_case_id: G057\ntitle: 机械音乐厅的节奏演奏\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1057\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《机械音乐厅的节奏演奏》；版本：mechanics-v3（2026-10-11 完整性修订：补谱面乐段、触屏/手柄统一判定、输入延迟红线、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘、触屏（HTML5）与手柄（可选）。\n- 原创边界：本作全部名称、场景、文案与美术必须原创；**音频必须为原创或公有领域曲目，不得使用任何商业作品的乐曲、录音或谱面**；不使用任何商业作品的名称、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 谱面实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的下落式节奏游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：下落式单谱面节奏游戏，单人。本测例包含的能力：三乐段谱面（热身/主题/终曲）、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、三设备统一判定管线、开场/终曲/结算视频。\n- S02 核心循环一句话：音符下落 → 判定窗口输入 → 命中评级 → 连击累积 → 结算。\n- S03 流程：开始界面 →（可选）校准 → 演奏单谱面 → 结算（评级/得分/最大连击）→ 重开。\n- S04 最低完整流程：开始界面、演奏、结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：血条归零即刻判负并可直接重开；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与开始界面 → 校准（可选）→ 演奏（热身/主题/终曲三段）→ 结算 → 重开。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与开始界面\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始演奏」\n  - precondition：构建可启动且谱面/音频按 seed=1057 冻结加载\n  - state_change：进入「开始界面」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：开始界面按 §9 F10 呈现（演奏/校准/设置/当前输入设备图标）\n  - next_actions：进入「校准（可选）」或「演奏」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 校准（可选）\n  - input：跟随 8 次提示节拍点击（触发方：玩家）\n  - precondition：从开始界面进入校准\n  - state_change：测得全局补偿值并即时生效（G06）\n  - feedback：每次点击显示 Δt 与当前中位值\n  - next_actions：返回开始界面或直接进入「演奏」\n  - outcome：补偿值存入设置（非局内状态）\n- S08 热身段（0–15 秒）\n  - input：D/F/J/K（或触屏四分区/手柄面键）（触发方：玩家）\n  - precondition：演奏开始且当前乐段＝热身\n  - state_change：仅点击型音符、密度低；判定/得分/连击/血条按 G03–G05 结算\n  - feedback：节拍灯与音符判定反馈按 §9 F05\n  - next_actions：15 秒边界 → `section_change` →「主题段」\n  - outcome：得分与连击局内累计\n- S09 主题段（15–70 秒）\n  - input：同 S08（触发方：玩家）\n  - precondition：热身段结束\n  - state_change：全型音符（点击＋长按）按谱面推进\n  - feedback：齿轮转动与轨道灯光随节奏脉动\n  - next_actions：70 秒边界 → `section_change`（提前 2 秒「终曲」提示）→「终曲段」\n  - outcome：局内状态持续\n- S10 终曲段（70 秒–曲尾）\n  - input：同 S08（触发方：玩家）\n  - precondition：主题段结束且终曲提示已显示\n  - state_change：密度较主题段 +50%、出现双押、下落速度 ×1.15（G08）；首次进入时按 §10 C02 触发终曲演出视频（每局一次）\n  - feedback：终曲灯光全亮与更强的命中反馈\n  - next_actions：谱面完成 →「结算」（先播 C03）；血条归零 → 即刻判负界面\n  - outcome：按 V01/V02 判定\n- S11 结算与重开\n  - input：Enter＝重开 / Esc＝返回开始界面（触发方：玩家）\n  - precondition：V01（完成且达标）或 V02（判负/未达标）达成\n  - state_change：进入「结算」状态；谱面推进冻结\n  - feedback：结算面板显示评级、得分、最大连击、Perfect/Good/Miss 统计\n  - next_actions：重开（谱面/血条/连击/得分全量重置，校准值保留）或返回\n  - outcome：无跨局写入\n\n## 3. 数值口径与全局规则 [G01–G08]\n\n- G01 统一刻度：时间为毫秒；得分、连击、血条为数值；血条百分比上限 100、下限 0。\n- G02 谱面与轨道：单曲 1 首（时长 90–120 秒，原创或公有领域音频）；4 条下落轨道（D/F/J/K 对应）；音符两型：点击、长按；谱面为时间轴数据（音符时间、轨道、类型、长按时长），由 fixed_seed=1057 冻结生成，同 seed 下谱面逐项可复现；音符总数 ≥ 80（建议点击 64、长按 16 分布）。\n- G03 判定窗口（按时间差 Δt=输入时刻−音符时刻，经 G06 校准补偿后）：|Δt| ≤ 50 毫秒 → PERFECT；50 < |Δt| ≤ 120 毫秒 → GOOD；|Δt| > 120 毫秒或未按 → MISS。\n- G04 得分与连击倍率：单次判定 PERFECT=300、GOOD=150、MISS=0；长按头、尾各一次判定、各计一次分。倍率 m = 1 + 0.02 × min(combo, 50)（上限 2.0），**按命中前当前连击数取值，命中后 combo+1；MISS 归零**。独立 oracle 数例：开局连续 10 个 PERFECT，第 k 个得分 300×(1+0.02×(k−1))，合计 300×(10+0.02×45) = **3270**，其中第 1 个为 300。结算对账：总分=逐音符加权之和，容差 0。\n- G05 血条：初始 70%；PERFECT +2%、GOOD +0.5%、MISS −8%；到达上限 100 后不再增加；归零 → 即刻判负。\n- G06 音画偏移校准：设置内提供校准流程——跟随 8 次提示节拍点击，取 |Δt| 中位数作为全局补偿值（默认 0）；**判定用 Δt = 原始时间差 − 补偿值**；校准值可随时重测并立即生效；校准只改判定时间差与谱面显示偏移，不改音符时刻本身。\n- G07 评级与暂停：评级按得分率（总分/理论满分，理论满分=全 PERFECT 总分）：S ≥ 95%、A ≥ 85%、B ≥ 70%、C ≥ 60%，< 60% 为未达标；Esc 暂停冻结音频与谱面推进，恢复后音画同步继续；窗口失焦自动暂停。\n- G08 谱面乐段（本包冻结值）：单曲三段——热身段（0–15 秒，仅点击型、密度低）、主题段（15–70 秒，全型音符）、终曲段（70 秒–曲尾，密度较主题段 +50%、出现双押、下落速度 ×1.15）；进入终曲段前 2 秒 HUD 显示「终曲」提示（图标＋文字）；段边界事件 `section_change` 可观测；乐段不改变 G03–G05 判定与计分规则。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：D/F/J/K＝对应轨道判定（点击型按一下；长按型按住至尾）；Esc＝暂停/继续；结算界面 Enter＝重开。\n- I02 输入语义边界：空轨按键不产生判定（不计 MISS、不加连击）；长按中途松开触发断连（M02）；暂停/结算期间输入无效。\n- I03 无鼠标玩法需求；菜单可键盘完整操作。\n- I04 输入设备与统一判定管线（本包冻结值）：键盘 D/F/J/K；触屏（HTML5 环境）四分区点击映射 D/F/J/K；手柄（可选开启）面键 A/B/X/Y 映射 D/F/J/K；三种设备汇入**同一判定管线**（同一 Δt 计算、同一窗口分档、同一连击/得分结算），设备切换即时生效并在 HUD 显示当前设备图标＋文字。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：连击数、血条、谱面进度、当前乐段名、判定反馈（P/G/M 图标＋文字）、当前输入设备；HUD 对照见 rubric。\n- I07 输入延迟红线（本包冻结值）：判定输入到对应评级反馈 ≤ **50 毫秒**（音游手感红线）；设置界面显示当前音频-视频偏移补偿值；超红线记为缺陷（rubric D4 断言）。\n\n## 5. 谱面与内容清单 [L01–L04]\n\n- L01 生成对象：单谱面 1（时间轴数据，seed=1057 冻结）、音频 1（原创或公有领域）、音符两型（点击 ≥ 64、长按 ≥ 16）、轨道 4、机械音乐厅场景与判定线 UI、三乐段结构。\n- L02 谱面结构：前 10 秒为低密度热身段（仅点击型）；谱面须通过「全 PERFECT 可达理论满分」的可解性自查；长按不与同轨其他音符重叠。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（开始界面/演奏 HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的机械厅装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 判定窗口（主机制）\n  - input：轨道键（键盘/触屏/手柄统一管线）\n  - precondition：处于演奏状态且该轨存在待判定音符\n  - state_change：按 G03 窗口将输入分档为 PERFECT/GOOD/MISS\n  - observable：逐音符判定事件含 Δt 字段与档位、输入设备字段\n  - invalid_case：空轨按键不产生判定事件\n  - recovery：—\n- M02 长按音符\n  - input：按住对应轨道键\n  - precondition：长按头部判定已成立\n  - state_change：头部判定（同 G03）→ 按住期间 → 尾部判定；中途松开 → 断连（尾部记 MISS、连击归零）\n  - observable：长按完成率事件、断连事件\n  - invalid_case：头部 MISS 后按住不产生尾部判定\n  - recovery：后续音符继续\n- M03 音画偏移校准\n  - input：校准流程中的 8 次点击\n  - precondition：处于校准流程\n  - state_change：测得补偿值 → 全局判定时间差与显示偏移生效\n  - observable：校准前后同输入序列的判定差分\n  - invalid_case：—\n  - recovery：重测即覆盖\n- M04 连击与结算\n  - input：逐次判定 / 结算画面\n  - precondition：处于演奏/结算状态\n  - state_change：命中按 G04 计倍率与得分并累计连击；MISS 归零；结算按加权和与评级阈值出分\n  - observable：连击事件、结算对账（容差 0）、评级事件\n  - invalid_case：—\n  - recovery：重开全量重置\n- M05 血条与胜负\n  - input：逐次判定\n  - precondition：处于演奏状态\n  - state_change：按 G05 增减血条；归零即刻判负；谱面走完 → 结算评级\n  - observable：血条事件、win/lose 事件与结算面板\n  - invalid_case：—\n  - recovery：判负即刻重开\n- M06 乐段推进\n  - input：谱面时间推进（系统）\n  - precondition：演奏进行中\n  - state_change：按 G08 三段边界切换乐段（密度/双押/下落速度规则生效）；`section_change` 事件与「终曲」提示\n  - observable：段边界事件、终曲段下落速度 ×1.15 采样、密度对照\n  - invalid_case：乐段切换不重置连击/血条\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成整首谱面（血条未归零）且结算评级 ≥ C（得分率 ≥ 60%）。\n- V02 失败条件：血条归零（即刻判负），或谱面完成但得分率 < 60%（结算显示未达标）。\n- V03 恢复语义：失败/未达标即刻重开；重开后谱面、血条、连击、得分全量重置（校准值保留，因其属于设置而非局内状态）。\n- V04 persistent_state：无（重开全量清空；最好成绩可作展示但不作为验收需求、不要求跨会话保存）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（得分/连击/血条）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设软锁——判负即刻重开、谱面按 seed 复现；判定输入始终可达。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：发条与蒸汽驱动的架空时代，「谐律厅」是城市的心脏——巨型机械音乐厅每晚以合奏钟声为全城报时。\n- W02 场景所在地：谐律厅的独奏台——四条黄铜音轨沿齿轮墙垂落，判定线是一排待击音簧。\n- W03 玩家身份与当前任务：玩家是调律师学徒「聆」；当前任务：在钟枢校准夜完成独奏，让报时大合奏如期奏响。\n- W04 失败代价与结局表达：血条归零＝校准中断需重来（判负界面文案）；完成则 C03 呈现大合奏钟声齐鸣、全城灯火应和的场面。\n- W05 叙事来源：四轨道＝钟枢的四根音簧；双押＝和音；终曲段＝校准夜的收束乐章；节拍灯＝音乐厅的呼吸。全部原创。\n- W06 视觉风格与色彩材质：黄铜与暗木的机械美感；主色＝黄铜金（#B08D4F 系）＋暗胡桃（#4A3A2C 系）＋判定青光（#57C9B8 系）；材质以黄铜、蒸汽管、磨砂玻璃为主。\n- W07 环境氛围与声音语言：齿轮低鸣的音乐厅——常驻机械运转声；音效语言为「节拍灯咔哒＋音符爆裂＋断连闷响＋终曲钟声」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代校准夜 → 终曲段视频（C02）作为高潮节点 → 结算视频（C03）收束报时；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正面舞台视角（演奏 UI 全屏），无跟随；判定线轻微随低频节奏起伏（幅度 ≤4 像素，不改变判定位置）；镜头边界＝演奏 UI 外框。\n- F02 关键操作镜头变化：连击达 25/50 时舞台灯光短暂扫过（0.5 秒）；终曲段进入时灯光全亮＋轻微 FOV 变化 +5°（0.5 秒）；无慢动作。\n- F03 输入与延迟：见 I07（≤50 毫秒红线）；判定反馈与音符爆裂在判定帧同帧呈现。\n- F04 环境常驻效果：齿轮墙缓慢转动、蒸汽微雾、节拍灯随节拍明暗；不遮挡轨道与判定线。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| PERFECT | 音符青光爆裂＋判定线火花＋「P」字弹出 | 清脆爆裂音 | 0.2s |\n| GOOD | 音符黄光散开＋「G」字弹出 | 较柔爆裂音 | 0.2s |\n| MISS | 音符灰化坠落＋判定线红闪＋「M」字 | 低沉闷响 | 0.3s |\n| 长按完成 | 尾焰沿轨道拉出光带 | 尾音清响 | 完成 |\n| 长按断连 | 光带断裂灰化 | 断连闷响 | 0.3s |\n| 连击档位升级 | 连击数字放大弹跳＋齿轮徽标点亮 | 连击咔哒声 | 弹跳完成 |\n| 血条增减 | 血条平滑移动＋数字跳动 | 增/减微音 | 移动完成 |\n| 段落切换 | 段名横幅（热身/主题/终曲）＋灯光变化 | 转段钟声短句 | 横幅结束 |\n| 终曲提示 | 「终曲」图标＋文字提前 2 秒显示 | 提示钟声 | 进入终曲段 |\n| 双押命中 | 双轨同步爆裂＋和音光环 | 和音爆裂音 | 0.2s |\n| 判负 | 灯光骤暗＋谱面停格 | 失谐低鸣 | 进入判负界面 |\n| 完成 | 谱面收束光带＋大合奏预演灯光 | 终曲钟声 | 进入结算 |\n\n- F06 关键音效清单：爆裂音（P/G 两档）、尾音、断连闷响、连击咔哒、转段钟声、提示钟声、和音爆裂、失谐低鸣、终曲钟声；环境音：齿轮低鸣＋蒸汽嘶声（常驻循环，演奏中低音量）；循环音开始/结束：环境声随开始界面进入、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：判定反馈（P/G/M）文字＋图形双通道承担判定信息；爆裂粒子单帧 ≤ 30 且不遮挡相邻轨道与判定线。\n- F08 音画同步：判定音效与判定帧同步（受 G06 补偿影响时以补偿后对齐）；转段钟声与 `section_change` 帧同步；终曲钟声与完成帧同步。\n- F09 屏幕震动：MISS 0.05 秒微幅（可关闭）；设置界面提供「判定线起伏开/关」「震动开/关」（关闭不影响判定）。\n- F10 前端界面：开始界面（演奏/校准/设置/退出＋当前输入设备图标）→ 演奏 HUD（连击、血条、进度、段名、判定反馈、设备图标）→ 结算（评级/得分/最大连击/P-G-M 统计/重开/返回）→ 判负界面（即刻重开）→ 暂停面板（继续/重开/设置）；关键状态附图标＋文字（P/G/M、段名、设备），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 开场演出（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由开始界面进入演奏之前，每局一次\n  - 内容与角色场景：夜幕中的谐律厅灯火通明，调律师学徒「聆」登上独奏台，四条黄铜音轨次第亮起，齿轮墙开始转动\n  - 资产对应：谐律厅、独奏台、音轨与游戏内场景同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入演奏（谱面从 0 秒起算）；自然播完 → 同\n  - 状态一致：播放期间不推进谱面与计时；进入状态＝热身段起点\n- C02 终曲段演出（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次进入终曲段（70 秒边界 `section_change` 事件）时短暂插入，每局一次\n  - 内容与角色场景：舞台灯光全亮，报时大钟的钟枢开始旋转，双轨和音音簧并列弹起\n  - 资产对应：钟枢、音簧、舞台与游戏内一致\n  - 可跳过：Esc 跳过 → 终曲段从边界点继续（谱面按已计时间推进，跳过不回溯）；自然播完 → 同\n  - 状态一致：仅在真实段边界后触发；跳过不改变得分/连击/血条\n- C03 演奏完成结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：V01 达成后、结算面板之前，每局一次\n  - 内容与角色场景：大合奏钟声齐鸣，谐律厅灯光如潮涌向全城，「聆」在掌声中收起音锤\n  - 资产对应：谐律厅、大钟、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：评级字样与真实结算一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三乐段单谱面演奏、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、键盘/触屏/手柄统一判定管线。\n- N02 本测例包含的流程与界面：开始界面、校准、演奏、结算与判负、暂停（含失焦自动暂停）、即刻重开。\n- N03 本测例包含的演出能力：开场/终曲/结算视频（C01–C03）、§9 F04–F09 全部事件反馈与音效、机械音乐厅氛围。\n- N04 输入范围：键盘（D/F/J/K/Esc/Enter）＋触屏四分区＋手柄面键（可选，统一判定管线）；无多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋原创/公有领域曲目（来源声明可追溯）；无配音需求。\n- N06 表现层自由度：§9 未冻结的机械厅装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（调律师学徒「聆」、齿轮墙舞台、音簧判定线等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（下落→判定→评级→连击→结算）；判定/倍率/血条均为同一判定系统的内部规则，无跨系统因果链；谱面时间轴与判定并发（B1）；判负即刻重开为恢复路径；新增乐段、统一输入管线与演出为表现/输入层，不改变难度档\"\n  downgrade_boundary: \"去掉长按与血条（纯点击判定无限重试）后仍为 S（更简）\"\n  upgrade_boundary: \"若成绩跨局保留并解锁曲目难度规则或多谱面联赛，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：2 个（text-to-3D 1，image-to-3D 1）；object 任务资产为：tuner_ling, chime_judgeline。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, strike_conduct。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "7f0f9f7c887ca98082287168c1e5c8363c89012da01aae212ce685ae974b4b64"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Detuned low wash as the performance fails",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G057_sfx_010": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G057_rhythm_machine_hall",
+          "task_id": "G057_sfx_010",
+          "asset_name": "grand_clock_chord",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Layered clock-chord swell as the grand chime rings",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5580,
+          "trigger": "V01 完成",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《机械音乐厅的节奏演奏》｜下落式节奏判定机制输入规范\n\n```yaml\ncase_id: G057\nbase_case_id: G057\ntitle: 机械音乐厅的节奏演奏\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1057\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《机械音乐厅的节奏演奏》；版本：mechanics-v3（2026-10-11 完整性修订：补谱面乐段、触屏/手柄统一判定、输入延迟红线、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘、触屏（HTML5）与手柄（可选）。\n- 原创边界：本作全部名称、场景、文案与美术必须原创；**音频必须为原创或公有领域曲目，不得使用任何商业作品的乐曲、录音或谱面**；不使用任何商业作品的名称、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 谱面实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的下落式节奏游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：下落式单谱面节奏游戏，单人。本测例包含的能力：三乐段谱面（热身/主题/终曲）、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、三设备统一判定管线、开场/终曲/结算视频。\n- S02 核心循环一句话：音符下落 → 判定窗口输入 → 命中评级 → 连击累积 → 结算。\n- S03 流程：开始界面 →（可选）校准 → 演奏单谱面 → 结算（评级/得分/最大连击）→ 重开。\n- S04 最低完整流程：开始界面、演奏、结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：血条归零即刻判负并可直接重开；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与开始界面 → 校准（可选）→ 演奏（热身/主题/终曲三段）→ 结算 → 重开。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与开始界面\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始演奏」\n  - precondition：构建可启动且谱面/音频按 seed=1057 冻结加载\n  - state_change：进入「开始界面」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：开始界面按 §9 F10 呈现（演奏/校准/设置/当前输入设备图标）\n  - next_actions：进入「校准（可选）」或「演奏」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 校准（可选）\n  - input：跟随 8 次提示节拍点击（触发方：玩家）\n  - precondition：从开始界面进入校准\n  - state_change：测得全局补偿值并即时生效（G06）\n  - feedback：每次点击显示 Δt 与当前中位值\n  - next_actions：返回开始界面或直接进入「演奏」\n  - outcome：补偿值存入设置（非局内状态）\n- S08 热身段（0–15 秒）\n  - input：D/F/J/K（或触屏四分区/手柄面键）（触发方：玩家）\n  - precondition：演奏开始且当前乐段＝热身\n  - state_change：仅点击型音符、密度低；判定/得分/连击/血条按 G03–G05 结算\n  - feedback：节拍灯与音符判定反馈按 §9 F05\n  - next_actions：15 秒边界 → `section_change` →「主题段」\n  - outcome：得分与连击局内累计\n- S09 主题段（15–70 秒）\n  - input：同 S08（触发方：玩家）\n  - precondition：热身段结束\n  - state_change：全型音符（点击＋长按）按谱面推进\n  - feedback：齿轮转动与轨道灯光随节奏脉动\n  - next_actions：70 秒边界 → `section_change`（提前 2 秒「终曲」提示）→「终曲段」\n  - outcome：局内状态持续\n- S10 终曲段（70 秒–曲尾）\n  - input：同 S08（触发方：玩家）\n  - precondition：主题段结束且终曲提示已显示\n  - state_change：密度较主题段 +50%、出现双押、下落速度 ×1.15（G08）；首次进入时按 §10 C02 触发终曲演出视频（每局一次）\n  - feedback：终曲灯光全亮与更强的命中反馈\n  - next_actions：谱面完成 →「结算」（先播 C03）；血条归零 → 即刻判负界面\n  - outcome：按 V01/V02 判定\n- S11 结算与重开\n  - input：Enter＝重开 / Esc＝返回开始界面（触发方：玩家）\n  - precondition：V01（完成且达标）或 V02（判负/未达标）达成\n  - state_change：进入「结算」状态；谱面推进冻结\n  - feedback：结算面板显示评级、得分、最大连击、Perfect/Good/Miss 统计\n  - next_actions：重开（谱面/血条/连击/得分全量重置，校准值保留）或返回\n  - outcome：无跨局写入\n\n## 3. 数值口径与全局规则 [G01–G08]\n\n- G01 统一刻度：时间为毫秒；得分、连击、血条为数值；血条百分比上限 100、下限 0。\n- G02 谱面与轨道：单曲 1 首（时长 90–120 秒，原创或公有领域音频）；4 条下落轨道（D/F/J/K 对应）；音符两型：点击、长按；谱面为时间轴数据（音符时间、轨道、类型、长按时长），由 fixed_seed=1057 冻结生成，同 seed 下谱面逐项可复现；音符总数 ≥ 80（建议点击 64、长按 16 分布）。\n- G03 判定窗口（按时间差 Δt=输入时刻−音符时刻，经 G06 校准补偿后）：|Δt| ≤ 50 毫秒 → PERFECT；50 < |Δt| ≤ 120 毫秒 → GOOD；|Δt| > 120 毫秒或未按 → MISS。\n- G04 得分与连击倍率：单次判定 PERFECT=300、GOOD=150、MISS=0；长按头、尾各一次判定、各计一次分。倍率 m = 1 + 0.02 × min(combo, 50)（上限 2.0），**按命中前当前连击数取值，命中后 combo+1；MISS 归零**。独立 oracle 数例：开局连续 10 个 PERFECT，第 k 个得分 300×(1+0.02×(k−1))，合计 300×(10+0.02×45) = **3270**，其中第 1 个为 300。结算对账：总分=逐音符加权之和，容差 0。\n- G05 血条：初始 70%；PERFECT +2%、GOOD +0.5%、MISS −8%；到达上限 100 后不再增加；归零 → 即刻判负。\n- G06 音画偏移校准：设置内提供校准流程——跟随 8 次提示节拍点击，取 |Δt| 中位数作为全局补偿值（默认 0）；**判定用 Δt = 原始时间差 − 补偿值**；校准值可随时重测并立即生效；校准只改判定时间差与谱面显示偏移，不改音符时刻本身。\n- G07 评级与暂停：评级按得分率（总分/理论满分，理论满分=全 PERFECT 总分）：S ≥ 95%、A ≥ 85%、B ≥ 70%、C ≥ 60%，< 60% 为未达标；Esc 暂停冻结音频与谱面推进，恢复后音画同步继续；窗口失焦自动暂停。\n- G08 谱面乐段（本包冻结值）：单曲三段——热身段（0–15 秒，仅点击型、密度低）、主题段（15–70 秒，全型音符）、终曲段（70 秒–曲尾，密度较主题段 +50%、出现双押、下落速度 ×1.15）；进入终曲段前 2 秒 HUD 显示「终曲」提示（图标＋文字）；段边界事件 `section_change` 可观测；乐段不改变 G03–G05 判定与计分规则。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：D/F/J/K＝对应轨道判定（点击型按一下；长按型按住至尾）；Esc＝暂停/继续；结算界面 Enter＝重开。\n- I02 输入语义边界：空轨按键不产生判定（不计 MISS、不加连击）；长按中途松开触发断连（M02）；暂停/结算期间输入无效。\n- I03 无鼠标玩法需求；菜单可键盘完整操作。\n- I04 输入设备与统一判定管线（本包冻结值）：键盘 D/F/J/K；触屏（HTML5 环境）四分区点击映射 D/F/J/K；手柄（可选开启）面键 A/B/X/Y 映射 D/F/J/K；三种设备汇入**同一判定管线**（同一 Δt 计算、同一窗口分档、同一连击/得分结算），设备切换即时生效并在 HUD 显示当前设备图标＋文字。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：连击数、血条、谱面进度、当前乐段名、判定反馈（P/G/M 图标＋文字）、当前输入设备；HUD 对照见 rubric。\n- I07 输入延迟红线（本包冻结值）：判定输入到对应评级反馈 ≤ **50 毫秒**（音游手感红线）；设置界面显示当前音频-视频偏移补偿值；超红线记为缺陷（rubric D4 断言）。\n\n## 5. 谱面与内容清单 [L01–L04]\n\n- L01 生成对象：单谱面 1（时间轴数据，seed=1057 冻结）、音频 1（原创或公有领域）、音符两型（点击 ≥ 64、长按 ≥ 16）、轨道 4、机械音乐厅场景与判定线 UI、三乐段结构。\n- L02 谱面结构：前 10 秒为低密度热身段（仅点击型）；谱面须通过「全 PERFECT 可达理论满分」的可解性自查；长按不与同轨其他音符重叠。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（开始界面/演奏 HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的机械厅装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 判定窗口（主机制）\n  - input：轨道键（键盘/触屏/手柄统一管线）\n  - precondition：处于演奏状态且该轨存在待判定音符\n  - state_change：按 G03 窗口将输入分档为 PERFECT/GOOD/MISS\n  - observable：逐音符判定事件含 Δt 字段与档位、输入设备字段\n  - invalid_case：空轨按键不产生判定事件\n  - recovery：—\n- M02 长按音符\n  - input：按住对应轨道键\n  - precondition：长按头部判定已成立\n  - state_change：头部判定（同 G03）→ 按住期间 → 尾部判定；中途松开 → 断连（尾部记 MISS、连击归零）\n  - observable：长按完成率事件、断连事件\n  - invalid_case：头部 MISS 后按住不产生尾部判定\n  - recovery：后续音符继续\n- M03 音画偏移校准\n  - input：校准流程中的 8 次点击\n  - precondition：处于校准流程\n  - state_change：测得补偿值 → 全局判定时间差与显示偏移生效\n  - observable：校准前后同输入序列的判定差分\n  - invalid_case：—\n  - recovery：重测即覆盖\n- M04 连击与结算\n  - input：逐次判定 / 结算画面\n  - precondition：处于演奏/结算状态\n  - state_change：命中按 G04 计倍率与得分并累计连击；MISS 归零；结算按加权和与评级阈值出分\n  - observable：连击事件、结算对账（容差 0）、评级事件\n  - invalid_case：—\n  - recovery：重开全量重置\n- M05 血条与胜负\n  - input：逐次判定\n  - precondition：处于演奏状态\n  - state_change：按 G05 增减血条；归零即刻判负；谱面走完 → 结算评级\n  - observable：血条事件、win/lose 事件与结算面板\n  - invalid_case：—\n  - recovery：判负即刻重开\n- M06 乐段推进\n  - input：谱面时间推进（系统）\n  - precondition：演奏进行中\n  - state_change：按 G08 三段边界切换乐段（密度/双押/下落速度规则生效）；`section_change` 事件与「终曲」提示\n  - observable：段边界事件、终曲段下落速度 ×1.15 采样、密度对照\n  - invalid_case：乐段切换不重置连击/血条\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成整首谱面（血条未归零）且结算评级 ≥ C（得分率 ≥ 60%）。\n- V02 失败条件：血条归零（即刻判负），或谱面完成但得分率 < 60%（结算显示未达标）。\n- V03 恢复语义：失败/未达标即刻重开；重开后谱面、血条、连击、得分全量重置（校准值保留，因其属于设置而非局内状态）。\n- V04 persistent_state：无（重开全量清空；最好成绩可作展示但不作为验收需求、不要求跨会话保存）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（得分/连击/血条）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设软锁——判负即刻重开、谱面按 seed 复现；判定输入始终可达。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：发条与蒸汽驱动的架空时代，「谐律厅」是城市的心脏——巨型机械音乐厅每晚以合奏钟声为全城报时。\n- W02 场景所在地：谐律厅的独奏台——四条黄铜音轨沿齿轮墙垂落，判定线是一排待击音簧。\n- W03 玩家身份与当前任务：玩家是调律师学徒「聆」；当前任务：在钟枢校准夜完成独奏，让报时大合奏如期奏响。\n- W04 失败代价与结局表达：血条归零＝校准中断需重来（判负界面文案）；完成则 C03 呈现大合奏钟声齐鸣、全城灯火应和的场面。\n- W05 叙事来源：四轨道＝钟枢的四根音簧；双押＝和音；终曲段＝校准夜的收束乐章；节拍灯＝音乐厅的呼吸。全部原创。\n- W06 视觉风格与色彩材质：黄铜与暗木的机械美感；主色＝黄铜金（#B08D4F 系）＋暗胡桃（#4A3A2C 系）＋判定青光（#57C9B8 系）；材质以黄铜、蒸汽管、磨砂玻璃为主。\n- W07 环境氛围与声音语言：齿轮低鸣的音乐厅——常驻机械运转声；音效语言为「节拍灯咔哒＋音符爆裂＋断连闷响＋终曲钟声」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代校准夜 → 终曲段视频（C02）作为高潮节点 → 结算视频（C03）收束报时；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正面舞台视角（演奏 UI 全屏），无跟随；判定线轻微随低频节奏起伏（幅度 ≤4 像素，不改变判定位置）；镜头边界＝演奏 UI 外框。\n- F02 关键操作镜头变化：连击达 25/50 时舞台灯光短暂扫过（0.5 秒）；终曲段进入时灯光全亮＋轻微 FOV 变化 +5°（0.5 秒）；无慢动作。\n- F03 输入与延迟：见 I07（≤50 毫秒红线）；判定反馈与音符爆裂在判定帧同帧呈现。\n- F04 环境常驻效果：齿轮墙缓慢转动、蒸汽微雾、节拍灯随节拍明暗；不遮挡轨道与判定线。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| PERFECT | 音符青光爆裂＋判定线火花＋「P」字弹出 | 清脆爆裂音 | 0.2s |\n| GOOD | 音符黄光散开＋「G」字弹出 | 较柔爆裂音 | 0.2s |\n| MISS | 音符灰化坠落＋判定线红闪＋「M」字 | 低沉闷响 | 0.3s |\n| 长按完成 | 尾焰沿轨道拉出光带 | 尾音清响 | 完成 |\n| 长按断连 | 光带断裂灰化 | 断连闷响 | 0.3s |\n| 连击档位升级 | 连击数字放大弹跳＋齿轮徽标点亮 | 连击咔哒声 | 弹跳完成 |\n| 血条增减 | 血条平滑移动＋数字跳动 | 增/减微音 | 移动完成 |\n| 段落切换 | 段名横幅（热身/主题/终曲）＋灯光变化 | 转段钟声短句 | 横幅结束 |\n| 终曲提示 | 「终曲」图标＋文字提前 2 秒显示 | 提示钟声 | 进入终曲段 |\n| 双押命中 | 双轨同步爆裂＋和音光环 | 和音爆裂音 | 0.2s |\n| 判负 | 灯光骤暗＋谱面停格 | 失谐低鸣 | 进入判负界面 |\n| 完成 | 谱面收束光带＋大合奏预演灯光 | 终曲钟声 | 进入结算 |\n\n- F06 关键音效清单：爆裂音（P/G 两档）、尾音、断连闷响、连击咔哒、转段钟声、提示钟声、和音爆裂、失谐低鸣、终曲钟声；环境音：齿轮低鸣＋蒸汽嘶声（常驻循环，演奏中低音量）；循环音开始/结束：环境声随开始界面进入、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：判定反馈（P/G/M）文字＋图形双通道承担判定信息；爆裂粒子单帧 ≤ 30 且不遮挡相邻轨道与判定线。\n- F08 音画同步：判定音效与判定帧同步（受 G06 补偿影响时以补偿后对齐）；转段钟声与 `section_change` 帧同步；终曲钟声与完成帧同步。\n- F09 屏幕震动：MISS 0.05 秒微幅（可关闭）；设置界面提供「判定线起伏开/关」「震动开/关」（关闭不影响判定）。\n- F10 前端界面：开始界面（演奏/校准/设置/退出＋当前输入设备图标）→ 演奏 HUD（连击、血条、进度、段名、判定反馈、设备图标）→ 结算（评级/得分/最大连击/P-G-M 统计/重开/返回）→ 判负界面（即刻重开）→ 暂停面板（继续/重开/设置）；关键状态附图标＋文字（P/G/M、段名、设备），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 开场演出（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由开始界面进入演奏之前，每局一次\n  - 内容与角色场景：夜幕中的谐律厅灯火通明，调律师学徒「聆」登上独奏台，四条黄铜音轨次第亮起，齿轮墙开始转动\n  - 资产对应：谐律厅、独奏台、音轨与游戏内场景同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入演奏（谱面从 0 秒起算）；自然播完 → 同\n  - 状态一致：播放期间不推进谱面与计时；进入状态＝热身段起点\n- C02 终曲段演出（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次进入终曲段（70 秒边界 `section_change` 事件）时短暂插入，每局一次\n  - 内容与角色场景：舞台灯光全亮，报时大钟的钟枢开始旋转，双轨和音音簧并列弹起\n  - 资产对应：钟枢、音簧、舞台与游戏内一致\n  - 可跳过：Esc 跳过 → 终曲段从边界点继续（谱面按已计时间推进，跳过不回溯）；自然播完 → 同\n  - 状态一致：仅在真实段边界后触发；跳过不改变得分/连击/血条\n- C03 演奏完成结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：V01 达成后、结算面板之前，每局一次\n  - 内容与角色场景：大合奏钟声齐鸣，谐律厅灯光如潮涌向全城，「聆」在掌声中收起音锤\n  - 资产对应：谐律厅、大钟、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：评级字样与真实结算一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三乐段单谱面演奏、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、键盘/触屏/手柄统一判定管线。\n- N02 本测例包含的流程与界面：开始界面、校准、演奏、结算与判负、暂停（含失焦自动暂停）、即刻重开。\n- N03 本测例包含的演出能力：开场/终曲/结算视频（C01–C03）、§9 F04–F09 全部事件反馈与音效、机械音乐厅氛围。\n- N04 输入范围：键盘（D/F/J/K/Esc/Enter）＋触屏四分区＋手柄面键（可选，统一判定管线）；无多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋原创/公有领域曲目（来源声明可追溯）；无配音需求。\n- N06 表现层自由度：§9 未冻结的机械厅装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（调律师学徒「聆」、齿轮墙舞台、音簧判定线等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（下落→判定→评级→连击→结算）；判定/倍率/血条均为同一判定系统的内部规则，无跨系统因果链；谱面时间轴与判定并发（B1）；判负即刻重开为恢复路径；新增乐段、统一输入管线与演出为表现/输入层，不改变难度档\"\n  downgrade_boundary: \"去掉长按与血条（纯点击判定无限重试）后仍为 S（更简）\"\n  upgrade_boundary: \"若成绩跨局保留并解锁曲目难度规则或多谱面联赛，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：2 个（text-to-3D 1，image-to-3D 1）；object 任务资产为：tuner_ling, chime_judgeline。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, strike_conduct。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "7f0f9f7c887ca98082287168c1e5c8363c89012da01aae212ce685ae974b4b64"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Layered clock-chord swell as the grand chime rings",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G057_sfx_011": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G057_rhythm_machine_hall",
+          "task_id": "G057_sfx_011",
+          "asset_name": "hall_ambience",
+          "audio_type": "sound_effect",
+          "sound_category": "ambient_loop",
+          "prompt": "Mechanical hall: gear rumble, faint steam hiss, distant audience murmur",
+          "duration_sec": 35.0,
+          "sample_rate": 48000,
+          "seed": 5581,
+          "trigger": "常驻环境音（演奏中低音量）",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《机械音乐厅的节奏演奏》｜下落式节奏判定机制输入规范\n\n```yaml\ncase_id: G057\nbase_case_id: G057\ntitle: 机械音乐厅的节奏演奏\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1057\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《机械音乐厅的节奏演奏》；版本：mechanics-v3（2026-10-11 完整性修订：补谱面乐段、触屏/手柄统一判定、输入延迟红线、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘、触屏（HTML5）与手柄（可选）。\n- 原创边界：本作全部名称、场景、文案与美术必须原创；**音频必须为原创或公有领域曲目，不得使用任何商业作品的乐曲、录音或谱面**；不使用任何商业作品的名称、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 谱面实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的下落式节奏游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：下落式单谱面节奏游戏，单人。本测例包含的能力：三乐段谱面（热身/主题/终曲）、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、三设备统一判定管线、开场/终曲/结算视频。\n- S02 核心循环一句话：音符下落 → 判定窗口输入 → 命中评级 → 连击累积 → 结算。\n- S03 流程：开始界面 →（可选）校准 → 演奏单谱面 → 结算（评级/得分/最大连击）→ 重开。\n- S04 最低完整流程：开始界面、演奏、结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：血条归零即刻判负并可直接重开；结算界面一键重开；游玩中 Esc 暂停。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与开始界面 → 校准（可选）→ 演奏（热身/主题/终曲三段）→ 结算 → 重开。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与开始界面\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始演奏」\n  - precondition：构建可启动且谱面/音频按 seed=1057 冻结加载\n  - state_change：进入「开始界面」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：开始界面按 §9 F10 呈现（演奏/校准/设置/当前输入设备图标）\n  - next_actions：进入「校准（可选）」或「演奏」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 校准（可选）\n  - input：跟随 8 次提示节拍点击（触发方：玩家）\n  - precondition：从开始界面进入校准\n  - state_change：测得全局补偿值并即时生效（G06）\n  - feedback：每次点击显示 Δt 与当前中位值\n  - next_actions：返回开始界面或直接进入「演奏」\n  - outcome：补偿值存入设置（非局内状态）\n- S08 热身段（0–15 秒）\n  - input：D/F/J/K（或触屏四分区/手柄面键）（触发方：玩家）\n  - precondition：演奏开始且当前乐段＝热身\n  - state_change：仅点击型音符、密度低；判定/得分/连击/血条按 G03–G05 结算\n  - feedback：节拍灯与音符判定反馈按 §9 F05\n  - next_actions：15 秒边界 → `section_change` →「主题段」\n  - outcome：得分与连击局内累计\n- S09 主题段（15–70 秒）\n  - input：同 S08（触发方：玩家）\n  - precondition：热身段结束\n  - state_change：全型音符（点击＋长按）按谱面推进\n  - feedback：齿轮转动与轨道灯光随节奏脉动\n  - next_actions：70 秒边界 → `section_change`（提前 2 秒「终曲」提示）→「终曲段」\n  - outcome：局内状态持续\n- S10 终曲段（70 秒–曲尾）\n  - input：同 S08（触发方：玩家）\n  - precondition：主题段结束且终曲提示已显示\n  - state_change：密度较主题段 +50%、出现双押、下落速度 ×1.15（G08）；首次进入时按 §10 C02 触发终曲演出视频（每局一次）\n  - feedback：终曲灯光全亮与更强的命中反馈\n  - next_actions：谱面完成 →「结算」（先播 C03）；血条归零 → 即刻判负界面\n  - outcome：按 V01/V02 判定\n- S11 结算与重开\n  - input：Enter＝重开 / Esc＝返回开始界面（触发方：玩家）\n  - precondition：V01（完成且达标）或 V02（判负/未达标）达成\n  - state_change：进入「结算」状态；谱面推进冻结\n  - feedback：结算面板显示评级、得分、最大连击、Perfect/Good/Miss 统计\n  - next_actions：重开（谱面/血条/连击/得分全量重置，校准值保留）或返回\n  - outcome：无跨局写入\n\n## 3. 数值口径与全局规则 [G01–G08]\n\n- G01 统一刻度：时间为毫秒；得分、连击、血条为数值；血条百分比上限 100、下限 0。\n- G02 谱面与轨道：单曲 1 首（时长 90–120 秒，原创或公有领域音频）；4 条下落轨道（D/F/J/K 对应）；音符两型：点击、长按；谱面为时间轴数据（音符时间、轨道、类型、长按时长），由 fixed_seed=1057 冻结生成，同 seed 下谱面逐项可复现；音符总数 ≥ 80（建议点击 64、长按 16 分布）。\n- G03 判定窗口（按时间差 Δt=输入时刻−音符时刻，经 G06 校准补偿后）：|Δt| ≤ 50 毫秒 → PERFECT；50 < |Δt| ≤ 120 毫秒 → GOOD；|Δt| > 120 毫秒或未按 → MISS。\n- G04 得分与连击倍率：单次判定 PERFECT=300、GOOD=150、MISS=0；长按头、尾各一次判定、各计一次分。倍率 m = 1 + 0.02 × min(combo, 50)（上限 2.0），**按命中前当前连击数取值，命中后 combo+1；MISS 归零**。独立 oracle 数例：开局连续 10 个 PERFECT，第 k 个得分 300×(1+0.02×(k−1))，合计 300×(10+0.02×45) = **3270**，其中第 1 个为 300。结算对账：总分=逐音符加权之和，容差 0。\n- G05 血条：初始 70%；PERFECT +2%、GOOD +0.5%、MISS −8%；到达上限 100 后不再增加；归零 → 即刻判负。\n- G06 音画偏移校准：设置内提供校准流程——跟随 8 次提示节拍点击，取 |Δt| 中位数作为全局补偿值（默认 0）；**判定用 Δt = 原始时间差 − 补偿值**；校准值可随时重测并立即生效；校准只改判定时间差与谱面显示偏移，不改音符时刻本身。\n- G07 评级与暂停：评级按得分率（总分/理论满分，理论满分=全 PERFECT 总分）：S ≥ 95%、A ≥ 85%、B ≥ 70%、C ≥ 60%，< 60% 为未达标；Esc 暂停冻结音频与谱面推进，恢复后音画同步继续；窗口失焦自动暂停。\n- G08 谱面乐段（本包冻结值）：单曲三段——热身段（0–15 秒，仅点击型、密度低）、主题段（15–70 秒，全型音符）、终曲段（70 秒–曲尾，密度较主题段 +50%、出现双押、下落速度 ×1.15）；进入终曲段前 2 秒 HUD 显示「终曲」提示（图标＋文字）；段边界事件 `section_change` 可观测；乐段不改变 G03–G05 判定与计分规则。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：D/F/J/K＝对应轨道判定（点击型按一下；长按型按住至尾）；Esc＝暂停/继续；结算界面 Enter＝重开。\n- I02 输入语义边界：空轨按键不产生判定（不计 MISS、不加连击）；长按中途松开触发断连（M02）；暂停/结算期间输入无效。\n- I03 无鼠标玩法需求；菜单可键盘完整操作。\n- I04 输入设备与统一判定管线（本包冻结值）：键盘 D/F/J/K；触屏（HTML5 环境）四分区点击映射 D/F/J/K；手柄（可选开启）面键 A/B/X/Y 映射 D/F/J/K；三种设备汇入**同一判定管线**（同一 Δt 计算、同一窗口分档、同一连击/得分结算），设备切换即时生效并在 HUD 显示当前设备图标＋文字。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：连击数、血条、谱面进度、当前乐段名、判定反馈（P/G/M 图标＋文字）、当前输入设备；HUD 对照见 rubric。\n- I07 输入延迟红线（本包冻结值）：判定输入到对应评级反馈 ≤ **50 毫秒**（音游手感红线）；设置界面显示当前音频-视频偏移补偿值；超红线记为缺陷（rubric D4 断言）。\n\n## 5. 谱面与内容清单 [L01–L04]\n\n- L01 生成对象：单谱面 1（时间轴数据，seed=1057 冻结）、音频 1（原创或公有领域）、音符两型（点击 ≥ 64、长按 ≥ 16）、轨道 4、机械音乐厅场景与判定线 UI、三乐段结构。\n- L02 谱面结构：前 10 秒为低密度热身段（仅点击型）；谱面须通过「全 PERFECT 可达理论满分」的可解性自查；长按不与同轨其他音符重叠。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（开始界面/演奏 HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的机械厅装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 判定窗口（主机制）\n  - input：轨道键（键盘/触屏/手柄统一管线）\n  - precondition：处于演奏状态且该轨存在待判定音符\n  - state_change：按 G03 窗口将输入分档为 PERFECT/GOOD/MISS\n  - observable：逐音符判定事件含 Δt 字段与档位、输入设备字段\n  - invalid_case：空轨按键不产生判定事件\n  - recovery：—\n- M02 长按音符\n  - input：按住对应轨道键\n  - precondition：长按头部判定已成立\n  - state_change：头部判定（同 G03）→ 按住期间 → 尾部判定；中途松开 → 断连（尾部记 MISS、连击归零）\n  - observable：长按完成率事件、断连事件\n  - invalid_case：头部 MISS 后按住不产生尾部判定\n  - recovery：后续音符继续\n- M03 音画偏移校准\n  - input：校准流程中的 8 次点击\n  - precondition：处于校准流程\n  - state_change：测得补偿值 → 全局判定时间差与显示偏移生效\n  - observable：校准前后同输入序列的判定差分\n  - invalid_case：—\n  - recovery：重测即覆盖\n- M04 连击与结算\n  - input：逐次判定 / 结算画面\n  - precondition：处于演奏/结算状态\n  - state_change：命中按 G04 计倍率与得分并累计连击；MISS 归零；结算按加权和与评级阈值出分\n  - observable：连击事件、结算对账（容差 0）、评级事件\n  - invalid_case：—\n  - recovery：重开全量重置\n- M05 血条与胜负\n  - input：逐次判定\n  - precondition：处于演奏状态\n  - state_change：按 G05 增减血条；归零即刻判负；谱面走完 → 结算评级\n  - observable：血条事件、win/lose 事件与结算面板\n  - invalid_case：—\n  - recovery：判负即刻重开\n- M06 乐段推进\n  - input：谱面时间推进（系统）\n  - precondition：演奏进行中\n  - state_change：按 G08 三段边界切换乐段（密度/双押/下落速度规则生效）；`section_change` 事件与「终曲」提示\n  - observable：段边界事件、终曲段下落速度 ×1.15 采样、密度对照\n  - invalid_case：乐段切换不重置连击/血条\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成整首谱面（血条未归零）且结算评级 ≥ C（得分率 ≥ 60%）。\n- V02 失败条件：血条归零（即刻判负），或谱面完成但得分率 < 60%（结算显示未达标）。\n- V03 恢复语义：失败/未达标即刻重开；重开后谱面、血条、连击、得分全量重置（校准值保留，因其属于设置而非局内状态）。\n- V04 persistent_state：无（重开全量清空；最好成绩可作展示但不作为验收需求、不要求跨会话保存）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（得分/连击/血条）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设软锁——判负即刻重开、谱面按 seed 复现；判定输入始终可达。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：发条与蒸汽驱动的架空时代，「谐律厅」是城市的心脏——巨型机械音乐厅每晚以合奏钟声为全城报时。\n- W02 场景所在地：谐律厅的独奏台——四条黄铜音轨沿齿轮墙垂落，判定线是一排待击音簧。\n- W03 玩家身份与当前任务：玩家是调律师学徒「聆」；当前任务：在钟枢校准夜完成独奏，让报时大合奏如期奏响。\n- W04 失败代价与结局表达：血条归零＝校准中断需重来（判负界面文案）；完成则 C03 呈现大合奏钟声齐鸣、全城灯火应和的场面。\n- W05 叙事来源：四轨道＝钟枢的四根音簧；双押＝和音；终曲段＝校准夜的收束乐章；节拍灯＝音乐厅的呼吸。全部原创。\n- W06 视觉风格与色彩材质：黄铜与暗木的机械美感；主色＝黄铜金（#B08D4F 系）＋暗胡桃（#4A3A2C 系）＋判定青光（#57C9B8 系）；材质以黄铜、蒸汽管、磨砂玻璃为主。\n- W07 环境氛围与声音语言：齿轮低鸣的音乐厅——常驻机械运转声；音效语言为「节拍灯咔哒＋音符爆裂＋断连闷响＋终曲钟声」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代校准夜 → 终曲段视频（C02）作为高潮节点 → 结算视频（C03）收束报时；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正面舞台视角（演奏 UI 全屏），无跟随；判定线轻微随低频节奏起伏（幅度 ≤4 像素，不改变判定位置）；镜头边界＝演奏 UI 外框。\n- F02 关键操作镜头变化：连击达 25/50 时舞台灯光短暂扫过（0.5 秒）；终曲段进入时灯光全亮＋轻微 FOV 变化 +5°（0.5 秒）；无慢动作。\n- F03 输入与延迟：见 I07（≤50 毫秒红线）；判定反馈与音符爆裂在判定帧同帧呈现。\n- F04 环境常驻效果：齿轮墙缓慢转动、蒸汽微雾、节拍灯随节拍明暗；不遮挡轨道与判定线。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| PERFECT | 音符青光爆裂＋判定线火花＋「P」字弹出 | 清脆爆裂音 | 0.2s |\n| GOOD | 音符黄光散开＋「G」字弹出 | 较柔爆裂音 | 0.2s |\n| MISS | 音符灰化坠落＋判定线红闪＋「M」字 | 低沉闷响 | 0.3s |\n| 长按完成 | 尾焰沿轨道拉出光带 | 尾音清响 | 完成 |\n| 长按断连 | 光带断裂灰化 | 断连闷响 | 0.3s |\n| 连击档位升级 | 连击数字放大弹跳＋齿轮徽标点亮 | 连击咔哒声 | 弹跳完成 |\n| 血条增减 | 血条平滑移动＋数字跳动 | 增/减微音 | 移动完成 |\n| 段落切换 | 段名横幅（热身/主题/终曲）＋灯光变化 | 转段钟声短句 | 横幅结束 |\n| 终曲提示 | 「终曲」图标＋文字提前 2 秒显示 | 提示钟声 | 进入终曲段 |\n| 双押命中 | 双轨同步爆裂＋和音光环 | 和音爆裂音 | 0.2s |\n| 判负 | 灯光骤暗＋谱面停格 | 失谐低鸣 | 进入判负界面 |\n| 完成 | 谱面收束光带＋大合奏预演灯光 | 终曲钟声 | 进入结算 |\n\n- F06 关键音效清单：爆裂音（P/G 两档）、尾音、断连闷响、连击咔哒、转段钟声、提示钟声、和音爆裂、失谐低鸣、终曲钟声；环境音：齿轮低鸣＋蒸汽嘶声（常驻循环，演奏中低音量）；循环音开始/结束：环境声随开始界面进入、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：判定反馈（P/G/M）文字＋图形双通道承担判定信息；爆裂粒子单帧 ≤ 30 且不遮挡相邻轨道与判定线。\n- F08 音画同步：判定音效与判定帧同步（受 G06 补偿影响时以补偿后对齐）；转段钟声与 `section_change` 帧同步；终曲钟声与完成帧同步。\n- F09 屏幕震动：MISS 0.05 秒微幅（可关闭）；设置界面提供「判定线起伏开/关」「震动开/关」（关闭不影响判定）。\n- F10 前端界面：开始界面（演奏/校准/设置/退出＋当前输入设备图标）→ 演奏 HUD（连击、血条、进度、段名、判定反馈、设备图标）→ 结算（评级/得分/最大连击/P-G-M 统计/重开/返回）→ 判负界面（即刻重开）→ 暂停面板（继续/重开/设置）；关键状态附图标＋文字（P/G/M、段名、设备），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 开场演出（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由开始界面进入演奏之前，每局一次\n  - 内容与角色场景：夜幕中的谐律厅灯火通明，调律师学徒「聆」登上独奏台，四条黄铜音轨次第亮起，齿轮墙开始转动\n  - 资产对应：谐律厅、独奏台、音轨与游戏内场景同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入演奏（谱面从 0 秒起算）；自然播完 → 同\n  - 状态一致：播放期间不推进谱面与计时；进入状态＝热身段起点\n- C02 终曲段演出（Event，6 秒，1280×720@24fps）\n  - 触发时机：首次进入终曲段（70 秒边界 `section_change` 事件）时短暂插入，每局一次\n  - 内容与角色场景：舞台灯光全亮，报时大钟的钟枢开始旋转，双轨和音音簧并列弹起\n  - 资产对应：钟枢、音簧、舞台与游戏内一致\n  - 可跳过：Esc 跳过 → 终曲段从边界点继续（谱面按已计时间推进，跳过不回溯）；自然播完 → 同\n  - 状态一致：仅在真实段边界后触发；跳过不改变得分/连击/血条\n- C03 演奏完成结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：V01 达成后、结算面板之前，每局一次\n  - 内容与角色场景：大合奏钟声齐鸣，谐律厅灯光如潮涌向全城，「聆」在掌声中收起音锤\n  - 资产对应：谐律厅、大钟、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入结算面板；自然播完 → 同\n  - 状态一致：评级字样与真实结算一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三乐段单谱面演奏、四轨道两型音符、判定窗口分档、连击倍率、血条胜负、音画校准、键盘/触屏/手柄统一判定管线。\n- N02 本测例包含的流程与界面：开始界面、校准、演奏、结算与判负、暂停（含失焦自动暂停）、即刻重开。\n- N03 本测例包含的演出能力：开场/终曲/结算视频（C01–C03）、§9 F04–F09 全部事件反馈与音效、机械音乐厅氛围。\n- N04 输入范围：键盘（D/F/J/K/Esc/Enter）＋触屏四分区＋手柄面键（可选，统一判定管线）；无多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋原创/公有领域曲目（来源声明可追溯）；无配音需求。\n- N06 表现层自由度：§9 未冻结的机械厅装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（调律师学徒「聆」、齿轮墙舞台、音簧判定线等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（下落→判定→评级→连击→结算）；判定/倍率/血条均为同一判定系统的内部规则，无跨系统因果链；谱面时间轴与判定并发（B1）；判负即刻重开为恢复路径；新增乐段、统一输入管线与演出为表现/输入层，不改变难度档\"\n  downgrade_boundary: \"去掉长按与血条（纯点击判定无限重试）后仍为 S（更简）\"\n  upgrade_boundary: \"若成绩跨局保留并解锁曲目难度规则或多谱面联赛，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：2 个（text-to-3D 1，image-to-3D 1）；object 任务资产为：tuner_ling, chime_judgeline。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, strike_conduct。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "7f0f9f7c887ca98082287168c1e5c8363c89012da01aae212ce685ae974b4b64"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Mechanical hall: gear rumble, faint steam hiss, distant audience murmur",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    }
+  },
+  "cg": {},
+  "3d": {
+    "G057_scene_001": {
+      "schema": "generated_per_asset_req.v1",
+      "task_id": "G057_scene_001",
+      "game_id": "G057_rhythm_machine_hall",
+      "sources_sha256": "c49a44ca129c7aff8aa00b02d8c7d1e851924999ec5bba7aeb0e30ae28f4d87e",
+      "policy": {
+        "version": "generated_req.v1",
+        "model": "gpt-6.1-sol",
+        "rubric_source": "full general_requirement.txt and exact priority task JSON prompt; generated without asset evidence",
+        "score_supported": "100 * PASS / (PASS + FAIL); null if denominator is zero",
+        "score_all_lower_bound": "100 * PASS / all_checks; UNVERIFIED is not a confirmed failure",
+        "coverage": "100 * (PASS + FAIL) / all_checks",
+        "comparison": "same frozen rubric across providers; report counts and coverage",
+        "req_vs_fidelity": "requirement checks are separate from DINO image similarity",
+        "static_limit": "metric units, rigging, physics, runtime behavior require additional evidence; do not infer from screenshots"
+      },
+      "dimensions": [
+        {
+          "id": "requirement_compliance",
+          "checks": [
+            {
+              "fail_criterion": "场景明确呈现为室外空间，或缺少音乐厅与机械装置的空间特征。",
+              "id": "R01",
+              "pass_criterion": "六视角整体可辨识为机械音乐厅内部，舞台及机械音乐装置共同构成室内场景。",
+              "requirement": "场景身份为机械音乐厅内部。",
+              "sources": [
+                {
+                  "quote": "Mechanical music hall interior",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "视角覆盖或可见范围不足，无法判断是否为机械音乐厅内部。"
+            },
+            {
+              "fail_criterion": "可见场景中没有齿轮墙，或齿轮墙仅为低矮局部构件，不具有高耸的墙体尺度感。",
+              "id": "R02",
+              "pass_criterion": "可见由齿轮构成或布置齿轮的高耸墙体，其轮廓与舞台形成明确的高大背景关系。",
+              "requirement": "具有高耸的齿轮墙。",
+              "sources": [
+                {
+                  "quote": "towering gear wall",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "齿轮墙被裁切或遮挡，无法辨认其构成或高耸轮廓。"
+            },
+            {
+              "fail_criterion": "完整可见的音轨数量不是四条，音轨不呈黄铜外观，或没有向下延伸的布局。",
+              "id": "R03",
+              "pass_criterion": "可明确区分四条具有黄铜金属外观的音轨，整体沿向下方向延伸。",
+              "requirement": "设置四条向下延伸的黄铜音轨。",
+              "sources": [
+                {
+                  "quote": "four brass note tracks descending",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "音轨重叠、遮挡或光照失真，无法确认数量、延伸方向或黄铜外观。"
+            },
+            {
+              "fail_criterion": "音轨下端没有音簧判定线，或仅有普通画线而没有可辨识的音簧构件。",
+              "id": "R04",
+              "pass_criterion": "音轨向下汇至由音簧构件形成的判定线，音轨与判定线的位置联系明确。",
+              "requirement": "音轨下端对应音簧判定线。",
+              "sources": [
+                {
+                  "quote": "four brass note tracks descending to a chime reed judgement line",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "判定线是一排待击音簧。",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "音轨末端或判定线区域不可见，无法区分音簧构件与普通装饰。"
+            },
+            {
+              "fail_criterion": "缺少舞台，或音簧判定线不位于舞台上，或舞台明确呈现为非胡桃木材质。",
+              "id": "R05",
+              "pass_criterion": "音簧判定线位于可辨识的舞台上，舞台具有胡桃木的深棕色木质外观。",
+              "requirement": "音簧判定线布置在胡桃木舞台上。",
+              "sources": [
+                {
+                  "quote": "a chime reed judgement line on a walnut stage",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "舞台被遮挡或材质不可辨，无法判断承载关系及木质外观。"
+            },
+            {
+              "fail_criterion": "充分可见的场景中没有可辨识的蒸汽排放口或相关喷口构件。",
+              "id": "R06",
+              "pass_criterion": "场景内可辨识蒸汽排放口或喷口构件；不要求静态图证明蒸汽正在流动。",
+              "requirement": "场景包含蒸汽排放口。",
+              "sources": [
+                {
+                  "quote": "steam vents",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "疑似喷口被遮挡或过小，无法确认其构件身份。"
+            },
+            {
+              "fail_criterion": "缺少壁灯，或壁灯明确呈现为冷色照明而非暖色照明。",
+              "id": "R07",
+              "pass_criterion": "可见安装在墙面的灯具，并通过灯体发光或邻近照明呈现暖色光感。",
+              "requirement": "场景包含暖色壁灯。",
+              "sources": [
+                {
+                  "quote": "warm lamp sconces",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "灯具安装关系不可见，或渲染曝光、照明状态使暖冷色无法判断。"
+            },
+            {
+              "fail_criterion": "场景主要配色明显由其他颜色主导，黄铜金与深胡桃棕未形成主要配色关系。",
+              "id": "R08",
+              "pass_criterion": "场景整体以黄铜金与深胡桃棕为主要配色，允许存在辅助色和灯光颜色。",
+              "requirement": "整体采用黄铜与深胡桃木配色。",
+              "sources": [
+                {
+                  "quote": "brass-and-dark-walnut palette",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "特殊照明、曝光或无材质显示导致无法可靠判断场景本色。"
+            },
+            {
+              "fail_criterion": "整体明确采用纯写实再现方式，未体现风格化设计。",
+              "id": "R09",
+              "pass_criterion": "场景造型、比例或材质表达具有可辨识的风格化处理；不额外要求特定卡通流派或低多边形风格。",
+              "requirement": "采用风格化的三维场景设计。",
+              "sources": [
+                {
+                  "quote": "stylized",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "可见内容或材质信息不足，无法区分风格化设计与写实表达。"
+            },
+            {
+              "fail_criterion": "舞台、齿轮墙等被分离排列为资产展示队列或拼贴面板，无法构成连续场景。",
+              "id": "R10",
+              "pass_criterion": "舞台、齿轮墙及其他构件具有连贯的空间关系，构成统一音乐厅场景，而不是物体队列或拼贴展示。",
+              "requirement": "场景应具有连贯的空间组织，不得以物体队列或拼贴面板替代。",
+              "sources": [
+                {
+                  "quote": "必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "固定视角覆盖不足，无法判断构件是否属于连续空间。"
+            },
+            {
+              "fail_criterion": "场景资产中出现下半部说明文字或嵌入的游戏UI面板、HUD等界面内容。",
+              "id": "R11",
+              "pass_criterion": "场景资产本体不包含下半部说明文字或嵌入的UI；音轨与实体音簧判定线不因承担玩法用途而视为UI违规。",
+              "requirement": "场景资产本体不应包含下半部说明文字或UI。",
+              "sources": [
+                {
+                  "quote": "不得出现下半部文字、拼贴面板、物体 lineup 或 UI。",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "无法区分可见文字、面板是资产本体还是渲染查看器叠加内容。"
+            }
+          ]
+        }
+      ],
+      "deferred_requirements": [
+        {
+          "reason": "转动及其速度属于时间行为，固定六视角静态渲染只能验证齿轮墙的外观，不能证明缓慢转动。",
+          "requirement": "齿轮墙缓慢转动。",
+          "sources": [
+            {
+              "quote": "towering gear wall slowly turning",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "游戏可用性涉及资源结构、运行时加载和集成验证，静态图像不能证明。",
+          "requirement": "场景达到可用于游戏的交付状态。",
+          "sources": [
+            {
+              "quote": "game-ready 3D scene",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "固定正面演奏镜头及其与判定线的实际对齐需要运行时相机或集成检查，不能由资产六视角证明。",
+          "requirement": "判定线在游戏中配合F01固定正面视角。",
+          "sources": [
+            {
+              "quote": "单谱面节奏 UI 为主；此场景为舞台与氛围基线（判定线沿 F01 固定正面视角）",
+              "source": "task_json"
+            }
+          ]
+        },
+        {
+          "reason": "实际可游玩性和通达性需要运行、交互或空间数据验证；视觉检查仅保留空间连贯性。",
+          "requirement": "场景空间可游玩。",
+          "sources": [
+            {
+              "quote": "必须生成连贯可游玩的空间",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "原创性与商业作品来源需要创作记录和来源审查，无法仅凭固定六视角静态渲染证明。",
+          "requirement": "美术原创且不使用商业作品的名称、角色、徽记、造型或台词。",
+          "sources": [
+            {
+              "quote": "本作全部名称、场景、文案与美术必须原创",
+              "source": "general_requirement"
+            },
+            {
+              "quote": "不使用任何商业作品的名称、角色、徽记、造型或台词。",
+              "source": "general_requirement"
+            }
+          ]
+        }
+      ],
+      "conflicts": []
+    }
   }
 }

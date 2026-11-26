@@ -16,5 +16,1138 @@
     "G036_scene_001": {
       "assertions": []
     }
+  },
+  "audio": {
+    "G036_sfx_001": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G036_salt_flat_timetrial",
+          "task_id": "G036_sfx_001",
+          "asset_name": "countdown_beep",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Clean electronic countdown beep, rising pitch per second, short decay",
+          "duration_sec": 0.4,
+          "sample_rate": 48000,
+          "seed": 5361,
+          "trigger": "倒计时 3-2-1 每秒一声（F05）",
+          "required_by_spec": true,
+          "spec_ref": "F05,F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《盐湖试车场的计时挑战》｜检查点计时机制输入规范\n\n```yaml\ncase_id: G036\nbase_case_id: G036\ntitle: 盐湖试车场的计时挑战\ncategory: Racing / Vehicle\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1036\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《盐湖试车场的计时挑战》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 yyy 反馈——补世界设定、镜头输入、路面差异、演出反馈、过场视频与正向范围清单；新增双路线分岔、分段计时门、总时限与盐晶酥松带抓地差异）；运行引擎：**Three.js（WebGL）**——选择理由：单机车辆、检查点与计时门为轻量场景，Three.js 场景图＋自研车辆物理与粒子（尘土/尾迹）实现成本可控，浏览器即开即玩交付；目标构建：桌面浏览器静态 Web 页面（Chrome/Edge 最新稳定版）；参考分辨率 1920×1080（1280×720 为最低可用口径）；摄像机：第三人称追车镜头；输入：键盘与鼠标；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：本作全部名称、赛道、车辆、文案与美术必须原创，不使用任何商业作品的名称、车辆、赛道或品牌标识。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 赛道实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：3D 单车两圈检查点计时赛（含 1 处双路线分岔）。\n- S02 核心循环一句话：驾驶 → 过计时门 → 计时累积 → 选择路面与路线 → 完成圈数 → 结算最好成绩。\n- S03 流程：开始界面 → C01 开场 → 倒计时起步 → 两圈行驶（过 8 检查点/圈＋分岔选择）→ 终点结算（评级/最好成绩）→ 重开。\n- S04 最低完整流程：开始界面、可操作驾驶、检查点计时门序列、终点结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：R 复位回最近检查点（计时继续、+3 秒罚时）；总时限超时判负结算；结算界面一键重开；Esc 暂停（计时暂停）。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：主菜单 → 倒计时起步 → 两圈行驶（每圈 8 座分段计时门＋1 处分岔）→ 终点结算 → 重开/返回菜单；任意行驶阶段可 Esc 暂停。每阶段六要素如下（引用本 spec §3–§7 对应规则）：\n\n- S06 主菜单\n  - input：系统启动，玩家确认进入\n  - precondition：程序启动完成（C01 可在首次入局前播放）\n  - state_change：显示主菜单（开始/退出）\n  - feedback：主菜单界面（F10）\n  - next_actions：点击「开始」→ S07\n  - outcome：无状态副作用\n- S07 倒计时起步\n  - input：玩家点击「开始」后系统进入；油门可预压\n  - precondition：主菜单已完成、C01 播完或跳过\n  - state_change：3-2-1 倒计时（3 秒）；倒计时内车辆锁定（G04/I02）\n  - feedback：倒计时数字＋发车音效（F05/F06）\n  - next_actions：倒计时归零 → S08\n  - outcome：起步瞬间开始计时（G01/G02）\n- S08 两圈行驶（主玩法阶段）\n  - input：玩家驾驶（按 §4 I01 键位）\n  - precondition：起步完成\n  - state_change：按序过 8 座分段计时门（每圈）；第 4–5 门之间选择主线/外线（M04）；出界、漏点、复位按 M01–M03 结算\n  - feedback：分段计时门横幅、胎痕/尘土/风（F04/F05），HUD 见 I06\n  - next_actions：完成两圈 → S09；总时限 720 秒耗尽 → S10；Esc → S11\n  - outcome：计时累积、复位罚时计入总成绩（G02）\n- S09 终点结算\n  - input：系统结算（跨过终点计时门）\n  - precondition：两圈全部按序完成（V01）\n  - state_change：显示两圈分段、总成绩、评级（金 480/银 540/铜 600）、复位次数\n  - feedback：C03 冲线结算视频＋结算面板（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V01 判定并结算\n- S10 超时判负结算\n  - input：系统结算（总时限 720 秒耗尽，V02）\n  - precondition：S08 中未完成两圈且超时\n  - state_change：显示超时判负结算（当前圈数/门数/已用时间）\n  - feedback：超时警报＋C03 失败意象（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V02 判负结算\n- S11 暂停\n  - input：玩家按 Esc\n  - precondition：处于 S07–S10 之外的全部行驶/倒计时阶段\n  - state_change：冻结车辆与计时（G04）\n  - feedback：暂停菜单（继续/重开/返回菜单）\n  - next_actions：Esc/继续 → 返回原阶段；重开 → S06\n  - outcome：恢复后计时从冻结点连续累计，无漂移\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：时间精确到毫秒；分段/单圈/总成绩均为累计计时；复位次数为整数；车速 km/h、距离米。\n- G02 计时公式与 oracle（本包冻结值）：单圈用时＝该圈末计时门时间戳 − 该圈首计时门时间戳；总成绩＝两圈之和＋Σ复位罚时（每次 **+3 秒**）。独立 oracle 数例：8 个分段各 30.000 秒 → 单圈 240.000 秒；两圈各 240 秒＋1 次复位 → 总成绩 **483.000 秒**。评级带宽（冻结）：金牌 ≤480 秒、银牌 ≤540 秒、铜牌 ≤600 秒，超铜牌仅显示完赛无评级。\n- G03 车辆与路面参数（本包冻结值）：极速 200 km/h；常规加速 0–100 km/h 用时 4 秒；转向无漂移辅助，转向灵敏度＝基准×(1−0.5×v/200)（v 为 km/h，即 100 km/h 时 75%、200 km/h 时 50%）；主路面（压实盐板）抓地系数 1.0，100 km/h 制动距离 40 米；盐晶酥松带抓地系数 0.75、制动距离 ×1.3（100 km/h → 52 米）、急转打滑风险显著提高。赛道全长约 4 千米，每圈 8 座分段计时门（起点拱门兼主计时门）。\n- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。\n- G05 超时（本包冻结值）：全程总时限 **720 秒**（自起步倒计时归零起算，暂停不计入）；超时 → 超时事件 → 判负结算（V02）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：W/S＝油门/刹车；A/D＝转向；R＝复位回最近已过计时门；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：暂停/结算期间驾驶输入无效；起步倒计时 3 秒内油门可预压但车辆锁定；被拒输入不产生状态变化。\n- I03 鼠标仅用于菜单与镜头辅助（可选），非冻结需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算。\n- I05 焦点与点击穿透规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（G04）。\n- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。\n- I07 输入延迟目标：按键到画面可见反馈 ≤100 毫秒（桌面 P95，每类输入 ≥30 次采样）。\n\n## 5. 赛道与内容清单 [L01–L04]\n\n- L01 生成对象：原创试验车 1、分段计时门拱门 8（兼起终点主计时门）、遥测站 1、盐晶岩地标 2、风向袋 3；装饰非冻结需求。\n- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/结算面板）与交互物（计时门触发体、出界判定体、复位点）逐类存在且运行时可进入；计时门判定体由引擎触发器构建，装饰拱门模型不得替代判定体；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的表现层（装饰造型、配色、粒子参数、音色）为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。音效为冻结需求（F06 清单逐条交付，缺失按 FAIL 计）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid\n- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）\n- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）\n- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。\n- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。\n- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。\n- V04 persistent_state：无（重开全量清空；最好成绩仅本次会话内显示，不要求跨会话保存）。\n- V04 软锁与不可达处理：不设永久软锁——关键目标均可通过正常操作达成，或触发 V02 失败路径进入结算；结算界面重开为最终恢复出路；判定不可达时按 V02 失败语义结算而非无限等待。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（计时/门序/复位计数）局内保留、重开清空；跨局状态无（S 档：重开全量清空）。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录；盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。\n- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。\n- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。\n- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）；跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。\n- W05 叙事来源：试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。\n- W06 视觉风格与色彩材质：高对比白盐工业风；主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C；材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。\n- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底；音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）；混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。\n- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束；叙事只做包装不改数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°；镜头平滑跟随（位置阻尼 0.12）；C 键复位镜头到正后方；镜头不出赛道边界；1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。\n- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）；碰撞/出界 0.3 秒中幅震动；复位瞬间镜头快速回正；设置里可关闭震动（F09）。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸；风为纯表现层，不参与车辆物理判定（G04）。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |\n\n- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。\n- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨；尘雾与尾迹不得遮挡 HUD 与前方计时门；非结算单个全屏遮挡 ≤0.5 秒。\n- F08 音画同步：过门音与门灯带闪青同帧；倒计时音与数字同帧；冲线音与终点横幅同帧。\n- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）；暂停/结算取消未结束的震动；设置可关闭（镜头震动开/关）。\n- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数；Enter 重开）；关键状态图标＋文字并用；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 测速周开幕（Opening，6 秒，1280×720@24fps）\n  - 触发时机：首次由标题点击「开始」后、倒计时起步之前，每局一次\n  - 内容与角色场景：白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门\n  - 资产对应：试验车、计时门、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入倒计时起步；自然播完 → 进入倒计时起步\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 高速赛段（Event，5 秒，1280×720@24fps）\n  - 触发时机：本局首次速度达到 ≥180 km/h 时插入一次（不打断操作，画中画或瞬时可跳），每局最多一次\n  - 内容与角色场景：追车镜头贴地掠过盐板、尾迹与尘雾拉长、外线酥松带反光一闪\n  - 资产对应：试验车与赛道材质同源\n  - 可跳过：Esc/Enter 跳过 → 立即返回行驶视角；自然播完 → 自动返回\n  - 状态一致：不打断驾驶控制权；播放期间游戏计时正常推进（不暂停、不加成）\n- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以驾驶试验车完成两圈计时挑战（M01）、在分岔口选择主/外线并承担抓地差异（M04）、出界后复位恢复有效性（M02/M03）、在 720 秒内冲击金标评级（V01）。\n- N02 流程与界面能力：主菜单、倒计时起步、两圈行驶、终点结算、超时判负、暂停（含失焦自动暂停）、一键重开全部具备真实入口。\n- N03 演出能力：C01–C03 视频、F04 常驻环境、F05 事件反馈表全部行、F06 音效 11 条、F09 震动与设置开关。\n- N04 输入范围：键盘为完整输入方式；鼠标为菜单与可选镜头辅助；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：F06 冻结音效清单（9 one_shot＋2 环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）；R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。\n- A02 绑定表（文件 → 对象）：\n\n| 参考图 | 绑定对象 | 用途 |\n|---|---|---|\n| images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |\n| images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |\n| images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |\n\n参考图为程序化概念草图（1024×1024，无文字；生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [runtime_complexity]\n  rationale: \"单主闭环（驾驶→过门→计时→两圈→结算）；计时门/出界/复位/路面差异均在驾驶计时系统内部，无跨系统因果链；分岔为局部路线取舍不升档（对照 difficulty_design §3.3）；车辆与计时器并发（B1）；新增总时限/分岔/路面差异为局内规则与表现，不升档\"\n  downgrade_boundary: \"去掉出界判定、罚时与分岔后仍为 S（更简）\"\n  upgrade_boundary: \"若轮胎损耗跨圈保留并改变后续圈操控，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：salt_flat_prototype_car, checkpoint_gate_kit, telemetry_station, salt_crystal_rock, wind_sock_set, maintenance_shed。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：drift_recovery。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Clean electronic countdown beep, rising pitch per second, short decay",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G036_sfx_002": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G036_salt_flat_timetrial",
+          "task_id": "G036_sfx_002",
+          "asset_name": "start_release",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Race start release chime with a low engine-friendly tone and short swell",
+          "duration_sec": 0.8,
+          "sample_rate": 48000,
+          "seed": 5362,
+          "trigger": "起步瞬间（GO 信号）",
+          "required_by_spec": true,
+          "spec_ref": "F05,F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《盐湖试车场的计时挑战》｜检查点计时机制输入规范\n\n```yaml\ncase_id: G036\nbase_case_id: G036\ntitle: 盐湖试车场的计时挑战\ncategory: Racing / Vehicle\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1036\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《盐湖试车场的计时挑战》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 yyy 反馈——补世界设定、镜头输入、路面差异、演出反馈、过场视频与正向范围清单；新增双路线分岔、分段计时门、总时限与盐晶酥松带抓地差异）；运行引擎：**Three.js（WebGL）**——选择理由：单机车辆、检查点与计时门为轻量场景，Three.js 场景图＋自研车辆物理与粒子（尘土/尾迹）实现成本可控，浏览器即开即玩交付；目标构建：桌面浏览器静态 Web 页面（Chrome/Edge 最新稳定版）；参考分辨率 1920×1080（1280×720 为最低可用口径）；摄像机：第三人称追车镜头；输入：键盘与鼠标；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：本作全部名称、赛道、车辆、文案与美术必须原创，不使用任何商业作品的名称、车辆、赛道或品牌标识。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 赛道实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：3D 单车两圈检查点计时赛（含 1 处双路线分岔）。\n- S02 核心循环一句话：驾驶 → 过计时门 → 计时累积 → 选择路面与路线 → 完成圈数 → 结算最好成绩。\n- S03 流程：开始界面 → C01 开场 → 倒计时起步 → 两圈行驶（过 8 检查点/圈＋分岔选择）→ 终点结算（评级/最好成绩）→ 重开。\n- S04 最低完整流程：开始界面、可操作驾驶、检查点计时门序列、终点结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：R 复位回最近检查点（计时继续、+3 秒罚时）；总时限超时判负结算；结算界面一键重开；Esc 暂停（计时暂停）。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：主菜单 → 倒计时起步 → 两圈行驶（每圈 8 座分段计时门＋1 处分岔）→ 终点结算 → 重开/返回菜单；任意行驶阶段可 Esc 暂停。每阶段六要素如下（引用本 spec §3–§7 对应规则）：\n\n- S06 主菜单\n  - input：系统启动，玩家确认进入\n  - precondition：程序启动完成（C01 可在首次入局前播放）\n  - state_change：显示主菜单（开始/退出）\n  - feedback：主菜单界面（F10）\n  - next_actions：点击「开始」→ S07\n  - outcome：无状态副作用\n- S07 倒计时起步\n  - input：玩家点击「开始」后系统进入；油门可预压\n  - precondition：主菜单已完成、C01 播完或跳过\n  - state_change：3-2-1 倒计时（3 秒）；倒计时内车辆锁定（G04/I02）\n  - feedback：倒计时数字＋发车音效（F05/F06）\n  - next_actions：倒计时归零 → S08\n  - outcome：起步瞬间开始计时（G01/G02）\n- S08 两圈行驶（主玩法阶段）\n  - input：玩家驾驶（按 §4 I01 键位）\n  - precondition：起步完成\n  - state_change：按序过 8 座分段计时门（每圈）；第 4–5 门之间选择主线/外线（M04）；出界、漏点、复位按 M01–M03 结算\n  - feedback：分段计时门横幅、胎痕/尘土/风（F04/F05），HUD 见 I06\n  - next_actions：完成两圈 → S09；总时限 720 秒耗尽 → S10；Esc → S11\n  - outcome：计时累积、复位罚时计入总成绩（G02）\n- S09 终点结算\n  - input：系统结算（跨过终点计时门）\n  - precondition：两圈全部按序完成（V01）\n  - state_change：显示两圈分段、总成绩、评级（金 480/银 540/铜 600）、复位次数\n  - feedback：C03 冲线结算视频＋结算面板（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V01 判定并结算\n- S10 超时判负结算\n  - input：系统结算（总时限 720 秒耗尽，V02）\n  - precondition：S08 中未完成两圈且超时\n  - state_change：显示超时判负结算（当前圈数/门数/已用时间）\n  - feedback：超时警报＋C03 失败意象（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V02 判负结算\n- S11 暂停\n  - input：玩家按 Esc\n  - precondition：处于 S07–S10 之外的全部行驶/倒计时阶段\n  - state_change：冻结车辆与计时（G04）\n  - feedback：暂停菜单（继续/重开/返回菜单）\n  - next_actions：Esc/继续 → 返回原阶段；重开 → S06\n  - outcome：恢复后计时从冻结点连续累计，无漂移\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：时间精确到毫秒；分段/单圈/总成绩均为累计计时；复位次数为整数；车速 km/h、距离米。\n- G02 计时公式与 oracle（本包冻结值）：单圈用时＝该圈末计时门时间戳 − 该圈首计时门时间戳；总成绩＝两圈之和＋Σ复位罚时（每次 **+3 秒**）。独立 oracle 数例：8 个分段各 30.000 秒 → 单圈 240.000 秒；两圈各 240 秒＋1 次复位 → 总成绩 **483.000 秒**。评级带宽（冻结）：金牌 ≤480 秒、银牌 ≤540 秒、铜牌 ≤600 秒，超铜牌仅显示完赛无评级。\n- G03 车辆与路面参数（本包冻结值）：极速 200 km/h；常规加速 0–100 km/h 用时 4 秒；转向无漂移辅助，转向灵敏度＝基准×(1−0.5×v/200)（v 为 km/h，即 100 km/h 时 75%、200 km/h 时 50%）；主路面（压实盐板）抓地系数 1.0，100 km/h 制动距离 40 米；盐晶酥松带抓地系数 0.75、制动距离 ×1.3（100 km/h → 52 米）、急转打滑风险显著提高。赛道全长约 4 千米，每圈 8 座分段计时门（起点拱门兼主计时门）。\n- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。\n- G05 超时（本包冻结值）：全程总时限 **720 秒**（自起步倒计时归零起算，暂停不计入）；超时 → 超时事件 → 判负结算（V02）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：W/S＝油门/刹车；A/D＝转向；R＝复位回最近已过计时门；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：暂停/结算期间驾驶输入无效；起步倒计时 3 秒内油门可预压但车辆锁定；被拒输入不产生状态变化。\n- I03 鼠标仅用于菜单与镜头辅助（可选），非冻结需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算。\n- I05 焦点与点击穿透规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（G04）。\n- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。\n- I07 输入延迟目标：按键到画面可见反馈 ≤100 毫秒（桌面 P95，每类输入 ≥30 次采样）。\n\n## 5. 赛道与内容清单 [L01–L04]\n\n- L01 生成对象：原创试验车 1、分段计时门拱门 8（兼起终点主计时门）、遥测站 1、盐晶岩地标 2、风向袋 3；装饰非冻结需求。\n- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/结算面板）与交互物（计时门触发体、出界判定体、复位点）逐类存在且运行时可进入；计时门判定体由引擎触发器构建，装饰拱门模型不得替代判定体；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的表现层（装饰造型、配色、粒子参数、音色）为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。音效为冻结需求（F06 清单逐条交付，缺失按 FAIL 计）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid\n- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）\n- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）\n- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。\n- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。\n- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。\n- V04 persistent_state：无（重开全量清空；最好成绩仅本次会话内显示，不要求跨会话保存）。\n- V04 软锁与不可达处理：不设永久软锁——关键目标均可通过正常操作达成，或触发 V02 失败路径进入结算；结算界面重开为最终恢复出路；判定不可达时按 V02 失败语义结算而非无限等待。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（计时/门序/复位计数）局内保留、重开清空；跨局状态无（S 档：重开全量清空）。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录；盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。\n- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。\n- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。\n- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）；跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。\n- W05 叙事来源：试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。\n- W06 视觉风格与色彩材质：高对比白盐工业风；主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C；材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。\n- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底；音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）；混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。\n- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束；叙事只做包装不改数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°；镜头平滑跟随（位置阻尼 0.12）；C 键复位镜头到正后方；镜头不出赛道边界；1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。\n- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）；碰撞/出界 0.3 秒中幅震动；复位瞬间镜头快速回正；设置里可关闭震动（F09）。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸；风为纯表现层，不参与车辆物理判定（G04）。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |\n\n- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。\n- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨；尘雾与尾迹不得遮挡 HUD 与前方计时门；非结算单个全屏遮挡 ≤0.5 秒。\n- F08 音画同步：过门音与门灯带闪青同帧；倒计时音与数字同帧；冲线音与终点横幅同帧。\n- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）；暂停/结算取消未结束的震动；设置可关闭（镜头震动开/关）。\n- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数；Enter 重开）；关键状态图标＋文字并用；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 测速周开幕（Opening，6 秒，1280×720@24fps）\n  - 触发时机：首次由标题点击「开始」后、倒计时起步之前，每局一次\n  - 内容与角色场景：白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门\n  - 资产对应：试验车、计时门、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入倒计时起步；自然播完 → 进入倒计时起步\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 高速赛段（Event，5 秒，1280×720@24fps）\n  - 触发时机：本局首次速度达到 ≥180 km/h 时插入一次（不打断操作，画中画或瞬时可跳），每局最多一次\n  - 内容与角色场景：追车镜头贴地掠过盐板、尾迹与尘雾拉长、外线酥松带反光一闪\n  - 资产对应：试验车与赛道材质同源\n  - 可跳过：Esc/Enter 跳过 → 立即返回行驶视角；自然播完 → 自动返回\n  - 状态一致：不打断驾驶控制权；播放期间游戏计时正常推进（不暂停、不加成）\n- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以驾驶试验车完成两圈计时挑战（M01）、在分岔口选择主/外线并承担抓地差异（M04）、出界后复位恢复有效性（M02/M03）、在 720 秒内冲击金标评级（V01）。\n- N02 流程与界面能力：主菜单、倒计时起步、两圈行驶、终点结算、超时判负、暂停（含失焦自动暂停）、一键重开全部具备真实入口。\n- N03 演出能力：C01–C03 视频、F04 常驻环境、F05 事件反馈表全部行、F06 音效 11 条、F09 震动与设置开关。\n- N04 输入范围：键盘为完整输入方式；鼠标为菜单与可选镜头辅助；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：F06 冻结音效清单（9 one_shot＋2 环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）；R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。\n- A02 绑定表（文件 → 对象）：\n\n| 参考图 | 绑定对象 | 用途 |\n|---|---|---|\n| images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |\n| images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |\n| images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |\n\n参考图为程序化概念草图（1024×1024，无文字；生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [runtime_complexity]\n  rationale: \"单主闭环（驾驶→过门→计时→两圈→结算）；计时门/出界/复位/路面差异均在驾驶计时系统内部，无跨系统因果链；分岔为局部路线取舍不升档（对照 difficulty_design §3.3）；车辆与计时器并发（B1）；新增总时限/分岔/路面差异为局内规则与表现，不升档\"\n  downgrade_boundary: \"去掉出界判定、罚时与分岔后仍为 S（更简）\"\n  upgrade_boundary: \"若轮胎损耗跨圈保留并改变后续圈操控，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：salt_flat_prototype_car, checkpoint_gate_kit, telemetry_station, salt_crystal_rock, wind_sock_set, maintenance_shed。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：drift_recovery。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Race start release chime with a low engine-friendly tone and short swell",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G036_sfx_003": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G036_salt_flat_timetrial",
+          "task_id": "G036_sfx_003",
+          "asset_name": "gate_pass",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Checkpoint pass confirmation blip with a bright ping tail, telemetry flavor",
+          "duration_sec": 0.5,
+          "sample_rate": 48000,
+          "seed": 5363,
+          "trigger": "按序穿越分段计时门（与门灯带闪青同帧）",
+          "required_by_spec": true,
+          "spec_ref": "F05,F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《盐湖试车场的计时挑战》｜检查点计时机制输入规范\n\n```yaml\ncase_id: G036\nbase_case_id: G036\ntitle: 盐湖试车场的计时挑战\ncategory: Racing / Vehicle\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1036\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《盐湖试车场的计时挑战》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 yyy 反馈——补世界设定、镜头输入、路面差异、演出反馈、过场视频与正向范围清单；新增双路线分岔、分段计时门、总时限与盐晶酥松带抓地差异）；运行引擎：**Three.js（WebGL）**——选择理由：单机车辆、检查点与计时门为轻量场景，Three.js 场景图＋自研车辆物理与粒子（尘土/尾迹）实现成本可控，浏览器即开即玩交付；目标构建：桌面浏览器静态 Web 页面（Chrome/Edge 最新稳定版）；参考分辨率 1920×1080（1280×720 为最低可用口径）；摄像机：第三人称追车镜头；输入：键盘与鼠标；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：本作全部名称、赛道、车辆、文案与美术必须原创，不使用任何商业作品的名称、车辆、赛道或品牌标识。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 赛道实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：3D 单车两圈检查点计时赛（含 1 处双路线分岔）。\n- S02 核心循环一句话：驾驶 → 过计时门 → 计时累积 → 选择路面与路线 → 完成圈数 → 结算最好成绩。\n- S03 流程：开始界面 → C01 开场 → 倒计时起步 → 两圈行驶（过 8 检查点/圈＋分岔选择）→ 终点结算（评级/最好成绩）→ 重开。\n- S04 最低完整流程：开始界面、可操作驾驶、检查点计时门序列、终点结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：R 复位回最近检查点（计时继续、+3 秒罚时）；总时限超时判负结算；结算界面一键重开；Esc 暂停（计时暂停）。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：主菜单 → 倒计时起步 → 两圈行驶（每圈 8 座分段计时门＋1 处分岔）→ 终点结算 → 重开/返回菜单；任意行驶阶段可 Esc 暂停。每阶段六要素如下（引用本 spec §3–§7 对应规则）：\n\n- S06 主菜单\n  - input：系统启动，玩家确认进入\n  - precondition：程序启动完成（C01 可在首次入局前播放）\n  - state_change：显示主菜单（开始/退出）\n  - feedback：主菜单界面（F10）\n  - next_actions：点击「开始」→ S07\n  - outcome：无状态副作用\n- S07 倒计时起步\n  - input：玩家点击「开始」后系统进入；油门可预压\n  - precondition：主菜单已完成、C01 播完或跳过\n  - state_change：3-2-1 倒计时（3 秒）；倒计时内车辆锁定（G04/I02）\n  - feedback：倒计时数字＋发车音效（F05/F06）\n  - next_actions：倒计时归零 → S08\n  - outcome：起步瞬间开始计时（G01/G02）\n- S08 两圈行驶（主玩法阶段）\n  - input：玩家驾驶（按 §4 I01 键位）\n  - precondition：起步完成\n  - state_change：按序过 8 座分段计时门（每圈）；第 4–5 门之间选择主线/外线（M04）；出界、漏点、复位按 M01–M03 结算\n  - feedback：分段计时门横幅、胎痕/尘土/风（F04/F05），HUD 见 I06\n  - next_actions：完成两圈 → S09；总时限 720 秒耗尽 → S10；Esc → S11\n  - outcome：计时累积、复位罚时计入总成绩（G02）\n- S09 终点结算\n  - input：系统结算（跨过终点计时门）\n  - precondition：两圈全部按序完成（V01）\n  - state_change：显示两圈分段、总成绩、评级（金 480/银 540/铜 600）、复位次数\n  - feedback：C03 冲线结算视频＋结算面板（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V01 判定并结算\n- S10 超时判负结算\n  - input：系统结算（总时限 720 秒耗尽，V02）\n  - precondition：S08 中未完成两圈且超时\n  - state_change：显示超时判负结算（当前圈数/门数/已用时间）\n  - feedback：超时警报＋C03 失败意象（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V02 判负结算\n- S11 暂停\n  - input：玩家按 Esc\n  - precondition：处于 S07–S10 之外的全部行驶/倒计时阶段\n  - state_change：冻结车辆与计时（G04）\n  - feedback：暂停菜单（继续/重开/返回菜单）\n  - next_actions：Esc/继续 → 返回原阶段；重开 → S06\n  - outcome：恢复后计时从冻结点连续累计，无漂移\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：时间精确到毫秒；分段/单圈/总成绩均为累计计时；复位次数为整数；车速 km/h、距离米。\n- G02 计时公式与 oracle（本包冻结值）：单圈用时＝该圈末计时门时间戳 − 该圈首计时门时间戳；总成绩＝两圈之和＋Σ复位罚时（每次 **+3 秒**）。独立 oracle 数例：8 个分段各 30.000 秒 → 单圈 240.000 秒；两圈各 240 秒＋1 次复位 → 总成绩 **483.000 秒**。评级带宽（冻结）：金牌 ≤480 秒、银牌 ≤540 秒、铜牌 ≤600 秒，超铜牌仅显示完赛无评级。\n- G03 车辆与路面参数（本包冻结值）：极速 200 km/h；常规加速 0–100 km/h 用时 4 秒；转向无漂移辅助，转向灵敏度＝基准×(1−0.5×v/200)（v 为 km/h，即 100 km/h 时 75%、200 km/h 时 50%）；主路面（压实盐板）抓地系数 1.0，100 km/h 制动距离 40 米；盐晶酥松带抓地系数 0.75、制动距离 ×1.3（100 km/h → 52 米）、急转打滑风险显著提高。赛道全长约 4 千米，每圈 8 座分段计时门（起点拱门兼主计时门）。\n- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。\n- G05 超时（本包冻结值）：全程总时限 **720 秒**（自起步倒计时归零起算，暂停不计入）；超时 → 超时事件 → 判负结算（V02）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：W/S＝油门/刹车；A/D＝转向；R＝复位回最近已过计时门；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：暂停/结算期间驾驶输入无效；起步倒计时 3 秒内油门可预压但车辆锁定；被拒输入不产生状态变化。\n- I03 鼠标仅用于菜单与镜头辅助（可选），非冻结需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算。\n- I05 焦点与点击穿透规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（G04）。\n- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。\n- I07 输入延迟目标：按键到画面可见反馈 ≤100 毫秒（桌面 P95，每类输入 ≥30 次采样）。\n\n## 5. 赛道与内容清单 [L01–L04]\n\n- L01 生成对象：原创试验车 1、分段计时门拱门 8（兼起终点主计时门）、遥测站 1、盐晶岩地标 2、风向袋 3；装饰非冻结需求。\n- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/结算面板）与交互物（计时门触发体、出界判定体、复位点）逐类存在且运行时可进入；计时门判定体由引擎触发器构建，装饰拱门模型不得替代判定体；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的表现层（装饰造型、配色、粒子参数、音色）为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。音效为冻结需求（F06 清单逐条交付，缺失按 FAIL 计）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid\n- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）\n- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）\n- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。\n- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。\n- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。\n- V04 persistent_state：无（重开全量清空；最好成绩仅本次会话内显示，不要求跨会话保存）。\n- V04 软锁与不可达处理：不设永久软锁——关键目标均可通过正常操作达成，或触发 V02 失败路径进入结算；结算界面重开为最终恢复出路；判定不可达时按 V02 失败语义结算而非无限等待。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（计时/门序/复位计数）局内保留、重开清空；跨局状态无（S 档：重开全量清空）。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录；盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。\n- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。\n- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。\n- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）；跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。\n- W05 叙事来源：试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。\n- W06 视觉风格与色彩材质：高对比白盐工业风；主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C；材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。\n- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底；音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）；混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。\n- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束；叙事只做包装不改数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°；镜头平滑跟随（位置阻尼 0.12）；C 键复位镜头到正后方；镜头不出赛道边界；1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。\n- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）；碰撞/出界 0.3 秒中幅震动；复位瞬间镜头快速回正；设置里可关闭震动（F09）。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸；风为纯表现层，不参与车辆物理判定（G04）。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |\n\n- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。\n- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨；尘雾与尾迹不得遮挡 HUD 与前方计时门；非结算单个全屏遮挡 ≤0.5 秒。\n- F08 音画同步：过门音与门灯带闪青同帧；倒计时音与数字同帧；冲线音与终点横幅同帧。\n- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）；暂停/结算取消未结束的震动；设置可关闭（镜头震动开/关）。\n- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数；Enter 重开）；关键状态图标＋文字并用；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 测速周开幕（Opening，6 秒，1280×720@24fps）\n  - 触发时机：首次由标题点击「开始」后、倒计时起步之前，每局一次\n  - 内容与角色场景：白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门\n  - 资产对应：试验车、计时门、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入倒计时起步；自然播完 → 进入倒计时起步\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 高速赛段（Event，5 秒，1280×720@24fps）\n  - 触发时机：本局首次速度达到 ≥180 km/h 时插入一次（不打断操作，画中画或瞬时可跳），每局最多一次\n  - 内容与角色场景：追车镜头贴地掠过盐板、尾迹与尘雾拉长、外线酥松带反光一闪\n  - 资产对应：试验车与赛道材质同源\n  - 可跳过：Esc/Enter 跳过 → 立即返回行驶视角；自然播完 → 自动返回\n  - 状态一致：不打断驾驶控制权；播放期间游戏计时正常推进（不暂停、不加成）\n- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以驾驶试验车完成两圈计时挑战（M01）、在分岔口选择主/外线并承担抓地差异（M04）、出界后复位恢复有效性（M02/M03）、在 720 秒内冲击金标评级（V01）。\n- N02 流程与界面能力：主菜单、倒计时起步、两圈行驶、终点结算、超时判负、暂停（含失焦自动暂停）、一键重开全部具备真实入口。\n- N03 演出能力：C01–C03 视频、F04 常驻环境、F05 事件反馈表全部行、F06 音效 11 条、F09 震动与设置开关。\n- N04 输入范围：键盘为完整输入方式；鼠标为菜单与可选镜头辅助；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：F06 冻结音效清单（9 one_shot＋2 环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）；R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。\n- A02 绑定表（文件 → 对象）：\n\n| 参考图 | 绑定对象 | 用途 |\n|---|---|---|\n| images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |\n| images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |\n| images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |\n\n参考图为程序化概念草图（1024×1024，无文字；生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [runtime_complexity]\n  rationale: \"单主闭环（驾驶→过门→计时→两圈→结算）；计时门/出界/复位/路面差异均在驾驶计时系统内部，无跨系统因果链；分岔为局部路线取舍不升档（对照 difficulty_design §3.3）；车辆与计时器并发（B1）；新增总时限/分岔/路面差异为局内规则与表现，不升档\"\n  downgrade_boundary: \"去掉出界判定、罚时与分岔后仍为 S（更简）\"\n  upgrade_boundary: \"若轮胎损耗跨圈保留并改变后续圈操控，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：salt_flat_prototype_car, checkpoint_gate_kit, telemetry_station, salt_crystal_rock, wind_sock_set, maintenance_shed。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：drift_recovery。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Checkpoint pass confirmation blip with a bright ping tail, telemetry flavor",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G036_sfx_004": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G036_salt_flat_timetrial",
+          "task_id": "G036_sfx_004",
+          "asset_name": "gate_miss",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Missed-gate warning tone, two quick descending notes with slight distortion",
+          "duration_sec": 0.6,
+          "sample_rate": 48000,
+          "seed": 5364,
+          "trigger": "越序/跳越穿门（漏门警告）",
+          "required_by_spec": true,
+          "spec_ref": "F05,F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《盐湖试车场的计时挑战》｜检查点计时机制输入规范\n\n```yaml\ncase_id: G036\nbase_case_id: G036\ntitle: 盐湖试车场的计时挑战\ncategory: Racing / Vehicle\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1036\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《盐湖试车场的计时挑战》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 yyy 反馈——补世界设定、镜头输入、路面差异、演出反馈、过场视频与正向范围清单；新增双路线分岔、分段计时门、总时限与盐晶酥松带抓地差异）；运行引擎：**Three.js（WebGL）**——选择理由：单机车辆、检查点与计时门为轻量场景，Three.js 场景图＋自研车辆物理与粒子（尘土/尾迹）实现成本可控，浏览器即开即玩交付；目标构建：桌面浏览器静态 Web 页面（Chrome/Edge 最新稳定版）；参考分辨率 1920×1080（1280×720 为最低可用口径）；摄像机：第三人称追车镜头；输入：键盘与鼠标；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：本作全部名称、赛道、车辆、文案与美术必须原创，不使用任何商业作品的名称、车辆、赛道或品牌标识。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 赛道实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：3D 单车两圈检查点计时赛（含 1 处双路线分岔）。\n- S02 核心循环一句话：驾驶 → 过计时门 → 计时累积 → 选择路面与路线 → 完成圈数 → 结算最好成绩。\n- S03 流程：开始界面 → C01 开场 → 倒计时起步 → 两圈行驶（过 8 检查点/圈＋分岔选择）→ 终点结算（评级/最好成绩）→ 重开。\n- S04 最低完整流程：开始界面、可操作驾驶、检查点计时门序列、终点结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：R 复位回最近检查点（计时继续、+3 秒罚时）；总时限超时判负结算；结算界面一键重开；Esc 暂停（计时暂停）。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：主菜单 → 倒计时起步 → 两圈行驶（每圈 8 座分段计时门＋1 处分岔）→ 终点结算 → 重开/返回菜单；任意行驶阶段可 Esc 暂停。每阶段六要素如下（引用本 spec §3–§7 对应规则）：\n\n- S06 主菜单\n  - input：系统启动，玩家确认进入\n  - precondition：程序启动完成（C01 可在首次入局前播放）\n  - state_change：显示主菜单（开始/退出）\n  - feedback：主菜单界面（F10）\n  - next_actions：点击「开始」→ S07\n  - outcome：无状态副作用\n- S07 倒计时起步\n  - input：玩家点击「开始」后系统进入；油门可预压\n  - precondition：主菜单已完成、C01 播完或跳过\n  - state_change：3-2-1 倒计时（3 秒）；倒计时内车辆锁定（G04/I02）\n  - feedback：倒计时数字＋发车音效（F05/F06）\n  - next_actions：倒计时归零 → S08\n  - outcome：起步瞬间开始计时（G01/G02）\n- S08 两圈行驶（主玩法阶段）\n  - input：玩家驾驶（按 §4 I01 键位）\n  - precondition：起步完成\n  - state_change：按序过 8 座分段计时门（每圈）；第 4–5 门之间选择主线/外线（M04）；出界、漏点、复位按 M01–M03 结算\n  - feedback：分段计时门横幅、胎痕/尘土/风（F04/F05），HUD 见 I06\n  - next_actions：完成两圈 → S09；总时限 720 秒耗尽 → S10；Esc → S11\n  - outcome：计时累积、复位罚时计入总成绩（G02）\n- S09 终点结算\n  - input：系统结算（跨过终点计时门）\n  - precondition：两圈全部按序完成（V01）\n  - state_change：显示两圈分段、总成绩、评级（金 480/银 540/铜 600）、复位次数\n  - feedback：C03 冲线结算视频＋结算面板（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V01 判定并结算\n- S10 超时判负结算\n  - input：系统结算（总时限 720 秒耗尽，V02）\n  - precondition：S08 中未完成两圈且超时\n  - state_change：显示超时判负结算（当前圈数/门数/已用时间）\n  - feedback：超时警报＋C03 失败意象（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V02 判负结算\n- S11 暂停\n  - input：玩家按 Esc\n  - precondition：处于 S07–S10 之外的全部行驶/倒计时阶段\n  - state_change：冻结车辆与计时（G04）\n  - feedback：暂停菜单（继续/重开/返回菜单）\n  - next_actions：Esc/继续 → 返回原阶段；重开 → S06\n  - outcome：恢复后计时从冻结点连续累计，无漂移\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：时间精确到毫秒；分段/单圈/总成绩均为累计计时；复位次数为整数；车速 km/h、距离米。\n- G02 计时公式与 oracle（本包冻结值）：单圈用时＝该圈末计时门时间戳 − 该圈首计时门时间戳；总成绩＝两圈之和＋Σ复位罚时（每次 **+3 秒**）。独立 oracle 数例：8 个分段各 30.000 秒 → 单圈 240.000 秒；两圈各 240 秒＋1 次复位 → 总成绩 **483.000 秒**。评级带宽（冻结）：金牌 ≤480 秒、银牌 ≤540 秒、铜牌 ≤600 秒，超铜牌仅显示完赛无评级。\n- G03 车辆与路面参数（本包冻结值）：极速 200 km/h；常规加速 0–100 km/h 用时 4 秒；转向无漂移辅助，转向灵敏度＝基准×(1−0.5×v/200)（v 为 km/h，即 100 km/h 时 75%、200 km/h 时 50%）；主路面（压实盐板）抓地系数 1.0，100 km/h 制动距离 40 米；盐晶酥松带抓地系数 0.75、制动距离 ×1.3（100 km/h → 52 米）、急转打滑风险显著提高。赛道全长约 4 千米，每圈 8 座分段计时门（起点拱门兼主计时门）。\n- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。\n- G05 超时（本包冻结值）：全程总时限 **720 秒**（自起步倒计时归零起算，暂停不计入）；超时 → 超时事件 → 判负结算（V02）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：W/S＝油门/刹车；A/D＝转向；R＝复位回最近已过计时门；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：暂停/结算期间驾驶输入无效；起步倒计时 3 秒内油门可预压但车辆锁定；被拒输入不产生状态变化。\n- I03 鼠标仅用于菜单与镜头辅助（可选），非冻结需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算。\n- I05 焦点与点击穿透规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（G04）。\n- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。\n- I07 输入延迟目标：按键到画面可见反馈 ≤100 毫秒（桌面 P95，每类输入 ≥30 次采样）。\n\n## 5. 赛道与内容清单 [L01–L04]\n\n- L01 生成对象：原创试验车 1、分段计时门拱门 8（兼起终点主计时门）、遥测站 1、盐晶岩地标 2、风向袋 3；装饰非冻结需求。\n- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/结算面板）与交互物（计时门触发体、出界判定体、复位点）逐类存在且运行时可进入；计时门判定体由引擎触发器构建，装饰拱门模型不得替代判定体；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的表现层（装饰造型、配色、粒子参数、音色）为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。音效为冻结需求（F06 清单逐条交付，缺失按 FAIL 计）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid\n- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）\n- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）\n- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。\n- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。\n- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。\n- V04 persistent_state：无（重开全量清空；最好成绩仅本次会话内显示，不要求跨会话保存）。\n- V04 软锁与不可达处理：不设永久软锁——关键目标均可通过正常操作达成，或触发 V02 失败路径进入结算；结算界面重开为最终恢复出路；判定不可达时按 V02 失败语义结算而非无限等待。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（计时/门序/复位计数）局内保留、重开清空；跨局状态无（S 档：重开全量清空）。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录；盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。\n- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。\n- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。\n- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）；跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。\n- W05 叙事来源：试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。\n- W06 视觉风格与色彩材质：高对比白盐工业风；主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C；材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。\n- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底；音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）；混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。\n- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束；叙事只做包装不改数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°；镜头平滑跟随（位置阻尼 0.12）；C 键复位镜头到正后方；镜头不出赛道边界；1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。\n- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）；碰撞/出界 0.3 秒中幅震动；复位瞬间镜头快速回正；设置里可关闭震动（F09）。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸；风为纯表现层，不参与车辆物理判定（G04）。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |\n\n- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。\n- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨；尘雾与尾迹不得遮挡 HUD 与前方计时门；非结算单个全屏遮挡 ≤0.5 秒。\n- F08 音画同步：过门音与门灯带闪青同帧；倒计时音与数字同帧；冲线音与终点横幅同帧。\n- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）；暂停/结算取消未结束的震动；设置可关闭（镜头震动开/关）。\n- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数；Enter 重开）；关键状态图标＋文字并用；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 测速周开幕（Opening，6 秒，1280×720@24fps）\n  - 触发时机：首次由标题点击「开始」后、倒计时起步之前，每局一次\n  - 内容与角色场景：白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门\n  - 资产对应：试验车、计时门、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入倒计时起步；自然播完 → 进入倒计时起步\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 高速赛段（Event，5 秒，1280×720@24fps）\n  - 触发时机：本局首次速度达到 ≥180 km/h 时插入一次（不打断操作，画中画或瞬时可跳），每局最多一次\n  - 内容与角色场景：追车镜头贴地掠过盐板、尾迹与尘雾拉长、外线酥松带反光一闪\n  - 资产对应：试验车与赛道材质同源\n  - 可跳过：Esc/Enter 跳过 → 立即返回行驶视角；自然播完 → 自动返回\n  - 状态一致：不打断驾驶控制权；播放期间游戏计时正常推进（不暂停、不加成）\n- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以驾驶试验车完成两圈计时挑战（M01）、在分岔口选择主/外线并承担抓地差异（M04）、出界后复位恢复有效性（M02/M03）、在 720 秒内冲击金标评级（V01）。\n- N02 流程与界面能力：主菜单、倒计时起步、两圈行驶、终点结算、超时判负、暂停（含失焦自动暂停）、一键重开全部具备真实入口。\n- N03 演出能力：C01–C03 视频、F04 常驻环境、F05 事件反馈表全部行、F06 音效 11 条、F09 震动与设置开关。\n- N04 输入范围：键盘为完整输入方式；鼠标为菜单与可选镜头辅助；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：F06 冻结音效清单（9 one_shot＋2 环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）；R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。\n- A02 绑定表（文件 → 对象）：\n\n| 参考图 | 绑定对象 | 用途 |\n|---|---|---|\n| images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |\n| images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |\n| images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |\n\n参考图为程序化概念草图（1024×1024，无文字；生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [runtime_complexity]\n  rationale: \"单主闭环（驾驶→过门→计时→两圈→结算）；计时门/出界/复位/路面差异均在驾驶计时系统内部，无跨系统因果链；分岔为局部路线取舍不升档（对照 difficulty_design §3.3）；车辆与计时器并发（B1）；新增总时限/分岔/路面差异为局内规则与表现，不升档\"\n  downgrade_boundary: \"去掉出界判定、罚时与分岔后仍为 S（更简）\"\n  upgrade_boundary: \"若轮胎损耗跨圈保留并改变后续圈操控，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：salt_flat_prototype_car, checkpoint_gate_kit, telemetry_station, salt_crystal_rock, wind_sock_set, maintenance_shed。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：drift_recovery。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Missed-gate warning tone, two quick descending notes with slight distortion",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G036_sfx_005": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G036_salt_flat_timetrial",
+          "task_id": "G036_sfx_005",
+          "asset_name": "offroad_rumble",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Loose salt crust rumble with granular scrape and low thud, vehicle leaving track",
+          "duration_sec": 1.2,
+          "sample_rate": 48000,
+          "seed": 5365,
+          "trigger": "车辆出界进入判定区（与去饱和同帧）",
+          "required_by_spec": true,
+          "spec_ref": "F05,F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《盐湖试车场的计时挑战》｜检查点计时机制输入规范\n\n```yaml\ncase_id: G036\nbase_case_id: G036\ntitle: 盐湖试车场的计时挑战\ncategory: Racing / Vehicle\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1036\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《盐湖试车场的计时挑战》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 yyy 反馈——补世界设定、镜头输入、路面差异、演出反馈、过场视频与正向范围清单；新增双路线分岔、分段计时门、总时限与盐晶酥松带抓地差异）；运行引擎：**Three.js（WebGL）**——选择理由：单机车辆、检查点与计时门为轻量场景，Three.js 场景图＋自研车辆物理与粒子（尘土/尾迹）实现成本可控，浏览器即开即玩交付；目标构建：桌面浏览器静态 Web 页面（Chrome/Edge 最新稳定版）；参考分辨率 1920×1080（1280×720 为最低可用口径）；摄像机：第三人称追车镜头；输入：键盘与鼠标；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：本作全部名称、赛道、车辆、文案与美术必须原创，不使用任何商业作品的名称、车辆、赛道或品牌标识。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 赛道实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：3D 单车两圈检查点计时赛（含 1 处双路线分岔）。\n- S02 核心循环一句话：驾驶 → 过计时门 → 计时累积 → 选择路面与路线 → 完成圈数 → 结算最好成绩。\n- S03 流程：开始界面 → C01 开场 → 倒计时起步 → 两圈行驶（过 8 检查点/圈＋分岔选择）→ 终点结算（评级/最好成绩）→ 重开。\n- S04 最低完整流程：开始界面、可操作驾驶、检查点计时门序列、终点结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：R 复位回最近检查点（计时继续、+3 秒罚时）；总时限超时判负结算；结算界面一键重开；Esc 暂停（计时暂停）。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：主菜单 → 倒计时起步 → 两圈行驶（每圈 8 座分段计时门＋1 处分岔）→ 终点结算 → 重开/返回菜单；任意行驶阶段可 Esc 暂停。每阶段六要素如下（引用本 spec §3–§7 对应规则）：\n\n- S06 主菜单\n  - input：系统启动，玩家确认进入\n  - precondition：程序启动完成（C01 可在首次入局前播放）\n  - state_change：显示主菜单（开始/退出）\n  - feedback：主菜单界面（F10）\n  - next_actions：点击「开始」→ S07\n  - outcome：无状态副作用\n- S07 倒计时起步\n  - input：玩家点击「开始」后系统进入；油门可预压\n  - precondition：主菜单已完成、C01 播完或跳过\n  - state_change：3-2-1 倒计时（3 秒）；倒计时内车辆锁定（G04/I02）\n  - feedback：倒计时数字＋发车音效（F05/F06）\n  - next_actions：倒计时归零 → S08\n  - outcome：起步瞬间开始计时（G01/G02）\n- S08 两圈行驶（主玩法阶段）\n  - input：玩家驾驶（按 §4 I01 键位）\n  - precondition：起步完成\n  - state_change：按序过 8 座分段计时门（每圈）；第 4–5 门之间选择主线/外线（M04）；出界、漏点、复位按 M01–M03 结算\n  - feedback：分段计时门横幅、胎痕/尘土/风（F04/F05），HUD 见 I06\n  - next_actions：完成两圈 → S09；总时限 720 秒耗尽 → S10；Esc → S11\n  - outcome：计时累积、复位罚时计入总成绩（G02）\n- S09 终点结算\n  - input：系统结算（跨过终点计时门）\n  - precondition：两圈全部按序完成（V01）\n  - state_change：显示两圈分段、总成绩、评级（金 480/银 540/铜 600）、复位次数\n  - feedback：C03 冲线结算视频＋结算面板（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V01 判定并结算\n- S10 超时判负结算\n  - input：系统结算（总时限 720 秒耗尽，V02）\n  - precondition：S08 中未完成两圈且超时\n  - state_change：显示超时判负结算（当前圈数/门数/已用时间）\n  - feedback：超时警报＋C03 失败意象（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V02 判负结算\n- S11 暂停\n  - input：玩家按 Esc\n  - precondition：处于 S07–S10 之外的全部行驶/倒计时阶段\n  - state_change：冻结车辆与计时（G04）\n  - feedback：暂停菜单（继续/重开/返回菜单）\n  - next_actions：Esc/继续 → 返回原阶段；重开 → S06\n  - outcome：恢复后计时从冻结点连续累计，无漂移\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：时间精确到毫秒；分段/单圈/总成绩均为累计计时；复位次数为整数；车速 km/h、距离米。\n- G02 计时公式与 oracle（本包冻结值）：单圈用时＝该圈末计时门时间戳 − 该圈首计时门时间戳；总成绩＝两圈之和＋Σ复位罚时（每次 **+3 秒**）。独立 oracle 数例：8 个分段各 30.000 秒 → 单圈 240.000 秒；两圈各 240 秒＋1 次复位 → 总成绩 **483.000 秒**。评级带宽（冻结）：金牌 ≤480 秒、银牌 ≤540 秒、铜牌 ≤600 秒，超铜牌仅显示完赛无评级。\n- G03 车辆与路面参数（本包冻结值）：极速 200 km/h；常规加速 0–100 km/h 用时 4 秒；转向无漂移辅助，转向灵敏度＝基准×(1−0.5×v/200)（v 为 km/h，即 100 km/h 时 75%、200 km/h 时 50%）；主路面（压实盐板）抓地系数 1.0，100 km/h 制动距离 40 米；盐晶酥松带抓地系数 0.75、制动距离 ×1.3（100 km/h → 52 米）、急转打滑风险显著提高。赛道全长约 4 千米，每圈 8 座分段计时门（起点拱门兼主计时门）。\n- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。\n- G05 超时（本包冻结值）：全程总时限 **720 秒**（自起步倒计时归零起算，暂停不计入）；超时 → 超时事件 → 判负结算（V02）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：W/S＝油门/刹车；A/D＝转向；R＝复位回最近已过计时门；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：暂停/结算期间驾驶输入无效；起步倒计时 3 秒内油门可预压但车辆锁定；被拒输入不产生状态变化。\n- I03 鼠标仅用于菜单与镜头辅助（可选），非冻结需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算。\n- I05 焦点与点击穿透规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（G04）。\n- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。\n- I07 输入延迟目标：按键到画面可见反馈 ≤100 毫秒（桌面 P95，每类输入 ≥30 次采样）。\n\n## 5. 赛道与内容清单 [L01–L04]\n\n- L01 生成对象：原创试验车 1、分段计时门拱门 8（兼起终点主计时门）、遥测站 1、盐晶岩地标 2、风向袋 3；装饰非冻结需求。\n- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/结算面板）与交互物（计时门触发体、出界判定体、复位点）逐类存在且运行时可进入；计时门判定体由引擎触发器构建，装饰拱门模型不得替代判定体；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的表现层（装饰造型、配色、粒子参数、音色）为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。音效为冻结需求（F06 清单逐条交付，缺失按 FAIL 计）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid\n- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）\n- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）\n- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。\n- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。\n- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。\n- V04 persistent_state：无（重开全量清空；最好成绩仅本次会话内显示，不要求跨会话保存）。\n- V04 软锁与不可达处理：不设永久软锁——关键目标均可通过正常操作达成，或触发 V02 失败路径进入结算；结算界面重开为最终恢复出路；判定不可达时按 V02 失败语义结算而非无限等待。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（计时/门序/复位计数）局内保留、重开清空；跨局状态无（S 档：重开全量清空）。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录；盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。\n- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。\n- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。\n- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）；跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。\n- W05 叙事来源：试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。\n- W06 视觉风格与色彩材质：高对比白盐工业风；主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C；材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。\n- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底；音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）；混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。\n- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束；叙事只做包装不改数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°；镜头平滑跟随（位置阻尼 0.12）；C 键复位镜头到正后方；镜头不出赛道边界；1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。\n- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）；碰撞/出界 0.3 秒中幅震动；复位瞬间镜头快速回正；设置里可关闭震动（F09）。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸；风为纯表现层，不参与车辆物理判定（G04）。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |\n\n- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。\n- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨；尘雾与尾迹不得遮挡 HUD 与前方计时门；非结算单个全屏遮挡 ≤0.5 秒。\n- F08 音画同步：过门音与门灯带闪青同帧；倒计时音与数字同帧；冲线音与终点横幅同帧。\n- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）；暂停/结算取消未结束的震动；设置可关闭（镜头震动开/关）。\n- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数；Enter 重开）；关键状态图标＋文字并用；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 测速周开幕（Opening，6 秒，1280×720@24fps）\n  - 触发时机：首次由标题点击「开始」后、倒计时起步之前，每局一次\n  - 内容与角色场景：白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门\n  - 资产对应：试验车、计时门、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入倒计时起步；自然播完 → 进入倒计时起步\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 高速赛段（Event，5 秒，1280×720@24fps）\n  - 触发时机：本局首次速度达到 ≥180 km/h 时插入一次（不打断操作，画中画或瞬时可跳），每局最多一次\n  - 内容与角色场景：追车镜头贴地掠过盐板、尾迹与尘雾拉长、外线酥松带反光一闪\n  - 资产对应：试验车与赛道材质同源\n  - 可跳过：Esc/Enter 跳过 → 立即返回行驶视角；自然播完 → 自动返回\n  - 状态一致：不打断驾驶控制权；播放期间游戏计时正常推进（不暂停、不加成）\n- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以驾驶试验车完成两圈计时挑战（M01）、在分岔口选择主/外线并承担抓地差异（M04）、出界后复位恢复有效性（M02/M03）、在 720 秒内冲击金标评级（V01）。\n- N02 流程与界面能力：主菜单、倒计时起步、两圈行驶、终点结算、超时判负、暂停（含失焦自动暂停）、一键重开全部具备真实入口。\n- N03 演出能力：C01–C03 视频、F04 常驻环境、F05 事件反馈表全部行、F06 音效 11 条、F09 震动与设置开关。\n- N04 输入范围：键盘为完整输入方式；鼠标为菜单与可选镜头辅助；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：F06 冻结音效清单（9 one_shot＋2 环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）；R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。\n- A02 绑定表（文件 → 对象）：\n\n| 参考图 | 绑定对象 | 用途 |\n|---|---|---|\n| images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |\n| images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |\n| images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |\n\n参考图为程序化概念草图（1024×1024，无文字；生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [runtime_complexity]\n  rationale: \"单主闭环（驾驶→过门→计时→两圈→结算）；计时门/出界/复位/路面差异均在驾驶计时系统内部，无跨系统因果链；分岔为局部路线取舍不升档（对照 difficulty_design §3.3）；车辆与计时器并发（B1）；新增总时限/分岔/路面差异为局内规则与表现，不升档\"\n  downgrade_boundary: \"去掉出界判定、罚时与分岔后仍为 S（更简）\"\n  upgrade_boundary: \"若轮胎损耗跨圈保留并改变后续圈操控，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：salt_flat_prototype_car, checkpoint_gate_kit, telemetry_station, salt_crystal_rock, wind_sock_set, maintenance_shed。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：drift_recovery。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Loose salt crust rumble with granular scrape and low thud, vehicle leaving track",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G036_sfx_006": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G036_salt_flat_timetrial",
+          "task_id": "G036_sfx_006",
+          "asset_name": "reset_woosh",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Fast position reset whoosh with a soft teleport shimmer tail",
+          "duration_sec": 0.7,
+          "sample_rate": 48000,
+          "seed": 5366,
+          "trigger": "R 复位回最近已过计时门",
+          "required_by_spec": true,
+          "spec_ref": "F05,F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《盐湖试车场的计时挑战》｜检查点计时机制输入规范\n\n```yaml\ncase_id: G036\nbase_case_id: G036\ntitle: 盐湖试车场的计时挑战\ncategory: Racing / Vehicle\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1036\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《盐湖试车场的计时挑战》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 yyy 反馈——补世界设定、镜头输入、路面差异、演出反馈、过场视频与正向范围清单；新增双路线分岔、分段计时门、总时限与盐晶酥松带抓地差异）；运行引擎：**Three.js（WebGL）**——选择理由：单机车辆、检查点与计时门为轻量场景，Three.js 场景图＋自研车辆物理与粒子（尘土/尾迹）实现成本可控，浏览器即开即玩交付；目标构建：桌面浏览器静态 Web 页面（Chrome/Edge 最新稳定版）；参考分辨率 1920×1080（1280×720 为最低可用口径）；摄像机：第三人称追车镜头；输入：键盘与鼠标；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：本作全部名称、赛道、车辆、文案与美术必须原创，不使用任何商业作品的名称、车辆、赛道或品牌标识。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 赛道实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：3D 单车两圈检查点计时赛（含 1 处双路线分岔）。\n- S02 核心循环一句话：驾驶 → 过计时门 → 计时累积 → 选择路面与路线 → 完成圈数 → 结算最好成绩。\n- S03 流程：开始界面 → C01 开场 → 倒计时起步 → 两圈行驶（过 8 检查点/圈＋分岔选择）→ 终点结算（评级/最好成绩）→ 重开。\n- S04 最低完整流程：开始界面、可操作驾驶、检查点计时门序列、终点结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：R 复位回最近检查点（计时继续、+3 秒罚时）；总时限超时判负结算；结算界面一键重开；Esc 暂停（计时暂停）。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：主菜单 → 倒计时起步 → 两圈行驶（每圈 8 座分段计时门＋1 处分岔）→ 终点结算 → 重开/返回菜单；任意行驶阶段可 Esc 暂停。每阶段六要素如下（引用本 spec §3–§7 对应规则）：\n\n- S06 主菜单\n  - input：系统启动，玩家确认进入\n  - precondition：程序启动完成（C01 可在首次入局前播放）\n  - state_change：显示主菜单（开始/退出）\n  - feedback：主菜单界面（F10）\n  - next_actions：点击「开始」→ S07\n  - outcome：无状态副作用\n- S07 倒计时起步\n  - input：玩家点击「开始」后系统进入；油门可预压\n  - precondition：主菜单已完成、C01 播完或跳过\n  - state_change：3-2-1 倒计时（3 秒）；倒计时内车辆锁定（G04/I02）\n  - feedback：倒计时数字＋发车音效（F05/F06）\n  - next_actions：倒计时归零 → S08\n  - outcome：起步瞬间开始计时（G01/G02）\n- S08 两圈行驶（主玩法阶段）\n  - input：玩家驾驶（按 §4 I01 键位）\n  - precondition：起步完成\n  - state_change：按序过 8 座分段计时门（每圈）；第 4–5 门之间选择主线/外线（M04）；出界、漏点、复位按 M01–M03 结算\n  - feedback：分段计时门横幅、胎痕/尘土/风（F04/F05），HUD 见 I06\n  - next_actions：完成两圈 → S09；总时限 720 秒耗尽 → S10；Esc → S11\n  - outcome：计时累积、复位罚时计入总成绩（G02）\n- S09 终点结算\n  - input：系统结算（跨过终点计时门）\n  - precondition：两圈全部按序完成（V01）\n  - state_change：显示两圈分段、总成绩、评级（金 480/银 540/铜 600）、复位次数\n  - feedback：C03 冲线结算视频＋结算面板（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V01 判定并结算\n- S10 超时判负结算\n  - input：系统结算（总时限 720 秒耗尽，V02）\n  - precondition：S08 中未完成两圈且超时\n  - state_change：显示超时判负结算（当前圈数/门数/已用时间）\n  - feedback：超时警报＋C03 失败意象（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V02 判负结算\n- S11 暂停\n  - input：玩家按 Esc\n  - precondition：处于 S07–S10 之外的全部行驶/倒计时阶段\n  - state_change：冻结车辆与计时（G04）\n  - feedback：暂停菜单（继续/重开/返回菜单）\n  - next_actions：Esc/继续 → 返回原阶段；重开 → S06\n  - outcome：恢复后计时从冻结点连续累计，无漂移\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：时间精确到毫秒；分段/单圈/总成绩均为累计计时；复位次数为整数；车速 km/h、距离米。\n- G02 计时公式与 oracle（本包冻结值）：单圈用时＝该圈末计时门时间戳 − 该圈首计时门时间戳；总成绩＝两圈之和＋Σ复位罚时（每次 **+3 秒**）。独立 oracle 数例：8 个分段各 30.000 秒 → 单圈 240.000 秒；两圈各 240 秒＋1 次复位 → 总成绩 **483.000 秒**。评级带宽（冻结）：金牌 ≤480 秒、银牌 ≤540 秒、铜牌 ≤600 秒，超铜牌仅显示完赛无评级。\n- G03 车辆与路面参数（本包冻结值）：极速 200 km/h；常规加速 0–100 km/h 用时 4 秒；转向无漂移辅助，转向灵敏度＝基准×(1−0.5×v/200)（v 为 km/h，即 100 km/h 时 75%、200 km/h 时 50%）；主路面（压实盐板）抓地系数 1.0，100 km/h 制动距离 40 米；盐晶酥松带抓地系数 0.75、制动距离 ×1.3（100 km/h → 52 米）、急转打滑风险显著提高。赛道全长约 4 千米，每圈 8 座分段计时门（起点拱门兼主计时门）。\n- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。\n- G05 超时（本包冻结值）：全程总时限 **720 秒**（自起步倒计时归零起算，暂停不计入）；超时 → 超时事件 → 判负结算（V02）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：W/S＝油门/刹车；A/D＝转向；R＝复位回最近已过计时门；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：暂停/结算期间驾驶输入无效；起步倒计时 3 秒内油门可预压但车辆锁定；被拒输入不产生状态变化。\n- I03 鼠标仅用于菜单与镜头辅助（可选），非冻结需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算。\n- I05 焦点与点击穿透规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（G04）。\n- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。\n- I07 输入延迟目标：按键到画面可见反馈 ≤100 毫秒（桌面 P95，每类输入 ≥30 次采样）。\n\n## 5. 赛道与内容清单 [L01–L04]\n\n- L01 生成对象：原创试验车 1、分段计时门拱门 8（兼起终点主计时门）、遥测站 1、盐晶岩地标 2、风向袋 3；装饰非冻结需求。\n- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/结算面板）与交互物（计时门触发体、出界判定体、复位点）逐类存在且运行时可进入；计时门判定体由引擎触发器构建，装饰拱门模型不得替代判定体；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的表现层（装饰造型、配色、粒子参数、音色）为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。音效为冻结需求（F06 清单逐条交付，缺失按 FAIL 计）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid\n- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）\n- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）\n- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。\n- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。\n- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。\n- V04 persistent_state：无（重开全量清空；最好成绩仅本次会话内显示，不要求跨会话保存）。\n- V04 软锁与不可达处理：不设永久软锁——关键目标均可通过正常操作达成，或触发 V02 失败路径进入结算；结算界面重开为最终恢复出路；判定不可达时按 V02 失败语义结算而非无限等待。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（计时/门序/复位计数）局内保留、重开清空；跨局状态无（S 档：重开全量清空）。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录；盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。\n- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。\n- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。\n- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）；跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。\n- W05 叙事来源：试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。\n- W06 视觉风格与色彩材质：高对比白盐工业风；主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C；材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。\n- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底；音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）；混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。\n- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束；叙事只做包装不改数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°；镜头平滑跟随（位置阻尼 0.12）；C 键复位镜头到正后方；镜头不出赛道边界；1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。\n- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）；碰撞/出界 0.3 秒中幅震动；复位瞬间镜头快速回正；设置里可关闭震动（F09）。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸；风为纯表现层，不参与车辆物理判定（G04）。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |\n\n- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。\n- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨；尘雾与尾迹不得遮挡 HUD 与前方计时门；非结算单个全屏遮挡 ≤0.5 秒。\n- F08 音画同步：过门音与门灯带闪青同帧；倒计时音与数字同帧；冲线音与终点横幅同帧。\n- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）；暂停/结算取消未结束的震动；设置可关闭（镜头震动开/关）。\n- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数；Enter 重开）；关键状态图标＋文字并用；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 测速周开幕（Opening，6 秒，1280×720@24fps）\n  - 触发时机：首次由标题点击「开始」后、倒计时起步之前，每局一次\n  - 内容与角色场景：白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门\n  - 资产对应：试验车、计时门、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入倒计时起步；自然播完 → 进入倒计时起步\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 高速赛段（Event，5 秒，1280×720@24fps）\n  - 触发时机：本局首次速度达到 ≥180 km/h 时插入一次（不打断操作，画中画或瞬时可跳），每局最多一次\n  - 内容与角色场景：追车镜头贴地掠过盐板、尾迹与尘雾拉长、外线酥松带反光一闪\n  - 资产对应：试验车与赛道材质同源\n  - 可跳过：Esc/Enter 跳过 → 立即返回行驶视角；自然播完 → 自动返回\n  - 状态一致：不打断驾驶控制权；播放期间游戏计时正常推进（不暂停、不加成）\n- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以驾驶试验车完成两圈计时挑战（M01）、在分岔口选择主/外线并承担抓地差异（M04）、出界后复位恢复有效性（M02/M03）、在 720 秒内冲击金标评级（V01）。\n- N02 流程与界面能力：主菜单、倒计时起步、两圈行驶、终点结算、超时判负、暂停（含失焦自动暂停）、一键重开全部具备真实入口。\n- N03 演出能力：C01–C03 视频、F04 常驻环境、F05 事件反馈表全部行、F06 音效 11 条、F09 震动与设置开关。\n- N04 输入范围：键盘为完整输入方式；鼠标为菜单与可选镜头辅助；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：F06 冻结音效清单（9 one_shot＋2 环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）；R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。\n- A02 绑定表（文件 → 对象）：\n\n| 参考图 | 绑定对象 | 用途 |\n|---|---|---|\n| images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |\n| images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |\n| images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |\n\n参考图为程序化概念草图（1024×1024，无文字；生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [runtime_complexity]\n  rationale: \"单主闭环（驾驶→过门→计时→两圈→结算）；计时门/出界/复位/路面差异均在驾驶计时系统内部，无跨系统因果链；分岔为局部路线取舍不升档（对照 difficulty_design §3.3）；车辆与计时器并发（B1）；新增总时限/分岔/路面差异为局内规则与表现，不升档\"\n  downgrade_boundary: \"去掉出界判定、罚时与分岔后仍为 S（更简）\"\n  upgrade_boundary: \"若轮胎损耗跨圈保留并改变后续圈操控，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：salt_flat_prototype_car, checkpoint_gate_kit, telemetry_station, salt_crystal_rock, wind_sock_set, maintenance_shed。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：drift_recovery。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Fast position reset whoosh with a soft teleport shimmer tail",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G036_sfx_007": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G036_salt_flat_timetrial",
+          "task_id": "G036_sfx_007",
+          "asset_name": "timeout_alarm",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Time-out alarm with three urgent pulses and a dark low tail",
+          "duration_sec": 1.5,
+          "sample_rate": 48000,
+          "seed": 5367,
+          "trigger": "总时限 720 秒耗尽（超时判负）",
+          "required_by_spec": true,
+          "spec_ref": "F05,F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《盐湖试车场的计时挑战》｜检查点计时机制输入规范\n\n```yaml\ncase_id: G036\nbase_case_id: G036\ntitle: 盐湖试车场的计时挑战\ncategory: Racing / Vehicle\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1036\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《盐湖试车场的计时挑战》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 yyy 反馈——补世界设定、镜头输入、路面差异、演出反馈、过场视频与正向范围清单；新增双路线分岔、分段计时门、总时限与盐晶酥松带抓地差异）；运行引擎：**Three.js（WebGL）**——选择理由：单机车辆、检查点与计时门为轻量场景，Three.js 场景图＋自研车辆物理与粒子（尘土/尾迹）实现成本可控，浏览器即开即玩交付；目标构建：桌面浏览器静态 Web 页面（Chrome/Edge 最新稳定版）；参考分辨率 1920×1080（1280×720 为最低可用口径）；摄像机：第三人称追车镜头；输入：键盘与鼠标；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：本作全部名称、赛道、车辆、文案与美术必须原创，不使用任何商业作品的名称、车辆、赛道或品牌标识。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 赛道实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：3D 单车两圈检查点计时赛（含 1 处双路线分岔）。\n- S02 核心循环一句话：驾驶 → 过计时门 → 计时累积 → 选择路面与路线 → 完成圈数 → 结算最好成绩。\n- S03 流程：开始界面 → C01 开场 → 倒计时起步 → 两圈行驶（过 8 检查点/圈＋分岔选择）→ 终点结算（评级/最好成绩）→ 重开。\n- S04 最低完整流程：开始界面、可操作驾驶、检查点计时门序列、终点结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：R 复位回最近检查点（计时继续、+3 秒罚时）；总时限超时判负结算；结算界面一键重开；Esc 暂停（计时暂停）。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：主菜单 → 倒计时起步 → 两圈行驶（每圈 8 座分段计时门＋1 处分岔）→ 终点结算 → 重开/返回菜单；任意行驶阶段可 Esc 暂停。每阶段六要素如下（引用本 spec §3–§7 对应规则）：\n\n- S06 主菜单\n  - input：系统启动，玩家确认进入\n  - precondition：程序启动完成（C01 可在首次入局前播放）\n  - state_change：显示主菜单（开始/退出）\n  - feedback：主菜单界面（F10）\n  - next_actions：点击「开始」→ S07\n  - outcome：无状态副作用\n- S07 倒计时起步\n  - input：玩家点击「开始」后系统进入；油门可预压\n  - precondition：主菜单已完成、C01 播完或跳过\n  - state_change：3-2-1 倒计时（3 秒）；倒计时内车辆锁定（G04/I02）\n  - feedback：倒计时数字＋发车音效（F05/F06）\n  - next_actions：倒计时归零 → S08\n  - outcome：起步瞬间开始计时（G01/G02）\n- S08 两圈行驶（主玩法阶段）\n  - input：玩家驾驶（按 §4 I01 键位）\n  - precondition：起步完成\n  - state_change：按序过 8 座分段计时门（每圈）；第 4–5 门之间选择主线/外线（M04）；出界、漏点、复位按 M01–M03 结算\n  - feedback：分段计时门横幅、胎痕/尘土/风（F04/F05），HUD 见 I06\n  - next_actions：完成两圈 → S09；总时限 720 秒耗尽 → S10；Esc → S11\n  - outcome：计时累积、复位罚时计入总成绩（G02）\n- S09 终点结算\n  - input：系统结算（跨过终点计时门）\n  - precondition：两圈全部按序完成（V01）\n  - state_change：显示两圈分段、总成绩、评级（金 480/银 540/铜 600）、复位次数\n  - feedback：C03 冲线结算视频＋结算面板（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V01 判定并结算\n- S10 超时判负结算\n  - input：系统结算（总时限 720 秒耗尽，V02）\n  - precondition：S08 中未完成两圈且超时\n  - state_change：显示超时判负结算（当前圈数/门数/已用时间）\n  - feedback：超时警报＋C03 失败意象（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V02 判负结算\n- S11 暂停\n  - input：玩家按 Esc\n  - precondition：处于 S07–S10 之外的全部行驶/倒计时阶段\n  - state_change：冻结车辆与计时（G04）\n  - feedback：暂停菜单（继续/重开/返回菜单）\n  - next_actions：Esc/继续 → 返回原阶段；重开 → S06\n  - outcome：恢复后计时从冻结点连续累计，无漂移\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：时间精确到毫秒；分段/单圈/总成绩均为累计计时；复位次数为整数；车速 km/h、距离米。\n- G02 计时公式与 oracle（本包冻结值）：单圈用时＝该圈末计时门时间戳 − 该圈首计时门时间戳；总成绩＝两圈之和＋Σ复位罚时（每次 **+3 秒**）。独立 oracle 数例：8 个分段各 30.000 秒 → 单圈 240.000 秒；两圈各 240 秒＋1 次复位 → 总成绩 **483.000 秒**。评级带宽（冻结）：金牌 ≤480 秒、银牌 ≤540 秒、铜牌 ≤600 秒，超铜牌仅显示完赛无评级。\n- G03 车辆与路面参数（本包冻结值）：极速 200 km/h；常规加速 0–100 km/h 用时 4 秒；转向无漂移辅助，转向灵敏度＝基准×(1−0.5×v/200)（v 为 km/h，即 100 km/h 时 75%、200 km/h 时 50%）；主路面（压实盐板）抓地系数 1.0，100 km/h 制动距离 40 米；盐晶酥松带抓地系数 0.75、制动距离 ×1.3（100 km/h → 52 米）、急转打滑风险显著提高。赛道全长约 4 千米，每圈 8 座分段计时门（起点拱门兼主计时门）。\n- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。\n- G05 超时（本包冻结值）：全程总时限 **720 秒**（自起步倒计时归零起算，暂停不计入）；超时 → 超时事件 → 判负结算（V02）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：W/S＝油门/刹车；A/D＝转向；R＝复位回最近已过计时门；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：暂停/结算期间驾驶输入无效；起步倒计时 3 秒内油门可预压但车辆锁定；被拒输入不产生状态变化。\n- I03 鼠标仅用于菜单与镜头辅助（可选），非冻结需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算。\n- I05 焦点与点击穿透规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（G04）。\n- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。\n- I07 输入延迟目标：按键到画面可见反馈 ≤100 毫秒（桌面 P95，每类输入 ≥30 次采样）。\n\n## 5. 赛道与内容清单 [L01–L04]\n\n- L01 生成对象：原创试验车 1、分段计时门拱门 8（兼起终点主计时门）、遥测站 1、盐晶岩地标 2、风向袋 3；装饰非冻结需求。\n- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/结算面板）与交互物（计时门触发体、出界判定体、复位点）逐类存在且运行时可进入；计时门判定体由引擎触发器构建，装饰拱门模型不得替代判定体；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的表现层（装饰造型、配色、粒子参数、音色）为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。音效为冻结需求（F06 清单逐条交付，缺失按 FAIL 计）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid\n- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）\n- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）\n- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。\n- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。\n- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。\n- V04 persistent_state：无（重开全量清空；最好成绩仅本次会话内显示，不要求跨会话保存）。\n- V04 软锁与不可达处理：不设永久软锁——关键目标均可通过正常操作达成，或触发 V02 失败路径进入结算；结算界面重开为最终恢复出路；判定不可达时按 V02 失败语义结算而非无限等待。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（计时/门序/复位计数）局内保留、重开清空；跨局状态无（S 档：重开全量清空）。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录；盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。\n- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。\n- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。\n- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）；跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。\n- W05 叙事来源：试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。\n- W06 视觉风格与色彩材质：高对比白盐工业风；主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C；材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。\n- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底；音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）；混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。\n- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束；叙事只做包装不改数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°；镜头平滑跟随（位置阻尼 0.12）；C 键复位镜头到正后方；镜头不出赛道边界；1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。\n- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）；碰撞/出界 0.3 秒中幅震动；复位瞬间镜头快速回正；设置里可关闭震动（F09）。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸；风为纯表现层，不参与车辆物理判定（G04）。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |\n\n- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。\n- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨；尘雾与尾迹不得遮挡 HUD 与前方计时门；非结算单个全屏遮挡 ≤0.5 秒。\n- F08 音画同步：过门音与门灯带闪青同帧；倒计时音与数字同帧；冲线音与终点横幅同帧。\n- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）；暂停/结算取消未结束的震动；设置可关闭（镜头震动开/关）。\n- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数；Enter 重开）；关键状态图标＋文字并用；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 测速周开幕（Opening，6 秒，1280×720@24fps）\n  - 触发时机：首次由标题点击「开始」后、倒计时起步之前，每局一次\n  - 内容与角色场景：白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门\n  - 资产对应：试验车、计时门、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入倒计时起步；自然播完 → 进入倒计时起步\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 高速赛段（Event，5 秒，1280×720@24fps）\n  - 触发时机：本局首次速度达到 ≥180 km/h 时插入一次（不打断操作，画中画或瞬时可跳），每局最多一次\n  - 内容与角色场景：追车镜头贴地掠过盐板、尾迹与尘雾拉长、外线酥松带反光一闪\n  - 资产对应：试验车与赛道材质同源\n  - 可跳过：Esc/Enter 跳过 → 立即返回行驶视角；自然播完 → 自动返回\n  - 状态一致：不打断驾驶控制权；播放期间游戏计时正常推进（不暂停、不加成）\n- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以驾驶试验车完成两圈计时挑战（M01）、在分岔口选择主/外线并承担抓地差异（M04）、出界后复位恢复有效性（M02/M03）、在 720 秒内冲击金标评级（V01）。\n- N02 流程与界面能力：主菜单、倒计时起步、两圈行驶、终点结算、超时判负、暂停（含失焦自动暂停）、一键重开全部具备真实入口。\n- N03 演出能力：C01–C03 视频、F04 常驻环境、F05 事件反馈表全部行、F06 音效 11 条、F09 震动与设置开关。\n- N04 输入范围：键盘为完整输入方式；鼠标为菜单与可选镜头辅助；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：F06 冻结音效清单（9 one_shot＋2 环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）；R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。\n- A02 绑定表（文件 → 对象）：\n\n| 参考图 | 绑定对象 | 用途 |\n|---|---|---|\n| images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |\n| images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |\n| images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |\n\n参考图为程序化概念草图（1024×1024，无文字；生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [runtime_complexity]\n  rationale: \"单主闭环（驾驶→过门→计时→两圈→结算）；计时门/出界/复位/路面差异均在驾驶计时系统内部，无跨系统因果链；分岔为局部路线取舍不升档（对照 difficulty_design §3.3）；车辆与计时器并发（B1）；新增总时限/分岔/路面差异为局内规则与表现，不升档\"\n  downgrade_boundary: \"去掉出界判定、罚时与分岔后仍为 S（更简）\"\n  upgrade_boundary: \"若轮胎损耗跨圈保留并改变后续圈操控，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：salt_flat_prototype_car, checkpoint_gate_kit, telemetry_station, salt_crystal_rock, wind_sock_set, maintenance_shed。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：drift_recovery。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Time-out alarm with three urgent pulses and a dark low tail",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G036_sfx_008": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G036_salt_flat_timetrial",
+          "task_id": "G036_sfx_008",
+          "asset_name": "victory_sting",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Victory sting with bright salt-flat airy chords and a rising finish",
+          "duration_sec": 2.5,
+          "sample_rate": 48000,
+          "seed": 5368,
+          "trigger": "V01 结算（胜利意象）",
+          "required_by_spec": true,
+          "spec_ref": "F05,F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《盐湖试车场的计时挑战》｜检查点计时机制输入规范\n\n```yaml\ncase_id: G036\nbase_case_id: G036\ntitle: 盐湖试车场的计时挑战\ncategory: Racing / Vehicle\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1036\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《盐湖试车场的计时挑战》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 yyy 反馈——补世界设定、镜头输入、路面差异、演出反馈、过场视频与正向范围清单；新增双路线分岔、分段计时门、总时限与盐晶酥松带抓地差异）；运行引擎：**Three.js（WebGL）**——选择理由：单机车辆、检查点与计时门为轻量场景，Three.js 场景图＋自研车辆物理与粒子（尘土/尾迹）实现成本可控，浏览器即开即玩交付；目标构建：桌面浏览器静态 Web 页面（Chrome/Edge 最新稳定版）；参考分辨率 1920×1080（1280×720 为最低可用口径）；摄像机：第三人称追车镜头；输入：键盘与鼠标；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：本作全部名称、赛道、车辆、文案与美术必须原创，不使用任何商业作品的名称、车辆、赛道或品牌标识。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 赛道实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：3D 单车两圈检查点计时赛（含 1 处双路线分岔）。\n- S02 核心循环一句话：驾驶 → 过计时门 → 计时累积 → 选择路面与路线 → 完成圈数 → 结算最好成绩。\n- S03 流程：开始界面 → C01 开场 → 倒计时起步 → 两圈行驶（过 8 检查点/圈＋分岔选择）→ 终点结算（评级/最好成绩）→ 重开。\n- S04 最低完整流程：开始界面、可操作驾驶、检查点计时门序列、终点结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：R 复位回最近检查点（计时继续、+3 秒罚时）；总时限超时判负结算；结算界面一键重开；Esc 暂停（计时暂停）。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：主菜单 → 倒计时起步 → 两圈行驶（每圈 8 座分段计时门＋1 处分岔）→ 终点结算 → 重开/返回菜单；任意行驶阶段可 Esc 暂停。每阶段六要素如下（引用本 spec §3–§7 对应规则）：\n\n- S06 主菜单\n  - input：系统启动，玩家确认进入\n  - precondition：程序启动完成（C01 可在首次入局前播放）\n  - state_change：显示主菜单（开始/退出）\n  - feedback：主菜单界面（F10）\n  - next_actions：点击「开始」→ S07\n  - outcome：无状态副作用\n- S07 倒计时起步\n  - input：玩家点击「开始」后系统进入；油门可预压\n  - precondition：主菜单已完成、C01 播完或跳过\n  - state_change：3-2-1 倒计时（3 秒）；倒计时内车辆锁定（G04/I02）\n  - feedback：倒计时数字＋发车音效（F05/F06）\n  - next_actions：倒计时归零 → S08\n  - outcome：起步瞬间开始计时（G01/G02）\n- S08 两圈行驶（主玩法阶段）\n  - input：玩家驾驶（按 §4 I01 键位）\n  - precondition：起步完成\n  - state_change：按序过 8 座分段计时门（每圈）；第 4–5 门之间选择主线/外线（M04）；出界、漏点、复位按 M01–M03 结算\n  - feedback：分段计时门横幅、胎痕/尘土/风（F04/F05），HUD 见 I06\n  - next_actions：完成两圈 → S09；总时限 720 秒耗尽 → S10；Esc → S11\n  - outcome：计时累积、复位罚时计入总成绩（G02）\n- S09 终点结算\n  - input：系统结算（跨过终点计时门）\n  - precondition：两圈全部按序完成（V01）\n  - state_change：显示两圈分段、总成绩、评级（金 480/银 540/铜 600）、复位次数\n  - feedback：C03 冲线结算视频＋结算面板（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V01 判定并结算\n- S10 超时判负结算\n  - input：系统结算（总时限 720 秒耗尽，V02）\n  - precondition：S08 中未完成两圈且超时\n  - state_change：显示超时判负结算（当前圈数/门数/已用时间）\n  - feedback：超时警报＋C03 失败意象（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V02 判负结算\n- S11 暂停\n  - input：玩家按 Esc\n  - precondition：处于 S07–S10 之外的全部行驶/倒计时阶段\n  - state_change：冻结车辆与计时（G04）\n  - feedback：暂停菜单（继续/重开/返回菜单）\n  - next_actions：Esc/继续 → 返回原阶段；重开 → S06\n  - outcome：恢复后计时从冻结点连续累计，无漂移\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：时间精确到毫秒；分段/单圈/总成绩均为累计计时；复位次数为整数；车速 km/h、距离米。\n- G02 计时公式与 oracle（本包冻结值）：单圈用时＝该圈末计时门时间戳 − 该圈首计时门时间戳；总成绩＝两圈之和＋Σ复位罚时（每次 **+3 秒**）。独立 oracle 数例：8 个分段各 30.000 秒 → 单圈 240.000 秒；两圈各 240 秒＋1 次复位 → 总成绩 **483.000 秒**。评级带宽（冻结）：金牌 ≤480 秒、银牌 ≤540 秒、铜牌 ≤600 秒，超铜牌仅显示完赛无评级。\n- G03 车辆与路面参数（本包冻结值）：极速 200 km/h；常规加速 0–100 km/h 用时 4 秒；转向无漂移辅助，转向灵敏度＝基准×(1−0.5×v/200)（v 为 km/h，即 100 km/h 时 75%、200 km/h 时 50%）；主路面（压实盐板）抓地系数 1.0，100 km/h 制动距离 40 米；盐晶酥松带抓地系数 0.75、制动距离 ×1.3（100 km/h → 52 米）、急转打滑风险显著提高。赛道全长约 4 千米，每圈 8 座分段计时门（起点拱门兼主计时门）。\n- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。\n- G05 超时（本包冻结值）：全程总时限 **720 秒**（自起步倒计时归零起算，暂停不计入）；超时 → 超时事件 → 判负结算（V02）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：W/S＝油门/刹车；A/D＝转向；R＝复位回最近已过计时门；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：暂停/结算期间驾驶输入无效；起步倒计时 3 秒内油门可预压但车辆锁定；被拒输入不产生状态变化。\n- I03 鼠标仅用于菜单与镜头辅助（可选），非冻结需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算。\n- I05 焦点与点击穿透规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（G04）。\n- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。\n- I07 输入延迟目标：按键到画面可见反馈 ≤100 毫秒（桌面 P95，每类输入 ≥30 次采样）。\n\n## 5. 赛道与内容清单 [L01–L04]\n\n- L01 生成对象：原创试验车 1、分段计时门拱门 8（兼起终点主计时门）、遥测站 1、盐晶岩地标 2、风向袋 3；装饰非冻结需求。\n- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/结算面板）与交互物（计时门触发体、出界判定体、复位点）逐类存在且运行时可进入；计时门判定体由引擎触发器构建，装饰拱门模型不得替代判定体；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的表现层（装饰造型、配色、粒子参数、音色）为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。音效为冻结需求（F06 清单逐条交付，缺失按 FAIL 计）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid\n- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）\n- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）\n- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。\n- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。\n- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。\n- V04 persistent_state：无（重开全量清空；最好成绩仅本次会话内显示，不要求跨会话保存）。\n- V04 软锁与不可达处理：不设永久软锁——关键目标均可通过正常操作达成，或触发 V02 失败路径进入结算；结算界面重开为最终恢复出路；判定不可达时按 V02 失败语义结算而非无限等待。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（计时/门序/复位计数）局内保留、重开清空；跨局状态无（S 档：重开全量清空）。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录；盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。\n- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。\n- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。\n- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）；跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。\n- W05 叙事来源：试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。\n- W06 视觉风格与色彩材质：高对比白盐工业风；主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C；材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。\n- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底；音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）；混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。\n- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束；叙事只做包装不改数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°；镜头平滑跟随（位置阻尼 0.12）；C 键复位镜头到正后方；镜头不出赛道边界；1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。\n- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）；碰撞/出界 0.3 秒中幅震动；复位瞬间镜头快速回正；设置里可关闭震动（F09）。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸；风为纯表现层，不参与车辆物理判定（G04）。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |\n\n- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。\n- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨；尘雾与尾迹不得遮挡 HUD 与前方计时门；非结算单个全屏遮挡 ≤0.5 秒。\n- F08 音画同步：过门音与门灯带闪青同帧；倒计时音与数字同帧；冲线音与终点横幅同帧。\n- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）；暂停/结算取消未结束的震动；设置可关闭（镜头震动开/关）。\n- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数；Enter 重开）；关键状态图标＋文字并用；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 测速周开幕（Opening，6 秒，1280×720@24fps）\n  - 触发时机：首次由标题点击「开始」后、倒计时起步之前，每局一次\n  - 内容与角色场景：白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门\n  - 资产对应：试验车、计时门、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入倒计时起步；自然播完 → 进入倒计时起步\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 高速赛段（Event，5 秒，1280×720@24fps）\n  - 触发时机：本局首次速度达到 ≥180 km/h 时插入一次（不打断操作，画中画或瞬时可跳），每局最多一次\n  - 内容与角色场景：追车镜头贴地掠过盐板、尾迹与尘雾拉长、外线酥松带反光一闪\n  - 资产对应：试验车与赛道材质同源\n  - 可跳过：Esc/Enter 跳过 → 立即返回行驶视角；自然播完 → 自动返回\n  - 状态一致：不打断驾驶控制权；播放期间游戏计时正常推进（不暂停、不加成）\n- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以驾驶试验车完成两圈计时挑战（M01）、在分岔口选择主/外线并承担抓地差异（M04）、出界后复位恢复有效性（M02/M03）、在 720 秒内冲击金标评级（V01）。\n- N02 流程与界面能力：主菜单、倒计时起步、两圈行驶、终点结算、超时判负、暂停（含失焦自动暂停）、一键重开全部具备真实入口。\n- N03 演出能力：C01–C03 视频、F04 常驻环境、F05 事件反馈表全部行、F06 音效 11 条、F09 震动与设置开关。\n- N04 输入范围：键盘为完整输入方式；鼠标为菜单与可选镜头辅助；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：F06 冻结音效清单（9 one_shot＋2 环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）；R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。\n- A02 绑定表（文件 → 对象）：\n\n| 参考图 | 绑定对象 | 用途 |\n|---|---|---|\n| images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |\n| images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |\n| images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |\n\n参考图为程序化概念草图（1024×1024，无文字；生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [runtime_complexity]\n  rationale: \"单主闭环（驾驶→过门→计时→两圈→结算）；计时门/出界/复位/路面差异均在驾驶计时系统内部，无跨系统因果链；分岔为局部路线取舍不升档（对照 difficulty_design §3.3）；车辆与计时器并发（B1）；新增总时限/分岔/路面差异为局内规则与表现，不升档\"\n  downgrade_boundary: \"去掉出界判定、罚时与分岔后仍为 S（更简）\"\n  upgrade_boundary: \"若轮胎损耗跨圈保留并改变后续圈操控，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：salt_flat_prototype_car, checkpoint_gate_kit, telemetry_station, salt_crystal_rock, wind_sock_set, maintenance_shed。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：drift_recovery。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Victory sting with bright salt-flat airy chords and a rising finish",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G036_sfx_009": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G036_salt_flat_timetrial",
+          "task_id": "G036_sfx_009",
+          "asset_name": "defeat_sting",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Defeat sting with muted low strings and a soft distant wind tail",
+          "duration_sec": 2.5,
+          "sample_rate": 48000,
+          "seed": 5369,
+          "trigger": "V02 结算（超时/失败意象）",
+          "required_by_spec": true,
+          "spec_ref": "F05,F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《盐湖试车场的计时挑战》｜检查点计时机制输入规范\n\n```yaml\ncase_id: G036\nbase_case_id: G036\ntitle: 盐湖试车场的计时挑战\ncategory: Racing / Vehicle\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1036\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《盐湖试车场的计时挑战》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 yyy 反馈——补世界设定、镜头输入、路面差异、演出反馈、过场视频与正向范围清单；新增双路线分岔、分段计时门、总时限与盐晶酥松带抓地差异）；运行引擎：**Three.js（WebGL）**——选择理由：单机车辆、检查点与计时门为轻量场景，Three.js 场景图＋自研车辆物理与粒子（尘土/尾迹）实现成本可控，浏览器即开即玩交付；目标构建：桌面浏览器静态 Web 页面（Chrome/Edge 最新稳定版）；参考分辨率 1920×1080（1280×720 为最低可用口径）；摄像机：第三人称追车镜头；输入：键盘与鼠标；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：本作全部名称、赛道、车辆、文案与美术必须原创，不使用任何商业作品的名称、车辆、赛道或品牌标识。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 赛道实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：3D 单车两圈检查点计时赛（含 1 处双路线分岔）。\n- S02 核心循环一句话：驾驶 → 过计时门 → 计时累积 → 选择路面与路线 → 完成圈数 → 结算最好成绩。\n- S03 流程：开始界面 → C01 开场 → 倒计时起步 → 两圈行驶（过 8 检查点/圈＋分岔选择）→ 终点结算（评级/最好成绩）→ 重开。\n- S04 最低完整流程：开始界面、可操作驾驶、检查点计时门序列、终点结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：R 复位回最近检查点（计时继续、+3 秒罚时）；总时限超时判负结算；结算界面一键重开；Esc 暂停（计时暂停）。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：主菜单 → 倒计时起步 → 两圈行驶（每圈 8 座分段计时门＋1 处分岔）→ 终点结算 → 重开/返回菜单；任意行驶阶段可 Esc 暂停。每阶段六要素如下（引用本 spec §3–§7 对应规则）：\n\n- S06 主菜单\n  - input：系统启动，玩家确认进入\n  - precondition：程序启动完成（C01 可在首次入局前播放）\n  - state_change：显示主菜单（开始/退出）\n  - feedback：主菜单界面（F10）\n  - next_actions：点击「开始」→ S07\n  - outcome：无状态副作用\n- S07 倒计时起步\n  - input：玩家点击「开始」后系统进入；油门可预压\n  - precondition：主菜单已完成、C01 播完或跳过\n  - state_change：3-2-1 倒计时（3 秒）；倒计时内车辆锁定（G04/I02）\n  - feedback：倒计时数字＋发车音效（F05/F06）\n  - next_actions：倒计时归零 → S08\n  - outcome：起步瞬间开始计时（G01/G02）\n- S08 两圈行驶（主玩法阶段）\n  - input：玩家驾驶（按 §4 I01 键位）\n  - precondition：起步完成\n  - state_change：按序过 8 座分段计时门（每圈）；第 4–5 门之间选择主线/外线（M04）；出界、漏点、复位按 M01–M03 结算\n  - feedback：分段计时门横幅、胎痕/尘土/风（F04/F05），HUD 见 I06\n  - next_actions：完成两圈 → S09；总时限 720 秒耗尽 → S10；Esc → S11\n  - outcome：计时累积、复位罚时计入总成绩（G02）\n- S09 终点结算\n  - input：系统结算（跨过终点计时门）\n  - precondition：两圈全部按序完成（V01）\n  - state_change：显示两圈分段、总成绩、评级（金 480/银 540/铜 600）、复位次数\n  - feedback：C03 冲线结算视频＋结算面板（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V01 判定并结算\n- S10 超时判负结算\n  - input：系统结算（总时限 720 秒耗尽，V02）\n  - precondition：S08 中未完成两圈且超时\n  - state_change：显示超时判负结算（当前圈数/门数/已用时间）\n  - feedback：超时警报＋C03 失败意象（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V02 判负结算\n- S11 暂停\n  - input：玩家按 Esc\n  - precondition：处于 S07–S10 之外的全部行驶/倒计时阶段\n  - state_change：冻结车辆与计时（G04）\n  - feedback：暂停菜单（继续/重开/返回菜单）\n  - next_actions：Esc/继续 → 返回原阶段；重开 → S06\n  - outcome：恢复后计时从冻结点连续累计，无漂移\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：时间精确到毫秒；分段/单圈/总成绩均为累计计时；复位次数为整数；车速 km/h、距离米。\n- G02 计时公式与 oracle（本包冻结值）：单圈用时＝该圈末计时门时间戳 − 该圈首计时门时间戳；总成绩＝两圈之和＋Σ复位罚时（每次 **+3 秒**）。独立 oracle 数例：8 个分段各 30.000 秒 → 单圈 240.000 秒；两圈各 240 秒＋1 次复位 → 总成绩 **483.000 秒**。评级带宽（冻结）：金牌 ≤480 秒、银牌 ≤540 秒、铜牌 ≤600 秒，超铜牌仅显示完赛无评级。\n- G03 车辆与路面参数（本包冻结值）：极速 200 km/h；常规加速 0–100 km/h 用时 4 秒；转向无漂移辅助，转向灵敏度＝基准×(1−0.5×v/200)（v 为 km/h，即 100 km/h 时 75%、200 km/h 时 50%）；主路面（压实盐板）抓地系数 1.0，100 km/h 制动距离 40 米；盐晶酥松带抓地系数 0.75、制动距离 ×1.3（100 km/h → 52 米）、急转打滑风险显著提高。赛道全长约 4 千米，每圈 8 座分段计时门（起点拱门兼主计时门）。\n- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。\n- G05 超时（本包冻结值）：全程总时限 **720 秒**（自起步倒计时归零起算，暂停不计入）；超时 → 超时事件 → 判负结算（V02）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：W/S＝油门/刹车；A/D＝转向；R＝复位回最近已过计时门；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：暂停/结算期间驾驶输入无效；起步倒计时 3 秒内油门可预压但车辆锁定；被拒输入不产生状态变化。\n- I03 鼠标仅用于菜单与镜头辅助（可选），非冻结需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算。\n- I05 焦点与点击穿透规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（G04）。\n- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。\n- I07 输入延迟目标：按键到画面可见反馈 ≤100 毫秒（桌面 P95，每类输入 ≥30 次采样）。\n\n## 5. 赛道与内容清单 [L01–L04]\n\n- L01 生成对象：原创试验车 1、分段计时门拱门 8（兼起终点主计时门）、遥测站 1、盐晶岩地标 2、风向袋 3；装饰非冻结需求。\n- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/结算面板）与交互物（计时门触发体、出界判定体、复位点）逐类存在且运行时可进入；计时门判定体由引擎触发器构建，装饰拱门模型不得替代判定体；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的表现层（装饰造型、配色、粒子参数、音色）为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。音效为冻结需求（F06 清单逐条交付，缺失按 FAIL 计）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid\n- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）\n- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）\n- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。\n- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。\n- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。\n- V04 persistent_state：无（重开全量清空；最好成绩仅本次会话内显示，不要求跨会话保存）。\n- V04 软锁与不可达处理：不设永久软锁——关键目标均可通过正常操作达成，或触发 V02 失败路径进入结算；结算界面重开为最终恢复出路；判定不可达时按 V02 失败语义结算而非无限等待。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（计时/门序/复位计数）局内保留、重开清空；跨局状态无（S 档：重开全量清空）。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录；盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。\n- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。\n- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。\n- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）；跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。\n- W05 叙事来源：试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。\n- W06 视觉风格与色彩材质：高对比白盐工业风；主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C；材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。\n- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底；音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）；混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。\n- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束；叙事只做包装不改数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°；镜头平滑跟随（位置阻尼 0.12）；C 键复位镜头到正后方；镜头不出赛道边界；1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。\n- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）；碰撞/出界 0.3 秒中幅震动；复位瞬间镜头快速回正；设置里可关闭震动（F09）。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸；风为纯表现层，不参与车辆物理判定（G04）。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |\n\n- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。\n- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨；尘雾与尾迹不得遮挡 HUD 与前方计时门；非结算单个全屏遮挡 ≤0.5 秒。\n- F08 音画同步：过门音与门灯带闪青同帧；倒计时音与数字同帧；冲线音与终点横幅同帧。\n- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）；暂停/结算取消未结束的震动；设置可关闭（镜头震动开/关）。\n- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数；Enter 重开）；关键状态图标＋文字并用；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 测速周开幕（Opening，6 秒，1280×720@24fps）\n  - 触发时机：首次由标题点击「开始」后、倒计时起步之前，每局一次\n  - 内容与角色场景：白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门\n  - 资产对应：试验车、计时门、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入倒计时起步；自然播完 → 进入倒计时起步\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 高速赛段（Event，5 秒，1280×720@24fps）\n  - 触发时机：本局首次速度达到 ≥180 km/h 时插入一次（不打断操作，画中画或瞬时可跳），每局最多一次\n  - 内容与角色场景：追车镜头贴地掠过盐板、尾迹与尘雾拉长、外线酥松带反光一闪\n  - 资产对应：试验车与赛道材质同源\n  - 可跳过：Esc/Enter 跳过 → 立即返回行驶视角；自然播完 → 自动返回\n  - 状态一致：不打断驾驶控制权；播放期间游戏计时正常推进（不暂停、不加成）\n- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以驾驶试验车完成两圈计时挑战（M01）、在分岔口选择主/外线并承担抓地差异（M04）、出界后复位恢复有效性（M02/M03）、在 720 秒内冲击金标评级（V01）。\n- N02 流程与界面能力：主菜单、倒计时起步、两圈行驶、终点结算、超时判负、暂停（含失焦自动暂停）、一键重开全部具备真实入口。\n- N03 演出能力：C01–C03 视频、F04 常驻环境、F05 事件反馈表全部行、F06 音效 11 条、F09 震动与设置开关。\n- N04 输入范围：键盘为完整输入方式；鼠标为菜单与可选镜头辅助；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：F06 冻结音效清单（9 one_shot＋2 环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）；R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。\n- A02 绑定表（文件 → 对象）：\n\n| 参考图 | 绑定对象 | 用途 |\n|---|---|---|\n| images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |\n| images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |\n| images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |\n\n参考图为程序化概念草图（1024×1024，无文字；生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [runtime_complexity]\n  rationale: \"单主闭环（驾驶→过门→计时→两圈→结算）；计时门/出界/复位/路面差异均在驾驶计时系统内部，无跨系统因果链；分岔为局部路线取舍不升档（对照 difficulty_design §3.3）；车辆与计时器并发（B1）；新增总时限/分岔/路面差异为局内规则与表现，不升档\"\n  downgrade_boundary: \"去掉出界判定、罚时与分岔后仍为 S（更简）\"\n  upgrade_boundary: \"若轮胎损耗跨圈保留并改变后续圈操控，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：salt_flat_prototype_car, checkpoint_gate_kit, telemetry_station, salt_crystal_rock, wind_sock_set, maintenance_shed。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：drift_recovery。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Defeat sting with muted low strings and a soft distant wind tail",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G036_sfx_010": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G036_salt_flat_timetrial",
+          "task_id": "G036_sfx_010",
+          "asset_name": "salt_flat_wind",
+          "audio_type": "sound_effect",
+          "sound_category": "ambient_loop",
+          "prompt": "Seamless dry salt-flat wind ambience with subtle distant telemetry hum, steady direction, no voices or music",
+          "duration_sec": 12,
+          "sample_rate": 48000,
+          "seed": 5370,
+          "trigger": "全程环境循环（暂停静音、结算淡出）",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《盐湖试车场的计时挑战》｜检查点计时机制输入规范\n\n```yaml\ncase_id: G036\nbase_case_id: G036\ntitle: 盐湖试车场的计时挑战\ncategory: Racing / Vehicle\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1036\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《盐湖试车场的计时挑战》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 yyy 反馈——补世界设定、镜头输入、路面差异、演出反馈、过场视频与正向范围清单；新增双路线分岔、分段计时门、总时限与盐晶酥松带抓地差异）；运行引擎：**Three.js（WebGL）**——选择理由：单机车辆、检查点与计时门为轻量场景，Three.js 场景图＋自研车辆物理与粒子（尘土/尾迹）实现成本可控，浏览器即开即玩交付；目标构建：桌面浏览器静态 Web 页面（Chrome/Edge 最新稳定版）；参考分辨率 1920×1080（1280×720 为最低可用口径）；摄像机：第三人称追车镜头；输入：键盘与鼠标；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：本作全部名称、赛道、车辆、文案与美术必须原创，不使用任何商业作品的名称、车辆、赛道或品牌标识。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 赛道实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：3D 单车两圈检查点计时赛（含 1 处双路线分岔）。\n- S02 核心循环一句话：驾驶 → 过计时门 → 计时累积 → 选择路面与路线 → 完成圈数 → 结算最好成绩。\n- S03 流程：开始界面 → C01 开场 → 倒计时起步 → 两圈行驶（过 8 检查点/圈＋分岔选择）→ 终点结算（评级/最好成绩）→ 重开。\n- S04 最低完整流程：开始界面、可操作驾驶、检查点计时门序列、终点结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：R 复位回最近检查点（计时继续、+3 秒罚时）；总时限超时判负结算；结算界面一键重开；Esc 暂停（计时暂停）。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：主菜单 → 倒计时起步 → 两圈行驶（每圈 8 座分段计时门＋1 处分岔）→ 终点结算 → 重开/返回菜单；任意行驶阶段可 Esc 暂停。每阶段六要素如下（引用本 spec §3–§7 对应规则）：\n\n- S06 主菜单\n  - input：系统启动，玩家确认进入\n  - precondition：程序启动完成（C01 可在首次入局前播放）\n  - state_change：显示主菜单（开始/退出）\n  - feedback：主菜单界面（F10）\n  - next_actions：点击「开始」→ S07\n  - outcome：无状态副作用\n- S07 倒计时起步\n  - input：玩家点击「开始」后系统进入；油门可预压\n  - precondition：主菜单已完成、C01 播完或跳过\n  - state_change：3-2-1 倒计时（3 秒）；倒计时内车辆锁定（G04/I02）\n  - feedback：倒计时数字＋发车音效（F05/F06）\n  - next_actions：倒计时归零 → S08\n  - outcome：起步瞬间开始计时（G01/G02）\n- S08 两圈行驶（主玩法阶段）\n  - input：玩家驾驶（按 §4 I01 键位）\n  - precondition：起步完成\n  - state_change：按序过 8 座分段计时门（每圈）；第 4–5 门之间选择主线/外线（M04）；出界、漏点、复位按 M01–M03 结算\n  - feedback：分段计时门横幅、胎痕/尘土/风（F04/F05），HUD 见 I06\n  - next_actions：完成两圈 → S09；总时限 720 秒耗尽 → S10；Esc → S11\n  - outcome：计时累积、复位罚时计入总成绩（G02）\n- S09 终点结算\n  - input：系统结算（跨过终点计时门）\n  - precondition：两圈全部按序完成（V01）\n  - state_change：显示两圈分段、总成绩、评级（金 480/银 540/铜 600）、复位次数\n  - feedback：C03 冲线结算视频＋结算面板（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V01 判定并结算\n- S10 超时判负结算\n  - input：系统结算（总时限 720 秒耗尽，V02）\n  - precondition：S08 中未完成两圈且超时\n  - state_change：显示超时判负结算（当前圈数/门数/已用时间）\n  - feedback：超时警报＋C03 失败意象（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V02 判负结算\n- S11 暂停\n  - input：玩家按 Esc\n  - precondition：处于 S07–S10 之外的全部行驶/倒计时阶段\n  - state_change：冻结车辆与计时（G04）\n  - feedback：暂停菜单（继续/重开/返回菜单）\n  - next_actions：Esc/继续 → 返回原阶段；重开 → S06\n  - outcome：恢复后计时从冻结点连续累计，无漂移\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：时间精确到毫秒；分段/单圈/总成绩均为累计计时；复位次数为整数；车速 km/h、距离米。\n- G02 计时公式与 oracle（本包冻结值）：单圈用时＝该圈末计时门时间戳 − 该圈首计时门时间戳；总成绩＝两圈之和＋Σ复位罚时（每次 **+3 秒**）。独立 oracle 数例：8 个分段各 30.000 秒 → 单圈 240.000 秒；两圈各 240 秒＋1 次复位 → 总成绩 **483.000 秒**。评级带宽（冻结）：金牌 ≤480 秒、银牌 ≤540 秒、铜牌 ≤600 秒，超铜牌仅显示完赛无评级。\n- G03 车辆与路面参数（本包冻结值）：极速 200 km/h；常规加速 0–100 km/h 用时 4 秒；转向无漂移辅助，转向灵敏度＝基准×(1−0.5×v/200)（v 为 km/h，即 100 km/h 时 75%、200 km/h 时 50%）；主路面（压实盐板）抓地系数 1.0，100 km/h 制动距离 40 米；盐晶酥松带抓地系数 0.75、制动距离 ×1.3（100 km/h → 52 米）、急转打滑风险显著提高。赛道全长约 4 千米，每圈 8 座分段计时门（起点拱门兼主计时门）。\n- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。\n- G05 超时（本包冻结值）：全程总时限 **720 秒**（自起步倒计时归零起算，暂停不计入）；超时 → 超时事件 → 判负结算（V02）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：W/S＝油门/刹车；A/D＝转向；R＝复位回最近已过计时门；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：暂停/结算期间驾驶输入无效；起步倒计时 3 秒内油门可预压但车辆锁定；被拒输入不产生状态变化。\n- I03 鼠标仅用于菜单与镜头辅助（可选），非冻结需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算。\n- I05 焦点与点击穿透规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（G04）。\n- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。\n- I07 输入延迟目标：按键到画面可见反馈 ≤100 毫秒（桌面 P95，每类输入 ≥30 次采样）。\n\n## 5. 赛道与内容清单 [L01–L04]\n\n- L01 生成对象：原创试验车 1、分段计时门拱门 8（兼起终点主计时门）、遥测站 1、盐晶岩地标 2、风向袋 3；装饰非冻结需求。\n- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/结算面板）与交互物（计时门触发体、出界判定体、复位点）逐类存在且运行时可进入；计时门判定体由引擎触发器构建，装饰拱门模型不得替代判定体；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的表现层（装饰造型、配色、粒子参数、音色）为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。音效为冻结需求（F06 清单逐条交付，缺失按 FAIL 计）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid\n- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）\n- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）\n- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。\n- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。\n- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。\n- V04 persistent_state：无（重开全量清空；最好成绩仅本次会话内显示，不要求跨会话保存）。\n- V04 软锁与不可达处理：不设永久软锁——关键目标均可通过正常操作达成，或触发 V02 失败路径进入结算；结算界面重开为最终恢复出路；判定不可达时按 V02 失败语义结算而非无限等待。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（计时/门序/复位计数）局内保留、重开清空；跨局状态无（S 档：重开全量清空）。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录；盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。\n- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。\n- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。\n- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）；跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。\n- W05 叙事来源：试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。\n- W06 视觉风格与色彩材质：高对比白盐工业风；主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C；材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。\n- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底；音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）；混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。\n- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束；叙事只做包装不改数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°；镜头平滑跟随（位置阻尼 0.12）；C 键复位镜头到正后方；镜头不出赛道边界；1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。\n- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）；碰撞/出界 0.3 秒中幅震动；复位瞬间镜头快速回正；设置里可关闭震动（F09）。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸；风为纯表现层，不参与车辆物理判定（G04）。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |\n\n- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。\n- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨；尘雾与尾迹不得遮挡 HUD 与前方计时门；非结算单个全屏遮挡 ≤0.5 秒。\n- F08 音画同步：过门音与门灯带闪青同帧；倒计时音与数字同帧；冲线音与终点横幅同帧。\n- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）；暂停/结算取消未结束的震动；设置可关闭（镜头震动开/关）。\n- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数；Enter 重开）；关键状态图标＋文字并用；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 测速周开幕（Opening，6 秒，1280×720@24fps）\n  - 触发时机：首次由标题点击「开始」后、倒计时起步之前，每局一次\n  - 内容与角色场景：白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门\n  - 资产对应：试验车、计时门、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入倒计时起步；自然播完 → 进入倒计时起步\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 高速赛段（Event，5 秒，1280×720@24fps）\n  - 触发时机：本局首次速度达到 ≥180 km/h 时插入一次（不打断操作，画中画或瞬时可跳），每局最多一次\n  - 内容与角色场景：追车镜头贴地掠过盐板、尾迹与尘雾拉长、外线酥松带反光一闪\n  - 资产对应：试验车与赛道材质同源\n  - 可跳过：Esc/Enter 跳过 → 立即返回行驶视角；自然播完 → 自动返回\n  - 状态一致：不打断驾驶控制权；播放期间游戏计时正常推进（不暂停、不加成）\n- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以驾驶试验车完成两圈计时挑战（M01）、在分岔口选择主/外线并承担抓地差异（M04）、出界后复位恢复有效性（M02/M03）、在 720 秒内冲击金标评级（V01）。\n- N02 流程与界面能力：主菜单、倒计时起步、两圈行驶、终点结算、超时判负、暂停（含失焦自动暂停）、一键重开全部具备真实入口。\n- N03 演出能力：C01–C03 视频、F04 常驻环境、F05 事件反馈表全部行、F06 音效 11 条、F09 震动与设置开关。\n- N04 输入范围：键盘为完整输入方式；鼠标为菜单与可选镜头辅助；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：F06 冻结音效清单（9 one_shot＋2 环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）；R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。\n- A02 绑定表（文件 → 对象）：\n\n| 参考图 | 绑定对象 | 用途 |\n|---|---|---|\n| images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |\n| images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |\n| images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |\n\n参考图为程序化概念草图（1024×1024，无文字；生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [runtime_complexity]\n  rationale: \"单主闭环（驾驶→过门→计时→两圈→结算）；计时门/出界/复位/路面差异均在驾驶计时系统内部，无跨系统因果链；分岔为局部路线取舍不升档（对照 difficulty_design §3.3）；车辆与计时器并发（B1）；新增总时限/分岔/路面差异为局内规则与表现，不升档\"\n  downgrade_boundary: \"去掉出界判定、罚时与分岔后仍为 S（更简）\"\n  upgrade_boundary: \"若轮胎损耗跨圈保留并改变后续圈操控，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：salt_flat_prototype_car, checkpoint_gate_kit, telemetry_station, salt_crystal_rock, wind_sock_set, maintenance_shed。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：drift_recovery。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Seamless dry salt-flat wind ambience with subtle distant telemetry hum, steady direction, no voices or music",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G036_sfx_011": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G036_salt_flat_timetrial",
+          "task_id": "G036_sfx_011",
+          "asset_name": "prototype_engine",
+          "audio_type": "sound_effect",
+          "sound_category": "ambient_loop",
+          "prompt": "Seamless heavy prototype engine loop at mid load suitable for runtime pitch modulation by speed, no manufacturer identity",
+          "duration_sec": 8,
+          "sample_rate": 48000,
+          "seed": 5371,
+          "trigger": "行驶全程循环（随速变调，I07 延迟口径）",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《盐湖试车场的计时挑战》｜检查点计时机制输入规范\n\n```yaml\ncase_id: G036\nbase_case_id: G036\ntitle: 盐湖试车场的计时挑战\ncategory: Racing / Vehicle\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1036\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《盐湖试车场的计时挑战》；版本：mechanics-v3（2026-10-11 完整性修订：吸收 yyy 反馈——补世界设定、镜头输入、路面差异、演出反馈、过场视频与正向范围清单；新增双路线分岔、分段计时门、总时限与盐晶酥松带抓地差异）；运行引擎：**Three.js（WebGL）**——选择理由：单机车辆、检查点与计时门为轻量场景，Three.js 场景图＋自研车辆物理与粒子（尘土/尾迹）实现成本可控，浏览器即开即玩交付；目标构建：桌面浏览器静态 Web 页面（Chrome/Edge 最新稳定版）；参考分辨率 1920×1080（1280×720 为最低可用口径）；摄像机：第三人称追车镜头；输入：键盘与鼠标；构建启动：Three.js 工程构建为静态 Web 页面（Vite/ESBuild 打包或单文件 HTML），本地静态服务器或直接打开 index.html 运行。\n- 原创边界：本作全部名称、赛道、车辆、文案与美术必须原创，不使用任何商业作品的名称、车辆、赛道或品牌标识。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 赛道实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：3D 单车两圈检查点计时赛（含 1 处双路线分岔）。\n- S02 核心循环一句话：驾驶 → 过计时门 → 计时累积 → 选择路面与路线 → 完成圈数 → 结算最好成绩。\n- S03 流程：开始界面 → C01 开场 → 倒计时起步 → 两圈行驶（过 8 检查点/圈＋分岔选择）→ 终点结算（评级/最好成绩）→ 重开。\n- S04 最低完整流程：开始界面、可操作驾驶、检查点计时门序列、终点结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：R 复位回最近检查点（计时继续、+3 秒罚时）；总时限超时判负结算；结算界面一键重开；Esc 暂停（计时暂停）。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：主菜单 → 倒计时起步 → 两圈行驶（每圈 8 座分段计时门＋1 处分岔）→ 终点结算 → 重开/返回菜单；任意行驶阶段可 Esc 暂停。每阶段六要素如下（引用本 spec §3–§7 对应规则）：\n\n- S06 主菜单\n  - input：系统启动，玩家确认进入\n  - precondition：程序启动完成（C01 可在首次入局前播放）\n  - state_change：显示主菜单（开始/退出）\n  - feedback：主菜单界面（F10）\n  - next_actions：点击「开始」→ S07\n  - outcome：无状态副作用\n- S07 倒计时起步\n  - input：玩家点击「开始」后系统进入；油门可预压\n  - precondition：主菜单已完成、C01 播完或跳过\n  - state_change：3-2-1 倒计时（3 秒）；倒计时内车辆锁定（G04/I02）\n  - feedback：倒计时数字＋发车音效（F05/F06）\n  - next_actions：倒计时归零 → S08\n  - outcome：起步瞬间开始计时（G01/G02）\n- S08 两圈行驶（主玩法阶段）\n  - input：玩家驾驶（按 §4 I01 键位）\n  - precondition：起步完成\n  - state_change：按序过 8 座分段计时门（每圈）；第 4–5 门之间选择主线/外线（M04）；出界、漏点、复位按 M01–M03 结算\n  - feedback：分段计时门横幅、胎痕/尘土/风（F04/F05），HUD 见 I06\n  - next_actions：完成两圈 → S09；总时限 720 秒耗尽 → S10；Esc → S11\n  - outcome：计时累积、复位罚时计入总成绩（G02）\n- S09 终点结算\n  - input：系统结算（跨过终点计时门）\n  - precondition：两圈全部按序完成（V01）\n  - state_change：显示两圈分段、总成绩、评级（金 480/银 540/铜 600）、复位次数\n  - feedback：C03 冲线结算视频＋结算面板（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V01 判定并结算\n- S10 超时判负结算\n  - input：系统结算（总时限 720 秒耗尽，V02）\n  - precondition：S08 中未完成两圈且超时\n  - state_change：显示超时判负结算（当前圈数/门数/已用时间）\n  - feedback：超时警报＋C03 失败意象（F05/F06）\n  - next_actions：Enter 重开 → S06；返回菜单 → S06\n  - outcome：按 V02 判负结算\n- S11 暂停\n  - input：玩家按 Esc\n  - precondition：处于 S07–S10 之外的全部行驶/倒计时阶段\n  - state_change：冻结车辆与计时（G04）\n  - feedback：暂停菜单（继续/重开/返回菜单）\n  - next_actions：Esc/继续 → 返回原阶段；重开 → S06\n  - outcome：恢复后计时从冻结点连续累计，无漂移\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：时间精确到毫秒；分段/单圈/总成绩均为累计计时；复位次数为整数；车速 km/h、距离米。\n- G02 计时公式与 oracle（本包冻结值）：单圈用时＝该圈末计时门时间戳 − 该圈首计时门时间戳；总成绩＝两圈之和＋Σ复位罚时（每次 **+3 秒**）。独立 oracle 数例：8 个分段各 30.000 秒 → 单圈 240.000 秒；两圈各 240 秒＋1 次复位 → 总成绩 **483.000 秒**。评级带宽（冻结）：金牌 ≤480 秒、银牌 ≤540 秒、铜牌 ≤600 秒，超铜牌仅显示完赛无评级。\n- G03 车辆与路面参数（本包冻结值）：极速 200 km/h；常规加速 0–100 km/h 用时 4 秒；转向无漂移辅助，转向灵敏度＝基准×(1−0.5×v/200)（v 为 km/h，即 100 km/h 时 75%、200 km/h 时 50%）；主路面（压实盐板）抓地系数 1.0，100 km/h 制动距离 40 米；盐晶酥松带抓地系数 0.75、制动距离 ×1.3（100 km/h → 52 米）、急转打滑风险显著提高。赛道全长约 4 千米，每圈 8 座分段计时门（起点拱门兼主计时门）。\n- G04 暂停与随机：Esc 暒停冻结车辆与计时；窗口失焦自动暂停；fixed_seed=1036 冻结赛道布置（检查点位置、分岔口、酥松带范围、地标）；本作无概率判定（风为表现层，见 F04）。\n- G05 超时（本包冻结值）：全程总时限 **720 秒**（自起步倒计时归零起算，暂停不计入）；超时 → 超时事件 → 判负结算（V02）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：W/S＝油门/刹车；A/D＝转向；R＝复位回最近已过计时门；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：暂停/结算期间驾驶输入无效；起步倒计时 3 秒内油门可预压但车辆锁定；被拒输入不产生状态变化。\n- I03 鼠标仅用于菜单与镜头辅助（可选），非冻结需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算。\n- I05 焦点与点击穿透规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（G04）。\n- I06 UI 必须显示的状态：当前圈数（1–2）、单圈计时、总计时、已过门数（x/8）、复位次数、本圈分段用时（过门时刷新）、超时倒计时（剩余总时限）。\n- I07 输入延迟目标：按键到画面可见反馈 ≤100 毫秒（桌面 P95，每类输入 ≥30 次采样）。\n\n## 5. 赛道与内容清单 [L01–L04]\n\n- L01 生成对象：原创试验车 1、分段计时门拱门 8（兼起终点主计时门）、遥测站 1、盐晶岩地标 2、风向袋 3；装饰非冻结需求。\n- L02 赛道（冻结布局）：全长约 4 千米封闭环线；8 座计时门位置由 seed=1036 冻结；边界白线外为出界判定区；第 4–5 门之间设 1 处双路线分岔——主线（压实盐板，长 500 米）与外线（盐晶酥松带，长 450 米、抓地 0.75）在分岔口汇合，两侧均设检查点判定；酥松带另在赛道两处弯道外侧延伸为漂移带。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/结算面板）与交互物（计时门触发体、出界判定体、复位点）逐类存在且运行时可进入；计时门判定体由引擎触发器构建，装饰拱门模型不得替代判定体；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；未给数值的表现层（装饰造型、配色、粒子参数、音色）为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。音效为冻结需求（F06 清单逐条交付，缺失按 FAIL 计）。\n\n## 6. 机制系统 [M01–M04]\n\n- M01 顺序计时门（主机制）\n  - input：穿越判定（系统触发器，毫秒时间戳）\n  - precondition：车辆处于可计时的行驶状态（非暂停/结算）\n  - state_change：计时门必须按 1→8 序通过；漏门（越序或跳越）→ 该圈不计成绩并触发漏门警告\n  - output：按 G02 结算分段与单圈用时\n  - observable：计时门序列事件（含编号与毫秒时间戳）、lap_complete 事件、漏门警告事件\n  - invalid_case：越序穿门不计入且出漏门警告（无副作用）；暂停/结算期间触发体冻结\n  - recovery：漏门后须按 R 复位回最近已过门重新按序通过，或继续完成本圈但成绩按 V02 标记 invalid\n- M02 防抄近路\n  - input：出界检测（系统，边界白线外判定区）\n  - precondition：车辆处于行驶状态\n  - state_change：离开赛道边界 → 计时继续、车辆减速，该圈成绩有效性标记 invalid（除非按 R 复位回检查点后重新按序通过剩余计时门）\n  - output：按 G02 结算成绩有效性\n  - observable：出界事件与成绩有效性标记\n  - invalid_case：分岔两侧均为合法路线（L02），出界判定不误伤分岔区；误判出界的样本须可回放复核\n  - recovery：出界后按 R 复位恢复有效性（+3 秒罚时）\n- M03 复位\n  - input：R 键或翻车自动\n  - precondition：车辆处于行驶状态或翻车态\n  - state_change：回最近已过计时门、车头朝向重置为赛道行进方向、计时继续、复位计数 +1 并罚 +3 秒\n  - output：按 G02 计入罚时\n  - observable：reset 事件（含门号与罚时）与计时连续性\n  - invalid_case：结算/暂停期间 R 无效\n  - recovery：复位本身即恢复入口；结算界面一键重开为最终出路（V03）\n- M04 路面与路线分岔\n  - input：驶入分岔口选择主线/外线（驾驶）；持续接触酥松带（系统）\n  - precondition：处于第 4–5 门之间分岔区或酥松带延伸区\n  - state_change：外线里程短但抓地 0.75（转向与制动衰减、打滑风险）；主线长但抓地 1.0；路线记录事件（圈号、所选路线、分段用时）\n  - output：按 G03 抓地/制动口径改变车辆物理参数\n  - observable：路线记录事件与两线分段用时差分（同 seed 同操作可复现）\n  - invalid_case：分岔区两侧均为合法赛道（M02 不判出界）\n  - recovery：误入外线可正常跑完，或 R 复位回第 4 门重选\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：按序完成两圈并跨越终点主计时门 → 结算（显示两圈分段、总成绩、评级与复位次数）。\n- V02 失败条件：总时限 720 秒耗尽未完成两圈 → 超时判负结算（G05）；作弊标记未消除的完赛 → 成绩显示 invalid（不授评级）。\n- V03 恢复语义：R 复位回最近计时门（计时继续、+3 秒罚时）；出界后须复位恢复有效性；超时判负或结算后一键重开。\n- V04 persistent_state：无（重开全量清空；最好成绩仅本次会话内显示，不要求跨会话保存）。\n- V04 软锁与不可达处理：不设永久软锁——关键目标均可通过正常操作达成，或触发 V02 失败路径进入结算；结算界面重开为最终恢复出路；判定不可达时按 V02 失败语义结算而非无限等待。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（计时/门序/复位计数）局内保留、重开清空；跨局状态无（S 档：重开全量清空）。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来「白蚀盐原」上的民间测速纪元——大地测量局每年开放干涸盐湖试车场一周，供独立车队挑战公开计时纪录；盐板之下是未干透的卤水层，酥松盐晶带随时可能让轻率的车手付出圈速代价。\n- W02 场景所在地：白蚀盐湖试车场——白色盐板主环线（4 千米）＋外围酥松盐晶带；远处低山、遥测站与维护棚屋点缀地平线；8 座分段计时门与起终点拱门由 seed 冻结。\n- W03 玩家身份与当前任务动机：玩家是独立车队「灰隼小队」的试车手，驾驶自制原型试验车挑战本赛季公开圈速纪录——两圈之内跑进金标 480 秒。\n- W04 失败代价与结局表达：超时或成绩无效＝「测速失败」——车队纪录墙留空（C03 失败意象）；跑进评级带宽＝纪录上墙、遥测站灯带亮起（C03 胜利意象）。\n- W05 叙事来源：试验车＝封闭座舱低重心原型车；分段计时门＝测量局的标准龙门架遥测门；酥松带＝盐晶卤水析出带；遥测站＝大地测量局观测塔。全部原创，不用商业作品命名。\n- W06 视觉风格与色彩材质：高对比白盐工业风；主色＝盐白 #F2F4EF、石墨灰 #3A3F45、遥测青 #2FA8C7、警示橙 #E4762C；材质为盐板反光地面、石墨车漆、金属龙门架与褪色安全条带。\n- W07 环境氛围与声音语言：干燥风啸与盐面尘雾为底；音效语言＝引擎、轮胎、过门提示、倒计时、结算（F06 冻结清单）；混音优先级：倒计时/过门提示 ＞ 漏门警告 ＞ 引擎 ＞ 轮胎 ＞ 风环境。\n- W08 故事表达方式：C01 开场交代测速周与车队目标 → 过程中分段计时门横幅与尘雾表现承载推进 → C03 结算双意象收束；叙事只做包装不改数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：第三人称追车镜头，跟随距离 6 米、高度 2.2 米、FOV 60°；镜头平滑跟随（位置阻尼 0.12）；C 键复位镜头到正后方；镜头不出赛道边界；1920×1080 下 HUD 不遮挡赛道关键门位，1280×720 保持可读（I06）。\n- F02 关键操作镜头变化：高速段（≥150 km/h）镜头 FOV +8°（速度感）；碰撞/出界 0.3 秒中幅震动；复位瞬间镜头快速回正；设置里可关闭震动（F09）。\n- F03 输入与延迟：见 I07（≤100ms P95）；顿帧不改变计时口径。\n- F04 环境常驻效果：盐面热浪扭曲、恒向风线与尘雾飘移（风向袋指示风向）、胎痕渐隐（30 秒）、遥测站顶灯呼吸；风为纯表现层，不参与车辆物理判定（G04）。\n- F05 事件反馈表（事件 → 画面表现 → 音效 → 结束条件，全部冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 倒计时起步 | 3-2-1 数字放大 | countdown_beep×3＋start_release | 起步瞬间 |\n| 过分段计时门 | 门上灯带闪青＋分段时间横幅 1.5 秒 | gate_pass | 横幅收起 |\n| 漏门警告 | 屏幕边缘橙框＋「MISS GATE」提示 | gate_miss | 玩家过下一合法门或复位 |\n| 出界 | 尘土爆起＋画面去饱和 20%（2 秒） | offroad_rumble | 回到界内 |\n| 驶入酥松带 | 车身扬起盐晶尘雾、胎痕颜色变浅 | tire_salt_loop | 离开酥松带 |\n| 高速直线（≥150） | 尾迹拉长＋镜头 FOV +8° | engine_high（音调随速） | 速度跌破 150 |\n| 复位 | 车辆淡出淡入回检查点＋镜头回正 | reset_woosh | 复位完成 |\n| 超时 | 画面暗角＋「TIME OUT」横幅 | timeout_alarm | 进入判负结算 |\n| 冲线结算 | C03 播放（双意象）＋结算面板 | victory_sting / defeat_sting | 进入结算面板 |\n\n- F06 关键音效清单（one_shot 9 条＋环境循环 2 条，全部冻结需求）：countdown_beep、start_release、gate_pass、gate_miss、offroad_rumble、reset_woosh、timeout_alarm、victory_sting、defeat_sting；环境循环：salt_flat_wind（恒向风啸）、prototype_engine（引擎，随速变调）。无配音需求。\n- F07 VFX 信息性与遮挡约束：分段横幅、漏门橙框、出界去饱和为信息类 VFX，必须清晰可辨；尘雾与尾迹不得遮挡 HUD 与前方计时门；非结算单个全屏遮挡 ≤0.5 秒。\n- F08 音画同步：过门音与门灯带闪青同帧；倒计时音与数字同帧；冲线音与终点横幅同帧。\n- F09 屏幕震动：碰撞/出界 0.3 秒中幅（幅度 6 px 等效）；暂停/结算取消未结束的震动；设置可关闭（镜头震动开/关）。\n- F10 前端界面：标题（开始/设置/退出）→ 行驶 HUD（圈数/单圈/总计时/已过门/复位数/分段/剩余总时限，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 结算面板（分段表、总成绩、评级、复位数；Enter 重开）；关键状态图标＋文字并用；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C03]\n\n- C01 测速周开幕（Opening，6 秒，1280×720@24fps）\n  - 触发时机：首次由标题点击「开始」后、倒计时起步之前，每局一次\n  - 内容与角色场景：白色盐湖全景、遥测站灯带依次点亮、灰隼试验车驶出维护棚，镜头掠过分段计时门停在起跑拱门\n  - 资产对应：试验车、计时门、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入倒计时起步；自然播完 → 进入倒计时起步\n  - 状态一致：跳过与自然播完后初始状态一致；播放期间不推进任何游戏计时\n- C02 高速赛段（Event，5 秒，1280×720@24fps）\n  - 触发时机：本局首次速度达到 ≥180 km/h 时插入一次（不打断操作，画中画或瞬时可跳），每局最多一次\n  - 内容与角色场景：追车镜头贴地掠过盐板、尾迹与尘雾拉长、外线酥松带反光一闪\n  - 资产对应：试验车与赛道材质同源\n  - 可跳过：Esc/Enter 跳过 → 立即返回行驶视角；自然播完 → 自动返回\n  - 状态一致：不打断驾驶控制权；播放期间游戏计时正常推进（不暂停、不加成）\n- C03 冲线与测速结果（Ending，6 秒，1280×720@24fps，双意象共用条目）\n  - 触发时机：V01/V02 成立、结算面板出现之前，每局一次\n  - 内容与角色场景：胜利意象＝冲线横幅、遥测站灯带全亮、纪录墙上墙；失败意象＝超时暗角、车队纪录墙留空、车影停在盐面\n  - 资产对应：试验车、遥测站与游戏内模型同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入对应结算面板；自然播完 → 进入对应结算面板\n  - 状态一致：仅在真实 V01/V02 后触发；播放期间不推进任何游戏计时\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 玩法能力：玩家可以驾驶试验车完成两圈计时挑战（M01）、在分岔口选择主/外线并承担抓地差异（M04）、出界后复位恢复有效性（M02/M03）、在 720 秒内冲击金标评级（V01）。\n- N02 流程与界面能力：主菜单、倒计时起步、两圈行驶、终点结算、超时判负、暂停（含失焦自动暂停）、一键重开全部具备真实入口。\n- N03 演出能力：C01–C03 视频、F04 常驻环境、F05 事件反馈表全部行、F06 音效 11 条、F09 震动与设置开关。\n- N04 输入范围：键盘为完整输入方式；鼠标为菜单与可选镜头辅助；手柄/触控为表现层扩展，不进入验收分母。\n- N05 音频范围：F06 冻结音效清单（9 one_shot＋2 环境循环）；无配音需求。\n- N06 表现层自由度：未冻结的装饰造型、配色、粒子参数与音色为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01–A02]\n\n- A01 绑定原则：参考图只约束对应资产的造型、配色与比例，不约束赛道布局（门位/分岔以本 spec L02 冻结数值为准）；R 条件提供 images/ 参考图，N 条件仅有文字描述，评测不得因 N 条件未见参考而追加扣分项。\n- A02 绑定表（文件 → 对象）：\n\n| 参考图 | 绑定对象 | 用途 |\n|---|---|---|\n| images/ref_race_car_sketch.png | 灰隼试验车 | 3D_object image_to_3d |\n| images/ref_checkpoint_gate_sketch.png | 分段计时门拱门组 | 3D_object image_to_3d |\n| images/ref_scene_salt_flat_sketch.png | 白蚀盐湖试车场 | 3D_scene image_to_scene |\n\n参考图为程序化概念草图（1024×1024，无文字；生成参数与负向提示见 asset_tasks/racing_simulation/ref_images_manifest.jsonl），可按该 manifest 扩散重绘后原位覆盖。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [runtime_complexity]\n  rationale: \"单主闭环（驾驶→过门→计时→两圈→结算）；计时门/出界/复位/路面差异均在驾驶计时系统内部，无跨系统因果链；分岔为局部路线取舍不升档（对照 difficulty_design §3.3）；车辆与计时器并发（B1）；新增总时限/分岔/路面差异为局内规则与表现，不升档\"\n  downgrade_boundary: \"去掉出界判定、罚时与分岔后仍为 S（更简）\"\n  upgrade_boundary: \"若轮胎损耗跨圈保留并改变后续圈操控，升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：6 个（text-to-3D 4，image-to-3D 2）；object 任务资产为：salt_flat_prototype_car, checkpoint_gate_kit, telemetry_station, salt_crystal_rock, wind_sock_set, maintenance_shed。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：drift_recovery。\n- video/audio/mechanic/UI：分别为 3/11/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "01bde5781c9a01113df9cb9db0723b7638df5d401bb597363be5d5f01d0bcc71"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Seamless heavy prototype engine loop at mid load suitable for runtime pitch modulation by speed, no manufacturer identity",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    }
+  },
+  "cg": {},
+  "3d": {
+    "G036_scene_001": {
+      "schema": "generated_per_asset_req.v1",
+      "task_id": "G036_scene_001",
+      "game_id": "G036_salt_flat_timetrial",
+      "sources_sha256": "c856d0fed9a009d94f3fc62bcb74ddb8e35e4e20e5301dcd9a183a597296e165",
+      "policy": {
+        "version": "generated_req.v1",
+        "model": "gpt-6.1-sol",
+        "rubric_source": "full general_requirement.txt and exact priority task JSON prompt; generated without asset evidence",
+        "score_supported": "100 * PASS / (PASS + FAIL); null if denominator is zero",
+        "score_all_lower_bound": "100 * PASS / all_checks; UNVERIFIED is not a confirmed failure",
+        "coverage": "100 * (PASS + FAIL) / all_checks",
+        "comparison": "same frozen rubric across providers; report counts and coverage",
+        "req_vs_fidelity": "requirement checks are separate from DINO image similarity",
+        "static_limit": "metric units, rigging, physics, runtime behavior require additional evidence; do not infer from screenshots"
+      },
+      "dimensions": [
+        {
+          "id": "requirement_compliance",
+          "checks": [
+            {
+              "fail_criterion": "场地不是白色盐滩，或主线明显呈沥青、泥土等其他路面，或呈镜面水面而非哑光白色盐面。",
+              "id": "R01",
+              "pass_criterion": "场景可辨认为白色盐滩试车场，主线呈压实盐板的哑光白色微光质感。",
+              "requirement": "表现白色盐滩场地及压实盐板主线的哑光白色表面。",
+              "sources": [
+                {
+                  "quote": "Bright daytime white salt-flat proving ground",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "compacted salt板 main line with matte white sheen",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "盐面或主线路面在六视角中不可辨，或曝光使其颜色与表面质感无法判断。"
+            },
+            {
+              "fail_criterion": "主线明确断开、为开放路线，或未形成环线。",
+              "id": "R02",
+              "pass_criterion": "可沿主线轮廓辨认出连续闭合的环形路线，不以绝对长度作为图像判据。",
+              "requirement": "主线形成封闭环线。",
+              "sources": [
+                {
+                  "quote": "4 km closed loop",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "路线关键段被遮挡或超出视野，无法确认是否闭合。"
+            },
+            {
+              "fail_criterion": "没有外线路径，或外线与主线均明确呈相同的压实表面，缺少松散盐晶带的可见区别。",
+              "id": "R03",
+              "pass_criterion": "主线外围存在可辨认的外线路径，其表面呈松散盐晶带特征，与压实主线形成视觉区别。",
+              "requirement": "设置松散盐晶外线。",
+              "sources": [
+                {
+                  "quote": "a shorter loose salt-crystal outer line",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "外线区域被遮挡，或渲染尺度不足以辨认其路面特征。"
+            },
+            {
+              "fail_criterion": "可比较的外线路径明显等长于或长于对应主线路径。",
+              "id": "R04",
+              "pass_criterion": "在对应分岔与汇合点之间，外线路径可辨地短于主线路径；不要求从图像验证米制长度。",
+              "requirement": "外线比对应主线路段更短。",
+              "sources": [
+                {
+                  "quote": "a shorter loose salt-crystal outer line",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "分岔、汇合点或完整路径不可见，透视与遮挡使两条路线的相对长度无法可靠比较。"
+            },
+            {
+              "fail_criterion": "在路线及相关位置均可完整检查时，可辨认的遥测门位少于或多于八处。",
+              "id": "R05",
+              "pass_criterion": "场景中能够区分并计数八处遥测门位；不要求这些门位自带运行时触发体。",
+              "requirement": "提供八处遥测门位。",
+              "sources": [
+                {
+                  "quote": "8 telemetry gate spots",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "部分赛道被遮挡，或门位标识不足以逐一辨认与计数。"
+            },
+            {
+              "fail_criterion": "地平线区域可充分检查但没有测量塔，或塔状设施明显被放置为近景主体而非地平线设施。",
+              "id": "R06",
+              "pass_criterion": "地平线附近存在可辨认为测量或观测用途的塔状设施。",
+              "requirement": "在地平线布置测量塔。",
+              "sources": [
+                {
+                  "quote": "survey tower and maintenance sheds on the horizon",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "地平线不可见，或远景设施过小、被遮挡，无法识别其是否为塔。"
+            },
+            {
+              "fail_criterion": "地平线区域可充分检查但没有维护棚屋，或棚屋明确仅位于近景。",
+              "id": "R07",
+              "pass_criterion": "地平线附近存在可辨认的维护棚屋建筑，不额外限定具体数量或建筑细节。",
+              "requirement": "在地平线布置维护棚屋。",
+              "sources": [
+                {
+                  "quote": "survey tower and maintenance sheds on the horizon",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "相关远景被遮挡或分辨率不足，无法识别棚屋。"
+            },
+            {
+              "fail_criterion": "可充分检查的远景没有山体，或山体明显呈贴近赛道的高耸山壁而非远处低山。",
+              "id": "R08",
+              "pass_criterion": "远景出现低矮山体轮廓，与盐滩主体保持明显的远近层次。",
+              "requirement": "表现远处低山。",
+              "sources": [
+                {
+                  "quote": "low mountains far away",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "六视角未展示有效远景，或远景被遮挡、裁切而无法判断。"
+            },
+            {
+              "fail_criterion": "整体明显表现为夜晚、黄昏或阴天柔光，缺少明亮正午强光的视觉特征。",
+              "id": "R09",
+              "pass_criterion": "场景呈明亮白昼，照明具有正午强光的鲜明明暗关系，而非低角度晨昏光或漫射阴天光。",
+              "requirement": "采用明亮白昼、强烈正午光照。",
+              "sources": [
+                {
+                  "quote": "Bright daytime",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "harsh noon light",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "固定渲染使用与资产场景照明无关的展示灯光，或曝光异常，无法判断设计的昼夜与光照状态。"
+            },
+            {
+              "fail_criterion": "场景以物体排列展示、拼贴面板或下半部文字呈现，或场景中混入作为展示内容的UI。",
+              "id": "R10",
+              "pass_criterion": "盐滩、道路与远景设施构成连贯空间，而非物体陈列或拼贴；场景内容不含下半部文字或UI。",
+              "requirement": "场景采用连贯空间表达，不采用文字面板、拼贴、物体排列或UI展示。",
+              "sources": [
+                {
+                  "quote": "scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "视图裁切不足以判断空间组织，或无法区分画面文字、UI来自资产本身还是外部查看器。"
+            },
+            {
+              "fail_criterion": "主外线明确没有分岔汇合结构；或门序能够可靠识别时，分岔明确不位于第四与第五门之间。",
+              "id": "R11",
+              "pass_criterion": "主外线形成分岔并重新汇合；能够可靠识别门序时，分岔位于第四与第五门之间。",
+              "requirement": "主外线分岔设置在第四与第五计时门之间，并重新汇合。",
+              "sources": [
+                {
+                  "quote": "第 4–5 门之间主线（500 米压实盐板）/外线（450 米酥松带）分岔",
+                  "source": "task_json"
+                },
+                {
+                  "quote": "在分岔口汇合",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "分岔或汇合位置被遮挡，或无法可靠识别门序，不能确认其位于第四与第五门之间。"
+            }
+          ]
+        }
+      ],
+      "deferred_requirements": [
+        {
+          "reason": "固定六视角渲染缺少可信米制标尺，无法证明路线绝对长度；闭环结构及主外线相对长短已分别纳入视觉检查。",
+          "requirement": "赛道总长约4千米，分岔主线500米、外线450米。",
+          "sources": [
+            {
+              "quote": "全长约 4 千米封闭环线",
+              "source": "task_json"
+            },
+            {
+              "quote": "主线（500 米压实盐板）/外线（450 米酥松带）",
+              "source": "task_json"
+            }
+          ]
+        },
+        {
+          "reason": "是否由引擎程序构建判定对象、场景是否承载运行时判定，属于实现责任与运行时行为，静态图像无法证明；不得因视觉外壳没有触发体而判缺失。",
+          "requirement": "本场景仅提供视觉外壳，计时门触发体、出界判定与复位点由引擎程序对象构建。",
+          "sources": [
+            {
+              "quote": "visual shell only",
+              "source": "task_prompt"
+            },
+            {
+              "quote": "计时门触发体、出界判定与复位点由引擎程序对象构建，场景图不承载判定",
+              "source": "task_json"
+            }
+          ]
+        },
+        {
+          "reason": "种子复现与精确布局需要生成配置或确定的布局基准，不能从六视角静态图像证明；种子口径冲突另列于conflicts。",
+          "requirement": "计时门位置、分岔、酥松带范围与地标位置按指定种子冻结。",
+          "sources": [
+            {
+              "quote": "8 座分段计时门位置、第 4–5 门之间主线（500 米压实盐板）/外线（450 米酥松带）分岔、酥松带范围与地标位置由 seed=1036 冻结",
+              "source": "task_json"
+            }
+          ]
+        }
+      ],
+      "conflicts": [
+        "任务JSON的seed为4361，而layout_constraints要求“由 seed=1036 冻结”，general requirement亦要求fixed_seed=1036。两种种子口径不一致，且没有给出可供静态图像核对的确定布局，因此不将特定种子对应的精确门位、酥松带范围及地标坐标纳入checks。"
+      ]
+    },
+    "G036_salt_flat_timetrial_obj_005": {
+      "schema": "generated_per_asset_req.v1",
+      "task_id": "G036_salt_flat_timetrial_obj_005",
+      "game_id": "G036_salt_flat_timetrial",
+      "sources_sha256": "ad9d4cc227ad7bda911f47d0d8251b1314cebd037a4bfbf96968df596903a79f",
+      "policy": {
+        "version": "generated_req.v1",
+        "model": "gpt-6.1-sol",
+        "rubric_source": "full general_requirement.txt and exact priority task JSON prompt; generated without asset evidence",
+        "score_supported": "100 * PASS / (PASS + FAIL); null if denominator is zero",
+        "score_all_lower_bound": "100 * PASS / all_checks; UNVERIFIED is not a confirmed failure",
+        "coverage": "100 * (PASS + FAIL) / all_checks",
+        "comparison": "same frozen rubric across providers; report counts and coverage",
+        "req_vs_fidelity": "requirement checks are separate from DINO image similarity",
+        "static_limit": "metric units, rigging, physics, runtime behavior require additional evidence; do not infer from screenshots"
+      },
+      "dimensions": [
+        {
+          "id": "requirement_compliance",
+          "checks": [
+            {
+              "fail_criterion": "相关结构充分可见，但风向袋未安装在立杆上，或主体无法辨认为风向袋。",
+              "id": "R01",
+              "pass_criterion": "可见风向袋由立杆支承，构成杆装式风向袋。",
+              "requirement": "资产表现为安装在立杆上的风向袋。",
+              "sources": [
+                {
+                  "quote": "Pole-mounted orange-and-white striped wind sock",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "安装部位被遮挡、裁切或分辨率不足，无法确认支承关系。"
+            },
+            {
+              "fail_criterion": "完整视图可确认立杆或风向袋缺失，或出现多根立杆、多个风向袋。",
+              "id": "R02",
+              "pass_criterion": "综合六视角可确认一根立杆和一个风向袋；转环等连接部件不另算风向袋或立杆。",
+              "requirement": "可见组成中的立杆和风向袋各为一个。",
+              "sources": [
+                {
+                  "quote": "single object set of one pole and sock",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "资产未完整入镜，或部件重叠使数量无法确认。"
+            },
+            {
+              "fail_criterion": "连接部位充分可见，但缺少环状转环构件。",
+              "id": "R03",
+              "pass_criterion": "安装连接结构中可辨认出环状转环构件。",
+              "requirement": "具有可见的转环结构。",
+              "sources": [
+                {
+                  "quote": "with pivot ring",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "连接部位被遮挡或过小，无法辨认是否存在转环。"
+            },
+            {
+              "fail_criterion": "袋体充分可见，但缺少橙色或白色，或两种颜色没有构成条纹。",
+              "id": "R04",
+              "pass_criterion": "风向袋表面清楚呈现橙色与白色相间的条纹。",
+              "requirement": "风向袋采用橙白条纹配色。",
+              "sources": [
+                {
+                  "quote": "orange-and-white striped wind sock",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "光照、遮挡或图像质量使颜色及条纹分布无法判断。"
+            },
+            {
+              "fail_criterion": "袋体外形充分可见，但没有锥形收束关系，或被明显复杂的造型取代。",
+              "id": "R05",
+              "pass_criterion": "风向袋主体为简洁的锥形，从较宽端向较窄端收束。",
+              "requirement": "风向袋具有简洁的锥形主体。",
+              "sources": [
+                {
+                  "quote": "simple cloth cone",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "遮挡、裁切或视角重叠使主体形状无法判断。"
+            },
+            {
+              "fail_criterion": "袋体明确表现为厚重的实心硬质构件，缺乏布质外观。",
+              "id": "R06",
+              "pass_criterion": "袋体的可见形态或表面观感能够传达布质外观；不要求细密织纹或复杂褶皱。",
+              "requirement": "锥形袋体呈布质外观。",
+              "sources": [
+                {
+                  "quote": "simple cloth cone",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "简化造型、光照或分辨率不足以区分布质与硬质材料。"
+            },
+            {
+              "fail_criterion": "在完整展示资产的视图中，主体轮廓混杂或难以辨认，必须依赖局部细节才能识别风向袋。",
+              "id": "R07",
+              "pass_criterion": "整体观看六视图时，无需放大局部细节即可识别风向袋，主体外轮廓简洁清楚。",
+              "requirement": "轮廓简洁清楚，具备远观辨识性。",
+              "sources": [
+                {
+                  "quote": "readable from distance",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "clean silhouette",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "仅有局部画面，或展示尺度、遮挡使整体轮廓辨识性无法判断。"
+            },
+            {
+              "fail_criterion": "主要造型采用密集、复杂的几何塑形，整体明显违背低多边形风格。",
+              "id": "R08",
+              "pass_criterion": "主体形体经过明显简化，以简洁的几何分段呈现低多边形风格。",
+              "requirement": "整体采用低多边形设计风格。",
+              "sources": [
+                {
+                  "quote": "low-poly style",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "视图尺度或遮挡使主要几何形体的简化程度无法辨认。"
+            },
+            {
+              "fail_criterion": "主要表面充分可见，却普遍表现为连续圆滑曲面，缺少要求的平面分面效果。",
+              "id": "R09",
+              "pass_criterion": "主要表面可见平直面片及面片之间的分面效果。",
+              "requirement": "表面呈平直分面的视觉效果。",
+              "sources": [
+                {
+                  "quote": "flat faceted surfaces",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "光照或分辨率使面片边界及明暗变化无法辨认。"
+            },
+            {
+              "fail_criterion": "可见细密织纹、微小划痕、精细雕刻等细碎表面细节。",
+              "id": "R10",
+              "pass_criterion": "表面保持简洁，使用大块颜色和分面表达，没有细碎的精细表面装饰。",
+              "requirement": "不添加精细表面细节。",
+              "sources": [
+                {
+                  "quote": "no fine surface detail",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "图像模糊或表面被遮挡，无法区分细节确实缺失还是未被显示。"
+            },
+            {
+              "fail_criterion": "可见文字或图案包含可识别的商业作品名称或品牌标识。",
+              "id": "R11",
+              "pass_criterion": "六视角中可见的文字和图案未出现可识别的商业作品名称或品牌标识。",
+              "requirement": "可见表面不使用商业作品名称或品牌标识。",
+              "sources": [
+                {
+                  "quote": "不使用任何商业作品的名称、车辆、赛道或品牌标识。",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "存在疑似名称或标识，但因过小、模糊或遮挡而无法辨认。"
+            }
+          ]
+        }
+      ],
+      "deferred_requirements": [
+        {
+          "reason": "六视角可以展示外观朝向，但无法证明资产坐标系实际采用哪一根轴作为上方向。",
+          "requirement": "资产采用Y轴向上的坐标约定。",
+          "sources": [
+            {
+              "quote": "Y-up",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "静态渲染不能证明实际三角面数或几何是否已尽量精简；可见的低多边形风格另在checks中检查，不添加数值阈值。",
+          "requirement": "尽量减少三角面数量。",
+          "sources": [
+            {
+              "quote": "minimal triangle count",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "六视角可核对可见构件数量，但无法证明资产文件或场景中的对象集组织方式；也不能据此追加单网格要求。",
+          "requirement": "一根立杆与一个风向袋作为单个对象集交付。",
+          "sources": [
+            {
+              "quote": "single object set of one pole and sock",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "固定静态视图没有运行时风向信息，无法验证风向袋是否实际随风向正确指示。",
+          "requirement": "风向袋在运行中指示风向。",
+          "sources": [
+            {
+              "quote": "风向袋指示风向",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "外观检查只能发现可识别的现有商业标识，无法证明设计来源与原创过程。",
+          "requirement": "资产美术必须原创。",
+          "sources": [
+            {
+              "quote": "本作全部名称、赛道、车辆、文案与美术必须原创",
+              "source": "general_requirement"
+            }
+          ]
+        }
+      ],
+      "conflicts": []
+    }
   }
 }

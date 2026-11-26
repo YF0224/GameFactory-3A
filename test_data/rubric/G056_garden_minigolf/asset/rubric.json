@@ -16,5 +16,1209 @@
     "G056_scene_001": {
       "assertions": []
     }
+  },
+  "audio": {
+    "G056_sfx_001": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G056_garden_minigolf",
+          "task_id": "G056_sfx_001",
+          "asset_name": "charge_tone",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Rising soft tone while charging a putt",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5561,
+          "trigger": "蓄力（按住循环，音调随力度）",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《漂浮花园的迷你高尔夫》｜推杆物理机制输入规范\n\n```yaml\ncase_id: G056\nbase_case_id: G056\ntitle: 漂浮花园的迷你高尔夫\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: godot\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1056\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《漂浮花园的迷你高尔夫》；版本：mechanics-v3（2026-10-11 完整性修订：补瞄准线/力度条/轨迹残影、镜头规则、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Godot 4.x（Windows 桌面构建）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘与鼠标。\n- 原创边界：迷你高尔夫属公有领域玩法；本作全部名称、球场、文案与美术必须原创，不使用任何商业作品的球场设计、角色或造型。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 球洞实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：3D 俯视迷你高尔夫（单人杆数制）。本测例包含的能力：三洞冻结球场、蓄力击球物理、坡面反弹摩擦、瞄准线与轨迹残影反馈、界外复位与罚杆、双镜头模式、开场/结算视频。\n- S02 核心循环一句话：瞄定力度方向 → 击球 → 物理滚动 → 进洞或补杆 → 结算杆数。\n- S03 流程：标题 → 球洞1 → 球洞2 → 球洞3 → 总结算（杆数对比标准杆）；每洞自动开球。\n- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：界外自动复位回上一杆位＋罚 1 杆；总结算界面一键重开；Esc 暂停。\n- S06 与种子卡差异：种子卡杆数为「规则化高尔夫全流程」；本包冻结为三洞切片（标准杆 12），P0 局内口径不变。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 球洞1 → 球洞2 → 球洞3 → 总结算 → 重开/返回。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且球场按 seed=1056 生成完成\n  - state_change：进入「标题」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「球洞1」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 球洞1（直道平地，标准杆 3）\n  - input：鼠标瞄准、按住左键蓄力、松开击球、R 重打、C 镜头切换、Esc 暂停（触发方：玩家）\n  - precondition：洞1 载入完成且球静止于发球点\n  - state_change：击球按 G02 公式生成初速 → 物理结算\n  - feedback：瞄准线/蓄力条/轨迹残影按 §9 F05 呈现\n  - next_actions：入洞 →「球洞2」；8 杆上限 → 强制完成进下一洞\n  - outcome：本洞杆数累计局内\n- S08 球洞2（缓上坡＋单挡板折返，标准杆 4）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞1 完成（入洞或达上限）\n  - state_change：载入洞2；坡面与挡板按 L02 冻结\n  - feedback：坡面瞄准线变浅提示减速\n  - next_actions：入洞 →「球洞3」\n  - outcome：杆数累计\n- S09 球洞3（阶梯坡＋双挡板，标准杆 5）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞2 完成\n  - state_change：载入洞3；阶梯坡与双挡板生效\n  - feedback：反弹火花与入洞反馈\n  - next_actions：入洞或达上限 →「总结算」（先播 C02）\n  - outcome：按 V01 结算\n- S10 总结算\n  - input：Enter＝重开 / Esc＝返回标题（触发方：玩家）\n  - precondition：三洞全部完成\n  - state_change：进入「总结算」状态\n  - feedback：总结算面板显示总杆数、对比标准杆 12、罚杆数\n  - next_actions：重开或返回\n  - outcome：无跨局写入\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于任一洞\n  - state_change：暂停覆盖层打开；球、物理与蓄力冻结\n  - feedback：暂停面板（继续/本洞重打/返回标题/设置）\n  - next_actions：Esc 或「继续」→ 恢复\n  - outcome：恢复后无状态漂移（G04）\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：距离米制；力度为 0–100% 蓄力条（数值常显）；杆数为整数。\n- G02 物理与公式（本包冻结值）：击球初速 v＝蓄力比例 × 12 米/秒；平地滚动摩擦减速度 1.5 米/秒²；坡道沿坡向加速度分量 3.0 米/秒²；碰撞恢复系数 0.6。独立 oracle 数例：平地直线满蓄力 50% 击球 v＝6 米/秒，纯滚动距离＝v²/(2×1.5)＝**12 米**；蓄力 100% 为 48 米。\n- G03 杆数与罚则（本包冻结值）：三洞标准杆 3/4/5（总标准杆 12）；界外复位每次罚 1 杆；每洞杆数上限 8 杆，达上限自动按 8 杆＋累计罚杆记入并进入下一洞（无硬失败）。\n- G04 暂停与随机：Esc 暂停冻结球与物理；窗口失焦自动暂停；fixed_seed=1056 冻结三洞地形布置；本作物理为确定公式，无概率判定。\n- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速；蓄力条 0–100% 数值与当前蓄力同步；球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键鼠：鼠标移动＝瞄准方向；按住左键蓄力、松开击球；C＝俯视全览/击球视角切换；R＝本洞重打（罚 1 杆）；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：球滚动中击球无效；蓄力不足 5% 松开视为取消（不耗杆）；暂停/结算期间输入无效；被拒输入不产生杆数变化。\n- I03 无手柄需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；俯视全览模式下击球无效（须切回击球视角）；同帧多输入按瞄准→蓄力→击球顺序结算。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示；HUD 对照见 rubric。\n- I07 输入延迟目标：蓄力/击球按键到画面反馈 ≤ 50 毫秒（手感关键）；镜头切换 ≤ 150 毫秒。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：高尔夫球 1、三洞（洞杯、旗杆、发球点）、坡面与挡板若干、瞄准线与蓄力条 UI、轨迹残影；花园装饰为表现层。\n- L02 球洞（seed=1056 冻结地形）：洞1 直道平地 12 米（标准杆 3）；洞2 缓上坡＋单挡板折返（标准杆 4）；洞3 阶梯坡＋双挡板（标准杆 5）。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的花园装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M05]\n\n- M01 力度方向与物理（主机制）\n  - input：瞄准＋蓄力击球\n  - precondition：球静止且处于击球准备状态（非俯视全览）\n  - state_change：按 G02 公式生成初速向量 → 球滚动/反弹\n  - observable：逐帧球位置采样与初速、距离事件（见 G02 oracle）；`stroke` 事件（含初速与角度）\n  - invalid_case：滚动中击球、全览模式击球 → 拒绝且不耗杆\n  - recovery：球静止即恢复击球准备\n- M02 坡面反弹与摩擦\n  - input：地形接触（系统）\n  - precondition：球与坡面/挡板碰撞\n  - state_change：坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹\n  - observable：接触/反弹事件与速度分量差分\n  - invalid_case：无碰撞则纯摩擦结算\n  - recovery：—\n- M03 界外复位\n  - input：球坠出球场边界（系统）\n  - precondition：球越过 L02 边界\n  - state_change：回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位\n  - observable：`out_of_bounds` 事件（含罚杆字段）\n  - invalid_case：贴边滚动不触发\n  - recovery：复位即恢复击球\n- M04 杆数判定\n  - input：球入洞（系统）/ 达上限（系统）\n  - precondition：球与洞杯判定重叠且速度低于阈值\n  - state_change：本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算\n  - observable：`hole_complete` 事件与杆数流水（含罚杆）\n  - invalid_case：高速掠过洞杯不判入洞（速度阈值）\n  - recovery：—\n- M05 瞄准与轨迹反馈\n  - input：瞄准移动／蓄力变化（玩家）\n  - precondition：击球准备状态\n  - state_change：瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）\n  - observable：虚线长度采样与预计距离的 60% 对账；残影出现/渐隐事件\n  - invalid_case：全览模式不显示虚线（切回即恢复）\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成三洞 → 总结算（显示总杆数、对比标准杆 12 与罚杆数）。\n- V02 失败条件：无硬失败态；每洞 8 杆上限强制推进（记为上限完成）。\n- V03 恢复语义：界外自动复位＋罚 1 杆；R 重打本洞（罚 1 杆、回发球点）；结算后一键重开。\n- V04 persistent_state：无（重开全量清空；累计杆数仅本局内保留）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（杆数/洞进度）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——8 杆上限保证推进；界外复位兜底；任意洞可完成。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：架空云海时代的「浮屿花园」——园艺师们在漂浮于云海的花屿上经营三洞试炼球场，庆祝春分的推杆大会今夜开杆。\n- W02 场景所在地：浮屿花园的三座花洞——直道花径（洞1）、上坡藤架（洞2）、阶梯石台（洞3），云海在球场边缘流动。\n- W03 玩家身份与当前任务：玩家是见习园艺师「芽衣」；当前任务：在推杆大会上以不超过标准杆的成绩完成三洞，取得正式园丁资格。\n- W04 失败代价与结局表达：本作无失败态；超标准杆仅影响成绩表达；完成则 C02 呈现大会颁奖与花灯升空。\n- W05 叙事来源：三洞＝园艺师资格考试的三个科目（直道基本功/坡度控球/复杂地形）；旗杆与洞杯＝试炼花器；云海边界＝浮屿边界（界外即坠云）。全部原创。\n- W06 视觉风格与色彩材质：明快风格化 3D 花园；主色＝草甸绿（#7CB26B 系）＋花瓣粉（#E8A0B8 系）＋云海白蓝（#C9DCE8 系）；材质以草坪、木挡板、石台为主，光线为春日暖光。\n- W07 环境氛围与声音语言：云海微风的春日花园——常驻风拂草浪与远处鸟鸣；音效语言为「击球脆响＋滚动沙沙＋碰撞闷响＋入洞清脆」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代浮屿与大会 → 三洞推进承载试炼节奏 → 结算视频（C02）收束颁奖；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头（冻结需求）：默认击球视角＝发球/停球点后方第三人称（俯角 45°，距离 5 米），瞄准方向随鼠标旋转；球滚动时镜头平滑跟随球（0.2 秒插值，速度上限 12 米/秒避免甩镜）；球静止 1 秒后镜头回击球准备位；C 键切换「俯视全览」（整洞 60° 俯视，不参与击球）；镜头边界＝球场外框外扩 10%；界外复位/换洞时镜头直接落位（无漂移）。\n- F02 关键操作镜头变化：入洞瞬间镜头轻微推近洞杯 5%（0.5 秒）；出界瞬间镜头短暂拉高 10%（0.4 秒）；无慢动作。\n- F03 输入与延迟：见 I07（击球手感为 S 档核心，≤50 毫秒）。\n- F04 环境常驻效果：花瓣随风飘落（低频）、云海缓慢流动、旗杆旗面摆动；不遮挡瞄准线与洞杯。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 蓄力开始 | 蓄力条展开＋数值跳动 | 蓄力低鸣（按住循环，音调随力度升高） | 松开或取消 |\n| 击球 | 球推出＋草地小尘环＋轨迹残影启动 | 击球脆响 | 残影 0.5s 渐隐 |\n| 球滚动 | 轨迹残影跟随＋草浪压痕 | 滚动沙沙（滚动中循环） | 球停 |\n| 碰撞挡板 | 火花小粒子＋球体挤压回弹 | 碰撞闷响 | 回弹完成 |\n| 上坡减速 | 瞄准线透明度提示（击球前）/球速渐减 | 沙沙声减弱 | 坡段结束 |\n| 出界 | 球坠云＋镜头拉高＋「界外＋1 杆」提示 | 坠落风声 | 复位完成 |\n| 入洞 | 球旋入洞杯＋旗杆亮灯＋花瓣迸溅 | 入洞清脆音 | 进入下一洞 |\n| 达杆数上限 | 「本洞按 8 杆计」横幅 | 低提示音 | 推进下一洞 |\n| 三洞完成 | 花灯升空粒子 | 结算上扬音 | 进入总结算 |\n\n- F06 关键音效清单：蓄力低鸣、击球脆响、滚动沙沙、碰撞闷响、坠落风声、入洞清脆音、低提示音、上扬音；环境音：风拂草浪＋云海低鸣＋远处鸟鸣（常驻循环）；循环音开始/结束：滚动沙沙按滚动起止、蓄力低鸣按按住起止、环境声随球场载入开始、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息；轨迹残影承担落点复盘信息；花瓣与草浪粒子单帧 ≤ 35 且不遮挡瞄准线、洞杯与 HUD。\n- F08 音画同步：击球脆响与击球帧同步；碰撞闷响与接触帧同步；入洞清脆音与入洞事件帧同步。\n- F09 屏幕震动：入洞 0.1 秒小幅；碰撞 0.05 秒微幅；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ HUD（洞号、杆数/上限、蓄力条数值、罚杆、镜头模式提示）→ 总结算（总杆数/对比标准杆 12/罚杆/重开/返回）→ 暂停面板（继续/本洞重打/返回标题/设置）；关键状态附图标＋文字（镜头模式、界外提示），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开场花园（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入球洞1 之前，每局一次\n  - 内容与角色场景：云海之上的浮屿花园全景，花灯次第点亮，见习园艺师「芽衣」握杆走向三洞试炼球场的第一洞发球点\n  - 资产对应：浮屿花园、旗杆、高尔夫球与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入球洞1；自然播完 → 同\n  - 状态一致：播放期间不推进任何计时；进入状态＝0/3 洞\n- C02 推杆大会结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：三洞全部完成后、总结算面板之前，每局一次\n  - 内容与角色场景：三座花洞灯带依次亮起，花灯升空汇成春分图案，「芽衣」举起推杆向观众席致意\n  - 资产对应：球场、花灯、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 同\n  - 状态一致：仅在真实完成三洞后触发\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三洞冻结球场、蓄力击球物理、坡面反弹与摩擦、瞄准线/蓄力条/轨迹残影反馈、界外复位与罚杆、8 杆上限推进、双镜头模式（击球/俯视全览）。\n- N02 本测例包含的流程与界面：标题、三洞推进、总结算、暂停（含失焦自动暂停）、重打与重开。\n- N03 本测例包含的演出能力：开场/结算视频（C01/C02）、§9 F04–F09 全部事件反馈与音效、云海花园氛围。\n- N04 输入范围：键盘＋鼠标（鼠标瞄准/左键蓄力/C/R/Esc/Enter）；无触控、手柄、多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋花园环境音；无配音与背景音乐轨需求。\n- N06 表现层自由度：§9 未冻结的花卉装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（见习园艺师「芽衣」、高尔夫球与旗杆、三洞球场布局等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（瞄准→蓄力→击球→物理→进洞/补杆）；坡面与反弹均为物理系统内部规则，无跨系统因果链；多球物理与镜头插值并发（B1）；无失败态，界外复位与重打为恢复路径；新增瞄准反馈与镜头模式不改变难度档\"\n  downgrade_boundary: \"去掉坡面与挡板（纯平地直道）后仍为 S（更简）\"\n  upgrade_boundary: \"若杆数成绩跨洞/跨局保留并解锁新球场规则，升 M/L\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 2，image-to-3D 1）；object 任务资产为：gardener_mei, golf_ball, hole_flag。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, putt_swing。\n- video/audio/mechanic/UI：分别为 2/9/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "ad13ec4682722b104bf6d56801d8b7bb5aaee25bf2fd17f75997bab49f55e8bd"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Rising soft tone while charging a putt",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G056_sfx_002": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G056_garden_minigolf",
+          "task_id": "G056_sfx_002",
+          "asset_name": "putt_tap",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Clean wood-and-putter tap",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5562,
+          "trigger": "击球",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《漂浮花园的迷你高尔夫》｜推杆物理机制输入规范\n\n```yaml\ncase_id: G056\nbase_case_id: G056\ntitle: 漂浮花园的迷你高尔夫\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: godot\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1056\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《漂浮花园的迷你高尔夫》；版本：mechanics-v3（2026-10-11 完整性修订：补瞄准线/力度条/轨迹残影、镜头规则、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Godot 4.x（Windows 桌面构建）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘与鼠标。\n- 原创边界：迷你高尔夫属公有领域玩法；本作全部名称、球场、文案与美术必须原创，不使用任何商业作品的球场设计、角色或造型。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 球洞实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：3D 俯视迷你高尔夫（单人杆数制）。本测例包含的能力：三洞冻结球场、蓄力击球物理、坡面反弹摩擦、瞄准线与轨迹残影反馈、界外复位与罚杆、双镜头模式、开场/结算视频。\n- S02 核心循环一句话：瞄定力度方向 → 击球 → 物理滚动 → 进洞或补杆 → 结算杆数。\n- S03 流程：标题 → 球洞1 → 球洞2 → 球洞3 → 总结算（杆数对比标准杆）；每洞自动开球。\n- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：界外自动复位回上一杆位＋罚 1 杆；总结算界面一键重开；Esc 暂停。\n- S06 与种子卡差异：种子卡杆数为「规则化高尔夫全流程」；本包冻结为三洞切片（标准杆 12），P0 局内口径不变。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 球洞1 → 球洞2 → 球洞3 → 总结算 → 重开/返回。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且球场按 seed=1056 生成完成\n  - state_change：进入「标题」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「球洞1」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 球洞1（直道平地，标准杆 3）\n  - input：鼠标瞄准、按住左键蓄力、松开击球、R 重打、C 镜头切换、Esc 暂停（触发方：玩家）\n  - precondition：洞1 载入完成且球静止于发球点\n  - state_change：击球按 G02 公式生成初速 → 物理结算\n  - feedback：瞄准线/蓄力条/轨迹残影按 §9 F05 呈现\n  - next_actions：入洞 →「球洞2」；8 杆上限 → 强制完成进下一洞\n  - outcome：本洞杆数累计局内\n- S08 球洞2（缓上坡＋单挡板折返，标准杆 4）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞1 完成（入洞或达上限）\n  - state_change：载入洞2；坡面与挡板按 L02 冻结\n  - feedback：坡面瞄准线变浅提示减速\n  - next_actions：入洞 →「球洞3」\n  - outcome：杆数累计\n- S09 球洞3（阶梯坡＋双挡板，标准杆 5）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞2 完成\n  - state_change：载入洞3；阶梯坡与双挡板生效\n  - feedback：反弹火花与入洞反馈\n  - next_actions：入洞或达上限 →「总结算」（先播 C02）\n  - outcome：按 V01 结算\n- S10 总结算\n  - input：Enter＝重开 / Esc＝返回标题（触发方：玩家）\n  - precondition：三洞全部完成\n  - state_change：进入「总结算」状态\n  - feedback：总结算面板显示总杆数、对比标准杆 12、罚杆数\n  - next_actions：重开或返回\n  - outcome：无跨局写入\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于任一洞\n  - state_change：暂停覆盖层打开；球、物理与蓄力冻结\n  - feedback：暂停面板（继续/本洞重打/返回标题/设置）\n  - next_actions：Esc 或「继续」→ 恢复\n  - outcome：恢复后无状态漂移（G04）\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：距离米制；力度为 0–100% 蓄力条（数值常显）；杆数为整数。\n- G02 物理与公式（本包冻结值）：击球初速 v＝蓄力比例 × 12 米/秒；平地滚动摩擦减速度 1.5 米/秒²；坡道沿坡向加速度分量 3.0 米/秒²；碰撞恢复系数 0.6。独立 oracle 数例：平地直线满蓄力 50% 击球 v＝6 米/秒，纯滚动距离＝v²/(2×1.5)＝**12 米**；蓄力 100% 为 48 米。\n- G03 杆数与罚则（本包冻结值）：三洞标准杆 3/4/5（总标准杆 12）；界外复位每次罚 1 杆；每洞杆数上限 8 杆，达上限自动按 8 杆＋累计罚杆记入并进入下一洞（无硬失败）。\n- G04 暂停与随机：Esc 暂停冻结球与物理；窗口失焦自动暂停；fixed_seed=1056 冻结三洞地形布置；本作物理为确定公式，无概率判定。\n- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速；蓄力条 0–100% 数值与当前蓄力同步；球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键鼠：鼠标移动＝瞄准方向；按住左键蓄力、松开击球；C＝俯视全览/击球视角切换；R＝本洞重打（罚 1 杆）；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：球滚动中击球无效；蓄力不足 5% 松开视为取消（不耗杆）；暂停/结算期间输入无效；被拒输入不产生杆数变化。\n- I03 无手柄需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；俯视全览模式下击球无效（须切回击球视角）；同帧多输入按瞄准→蓄力→击球顺序结算。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示；HUD 对照见 rubric。\n- I07 输入延迟目标：蓄力/击球按键到画面反馈 ≤ 50 毫秒（手感关键）；镜头切换 ≤ 150 毫秒。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：高尔夫球 1、三洞（洞杯、旗杆、发球点）、坡面与挡板若干、瞄准线与蓄力条 UI、轨迹残影；花园装饰为表现层。\n- L02 球洞（seed=1056 冻结地形）：洞1 直道平地 12 米（标准杆 3）；洞2 缓上坡＋单挡板折返（标准杆 4）；洞3 阶梯坡＋双挡板（标准杆 5）。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的花园装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M05]\n\n- M01 力度方向与物理（主机制）\n  - input：瞄准＋蓄力击球\n  - precondition：球静止且处于击球准备状态（非俯视全览）\n  - state_change：按 G02 公式生成初速向量 → 球滚动/反弹\n  - observable：逐帧球位置采样与初速、距离事件（见 G02 oracle）；`stroke` 事件（含初速与角度）\n  - invalid_case：滚动中击球、全览模式击球 → 拒绝且不耗杆\n  - recovery：球静止即恢复击球准备\n- M02 坡面反弹与摩擦\n  - input：地形接触（系统）\n  - precondition：球与坡面/挡板碰撞\n  - state_change：坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹\n  - observable：接触/反弹事件与速度分量差分\n  - invalid_case：无碰撞则纯摩擦结算\n  - recovery：—\n- M03 界外复位\n  - input：球坠出球场边界（系统）\n  - precondition：球越过 L02 边界\n  - state_change：回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位\n  - observable：`out_of_bounds` 事件（含罚杆字段）\n  - invalid_case：贴边滚动不触发\n  - recovery：复位即恢复击球\n- M04 杆数判定\n  - input：球入洞（系统）/ 达上限（系统）\n  - precondition：球与洞杯判定重叠且速度低于阈值\n  - state_change：本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算\n  - observable：`hole_complete` 事件与杆数流水（含罚杆）\n  - invalid_case：高速掠过洞杯不判入洞（速度阈值）\n  - recovery：—\n- M05 瞄准与轨迹反馈\n  - input：瞄准移动／蓄力变化（玩家）\n  - precondition：击球准备状态\n  - state_change：瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）\n  - observable：虚线长度采样与预计距离的 60% 对账；残影出现/渐隐事件\n  - invalid_case：全览模式不显示虚线（切回即恢复）\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成三洞 → 总结算（显示总杆数、对比标准杆 12 与罚杆数）。\n- V02 失败条件：无硬失败态；每洞 8 杆上限强制推进（记为上限完成）。\n- V03 恢复语义：界外自动复位＋罚 1 杆；R 重打本洞（罚 1 杆、回发球点）；结算后一键重开。\n- V04 persistent_state：无（重开全量清空；累计杆数仅本局内保留）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（杆数/洞进度）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——8 杆上限保证推进；界外复位兜底；任意洞可完成。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：架空云海时代的「浮屿花园」——园艺师们在漂浮于云海的花屿上经营三洞试炼球场，庆祝春分的推杆大会今夜开杆。\n- W02 场景所在地：浮屿花园的三座花洞——直道花径（洞1）、上坡藤架（洞2）、阶梯石台（洞3），云海在球场边缘流动。\n- W03 玩家身份与当前任务：玩家是见习园艺师「芽衣」；当前任务：在推杆大会上以不超过标准杆的成绩完成三洞，取得正式园丁资格。\n- W04 失败代价与结局表达：本作无失败态；超标准杆仅影响成绩表达；完成则 C02 呈现大会颁奖与花灯升空。\n- W05 叙事来源：三洞＝园艺师资格考试的三个科目（直道基本功/坡度控球/复杂地形）；旗杆与洞杯＝试炼花器；云海边界＝浮屿边界（界外即坠云）。全部原创。\n- W06 视觉风格与色彩材质：明快风格化 3D 花园；主色＝草甸绿（#7CB26B 系）＋花瓣粉（#E8A0B8 系）＋云海白蓝（#C9DCE8 系）；材质以草坪、木挡板、石台为主，光线为春日暖光。\n- W07 环境氛围与声音语言：云海微风的春日花园——常驻风拂草浪与远处鸟鸣；音效语言为「击球脆响＋滚动沙沙＋碰撞闷响＋入洞清脆」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代浮屿与大会 → 三洞推进承载试炼节奏 → 结算视频（C02）收束颁奖；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头（冻结需求）：默认击球视角＝发球/停球点后方第三人称（俯角 45°，距离 5 米），瞄准方向随鼠标旋转；球滚动时镜头平滑跟随球（0.2 秒插值，速度上限 12 米/秒避免甩镜）；球静止 1 秒后镜头回击球准备位；C 键切换「俯视全览」（整洞 60° 俯视，不参与击球）；镜头边界＝球场外框外扩 10%；界外复位/换洞时镜头直接落位（无漂移）。\n- F02 关键操作镜头变化：入洞瞬间镜头轻微推近洞杯 5%（0.5 秒）；出界瞬间镜头短暂拉高 10%（0.4 秒）；无慢动作。\n- F03 输入与延迟：见 I07（击球手感为 S 档核心，≤50 毫秒）。\n- F04 环境常驻效果：花瓣随风飘落（低频）、云海缓慢流动、旗杆旗面摆动；不遮挡瞄准线与洞杯。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 蓄力开始 | 蓄力条展开＋数值跳动 | 蓄力低鸣（按住循环，音调随力度升高） | 松开或取消 |\n| 击球 | 球推出＋草地小尘环＋轨迹残影启动 | 击球脆响 | 残影 0.5s 渐隐 |\n| 球滚动 | 轨迹残影跟随＋草浪压痕 | 滚动沙沙（滚动中循环） | 球停 |\n| 碰撞挡板 | 火花小粒子＋球体挤压回弹 | 碰撞闷响 | 回弹完成 |\n| 上坡减速 | 瞄准线透明度提示（击球前）/球速渐减 | 沙沙声减弱 | 坡段结束 |\n| 出界 | 球坠云＋镜头拉高＋「界外＋1 杆」提示 | 坠落风声 | 复位完成 |\n| 入洞 | 球旋入洞杯＋旗杆亮灯＋花瓣迸溅 | 入洞清脆音 | 进入下一洞 |\n| 达杆数上限 | 「本洞按 8 杆计」横幅 | 低提示音 | 推进下一洞 |\n| 三洞完成 | 花灯升空粒子 | 结算上扬音 | 进入总结算 |\n\n- F06 关键音效清单：蓄力低鸣、击球脆响、滚动沙沙、碰撞闷响、坠落风声、入洞清脆音、低提示音、上扬音；环境音：风拂草浪＋云海低鸣＋远处鸟鸣（常驻循环）；循环音开始/结束：滚动沙沙按滚动起止、蓄力低鸣按按住起止、环境声随球场载入开始、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息；轨迹残影承担落点复盘信息；花瓣与草浪粒子单帧 ≤ 35 且不遮挡瞄准线、洞杯与 HUD。\n- F08 音画同步：击球脆响与击球帧同步；碰撞闷响与接触帧同步；入洞清脆音与入洞事件帧同步。\n- F09 屏幕震动：入洞 0.1 秒小幅；碰撞 0.05 秒微幅；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ HUD（洞号、杆数/上限、蓄力条数值、罚杆、镜头模式提示）→ 总结算（总杆数/对比标准杆 12/罚杆/重开/返回）→ 暂停面板（继续/本洞重打/返回标题/设置）；关键状态附图标＋文字（镜头模式、界外提示），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开场花园（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入球洞1 之前，每局一次\n  - 内容与角色场景：云海之上的浮屿花园全景，花灯次第点亮，见习园艺师「芽衣」握杆走向三洞试炼球场的第一洞发球点\n  - 资产对应：浮屿花园、旗杆、高尔夫球与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入球洞1；自然播完 → 同\n  - 状态一致：播放期间不推进任何计时；进入状态＝0/3 洞\n- C02 推杆大会结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：三洞全部完成后、总结算面板之前，每局一次\n  - 内容与角色场景：三座花洞灯带依次亮起，花灯升空汇成春分图案，「芽衣」举起推杆向观众席致意\n  - 资产对应：球场、花灯、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 同\n  - 状态一致：仅在真实完成三洞后触发\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三洞冻结球场、蓄力击球物理、坡面反弹与摩擦、瞄准线/蓄力条/轨迹残影反馈、界外复位与罚杆、8 杆上限推进、双镜头模式（击球/俯视全览）。\n- N02 本测例包含的流程与界面：标题、三洞推进、总结算、暂停（含失焦自动暂停）、重打与重开。\n- N03 本测例包含的演出能力：开场/结算视频（C01/C02）、§9 F04–F09 全部事件反馈与音效、云海花园氛围。\n- N04 输入范围：键盘＋鼠标（鼠标瞄准/左键蓄力/C/R/Esc/Enter）；无触控、手柄、多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋花园环境音；无配音与背景音乐轨需求。\n- N06 表现层自由度：§9 未冻结的花卉装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（见习园艺师「芽衣」、高尔夫球与旗杆、三洞球场布局等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（瞄准→蓄力→击球→物理→进洞/补杆）；坡面与反弹均为物理系统内部规则，无跨系统因果链；多球物理与镜头插值并发（B1）；无失败态，界外复位与重打为恢复路径；新增瞄准反馈与镜头模式不改变难度档\"\n  downgrade_boundary: \"去掉坡面与挡板（纯平地直道）后仍为 S（更简）\"\n  upgrade_boundary: \"若杆数成绩跨洞/跨局保留并解锁新球场规则，升 M/L\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 2，image-to-3D 1）；object 任务资产为：gardener_mei, golf_ball, hole_flag。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, putt_swing。\n- video/audio/mechanic/UI：分别为 2/9/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "ad13ec4682722b104bf6d56801d8b7bb5aaee25bf2fd17f75997bab49f55e8bd"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Clean wood-and-putter tap",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G056_sfx_003": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G056_garden_minigolf",
+          "task_id": "G056_sfx_003",
+          "asset_name": "roll_grass",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Soft grass rolling hiss",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5563,
+          "trigger": "滚动（循环）",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《漂浮花园的迷你高尔夫》｜推杆物理机制输入规范\n\n```yaml\ncase_id: G056\nbase_case_id: G056\ntitle: 漂浮花园的迷你高尔夫\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: godot\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1056\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《漂浮花园的迷你高尔夫》；版本：mechanics-v3（2026-10-11 完整性修订：补瞄准线/力度条/轨迹残影、镜头规则、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Godot 4.x（Windows 桌面构建）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘与鼠标。\n- 原创边界：迷你高尔夫属公有领域玩法；本作全部名称、球场、文案与美术必须原创，不使用任何商业作品的球场设计、角色或造型。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 球洞实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：3D 俯视迷你高尔夫（单人杆数制）。本测例包含的能力：三洞冻结球场、蓄力击球物理、坡面反弹摩擦、瞄准线与轨迹残影反馈、界外复位与罚杆、双镜头模式、开场/结算视频。\n- S02 核心循环一句话：瞄定力度方向 → 击球 → 物理滚动 → 进洞或补杆 → 结算杆数。\n- S03 流程：标题 → 球洞1 → 球洞2 → 球洞3 → 总结算（杆数对比标准杆）；每洞自动开球。\n- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：界外自动复位回上一杆位＋罚 1 杆；总结算界面一键重开；Esc 暂停。\n- S06 与种子卡差异：种子卡杆数为「规则化高尔夫全流程」；本包冻结为三洞切片（标准杆 12），P0 局内口径不变。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 球洞1 → 球洞2 → 球洞3 → 总结算 → 重开/返回。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且球场按 seed=1056 生成完成\n  - state_change：进入「标题」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「球洞1」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 球洞1（直道平地，标准杆 3）\n  - input：鼠标瞄准、按住左键蓄力、松开击球、R 重打、C 镜头切换、Esc 暂停（触发方：玩家）\n  - precondition：洞1 载入完成且球静止于发球点\n  - state_change：击球按 G02 公式生成初速 → 物理结算\n  - feedback：瞄准线/蓄力条/轨迹残影按 §9 F05 呈现\n  - next_actions：入洞 →「球洞2」；8 杆上限 → 强制完成进下一洞\n  - outcome：本洞杆数累计局内\n- S08 球洞2（缓上坡＋单挡板折返，标准杆 4）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞1 完成（入洞或达上限）\n  - state_change：载入洞2；坡面与挡板按 L02 冻结\n  - feedback：坡面瞄准线变浅提示减速\n  - next_actions：入洞 →「球洞3」\n  - outcome：杆数累计\n- S09 球洞3（阶梯坡＋双挡板，标准杆 5）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞2 完成\n  - state_change：载入洞3；阶梯坡与双挡板生效\n  - feedback：反弹火花与入洞反馈\n  - next_actions：入洞或达上限 →「总结算」（先播 C02）\n  - outcome：按 V01 结算\n- S10 总结算\n  - input：Enter＝重开 / Esc＝返回标题（触发方：玩家）\n  - precondition：三洞全部完成\n  - state_change：进入「总结算」状态\n  - feedback：总结算面板显示总杆数、对比标准杆 12、罚杆数\n  - next_actions：重开或返回\n  - outcome：无跨局写入\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于任一洞\n  - state_change：暂停覆盖层打开；球、物理与蓄力冻结\n  - feedback：暂停面板（继续/本洞重打/返回标题/设置）\n  - next_actions：Esc 或「继续」→ 恢复\n  - outcome：恢复后无状态漂移（G04）\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：距离米制；力度为 0–100% 蓄力条（数值常显）；杆数为整数。\n- G02 物理与公式（本包冻结值）：击球初速 v＝蓄力比例 × 12 米/秒；平地滚动摩擦减速度 1.5 米/秒²；坡道沿坡向加速度分量 3.0 米/秒²；碰撞恢复系数 0.6。独立 oracle 数例：平地直线满蓄力 50% 击球 v＝6 米/秒，纯滚动距离＝v²/(2×1.5)＝**12 米**；蓄力 100% 为 48 米。\n- G03 杆数与罚则（本包冻结值）：三洞标准杆 3/4/5（总标准杆 12）；界外复位每次罚 1 杆；每洞杆数上限 8 杆，达上限自动按 8 杆＋累计罚杆记入并进入下一洞（无硬失败）。\n- G04 暂停与随机：Esc 暂停冻结球与物理；窗口失焦自动暂停；fixed_seed=1056 冻结三洞地形布置；本作物理为确定公式，无概率判定。\n- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速；蓄力条 0–100% 数值与当前蓄力同步；球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键鼠：鼠标移动＝瞄准方向；按住左键蓄力、松开击球；C＝俯视全览/击球视角切换；R＝本洞重打（罚 1 杆）；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：球滚动中击球无效；蓄力不足 5% 松开视为取消（不耗杆）；暂停/结算期间输入无效；被拒输入不产生杆数变化。\n- I03 无手柄需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；俯视全览模式下击球无效（须切回击球视角）；同帧多输入按瞄准→蓄力→击球顺序结算。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示；HUD 对照见 rubric。\n- I07 输入延迟目标：蓄力/击球按键到画面反馈 ≤ 50 毫秒（手感关键）；镜头切换 ≤ 150 毫秒。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：高尔夫球 1、三洞（洞杯、旗杆、发球点）、坡面与挡板若干、瞄准线与蓄力条 UI、轨迹残影；花园装饰为表现层。\n- L02 球洞（seed=1056 冻结地形）：洞1 直道平地 12 米（标准杆 3）；洞2 缓上坡＋单挡板折返（标准杆 4）；洞3 阶梯坡＋双挡板（标准杆 5）。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的花园装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M05]\n\n- M01 力度方向与物理（主机制）\n  - input：瞄准＋蓄力击球\n  - precondition：球静止且处于击球准备状态（非俯视全览）\n  - state_change：按 G02 公式生成初速向量 → 球滚动/反弹\n  - observable：逐帧球位置采样与初速、距离事件（见 G02 oracle）；`stroke` 事件（含初速与角度）\n  - invalid_case：滚动中击球、全览模式击球 → 拒绝且不耗杆\n  - recovery：球静止即恢复击球准备\n- M02 坡面反弹与摩擦\n  - input：地形接触（系统）\n  - precondition：球与坡面/挡板碰撞\n  - state_change：坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹\n  - observable：接触/反弹事件与速度分量差分\n  - invalid_case：无碰撞则纯摩擦结算\n  - recovery：—\n- M03 界外复位\n  - input：球坠出球场边界（系统）\n  - precondition：球越过 L02 边界\n  - state_change：回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位\n  - observable：`out_of_bounds` 事件（含罚杆字段）\n  - invalid_case：贴边滚动不触发\n  - recovery：复位即恢复击球\n- M04 杆数判定\n  - input：球入洞（系统）/ 达上限（系统）\n  - precondition：球与洞杯判定重叠且速度低于阈值\n  - state_change：本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算\n  - observable：`hole_complete` 事件与杆数流水（含罚杆）\n  - invalid_case：高速掠过洞杯不判入洞（速度阈值）\n  - recovery：—\n- M05 瞄准与轨迹反馈\n  - input：瞄准移动／蓄力变化（玩家）\n  - precondition：击球准备状态\n  - state_change：瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）\n  - observable：虚线长度采样与预计距离的 60% 对账；残影出现/渐隐事件\n  - invalid_case：全览模式不显示虚线（切回即恢复）\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成三洞 → 总结算（显示总杆数、对比标准杆 12 与罚杆数）。\n- V02 失败条件：无硬失败态；每洞 8 杆上限强制推进（记为上限完成）。\n- V03 恢复语义：界外自动复位＋罚 1 杆；R 重打本洞（罚 1 杆、回发球点）；结算后一键重开。\n- V04 persistent_state：无（重开全量清空；累计杆数仅本局内保留）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（杆数/洞进度）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——8 杆上限保证推进；界外复位兜底；任意洞可完成。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：架空云海时代的「浮屿花园」——园艺师们在漂浮于云海的花屿上经营三洞试炼球场，庆祝春分的推杆大会今夜开杆。\n- W02 场景所在地：浮屿花园的三座花洞——直道花径（洞1）、上坡藤架（洞2）、阶梯石台（洞3），云海在球场边缘流动。\n- W03 玩家身份与当前任务：玩家是见习园艺师「芽衣」；当前任务：在推杆大会上以不超过标准杆的成绩完成三洞，取得正式园丁资格。\n- W04 失败代价与结局表达：本作无失败态；超标准杆仅影响成绩表达；完成则 C02 呈现大会颁奖与花灯升空。\n- W05 叙事来源：三洞＝园艺师资格考试的三个科目（直道基本功/坡度控球/复杂地形）；旗杆与洞杯＝试炼花器；云海边界＝浮屿边界（界外即坠云）。全部原创。\n- W06 视觉风格与色彩材质：明快风格化 3D 花园；主色＝草甸绿（#7CB26B 系）＋花瓣粉（#E8A0B8 系）＋云海白蓝（#C9DCE8 系）；材质以草坪、木挡板、石台为主，光线为春日暖光。\n- W07 环境氛围与声音语言：云海微风的春日花园——常驻风拂草浪与远处鸟鸣；音效语言为「击球脆响＋滚动沙沙＋碰撞闷响＋入洞清脆」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代浮屿与大会 → 三洞推进承载试炼节奏 → 结算视频（C02）收束颁奖；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头（冻结需求）：默认击球视角＝发球/停球点后方第三人称（俯角 45°，距离 5 米），瞄准方向随鼠标旋转；球滚动时镜头平滑跟随球（0.2 秒插值，速度上限 12 米/秒避免甩镜）；球静止 1 秒后镜头回击球准备位；C 键切换「俯视全览」（整洞 60° 俯视，不参与击球）；镜头边界＝球场外框外扩 10%；界外复位/换洞时镜头直接落位（无漂移）。\n- F02 关键操作镜头变化：入洞瞬间镜头轻微推近洞杯 5%（0.5 秒）；出界瞬间镜头短暂拉高 10%（0.4 秒）；无慢动作。\n- F03 输入与延迟：见 I07（击球手感为 S 档核心，≤50 毫秒）。\n- F04 环境常驻效果：花瓣随风飘落（低频）、云海缓慢流动、旗杆旗面摆动；不遮挡瞄准线与洞杯。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 蓄力开始 | 蓄力条展开＋数值跳动 | 蓄力低鸣（按住循环，音调随力度升高） | 松开或取消 |\n| 击球 | 球推出＋草地小尘环＋轨迹残影启动 | 击球脆响 | 残影 0.5s 渐隐 |\n| 球滚动 | 轨迹残影跟随＋草浪压痕 | 滚动沙沙（滚动中循环） | 球停 |\n| 碰撞挡板 | 火花小粒子＋球体挤压回弹 | 碰撞闷响 | 回弹完成 |\n| 上坡减速 | 瞄准线透明度提示（击球前）/球速渐减 | 沙沙声减弱 | 坡段结束 |\n| 出界 | 球坠云＋镜头拉高＋「界外＋1 杆」提示 | 坠落风声 | 复位完成 |\n| 入洞 | 球旋入洞杯＋旗杆亮灯＋花瓣迸溅 | 入洞清脆音 | 进入下一洞 |\n| 达杆数上限 | 「本洞按 8 杆计」横幅 | 低提示音 | 推进下一洞 |\n| 三洞完成 | 花灯升空粒子 | 结算上扬音 | 进入总结算 |\n\n- F06 关键音效清单：蓄力低鸣、击球脆响、滚动沙沙、碰撞闷响、坠落风声、入洞清脆音、低提示音、上扬音；环境音：风拂草浪＋云海低鸣＋远处鸟鸣（常驻循环）；循环音开始/结束：滚动沙沙按滚动起止、蓄力低鸣按按住起止、环境声随球场载入开始、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息；轨迹残影承担落点复盘信息；花瓣与草浪粒子单帧 ≤ 35 且不遮挡瞄准线、洞杯与 HUD。\n- F08 音画同步：击球脆响与击球帧同步；碰撞闷响与接触帧同步；入洞清脆音与入洞事件帧同步。\n- F09 屏幕震动：入洞 0.1 秒小幅；碰撞 0.05 秒微幅；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ HUD（洞号、杆数/上限、蓄力条数值、罚杆、镜头模式提示）→ 总结算（总杆数/对比标准杆 12/罚杆/重开/返回）→ 暂停面板（继续/本洞重打/返回标题/设置）；关键状态附图标＋文字（镜头模式、界外提示），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开场花园（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入球洞1 之前，每局一次\n  - 内容与角色场景：云海之上的浮屿花园全景，花灯次第点亮，见习园艺师「芽衣」握杆走向三洞试炼球场的第一洞发球点\n  - 资产对应：浮屿花园、旗杆、高尔夫球与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入球洞1；自然播完 → 同\n  - 状态一致：播放期间不推进任何计时；进入状态＝0/3 洞\n- C02 推杆大会结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：三洞全部完成后、总结算面板之前，每局一次\n  - 内容与角色场景：三座花洞灯带依次亮起，花灯升空汇成春分图案，「芽衣」举起推杆向观众席致意\n  - 资产对应：球场、花灯、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 同\n  - 状态一致：仅在真实完成三洞后触发\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三洞冻结球场、蓄力击球物理、坡面反弹与摩擦、瞄准线/蓄力条/轨迹残影反馈、界外复位与罚杆、8 杆上限推进、双镜头模式（击球/俯视全览）。\n- N02 本测例包含的流程与界面：标题、三洞推进、总结算、暂停（含失焦自动暂停）、重打与重开。\n- N03 本测例包含的演出能力：开场/结算视频（C01/C02）、§9 F04–F09 全部事件反馈与音效、云海花园氛围。\n- N04 输入范围：键盘＋鼠标（鼠标瞄准/左键蓄力/C/R/Esc/Enter）；无触控、手柄、多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋花园环境音；无配音与背景音乐轨需求。\n- N06 表现层自由度：§9 未冻结的花卉装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（见习园艺师「芽衣」、高尔夫球与旗杆、三洞球场布局等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（瞄准→蓄力→击球→物理→进洞/补杆）；坡面与反弹均为物理系统内部规则，无跨系统因果链；多球物理与镜头插值并发（B1）；无失败态，界外复位与重打为恢复路径；新增瞄准反馈与镜头模式不改变难度档\"\n  downgrade_boundary: \"去掉坡面与挡板（纯平地直道）后仍为 S（更简）\"\n  upgrade_boundary: \"若杆数成绩跨洞/跨局保留并解锁新球场规则，升 M/L\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 2，image-to-3D 1）；object 任务资产为：gardener_mei, golf_ball, hole_flag。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, putt_swing。\n- video/audio/mechanic/UI：分别为 2/9/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "ad13ec4682722b104bf6d56801d8b7bb5aaee25bf2fd17f75997bab49f55e8bd"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Soft grass rolling hiss",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G056_sfx_004": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G056_garden_minigolf",
+          "task_id": "G056_sfx_004",
+          "asset_name": "board_bonk",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Hollow wooden bumper bounce",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5564,
+          "trigger": "碰撞挡板",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《漂浮花园的迷你高尔夫》｜推杆物理机制输入规范\n\n```yaml\ncase_id: G056\nbase_case_id: G056\ntitle: 漂浮花园的迷你高尔夫\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: godot\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1056\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《漂浮花园的迷你高尔夫》；版本：mechanics-v3（2026-10-11 完整性修订：补瞄准线/力度条/轨迹残影、镜头规则、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Godot 4.x（Windows 桌面构建）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘与鼠标。\n- 原创边界：迷你高尔夫属公有领域玩法；本作全部名称、球场、文案与美术必须原创，不使用任何商业作品的球场设计、角色或造型。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 球洞实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：3D 俯视迷你高尔夫（单人杆数制）。本测例包含的能力：三洞冻结球场、蓄力击球物理、坡面反弹摩擦、瞄准线与轨迹残影反馈、界外复位与罚杆、双镜头模式、开场/结算视频。\n- S02 核心循环一句话：瞄定力度方向 → 击球 → 物理滚动 → 进洞或补杆 → 结算杆数。\n- S03 流程：标题 → 球洞1 → 球洞2 → 球洞3 → 总结算（杆数对比标准杆）；每洞自动开球。\n- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：界外自动复位回上一杆位＋罚 1 杆；总结算界面一键重开；Esc 暂停。\n- S06 与种子卡差异：种子卡杆数为「规则化高尔夫全流程」；本包冻结为三洞切片（标准杆 12），P0 局内口径不变。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 球洞1 → 球洞2 → 球洞3 → 总结算 → 重开/返回。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且球场按 seed=1056 生成完成\n  - state_change：进入「标题」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「球洞1」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 球洞1（直道平地，标准杆 3）\n  - input：鼠标瞄准、按住左键蓄力、松开击球、R 重打、C 镜头切换、Esc 暂停（触发方：玩家）\n  - precondition：洞1 载入完成且球静止于发球点\n  - state_change：击球按 G02 公式生成初速 → 物理结算\n  - feedback：瞄准线/蓄力条/轨迹残影按 §9 F05 呈现\n  - next_actions：入洞 →「球洞2」；8 杆上限 → 强制完成进下一洞\n  - outcome：本洞杆数累计局内\n- S08 球洞2（缓上坡＋单挡板折返，标准杆 4）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞1 完成（入洞或达上限）\n  - state_change：载入洞2；坡面与挡板按 L02 冻结\n  - feedback：坡面瞄准线变浅提示减速\n  - next_actions：入洞 →「球洞3」\n  - outcome：杆数累计\n- S09 球洞3（阶梯坡＋双挡板，标准杆 5）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞2 完成\n  - state_change：载入洞3；阶梯坡与双挡板生效\n  - feedback：反弹火花与入洞反馈\n  - next_actions：入洞或达上限 →「总结算」（先播 C02）\n  - outcome：按 V01 结算\n- S10 总结算\n  - input：Enter＝重开 / Esc＝返回标题（触发方：玩家）\n  - precondition：三洞全部完成\n  - state_change：进入「总结算」状态\n  - feedback：总结算面板显示总杆数、对比标准杆 12、罚杆数\n  - next_actions：重开或返回\n  - outcome：无跨局写入\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于任一洞\n  - state_change：暂停覆盖层打开；球、物理与蓄力冻结\n  - feedback：暂停面板（继续/本洞重打/返回标题/设置）\n  - next_actions：Esc 或「继续」→ 恢复\n  - outcome：恢复后无状态漂移（G04）\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：距离米制；力度为 0–100% 蓄力条（数值常显）；杆数为整数。\n- G02 物理与公式（本包冻结值）：击球初速 v＝蓄力比例 × 12 米/秒；平地滚动摩擦减速度 1.5 米/秒²；坡道沿坡向加速度分量 3.0 米/秒²；碰撞恢复系数 0.6。独立 oracle 数例：平地直线满蓄力 50% 击球 v＝6 米/秒，纯滚动距离＝v²/(2×1.5)＝**12 米**；蓄力 100% 为 48 米。\n- G03 杆数与罚则（本包冻结值）：三洞标准杆 3/4/5（总标准杆 12）；界外复位每次罚 1 杆；每洞杆数上限 8 杆，达上限自动按 8 杆＋累计罚杆记入并进入下一洞（无硬失败）。\n- G04 暂停与随机：Esc 暂停冻结球与物理；窗口失焦自动暂停；fixed_seed=1056 冻结三洞地形布置；本作物理为确定公式，无概率判定。\n- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速；蓄力条 0–100% 数值与当前蓄力同步；球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键鼠：鼠标移动＝瞄准方向；按住左键蓄力、松开击球；C＝俯视全览/击球视角切换；R＝本洞重打（罚 1 杆）；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：球滚动中击球无效；蓄力不足 5% 松开视为取消（不耗杆）；暂停/结算期间输入无效；被拒输入不产生杆数变化。\n- I03 无手柄需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；俯视全览模式下击球无效（须切回击球视角）；同帧多输入按瞄准→蓄力→击球顺序结算。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示；HUD 对照见 rubric。\n- I07 输入延迟目标：蓄力/击球按键到画面反馈 ≤ 50 毫秒（手感关键）；镜头切换 ≤ 150 毫秒。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：高尔夫球 1、三洞（洞杯、旗杆、发球点）、坡面与挡板若干、瞄准线与蓄力条 UI、轨迹残影；花园装饰为表现层。\n- L02 球洞（seed=1056 冻结地形）：洞1 直道平地 12 米（标准杆 3）；洞2 缓上坡＋单挡板折返（标准杆 4）；洞3 阶梯坡＋双挡板（标准杆 5）。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的花园装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M05]\n\n- M01 力度方向与物理（主机制）\n  - input：瞄准＋蓄力击球\n  - precondition：球静止且处于击球准备状态（非俯视全览）\n  - state_change：按 G02 公式生成初速向量 → 球滚动/反弹\n  - observable：逐帧球位置采样与初速、距离事件（见 G02 oracle）；`stroke` 事件（含初速与角度）\n  - invalid_case：滚动中击球、全览模式击球 → 拒绝且不耗杆\n  - recovery：球静止即恢复击球准备\n- M02 坡面反弹与摩擦\n  - input：地形接触（系统）\n  - precondition：球与坡面/挡板碰撞\n  - state_change：坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹\n  - observable：接触/反弹事件与速度分量差分\n  - invalid_case：无碰撞则纯摩擦结算\n  - recovery：—\n- M03 界外复位\n  - input：球坠出球场边界（系统）\n  - precondition：球越过 L02 边界\n  - state_change：回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位\n  - observable：`out_of_bounds` 事件（含罚杆字段）\n  - invalid_case：贴边滚动不触发\n  - recovery：复位即恢复击球\n- M04 杆数判定\n  - input：球入洞（系统）/ 达上限（系统）\n  - precondition：球与洞杯判定重叠且速度低于阈值\n  - state_change：本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算\n  - observable：`hole_complete` 事件与杆数流水（含罚杆）\n  - invalid_case：高速掠过洞杯不判入洞（速度阈值）\n  - recovery：—\n- M05 瞄准与轨迹反馈\n  - input：瞄准移动／蓄力变化（玩家）\n  - precondition：击球准备状态\n  - state_change：瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）\n  - observable：虚线长度采样与预计距离的 60% 对账；残影出现/渐隐事件\n  - invalid_case：全览模式不显示虚线（切回即恢复）\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成三洞 → 总结算（显示总杆数、对比标准杆 12 与罚杆数）。\n- V02 失败条件：无硬失败态；每洞 8 杆上限强制推进（记为上限完成）。\n- V03 恢复语义：界外自动复位＋罚 1 杆；R 重打本洞（罚 1 杆、回发球点）；结算后一键重开。\n- V04 persistent_state：无（重开全量清空；累计杆数仅本局内保留）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（杆数/洞进度）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——8 杆上限保证推进；界外复位兜底；任意洞可完成。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：架空云海时代的「浮屿花园」——园艺师们在漂浮于云海的花屿上经营三洞试炼球场，庆祝春分的推杆大会今夜开杆。\n- W02 场景所在地：浮屿花园的三座花洞——直道花径（洞1）、上坡藤架（洞2）、阶梯石台（洞3），云海在球场边缘流动。\n- W03 玩家身份与当前任务：玩家是见习园艺师「芽衣」；当前任务：在推杆大会上以不超过标准杆的成绩完成三洞，取得正式园丁资格。\n- W04 失败代价与结局表达：本作无失败态；超标准杆仅影响成绩表达；完成则 C02 呈现大会颁奖与花灯升空。\n- W05 叙事来源：三洞＝园艺师资格考试的三个科目（直道基本功/坡度控球/复杂地形）；旗杆与洞杯＝试炼花器；云海边界＝浮屿边界（界外即坠云）。全部原创。\n- W06 视觉风格与色彩材质：明快风格化 3D 花园；主色＝草甸绿（#7CB26B 系）＋花瓣粉（#E8A0B8 系）＋云海白蓝（#C9DCE8 系）；材质以草坪、木挡板、石台为主，光线为春日暖光。\n- W07 环境氛围与声音语言：云海微风的春日花园——常驻风拂草浪与远处鸟鸣；音效语言为「击球脆响＋滚动沙沙＋碰撞闷响＋入洞清脆」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代浮屿与大会 → 三洞推进承载试炼节奏 → 结算视频（C02）收束颁奖；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头（冻结需求）：默认击球视角＝发球/停球点后方第三人称（俯角 45°，距离 5 米），瞄准方向随鼠标旋转；球滚动时镜头平滑跟随球（0.2 秒插值，速度上限 12 米/秒避免甩镜）；球静止 1 秒后镜头回击球准备位；C 键切换「俯视全览」（整洞 60° 俯视，不参与击球）；镜头边界＝球场外框外扩 10%；界外复位/换洞时镜头直接落位（无漂移）。\n- F02 关键操作镜头变化：入洞瞬间镜头轻微推近洞杯 5%（0.5 秒）；出界瞬间镜头短暂拉高 10%（0.4 秒）；无慢动作。\n- F03 输入与延迟：见 I07（击球手感为 S 档核心，≤50 毫秒）。\n- F04 环境常驻效果：花瓣随风飘落（低频）、云海缓慢流动、旗杆旗面摆动；不遮挡瞄准线与洞杯。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 蓄力开始 | 蓄力条展开＋数值跳动 | 蓄力低鸣（按住循环，音调随力度升高） | 松开或取消 |\n| 击球 | 球推出＋草地小尘环＋轨迹残影启动 | 击球脆响 | 残影 0.5s 渐隐 |\n| 球滚动 | 轨迹残影跟随＋草浪压痕 | 滚动沙沙（滚动中循环） | 球停 |\n| 碰撞挡板 | 火花小粒子＋球体挤压回弹 | 碰撞闷响 | 回弹完成 |\n| 上坡减速 | 瞄准线透明度提示（击球前）/球速渐减 | 沙沙声减弱 | 坡段结束 |\n| 出界 | 球坠云＋镜头拉高＋「界外＋1 杆」提示 | 坠落风声 | 复位完成 |\n| 入洞 | 球旋入洞杯＋旗杆亮灯＋花瓣迸溅 | 入洞清脆音 | 进入下一洞 |\n| 达杆数上限 | 「本洞按 8 杆计」横幅 | 低提示音 | 推进下一洞 |\n| 三洞完成 | 花灯升空粒子 | 结算上扬音 | 进入总结算 |\n\n- F06 关键音效清单：蓄力低鸣、击球脆响、滚动沙沙、碰撞闷响、坠落风声、入洞清脆音、低提示音、上扬音；环境音：风拂草浪＋云海低鸣＋远处鸟鸣（常驻循环）；循环音开始/结束：滚动沙沙按滚动起止、蓄力低鸣按按住起止、环境声随球场载入开始、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息；轨迹残影承担落点复盘信息；花瓣与草浪粒子单帧 ≤ 35 且不遮挡瞄准线、洞杯与 HUD。\n- F08 音画同步：击球脆响与击球帧同步；碰撞闷响与接触帧同步；入洞清脆音与入洞事件帧同步。\n- F09 屏幕震动：入洞 0.1 秒小幅；碰撞 0.05 秒微幅；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ HUD（洞号、杆数/上限、蓄力条数值、罚杆、镜头模式提示）→ 总结算（总杆数/对比标准杆 12/罚杆/重开/返回）→ 暂停面板（继续/本洞重打/返回标题/设置）；关键状态附图标＋文字（镜头模式、界外提示），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开场花园（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入球洞1 之前，每局一次\n  - 内容与角色场景：云海之上的浮屿花园全景，花灯次第点亮，见习园艺师「芽衣」握杆走向三洞试炼球场的第一洞发球点\n  - 资产对应：浮屿花园、旗杆、高尔夫球与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入球洞1；自然播完 → 同\n  - 状态一致：播放期间不推进任何计时；进入状态＝0/3 洞\n- C02 推杆大会结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：三洞全部完成后、总结算面板之前，每局一次\n  - 内容与角色场景：三座花洞灯带依次亮起，花灯升空汇成春分图案，「芽衣」举起推杆向观众席致意\n  - 资产对应：球场、花灯、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 同\n  - 状态一致：仅在真实完成三洞后触发\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三洞冻结球场、蓄力击球物理、坡面反弹与摩擦、瞄准线/蓄力条/轨迹残影反馈、界外复位与罚杆、8 杆上限推进、双镜头模式（击球/俯视全览）。\n- N02 本测例包含的流程与界面：标题、三洞推进、总结算、暂停（含失焦自动暂停）、重打与重开。\n- N03 本测例包含的演出能力：开场/结算视频（C01/C02）、§9 F04–F09 全部事件反馈与音效、云海花园氛围。\n- N04 输入范围：键盘＋鼠标（鼠标瞄准/左键蓄力/C/R/Esc/Enter）；无触控、手柄、多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋花园环境音；无配音与背景音乐轨需求。\n- N06 表现层自由度：§9 未冻结的花卉装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（见习园艺师「芽衣」、高尔夫球与旗杆、三洞球场布局等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（瞄准→蓄力→击球→物理→进洞/补杆）；坡面与反弹均为物理系统内部规则，无跨系统因果链；多球物理与镜头插值并发（B1）；无失败态，界外复位与重打为恢复路径；新增瞄准反馈与镜头模式不改变难度档\"\n  downgrade_boundary: \"去掉坡面与挡板（纯平地直道）后仍为 S（更简）\"\n  upgrade_boundary: \"若杆数成绩跨洞/跨局保留并解锁新球场规则，升 M/L\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 2，image-to-3D 1）；object 任务资产为：gardener_mei, golf_ball, hole_flag。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, putt_swing。\n- video/audio/mechanic/UI：分别为 2/9/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "ad13ec4682722b104bf6d56801d8b7bb5aaee25bf2fd17f75997bab49f55e8bd"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Hollow wooden bumper bounce",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G056_sfx_005": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G056_garden_minigolf",
+          "task_id": "G056_sfx_005",
+          "asset_name": "out_bound_fall",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Whistling fall into wind and a soft poof",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5565,
+          "trigger": "出界坠云",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《漂浮花园的迷你高尔夫》｜推杆物理机制输入规范\n\n```yaml\ncase_id: G056\nbase_case_id: G056\ntitle: 漂浮花园的迷你高尔夫\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: godot\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1056\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《漂浮花园的迷你高尔夫》；版本：mechanics-v3（2026-10-11 完整性修订：补瞄准线/力度条/轨迹残影、镜头规则、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Godot 4.x（Windows 桌面构建）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘与鼠标。\n- 原创边界：迷你高尔夫属公有领域玩法；本作全部名称、球场、文案与美术必须原创，不使用任何商业作品的球场设计、角色或造型。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 球洞实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：3D 俯视迷你高尔夫（单人杆数制）。本测例包含的能力：三洞冻结球场、蓄力击球物理、坡面反弹摩擦、瞄准线与轨迹残影反馈、界外复位与罚杆、双镜头模式、开场/结算视频。\n- S02 核心循环一句话：瞄定力度方向 → 击球 → 物理滚动 → 进洞或补杆 → 结算杆数。\n- S03 流程：标题 → 球洞1 → 球洞2 → 球洞3 → 总结算（杆数对比标准杆）；每洞自动开球。\n- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：界外自动复位回上一杆位＋罚 1 杆；总结算界面一键重开；Esc 暂停。\n- S06 与种子卡差异：种子卡杆数为「规则化高尔夫全流程」；本包冻结为三洞切片（标准杆 12），P0 局内口径不变。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 球洞1 → 球洞2 → 球洞3 → 总结算 → 重开/返回。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且球场按 seed=1056 生成完成\n  - state_change：进入「标题」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「球洞1」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 球洞1（直道平地，标准杆 3）\n  - input：鼠标瞄准、按住左键蓄力、松开击球、R 重打、C 镜头切换、Esc 暂停（触发方：玩家）\n  - precondition：洞1 载入完成且球静止于发球点\n  - state_change：击球按 G02 公式生成初速 → 物理结算\n  - feedback：瞄准线/蓄力条/轨迹残影按 §9 F05 呈现\n  - next_actions：入洞 →「球洞2」；8 杆上限 → 强制完成进下一洞\n  - outcome：本洞杆数累计局内\n- S08 球洞2（缓上坡＋单挡板折返，标准杆 4）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞1 完成（入洞或达上限）\n  - state_change：载入洞2；坡面与挡板按 L02 冻结\n  - feedback：坡面瞄准线变浅提示减速\n  - next_actions：入洞 →「球洞3」\n  - outcome：杆数累计\n- S09 球洞3（阶梯坡＋双挡板，标准杆 5）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞2 完成\n  - state_change：载入洞3；阶梯坡与双挡板生效\n  - feedback：反弹火花与入洞反馈\n  - next_actions：入洞或达上限 →「总结算」（先播 C02）\n  - outcome：按 V01 结算\n- S10 总结算\n  - input：Enter＝重开 / Esc＝返回标题（触发方：玩家）\n  - precondition：三洞全部完成\n  - state_change：进入「总结算」状态\n  - feedback：总结算面板显示总杆数、对比标准杆 12、罚杆数\n  - next_actions：重开或返回\n  - outcome：无跨局写入\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于任一洞\n  - state_change：暂停覆盖层打开；球、物理与蓄力冻结\n  - feedback：暂停面板（继续/本洞重打/返回标题/设置）\n  - next_actions：Esc 或「继续」→ 恢复\n  - outcome：恢复后无状态漂移（G04）\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：距离米制；力度为 0–100% 蓄力条（数值常显）；杆数为整数。\n- G02 物理与公式（本包冻结值）：击球初速 v＝蓄力比例 × 12 米/秒；平地滚动摩擦减速度 1.5 米/秒²；坡道沿坡向加速度分量 3.0 米/秒²；碰撞恢复系数 0.6。独立 oracle 数例：平地直线满蓄力 50% 击球 v＝6 米/秒，纯滚动距离＝v²/(2×1.5)＝**12 米**；蓄力 100% 为 48 米。\n- G03 杆数与罚则（本包冻结值）：三洞标准杆 3/4/5（总标准杆 12）；界外复位每次罚 1 杆；每洞杆数上限 8 杆，达上限自动按 8 杆＋累计罚杆记入并进入下一洞（无硬失败）。\n- G04 暂停与随机：Esc 暂停冻结球与物理；窗口失焦自动暂停；fixed_seed=1056 冻结三洞地形布置；本作物理为确定公式，无概率判定。\n- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速；蓄力条 0–100% 数值与当前蓄力同步；球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键鼠：鼠标移动＝瞄准方向；按住左键蓄力、松开击球；C＝俯视全览/击球视角切换；R＝本洞重打（罚 1 杆）；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：球滚动中击球无效；蓄力不足 5% 松开视为取消（不耗杆）；暂停/结算期间输入无效；被拒输入不产生杆数变化。\n- I03 无手柄需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；俯视全览模式下击球无效（须切回击球视角）；同帧多输入按瞄准→蓄力→击球顺序结算。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示；HUD 对照见 rubric。\n- I07 输入延迟目标：蓄力/击球按键到画面反馈 ≤ 50 毫秒（手感关键）；镜头切换 ≤ 150 毫秒。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：高尔夫球 1、三洞（洞杯、旗杆、发球点）、坡面与挡板若干、瞄准线与蓄力条 UI、轨迹残影；花园装饰为表现层。\n- L02 球洞（seed=1056 冻结地形）：洞1 直道平地 12 米（标准杆 3）；洞2 缓上坡＋单挡板折返（标准杆 4）；洞3 阶梯坡＋双挡板（标准杆 5）。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的花园装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M05]\n\n- M01 力度方向与物理（主机制）\n  - input：瞄准＋蓄力击球\n  - precondition：球静止且处于击球准备状态（非俯视全览）\n  - state_change：按 G02 公式生成初速向量 → 球滚动/反弹\n  - observable：逐帧球位置采样与初速、距离事件（见 G02 oracle）；`stroke` 事件（含初速与角度）\n  - invalid_case：滚动中击球、全览模式击球 → 拒绝且不耗杆\n  - recovery：球静止即恢复击球准备\n- M02 坡面反弹与摩擦\n  - input：地形接触（系统）\n  - precondition：球与坡面/挡板碰撞\n  - state_change：坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹\n  - observable：接触/反弹事件与速度分量差分\n  - invalid_case：无碰撞则纯摩擦结算\n  - recovery：—\n- M03 界外复位\n  - input：球坠出球场边界（系统）\n  - precondition：球越过 L02 边界\n  - state_change：回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位\n  - observable：`out_of_bounds` 事件（含罚杆字段）\n  - invalid_case：贴边滚动不触发\n  - recovery：复位即恢复击球\n- M04 杆数判定\n  - input：球入洞（系统）/ 达上限（系统）\n  - precondition：球与洞杯判定重叠且速度低于阈值\n  - state_change：本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算\n  - observable：`hole_complete` 事件与杆数流水（含罚杆）\n  - invalid_case：高速掠过洞杯不判入洞（速度阈值）\n  - recovery：—\n- M05 瞄准与轨迹反馈\n  - input：瞄准移动／蓄力变化（玩家）\n  - precondition：击球准备状态\n  - state_change：瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）\n  - observable：虚线长度采样与预计距离的 60% 对账；残影出现/渐隐事件\n  - invalid_case：全览模式不显示虚线（切回即恢复）\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成三洞 → 总结算（显示总杆数、对比标准杆 12 与罚杆数）。\n- V02 失败条件：无硬失败态；每洞 8 杆上限强制推进（记为上限完成）。\n- V03 恢复语义：界外自动复位＋罚 1 杆；R 重打本洞（罚 1 杆、回发球点）；结算后一键重开。\n- V04 persistent_state：无（重开全量清空；累计杆数仅本局内保留）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（杆数/洞进度）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——8 杆上限保证推进；界外复位兜底；任意洞可完成。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：架空云海时代的「浮屿花园」——园艺师们在漂浮于云海的花屿上经营三洞试炼球场，庆祝春分的推杆大会今夜开杆。\n- W02 场景所在地：浮屿花园的三座花洞——直道花径（洞1）、上坡藤架（洞2）、阶梯石台（洞3），云海在球场边缘流动。\n- W03 玩家身份与当前任务：玩家是见习园艺师「芽衣」；当前任务：在推杆大会上以不超过标准杆的成绩完成三洞，取得正式园丁资格。\n- W04 失败代价与结局表达：本作无失败态；超标准杆仅影响成绩表达；完成则 C02 呈现大会颁奖与花灯升空。\n- W05 叙事来源：三洞＝园艺师资格考试的三个科目（直道基本功/坡度控球/复杂地形）；旗杆与洞杯＝试炼花器；云海边界＝浮屿边界（界外即坠云）。全部原创。\n- W06 视觉风格与色彩材质：明快风格化 3D 花园；主色＝草甸绿（#7CB26B 系）＋花瓣粉（#E8A0B8 系）＋云海白蓝（#C9DCE8 系）；材质以草坪、木挡板、石台为主，光线为春日暖光。\n- W07 环境氛围与声音语言：云海微风的春日花园——常驻风拂草浪与远处鸟鸣；音效语言为「击球脆响＋滚动沙沙＋碰撞闷响＋入洞清脆」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代浮屿与大会 → 三洞推进承载试炼节奏 → 结算视频（C02）收束颁奖；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头（冻结需求）：默认击球视角＝发球/停球点后方第三人称（俯角 45°，距离 5 米），瞄准方向随鼠标旋转；球滚动时镜头平滑跟随球（0.2 秒插值，速度上限 12 米/秒避免甩镜）；球静止 1 秒后镜头回击球准备位；C 键切换「俯视全览」（整洞 60° 俯视，不参与击球）；镜头边界＝球场外框外扩 10%；界外复位/换洞时镜头直接落位（无漂移）。\n- F02 关键操作镜头变化：入洞瞬间镜头轻微推近洞杯 5%（0.5 秒）；出界瞬间镜头短暂拉高 10%（0.4 秒）；无慢动作。\n- F03 输入与延迟：见 I07（击球手感为 S 档核心，≤50 毫秒）。\n- F04 环境常驻效果：花瓣随风飘落（低频）、云海缓慢流动、旗杆旗面摆动；不遮挡瞄准线与洞杯。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 蓄力开始 | 蓄力条展开＋数值跳动 | 蓄力低鸣（按住循环，音调随力度升高） | 松开或取消 |\n| 击球 | 球推出＋草地小尘环＋轨迹残影启动 | 击球脆响 | 残影 0.5s 渐隐 |\n| 球滚动 | 轨迹残影跟随＋草浪压痕 | 滚动沙沙（滚动中循环） | 球停 |\n| 碰撞挡板 | 火花小粒子＋球体挤压回弹 | 碰撞闷响 | 回弹完成 |\n| 上坡减速 | 瞄准线透明度提示（击球前）/球速渐减 | 沙沙声减弱 | 坡段结束 |\n| 出界 | 球坠云＋镜头拉高＋「界外＋1 杆」提示 | 坠落风声 | 复位完成 |\n| 入洞 | 球旋入洞杯＋旗杆亮灯＋花瓣迸溅 | 入洞清脆音 | 进入下一洞 |\n| 达杆数上限 | 「本洞按 8 杆计」横幅 | 低提示音 | 推进下一洞 |\n| 三洞完成 | 花灯升空粒子 | 结算上扬音 | 进入总结算 |\n\n- F06 关键音效清单：蓄力低鸣、击球脆响、滚动沙沙、碰撞闷响、坠落风声、入洞清脆音、低提示音、上扬音；环境音：风拂草浪＋云海低鸣＋远处鸟鸣（常驻循环）；循环音开始/结束：滚动沙沙按滚动起止、蓄力低鸣按按住起止、环境声随球场载入开始、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息；轨迹残影承担落点复盘信息；花瓣与草浪粒子单帧 ≤ 35 且不遮挡瞄准线、洞杯与 HUD。\n- F08 音画同步：击球脆响与击球帧同步；碰撞闷响与接触帧同步；入洞清脆音与入洞事件帧同步。\n- F09 屏幕震动：入洞 0.1 秒小幅；碰撞 0.05 秒微幅；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ HUD（洞号、杆数/上限、蓄力条数值、罚杆、镜头模式提示）→ 总结算（总杆数/对比标准杆 12/罚杆/重开/返回）→ 暂停面板（继续/本洞重打/返回标题/设置）；关键状态附图标＋文字（镜头模式、界外提示），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开场花园（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入球洞1 之前，每局一次\n  - 内容与角色场景：云海之上的浮屿花园全景，花灯次第点亮，见习园艺师「芽衣」握杆走向三洞试炼球场的第一洞发球点\n  - 资产对应：浮屿花园、旗杆、高尔夫球与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入球洞1；自然播完 → 同\n  - 状态一致：播放期间不推进任何计时；进入状态＝0/3 洞\n- C02 推杆大会结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：三洞全部完成后、总结算面板之前，每局一次\n  - 内容与角色场景：三座花洞灯带依次亮起，花灯升空汇成春分图案，「芽衣」举起推杆向观众席致意\n  - 资产对应：球场、花灯、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 同\n  - 状态一致：仅在真实完成三洞后触发\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三洞冻结球场、蓄力击球物理、坡面反弹与摩擦、瞄准线/蓄力条/轨迹残影反馈、界外复位与罚杆、8 杆上限推进、双镜头模式（击球/俯视全览）。\n- N02 本测例包含的流程与界面：标题、三洞推进、总结算、暂停（含失焦自动暂停）、重打与重开。\n- N03 本测例包含的演出能力：开场/结算视频（C01/C02）、§9 F04–F09 全部事件反馈与音效、云海花园氛围。\n- N04 输入范围：键盘＋鼠标（鼠标瞄准/左键蓄力/C/R/Esc/Enter）；无触控、手柄、多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋花园环境音；无配音与背景音乐轨需求。\n- N06 表现层自由度：§9 未冻结的花卉装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（见习园艺师「芽衣」、高尔夫球与旗杆、三洞球场布局等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（瞄准→蓄力→击球→物理→进洞/补杆）；坡面与反弹均为物理系统内部规则，无跨系统因果链；多球物理与镜头插值并发（B1）；无失败态，界外复位与重打为恢复路径；新增瞄准反馈与镜头模式不改变难度档\"\n  downgrade_boundary: \"去掉坡面与挡板（纯平地直道）后仍为 S（更简）\"\n  upgrade_boundary: \"若杆数成绩跨洞/跨局保留并解锁新球场规则，升 M/L\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 2，image-to-3D 1）；object 任务资产为：gardener_mei, golf_ball, hole_flag。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, putt_swing。\n- video/audio/mechanic/UI：分别为 2/9/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "ad13ec4682722b104bf6d56801d8b7bb5aaee25bf2fd17f75997bab49f55e8bd"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Whistling fall into wind and a soft poof",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G056_sfx_006": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G056_garden_minigolf",
+          "task_id": "G056_sfx_006",
+          "asset_name": "hole_pop",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Bright pop and a satisfying rattle as the ball drops",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5566,
+          "trigger": "入洞",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《漂浮花园的迷你高尔夫》｜推杆物理机制输入规范\n\n```yaml\ncase_id: G056\nbase_case_id: G056\ntitle: 漂浮花园的迷你高尔夫\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: godot\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1056\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《漂浮花园的迷你高尔夫》；版本：mechanics-v3（2026-10-11 完整性修订：补瞄准线/力度条/轨迹残影、镜头规则、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Godot 4.x（Windows 桌面构建）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘与鼠标。\n- 原创边界：迷你高尔夫属公有领域玩法；本作全部名称、球场、文案与美术必须原创，不使用任何商业作品的球场设计、角色或造型。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 球洞实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：3D 俯视迷你高尔夫（单人杆数制）。本测例包含的能力：三洞冻结球场、蓄力击球物理、坡面反弹摩擦、瞄准线与轨迹残影反馈、界外复位与罚杆、双镜头模式、开场/结算视频。\n- S02 核心循环一句话：瞄定力度方向 → 击球 → 物理滚动 → 进洞或补杆 → 结算杆数。\n- S03 流程：标题 → 球洞1 → 球洞2 → 球洞3 → 总结算（杆数对比标准杆）；每洞自动开球。\n- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：界外自动复位回上一杆位＋罚 1 杆；总结算界面一键重开；Esc 暂停。\n- S06 与种子卡差异：种子卡杆数为「规则化高尔夫全流程」；本包冻结为三洞切片（标准杆 12），P0 局内口径不变。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 球洞1 → 球洞2 → 球洞3 → 总结算 → 重开/返回。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且球场按 seed=1056 生成完成\n  - state_change：进入「标题」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「球洞1」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 球洞1（直道平地，标准杆 3）\n  - input：鼠标瞄准、按住左键蓄力、松开击球、R 重打、C 镜头切换、Esc 暂停（触发方：玩家）\n  - precondition：洞1 载入完成且球静止于发球点\n  - state_change：击球按 G02 公式生成初速 → 物理结算\n  - feedback：瞄准线/蓄力条/轨迹残影按 §9 F05 呈现\n  - next_actions：入洞 →「球洞2」；8 杆上限 → 强制完成进下一洞\n  - outcome：本洞杆数累计局内\n- S08 球洞2（缓上坡＋单挡板折返，标准杆 4）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞1 完成（入洞或达上限）\n  - state_change：载入洞2；坡面与挡板按 L02 冻结\n  - feedback：坡面瞄准线变浅提示减速\n  - next_actions：入洞 →「球洞3」\n  - outcome：杆数累计\n- S09 球洞3（阶梯坡＋双挡板，标准杆 5）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞2 完成\n  - state_change：载入洞3；阶梯坡与双挡板生效\n  - feedback：反弹火花与入洞反馈\n  - next_actions：入洞或达上限 →「总结算」（先播 C02）\n  - outcome：按 V01 结算\n- S10 总结算\n  - input：Enter＝重开 / Esc＝返回标题（触发方：玩家）\n  - precondition：三洞全部完成\n  - state_change：进入「总结算」状态\n  - feedback：总结算面板显示总杆数、对比标准杆 12、罚杆数\n  - next_actions：重开或返回\n  - outcome：无跨局写入\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于任一洞\n  - state_change：暂停覆盖层打开；球、物理与蓄力冻结\n  - feedback：暂停面板（继续/本洞重打/返回标题/设置）\n  - next_actions：Esc 或「继续」→ 恢复\n  - outcome：恢复后无状态漂移（G04）\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：距离米制；力度为 0–100% 蓄力条（数值常显）；杆数为整数。\n- G02 物理与公式（本包冻结值）：击球初速 v＝蓄力比例 × 12 米/秒；平地滚动摩擦减速度 1.5 米/秒²；坡道沿坡向加速度分量 3.0 米/秒²；碰撞恢复系数 0.6。独立 oracle 数例：平地直线满蓄力 50% 击球 v＝6 米/秒，纯滚动距离＝v²/(2×1.5)＝**12 米**；蓄力 100% 为 48 米。\n- G03 杆数与罚则（本包冻结值）：三洞标准杆 3/4/5（总标准杆 12）；界外复位每次罚 1 杆；每洞杆数上限 8 杆，达上限自动按 8 杆＋累计罚杆记入并进入下一洞（无硬失败）。\n- G04 暂停与随机：Esc 暂停冻结球与物理；窗口失焦自动暂停；fixed_seed=1056 冻结三洞地形布置；本作物理为确定公式，无概率判定。\n- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速；蓄力条 0–100% 数值与当前蓄力同步；球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键鼠：鼠标移动＝瞄准方向；按住左键蓄力、松开击球；C＝俯视全览/击球视角切换；R＝本洞重打（罚 1 杆）；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：球滚动中击球无效；蓄力不足 5% 松开视为取消（不耗杆）；暂停/结算期间输入无效；被拒输入不产生杆数变化。\n- I03 无手柄需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；俯视全览模式下击球无效（须切回击球视角）；同帧多输入按瞄准→蓄力→击球顺序结算。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示；HUD 对照见 rubric。\n- I07 输入延迟目标：蓄力/击球按键到画面反馈 ≤ 50 毫秒（手感关键）；镜头切换 ≤ 150 毫秒。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：高尔夫球 1、三洞（洞杯、旗杆、发球点）、坡面与挡板若干、瞄准线与蓄力条 UI、轨迹残影；花园装饰为表现层。\n- L02 球洞（seed=1056 冻结地形）：洞1 直道平地 12 米（标准杆 3）；洞2 缓上坡＋单挡板折返（标准杆 4）；洞3 阶梯坡＋双挡板（标准杆 5）。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的花园装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M05]\n\n- M01 力度方向与物理（主机制）\n  - input：瞄准＋蓄力击球\n  - precondition：球静止且处于击球准备状态（非俯视全览）\n  - state_change：按 G02 公式生成初速向量 → 球滚动/反弹\n  - observable：逐帧球位置采样与初速、距离事件（见 G02 oracle）；`stroke` 事件（含初速与角度）\n  - invalid_case：滚动中击球、全览模式击球 → 拒绝且不耗杆\n  - recovery：球静止即恢复击球准备\n- M02 坡面反弹与摩擦\n  - input：地形接触（系统）\n  - precondition：球与坡面/挡板碰撞\n  - state_change：坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹\n  - observable：接触/反弹事件与速度分量差分\n  - invalid_case：无碰撞则纯摩擦结算\n  - recovery：—\n- M03 界外复位\n  - input：球坠出球场边界（系统）\n  - precondition：球越过 L02 边界\n  - state_change：回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位\n  - observable：`out_of_bounds` 事件（含罚杆字段）\n  - invalid_case：贴边滚动不触发\n  - recovery：复位即恢复击球\n- M04 杆数判定\n  - input：球入洞（系统）/ 达上限（系统）\n  - precondition：球与洞杯判定重叠且速度低于阈值\n  - state_change：本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算\n  - observable：`hole_complete` 事件与杆数流水（含罚杆）\n  - invalid_case：高速掠过洞杯不判入洞（速度阈值）\n  - recovery：—\n- M05 瞄准与轨迹反馈\n  - input：瞄准移动／蓄力变化（玩家）\n  - precondition：击球准备状态\n  - state_change：瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）\n  - observable：虚线长度采样与预计距离的 60% 对账；残影出现/渐隐事件\n  - invalid_case：全览模式不显示虚线（切回即恢复）\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成三洞 → 总结算（显示总杆数、对比标准杆 12 与罚杆数）。\n- V02 失败条件：无硬失败态；每洞 8 杆上限强制推进（记为上限完成）。\n- V03 恢复语义：界外自动复位＋罚 1 杆；R 重打本洞（罚 1 杆、回发球点）；结算后一键重开。\n- V04 persistent_state：无（重开全量清空；累计杆数仅本局内保留）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（杆数/洞进度）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——8 杆上限保证推进；界外复位兜底；任意洞可完成。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：架空云海时代的「浮屿花园」——园艺师们在漂浮于云海的花屿上经营三洞试炼球场，庆祝春分的推杆大会今夜开杆。\n- W02 场景所在地：浮屿花园的三座花洞——直道花径（洞1）、上坡藤架（洞2）、阶梯石台（洞3），云海在球场边缘流动。\n- W03 玩家身份与当前任务：玩家是见习园艺师「芽衣」；当前任务：在推杆大会上以不超过标准杆的成绩完成三洞，取得正式园丁资格。\n- W04 失败代价与结局表达：本作无失败态；超标准杆仅影响成绩表达；完成则 C02 呈现大会颁奖与花灯升空。\n- W05 叙事来源：三洞＝园艺师资格考试的三个科目（直道基本功/坡度控球/复杂地形）；旗杆与洞杯＝试炼花器；云海边界＝浮屿边界（界外即坠云）。全部原创。\n- W06 视觉风格与色彩材质：明快风格化 3D 花园；主色＝草甸绿（#7CB26B 系）＋花瓣粉（#E8A0B8 系）＋云海白蓝（#C9DCE8 系）；材质以草坪、木挡板、石台为主，光线为春日暖光。\n- W07 环境氛围与声音语言：云海微风的春日花园——常驻风拂草浪与远处鸟鸣；音效语言为「击球脆响＋滚动沙沙＋碰撞闷响＋入洞清脆」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代浮屿与大会 → 三洞推进承载试炼节奏 → 结算视频（C02）收束颁奖；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头（冻结需求）：默认击球视角＝发球/停球点后方第三人称（俯角 45°，距离 5 米），瞄准方向随鼠标旋转；球滚动时镜头平滑跟随球（0.2 秒插值，速度上限 12 米/秒避免甩镜）；球静止 1 秒后镜头回击球准备位；C 键切换「俯视全览」（整洞 60° 俯视，不参与击球）；镜头边界＝球场外框外扩 10%；界外复位/换洞时镜头直接落位（无漂移）。\n- F02 关键操作镜头变化：入洞瞬间镜头轻微推近洞杯 5%（0.5 秒）；出界瞬间镜头短暂拉高 10%（0.4 秒）；无慢动作。\n- F03 输入与延迟：见 I07（击球手感为 S 档核心，≤50 毫秒）。\n- F04 环境常驻效果：花瓣随风飘落（低频）、云海缓慢流动、旗杆旗面摆动；不遮挡瞄准线与洞杯。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 蓄力开始 | 蓄力条展开＋数值跳动 | 蓄力低鸣（按住循环，音调随力度升高） | 松开或取消 |\n| 击球 | 球推出＋草地小尘环＋轨迹残影启动 | 击球脆响 | 残影 0.5s 渐隐 |\n| 球滚动 | 轨迹残影跟随＋草浪压痕 | 滚动沙沙（滚动中循环） | 球停 |\n| 碰撞挡板 | 火花小粒子＋球体挤压回弹 | 碰撞闷响 | 回弹完成 |\n| 上坡减速 | 瞄准线透明度提示（击球前）/球速渐减 | 沙沙声减弱 | 坡段结束 |\n| 出界 | 球坠云＋镜头拉高＋「界外＋1 杆」提示 | 坠落风声 | 复位完成 |\n| 入洞 | 球旋入洞杯＋旗杆亮灯＋花瓣迸溅 | 入洞清脆音 | 进入下一洞 |\n| 达杆数上限 | 「本洞按 8 杆计」横幅 | 低提示音 | 推进下一洞 |\n| 三洞完成 | 花灯升空粒子 | 结算上扬音 | 进入总结算 |\n\n- F06 关键音效清单：蓄力低鸣、击球脆响、滚动沙沙、碰撞闷响、坠落风声、入洞清脆音、低提示音、上扬音；环境音：风拂草浪＋云海低鸣＋远处鸟鸣（常驻循环）；循环音开始/结束：滚动沙沙按滚动起止、蓄力低鸣按按住起止、环境声随球场载入开始、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息；轨迹残影承担落点复盘信息；花瓣与草浪粒子单帧 ≤ 35 且不遮挡瞄准线、洞杯与 HUD。\n- F08 音画同步：击球脆响与击球帧同步；碰撞闷响与接触帧同步；入洞清脆音与入洞事件帧同步。\n- F09 屏幕震动：入洞 0.1 秒小幅；碰撞 0.05 秒微幅；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ HUD（洞号、杆数/上限、蓄力条数值、罚杆、镜头模式提示）→ 总结算（总杆数/对比标准杆 12/罚杆/重开/返回）→ 暂停面板（继续/本洞重打/返回标题/设置）；关键状态附图标＋文字（镜头模式、界外提示），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开场花园（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入球洞1 之前，每局一次\n  - 内容与角色场景：云海之上的浮屿花园全景，花灯次第点亮，见习园艺师「芽衣」握杆走向三洞试炼球场的第一洞发球点\n  - 资产对应：浮屿花园、旗杆、高尔夫球与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入球洞1；自然播完 → 同\n  - 状态一致：播放期间不推进任何计时；进入状态＝0/3 洞\n- C02 推杆大会结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：三洞全部完成后、总结算面板之前，每局一次\n  - 内容与角色场景：三座花洞灯带依次亮起，花灯升空汇成春分图案，「芽衣」举起推杆向观众席致意\n  - 资产对应：球场、花灯、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 同\n  - 状态一致：仅在真实完成三洞后触发\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三洞冻结球场、蓄力击球物理、坡面反弹与摩擦、瞄准线/蓄力条/轨迹残影反馈、界外复位与罚杆、8 杆上限推进、双镜头模式（击球/俯视全览）。\n- N02 本测例包含的流程与界面：标题、三洞推进、总结算、暂停（含失焦自动暂停）、重打与重开。\n- N03 本测例包含的演出能力：开场/结算视频（C01/C02）、§9 F04–F09 全部事件反馈与音效、云海花园氛围。\n- N04 输入范围：键盘＋鼠标（鼠标瞄准/左键蓄力/C/R/Esc/Enter）；无触控、手柄、多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋花园环境音；无配音与背景音乐轨需求。\n- N06 表现层自由度：§9 未冻结的花卉装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（见习园艺师「芽衣」、高尔夫球与旗杆、三洞球场布局等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（瞄准→蓄力→击球→物理→进洞/补杆）；坡面与反弹均为物理系统内部规则，无跨系统因果链；多球物理与镜头插值并发（B1）；无失败态，界外复位与重打为恢复路径；新增瞄准反馈与镜头模式不改变难度档\"\n  downgrade_boundary: \"去掉坡面与挡板（纯平地直道）后仍为 S（更简）\"\n  upgrade_boundary: \"若杆数成绩跨洞/跨局保留并解锁新球场规则，升 M/L\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 2，image-to-3D 1）；object 任务资产为：gardener_mei, golf_ball, hole_flag。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, putt_swing。\n- video/audio/mechanic/UI：分别为 2/9/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "ad13ec4682722b104bf6d56801d8b7bb5aaee25bf2fd17f75997bab49f55e8bd"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Bright pop and a satisfying rattle as the ball drops",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G056_sfx_007": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G056_garden_minigolf",
+          "task_id": "G056_sfx_007",
+          "asset_name": "cap_limit",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Low neutral chime as the 8-stroke cap applies",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5567,
+          "trigger": "杆数上限",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《漂浮花园的迷你高尔夫》｜推杆物理机制输入规范\n\n```yaml\ncase_id: G056\nbase_case_id: G056\ntitle: 漂浮花园的迷你高尔夫\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: godot\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1056\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《漂浮花园的迷你高尔夫》；版本：mechanics-v3（2026-10-11 完整性修订：补瞄准线/力度条/轨迹残影、镜头规则、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Godot 4.x（Windows 桌面构建）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘与鼠标。\n- 原创边界：迷你高尔夫属公有领域玩法；本作全部名称、球场、文案与美术必须原创，不使用任何商业作品的球场设计、角色或造型。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 球洞实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：3D 俯视迷你高尔夫（单人杆数制）。本测例包含的能力：三洞冻结球场、蓄力击球物理、坡面反弹摩擦、瞄准线与轨迹残影反馈、界外复位与罚杆、双镜头模式、开场/结算视频。\n- S02 核心循环一句话：瞄定力度方向 → 击球 → 物理滚动 → 进洞或补杆 → 结算杆数。\n- S03 流程：标题 → 球洞1 → 球洞2 → 球洞3 → 总结算（杆数对比标准杆）；每洞自动开球。\n- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：界外自动复位回上一杆位＋罚 1 杆；总结算界面一键重开；Esc 暂停。\n- S06 与种子卡差异：种子卡杆数为「规则化高尔夫全流程」；本包冻结为三洞切片（标准杆 12），P0 局内口径不变。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 球洞1 → 球洞2 → 球洞3 → 总结算 → 重开/返回。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且球场按 seed=1056 生成完成\n  - state_change：进入「标题」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「球洞1」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 球洞1（直道平地，标准杆 3）\n  - input：鼠标瞄准、按住左键蓄力、松开击球、R 重打、C 镜头切换、Esc 暂停（触发方：玩家）\n  - precondition：洞1 载入完成且球静止于发球点\n  - state_change：击球按 G02 公式生成初速 → 物理结算\n  - feedback：瞄准线/蓄力条/轨迹残影按 §9 F05 呈现\n  - next_actions：入洞 →「球洞2」；8 杆上限 → 强制完成进下一洞\n  - outcome：本洞杆数累计局内\n- S08 球洞2（缓上坡＋单挡板折返，标准杆 4）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞1 完成（入洞或达上限）\n  - state_change：载入洞2；坡面与挡板按 L02 冻结\n  - feedback：坡面瞄准线变浅提示减速\n  - next_actions：入洞 →「球洞3」\n  - outcome：杆数累计\n- S09 球洞3（阶梯坡＋双挡板，标准杆 5）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞2 完成\n  - state_change：载入洞3；阶梯坡与双挡板生效\n  - feedback：反弹火花与入洞反馈\n  - next_actions：入洞或达上限 →「总结算」（先播 C02）\n  - outcome：按 V01 结算\n- S10 总结算\n  - input：Enter＝重开 / Esc＝返回标题（触发方：玩家）\n  - precondition：三洞全部完成\n  - state_change：进入「总结算」状态\n  - feedback：总结算面板显示总杆数、对比标准杆 12、罚杆数\n  - next_actions：重开或返回\n  - outcome：无跨局写入\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于任一洞\n  - state_change：暂停覆盖层打开；球、物理与蓄力冻结\n  - feedback：暂停面板（继续/本洞重打/返回标题/设置）\n  - next_actions：Esc 或「继续」→ 恢复\n  - outcome：恢复后无状态漂移（G04）\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：距离米制；力度为 0–100% 蓄力条（数值常显）；杆数为整数。\n- G02 物理与公式（本包冻结值）：击球初速 v＝蓄力比例 × 12 米/秒；平地滚动摩擦减速度 1.5 米/秒²；坡道沿坡向加速度分量 3.0 米/秒²；碰撞恢复系数 0.6。独立 oracle 数例：平地直线满蓄力 50% 击球 v＝6 米/秒，纯滚动距离＝v²/(2×1.5)＝**12 米**；蓄力 100% 为 48 米。\n- G03 杆数与罚则（本包冻结值）：三洞标准杆 3/4/5（总标准杆 12）；界外复位每次罚 1 杆；每洞杆数上限 8 杆，达上限自动按 8 杆＋累计罚杆记入并进入下一洞（无硬失败）。\n- G04 暂停与随机：Esc 暂停冻结球与物理；窗口失焦自动暂停；fixed_seed=1056 冻结三洞地形布置；本作物理为确定公式，无概率判定。\n- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速；蓄力条 0–100% 数值与当前蓄力同步；球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键鼠：鼠标移动＝瞄准方向；按住左键蓄力、松开击球；C＝俯视全览/击球视角切换；R＝本洞重打（罚 1 杆）；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：球滚动中击球无效；蓄力不足 5% 松开视为取消（不耗杆）；暂停/结算期间输入无效；被拒输入不产生杆数变化。\n- I03 无手柄需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；俯视全览模式下击球无效（须切回击球视角）；同帧多输入按瞄准→蓄力→击球顺序结算。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示；HUD 对照见 rubric。\n- I07 输入延迟目标：蓄力/击球按键到画面反馈 ≤ 50 毫秒（手感关键）；镜头切换 ≤ 150 毫秒。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：高尔夫球 1、三洞（洞杯、旗杆、发球点）、坡面与挡板若干、瞄准线与蓄力条 UI、轨迹残影；花园装饰为表现层。\n- L02 球洞（seed=1056 冻结地形）：洞1 直道平地 12 米（标准杆 3）；洞2 缓上坡＋单挡板折返（标准杆 4）；洞3 阶梯坡＋双挡板（标准杆 5）。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的花园装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M05]\n\n- M01 力度方向与物理（主机制）\n  - input：瞄准＋蓄力击球\n  - precondition：球静止且处于击球准备状态（非俯视全览）\n  - state_change：按 G02 公式生成初速向量 → 球滚动/反弹\n  - observable：逐帧球位置采样与初速、距离事件（见 G02 oracle）；`stroke` 事件（含初速与角度）\n  - invalid_case：滚动中击球、全览模式击球 → 拒绝且不耗杆\n  - recovery：球静止即恢复击球准备\n- M02 坡面反弹与摩擦\n  - input：地形接触（系统）\n  - precondition：球与坡面/挡板碰撞\n  - state_change：坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹\n  - observable：接触/反弹事件与速度分量差分\n  - invalid_case：无碰撞则纯摩擦结算\n  - recovery：—\n- M03 界外复位\n  - input：球坠出球场边界（系统）\n  - precondition：球越过 L02 边界\n  - state_change：回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位\n  - observable：`out_of_bounds` 事件（含罚杆字段）\n  - invalid_case：贴边滚动不触发\n  - recovery：复位即恢复击球\n- M04 杆数判定\n  - input：球入洞（系统）/ 达上限（系统）\n  - precondition：球与洞杯判定重叠且速度低于阈值\n  - state_change：本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算\n  - observable：`hole_complete` 事件与杆数流水（含罚杆）\n  - invalid_case：高速掠过洞杯不判入洞（速度阈值）\n  - recovery：—\n- M05 瞄准与轨迹反馈\n  - input：瞄准移动／蓄力变化（玩家）\n  - precondition：击球准备状态\n  - state_change：瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）\n  - observable：虚线长度采样与预计距离的 60% 对账；残影出现/渐隐事件\n  - invalid_case：全览模式不显示虚线（切回即恢复）\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成三洞 → 总结算（显示总杆数、对比标准杆 12 与罚杆数）。\n- V02 失败条件：无硬失败态；每洞 8 杆上限强制推进（记为上限完成）。\n- V03 恢复语义：界外自动复位＋罚 1 杆；R 重打本洞（罚 1 杆、回发球点）；结算后一键重开。\n- V04 persistent_state：无（重开全量清空；累计杆数仅本局内保留）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（杆数/洞进度）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——8 杆上限保证推进；界外复位兜底；任意洞可完成。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：架空云海时代的「浮屿花园」——园艺师们在漂浮于云海的花屿上经营三洞试炼球场，庆祝春分的推杆大会今夜开杆。\n- W02 场景所在地：浮屿花园的三座花洞——直道花径（洞1）、上坡藤架（洞2）、阶梯石台（洞3），云海在球场边缘流动。\n- W03 玩家身份与当前任务：玩家是见习园艺师「芽衣」；当前任务：在推杆大会上以不超过标准杆的成绩完成三洞，取得正式园丁资格。\n- W04 失败代价与结局表达：本作无失败态；超标准杆仅影响成绩表达；完成则 C02 呈现大会颁奖与花灯升空。\n- W05 叙事来源：三洞＝园艺师资格考试的三个科目（直道基本功/坡度控球/复杂地形）；旗杆与洞杯＝试炼花器；云海边界＝浮屿边界（界外即坠云）。全部原创。\n- W06 视觉风格与色彩材质：明快风格化 3D 花园；主色＝草甸绿（#7CB26B 系）＋花瓣粉（#E8A0B8 系）＋云海白蓝（#C9DCE8 系）；材质以草坪、木挡板、石台为主，光线为春日暖光。\n- W07 环境氛围与声音语言：云海微风的春日花园——常驻风拂草浪与远处鸟鸣；音效语言为「击球脆响＋滚动沙沙＋碰撞闷响＋入洞清脆」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代浮屿与大会 → 三洞推进承载试炼节奏 → 结算视频（C02）收束颁奖；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头（冻结需求）：默认击球视角＝发球/停球点后方第三人称（俯角 45°，距离 5 米），瞄准方向随鼠标旋转；球滚动时镜头平滑跟随球（0.2 秒插值，速度上限 12 米/秒避免甩镜）；球静止 1 秒后镜头回击球准备位；C 键切换「俯视全览」（整洞 60° 俯视，不参与击球）；镜头边界＝球场外框外扩 10%；界外复位/换洞时镜头直接落位（无漂移）。\n- F02 关键操作镜头变化：入洞瞬间镜头轻微推近洞杯 5%（0.5 秒）；出界瞬间镜头短暂拉高 10%（0.4 秒）；无慢动作。\n- F03 输入与延迟：见 I07（击球手感为 S 档核心，≤50 毫秒）。\n- F04 环境常驻效果：花瓣随风飘落（低频）、云海缓慢流动、旗杆旗面摆动；不遮挡瞄准线与洞杯。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 蓄力开始 | 蓄力条展开＋数值跳动 | 蓄力低鸣（按住循环，音调随力度升高） | 松开或取消 |\n| 击球 | 球推出＋草地小尘环＋轨迹残影启动 | 击球脆响 | 残影 0.5s 渐隐 |\n| 球滚动 | 轨迹残影跟随＋草浪压痕 | 滚动沙沙（滚动中循环） | 球停 |\n| 碰撞挡板 | 火花小粒子＋球体挤压回弹 | 碰撞闷响 | 回弹完成 |\n| 上坡减速 | 瞄准线透明度提示（击球前）/球速渐减 | 沙沙声减弱 | 坡段结束 |\n| 出界 | 球坠云＋镜头拉高＋「界外＋1 杆」提示 | 坠落风声 | 复位完成 |\n| 入洞 | 球旋入洞杯＋旗杆亮灯＋花瓣迸溅 | 入洞清脆音 | 进入下一洞 |\n| 达杆数上限 | 「本洞按 8 杆计」横幅 | 低提示音 | 推进下一洞 |\n| 三洞完成 | 花灯升空粒子 | 结算上扬音 | 进入总结算 |\n\n- F06 关键音效清单：蓄力低鸣、击球脆响、滚动沙沙、碰撞闷响、坠落风声、入洞清脆音、低提示音、上扬音；环境音：风拂草浪＋云海低鸣＋远处鸟鸣（常驻循环）；循环音开始/结束：滚动沙沙按滚动起止、蓄力低鸣按按住起止、环境声随球场载入开始、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息；轨迹残影承担落点复盘信息；花瓣与草浪粒子单帧 ≤ 35 且不遮挡瞄准线、洞杯与 HUD。\n- F08 音画同步：击球脆响与击球帧同步；碰撞闷响与接触帧同步；入洞清脆音与入洞事件帧同步。\n- F09 屏幕震动：入洞 0.1 秒小幅；碰撞 0.05 秒微幅；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ HUD（洞号、杆数/上限、蓄力条数值、罚杆、镜头模式提示）→ 总结算（总杆数/对比标准杆 12/罚杆/重开/返回）→ 暂停面板（继续/本洞重打/返回标题/设置）；关键状态附图标＋文字（镜头模式、界外提示），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开场花园（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入球洞1 之前，每局一次\n  - 内容与角色场景：云海之上的浮屿花园全景，花灯次第点亮，见习园艺师「芽衣」握杆走向三洞试炼球场的第一洞发球点\n  - 资产对应：浮屿花园、旗杆、高尔夫球与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入球洞1；自然播完 → 同\n  - 状态一致：播放期间不推进任何计时；进入状态＝0/3 洞\n- C02 推杆大会结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：三洞全部完成后、总结算面板之前，每局一次\n  - 内容与角色场景：三座花洞灯带依次亮起，花灯升空汇成春分图案，「芽衣」举起推杆向观众席致意\n  - 资产对应：球场、花灯、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 同\n  - 状态一致：仅在真实完成三洞后触发\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三洞冻结球场、蓄力击球物理、坡面反弹与摩擦、瞄准线/蓄力条/轨迹残影反馈、界外复位与罚杆、8 杆上限推进、双镜头模式（击球/俯视全览）。\n- N02 本测例包含的流程与界面：标题、三洞推进、总结算、暂停（含失焦自动暂停）、重打与重开。\n- N03 本测例包含的演出能力：开场/结算视频（C01/C02）、§9 F04–F09 全部事件反馈与音效、云海花园氛围。\n- N04 输入范围：键盘＋鼠标（鼠标瞄准/左键蓄力/C/R/Esc/Enter）；无触控、手柄、多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋花园环境音；无配音与背景音乐轨需求。\n- N06 表现层自由度：§9 未冻结的花卉装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（见习园艺师「芽衣」、高尔夫球与旗杆、三洞球场布局等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（瞄准→蓄力→击球→物理→进洞/补杆）；坡面与反弹均为物理系统内部规则，无跨系统因果链；多球物理与镜头插值并发（B1）；无失败态，界外复位与重打为恢复路径；新增瞄准反馈与镜头模式不改变难度档\"\n  downgrade_boundary: \"去掉坡面与挡板（纯平地直道）后仍为 S（更简）\"\n  upgrade_boundary: \"若杆数成绩跨洞/跨局保留并解锁新球场规则，升 M/L\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 2，image-to-3D 1）；object 任务资产为：gardener_mei, golf_ball, hole_flag。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, putt_swing。\n- video/audio/mechanic/UI：分别为 2/9/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "ad13ec4682722b104bf6d56801d8b7bb5aaee25bf2fd17f75997bab49f55e8bd"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Low neutral chime as the 8-stroke cap applies",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G056_sfx_008": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G056_garden_minigolf",
+          "task_id": "G056_sfx_008",
+          "asset_name": "finish_fanfare",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Light airy fanfare with paper-lantern shimmer",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5568,
+          "trigger": "三洞完成",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《漂浮花园的迷你高尔夫》｜推杆物理机制输入规范\n\n```yaml\ncase_id: G056\nbase_case_id: G056\ntitle: 漂浮花园的迷你高尔夫\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: godot\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1056\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《漂浮花园的迷你高尔夫》；版本：mechanics-v3（2026-10-11 完整性修订：补瞄准线/力度条/轨迹残影、镜头规则、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Godot 4.x（Windows 桌面构建）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘与鼠标。\n- 原创边界：迷你高尔夫属公有领域玩法；本作全部名称、球场、文案与美术必须原创，不使用任何商业作品的球场设计、角色或造型。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 球洞实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：3D 俯视迷你高尔夫（单人杆数制）。本测例包含的能力：三洞冻结球场、蓄力击球物理、坡面反弹摩擦、瞄准线与轨迹残影反馈、界外复位与罚杆、双镜头模式、开场/结算视频。\n- S02 核心循环一句话：瞄定力度方向 → 击球 → 物理滚动 → 进洞或补杆 → 结算杆数。\n- S03 流程：标题 → 球洞1 → 球洞2 → 球洞3 → 总结算（杆数对比标准杆）；每洞自动开球。\n- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：界外自动复位回上一杆位＋罚 1 杆；总结算界面一键重开；Esc 暂停。\n- S06 与种子卡差异：种子卡杆数为「规则化高尔夫全流程」；本包冻结为三洞切片（标准杆 12），P0 局内口径不变。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 球洞1 → 球洞2 → 球洞3 → 总结算 → 重开/返回。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且球场按 seed=1056 生成完成\n  - state_change：进入「标题」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「球洞1」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 球洞1（直道平地，标准杆 3）\n  - input：鼠标瞄准、按住左键蓄力、松开击球、R 重打、C 镜头切换、Esc 暂停（触发方：玩家）\n  - precondition：洞1 载入完成且球静止于发球点\n  - state_change：击球按 G02 公式生成初速 → 物理结算\n  - feedback：瞄准线/蓄力条/轨迹残影按 §9 F05 呈现\n  - next_actions：入洞 →「球洞2」；8 杆上限 → 强制完成进下一洞\n  - outcome：本洞杆数累计局内\n- S08 球洞2（缓上坡＋单挡板折返，标准杆 4）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞1 完成（入洞或达上限）\n  - state_change：载入洞2；坡面与挡板按 L02 冻结\n  - feedback：坡面瞄准线变浅提示减速\n  - next_actions：入洞 →「球洞3」\n  - outcome：杆数累计\n- S09 球洞3（阶梯坡＋双挡板，标准杆 5）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞2 完成\n  - state_change：载入洞3；阶梯坡与双挡板生效\n  - feedback：反弹火花与入洞反馈\n  - next_actions：入洞或达上限 →「总结算」（先播 C02）\n  - outcome：按 V01 结算\n- S10 总结算\n  - input：Enter＝重开 / Esc＝返回标题（触发方：玩家）\n  - precondition：三洞全部完成\n  - state_change：进入「总结算」状态\n  - feedback：总结算面板显示总杆数、对比标准杆 12、罚杆数\n  - next_actions：重开或返回\n  - outcome：无跨局写入\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于任一洞\n  - state_change：暂停覆盖层打开；球、物理与蓄力冻结\n  - feedback：暂停面板（继续/本洞重打/返回标题/设置）\n  - next_actions：Esc 或「继续」→ 恢复\n  - outcome：恢复后无状态漂移（G04）\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：距离米制；力度为 0–100% 蓄力条（数值常显）；杆数为整数。\n- G02 物理与公式（本包冻结值）：击球初速 v＝蓄力比例 × 12 米/秒；平地滚动摩擦减速度 1.5 米/秒²；坡道沿坡向加速度分量 3.0 米/秒²；碰撞恢复系数 0.6。独立 oracle 数例：平地直线满蓄力 50% 击球 v＝6 米/秒，纯滚动距离＝v²/(2×1.5)＝**12 米**；蓄力 100% 为 48 米。\n- G03 杆数与罚则（本包冻结值）：三洞标准杆 3/4/5（总标准杆 12）；界外复位每次罚 1 杆；每洞杆数上限 8 杆，达上限自动按 8 杆＋累计罚杆记入并进入下一洞（无硬失败）。\n- G04 暂停与随机：Esc 暂停冻结球与物理；窗口失焦自动暂停；fixed_seed=1056 冻结三洞地形布置；本作物理为确定公式，无概率判定。\n- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速；蓄力条 0–100% 数值与当前蓄力同步；球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键鼠：鼠标移动＝瞄准方向；按住左键蓄力、松开击球；C＝俯视全览/击球视角切换；R＝本洞重打（罚 1 杆）；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：球滚动中击球无效；蓄力不足 5% 松开视为取消（不耗杆）；暂停/结算期间输入无效；被拒输入不产生杆数变化。\n- I03 无手柄需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；俯视全览模式下击球无效（须切回击球视角）；同帧多输入按瞄准→蓄力→击球顺序结算。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示；HUD 对照见 rubric。\n- I07 输入延迟目标：蓄力/击球按键到画面反馈 ≤ 50 毫秒（手感关键）；镜头切换 ≤ 150 毫秒。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：高尔夫球 1、三洞（洞杯、旗杆、发球点）、坡面与挡板若干、瞄准线与蓄力条 UI、轨迹残影；花园装饰为表现层。\n- L02 球洞（seed=1056 冻结地形）：洞1 直道平地 12 米（标准杆 3）；洞2 缓上坡＋单挡板折返（标准杆 4）；洞3 阶梯坡＋双挡板（标准杆 5）。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的花园装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M05]\n\n- M01 力度方向与物理（主机制）\n  - input：瞄准＋蓄力击球\n  - precondition：球静止且处于击球准备状态（非俯视全览）\n  - state_change：按 G02 公式生成初速向量 → 球滚动/反弹\n  - observable：逐帧球位置采样与初速、距离事件（见 G02 oracle）；`stroke` 事件（含初速与角度）\n  - invalid_case：滚动中击球、全览模式击球 → 拒绝且不耗杆\n  - recovery：球静止即恢复击球准备\n- M02 坡面反弹与摩擦\n  - input：地形接触（系统）\n  - precondition：球与坡面/挡板碰撞\n  - state_change：坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹\n  - observable：接触/反弹事件与速度分量差分\n  - invalid_case：无碰撞则纯摩擦结算\n  - recovery：—\n- M03 界外复位\n  - input：球坠出球场边界（系统）\n  - precondition：球越过 L02 边界\n  - state_change：回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位\n  - observable：`out_of_bounds` 事件（含罚杆字段）\n  - invalid_case：贴边滚动不触发\n  - recovery：复位即恢复击球\n- M04 杆数判定\n  - input：球入洞（系统）/ 达上限（系统）\n  - precondition：球与洞杯判定重叠且速度低于阈值\n  - state_change：本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算\n  - observable：`hole_complete` 事件与杆数流水（含罚杆）\n  - invalid_case：高速掠过洞杯不判入洞（速度阈值）\n  - recovery：—\n- M05 瞄准与轨迹反馈\n  - input：瞄准移动／蓄力变化（玩家）\n  - precondition：击球准备状态\n  - state_change：瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）\n  - observable：虚线长度采样与预计距离的 60% 对账；残影出现/渐隐事件\n  - invalid_case：全览模式不显示虚线（切回即恢复）\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成三洞 → 总结算（显示总杆数、对比标准杆 12 与罚杆数）。\n- V02 失败条件：无硬失败态；每洞 8 杆上限强制推进（记为上限完成）。\n- V03 恢复语义：界外自动复位＋罚 1 杆；R 重打本洞（罚 1 杆、回发球点）；结算后一键重开。\n- V04 persistent_state：无（重开全量清空；累计杆数仅本局内保留）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（杆数/洞进度）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——8 杆上限保证推进；界外复位兜底；任意洞可完成。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：架空云海时代的「浮屿花园」——园艺师们在漂浮于云海的花屿上经营三洞试炼球场，庆祝春分的推杆大会今夜开杆。\n- W02 场景所在地：浮屿花园的三座花洞——直道花径（洞1）、上坡藤架（洞2）、阶梯石台（洞3），云海在球场边缘流动。\n- W03 玩家身份与当前任务：玩家是见习园艺师「芽衣」；当前任务：在推杆大会上以不超过标准杆的成绩完成三洞，取得正式园丁资格。\n- W04 失败代价与结局表达：本作无失败态；超标准杆仅影响成绩表达；完成则 C02 呈现大会颁奖与花灯升空。\n- W05 叙事来源：三洞＝园艺师资格考试的三个科目（直道基本功/坡度控球/复杂地形）；旗杆与洞杯＝试炼花器；云海边界＝浮屿边界（界外即坠云）。全部原创。\n- W06 视觉风格与色彩材质：明快风格化 3D 花园；主色＝草甸绿（#7CB26B 系）＋花瓣粉（#E8A0B8 系）＋云海白蓝（#C9DCE8 系）；材质以草坪、木挡板、石台为主，光线为春日暖光。\n- W07 环境氛围与声音语言：云海微风的春日花园——常驻风拂草浪与远处鸟鸣；音效语言为「击球脆响＋滚动沙沙＋碰撞闷响＋入洞清脆」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代浮屿与大会 → 三洞推进承载试炼节奏 → 结算视频（C02）收束颁奖；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头（冻结需求）：默认击球视角＝发球/停球点后方第三人称（俯角 45°，距离 5 米），瞄准方向随鼠标旋转；球滚动时镜头平滑跟随球（0.2 秒插值，速度上限 12 米/秒避免甩镜）；球静止 1 秒后镜头回击球准备位；C 键切换「俯视全览」（整洞 60° 俯视，不参与击球）；镜头边界＝球场外框外扩 10%；界外复位/换洞时镜头直接落位（无漂移）。\n- F02 关键操作镜头变化：入洞瞬间镜头轻微推近洞杯 5%（0.5 秒）；出界瞬间镜头短暂拉高 10%（0.4 秒）；无慢动作。\n- F03 输入与延迟：见 I07（击球手感为 S 档核心，≤50 毫秒）。\n- F04 环境常驻效果：花瓣随风飘落（低频）、云海缓慢流动、旗杆旗面摆动；不遮挡瞄准线与洞杯。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 蓄力开始 | 蓄力条展开＋数值跳动 | 蓄力低鸣（按住循环，音调随力度升高） | 松开或取消 |\n| 击球 | 球推出＋草地小尘环＋轨迹残影启动 | 击球脆响 | 残影 0.5s 渐隐 |\n| 球滚动 | 轨迹残影跟随＋草浪压痕 | 滚动沙沙（滚动中循环） | 球停 |\n| 碰撞挡板 | 火花小粒子＋球体挤压回弹 | 碰撞闷响 | 回弹完成 |\n| 上坡减速 | 瞄准线透明度提示（击球前）/球速渐减 | 沙沙声减弱 | 坡段结束 |\n| 出界 | 球坠云＋镜头拉高＋「界外＋1 杆」提示 | 坠落风声 | 复位完成 |\n| 入洞 | 球旋入洞杯＋旗杆亮灯＋花瓣迸溅 | 入洞清脆音 | 进入下一洞 |\n| 达杆数上限 | 「本洞按 8 杆计」横幅 | 低提示音 | 推进下一洞 |\n| 三洞完成 | 花灯升空粒子 | 结算上扬音 | 进入总结算 |\n\n- F06 关键音效清单：蓄力低鸣、击球脆响、滚动沙沙、碰撞闷响、坠落风声、入洞清脆音、低提示音、上扬音；环境音：风拂草浪＋云海低鸣＋远处鸟鸣（常驻循环）；循环音开始/结束：滚动沙沙按滚动起止、蓄力低鸣按按住起止、环境声随球场载入开始、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息；轨迹残影承担落点复盘信息；花瓣与草浪粒子单帧 ≤ 35 且不遮挡瞄准线、洞杯与 HUD。\n- F08 音画同步：击球脆响与击球帧同步；碰撞闷响与接触帧同步；入洞清脆音与入洞事件帧同步。\n- F09 屏幕震动：入洞 0.1 秒小幅；碰撞 0.05 秒微幅；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ HUD（洞号、杆数/上限、蓄力条数值、罚杆、镜头模式提示）→ 总结算（总杆数/对比标准杆 12/罚杆/重开/返回）→ 暂停面板（继续/本洞重打/返回标题/设置）；关键状态附图标＋文字（镜头模式、界外提示），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开场花园（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入球洞1 之前，每局一次\n  - 内容与角色场景：云海之上的浮屿花园全景，花灯次第点亮，见习园艺师「芽衣」握杆走向三洞试炼球场的第一洞发球点\n  - 资产对应：浮屿花园、旗杆、高尔夫球与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入球洞1；自然播完 → 同\n  - 状态一致：播放期间不推进任何计时；进入状态＝0/3 洞\n- C02 推杆大会结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：三洞全部完成后、总结算面板之前，每局一次\n  - 内容与角色场景：三座花洞灯带依次亮起，花灯升空汇成春分图案，「芽衣」举起推杆向观众席致意\n  - 资产对应：球场、花灯、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 同\n  - 状态一致：仅在真实完成三洞后触发\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三洞冻结球场、蓄力击球物理、坡面反弹与摩擦、瞄准线/蓄力条/轨迹残影反馈、界外复位与罚杆、8 杆上限推进、双镜头模式（击球/俯视全览）。\n- N02 本测例包含的流程与界面：标题、三洞推进、总结算、暂停（含失焦自动暂停）、重打与重开。\n- N03 本测例包含的演出能力：开场/结算视频（C01/C02）、§9 F04–F09 全部事件反馈与音效、云海花园氛围。\n- N04 输入范围：键盘＋鼠标（鼠标瞄准/左键蓄力/C/R/Esc/Enter）；无触控、手柄、多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋花园环境音；无配音与背景音乐轨需求。\n- N06 表现层自由度：§9 未冻结的花卉装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（见习园艺师「芽衣」、高尔夫球与旗杆、三洞球场布局等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（瞄准→蓄力→击球→物理→进洞/补杆）；坡面与反弹均为物理系统内部规则，无跨系统因果链；多球物理与镜头插值并发（B1）；无失败态，界外复位与重打为恢复路径；新增瞄准反馈与镜头模式不改变难度档\"\n  downgrade_boundary: \"去掉坡面与挡板（纯平地直道）后仍为 S（更简）\"\n  upgrade_boundary: \"若杆数成绩跨洞/跨局保留并解锁新球场规则，升 M/L\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 2，image-to-3D 1）；object 任务资产为：gardener_mei, golf_ball, hole_flag。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, putt_swing。\n- video/audio/mechanic/UI：分别为 2/9/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "ad13ec4682722b104bf6d56801d8b7bb5aaee25bf2fd17f75997bab49f55e8bd"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Light airy fanfare with paper-lantern shimmer",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G056_sfx_009": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G056_garden_minigolf",
+          "task_id": "G056_sfx_009",
+          "asset_name": "garden_ambience",
+          "audio_type": "sound_effect",
+          "sound_category": "ambient_loop",
+          "prompt": "Floating garden: soft wind over grass, cloud-sea hum, distant songbirds",
+          "duration_sec": 35.0,
+          "sample_rate": 48000,
+          "seed": 5569,
+          "trigger": "常驻环境音",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《漂浮花园的迷你高尔夫》｜推杆物理机制输入规范\n\n```yaml\ncase_id: G056\nbase_case_id: G056\ntitle: 漂浮花园的迷你高尔夫\ncategory: Sports / Rhythm / Physics\ntier: S\nengine: godot\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1056\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《漂浮花园的迷你高尔夫》；版本：mechanics-v3（2026-10-11 完整性修订：补瞄准线/力度条/轨迹残影、镜头规则、世界设定、演出反馈、视频与正向范围清单）；运行引擎：**Godot 4.x（Windows 桌面构建）**（spec、rubric 与 asset 任务 JSONL 引擎字段保持一致）；输入方式：键盘与鼠标。\n- 原创边界：迷你高尔夫属公有领域玩法；本作全部名称、球场、文案与美术必须原创，不使用任何商业作品的球场设计、角色或造型。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 球洞实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值。\n- 本文件用于游戏生成模型；文档存在不等于玩法完成，静态页面或演示视频不能单独证明可玩。\n\n## 1. 定位与完整流程 [S01–S06]\n\n- S01 类型：3D 俯视迷你高尔夫（单人杆数制）。本测例包含的能力：三洞冻结球场、蓄力击球物理、坡面反弹摩擦、瞄准线与轨迹残影反馈、界外复位与罚杆、双镜头模式、开场/结算视频。\n- S02 核心循环一句话：瞄定力度方向 → 击球 → 物理滚动 → 进洞或补杆 → 结算杆数。\n- S03 流程：标题 → 球洞1 → 球洞2 → 球洞3 → 总结算（杆数对比标准杆）；每洞自动开球。\n- S04 最低完整流程：标题、三洞球场、每洞 HUD（当前杆数）、总结算、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：界外自动复位回上一杆位＋罚 1 杆；总结算界面一键重开；Esc 暂停。\n- S06 与种子卡差异：种子卡杆数为「规则化高尔夫全流程」；本包冻结为三洞切片（标准杆 12），P0 局内口径不变。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 球洞1 → 球洞2 → 球洞3 → 总结算 → 重开/返回。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且球场按 seed=1056 生成完成\n  - state_change：进入「标题」状态；首次进入按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现\n  - next_actions：进入「球洞1」\n  - outcome：无跨局状态写入（见 §7 V04）\n- S07 球洞1（直道平地，标准杆 3）\n  - input：鼠标瞄准、按住左键蓄力、松开击球、R 重打、C 镜头切换、Esc 暂停（触发方：玩家）\n  - precondition：洞1 载入完成且球静止于发球点\n  - state_change：击球按 G02 公式生成初速 → 物理结算\n  - feedback：瞄准线/蓄力条/轨迹残影按 §9 F05 呈现\n  - next_actions：入洞 →「球洞2」；8 杆上限 → 强制完成进下一洞\n  - outcome：本洞杆数累计局内\n- S08 球洞2（缓上坡＋单挡板折返，标准杆 4）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞1 完成（入洞或达上限）\n  - state_change：载入洞2；坡面与挡板按 L02 冻结\n  - feedback：坡面瞄准线变浅提示减速\n  - next_actions：入洞 →「球洞3」\n  - outcome：杆数累计\n- S09 球洞3（阶梯坡＋双挡板，标准杆 5）\n  - input：同 S07（触发方：玩家）\n  - precondition：洞2 完成\n  - state_change：载入洞3；阶梯坡与双挡板生效\n  - feedback：反弹火花与入洞反馈\n  - next_actions：入洞或达上限 →「总结算」（先播 C02）\n  - outcome：按 V01 结算\n- S10 总结算\n  - input：Enter＝重开 / Esc＝返回标题（触发方：玩家）\n  - precondition：三洞全部完成\n  - state_change：进入「总结算」状态\n  - feedback：总结算面板显示总杆数、对比标准杆 12、罚杆数\n  - next_actions：重开或返回\n  - outcome：无跨局写入\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于任一洞\n  - state_change：暂停覆盖层打开；球、物理与蓄力冻结\n  - feedback：暂停面板（继续/本洞重打/返回标题/设置）\n  - next_actions：Esc 或「继续」→ 恢复\n  - outcome：恢复后无状态漂移（G04）\n\n## 3. 数值口径与全局规则 [G01–G05]\n\n- G01 统一刻度：距离米制；力度为 0–100% 蓄力条（数值常显）；杆数为整数。\n- G02 物理与公式（本包冻结值）：击球初速 v＝蓄力比例 × 12 米/秒；平地滚动摩擦减速度 1.5 米/秒²；坡道沿坡向加速度分量 3.0 米/秒²；碰撞恢复系数 0.6。独立 oracle 数例：平地直线满蓄力 50% 击球 v＝6 米/秒，纯滚动距离＝v²/(2×1.5)＝**12 米**；蓄力 100% 为 48 米。\n- G03 杆数与罚则（本包冻结值）：三洞标准杆 3/4/5（总标准杆 12）；界外复位每次罚 1 杆；每洞杆数上限 8 杆，达上限自动按 8 杆＋累计罚杆记入并进入下一洞（无硬失败）。\n- G04 暂停与随机：Esc 暂停冻结球与物理；窗口失焦自动暂停；fixed_seed=1056 冻结三洞地形布置；本作物理为确定公式，无概率判定。\n- G05 瞄准与轨迹反馈（本包冻结值）：击球准备时显示瞄准虚线——长度＝按当前蓄力的预计纯滚动距离 × 60%，不显示反弹/坡面后路径，坡面段虚线透明度降低 40% 提示减速；蓄力条 0–100% 数值与当前蓄力同步；球滚动中显示轨迹残影（0.5 秒渐隐，仅保留最近一条）。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键鼠：鼠标移动＝瞄准方向；按住左键蓄力、松开击球；C＝俯视全览/击球视角切换；R＝本洞重打（罚 1 杆）；Esc＝暂停；结算界面 Enter＝重开。\n- I02 输入语义边界：球滚动中击球无效；蓄力不足 5% 松开视为取消（不耗杆）；暂停/结算期间输入无效；被拒输入不产生杆数变化。\n- I03 无手柄需求。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；俯视全览模式下击球无效（须切回击球视角）；同帧多输入按瞄准→蓄力→击球顺序结算。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停。\n- I06 UI 必须显示的状态：当前洞号、本洞已用杆数与上限、蓄力条数值、罚杆数、镜头模式提示；HUD 对照见 rubric。\n- I07 输入延迟目标：蓄力/击球按键到画面反馈 ≤ 50 毫秒（手感关键）；镜头切换 ≤ 150 毫秒。\n\n## 5. 关卡与内容清单 [L01–L04]\n\n- L01 生成对象：高尔夫球 1、三洞（洞杯、旗杆、发球点）、坡面与挡板若干、瞄准线与蓄力条 UI、轨迹残影；花园装饰为表现层。\n- L02 球洞（seed=1056 冻结地形）：洞1 直道平地 12 米（标准杆 3）；洞2 缓上坡＋单挡板折返（标准杆 4）；洞3 阶梯坡＋双挡板（标准杆 5）。\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/HUD/结算/暂停/视频播放层）与交互物逐类存在且运行时可进入；数量与属性以 L01/L02 与 G 系为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 未冻结的花园装饰与配色为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M05]\n\n- M01 力度方向与物理（主机制）\n  - input：瞄准＋蓄力击球\n  - precondition：球静止且处于击球准备状态（非俯视全览）\n  - state_change：按 G02 公式生成初速向量 → 球滚动/反弹\n  - observable：逐帧球位置采样与初速、距离事件（见 G02 oracle）；`stroke` 事件（含初速与角度）\n  - invalid_case：滚动中击球、全览模式击球 → 拒绝且不耗杆\n  - recovery：球静止即恢复击球准备\n- M02 坡面反弹与摩擦\n  - input：地形接触（系统）\n  - precondition：球与坡面/挡板碰撞\n  - state_change：坡面改变速度分量（沿坡 3.0 米/秒²）；碰撞按恢复系数 0.6 反弹\n  - observable：接触/反弹事件与速度分量差分\n  - invalid_case：无碰撞则纯摩擦结算\n  - recovery：—\n- M03 界外复位\n  - input：球坠出球场边界（系统）\n  - precondition：球越过 L02 边界\n  - state_change：回上一杆位＋罚 1 杆；连续界外不叠加惩罚上限以外的额外状态；镜头回上一杆位\n  - observable：`out_of_bounds` 事件（含罚杆字段）\n  - invalid_case：贴边滚动不触发\n  - recovery：复位即恢复击球\n- M04 杆数判定\n  - input：球入洞（系统）/ 达上限（系统）\n  - precondition：球与洞杯判定重叠且速度低于阈值\n  - state_change：本洞完成 → 下一洞；达 8 杆上限强制完成；三洞完成 → 总结算\n  - observable：`hole_complete` 事件与杆数流水（含罚杆）\n  - invalid_case：高速掠过洞杯不判入洞（速度阈值）\n  - recovery：—\n- M05 瞄准与轨迹反馈\n  - input：瞄准移动／蓄力变化（玩家）\n  - precondition：击球准备状态\n  - state_change：瞄准虚线长度与坡面透明度按 G05 更新；蓄力条数值同步；击球后生成轨迹残影（0.5 秒渐隐，替换旧残影）\n  - observable：虚线长度采样与预计距离的 60% 对账；残影出现/渐隐事件\n  - invalid_case：全览模式不显示虚线（切回即恢复）\n  - recovery：—\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：完成三洞 → 总结算（显示总杆数、对比标准杆 12 与罚杆数）。\n- V02 失败条件：无硬失败态；每洞 8 杆上限强制推进（记为上限完成）。\n- V03 恢复语义：界外自动复位＋罚 1 杆；R 重打本洞（罚 1 杆、回发球点）；结算后一键重开。\n- V04 persistent_state：无（重开全量清空；累计杆数仅本局内保留）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（杆数/洞进度）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——8 杆上限保证推进；界外复位兜底；任意洞可完成。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：架空云海时代的「浮屿花园」——园艺师们在漂浮于云海的花屿上经营三洞试炼球场，庆祝春分的推杆大会今夜开杆。\n- W02 场景所在地：浮屿花园的三座花洞——直道花径（洞1）、上坡藤架（洞2）、阶梯石台（洞3），云海在球场边缘流动。\n- W03 玩家身份与当前任务：玩家是见习园艺师「芽衣」；当前任务：在推杆大会上以不超过标准杆的成绩完成三洞，取得正式园丁资格。\n- W04 失败代价与结局表达：本作无失败态；超标准杆仅影响成绩表达；完成则 C02 呈现大会颁奖与花灯升空。\n- W05 叙事来源：三洞＝园艺师资格考试的三个科目（直道基本功/坡度控球/复杂地形）；旗杆与洞杯＝试炼花器；云海边界＝浮屿边界（界外即坠云）。全部原创。\n- W06 视觉风格与色彩材质：明快风格化 3D 花园；主色＝草甸绿（#7CB26B 系）＋花瓣粉（#E8A0B8 系）＋云海白蓝（#C9DCE8 系）；材质以草坪、木挡板、石台为主，光线为春日暖光。\n- W07 环境氛围与声音语言：云海微风的春日花园——常驻风拂草浪与远处鸟鸣；音效语言为「击球脆响＋滚动沙沙＋碰撞闷响＋入洞清脆」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代浮屿与大会 → 三洞推进承载试炼节奏 → 结算视频（C02）收束颁奖；故事只做包装，不改变机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头（冻结需求）：默认击球视角＝发球/停球点后方第三人称（俯角 45°，距离 5 米），瞄准方向随鼠标旋转；球滚动时镜头平滑跟随球（0.2 秒插值，速度上限 12 米/秒避免甩镜）；球静止 1 秒后镜头回击球准备位；C 键切换「俯视全览」（整洞 60° 俯视，不参与击球）；镜头边界＝球场外框外扩 10%；界外复位/换洞时镜头直接落位（无漂移）。\n- F02 关键操作镜头变化：入洞瞬间镜头轻微推近洞杯 5%（0.5 秒）；出界瞬间镜头短暂拉高 10%（0.4 秒）；无慢动作。\n- F03 输入与延迟：见 I07（击球手感为 S 档核心，≤50 毫秒）。\n- F04 环境常驻效果：花瓣随风飘落（低频）、云海缓慢流动、旗杆旗面摆动；不遮挡瞄准线与洞杯。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 蓄力开始 | 蓄力条展开＋数值跳动 | 蓄力低鸣（按住循环，音调随力度升高） | 松开或取消 |\n| 击球 | 球推出＋草地小尘环＋轨迹残影启动 | 击球脆响 | 残影 0.5s 渐隐 |\n| 球滚动 | 轨迹残影跟随＋草浪压痕 | 滚动沙沙（滚动中循环） | 球停 |\n| 碰撞挡板 | 火花小粒子＋球体挤压回弹 | 碰撞闷响 | 回弹完成 |\n| 上坡减速 | 瞄准线透明度提示（击球前）/球速渐减 | 沙沙声减弱 | 坡段结束 |\n| 出界 | 球坠云＋镜头拉高＋「界外＋1 杆」提示 | 坠落风声 | 复位完成 |\n| 入洞 | 球旋入洞杯＋旗杆亮灯＋花瓣迸溅 | 入洞清脆音 | 进入下一洞 |\n| 达杆数上限 | 「本洞按 8 杆计」横幅 | 低提示音 | 推进下一洞 |\n| 三洞完成 | 花灯升空粒子 | 结算上扬音 | 进入总结算 |\n\n- F06 关键音效清单：蓄力低鸣、击球脆响、滚动沙沙、碰撞闷响、坠落风声、入洞清脆音、低提示音、上扬音；环境音：风拂草浪＋云海低鸣＋远处鸟鸣（常驻循环）；循环音开始/结束：滚动沙沙按滚动起止、蓄力低鸣按按住起止、环境声随球场载入开始、随结算淡出 0.5s；无配音需求。\n- F07 VFX 信息性与遮挡约束：瞄准虚线与蓄力条承担击球信息；轨迹残影承担落点复盘信息；花瓣与草浪粒子单帧 ≤ 35 且不遮挡瞄准线、洞杯与 HUD。\n- F08 音画同步：击球脆响与击球帧同步；碰撞闷响与接触帧同步；入洞清脆音与入洞事件帧同步。\n- F09 屏幕震动：入洞 0.1 秒小幅；碰撞 0.05 秒微幅；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ HUD（洞号、杆数/上限、蓄力条数值、罚杆、镜头模式提示）→ 总结算（总杆数/对比标准杆 12/罚杆/重开/返回）→ 暂停面板（继续/本洞重打/返回标题/设置）；关键状态附图标＋文字（镜头模式、界外提示），不只靠颜色区分；窗口失焦自动暂停。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开场花园（Opening，10 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入球洞1 之前，每局一次\n  - 内容与角色场景：云海之上的浮屿花园全景，花灯次第点亮，见习园艺师「芽衣」握杆走向三洞试炼球场的第一洞发球点\n  - 资产对应：浮屿花园、旗杆、高尔夫球与游戏内模型同源设计\n  - 可跳过：Esc/Enter 跳过 → 直接进入球洞1；自然播完 → 同\n  - 状态一致：播放期间不推进任何计时；进入状态＝0/3 洞\n- C02 推杆大会结算（Ending，10 秒，1280×720@24fps）\n  - 触发时机：三洞全部完成后、总结算面板之前，每局一次\n  - 内容与角色场景：三座花洞灯带依次亮起，花灯升空汇成春分图案，「芽衣」举起推杆向观众席致意\n  - 资产对应：球场、花灯、角色与游戏内一致\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 同\n  - 状态一致：仅在真实完成三洞后触发\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三洞冻结球场、蓄力击球物理、坡面反弹与摩擦、瞄准线/蓄力条/轨迹残影反馈、界外复位与罚杆、8 杆上限推进、双镜头模式（击球/俯视全览）。\n- N02 本测例包含的流程与界面：标题、三洞推进、总结算、暂停（含失焦自动暂停）、重打与重开。\n- N03 本测例包含的演出能力：开场/结算视频（C01/C02）、§9 F04–F09 全部事件反馈与音效、云海花园氛围。\n- N04 输入范围：键盘＋鼠标（鼠标瞄准/左键蓄力/C/R/Esc/Enter）；无触控、手柄、多人需求。\n- N05 音频范围：§9 F06 冻结音效清单＋花园环境音；无配音与背景音乐轨需求。\n- N06 表现层自由度：§9 未冻结的花卉装饰、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（见习园艺师「芽衣」、高尔夫球与旗杆、三洞球场布局等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B1, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（瞄准→蓄力→击球→物理→进洞/补杆）；坡面与反弹均为物理系统内部规则，无跨系统因果链；多球物理与镜头插值并发（B1）；无失败态，界外复位与重打为恢复路径；新增瞄准反馈与镜头模式不改变难度档\"\n  downgrade_boundary: \"去掉坡面与挡板（纯平地直道）后仍为 S（更简）\"\n  upgrade_boundary: \"若杆数成绩跨洞/跨局保留并解锁新球场规则，升 M/L\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 2，image-to-3D 1）；object 任务资产为：gardener_mei, golf_ball, hole_flag。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：2 个；覆盖动作：idle, putt_swing。\n- video/audio/mechanic/UI：分别为 2/9/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "ad13ec4682722b104bf6d56801d8b7bb5aaee25bf2fd17f75997bab49f55e8bd"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Floating garden: soft wind over grass, cloud-sea hum, distant songbirds",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    }
+  },
+  "cg": {},
+  "3d": {
+    "G056_scene_001": {
+      "schema": "generated_per_asset_req.v1",
+      "task_id": "G056_scene_001",
+      "game_id": "G056_garden_minigolf",
+      "sources_sha256": "2b21adeebf46816ee6ef62a8972c4aef9a0e450fb06a120024f1362f53867146",
+      "policy": {
+        "version": "generated_req.v1",
+        "model": "gpt-6.1-sol",
+        "rubric_source": "full general_requirement.txt and exact priority task JSON prompt; generated without asset evidence",
+        "score_supported": "100 * PASS / (PASS + FAIL); null if denominator is zero",
+        "score_all_lower_bound": "100 * PASS / all_checks; UNVERIFIED is not a confirmed failure",
+        "coverage": "100 * (PASS + FAIL) / all_checks",
+        "comparison": "same frozen rubric across providers; report counts and coverage",
+        "req_vs_fidelity": "requirement checks are separate from DINO image similarity",
+        "static_limit": "metric units, rigging, physics, runtime behavior require additional evidence; do not infer from screenshots"
+      },
+      "dimensions": [
+        {
+          "id": "requirement_compliance",
+          "checks": [
+            {
+              "fail_criterion": "可见场地明确建立在连续地面上，或没有浮岛形态及云海之上的空间关系。",
+              "id": "R01",
+              "pass_criterion": "场地可辨认为浮岛花园高尔夫球场，岛体与下方云海形成明确的悬浮空间关系。",
+              "requirement": "呈现位于云海之上的浮岛花园高尔夫球场。",
+              "sources": [
+                {
+                  "quote": "Floating island garden golf course above a sea of clouds",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "固定六视角未展示岛体外缘或下方空间，无法区分浮岛与普通地面球场。"
+            },
+            {
+              "fail_criterion": "球道清楚可见，但主体为裸石、沙地等非草甸表面，或没有可辨认的球道。",
+              "id": "R02",
+              "pass_criterion": "场景中存在可辨认的草甸草坪球道。",
+              "requirement": "球道呈草甸草坪外观。",
+              "sources": [
+                {
+                  "quote": "meadow fairway",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "球道表面被遮挡或渲染信息不足，无法判断是否为草甸草坪。"
+            },
+            {
+              "fail_criterion": "球道周边可见区域中没有花瓣或花卉外观的绿篱，仅有普通围墙、裸挡板或无花绿篱。",
+              "id": "R03",
+              "pass_criterion": "球道配有可辨认的花瓣或花卉装饰绿篱。",
+              "requirement": "草甸球道配有花瓣绿篱。",
+              "sources": [
+                {
+                  "quote": "meadow fairway with petal hedges",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "绿篱所在区域不可见，或画面细节不足以区分花瓣装饰与普通叶片。"
+            },
+            {
+              "fail_criterion": "完整可见的地形中没有坡道，或对应坡道呈明显陡峭、垂直台阶而非缓坡。",
+              "id": "R04",
+              "pass_criterion": "场景具有可辨认的平缓上坡坡道。",
+              "requirement": "包含缓上坡坡道。",
+              "sources": [
+                {
+                  "quote": "gentle slope ramp",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "视角或遮挡使坡道高差及坡面走向无法辨认。"
+            },
+            {
+              "fail_criterion": "缓坡区域清楚可见但缺少挡板，或其挡板明确呈非木质外观。",
+              "id": "R05",
+              "pass_criterion": "缓坡区域设有可辨认为木质的挡板。",
+              "requirement": "缓坡配有木质挡板。",
+              "sources": [
+                {
+                  "quote": "gentle slope ramp with a wooden bumper",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "坡道挡板被遮挡，或其表面信息不足以判断木质外观。"
+            },
+            {
+              "fail_criterion": "对应区域完整可见，但没有阶梯层级，或层级表面明确不呈石质外观。",
+              "id": "R06",
+              "pass_criterion": "存在具有高低层级关系的阶梯式石台，石质外观可辨。",
+              "requirement": "包含阶梯式石台地形。",
+              "sources": [
+                {
+                  "quote": "stepped stone tiers",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "阶梯区域被遮挡，或无法从视角判断层级结构与石质外观。"
+            },
+            {
+              "fail_criterion": "阶梯区域完整可见，其配套挡板数量明确不是两块。",
+              "id": "R07",
+              "pass_criterion": "阶梯石台区域能够明确辨认出两块配套挡板。",
+              "requirement": "阶梯石台配置两块挡板。",
+              "sources": [
+                {
+                  "quote": "stepped stone tiers with two boards",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "阶梯区域或挡板被遮挡，无法可靠区分、计数两块挡板。"
+            },
+            {
+              "fail_criterion": "场地边缘完整可见，但没有云海，或云海仅作为远处背景而未出现在球场边缘。",
+              "id": "R08",
+              "pass_criterion": "球场外缘可见云海环绕或贴近边界，形成浮屿的云海边缘。",
+              "requirement": "球场边缘呈现云海。",
+              "sources": [
+                {
+                  "quote": "drifting cloud sea at the edges",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "云海在球场边缘流动。",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "六视角未充分展示球场外缘，无法确认云海与边界的位置关系；本条不判断云海是否运动。"
+            },
+            {
+              "fail_criterion": "整体呈明显阴暗、沉重的非春日配色，或主要色彩关系与草甸绿、花瓣粉、云海白蓝的要求明显相反。",
+              "id": "R09",
+              "pass_criterion": "整体配色明快，体现春日氛围，并以草甸绿、花瓣粉和云海白蓝构成主要色彩关系；不要求从渲染像素精确匹配色值。",
+              "requirement": "采用明快春日配色及指定的主要色彩关系。",
+              "sources": [
+                {
+                  "quote": "bright spring palette",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "主色＝草甸绿（#7CB26B 系）＋花瓣粉（#E8A0B8 系）＋云海白蓝（#C9DCE8 系）",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "渲染严重偏色、过曝或欠曝，无法可靠判断资产的主要配色。"
+            },
+            {
+              "fail_criterion": "场景明确采用写实摄影式或其他与卡通风格相背的造型及表面表现。",
+              "id": "R10",
+              "pass_criterion": "场景整体采用明确的风格化卡通造型与表面表现。",
+              "requirement": "采用风格化卡通三维美术风格。",
+              "sources": [
+                {
+                  "quote": "stylized cartoon",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "渲染仅能呈现轮廓或局部，无法判断整体美术风格。"
+            },
+            {
+              "fail_criterion": "整体地形充分可见，但没有可辨认的直道平地区域。",
+              "id": "R11",
+              "pass_criterion": "除缓坡与阶梯区域外，场景中还可辨认出直道平地球道区域；不以图像验证其米制长度。",
+              "requirement": "三洞地形包含直道平地区域。",
+              "sources": [
+                {
+                  "quote": "洞1 直道平地 12 米（标准杆 3）",
+                  "source": "general_requirement"
+                },
+                {
+                  "quote": "三洞地形（12 m 直道/上坡折返/阶梯坡）按 seed=1056 由引擎布置；云海边界即球场外框",
+                  "source": "task_json"
+                }
+              ],
+              "unverified_criterion": "整体布局不可见，或透视与遮挡使直道走向和平地结构无法辨认。"
+            },
+            {
+              "fail_criterion": "场景以互不相连的物体陈列、拼贴面板、下半部文字或嵌入式 UI 呈现，而非连贯球场空间。",
+              "id": "R12",
+              "pass_criterion": "场景在视觉上构成连贯的球场空间，未出现下半部文字、拼贴面板、物体陈列阵列或 UI；本条仅验证静态空间呈现。",
+              "requirement": "交付连贯的场景空间，不以文字面板、物体陈列或 UI 替代场景。",
+              "sources": [
+                {
+                  "quote": "scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "六视角仅覆盖孤立局部，无法判断空间连贯性及是否存在被排除的展示形式。"
+            }
+          ]
+        }
+      ],
+      "deferred_requirements": [
+        {
+          "reason": "静态六视角只能确认云海的可见形态和位置，不能验证漂移或流动。",
+          "requirement": "云海缓慢漂移、流动。",
+          "sources": [
+            {
+              "quote": "drifting cloud sea at the edges",
+              "source": "task_prompt"
+            },
+            {
+              "quote": "云海缓慢流动",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "无比例标定的静态渲染不能证明米制长度，也不能证明地形由指定随机种子在引擎中布置。",
+          "requirement": "直道长度为12米，三洞地形按 seed=1056 由引擎布置。",
+          "sources": [
+            {
+              "quote": "三洞地形（12 m 直道/上坡折返/阶梯坡）按 seed=1056 由引擎布置；云海边界即球场外框",
+              "source": "task_json"
+            }
+          ]
+        },
+        {
+          "reason": "游戏就绪性与真实可玩性涉及引擎集成、碰撞和运行行为，不能由固定六视角证明；静态空间连贯性已单独列入检查。",
+          "requirement": "场景达到游戏就绪状态并形成真实可游玩的空间。",
+          "sources": [
+            {
+              "quote": "game-ready 3D scene",
+              "source": "task_prompt"
+            },
+            {
+              "quote": "必须生成连贯可游玩的空间",
+              "source": "general_requirement"
+            }
+          ]
+        }
+      ],
+      "conflicts": []
+    },
+    "G056_garden_minigolf_obj_002": {
+      "schema": "generated_per_asset_req.v1",
+      "task_id": "G056_garden_minigolf_obj_002",
+      "game_id": "G056_garden_minigolf",
+      "sources_sha256": "abd7fc7bf8166089100607aee72f4f16dd4e278f1578b6cfc753a6847f6b8ef6",
+      "policy": {
+        "version": "generated_req.v1",
+        "model": "gpt-6.1-sol",
+        "rubric_source": "full general_requirement.txt and exact priority task JSON prompt; generated without asset evidence",
+        "score_supported": "100 * PASS / (PASS + FAIL); null if denominator is zero",
+        "score_all_lower_bound": "100 * PASS / all_checks; UNVERIFIED is not a confirmed failure",
+        "coverage": "100 * (PASS + FAIL) / all_checks",
+        "comparison": "same frozen rubric across providers; report counts and coverage",
+        "req_vs_fidelity": "requirement checks are separate from DINO image similarity",
+        "static_limit": "metric units, rigging, physics, runtime behavior require additional evidence; do not infer from screenshots"
+      },
+      "dimensions": [
+        {
+          "id": "requirement_compliance",
+          "checks": [
+            {
+              "fail_criterion": "可见资产包含多颗球，或包含额外的独立道具。",
+              "id": "R01",
+              "pass_criterion": "资产仅包含一颗高尔夫球。",
+              "requirement": "资产为单个高尔夫球物体。",
+              "sources": [
+                {
+                  "quote": "Single dimpled golf ball",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "每项只允许一个物体；组合物必须拆成独立任务。",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "遮挡或裁切使独立物体数量无法确认。"
+            },
+            {
+              "fail_criterion": "主体明显不是球形，或存在破坏高尔夫球整体轮廓的突出结构。",
+              "id": "R02",
+              "pass_criterion": "各可辨识视角下，主体均保持清楚的球形轮廓；允许低多边形分面形成的折线边缘。",
+              "requirement": "高尔夫球具有清晰的球形轮廓。",
+              "sources": [
+                {
+                  "quote": "golf ball",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "clean silhouette",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "主体轮廓因遮挡、裁切或背景混同而无法辨认。"
+            },
+            {
+              "fail_criterion": "清楚可见的球面没有凹坑表达，或仅有凸点、平面斑点而无凹陷观感。",
+              "id": "R03",
+              "pass_criterion": "可见球面具有能够辨认的凹坑纹样。",
+              "requirement": "球面具有高尔夫球凹坑。",
+              "sources": [
+                {
+                  "quote": "dimpled golf ball",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "分辨率、曝光或观察距离不足以判断球面是否存在凹坑。"
+            },
+            {
+              "fail_criterion": "在材质表现充分可见时，球面呈完全哑光或强烈硬镜面效果，缺少柔和珍珠光泽。",
+              "id": "R04",
+              "pass_criterion": "球面呈现柔和、含蓄的珍珠般光泽。",
+              "requirement": "球面具有柔和的珍珠光泽。",
+              "sources": [
+                {
+                  "quote": "with a soft pearl sheen",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "照明、曝光或渲染方式不足以辨认材质光泽。"
+            },
+            {
+              "fail_criterion": "球面呈连续光滑曲面而无可辨识平直分面，或整体采用明显写实繁复的造型语言。",
+              "id": "R05",
+              "pass_criterion": "球面可辨识平直分面，整体呈简洁、风格化的低多边形外观。",
+              "requirement": "采用简洁风格化、带平直分面的低多边形视觉风格。",
+              "sources": [
+                {
+                  "quote": "clean stylized",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "low-poly style",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "flat faceted surfaces",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "渲染分辨率或光照无法区分平直分面与连续曲面。"
+            },
+            {
+              "fail_criterion": "可见精细微纹理、细密刻饰，或以繁复微细节表现球面凹坑。",
+              "id": "R06",
+              "pass_criterion": "球面细节保持概括，凹坑采用简化表达，没有可辨识的精细表面细节。",
+              "requirement": "不添加精细表面细节；必需凹坑采用简化表达。",
+              "sources": [
+                {
+                  "quote": "no fine surface detail",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "dimpled golf ball",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "图像清晰度不足，无法区分细节确实缺失还是未被渲染显示。"
+            }
+          ]
+        }
+      ],
+      "deferred_requirements": [
+        {
+          "reason": "六视角只能验证低多边形外观，无法确认实际三角面数或是否已尽量减少面数；需检查网格数据。",
+          "requirement": "尽量减少三角面数。",
+          "sources": [
+            {
+              "quote": "minimal triangle count",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "静态渲染不能证明使用了 PBR 纹理或正确配置了相应材质通道，需检查纹理与材质资源。",
+          "requirement": "使用 PBR 纹理。",
+          "sources": [
+            {
+              "quote": "PBR textures",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "是否可直接用于游戏需要检查资产数据并进行引擎集成验证，无法仅凭固定六视角静态图像证明。",
+          "requirement": "资产达到可用于游戏的交付状态。",
+          "sources": [
+            {
+              "quote": "game-ready",
+              "source": "task_prompt"
+            }
+          ]
+        }
+      ],
+      "conflicts": []
+    },
+    "G056_garden_minigolf_obj_003": {
+      "schema": "generated_per_asset_req.v1",
+      "task_id": "G056_garden_minigolf_obj_003",
+      "game_id": "G056_garden_minigolf",
+      "sources_sha256": "c2f8567f9d4b6e0d679255c671e7f069c180b43549c81dc1af8315fb68ef4be6",
+      "policy": {
+        "version": "generated_req.v1",
+        "model": "gpt-6.1-sol",
+        "rubric_source": "full general_requirement.txt and exact priority task JSON prompt; generated without asset evidence",
+        "score_supported": "100 * PASS / (PASS + FAIL); null if denominator is zero",
+        "score_all_lower_bound": "100 * PASS / all_checks; UNVERIFIED is not a confirmed failure",
+        "coverage": "100 * (PASS + FAIL) / all_checks",
+        "comparison": "same frozen rubric across providers; report counts and coverage",
+        "req_vs_fidelity": "requirement checks are separate from DINO image similarity",
+        "static_limit": "metric units, rigging, physics, runtime behavior require additional evidence; do not infer from screenshots"
+      },
+      "dimensions": [
+        {
+          "id": "requirement_compliance",
+          "checks": [
+            {
+              "fail_criterion": "主体缺少洞杯，或清楚可见的主体为实心封闭形体，无法辨识球洞洞口。",
+              "id": "R01",
+              "pass_criterion": "可辨识出迷你高尔夫洞杯，洞口及杯状凹腔形态清楚可见。",
+              "requirement": "具有迷你高尔夫洞杯。",
+              "sources": [
+                {
+                  "quote": "Miniature golf hole cup",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "洞口区域被遮挡或渲染信息不足，无法确认是否具有杯状凹腔。"
+            },
+            {
+              "fail_criterion": "相关区域清楚可见，但没有可辨识的旗杆。",
+              "id": "R02",
+              "pass_criterion": "能够辨识支撑旗帜的旗杆。",
+              "requirement": "具有旗杆部件。",
+              "sources": [
+                {
+                  "quote": "三洞（洞杯、旗杆、发球点）",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "旗帜支撑部位被遮挡，无法确认旗杆是否存在。"
+            },
+            {
+              "fail_criterion": "缺少小旗，或旗帜组件明显宽厚笨重，不具备修长外观。",
+              "id": "R03",
+              "pass_criterion": "具有可辨识的 pennant 小旗，旗帜组件整体呈修长外观。",
+              "requirement": "旗帜为修长的小旗形态。",
+              "sources": [
+                {
+                  "quote": "a slender striped pennant flag",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "旗帜仅以侧缘出现、被遮挡或投影严重缩短，无法判断形态与比例。"
+            },
+            {
+              "fail_criterion": "旗面清楚可见，但为纯色或其他图案，没有条纹。",
+              "id": "R04",
+              "pass_criterion": "旗面具有清楚可辨识的条纹图案。",
+              "requirement": "旗面带有条纹。",
+              "sources": [
+                {
+                  "quote": "striped pennant flag",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "旗面面积、朝向或渲染清晰度不足以辨认图案。"
+            },
+            {
+              "fail_criterion": "杯口边缘清楚可见却没有发光观感，或发光明显强烈，偏离轻微发光要求。",
+              "id": "R05",
+              "pass_criterion": "洞杯边缘呈现轻微、克制的发光观感。",
+              "requirement": "洞杯具有轻微发光的边缘。",
+              "sources": [
+                {
+                  "quote": "a subtle glow rim",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "边缘被遮挡，或曝光与环境照明使轻微发光无法辨认。"
+            },
+            {
+              "fail_criterion": "整体明显采用写实表达，缺少简洁的风格化处理。",
+              "id": "R06",
+              "pass_criterion": "主体造型具有明确的简洁风格化表达。",
+              "requirement": "采用简洁的风格化设计。",
+              "sources": [
+                {
+                  "quote": "clean stylized",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "主体展示不完整或清晰度不足，无法判断整体设计风格。"
+            },
+            {
+              "fail_criterion": "整体以繁复、细密的几何造型为主要表现，缺少低多边形风格的简化体块。",
+              "id": "R07",
+              "pass_criterion": "整体形体采用明显简化的几何体块，呈现低多边形视觉风格。",
+              "requirement": "呈现低多边形视觉风格。",
+              "sources": [
+                {
+                  "quote": "low-poly style",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "视图尺寸或展示范围不足，无法辨认形体的简化程度；不据此推断实际面数。"
+            },
+            {
+              "fail_criterion": "表面清楚可见，但均呈连续圆滑过渡，没有平面分面特征。",
+              "id": "R08",
+              "pass_criterion": "主体表面可见平直面片及面片之间的分面转折。",
+              "requirement": "表面呈平面分面效果。",
+              "sources": [
+                {
+                  "quote": "flat faceted surfaces",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "照明、材质或渲染清晰度不足以区分平面分面与平滑表面。"
+            },
+            {
+              "fail_criterion": "轮廓明显零碎、杂乱或粘连，使所要求的主体形态难以辨认。",
+              "id": "R09",
+              "pass_criterion": "洞杯、旗杆与旗帜的可见外轮廓清楚、简洁，形态易于辨认。",
+              "requirement": "保持干净清晰的轮廓。",
+              "sources": [
+                {
+                  "quote": "clean silhouette",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "背景对比不足、裁切或遮挡导致主体轮廓无法可靠辨认。"
+            },
+            {
+              "fail_criterion": "可见表面出现细密刻纹、微小凹凸或其他精细表面装饰。",
+              "id": "R10",
+              "pass_criterion": "可见表面保持简化，没有精细表面细节；条纹与发光边缘仍可保留。",
+              "requirement": "不添加精细表面细节。",
+              "sources": [
+                {
+                  "quote": "no fine surface detail",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "渲染分辨率或拍摄距离不足，无法判断是否存在精细表面细节。"
+            }
+          ]
+        }
+      ],
+      "deferred_requirements": [
+        {
+          "reason": "静态渲染不能证明实际三角面数，也不能证明其已达到最少面数；需检查网格数据。",
+          "requirement": "尽量减少三角面数。",
+          "sources": [
+            {
+              "quote": "minimal triangle count",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "外观不能证明使用了 PBR 纹理及正确的材质通道；需检查纹理和材质配置。",
+          "requirement": "使用 PBR 纹理。",
+          "sources": [
+            {
+              "quote": "PBR textures",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "游戏可用性及引擎兼容性需通过资产文件检查和引擎内验证，六视角图像无法证明。",
+          "requirement": "资产达到游戏可用状态，并适用于指定的 Godot 引擎。",
+          "sources": [
+            {
+              "quote": "game-ready",
+              "source": "task_prompt"
+            },
+            {
+              "quote": "Godot 4.x（Windows 桌面构建）",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "旗面摆动属于动态表现，固定静态视图无法验证。",
+          "requirement": "运行中旗面摆动。",
+          "sources": [
+            {
+              "quote": "旗杆旗面摆动",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "需要触发入洞事件并观察状态变化，不能用静态发光外观证明事件响应。",
+          "requirement": "入洞时旗杆亮灯。",
+          "sources": [
+            {
+              "quote": "球旋入洞杯＋旗杆亮灯＋花瓣迸溅",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "需要在实际游戏镜头、瞄准线及旗面摆动状态下验证，孤立资产六视角无法证明。",
+          "requirement": "旗面等环境动态表现不遮挡瞄准线与洞杯。",
+          "sources": [
+            {
+              "quote": "旗杆旗面摆动；不遮挡瞄准线与洞杯。",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "“试炼花器”是叙事身份，原文未规定必须采用的花形或装饰，不能据此增加具体视觉细节。",
+          "requirement": "旗杆与洞杯承载试炼花器的叙事身份。",
+          "sources": [
+            {
+              "quote": "旗杆与洞杯＝试炼花器",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "需要同时检查过场与游戏内资产来源，单个资产的六视角无法证明同源关系。",
+          "requirement": "过场中的旗杆与游戏内模型采用同源设计。",
+          "sources": [
+            {
+              "quote": "浮屿花园、旗杆、高尔夫球与游戏内模型同源设计",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "原创性需要创作来源与授权等证据，无法仅凭固定六视角证明。",
+          "requirement": "资产美术为原创。",
+          "sources": [
+            {
+              "quote": "本作全部名称、球场、文案与美术必须原创",
+              "source": "general_requirement"
+            }
+          ]
+        }
+      ],
+      "conflicts": [
+        "资产 prompt 的“Miniature golf hole cup with a slender striped pennant flag”要求洞杯与旗帜组合，而 general requirement 规定“每项只允许一个物体；组合物必须拆成独立任务。”两者在组合资产的任务粒度上存在未消解冲突。是否必须合并或拆分不纳入 checks；各必需部件的独立外观仍可检查。"
+      ]
+    }
   }
 }

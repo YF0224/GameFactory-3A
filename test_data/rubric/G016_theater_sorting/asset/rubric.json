@@ -13,5 +13,906 @@
     "G016_theater_sorting_obj_003": {
       "assertions": []
     }
+  },
+  "audio": {
+    "G016_sfx_001": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G016_theater_sorting",
+          "task_id": "G016_sfx_001",
+          "asset_name": "wood_slide",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Wooden crate sliding across worn stage boards, short dry creak, no music",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5161,
+          "trigger": "M01 push 成功",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《仓储机器人整理旧剧院》｜推箱解谜机制输入规范\n\n```yaml\ncase_id: G016\nbase_case_id: G016\ntitle: 仓储机器人整理旧剧院\ncategory: Puzzle / Investigation\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1016\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《仓储机器人整理旧剧院》；版本：mechanics-v3（2026-10-11 完整性修订：补世界设定、镜头/输入、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（本 spec、rubric 与 asset 任务 JSONL 中的 mechanic/ui/pipeline 任务引擎字段保持一致，引擎唯一冻结）；输入方式：键盘。\n- 原创边界：推箱子的公有领域规则机制可复用；本作全部名称、角色、场景、文案与美术必须原创，不使用任何商业作品的关卡集、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的俯视格子推箱解谜游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。任何任务关键目标不得因随机失败被永久删除（本题无随机玩法内容）。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2D 俯视格子推箱解谜，单人单屏。本测例包含的能力：三关静态棋盘、推动与覆盖检测、撤销与重置、死角提示、步数预算、开场与结算视频、舞台主题表现层。\n- S02 核心循环一句话：观察布局 → 规划推动序 → 执行 → 目标覆盖检测 → 过关或重置。\n- S03 流程：标题界面 → 关卡选择（3 关全开，无解锁门槛）→ 游玩 → 过关结算（步数、撤销次数）→ 下一关或重开；任意界面可返回标题。\n- S04 最低完整流程：标题、选关、游玩、过关结算、失败提示、重置、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：游玩中任意时刻可撤销（Z）或整关重置（R）；失败结算界面提供「重试本关」。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 关卡选择 → 游玩 → 过关结算 → 下一关或重开 → 返回标题/重试。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成（rubric D3 断言）\n  - state_change：游戏进入「标题」状态；首次进入时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现（开始/退出按钮、引擎版本号）\n  - next_actions：进入「关卡选择」\n  - outcome：无跨局状态写入（见 §8 V04）\n- S07 关卡选择\n  - input：方向键＋Enter（触发方：玩家）\n  - precondition：标题或结算界面已提供选关入口\n  - state_change：进入「关卡选择」状态，三关全部可选\n  - feedback：关卡卡片显示本关历史完成标记（局内，仅本会话）\n  - next_actions：载入所选关 →「游玩」\n  - outcome：按 §6 M06 载入静态布局，全部状态按该关初始值\n- S08 游玩\n  - input：方向键/WASD 移动、Z 撤销、R 重置、Esc 暂停（触发方：玩家）\n  - precondition：关卡载入完成且非暂停/结算状态\n  - state_change：按 §6 M01–M05 结算每次输入；步数、覆盖计数、undo_count 实时更新\n  - feedback：按 §9 F05/F06 呈现推动、覆盖、非法、撤销、重置反馈\n  - next_actions：覆盖计数==目标点数 →「过关结算」；步数耗尽 →「失败结算」\n  - outcome：按 §8 V01/V02 判定，优先级按 §3 G07\n- S09 过关结算\n  - input：Enter＝下一关 / R＝重开本关 / Esc＝返回选关（触发方：玩家）\n  - precondition：V01 成立（覆盖计数==目标点数）\n  - state_change：进入「过关结算」状态；棋盘冻结；第三关完成时按 §10 C02 触发结算视频\n  - feedback：结算面板显示步数、undo_count、用时\n  - next_actions：下一关（未过完）/ 总结算（三关完成）/ 重开\n  - outcome：不写入跨局状态（见 §8 V04）\n- S10 失败结算\n  - input：Enter＝重试本关 / Esc＝返回选关（触发方：玩家）\n  - precondition：V02 成立（步数预算耗尽且未达成覆盖）\n  - state_change：进入「失败结算」状态；棋盘冻结\n  - feedback：失败面板注明原因「步数预算耗尽」并给重试入口\n  - next_actions：重试本关（全量按初始布局重载）\n  - outcome：本关状态清空，无跨局副作用\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，输入与棋盘逻辑冻结\n  - feedback：暂停面板（继续/重置本关/返回选关/设置）\n  - next_actions：Esc 或「继续」→ 回到游玩\n  - outcome：恢复后状态与暂停前逐格一致（§3 G05）\n\n## 3. 数值口径与全局规则 [G01–G07]\n\n- G01 统一刻度：棋盘为格子坐标（列,行），原点 (0,0) 位于左上；格子类型＝墙 / 地面 / 目标点；状态变量＝玩家坐标、每箱坐标、覆盖计数（箱子位于目标点的数量）、已用步数、undo_count。目标点以「金色圆环＋『目标』文字标签」标识（不只靠颜色，见 F10）。\n- G02 步数预算：L1=40 步、L2=60 步、L3=90 步；每次有效移动或有效推箱计 1 步；被拒绝的输入、撤销、重置、菜单导航不计步。\n- G03 难度：单档「标准」；不提供难度选择。\n- G04 随机种子：fixed_seed=1016。三关布局为静态数据，不含随机生成；本 seed 仅用于保证同版本构建内任何内部随机流（如表现层粒子）不影响棋盘规则结果。\n- G05 暂停与模拟时间：Esc 暂停冻结输入与棋盘逻辑；暂停、结算、菜单、视频播放期间不推进任何游戏状态；UI 过渡不得触发格子逻辑；窗口失焦自动暂停。\n- G06 状态转移 oracle（独立可复核）：给定初始棋盘与输入序列，最终棋盘唯一确定。数例：局部棋局中玩家位于 (2,1)、箱子位于 (2,2)、(2,3) 为目标点、其右为空地；输入 [右] 后必然产生事件流 `move(player,2,1→2,2)`、`push(box,2,2→2,3)`、`cover(2,3)=true`、`steps+1`，玩家位于 (2,2)、箱子位于 (2,3)、覆盖计数 +1；任何偏离即 FAIL。\n- G07 优先级与统计（本包冻结值）：同一有效步使「覆盖计数==目标点数」与「步数预算恰好耗尽」同时成立时，判胜优先于判负（先完成目标）。undo_count＝本关成功撤销的有效步总数；被拒输入不计入 undo_count；撤销本身不消耗步数、不增加步数；过关结算必须同时显示已用步数与 undo_count。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：方向键或 WASD＝移动一格（面向相邻箱子则推动）；Z＝撤销一步；R＝整关重置（带确认）；Esc＝暂停/关闭面板；Enter＝确认。\n- I02 输入语义边界：面向墙移动、推动被墙/另一箱阻挡的箱子、忙时与面板打开时的玩法键，一律拒绝且不消耗步数、不产生状态变化；被拒绝输入不得被记为一步、不得计入 undo_count。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算（先 movement、后 undo、后 reset）。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（不依赖 G06）。\n- I06 UI 必须显示的状态：本关号、步数预算剩余/已用、覆盖计数/目标点数、undo_count；HUD 对照见 rubric。\n- I07 输入延迟目标：按键到对应画面反馈（移动动画或拒绝反馈）≤ 100 毫秒（WebGL/HTML5 环境目标 ≤ 150 毫秒）；延迟异常须在设置中可见当前帧率。\n\n## 5. 关卡与内容清单 [L01–L02]\n\n- L01 生成对象：守护机器人「初幕」1（玩家）、仓储箱每关 2/3/4 只、目标点与箱数相同、墙面与地面格若干；三个关卡的棋盘分别以舞台、后台、观众厅为主题变体（配色与装饰不同，判定格完全一致）；程序化几何或原创贴图均可；骨骼动画非冻结需求（机器人可为刚性滑动＋转向表现）。\n- L02 三关静态布局（`#`墙、`.`地面、`*`目标点、`$`箱、`@`机器人；均为可解布局，坐标为（列,行））：\n\n关卡一（主题：舞台；步数预算 40，箱 2）：\n\n```text\n########\n#..*...#\n#.$..*.#\n#.@$...#\n#......#\n########\n```\n\n关卡二（主题：后台；步数预算 60，箱 3）：\n\n```text\n########\n#......#\n#.*$...#\n#..@...#\n#...$*.#\n#.$..*.#\n########\n```\n\n关卡三（主题：观众厅；步数预算 90，箱 4；含可触发的死角路线）：\n\n```text\n########\n#......#\n#.$.*..#\n#..@...#\n#*.$...#\n#...$.*#\n#.*..$.#\n########\n```\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/选关/HUD/结算/失败/暂停面板、视频播放层）与交互物逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 F04 之外的装饰造型与配色细节为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 推动限制（主机制）\n  - input：移动键（方向键/WASD）\n  - precondition：处于游玩状态（非暂停/结算/面板）；目标格在棋盘界内\n  - state_change：目标格为空地面或目标点 → 玩家移入一格；目标格为箱子且箱子落点格（同方向再前进一格）为空地面或目标点 → 玩家与箱子各前进一格；箱子只能推不能拉；目标格为墙、或箱子落点为墙/另一箱 → 整体拒绝且无副作用\n  - observable：每步产生棋盘快照与事件 `move` / `push` / `reject`（含方向与坐标）；有效步 steps+1；被拒事件不伴随 steps+1\n  - invalid_case：面向墙、推箱顶墙、推箱顶第二箱 → reject，坐标不变、步数不变\n  - recovery：Z 撤销最近一次有效步（见 M02）或 R 整关重置\n- M02 撤销栈（事务性回滚）\n  - input：Z\n  - precondition：存在至少一次未回滚的有效步；处于游玩状态\n  - state_change：回退最近一次有效步——玩家坐标、全部箱坐标、覆盖计数、步数在同一事务内同步回滚；undo_count+1；可连续回溯到本关开局；开局（无可回滚步）时 Z 无效且不计数\n  - observable：`undo` 事件与回滚后棋盘快照；回滚后状态与所撤销步骤执行前逐格一致（diff=0）\n  - invalid_case：无可回滚步时 Z → 无事件副作用、undo_count 不变\n  - recovery：撤销链到开局即止；R 重置可随时使用\n- M03 死角判定与提示\n  - input：系统在每次 push 后判定\n  - precondition：刚发生一次有效 `push`\n  - state_change：箱子被推入「贴墙角格」（其行进正交两侧均为墙/界的格子）且该格不是目标点时，标记该箱为不可解；不强制失败，玩家可撤销或重置\n  - observable：`deadlock` 事件（含箱子坐标）与画面提示（该箱红色高亮＋「该箱已卡死角」文字提示一次）\n  - invalid_case：箱子落入目标点角格不触发 deadlock；普通贴墙（单侧）不误报\n  - recovery：Z 撤销该步即可解除标记\n- M04 目标覆盖检测\n  - input：每次 push 后系统检测\n  - precondition：发生过一次有效 `push`（或撤销恢复）\n  - state_change：覆盖计数＝位于目标点的箱子数；计数==目标点数 → 过关结算（优先级按 G07）\n  - observable：`cover`/`uncover` 事件、HUD 覆盖计数、`win` 事件\n  - invalid_case：部分覆盖不判胜；箱子被推离目标点产生 `uncover`\n  - recovery：无失败态；覆盖后棋盘冻结\n- M05 守护机器人（玩家角色）移动\n  - input：移动键\n  - precondition：与 M01 同一判定入口\n  - state_change：一格一格移动，不可穿墙、不可穿越箱子；移动逻辑与 M01 同一判定\n  - observable：移动事件与坐标流水\n  - invalid_case：越界/穿墙/穿箱输入拒绝\n  - recovery：同 M01\n- M06 关卡切换\n  - input：过关结算界面（下一关）/ 选关界面\n  - precondition：V01 成立或玩家主动从选关进入\n  - state_change：载入对应静态布局，玩家/箱子/步数/覆盖计数/undo_count 全部按该关初始值重置\n  - observable：`level_loaded` 事件与关卡号显示\n  - invalid_case：非法关卡号请求拒绝\n  - recovery：载入失败重试或返回标题\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：本关全部目标点被箱子覆盖（覆盖计数==目标点数）→ 过关结算，显示已用步数与 undo_count。\n- V02 失败条件：步数预算耗尽且未达成覆盖 → 失败结算（区别于主动重置）；无 HP、无时限；与覆盖同时达成时按 G07 判胜。\n- V03 恢复语义：Z 撤销可回溯到开局（M02）；R 整关重置回到本关初始布局（含 undo_count 清零）；失败结算后可重试本关；一切恢复不需要读档。\n- V04 persistent_state：无（重开全量清空；无跨关解锁、无收集品、无跨关状态）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（步数/覆盖/undo_count）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——死角仅提示不判负，关键目标均可通过正常操作或 R 重置达成；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来的小城「暮椿镇」，废弃三十年的老剧院「暮椿剧院」将在明晚重新开幕；镇上唯一能在一夜之间完成整备的，是剧院遗留的仓储整理机器人。\n- W02 场景所在地：暮椿剧院内部——关卡一为主舞台区（幕布与追光）、关卡二为后台仓储区（道具架与缆绳）、关卡三为观众厅（座椅与包厢）。\n- W03 玩家身份与当前任务：玩家操作整理机器人「初幕」；当前任务：在天亮前把全部道具箱推回舞台标记位，让开幕灯光测试可以照常进行。\n- W04 失败代价与结局表达：失败＝天亮前来不及完成整备（步数预算耗尽），开幕被迫推迟；结局表达见 §10 C02——三关完成时剧院重新亮灯，开幕如期举行。\n- W05 叙事来源：道具箱＝剧院历次演出遗留的布景箱（因此数量随区域递增）；目标点＝舞台灯光师用金色标记贴出的存放位；机器人「初幕」＝剧院老机械师退休前留下的整理机。所有角色与物件均原创，不使用任何商业剧院/机器人作品的命名或造型。\n- W06 视觉风格与色彩材质：2D 手绘风格化俯视画面；主色＝暖木色（#C89B6D 系）＋舞台深红（#8E2F3C 系）＋目标金（#F2C14E）；材质以哑光木材、绒面幕布、磨损金属为主；三关通过主题色变体区分（舞台偏红金、后台偏灰木、观众厅偏蓝绒）。\n- W07 环境氛围与声音语言：安静夜间的剧院——常驻低鸣环境声、尘埃光束（F04）；音效语言为「木质滑动声＋机械伺服声＋灯光提示音」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代任务 → 关卡主题变体承载过程叙事 → 结算视频（C02）与结算面板收束；故事只做包装与节奏，不改变任何机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正交俯视（90°），整张棋盘在默认窗口（1280×720）内全部可见，无跟随、无平移；镜头边界＝棋盘外接矩形外加 8% 余量。\n- F02 关键操作镜头变化：过关瞬间镜头向该关最后一个被覆盖目标点轻微推近 5%（2 秒内完成并保持到结算）；失败时镜头轻微下沉变暗 0.5 秒；无震动类镜头变化。\n- F03 输入与延迟：见 I07；Z/R 的反馈延迟同 I07 目标。\n- F04 环境常驻效果：舞台区追光光束＋浮尘粒子（低密度，不遮挡格线）；后台区吊缆微摆；观众厅座椅尘埃。常驻效果纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 推动成功 | 箱体滑动 0.15s＋箱底尘土小粒子 | 木质滑动声（与动画同步起止） | 滑动到位即停 |\n| 目标覆盖 | 目标点金圈点亮 0.3s＋箱子描金边 | 「叮」确认音 | 覆盖状态常亮至变化 |\n| 非法移动 | 机器人原地抖动 0.3s＋目标格红框闪 1 次 | 短促否定音 | 0.3s 结束 |\n| 撤销 | 箱体与机器人反向回放 0.15s | 回摆音（滑动声倒放感） | 回放到位即停 |\n| 重置确认 | 幕布暗转 0.5s | 幕布摩擦声 | 布局重载完成 |\n| 过关 | 全场景灯组亮起＋彩带粒子 | 上扬提示音＋掌声（一次，不循环） | 进入结算即淡出 |\n| 失败 | 灯光转暗＋HUD 变灰 | 低沉提示音 | 进入失败面板即停 |\n| 死角提示 | 该箱红色高亮＋文字标签一次 | 警示音一次 | 提示 2s 后仅保留描边 |\n\n- F06 关键音效清单：木质滑动、确认「叮」、否定音、回摆音、幕布声、胜利音、掌声、失败音、警示音；环境音：剧院低鸣（常驻循环，暂停时静音）；循环音开始/结束：环境低鸣随关卡载入开始、随结算/返回标题淡出 0.5s；无配音需求（对白以文本呈现）。\n- F07 VFX 信息性与遮挡约束：目标点金色圆环与死角红色高亮承担玩法信息（可辨认可解状态）；尘土与彩带粒子只出现在格间空隙，单帧粒子数 ≤ 40，不得遮挡格线与 HUD。\n- F08 音画同步：滑动/回放音与对应动画同帧起止；覆盖确认音在 cover 事件帧触发；胜利音在 win 事件帧触发。\n- F09 屏幕震动：仅过关瞬间 0.2 秒小幅震动；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ 选关（三关卡片＋完成标记）→ HUD（关卡号、步数预算剩余/已用、覆盖计数/目标点数、undo_count）→ 过关结算（步数/undo_count/用时/下一关/重开/返回）→ 失败结算（重试本关/返回选关）；关键状态均附图标＋文字（目标点金环＋「目标」标签、死角红框＋「死角」标签），不只靠颜色区分；Esc 暂停面板含继续/重置本关/返回选关/设置；窗口失焦自动暂停（F10 与 I05 一致）。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开幕整备（Opening，8 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入关卡选择之前，每局一次\n  - 内容与角色场景：暮椿剧院夜景内部灯光次第亮起，机器人「初幕」推动一只道具箱穿过舞台，追光落在金色目标点上\n  - 资产对应：机器人、道具箱、剧院舞台与游戏内模型/贴图同源设计（同一套造型描述生成）\n  - 可跳过：Esc/Enter 跳过 → 直接进入关卡选择；自然播完 → 进入关卡选择\n  - 状态一致：播放期间不推进任何游戏计时；本局从「三关全未完成」状态开始\n- C02 剧院重新亮灯（Ending，10 秒，1280×720@24fps）\n  - 触发时机：第三关过关结算面板出现之前，每局一次\n  - 内容与角色场景：舞台、后台、观众厅三区灯组依次全亮，开幕横幅落下，「初幕」在追光下停在舞台中央鞠躬\n  - 资产对应：机器人、剧院三区与游戏内场景同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 进入总结算面板\n  - 状态一致：仅在真实达成三关后触发，与真实游戏进度一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三关静态推箱解谜、推动/覆盖/死角判定、事务性撤销（undo_count 统计）、整关重置、步数预算与失败结算。\n- N02 本测例包含的流程与界面：标题、选关、游玩、过关结算、失败结算、暂停（含失焦自动暂停）、重试与重开。\n- N03 本测例包含的演出能力：开场与结算视频（C01/C02）、§9 F04–F09 的全部事件反馈与音效、舞台三关主题变体。\n- N04 输入范围：键盘（WASD/方向键/Z/R/Esc/Enter）；无触控、手柄、多人需求（表现层可另行扩展，但不进入验收分母）。\n- N05 音频范围：§9 F06 冻结音效清单＋剧院环境音；无配音与背景音乐轨需求（对白以文本呈现）。\n- N06 表现层自由度：§9 未冻结的装饰造型、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（机器人「初幕」、道具箱、剧院舞台场景等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B0, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（观察→规划→执行→检测→过关/重置）；推动仅改变本系统覆盖状态，无跨系统因果链；撤销与重置是唯一恢复路径；新增的日夜演出、视频与 VFX 均为表现层，不改变难度档\"\n  downgrade_boundary: \"删除撤销栈与死角提示后仍为 S（更简）；S 已是本计划下限\"\n  upgrade_boundary: \"若引入跨关保留的道具/规则改写或双箱联动机制（A→B 状态传递），升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 1，image-to-3D 2）；object 任务资产为：sorting_robot, prop_crate, goal_marker。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：sort_and_place。\n- video/audio/mechanic/UI：分别为 2/6/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "3da769956ee4769074c0898083cd74f058191028d4c78acde20510d51b7740a0"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Wooden crate sliding across worn stage boards, short dry creak, no music",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G016_sfx_002": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G016_theater_sorting",
+          "task_id": "G016_sfx_002",
+          "asset_name": "confirm_ding",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Bright small chime confirming a crate covers its goal marker",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5162,
+          "trigger": "M04 cover",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《仓储机器人整理旧剧院》｜推箱解谜机制输入规范\n\n```yaml\ncase_id: G016\nbase_case_id: G016\ntitle: 仓储机器人整理旧剧院\ncategory: Puzzle / Investigation\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1016\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《仓储机器人整理旧剧院》；版本：mechanics-v3（2026-10-11 完整性修订：补世界设定、镜头/输入、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（本 spec、rubric 与 asset 任务 JSONL 中的 mechanic/ui/pipeline 任务引擎字段保持一致，引擎唯一冻结）；输入方式：键盘。\n- 原创边界：推箱子的公有领域规则机制可复用；本作全部名称、角色、场景、文案与美术必须原创，不使用任何商业作品的关卡集、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的俯视格子推箱解谜游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。任何任务关键目标不得因随机失败被永久删除（本题无随机玩法内容）。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2D 俯视格子推箱解谜，单人单屏。本测例包含的能力：三关静态棋盘、推动与覆盖检测、撤销与重置、死角提示、步数预算、开场与结算视频、舞台主题表现层。\n- S02 核心循环一句话：观察布局 → 规划推动序 → 执行 → 目标覆盖检测 → 过关或重置。\n- S03 流程：标题界面 → 关卡选择（3 关全开，无解锁门槛）→ 游玩 → 过关结算（步数、撤销次数）→ 下一关或重开；任意界面可返回标题。\n- S04 最低完整流程：标题、选关、游玩、过关结算、失败提示、重置、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：游玩中任意时刻可撤销（Z）或整关重置（R）；失败结算界面提供「重试本关」。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 关卡选择 → 游玩 → 过关结算 → 下一关或重开 → 返回标题/重试。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成（rubric D3 断言）\n  - state_change：游戏进入「标题」状态；首次进入时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现（开始/退出按钮、引擎版本号）\n  - next_actions：进入「关卡选择」\n  - outcome：无跨局状态写入（见 §8 V04）\n- S07 关卡选择\n  - input：方向键＋Enter（触发方：玩家）\n  - precondition：标题或结算界面已提供选关入口\n  - state_change：进入「关卡选择」状态，三关全部可选\n  - feedback：关卡卡片显示本关历史完成标记（局内，仅本会话）\n  - next_actions：载入所选关 →「游玩」\n  - outcome：按 §6 M06 载入静态布局，全部状态按该关初始值\n- S08 游玩\n  - input：方向键/WASD 移动、Z 撤销、R 重置、Esc 暂停（触发方：玩家）\n  - precondition：关卡载入完成且非暂停/结算状态\n  - state_change：按 §6 M01–M05 结算每次输入；步数、覆盖计数、undo_count 实时更新\n  - feedback：按 §9 F05/F06 呈现推动、覆盖、非法、撤销、重置反馈\n  - next_actions：覆盖计数==目标点数 →「过关结算」；步数耗尽 →「失败结算」\n  - outcome：按 §8 V01/V02 判定，优先级按 §3 G07\n- S09 过关结算\n  - input：Enter＝下一关 / R＝重开本关 / Esc＝返回选关（触发方：玩家）\n  - precondition：V01 成立（覆盖计数==目标点数）\n  - state_change：进入「过关结算」状态；棋盘冻结；第三关完成时按 §10 C02 触发结算视频\n  - feedback：结算面板显示步数、undo_count、用时\n  - next_actions：下一关（未过完）/ 总结算（三关完成）/ 重开\n  - outcome：不写入跨局状态（见 §8 V04）\n- S10 失败结算\n  - input：Enter＝重试本关 / Esc＝返回选关（触发方：玩家）\n  - precondition：V02 成立（步数预算耗尽且未达成覆盖）\n  - state_change：进入「失败结算」状态；棋盘冻结\n  - feedback：失败面板注明原因「步数预算耗尽」并给重试入口\n  - next_actions：重试本关（全量按初始布局重载）\n  - outcome：本关状态清空，无跨局副作用\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，输入与棋盘逻辑冻结\n  - feedback：暂停面板（继续/重置本关/返回选关/设置）\n  - next_actions：Esc 或「继续」→ 回到游玩\n  - outcome：恢复后状态与暂停前逐格一致（§3 G05）\n\n## 3. 数值口径与全局规则 [G01–G07]\n\n- G01 统一刻度：棋盘为格子坐标（列,行），原点 (0,0) 位于左上；格子类型＝墙 / 地面 / 目标点；状态变量＝玩家坐标、每箱坐标、覆盖计数（箱子位于目标点的数量）、已用步数、undo_count。目标点以「金色圆环＋『目标』文字标签」标识（不只靠颜色，见 F10）。\n- G02 步数预算：L1=40 步、L2=60 步、L3=90 步；每次有效移动或有效推箱计 1 步；被拒绝的输入、撤销、重置、菜单导航不计步。\n- G03 难度：单档「标准」；不提供难度选择。\n- G04 随机种子：fixed_seed=1016。三关布局为静态数据，不含随机生成；本 seed 仅用于保证同版本构建内任何内部随机流（如表现层粒子）不影响棋盘规则结果。\n- G05 暂停与模拟时间：Esc 暂停冻结输入与棋盘逻辑；暂停、结算、菜单、视频播放期间不推进任何游戏状态；UI 过渡不得触发格子逻辑；窗口失焦自动暂停。\n- G06 状态转移 oracle（独立可复核）：给定初始棋盘与输入序列，最终棋盘唯一确定。数例：局部棋局中玩家位于 (2,1)、箱子位于 (2,2)、(2,3) 为目标点、其右为空地；输入 [右] 后必然产生事件流 `move(player,2,1→2,2)`、`push(box,2,2→2,3)`、`cover(2,3)=true`、`steps+1`，玩家位于 (2,2)、箱子位于 (2,3)、覆盖计数 +1；任何偏离即 FAIL。\n- G07 优先级与统计（本包冻结值）：同一有效步使「覆盖计数==目标点数」与「步数预算恰好耗尽」同时成立时，判胜优先于判负（先完成目标）。undo_count＝本关成功撤销的有效步总数；被拒输入不计入 undo_count；撤销本身不消耗步数、不增加步数；过关结算必须同时显示已用步数与 undo_count。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：方向键或 WASD＝移动一格（面向相邻箱子则推动）；Z＝撤销一步；R＝整关重置（带确认）；Esc＝暂停/关闭面板；Enter＝确认。\n- I02 输入语义边界：面向墙移动、推动被墙/另一箱阻挡的箱子、忙时与面板打开时的玩法键，一律拒绝且不消耗步数、不产生状态变化；被拒绝输入不得被记为一步、不得计入 undo_count。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算（先 movement、后 undo、后 reset）。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（不依赖 G06）。\n- I06 UI 必须显示的状态：本关号、步数预算剩余/已用、覆盖计数/目标点数、undo_count；HUD 对照见 rubric。\n- I07 输入延迟目标：按键到对应画面反馈（移动动画或拒绝反馈）≤ 100 毫秒（WebGL/HTML5 环境目标 ≤ 150 毫秒）；延迟异常须在设置中可见当前帧率。\n\n## 5. 关卡与内容清单 [L01–L02]\n\n- L01 生成对象：守护机器人「初幕」1（玩家）、仓储箱每关 2/3/4 只、目标点与箱数相同、墙面与地面格若干；三个关卡的棋盘分别以舞台、后台、观众厅为主题变体（配色与装饰不同，判定格完全一致）；程序化几何或原创贴图均可；骨骼动画非冻结需求（机器人可为刚性滑动＋转向表现）。\n- L02 三关静态布局（`#`墙、`.`地面、`*`目标点、`$`箱、`@`机器人；均为可解布局，坐标为（列,行））：\n\n关卡一（主题：舞台；步数预算 40，箱 2）：\n\n```text\n########\n#..*...#\n#.$..*.#\n#.@$...#\n#......#\n########\n```\n\n关卡二（主题：后台；步数预算 60，箱 3）：\n\n```text\n########\n#......#\n#.*$...#\n#..@...#\n#...$*.#\n#.$..*.#\n########\n```\n\n关卡三（主题：观众厅；步数预算 90，箱 4；含可触发的死角路线）：\n\n```text\n########\n#......#\n#.$.*..#\n#..@...#\n#*.$...#\n#...$.*#\n#.*..$.#\n########\n```\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/选关/HUD/结算/失败/暂停面板、视频播放层）与交互物逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 F04 之外的装饰造型与配色细节为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 推动限制（主机制）\n  - input：移动键（方向键/WASD）\n  - precondition：处于游玩状态（非暂停/结算/面板）；目标格在棋盘界内\n  - state_change：目标格为空地面或目标点 → 玩家移入一格；目标格为箱子且箱子落点格（同方向再前进一格）为空地面或目标点 → 玩家与箱子各前进一格；箱子只能推不能拉；目标格为墙、或箱子落点为墙/另一箱 → 整体拒绝且无副作用\n  - observable：每步产生棋盘快照与事件 `move` / `push` / `reject`（含方向与坐标）；有效步 steps+1；被拒事件不伴随 steps+1\n  - invalid_case：面向墙、推箱顶墙、推箱顶第二箱 → reject，坐标不变、步数不变\n  - recovery：Z 撤销最近一次有效步（见 M02）或 R 整关重置\n- M02 撤销栈（事务性回滚）\n  - input：Z\n  - precondition：存在至少一次未回滚的有效步；处于游玩状态\n  - state_change：回退最近一次有效步——玩家坐标、全部箱坐标、覆盖计数、步数在同一事务内同步回滚；undo_count+1；可连续回溯到本关开局；开局（无可回滚步）时 Z 无效且不计数\n  - observable：`undo` 事件与回滚后棋盘快照；回滚后状态与所撤销步骤执行前逐格一致（diff=0）\n  - invalid_case：无可回滚步时 Z → 无事件副作用、undo_count 不变\n  - recovery：撤销链到开局即止；R 重置可随时使用\n- M03 死角判定与提示\n  - input：系统在每次 push 后判定\n  - precondition：刚发生一次有效 `push`\n  - state_change：箱子被推入「贴墙角格」（其行进正交两侧均为墙/界的格子）且该格不是目标点时，标记该箱为不可解；不强制失败，玩家可撤销或重置\n  - observable：`deadlock` 事件（含箱子坐标）与画面提示（该箱红色高亮＋「该箱已卡死角」文字提示一次）\n  - invalid_case：箱子落入目标点角格不触发 deadlock；普通贴墙（单侧）不误报\n  - recovery：Z 撤销该步即可解除标记\n- M04 目标覆盖检测\n  - input：每次 push 后系统检测\n  - precondition：发生过一次有效 `push`（或撤销恢复）\n  - state_change：覆盖计数＝位于目标点的箱子数；计数==目标点数 → 过关结算（优先级按 G07）\n  - observable：`cover`/`uncover` 事件、HUD 覆盖计数、`win` 事件\n  - invalid_case：部分覆盖不判胜；箱子被推离目标点产生 `uncover`\n  - recovery：无失败态；覆盖后棋盘冻结\n- M05 守护机器人（玩家角色）移动\n  - input：移动键\n  - precondition：与 M01 同一判定入口\n  - state_change：一格一格移动，不可穿墙、不可穿越箱子；移动逻辑与 M01 同一判定\n  - observable：移动事件与坐标流水\n  - invalid_case：越界/穿墙/穿箱输入拒绝\n  - recovery：同 M01\n- M06 关卡切换\n  - input：过关结算界面（下一关）/ 选关界面\n  - precondition：V01 成立或玩家主动从选关进入\n  - state_change：载入对应静态布局，玩家/箱子/步数/覆盖计数/undo_count 全部按该关初始值重置\n  - observable：`level_loaded` 事件与关卡号显示\n  - invalid_case：非法关卡号请求拒绝\n  - recovery：载入失败重试或返回标题\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：本关全部目标点被箱子覆盖（覆盖计数==目标点数）→ 过关结算，显示已用步数与 undo_count。\n- V02 失败条件：步数预算耗尽且未达成覆盖 → 失败结算（区别于主动重置）；无 HP、无时限；与覆盖同时达成时按 G07 判胜。\n- V03 恢复语义：Z 撤销可回溯到开局（M02）；R 整关重置回到本关初始布局（含 undo_count 清零）；失败结算后可重试本关；一切恢复不需要读档。\n- V04 persistent_state：无（重开全量清空；无跨关解锁、无收集品、无跨关状态）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（步数/覆盖/undo_count）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——死角仅提示不判负，关键目标均可通过正常操作或 R 重置达成；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来的小城「暮椿镇」，废弃三十年的老剧院「暮椿剧院」将在明晚重新开幕；镇上唯一能在一夜之间完成整备的，是剧院遗留的仓储整理机器人。\n- W02 场景所在地：暮椿剧院内部——关卡一为主舞台区（幕布与追光）、关卡二为后台仓储区（道具架与缆绳）、关卡三为观众厅（座椅与包厢）。\n- W03 玩家身份与当前任务：玩家操作整理机器人「初幕」；当前任务：在天亮前把全部道具箱推回舞台标记位，让开幕灯光测试可以照常进行。\n- W04 失败代价与结局表达：失败＝天亮前来不及完成整备（步数预算耗尽），开幕被迫推迟；结局表达见 §10 C02——三关完成时剧院重新亮灯，开幕如期举行。\n- W05 叙事来源：道具箱＝剧院历次演出遗留的布景箱（因此数量随区域递增）；目标点＝舞台灯光师用金色标记贴出的存放位；机器人「初幕」＝剧院老机械师退休前留下的整理机。所有角色与物件均原创，不使用任何商业剧院/机器人作品的命名或造型。\n- W06 视觉风格与色彩材质：2D 手绘风格化俯视画面；主色＝暖木色（#C89B6D 系）＋舞台深红（#8E2F3C 系）＋目标金（#F2C14E）；材质以哑光木材、绒面幕布、磨损金属为主；三关通过主题色变体区分（舞台偏红金、后台偏灰木、观众厅偏蓝绒）。\n- W07 环境氛围与声音语言：安静夜间的剧院——常驻低鸣环境声、尘埃光束（F04）；音效语言为「木质滑动声＋机械伺服声＋灯光提示音」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代任务 → 关卡主题变体承载过程叙事 → 结算视频（C02）与结算面板收束；故事只做包装与节奏，不改变任何机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正交俯视（90°），整张棋盘在默认窗口（1280×720）内全部可见，无跟随、无平移；镜头边界＝棋盘外接矩形外加 8% 余量。\n- F02 关键操作镜头变化：过关瞬间镜头向该关最后一个被覆盖目标点轻微推近 5%（2 秒内完成并保持到结算）；失败时镜头轻微下沉变暗 0.5 秒；无震动类镜头变化。\n- F03 输入与延迟：见 I07；Z/R 的反馈延迟同 I07 目标。\n- F04 环境常驻效果：舞台区追光光束＋浮尘粒子（低密度，不遮挡格线）；后台区吊缆微摆；观众厅座椅尘埃。常驻效果纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 推动成功 | 箱体滑动 0.15s＋箱底尘土小粒子 | 木质滑动声（与动画同步起止） | 滑动到位即停 |\n| 目标覆盖 | 目标点金圈点亮 0.3s＋箱子描金边 | 「叮」确认音 | 覆盖状态常亮至变化 |\n| 非法移动 | 机器人原地抖动 0.3s＋目标格红框闪 1 次 | 短促否定音 | 0.3s 结束 |\n| 撤销 | 箱体与机器人反向回放 0.15s | 回摆音（滑动声倒放感） | 回放到位即停 |\n| 重置确认 | 幕布暗转 0.5s | 幕布摩擦声 | 布局重载完成 |\n| 过关 | 全场景灯组亮起＋彩带粒子 | 上扬提示音＋掌声（一次，不循环） | 进入结算即淡出 |\n| 失败 | 灯光转暗＋HUD 变灰 | 低沉提示音 | 进入失败面板即停 |\n| 死角提示 | 该箱红色高亮＋文字标签一次 | 警示音一次 | 提示 2s 后仅保留描边 |\n\n- F06 关键音效清单：木质滑动、确认「叮」、否定音、回摆音、幕布声、胜利音、掌声、失败音、警示音；环境音：剧院低鸣（常驻循环，暂停时静音）；循环音开始/结束：环境低鸣随关卡载入开始、随结算/返回标题淡出 0.5s；无配音需求（对白以文本呈现）。\n- F07 VFX 信息性与遮挡约束：目标点金色圆环与死角红色高亮承担玩法信息（可辨认可解状态）；尘土与彩带粒子只出现在格间空隙，单帧粒子数 ≤ 40，不得遮挡格线与 HUD。\n- F08 音画同步：滑动/回放音与对应动画同帧起止；覆盖确认音在 cover 事件帧触发；胜利音在 win 事件帧触发。\n- F09 屏幕震动：仅过关瞬间 0.2 秒小幅震动；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ 选关（三关卡片＋完成标记）→ HUD（关卡号、步数预算剩余/已用、覆盖计数/目标点数、undo_count）→ 过关结算（步数/undo_count/用时/下一关/重开/返回）→ 失败结算（重试本关/返回选关）；关键状态均附图标＋文字（目标点金环＋「目标」标签、死角红框＋「死角」标签），不只靠颜色区分；Esc 暂停面板含继续/重置本关/返回选关/设置；窗口失焦自动暂停（F10 与 I05 一致）。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开幕整备（Opening，8 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入关卡选择之前，每局一次\n  - 内容与角色场景：暮椿剧院夜景内部灯光次第亮起，机器人「初幕」推动一只道具箱穿过舞台，追光落在金色目标点上\n  - 资产对应：机器人、道具箱、剧院舞台与游戏内模型/贴图同源设计（同一套造型描述生成）\n  - 可跳过：Esc/Enter 跳过 → 直接进入关卡选择；自然播完 → 进入关卡选择\n  - 状态一致：播放期间不推进任何游戏计时；本局从「三关全未完成」状态开始\n- C02 剧院重新亮灯（Ending，10 秒，1280×720@24fps）\n  - 触发时机：第三关过关结算面板出现之前，每局一次\n  - 内容与角色场景：舞台、后台、观众厅三区灯组依次全亮，开幕横幅落下，「初幕」在追光下停在舞台中央鞠躬\n  - 资产对应：机器人、剧院三区与游戏内场景同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 进入总结算面板\n  - 状态一致：仅在真实达成三关后触发，与真实游戏进度一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三关静态推箱解谜、推动/覆盖/死角判定、事务性撤销（undo_count 统计）、整关重置、步数预算与失败结算。\n- N02 本测例包含的流程与界面：标题、选关、游玩、过关结算、失败结算、暂停（含失焦自动暂停）、重试与重开。\n- N03 本测例包含的演出能力：开场与结算视频（C01/C02）、§9 F04–F09 的全部事件反馈与音效、舞台三关主题变体。\n- N04 输入范围：键盘（WASD/方向键/Z/R/Esc/Enter）；无触控、手柄、多人需求（表现层可另行扩展，但不进入验收分母）。\n- N05 音频范围：§9 F06 冻结音效清单＋剧院环境音；无配音与背景音乐轨需求（对白以文本呈现）。\n- N06 表现层自由度：§9 未冻结的装饰造型、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（机器人「初幕」、道具箱、剧院舞台场景等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B0, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（观察→规划→执行→检测→过关/重置）；推动仅改变本系统覆盖状态，无跨系统因果链；撤销与重置是唯一恢复路径；新增的日夜演出、视频与 VFX 均为表现层，不改变难度档\"\n  downgrade_boundary: \"删除撤销栈与死角提示后仍为 S（更简）；S 已是本计划下限\"\n  upgrade_boundary: \"若引入跨关保留的道具/规则改写或双箱联动机制（A→B 状态传递），升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 1，image-to-3D 2）；object 任务资产为：sorting_robot, prop_crate, goal_marker。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：sort_and_place。\n- video/audio/mechanic/UI：分别为 2/6/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "3da769956ee4769074c0898083cd74f058191028d4c78acde20510d51b7740a0"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Bright small chime confirming a crate covers its goal marker",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G016_sfx_003": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G016_theater_sorting",
+          "task_id": "G016_sfx_003",
+          "asset_name": "reject_buzz",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Short low mechanical buzz for an illegal move rejection",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5163,
+          "trigger": "I02 非法输入",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《仓储机器人整理旧剧院》｜推箱解谜机制输入规范\n\n```yaml\ncase_id: G016\nbase_case_id: G016\ntitle: 仓储机器人整理旧剧院\ncategory: Puzzle / Investigation\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1016\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《仓储机器人整理旧剧院》；版本：mechanics-v3（2026-10-11 完整性修订：补世界设定、镜头/输入、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（本 spec、rubric 与 asset 任务 JSONL 中的 mechanic/ui/pipeline 任务引擎字段保持一致，引擎唯一冻结）；输入方式：键盘。\n- 原创边界：推箱子的公有领域规则机制可复用；本作全部名称、角色、场景、文案与美术必须原创，不使用任何商业作品的关卡集、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的俯视格子推箱解谜游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。任何任务关键目标不得因随机失败被永久删除（本题无随机玩法内容）。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2D 俯视格子推箱解谜，单人单屏。本测例包含的能力：三关静态棋盘、推动与覆盖检测、撤销与重置、死角提示、步数预算、开场与结算视频、舞台主题表现层。\n- S02 核心循环一句话：观察布局 → 规划推动序 → 执行 → 目标覆盖检测 → 过关或重置。\n- S03 流程：标题界面 → 关卡选择（3 关全开，无解锁门槛）→ 游玩 → 过关结算（步数、撤销次数）→ 下一关或重开；任意界面可返回标题。\n- S04 最低完整流程：标题、选关、游玩、过关结算、失败提示、重置、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：游玩中任意时刻可撤销（Z）或整关重置（R）；失败结算界面提供「重试本关」。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 关卡选择 → 游玩 → 过关结算 → 下一关或重开 → 返回标题/重试。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成（rubric D3 断言）\n  - state_change：游戏进入「标题」状态；首次进入时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现（开始/退出按钮、引擎版本号）\n  - next_actions：进入「关卡选择」\n  - outcome：无跨局状态写入（见 §8 V04）\n- S07 关卡选择\n  - input：方向键＋Enter（触发方：玩家）\n  - precondition：标题或结算界面已提供选关入口\n  - state_change：进入「关卡选择」状态，三关全部可选\n  - feedback：关卡卡片显示本关历史完成标记（局内，仅本会话）\n  - next_actions：载入所选关 →「游玩」\n  - outcome：按 §6 M06 载入静态布局，全部状态按该关初始值\n- S08 游玩\n  - input：方向键/WASD 移动、Z 撤销、R 重置、Esc 暂停（触发方：玩家）\n  - precondition：关卡载入完成且非暂停/结算状态\n  - state_change：按 §6 M01–M05 结算每次输入；步数、覆盖计数、undo_count 实时更新\n  - feedback：按 §9 F05/F06 呈现推动、覆盖、非法、撤销、重置反馈\n  - next_actions：覆盖计数==目标点数 →「过关结算」；步数耗尽 →「失败结算」\n  - outcome：按 §8 V01/V02 判定，优先级按 §3 G07\n- S09 过关结算\n  - input：Enter＝下一关 / R＝重开本关 / Esc＝返回选关（触发方：玩家）\n  - precondition：V01 成立（覆盖计数==目标点数）\n  - state_change：进入「过关结算」状态；棋盘冻结；第三关完成时按 §10 C02 触发结算视频\n  - feedback：结算面板显示步数、undo_count、用时\n  - next_actions：下一关（未过完）/ 总结算（三关完成）/ 重开\n  - outcome：不写入跨局状态（见 §8 V04）\n- S10 失败结算\n  - input：Enter＝重试本关 / Esc＝返回选关（触发方：玩家）\n  - precondition：V02 成立（步数预算耗尽且未达成覆盖）\n  - state_change：进入「失败结算」状态；棋盘冻结\n  - feedback：失败面板注明原因「步数预算耗尽」并给重试入口\n  - next_actions：重试本关（全量按初始布局重载）\n  - outcome：本关状态清空，无跨局副作用\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，输入与棋盘逻辑冻结\n  - feedback：暂停面板（继续/重置本关/返回选关/设置）\n  - next_actions：Esc 或「继续」→ 回到游玩\n  - outcome：恢复后状态与暂停前逐格一致（§3 G05）\n\n## 3. 数值口径与全局规则 [G01–G07]\n\n- G01 统一刻度：棋盘为格子坐标（列,行），原点 (0,0) 位于左上；格子类型＝墙 / 地面 / 目标点；状态变量＝玩家坐标、每箱坐标、覆盖计数（箱子位于目标点的数量）、已用步数、undo_count。目标点以「金色圆环＋『目标』文字标签」标识（不只靠颜色，见 F10）。\n- G02 步数预算：L1=40 步、L2=60 步、L3=90 步；每次有效移动或有效推箱计 1 步；被拒绝的输入、撤销、重置、菜单导航不计步。\n- G03 难度：单档「标准」；不提供难度选择。\n- G04 随机种子：fixed_seed=1016。三关布局为静态数据，不含随机生成；本 seed 仅用于保证同版本构建内任何内部随机流（如表现层粒子）不影响棋盘规则结果。\n- G05 暂停与模拟时间：Esc 暂停冻结输入与棋盘逻辑；暂停、结算、菜单、视频播放期间不推进任何游戏状态；UI 过渡不得触发格子逻辑；窗口失焦自动暂停。\n- G06 状态转移 oracle（独立可复核）：给定初始棋盘与输入序列，最终棋盘唯一确定。数例：局部棋局中玩家位于 (2,1)、箱子位于 (2,2)、(2,3) 为目标点、其右为空地；输入 [右] 后必然产生事件流 `move(player,2,1→2,2)`、`push(box,2,2→2,3)`、`cover(2,3)=true`、`steps+1`，玩家位于 (2,2)、箱子位于 (2,3)、覆盖计数 +1；任何偏离即 FAIL。\n- G07 优先级与统计（本包冻结值）：同一有效步使「覆盖计数==目标点数」与「步数预算恰好耗尽」同时成立时，判胜优先于判负（先完成目标）。undo_count＝本关成功撤销的有效步总数；被拒输入不计入 undo_count；撤销本身不消耗步数、不增加步数；过关结算必须同时显示已用步数与 undo_count。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：方向键或 WASD＝移动一格（面向相邻箱子则推动）；Z＝撤销一步；R＝整关重置（带确认）；Esc＝暂停/关闭面板；Enter＝确认。\n- I02 输入语义边界：面向墙移动、推动被墙/另一箱阻挡的箱子、忙时与面板打开时的玩法键，一律拒绝且不消耗步数、不产生状态变化；被拒绝输入不得被记为一步、不得计入 undo_count。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算（先 movement、后 undo、后 reset）。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（不依赖 G06）。\n- I06 UI 必须显示的状态：本关号、步数预算剩余/已用、覆盖计数/目标点数、undo_count；HUD 对照见 rubric。\n- I07 输入延迟目标：按键到对应画面反馈（移动动画或拒绝反馈）≤ 100 毫秒（WebGL/HTML5 环境目标 ≤ 150 毫秒）；延迟异常须在设置中可见当前帧率。\n\n## 5. 关卡与内容清单 [L01–L02]\n\n- L01 生成对象：守护机器人「初幕」1（玩家）、仓储箱每关 2/3/4 只、目标点与箱数相同、墙面与地面格若干；三个关卡的棋盘分别以舞台、后台、观众厅为主题变体（配色与装饰不同，判定格完全一致）；程序化几何或原创贴图均可；骨骼动画非冻结需求（机器人可为刚性滑动＋转向表现）。\n- L02 三关静态布局（`#`墙、`.`地面、`*`目标点、`$`箱、`@`机器人；均为可解布局，坐标为（列,行））：\n\n关卡一（主题：舞台；步数预算 40，箱 2）：\n\n```text\n########\n#..*...#\n#.$..*.#\n#.@$...#\n#......#\n########\n```\n\n关卡二（主题：后台；步数预算 60，箱 3）：\n\n```text\n########\n#......#\n#.*$...#\n#..@...#\n#...$*.#\n#.$..*.#\n########\n```\n\n关卡三（主题：观众厅；步数预算 90，箱 4；含可触发的死角路线）：\n\n```text\n########\n#......#\n#.$.*..#\n#..@...#\n#*.$...#\n#...$.*#\n#.*..$.#\n########\n```\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/选关/HUD/结算/失败/暂停面板、视频播放层）与交互物逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 F04 之外的装饰造型与配色细节为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 推动限制（主机制）\n  - input：移动键（方向键/WASD）\n  - precondition：处于游玩状态（非暂停/结算/面板）；目标格在棋盘界内\n  - state_change：目标格为空地面或目标点 → 玩家移入一格；目标格为箱子且箱子落点格（同方向再前进一格）为空地面或目标点 → 玩家与箱子各前进一格；箱子只能推不能拉；目标格为墙、或箱子落点为墙/另一箱 → 整体拒绝且无副作用\n  - observable：每步产生棋盘快照与事件 `move` / `push` / `reject`（含方向与坐标）；有效步 steps+1；被拒事件不伴随 steps+1\n  - invalid_case：面向墙、推箱顶墙、推箱顶第二箱 → reject，坐标不变、步数不变\n  - recovery：Z 撤销最近一次有效步（见 M02）或 R 整关重置\n- M02 撤销栈（事务性回滚）\n  - input：Z\n  - precondition：存在至少一次未回滚的有效步；处于游玩状态\n  - state_change：回退最近一次有效步——玩家坐标、全部箱坐标、覆盖计数、步数在同一事务内同步回滚；undo_count+1；可连续回溯到本关开局；开局（无可回滚步）时 Z 无效且不计数\n  - observable：`undo` 事件与回滚后棋盘快照；回滚后状态与所撤销步骤执行前逐格一致（diff=0）\n  - invalid_case：无可回滚步时 Z → 无事件副作用、undo_count 不变\n  - recovery：撤销链到开局即止；R 重置可随时使用\n- M03 死角判定与提示\n  - input：系统在每次 push 后判定\n  - precondition：刚发生一次有效 `push`\n  - state_change：箱子被推入「贴墙角格」（其行进正交两侧均为墙/界的格子）且该格不是目标点时，标记该箱为不可解；不强制失败，玩家可撤销或重置\n  - observable：`deadlock` 事件（含箱子坐标）与画面提示（该箱红色高亮＋「该箱已卡死角」文字提示一次）\n  - invalid_case：箱子落入目标点角格不触发 deadlock；普通贴墙（单侧）不误报\n  - recovery：Z 撤销该步即可解除标记\n- M04 目标覆盖检测\n  - input：每次 push 后系统检测\n  - precondition：发生过一次有效 `push`（或撤销恢复）\n  - state_change：覆盖计数＝位于目标点的箱子数；计数==目标点数 → 过关结算（优先级按 G07）\n  - observable：`cover`/`uncover` 事件、HUD 覆盖计数、`win` 事件\n  - invalid_case：部分覆盖不判胜；箱子被推离目标点产生 `uncover`\n  - recovery：无失败态；覆盖后棋盘冻结\n- M05 守护机器人（玩家角色）移动\n  - input：移动键\n  - precondition：与 M01 同一判定入口\n  - state_change：一格一格移动，不可穿墙、不可穿越箱子；移动逻辑与 M01 同一判定\n  - observable：移动事件与坐标流水\n  - invalid_case：越界/穿墙/穿箱输入拒绝\n  - recovery：同 M01\n- M06 关卡切换\n  - input：过关结算界面（下一关）/ 选关界面\n  - precondition：V01 成立或玩家主动从选关进入\n  - state_change：载入对应静态布局，玩家/箱子/步数/覆盖计数/undo_count 全部按该关初始值重置\n  - observable：`level_loaded` 事件与关卡号显示\n  - invalid_case：非法关卡号请求拒绝\n  - recovery：载入失败重试或返回标题\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：本关全部目标点被箱子覆盖（覆盖计数==目标点数）→ 过关结算，显示已用步数与 undo_count。\n- V02 失败条件：步数预算耗尽且未达成覆盖 → 失败结算（区别于主动重置）；无 HP、无时限；与覆盖同时达成时按 G07 判胜。\n- V03 恢复语义：Z 撤销可回溯到开局（M02）；R 整关重置回到本关初始布局（含 undo_count 清零）；失败结算后可重试本关；一切恢复不需要读档。\n- V04 persistent_state：无（重开全量清空；无跨关解锁、无收集品、无跨关状态）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（步数/覆盖/undo_count）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——死角仅提示不判负，关键目标均可通过正常操作或 R 重置达成；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来的小城「暮椿镇」，废弃三十年的老剧院「暮椿剧院」将在明晚重新开幕；镇上唯一能在一夜之间完成整备的，是剧院遗留的仓储整理机器人。\n- W02 场景所在地：暮椿剧院内部——关卡一为主舞台区（幕布与追光）、关卡二为后台仓储区（道具架与缆绳）、关卡三为观众厅（座椅与包厢）。\n- W03 玩家身份与当前任务：玩家操作整理机器人「初幕」；当前任务：在天亮前把全部道具箱推回舞台标记位，让开幕灯光测试可以照常进行。\n- W04 失败代价与结局表达：失败＝天亮前来不及完成整备（步数预算耗尽），开幕被迫推迟；结局表达见 §10 C02——三关完成时剧院重新亮灯，开幕如期举行。\n- W05 叙事来源：道具箱＝剧院历次演出遗留的布景箱（因此数量随区域递增）；目标点＝舞台灯光师用金色标记贴出的存放位；机器人「初幕」＝剧院老机械师退休前留下的整理机。所有角色与物件均原创，不使用任何商业剧院/机器人作品的命名或造型。\n- W06 视觉风格与色彩材质：2D 手绘风格化俯视画面；主色＝暖木色（#C89B6D 系）＋舞台深红（#8E2F3C 系）＋目标金（#F2C14E）；材质以哑光木材、绒面幕布、磨损金属为主；三关通过主题色变体区分（舞台偏红金、后台偏灰木、观众厅偏蓝绒）。\n- W07 环境氛围与声音语言：安静夜间的剧院——常驻低鸣环境声、尘埃光束（F04）；音效语言为「木质滑动声＋机械伺服声＋灯光提示音」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代任务 → 关卡主题变体承载过程叙事 → 结算视频（C02）与结算面板收束；故事只做包装与节奏，不改变任何机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正交俯视（90°），整张棋盘在默认窗口（1280×720）内全部可见，无跟随、无平移；镜头边界＝棋盘外接矩形外加 8% 余量。\n- F02 关键操作镜头变化：过关瞬间镜头向该关最后一个被覆盖目标点轻微推近 5%（2 秒内完成并保持到结算）；失败时镜头轻微下沉变暗 0.5 秒；无震动类镜头变化。\n- F03 输入与延迟：见 I07；Z/R 的反馈延迟同 I07 目标。\n- F04 环境常驻效果：舞台区追光光束＋浮尘粒子（低密度，不遮挡格线）；后台区吊缆微摆；观众厅座椅尘埃。常驻效果纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 推动成功 | 箱体滑动 0.15s＋箱底尘土小粒子 | 木质滑动声（与动画同步起止） | 滑动到位即停 |\n| 目标覆盖 | 目标点金圈点亮 0.3s＋箱子描金边 | 「叮」确认音 | 覆盖状态常亮至变化 |\n| 非法移动 | 机器人原地抖动 0.3s＋目标格红框闪 1 次 | 短促否定音 | 0.3s 结束 |\n| 撤销 | 箱体与机器人反向回放 0.15s | 回摆音（滑动声倒放感） | 回放到位即停 |\n| 重置确认 | 幕布暗转 0.5s | 幕布摩擦声 | 布局重载完成 |\n| 过关 | 全场景灯组亮起＋彩带粒子 | 上扬提示音＋掌声（一次，不循环） | 进入结算即淡出 |\n| 失败 | 灯光转暗＋HUD 变灰 | 低沉提示音 | 进入失败面板即停 |\n| 死角提示 | 该箱红色高亮＋文字标签一次 | 警示音一次 | 提示 2s 后仅保留描边 |\n\n- F06 关键音效清单：木质滑动、确认「叮」、否定音、回摆音、幕布声、胜利音、掌声、失败音、警示音；环境音：剧院低鸣（常驻循环，暂停时静音）；循环音开始/结束：环境低鸣随关卡载入开始、随结算/返回标题淡出 0.5s；无配音需求（对白以文本呈现）。\n- F07 VFX 信息性与遮挡约束：目标点金色圆环与死角红色高亮承担玩法信息（可辨认可解状态）；尘土与彩带粒子只出现在格间空隙，单帧粒子数 ≤ 40，不得遮挡格线与 HUD。\n- F08 音画同步：滑动/回放音与对应动画同帧起止；覆盖确认音在 cover 事件帧触发；胜利音在 win 事件帧触发。\n- F09 屏幕震动：仅过关瞬间 0.2 秒小幅震动；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ 选关（三关卡片＋完成标记）→ HUD（关卡号、步数预算剩余/已用、覆盖计数/目标点数、undo_count）→ 过关结算（步数/undo_count/用时/下一关/重开/返回）→ 失败结算（重试本关/返回选关）；关键状态均附图标＋文字（目标点金环＋「目标」标签、死角红框＋「死角」标签），不只靠颜色区分；Esc 暂停面板含继续/重置本关/返回选关/设置；窗口失焦自动暂停（F10 与 I05 一致）。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开幕整备（Opening，8 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入关卡选择之前，每局一次\n  - 内容与角色场景：暮椿剧院夜景内部灯光次第亮起，机器人「初幕」推动一只道具箱穿过舞台，追光落在金色目标点上\n  - 资产对应：机器人、道具箱、剧院舞台与游戏内模型/贴图同源设计（同一套造型描述生成）\n  - 可跳过：Esc/Enter 跳过 → 直接进入关卡选择；自然播完 → 进入关卡选择\n  - 状态一致：播放期间不推进任何游戏计时；本局从「三关全未完成」状态开始\n- C02 剧院重新亮灯（Ending，10 秒，1280×720@24fps）\n  - 触发时机：第三关过关结算面板出现之前，每局一次\n  - 内容与角色场景：舞台、后台、观众厅三区灯组依次全亮，开幕横幅落下，「初幕」在追光下停在舞台中央鞠躬\n  - 资产对应：机器人、剧院三区与游戏内场景同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 进入总结算面板\n  - 状态一致：仅在真实达成三关后触发，与真实游戏进度一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三关静态推箱解谜、推动/覆盖/死角判定、事务性撤销（undo_count 统计）、整关重置、步数预算与失败结算。\n- N02 本测例包含的流程与界面：标题、选关、游玩、过关结算、失败结算、暂停（含失焦自动暂停）、重试与重开。\n- N03 本测例包含的演出能力：开场与结算视频（C01/C02）、§9 F04–F09 的全部事件反馈与音效、舞台三关主题变体。\n- N04 输入范围：键盘（WASD/方向键/Z/R/Esc/Enter）；无触控、手柄、多人需求（表现层可另行扩展，但不进入验收分母）。\n- N05 音频范围：§9 F06 冻结音效清单＋剧院环境音；无配音与背景音乐轨需求（对白以文本呈现）。\n- N06 表现层自由度：§9 未冻结的装饰造型、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（机器人「初幕」、道具箱、剧院舞台场景等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B0, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（观察→规划→执行→检测→过关/重置）；推动仅改变本系统覆盖状态，无跨系统因果链；撤销与重置是唯一恢复路径；新增的日夜演出、视频与 VFX 均为表现层，不改变难度档\"\n  downgrade_boundary: \"删除撤销栈与死角提示后仍为 S（更简）；S 已是本计划下限\"\n  upgrade_boundary: \"若引入跨关保留的道具/规则改写或双箱联动机制（A→B 状态传递），升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 1，image-to-3D 2）；object 任务资产为：sorting_robot, prop_crate, goal_marker。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：sort_and_place。\n- video/audio/mechanic/UI：分别为 2/6/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "3da769956ee4769074c0898083cd74f058191028d4c78acde20510d51b7740a0"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Short low mechanical buzz for an illegal move rejection",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G016_sfx_004": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G016_theater_sorting",
+          "task_id": "G016_sfx_004",
+          "asset_name": "undo_whoosh",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Reversed-feeling short whoosh as a move is rolled back",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5164,
+          "trigger": "M02 undo",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《仓储机器人整理旧剧院》｜推箱解谜机制输入规范\n\n```yaml\ncase_id: G016\nbase_case_id: G016\ntitle: 仓储机器人整理旧剧院\ncategory: Puzzle / Investigation\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1016\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《仓储机器人整理旧剧院》；版本：mechanics-v3（2026-10-11 完整性修订：补世界设定、镜头/输入、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（本 spec、rubric 与 asset 任务 JSONL 中的 mechanic/ui/pipeline 任务引擎字段保持一致，引擎唯一冻结）；输入方式：键盘。\n- 原创边界：推箱子的公有领域规则机制可复用；本作全部名称、角色、场景、文案与美术必须原创，不使用任何商业作品的关卡集、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的俯视格子推箱解谜游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。任何任务关键目标不得因随机失败被永久删除（本题无随机玩法内容）。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2D 俯视格子推箱解谜，单人单屏。本测例包含的能力：三关静态棋盘、推动与覆盖检测、撤销与重置、死角提示、步数预算、开场与结算视频、舞台主题表现层。\n- S02 核心循环一句话：观察布局 → 规划推动序 → 执行 → 目标覆盖检测 → 过关或重置。\n- S03 流程：标题界面 → 关卡选择（3 关全开，无解锁门槛）→ 游玩 → 过关结算（步数、撤销次数）→ 下一关或重开；任意界面可返回标题。\n- S04 最低完整流程：标题、选关、游玩、过关结算、失败提示、重置、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：游玩中任意时刻可撤销（Z）或整关重置（R）；失败结算界面提供「重试本关」。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 关卡选择 → 游玩 → 过关结算 → 下一关或重开 → 返回标题/重试。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成（rubric D3 断言）\n  - state_change：游戏进入「标题」状态；首次进入时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现（开始/退出按钮、引擎版本号）\n  - next_actions：进入「关卡选择」\n  - outcome：无跨局状态写入（见 §8 V04）\n- S07 关卡选择\n  - input：方向键＋Enter（触发方：玩家）\n  - precondition：标题或结算界面已提供选关入口\n  - state_change：进入「关卡选择」状态，三关全部可选\n  - feedback：关卡卡片显示本关历史完成标记（局内，仅本会话）\n  - next_actions：载入所选关 →「游玩」\n  - outcome：按 §6 M06 载入静态布局，全部状态按该关初始值\n- S08 游玩\n  - input：方向键/WASD 移动、Z 撤销、R 重置、Esc 暂停（触发方：玩家）\n  - precondition：关卡载入完成且非暂停/结算状态\n  - state_change：按 §6 M01–M05 结算每次输入；步数、覆盖计数、undo_count 实时更新\n  - feedback：按 §9 F05/F06 呈现推动、覆盖、非法、撤销、重置反馈\n  - next_actions：覆盖计数==目标点数 →「过关结算」；步数耗尽 →「失败结算」\n  - outcome：按 §8 V01/V02 判定，优先级按 §3 G07\n- S09 过关结算\n  - input：Enter＝下一关 / R＝重开本关 / Esc＝返回选关（触发方：玩家）\n  - precondition：V01 成立（覆盖计数==目标点数）\n  - state_change：进入「过关结算」状态；棋盘冻结；第三关完成时按 §10 C02 触发结算视频\n  - feedback：结算面板显示步数、undo_count、用时\n  - next_actions：下一关（未过完）/ 总结算（三关完成）/ 重开\n  - outcome：不写入跨局状态（见 §8 V04）\n- S10 失败结算\n  - input：Enter＝重试本关 / Esc＝返回选关（触发方：玩家）\n  - precondition：V02 成立（步数预算耗尽且未达成覆盖）\n  - state_change：进入「失败结算」状态；棋盘冻结\n  - feedback：失败面板注明原因「步数预算耗尽」并给重试入口\n  - next_actions：重试本关（全量按初始布局重载）\n  - outcome：本关状态清空，无跨局副作用\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，输入与棋盘逻辑冻结\n  - feedback：暂停面板（继续/重置本关/返回选关/设置）\n  - next_actions：Esc 或「继续」→ 回到游玩\n  - outcome：恢复后状态与暂停前逐格一致（§3 G05）\n\n## 3. 数值口径与全局规则 [G01–G07]\n\n- G01 统一刻度：棋盘为格子坐标（列,行），原点 (0,0) 位于左上；格子类型＝墙 / 地面 / 目标点；状态变量＝玩家坐标、每箱坐标、覆盖计数（箱子位于目标点的数量）、已用步数、undo_count。目标点以「金色圆环＋『目标』文字标签」标识（不只靠颜色，见 F10）。\n- G02 步数预算：L1=40 步、L2=60 步、L3=90 步；每次有效移动或有效推箱计 1 步；被拒绝的输入、撤销、重置、菜单导航不计步。\n- G03 难度：单档「标准」；不提供难度选择。\n- G04 随机种子：fixed_seed=1016。三关布局为静态数据，不含随机生成；本 seed 仅用于保证同版本构建内任何内部随机流（如表现层粒子）不影响棋盘规则结果。\n- G05 暂停与模拟时间：Esc 暂停冻结输入与棋盘逻辑；暂停、结算、菜单、视频播放期间不推进任何游戏状态；UI 过渡不得触发格子逻辑；窗口失焦自动暂停。\n- G06 状态转移 oracle（独立可复核）：给定初始棋盘与输入序列，最终棋盘唯一确定。数例：局部棋局中玩家位于 (2,1)、箱子位于 (2,2)、(2,3) 为目标点、其右为空地；输入 [右] 后必然产生事件流 `move(player,2,1→2,2)`、`push(box,2,2→2,3)`、`cover(2,3)=true`、`steps+1`，玩家位于 (2,2)、箱子位于 (2,3)、覆盖计数 +1；任何偏离即 FAIL。\n- G07 优先级与统计（本包冻结值）：同一有效步使「覆盖计数==目标点数」与「步数预算恰好耗尽」同时成立时，判胜优先于判负（先完成目标）。undo_count＝本关成功撤销的有效步总数；被拒输入不计入 undo_count；撤销本身不消耗步数、不增加步数；过关结算必须同时显示已用步数与 undo_count。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：方向键或 WASD＝移动一格（面向相邻箱子则推动）；Z＝撤销一步；R＝整关重置（带确认）；Esc＝暂停/关闭面板；Enter＝确认。\n- I02 输入语义边界：面向墙移动、推动被墙/另一箱阻挡的箱子、忙时与面板打开时的玩法键，一律拒绝且不消耗步数、不产生状态变化；被拒绝输入不得被记为一步、不得计入 undo_count。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算（先 movement、后 undo、后 reset）。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（不依赖 G06）。\n- I06 UI 必须显示的状态：本关号、步数预算剩余/已用、覆盖计数/目标点数、undo_count；HUD 对照见 rubric。\n- I07 输入延迟目标：按键到对应画面反馈（移动动画或拒绝反馈）≤ 100 毫秒（WebGL/HTML5 环境目标 ≤ 150 毫秒）；延迟异常须在设置中可见当前帧率。\n\n## 5. 关卡与内容清单 [L01–L02]\n\n- L01 生成对象：守护机器人「初幕」1（玩家）、仓储箱每关 2/3/4 只、目标点与箱数相同、墙面与地面格若干；三个关卡的棋盘分别以舞台、后台、观众厅为主题变体（配色与装饰不同，判定格完全一致）；程序化几何或原创贴图均可；骨骼动画非冻结需求（机器人可为刚性滑动＋转向表现）。\n- L02 三关静态布局（`#`墙、`.`地面、`*`目标点、`$`箱、`@`机器人；均为可解布局，坐标为（列,行））：\n\n关卡一（主题：舞台；步数预算 40，箱 2）：\n\n```text\n########\n#..*...#\n#.$..*.#\n#.@$...#\n#......#\n########\n```\n\n关卡二（主题：后台；步数预算 60，箱 3）：\n\n```text\n########\n#......#\n#.*$...#\n#..@...#\n#...$*.#\n#.$..*.#\n########\n```\n\n关卡三（主题：观众厅；步数预算 90，箱 4；含可触发的死角路线）：\n\n```text\n########\n#......#\n#.$.*..#\n#..@...#\n#*.$...#\n#...$.*#\n#.*..$.#\n########\n```\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/选关/HUD/结算/失败/暂停面板、视频播放层）与交互物逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 F04 之外的装饰造型与配色细节为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 推动限制（主机制）\n  - input：移动键（方向键/WASD）\n  - precondition：处于游玩状态（非暂停/结算/面板）；目标格在棋盘界内\n  - state_change：目标格为空地面或目标点 → 玩家移入一格；目标格为箱子且箱子落点格（同方向再前进一格）为空地面或目标点 → 玩家与箱子各前进一格；箱子只能推不能拉；目标格为墙、或箱子落点为墙/另一箱 → 整体拒绝且无副作用\n  - observable：每步产生棋盘快照与事件 `move` / `push` / `reject`（含方向与坐标）；有效步 steps+1；被拒事件不伴随 steps+1\n  - invalid_case：面向墙、推箱顶墙、推箱顶第二箱 → reject，坐标不变、步数不变\n  - recovery：Z 撤销最近一次有效步（见 M02）或 R 整关重置\n- M02 撤销栈（事务性回滚）\n  - input：Z\n  - precondition：存在至少一次未回滚的有效步；处于游玩状态\n  - state_change：回退最近一次有效步——玩家坐标、全部箱坐标、覆盖计数、步数在同一事务内同步回滚；undo_count+1；可连续回溯到本关开局；开局（无可回滚步）时 Z 无效且不计数\n  - observable：`undo` 事件与回滚后棋盘快照；回滚后状态与所撤销步骤执行前逐格一致（diff=0）\n  - invalid_case：无可回滚步时 Z → 无事件副作用、undo_count 不变\n  - recovery：撤销链到开局即止；R 重置可随时使用\n- M03 死角判定与提示\n  - input：系统在每次 push 后判定\n  - precondition：刚发生一次有效 `push`\n  - state_change：箱子被推入「贴墙角格」（其行进正交两侧均为墙/界的格子）且该格不是目标点时，标记该箱为不可解；不强制失败，玩家可撤销或重置\n  - observable：`deadlock` 事件（含箱子坐标）与画面提示（该箱红色高亮＋「该箱已卡死角」文字提示一次）\n  - invalid_case：箱子落入目标点角格不触发 deadlock；普通贴墙（单侧）不误报\n  - recovery：Z 撤销该步即可解除标记\n- M04 目标覆盖检测\n  - input：每次 push 后系统检测\n  - precondition：发生过一次有效 `push`（或撤销恢复）\n  - state_change：覆盖计数＝位于目标点的箱子数；计数==目标点数 → 过关结算（优先级按 G07）\n  - observable：`cover`/`uncover` 事件、HUD 覆盖计数、`win` 事件\n  - invalid_case：部分覆盖不判胜；箱子被推离目标点产生 `uncover`\n  - recovery：无失败态；覆盖后棋盘冻结\n- M05 守护机器人（玩家角色）移动\n  - input：移动键\n  - precondition：与 M01 同一判定入口\n  - state_change：一格一格移动，不可穿墙、不可穿越箱子；移动逻辑与 M01 同一判定\n  - observable：移动事件与坐标流水\n  - invalid_case：越界/穿墙/穿箱输入拒绝\n  - recovery：同 M01\n- M06 关卡切换\n  - input：过关结算界面（下一关）/ 选关界面\n  - precondition：V01 成立或玩家主动从选关进入\n  - state_change：载入对应静态布局，玩家/箱子/步数/覆盖计数/undo_count 全部按该关初始值重置\n  - observable：`level_loaded` 事件与关卡号显示\n  - invalid_case：非法关卡号请求拒绝\n  - recovery：载入失败重试或返回标题\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：本关全部目标点被箱子覆盖（覆盖计数==目标点数）→ 过关结算，显示已用步数与 undo_count。\n- V02 失败条件：步数预算耗尽且未达成覆盖 → 失败结算（区别于主动重置）；无 HP、无时限；与覆盖同时达成时按 G07 判胜。\n- V03 恢复语义：Z 撤销可回溯到开局（M02）；R 整关重置回到本关初始布局（含 undo_count 清零）；失败结算后可重试本关；一切恢复不需要读档。\n- V04 persistent_state：无（重开全量清空；无跨关解锁、无收集品、无跨关状态）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（步数/覆盖/undo_count）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——死角仅提示不判负，关键目标均可通过正常操作或 R 重置达成；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来的小城「暮椿镇」，废弃三十年的老剧院「暮椿剧院」将在明晚重新开幕；镇上唯一能在一夜之间完成整备的，是剧院遗留的仓储整理机器人。\n- W02 场景所在地：暮椿剧院内部——关卡一为主舞台区（幕布与追光）、关卡二为后台仓储区（道具架与缆绳）、关卡三为观众厅（座椅与包厢）。\n- W03 玩家身份与当前任务：玩家操作整理机器人「初幕」；当前任务：在天亮前把全部道具箱推回舞台标记位，让开幕灯光测试可以照常进行。\n- W04 失败代价与结局表达：失败＝天亮前来不及完成整备（步数预算耗尽），开幕被迫推迟；结局表达见 §10 C02——三关完成时剧院重新亮灯，开幕如期举行。\n- W05 叙事来源：道具箱＝剧院历次演出遗留的布景箱（因此数量随区域递增）；目标点＝舞台灯光师用金色标记贴出的存放位；机器人「初幕」＝剧院老机械师退休前留下的整理机。所有角色与物件均原创，不使用任何商业剧院/机器人作品的命名或造型。\n- W06 视觉风格与色彩材质：2D 手绘风格化俯视画面；主色＝暖木色（#C89B6D 系）＋舞台深红（#8E2F3C 系）＋目标金（#F2C14E）；材质以哑光木材、绒面幕布、磨损金属为主；三关通过主题色变体区分（舞台偏红金、后台偏灰木、观众厅偏蓝绒）。\n- W07 环境氛围与声音语言：安静夜间的剧院——常驻低鸣环境声、尘埃光束（F04）；音效语言为「木质滑动声＋机械伺服声＋灯光提示音」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代任务 → 关卡主题变体承载过程叙事 → 结算视频（C02）与结算面板收束；故事只做包装与节奏，不改变任何机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正交俯视（90°），整张棋盘在默认窗口（1280×720）内全部可见，无跟随、无平移；镜头边界＝棋盘外接矩形外加 8% 余量。\n- F02 关键操作镜头变化：过关瞬间镜头向该关最后一个被覆盖目标点轻微推近 5%（2 秒内完成并保持到结算）；失败时镜头轻微下沉变暗 0.5 秒；无震动类镜头变化。\n- F03 输入与延迟：见 I07；Z/R 的反馈延迟同 I07 目标。\n- F04 环境常驻效果：舞台区追光光束＋浮尘粒子（低密度，不遮挡格线）；后台区吊缆微摆；观众厅座椅尘埃。常驻效果纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 推动成功 | 箱体滑动 0.15s＋箱底尘土小粒子 | 木质滑动声（与动画同步起止） | 滑动到位即停 |\n| 目标覆盖 | 目标点金圈点亮 0.3s＋箱子描金边 | 「叮」确认音 | 覆盖状态常亮至变化 |\n| 非法移动 | 机器人原地抖动 0.3s＋目标格红框闪 1 次 | 短促否定音 | 0.3s 结束 |\n| 撤销 | 箱体与机器人反向回放 0.15s | 回摆音（滑动声倒放感） | 回放到位即停 |\n| 重置确认 | 幕布暗转 0.5s | 幕布摩擦声 | 布局重载完成 |\n| 过关 | 全场景灯组亮起＋彩带粒子 | 上扬提示音＋掌声（一次，不循环） | 进入结算即淡出 |\n| 失败 | 灯光转暗＋HUD 变灰 | 低沉提示音 | 进入失败面板即停 |\n| 死角提示 | 该箱红色高亮＋文字标签一次 | 警示音一次 | 提示 2s 后仅保留描边 |\n\n- F06 关键音效清单：木质滑动、确认「叮」、否定音、回摆音、幕布声、胜利音、掌声、失败音、警示音；环境音：剧院低鸣（常驻循环，暂停时静音）；循环音开始/结束：环境低鸣随关卡载入开始、随结算/返回标题淡出 0.5s；无配音需求（对白以文本呈现）。\n- F07 VFX 信息性与遮挡约束：目标点金色圆环与死角红色高亮承担玩法信息（可辨认可解状态）；尘土与彩带粒子只出现在格间空隙，单帧粒子数 ≤ 40，不得遮挡格线与 HUD。\n- F08 音画同步：滑动/回放音与对应动画同帧起止；覆盖确认音在 cover 事件帧触发；胜利音在 win 事件帧触发。\n- F09 屏幕震动：仅过关瞬间 0.2 秒小幅震动；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ 选关（三关卡片＋完成标记）→ HUD（关卡号、步数预算剩余/已用、覆盖计数/目标点数、undo_count）→ 过关结算（步数/undo_count/用时/下一关/重开/返回）→ 失败结算（重试本关/返回选关）；关键状态均附图标＋文字（目标点金环＋「目标」标签、死角红框＋「死角」标签），不只靠颜色区分；Esc 暂停面板含继续/重置本关/返回选关/设置；窗口失焦自动暂停（F10 与 I05 一致）。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开幕整备（Opening，8 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入关卡选择之前，每局一次\n  - 内容与角色场景：暮椿剧院夜景内部灯光次第亮起，机器人「初幕」推动一只道具箱穿过舞台，追光落在金色目标点上\n  - 资产对应：机器人、道具箱、剧院舞台与游戏内模型/贴图同源设计（同一套造型描述生成）\n  - 可跳过：Esc/Enter 跳过 → 直接进入关卡选择；自然播完 → 进入关卡选择\n  - 状态一致：播放期间不推进任何游戏计时；本局从「三关全未完成」状态开始\n- C02 剧院重新亮灯（Ending，10 秒，1280×720@24fps）\n  - 触发时机：第三关过关结算面板出现之前，每局一次\n  - 内容与角色场景：舞台、后台、观众厅三区灯组依次全亮，开幕横幅落下，「初幕」在追光下停在舞台中央鞠躬\n  - 资产对应：机器人、剧院三区与游戏内场景同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 进入总结算面板\n  - 状态一致：仅在真实达成三关后触发，与真实游戏进度一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三关静态推箱解谜、推动/覆盖/死角判定、事务性撤销（undo_count 统计）、整关重置、步数预算与失败结算。\n- N02 本测例包含的流程与界面：标题、选关、游玩、过关结算、失败结算、暂停（含失焦自动暂停）、重试与重开。\n- N03 本测例包含的演出能力：开场与结算视频（C01/C02）、§9 F04–F09 的全部事件反馈与音效、舞台三关主题变体。\n- N04 输入范围：键盘（WASD/方向键/Z/R/Esc/Enter）；无触控、手柄、多人需求（表现层可另行扩展，但不进入验收分母）。\n- N05 音频范围：§9 F06 冻结音效清单＋剧院环境音；无配音与背景音乐轨需求（对白以文本呈现）。\n- N06 表现层自由度：§9 未冻结的装饰造型、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（机器人「初幕」、道具箱、剧院舞台场景等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B0, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（观察→规划→执行→检测→过关/重置）；推动仅改变本系统覆盖状态，无跨系统因果链；撤销与重置是唯一恢复路径；新增的日夜演出、视频与 VFX 均为表现层，不改变难度档\"\n  downgrade_boundary: \"删除撤销栈与死角提示后仍为 S（更简）；S 已是本计划下限\"\n  upgrade_boundary: \"若引入跨关保留的道具/规则改写或双箱联动机制（A→B 状态传递），升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 1，image-to-3D 2）；object 任务资产为：sorting_robot, prop_crate, goal_marker。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：sort_and_place。\n- video/audio/mechanic/UI：分别为 2/6/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "3da769956ee4769074c0898083cd74f058191028d4c78acde20510d51b7740a0"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Reversed-feeling short whoosh as a move is rolled back",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G016_sfx_005": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G016_theater_sorting",
+          "task_id": "G016_sfx_005",
+          "asset_name": "victory_fanfare",
+          "audio_type": "sound_effect",
+          "sound_category": "one_shot",
+          "prompt": "Brief cheerful theater re-opening jingle with applause tail, no vocals",
+          "duration_sec": 1.0,
+          "sample_rate": 48000,
+          "seed": 5165,
+          "trigger": "V01 过关",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《仓储机器人整理旧剧院》｜推箱解谜机制输入规范\n\n```yaml\ncase_id: G016\nbase_case_id: G016\ntitle: 仓储机器人整理旧剧院\ncategory: Puzzle / Investigation\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1016\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《仓储机器人整理旧剧院》；版本：mechanics-v3（2026-10-11 完整性修订：补世界设定、镜头/输入、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（本 spec、rubric 与 asset 任务 JSONL 中的 mechanic/ui/pipeline 任务引擎字段保持一致，引擎唯一冻结）；输入方式：键盘。\n- 原创边界：推箱子的公有领域规则机制可复用；本作全部名称、角色、场景、文案与美术必须原创，不使用任何商业作品的关卡集、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的俯视格子推箱解谜游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。任何任务关键目标不得因随机失败被永久删除（本题无随机玩法内容）。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2D 俯视格子推箱解谜，单人单屏。本测例包含的能力：三关静态棋盘、推动与覆盖检测、撤销与重置、死角提示、步数预算、开场与结算视频、舞台主题表现层。\n- S02 核心循环一句话：观察布局 → 规划推动序 → 执行 → 目标覆盖检测 → 过关或重置。\n- S03 流程：标题界面 → 关卡选择（3 关全开，无解锁门槛）→ 游玩 → 过关结算（步数、撤销次数）→ 下一关或重开；任意界面可返回标题。\n- S04 最低完整流程：标题、选关、游玩、过关结算、失败提示、重置、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：游玩中任意时刻可撤销（Z）或整关重置（R）；失败结算界面提供「重试本关」。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 关卡选择 → 游玩 → 过关结算 → 下一关或重开 → 返回标题/重试。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成（rubric D3 断言）\n  - state_change：游戏进入「标题」状态；首次进入时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现（开始/退出按钮、引擎版本号）\n  - next_actions：进入「关卡选择」\n  - outcome：无跨局状态写入（见 §8 V04）\n- S07 关卡选择\n  - input：方向键＋Enter（触发方：玩家）\n  - precondition：标题或结算界面已提供选关入口\n  - state_change：进入「关卡选择」状态，三关全部可选\n  - feedback：关卡卡片显示本关历史完成标记（局内，仅本会话）\n  - next_actions：载入所选关 →「游玩」\n  - outcome：按 §6 M06 载入静态布局，全部状态按该关初始值\n- S08 游玩\n  - input：方向键/WASD 移动、Z 撤销、R 重置、Esc 暂停（触发方：玩家）\n  - precondition：关卡载入完成且非暂停/结算状态\n  - state_change：按 §6 M01–M05 结算每次输入；步数、覆盖计数、undo_count 实时更新\n  - feedback：按 §9 F05/F06 呈现推动、覆盖、非法、撤销、重置反馈\n  - next_actions：覆盖计数==目标点数 →「过关结算」；步数耗尽 →「失败结算」\n  - outcome：按 §8 V01/V02 判定，优先级按 §3 G07\n- S09 过关结算\n  - input：Enter＝下一关 / R＝重开本关 / Esc＝返回选关（触发方：玩家）\n  - precondition：V01 成立（覆盖计数==目标点数）\n  - state_change：进入「过关结算」状态；棋盘冻结；第三关完成时按 §10 C02 触发结算视频\n  - feedback：结算面板显示步数、undo_count、用时\n  - next_actions：下一关（未过完）/ 总结算（三关完成）/ 重开\n  - outcome：不写入跨局状态（见 §8 V04）\n- S10 失败结算\n  - input：Enter＝重试本关 / Esc＝返回选关（触发方：玩家）\n  - precondition：V02 成立（步数预算耗尽且未达成覆盖）\n  - state_change：进入「失败结算」状态；棋盘冻结\n  - feedback：失败面板注明原因「步数预算耗尽」并给重试入口\n  - next_actions：重试本关（全量按初始布局重载）\n  - outcome：本关状态清空，无跨局副作用\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，输入与棋盘逻辑冻结\n  - feedback：暂停面板（继续/重置本关/返回选关/设置）\n  - next_actions：Esc 或「继续」→ 回到游玩\n  - outcome：恢复后状态与暂停前逐格一致（§3 G05）\n\n## 3. 数值口径与全局规则 [G01–G07]\n\n- G01 统一刻度：棋盘为格子坐标（列,行），原点 (0,0) 位于左上；格子类型＝墙 / 地面 / 目标点；状态变量＝玩家坐标、每箱坐标、覆盖计数（箱子位于目标点的数量）、已用步数、undo_count。目标点以「金色圆环＋『目标』文字标签」标识（不只靠颜色，见 F10）。\n- G02 步数预算：L1=40 步、L2=60 步、L3=90 步；每次有效移动或有效推箱计 1 步；被拒绝的输入、撤销、重置、菜单导航不计步。\n- G03 难度：单档「标准」；不提供难度选择。\n- G04 随机种子：fixed_seed=1016。三关布局为静态数据，不含随机生成；本 seed 仅用于保证同版本构建内任何内部随机流（如表现层粒子）不影响棋盘规则结果。\n- G05 暂停与模拟时间：Esc 暂停冻结输入与棋盘逻辑；暂停、结算、菜单、视频播放期间不推进任何游戏状态；UI 过渡不得触发格子逻辑；窗口失焦自动暂停。\n- G06 状态转移 oracle（独立可复核）：给定初始棋盘与输入序列，最终棋盘唯一确定。数例：局部棋局中玩家位于 (2,1)、箱子位于 (2,2)、(2,3) 为目标点、其右为空地；输入 [右] 后必然产生事件流 `move(player,2,1→2,2)`、`push(box,2,2→2,3)`、`cover(2,3)=true`、`steps+1`，玩家位于 (2,2)、箱子位于 (2,3)、覆盖计数 +1；任何偏离即 FAIL。\n- G07 优先级与统计（本包冻结值）：同一有效步使「覆盖计数==目标点数」与「步数预算恰好耗尽」同时成立时，判胜优先于判负（先完成目标）。undo_count＝本关成功撤销的有效步总数；被拒输入不计入 undo_count；撤销本身不消耗步数、不增加步数；过关结算必须同时显示已用步数与 undo_count。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：方向键或 WASD＝移动一格（面向相邻箱子则推动）；Z＝撤销一步；R＝整关重置（带确认）；Esc＝暂停/关闭面板；Enter＝确认。\n- I02 输入语义边界：面向墙移动、推动被墙/另一箱阻挡的箱子、忙时与面板打开时的玩法键，一律拒绝且不消耗步数、不产生状态变化；被拒绝输入不得被记为一步、不得计入 undo_count。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算（先 movement、后 undo、后 reset）。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（不依赖 G06）。\n- I06 UI 必须显示的状态：本关号、步数预算剩余/已用、覆盖计数/目标点数、undo_count；HUD 对照见 rubric。\n- I07 输入延迟目标：按键到对应画面反馈（移动动画或拒绝反馈）≤ 100 毫秒（WebGL/HTML5 环境目标 ≤ 150 毫秒）；延迟异常须在设置中可见当前帧率。\n\n## 5. 关卡与内容清单 [L01–L02]\n\n- L01 生成对象：守护机器人「初幕」1（玩家）、仓储箱每关 2/3/4 只、目标点与箱数相同、墙面与地面格若干；三个关卡的棋盘分别以舞台、后台、观众厅为主题变体（配色与装饰不同，判定格完全一致）；程序化几何或原创贴图均可；骨骼动画非冻结需求（机器人可为刚性滑动＋转向表现）。\n- L02 三关静态布局（`#`墙、`.`地面、`*`目标点、`$`箱、`@`机器人；均为可解布局，坐标为（列,行））：\n\n关卡一（主题：舞台；步数预算 40，箱 2）：\n\n```text\n########\n#..*...#\n#.$..*.#\n#.@$...#\n#......#\n########\n```\n\n关卡二（主题：后台；步数预算 60，箱 3）：\n\n```text\n########\n#......#\n#.*$...#\n#..@...#\n#...$*.#\n#.$..*.#\n########\n```\n\n关卡三（主题：观众厅；步数预算 90，箱 4；含可触发的死角路线）：\n\n```text\n########\n#......#\n#.$.*..#\n#..@...#\n#*.$...#\n#...$.*#\n#.*..$.#\n########\n```\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/选关/HUD/结算/失败/暂停面板、视频播放层）与交互物逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 F04 之外的装饰造型与配色细节为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 推动限制（主机制）\n  - input：移动键（方向键/WASD）\n  - precondition：处于游玩状态（非暂停/结算/面板）；目标格在棋盘界内\n  - state_change：目标格为空地面或目标点 → 玩家移入一格；目标格为箱子且箱子落点格（同方向再前进一格）为空地面或目标点 → 玩家与箱子各前进一格；箱子只能推不能拉；目标格为墙、或箱子落点为墙/另一箱 → 整体拒绝且无副作用\n  - observable：每步产生棋盘快照与事件 `move` / `push` / `reject`（含方向与坐标）；有效步 steps+1；被拒事件不伴随 steps+1\n  - invalid_case：面向墙、推箱顶墙、推箱顶第二箱 → reject，坐标不变、步数不变\n  - recovery：Z 撤销最近一次有效步（见 M02）或 R 整关重置\n- M02 撤销栈（事务性回滚）\n  - input：Z\n  - precondition：存在至少一次未回滚的有效步；处于游玩状态\n  - state_change：回退最近一次有效步——玩家坐标、全部箱坐标、覆盖计数、步数在同一事务内同步回滚；undo_count+1；可连续回溯到本关开局；开局（无可回滚步）时 Z 无效且不计数\n  - observable：`undo` 事件与回滚后棋盘快照；回滚后状态与所撤销步骤执行前逐格一致（diff=0）\n  - invalid_case：无可回滚步时 Z → 无事件副作用、undo_count 不变\n  - recovery：撤销链到开局即止；R 重置可随时使用\n- M03 死角判定与提示\n  - input：系统在每次 push 后判定\n  - precondition：刚发生一次有效 `push`\n  - state_change：箱子被推入「贴墙角格」（其行进正交两侧均为墙/界的格子）且该格不是目标点时，标记该箱为不可解；不强制失败，玩家可撤销或重置\n  - observable：`deadlock` 事件（含箱子坐标）与画面提示（该箱红色高亮＋「该箱已卡死角」文字提示一次）\n  - invalid_case：箱子落入目标点角格不触发 deadlock；普通贴墙（单侧）不误报\n  - recovery：Z 撤销该步即可解除标记\n- M04 目标覆盖检测\n  - input：每次 push 后系统检测\n  - precondition：发生过一次有效 `push`（或撤销恢复）\n  - state_change：覆盖计数＝位于目标点的箱子数；计数==目标点数 → 过关结算（优先级按 G07）\n  - observable：`cover`/`uncover` 事件、HUD 覆盖计数、`win` 事件\n  - invalid_case：部分覆盖不判胜；箱子被推离目标点产生 `uncover`\n  - recovery：无失败态；覆盖后棋盘冻结\n- M05 守护机器人（玩家角色）移动\n  - input：移动键\n  - precondition：与 M01 同一判定入口\n  - state_change：一格一格移动，不可穿墙、不可穿越箱子；移动逻辑与 M01 同一判定\n  - observable：移动事件与坐标流水\n  - invalid_case：越界/穿墙/穿箱输入拒绝\n  - recovery：同 M01\n- M06 关卡切换\n  - input：过关结算界面（下一关）/ 选关界面\n  - precondition：V01 成立或玩家主动从选关进入\n  - state_change：载入对应静态布局，玩家/箱子/步数/覆盖计数/undo_count 全部按该关初始值重置\n  - observable：`level_loaded` 事件与关卡号显示\n  - invalid_case：非法关卡号请求拒绝\n  - recovery：载入失败重试或返回标题\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：本关全部目标点被箱子覆盖（覆盖计数==目标点数）→ 过关结算，显示已用步数与 undo_count。\n- V02 失败条件：步数预算耗尽且未达成覆盖 → 失败结算（区别于主动重置）；无 HP、无时限；与覆盖同时达成时按 G07 判胜。\n- V03 恢复语义：Z 撤销可回溯到开局（M02）；R 整关重置回到本关初始布局（含 undo_count 清零）；失败结算后可重试本关；一切恢复不需要读档。\n- V04 persistent_state：无（重开全量清空；无跨关解锁、无收集品、无跨关状态）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（步数/覆盖/undo_count）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——死角仅提示不判负，关键目标均可通过正常操作或 R 重置达成；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来的小城「暮椿镇」，废弃三十年的老剧院「暮椿剧院」将在明晚重新开幕；镇上唯一能在一夜之间完成整备的，是剧院遗留的仓储整理机器人。\n- W02 场景所在地：暮椿剧院内部——关卡一为主舞台区（幕布与追光）、关卡二为后台仓储区（道具架与缆绳）、关卡三为观众厅（座椅与包厢）。\n- W03 玩家身份与当前任务：玩家操作整理机器人「初幕」；当前任务：在天亮前把全部道具箱推回舞台标记位，让开幕灯光测试可以照常进行。\n- W04 失败代价与结局表达：失败＝天亮前来不及完成整备（步数预算耗尽），开幕被迫推迟；结局表达见 §10 C02——三关完成时剧院重新亮灯，开幕如期举行。\n- W05 叙事来源：道具箱＝剧院历次演出遗留的布景箱（因此数量随区域递增）；目标点＝舞台灯光师用金色标记贴出的存放位；机器人「初幕」＝剧院老机械师退休前留下的整理机。所有角色与物件均原创，不使用任何商业剧院/机器人作品的命名或造型。\n- W06 视觉风格与色彩材质：2D 手绘风格化俯视画面；主色＝暖木色（#C89B6D 系）＋舞台深红（#8E2F3C 系）＋目标金（#F2C14E）；材质以哑光木材、绒面幕布、磨损金属为主；三关通过主题色变体区分（舞台偏红金、后台偏灰木、观众厅偏蓝绒）。\n- W07 环境氛围与声音语言：安静夜间的剧院——常驻低鸣环境声、尘埃光束（F04）；音效语言为「木质滑动声＋机械伺服声＋灯光提示音」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代任务 → 关卡主题变体承载过程叙事 → 结算视频（C02）与结算面板收束；故事只做包装与节奏，不改变任何机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正交俯视（90°），整张棋盘在默认窗口（1280×720）内全部可见，无跟随、无平移；镜头边界＝棋盘外接矩形外加 8% 余量。\n- F02 关键操作镜头变化：过关瞬间镜头向该关最后一个被覆盖目标点轻微推近 5%（2 秒内完成并保持到结算）；失败时镜头轻微下沉变暗 0.5 秒；无震动类镜头变化。\n- F03 输入与延迟：见 I07；Z/R 的反馈延迟同 I07 目标。\n- F04 环境常驻效果：舞台区追光光束＋浮尘粒子（低密度，不遮挡格线）；后台区吊缆微摆；观众厅座椅尘埃。常驻效果纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 推动成功 | 箱体滑动 0.15s＋箱底尘土小粒子 | 木质滑动声（与动画同步起止） | 滑动到位即停 |\n| 目标覆盖 | 目标点金圈点亮 0.3s＋箱子描金边 | 「叮」确认音 | 覆盖状态常亮至变化 |\n| 非法移动 | 机器人原地抖动 0.3s＋目标格红框闪 1 次 | 短促否定音 | 0.3s 结束 |\n| 撤销 | 箱体与机器人反向回放 0.15s | 回摆音（滑动声倒放感） | 回放到位即停 |\n| 重置确认 | 幕布暗转 0.5s | 幕布摩擦声 | 布局重载完成 |\n| 过关 | 全场景灯组亮起＋彩带粒子 | 上扬提示音＋掌声（一次，不循环） | 进入结算即淡出 |\n| 失败 | 灯光转暗＋HUD 变灰 | 低沉提示音 | 进入失败面板即停 |\n| 死角提示 | 该箱红色高亮＋文字标签一次 | 警示音一次 | 提示 2s 后仅保留描边 |\n\n- F06 关键音效清单：木质滑动、确认「叮」、否定音、回摆音、幕布声、胜利音、掌声、失败音、警示音；环境音：剧院低鸣（常驻循环，暂停时静音）；循环音开始/结束：环境低鸣随关卡载入开始、随结算/返回标题淡出 0.5s；无配音需求（对白以文本呈现）。\n- F07 VFX 信息性与遮挡约束：目标点金色圆环与死角红色高亮承担玩法信息（可辨认可解状态）；尘土与彩带粒子只出现在格间空隙，单帧粒子数 ≤ 40，不得遮挡格线与 HUD。\n- F08 音画同步：滑动/回放音与对应动画同帧起止；覆盖确认音在 cover 事件帧触发；胜利音在 win 事件帧触发。\n- F09 屏幕震动：仅过关瞬间 0.2 秒小幅震动；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ 选关（三关卡片＋完成标记）→ HUD（关卡号、步数预算剩余/已用、覆盖计数/目标点数、undo_count）→ 过关结算（步数/undo_count/用时/下一关/重开/返回）→ 失败结算（重试本关/返回选关）；关键状态均附图标＋文字（目标点金环＋「目标」标签、死角红框＋「死角」标签），不只靠颜色区分；Esc 暂停面板含继续/重置本关/返回选关/设置；窗口失焦自动暂停（F10 与 I05 一致）。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开幕整备（Opening，8 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入关卡选择之前，每局一次\n  - 内容与角色场景：暮椿剧院夜景内部灯光次第亮起，机器人「初幕」推动一只道具箱穿过舞台，追光落在金色目标点上\n  - 资产对应：机器人、道具箱、剧院舞台与游戏内模型/贴图同源设计（同一套造型描述生成）\n  - 可跳过：Esc/Enter 跳过 → 直接进入关卡选择；自然播完 → 进入关卡选择\n  - 状态一致：播放期间不推进任何游戏计时；本局从「三关全未完成」状态开始\n- C02 剧院重新亮灯（Ending，10 秒，1280×720@24fps）\n  - 触发时机：第三关过关结算面板出现之前，每局一次\n  - 内容与角色场景：舞台、后台、观众厅三区灯组依次全亮，开幕横幅落下，「初幕」在追光下停在舞台中央鞠躬\n  - 资产对应：机器人、剧院三区与游戏内场景同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 进入总结算面板\n  - 状态一致：仅在真实达成三关后触发，与真实游戏进度一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三关静态推箱解谜、推动/覆盖/死角判定、事务性撤销（undo_count 统计）、整关重置、步数预算与失败结算。\n- N02 本测例包含的流程与界面：标题、选关、游玩、过关结算、失败结算、暂停（含失焦自动暂停）、重试与重开。\n- N03 本测例包含的演出能力：开场与结算视频（C01/C02）、§9 F04–F09 的全部事件反馈与音效、舞台三关主题变体。\n- N04 输入范围：键盘（WASD/方向键/Z/R/Esc/Enter）；无触控、手柄、多人需求（表现层可另行扩展，但不进入验收分母）。\n- N05 音频范围：§9 F06 冻结音效清单＋剧院环境音；无配音与背景音乐轨需求（对白以文本呈现）。\n- N06 表现层自由度：§9 未冻结的装饰造型、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（机器人「初幕」、道具箱、剧院舞台场景等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B0, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（观察→规划→执行→检测→过关/重置）；推动仅改变本系统覆盖状态，无跨系统因果链；撤销与重置是唯一恢复路径；新增的日夜演出、视频与 VFX 均为表现层，不改变难度档\"\n  downgrade_boundary: \"删除撤销栈与死角提示后仍为 S（更简）；S 已是本计划下限\"\n  upgrade_boundary: \"若引入跨关保留的道具/规则改写或双箱联动机制（A→B 状态传递），升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 1，image-to-3D 2）；object 任务资产为：sorting_robot, prop_crate, goal_marker。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：sort_and_place。\n- video/audio/mechanic/UI：分别为 2/6/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "3da769956ee4769074c0898083cd74f058191028d4c78acde20510d51b7740a0"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Brief cheerful theater re-opening jingle with applause tail, no vocals",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    },
+    "G016_sfx_006": {
+      "policy": {
+        "version": "audio_content_binary.validated.v2",
+        "speech_asr": "qwen3-asr-flash",
+        "non_speech_observer": "qwen3.8-omni-flash",
+        "judge": "gpt-6.1-sol",
+        "pass": 100,
+        "fail": 0,
+        "unrecognized": 0,
+        "api_error": null,
+        "speech_criterion": "semantic equivalence to original source_task.text, not exact orthography; incoherent or contradictory transcript fails",
+        "excluded_speech_requirements": [
+          "tone",
+          "emotion",
+          "prosody",
+          "voice identity",
+          "speaker timbre"
+        ],
+        "api_errors_are_not_recognition_failures": true,
+        "quality_is_separate": true,
+        "speech_endpoint": "DashScope workspace native API",
+        "sound_input": "WAV16k mono; system instruction; audio-only user; stream; reasoning_effort none;120s",
+        "old_invalid_scores_reused": false
+      },
+      "source": {
+        "task": {
+          "game_id": "G016_theater_sorting",
+          "task_id": "G016_sfx_006",
+          "asset_name": "theater_ambience",
+          "audio_type": "sound_effect",
+          "sound_category": "ambient_loop",
+          "prompt": "Quiet empty theater at night, faint hall hum, distant stage rigging creaks, no music",
+          "duration_sec": 30.0,
+          "sample_rate": 48000,
+          "seed": 5166,
+          "trigger": "常驻环境音（关卡载入起，结算淡出）",
+          "required_by_spec": true,
+          "spec_ref": "F06",
+          "loop": false,
+          "stop_condition": "natural_end",
+          "priority": "gameplay_critical",
+          "ducking": "none",
+          "sync_contract": "one_shot starts on trigger event frame; loop starts on state entry and stops per stop_condition"
+        },
+        "general_requirement": "# 《仓储机器人整理旧剧院》｜推箱解谜机制输入规范\n\n```yaml\ncase_id: G016\nbase_case_id: G016\ntitle: 仓储机器人整理旧剧院\ncategory: Puzzle / Investigation\ntier: S\nengine: three_js\nreport_track: Standard\npaired_conditions: [R, N]\nrequired_real_clients: 1\nfixed_seed: 1016\nspec_version: v3\nstatus: DRAFT_LOCAL\nmechanism_source: null\ntask_spec_version: null\ntask_spec_hash: null\nfrozen_by: null\nfrozen_at: null\ndependency_hashes: null\n```\n\n## 0. 标题、版本与使用说明\n\n- 作品名：《仓储机器人整理旧剧院》；版本：mechanics-v3（2026-10-11 完整性修订：补世界设定、镜头/输入、演出反馈、视频与正向范围清单）；运行引擎：**Three.js（WebGL）**（本 spec、rubric 与 asset 任务 JSONL 中的 mechanic/ui/pipeline 任务引擎字段保持一致，引擎唯一冻结）；输入方式：键盘。\n- 原创边界：推箱子的公有领域规则机制可复用；本作全部名称、角色、场景、文案与美术必须原创，不使用任何商业作品的关卡集、角色、徽记、造型或台词。\n- 规则优先级：本文件全局数值与规则 ＞ 机制章节 ＞ 关卡实例 ＞ 生成器自由补充；未指定数值可作为明确标注的配置默认值，不得伪装成本文既定要求。\n- 本文件用于游戏生成模型，目标是输出可操作的俯视格子推箱解谜游戏；文档存在不等于玩法完成，静态页面、类名或演示视频不能单独证明可玩。任何任务关键目标不得因随机失败被永久删除（本题无随机玩法内容）。\n\n## 1. 定位与完整流程 [S01–S05]\n\n- S01 类型：2D 俯视格子推箱解谜，单人单屏。本测例包含的能力：三关静态棋盘、推动与覆盖检测、撤销与重置、死角提示、步数预算、开场与结算视频、舞台主题表现层。\n- S02 核心循环一句话：观察布局 → 规划推动序 → 执行 → 目标覆盖检测 → 过关或重置。\n- S03 流程：标题界面 → 关卡选择（3 关全开，无解锁门槛）→ 游玩 → 过关结算（步数、撤销次数）→ 下一关或重开；任意界面可返回标题。\n- S04 最低完整流程：标题、选关、游玩、过关结算、失败提示、重置、重开必须全部存在且有真实入口。\n- S05 失败恢复入口：游玩中任意时刻可撤销（Z）或整关重置（R）；失败结算界面提供「重试本关」。\n\n## 2. 完整核心循环与阶段 [S06–S11]\n\n完整循环：启动与标题 → 关卡选择 → 游玩 → 过关结算 → 下一关或重开 → 返回标题/重试。每阶段六要素如下（引用本 spec §3–§7 与 §9 对应规则）：\n\n- S06 启动与标题\n  - input：系统启动加载完成（触发方：系统）；玩家按 Enter/点击「开始」\n  - precondition：构建可启动且资源加载完成（rubric D3 断言）\n  - state_change：游戏进入「标题」状态；首次进入时按 §10 C01 触发开场视频\n  - feedback：标题界面按 §9 F10 呈现（开始/退出按钮、引擎版本号）\n  - next_actions：进入「关卡选择」\n  - outcome：无跨局状态写入（见 §8 V04）\n- S07 关卡选择\n  - input：方向键＋Enter（触发方：玩家）\n  - precondition：标题或结算界面已提供选关入口\n  - state_change：进入「关卡选择」状态，三关全部可选\n  - feedback：关卡卡片显示本关历史完成标记（局内，仅本会话）\n  - next_actions：载入所选关 →「游玩」\n  - outcome：按 §6 M06 载入静态布局，全部状态按该关初始值\n- S08 游玩\n  - input：方向键/WASD 移动、Z 撤销、R 重置、Esc 暂停（触发方：玩家）\n  - precondition：关卡载入完成且非暂停/结算状态\n  - state_change：按 §6 M01–M05 结算每次输入；步数、覆盖计数、undo_count 实时更新\n  - feedback：按 §9 F05/F06 呈现推动、覆盖、非法、撤销、重置反馈\n  - next_actions：覆盖计数==目标点数 →「过关结算」；步数耗尽 →「失败结算」\n  - outcome：按 §8 V01/V02 判定，优先级按 §3 G07\n- S09 过关结算\n  - input：Enter＝下一关 / R＝重开本关 / Esc＝返回选关（触发方：玩家）\n  - precondition：V01 成立（覆盖计数==目标点数）\n  - state_change：进入「过关结算」状态；棋盘冻结；第三关完成时按 §10 C02 触发结算视频\n  - feedback：结算面板显示步数、undo_count、用时\n  - next_actions：下一关（未过完）/ 总结算（三关完成）/ 重开\n  - outcome：不写入跨局状态（见 §8 V04）\n- S10 失败结算\n  - input：Enter＝重试本关 / Esc＝返回选关（触发方：玩家）\n  - precondition：V02 成立（步数预算耗尽且未达成覆盖）\n  - state_change：进入「失败结算」状态；棋盘冻结\n  - feedback：失败面板注明原因「步数预算耗尽」并给重试入口\n  - next_actions：重试本关（全量按初始布局重载）\n  - outcome：本关状态清空，无跨局副作用\n- S11 暂停\n  - input：Esc（触发方：玩家）\n  - precondition：处于游玩状态\n  - state_change：暂停覆盖层打开，输入与棋盘逻辑冻结\n  - feedback：暂停面板（继续/重置本关/返回选关/设置）\n  - next_actions：Esc 或「继续」→ 回到游玩\n  - outcome：恢复后状态与暂停前逐格一致（§3 G05）\n\n## 3. 数值口径与全局规则 [G01–G07]\n\n- G01 统一刻度：棋盘为格子坐标（列,行），原点 (0,0) 位于左上；格子类型＝墙 / 地面 / 目标点；状态变量＝玩家坐标、每箱坐标、覆盖计数（箱子位于目标点的数量）、已用步数、undo_count。目标点以「金色圆环＋『目标』文字标签」标识（不只靠颜色，见 F10）。\n- G02 步数预算：L1=40 步、L2=60 步、L3=90 步；每次有效移动或有效推箱计 1 步；被拒绝的输入、撤销、重置、菜单导航不计步。\n- G03 难度：单档「标准」；不提供难度选择。\n- G04 随机种子：fixed_seed=1016。三关布局为静态数据，不含随机生成；本 seed 仅用于保证同版本构建内任何内部随机流（如表现层粒子）不影响棋盘规则结果。\n- G05 暂停与模拟时间：Esc 暂停冻结输入与棋盘逻辑；暂停、结算、菜单、视频播放期间不推进任何游戏状态；UI 过渡不得触发格子逻辑；窗口失焦自动暂停。\n- G06 状态转移 oracle（独立可复核）：给定初始棋盘与输入序列，最终棋盘唯一确定。数例：局部棋局中玩家位于 (2,1)、箱子位于 (2,2)、(2,3) 为目标点、其右为空地；输入 [右] 后必然产生事件流 `move(player,2,1→2,2)`、`push(box,2,2→2,3)`、`cover(2,3)=true`、`steps+1`，玩家位于 (2,2)、箱子位于 (2,3)、覆盖计数 +1；任何偏离即 FAIL。\n- G07 优先级与统计（本包冻结值）：同一有效步使「覆盖计数==目标点数」与「步数预算恰好耗尽」同时成立时，判胜优先于判负（先完成目标）。undo_count＝本关成功撤销的有效步总数；被拒输入不计入 undo_count；撤销本身不消耗步数、不增加步数；过关结算必须同时显示已用步数与 undo_count。\n\n## 4. 操作与输入 [I01–I07]\n\n- I01 键位：方向键或 WASD＝移动一格（面向相邻箱子则推动）；Z＝撤销一步；R＝整关重置（带确认）；Esc＝暂停/关闭面板；Enter＝确认。\n- I02 输入语义边界：面向墙移动、推动被墙/另一箱阻挡的箱子、忙时与面板打开时的玩法键，一律拒绝且不消耗步数、不产生状态变化；被拒绝输入不得被记为一步、不得计入 undo_count。\n- I03 键盘为完整输入方式；菜单可仅用键盘操作。\n- I04 输入优先级：暂停与结算状态阻断全部玩法输入；面板打开时玩法键不串入；同帧多输入按 §6 各机制声明的顺序结算（先 movement、后 undo、后 reset）。\n- I05 焦点与失焦规则：点击画布捕获输入焦点；面板层阻断点击穿透；窗口失焦自动暂停（不依赖 G06）。\n- I06 UI 必须显示的状态：本关号、步数预算剩余/已用、覆盖计数/目标点数、undo_count；HUD 对照见 rubric。\n- I07 输入延迟目标：按键到对应画面反馈（移动动画或拒绝反馈）≤ 100 毫秒（WebGL/HTML5 环境目标 ≤ 150 毫秒）；延迟异常须在设置中可见当前帧率。\n\n## 5. 关卡与内容清单 [L01–L02]\n\n- L01 生成对象：守护机器人「初幕」1（玩家）、仓储箱每关 2/3/4 只、目标点与箱数相同、墙面与地面格若干；三个关卡的棋盘分别以舞台、后台、观众厅为主题变体（配色与装饰不同，判定格完全一致）；程序化几何或原创贴图均可；骨骼动画非冻结需求（机器人可为刚性滑动＋转向表现）。\n- L02 三关静态布局（`#`墙、`.`地面、`*`目标点、`$`箱、`@`机器人；均为可解布局，坐标为（列,行））：\n\n关卡一（主题：舞台；步数预算 40，箱 2）：\n\n```text\n########\n#..*...#\n#.$..*.#\n#.@$...#\n#......#\n########\n```\n\n关卡二（主题：后台；步数预算 60，箱 3）：\n\n```text\n########\n#......#\n#.*$...#\n#..@...#\n#...$*.#\n#.$..*.#\n########\n```\n\n关卡三（主题：观众厅；步数预算 90，箱 4；含可触发的死角路线）：\n\n```text\n########\n#......#\n#.$.*..#\n#..@...#\n#*.$...#\n#...$.*#\n#.*..$.#\n########\n```\n- L03 目标物/交互物/场景/UI 对象：本 spec §3–§9 引用的界面元素（标题/选关/HUD/结算/失败/暂停面板、视频播放层）与交互物逐类存在且运行时可进入；数量与属性以对应 G·M 条目为准。\n- L04 冻结需求 vs 实现默认 vs 生成自由度：本 spec 明确写出的数值与数量为冻结需求；§9 F04 之外的装饰造型与配色细节为生成自由度，不得评估为缺失；实现默认值必须明确标注且符合核心机制。\n\n## 6. 机制系统 [M01–M06]\n\n- M01 推动限制（主机制）\n  - input：移动键（方向键/WASD）\n  - precondition：处于游玩状态（非暂停/结算/面板）；目标格在棋盘界内\n  - state_change：目标格为空地面或目标点 → 玩家移入一格；目标格为箱子且箱子落点格（同方向再前进一格）为空地面或目标点 → 玩家与箱子各前进一格；箱子只能推不能拉；目标格为墙、或箱子落点为墙/另一箱 → 整体拒绝且无副作用\n  - observable：每步产生棋盘快照与事件 `move` / `push` / `reject`（含方向与坐标）；有效步 steps+1；被拒事件不伴随 steps+1\n  - invalid_case：面向墙、推箱顶墙、推箱顶第二箱 → reject，坐标不变、步数不变\n  - recovery：Z 撤销最近一次有效步（见 M02）或 R 整关重置\n- M02 撤销栈（事务性回滚）\n  - input：Z\n  - precondition：存在至少一次未回滚的有效步；处于游玩状态\n  - state_change：回退最近一次有效步——玩家坐标、全部箱坐标、覆盖计数、步数在同一事务内同步回滚；undo_count+1；可连续回溯到本关开局；开局（无可回滚步）时 Z 无效且不计数\n  - observable：`undo` 事件与回滚后棋盘快照；回滚后状态与所撤销步骤执行前逐格一致（diff=0）\n  - invalid_case：无可回滚步时 Z → 无事件副作用、undo_count 不变\n  - recovery：撤销链到开局即止；R 重置可随时使用\n- M03 死角判定与提示\n  - input：系统在每次 push 后判定\n  - precondition：刚发生一次有效 `push`\n  - state_change：箱子被推入「贴墙角格」（其行进正交两侧均为墙/界的格子）且该格不是目标点时，标记该箱为不可解；不强制失败，玩家可撤销或重置\n  - observable：`deadlock` 事件（含箱子坐标）与画面提示（该箱红色高亮＋「该箱已卡死角」文字提示一次）\n  - invalid_case：箱子落入目标点角格不触发 deadlock；普通贴墙（单侧）不误报\n  - recovery：Z 撤销该步即可解除标记\n- M04 目标覆盖检测\n  - input：每次 push 后系统检测\n  - precondition：发生过一次有效 `push`（或撤销恢复）\n  - state_change：覆盖计数＝位于目标点的箱子数；计数==目标点数 → 过关结算（优先级按 G07）\n  - observable：`cover`/`uncover` 事件、HUD 覆盖计数、`win` 事件\n  - invalid_case：部分覆盖不判胜；箱子被推离目标点产生 `uncover`\n  - recovery：无失败态；覆盖后棋盘冻结\n- M05 守护机器人（玩家角色）移动\n  - input：移动键\n  - precondition：与 M01 同一判定入口\n  - state_change：一格一格移动，不可穿墙、不可穿越箱子；移动逻辑与 M01 同一判定\n  - observable：移动事件与坐标流水\n  - invalid_case：越界/穿墙/穿箱输入拒绝\n  - recovery：同 M01\n- M06 关卡切换\n  - input：过关结算界面（下一关）/ 选关界面\n  - precondition：V01 成立或玩家主动从选关进入\n  - state_change：载入对应静态布局，玩家/箱子/步数/覆盖计数/undo_count 全部按该关初始值重置\n  - observable：`level_loaded` 事件与关卡号显示\n  - invalid_case：非法关卡号请求拒绝\n  - recovery：载入失败重试或返回标题\n\n## 7. 成功、失败与恢复 [V01–V05]\n\n- V01 成功条件：本关全部目标点被箱子覆盖（覆盖计数==目标点数）→ 过关结算，显示已用步数与 undo_count。\n- V02 失败条件：步数预算耗尽且未达成覆盖 → 失败结算（区别于主动重置）；无 HP、无时限；与覆盖同时达成时按 G07 判胜。\n- V03 恢复语义：Z 撤销可回溯到开局（M02）；R 整关重置回到本关初始布局（含 undo_count 清零）；失败结算后可重试本关；一切恢复不需要读档。\n- V04 persistent_state：无（重开全量清空；无跨关解锁、无收集品、无跨关状态）。\n- V05 persistent_state 生命周期：当前动作级状态即时结算；当前局级状态（步数/覆盖/undo_count）局内保留、重开清空；无跨局保留状态。\n- V06 软锁与不可达处理：不设永久软锁——死角仅提示不判负，关键目标均可通过正常操作或 R 重置达成；判定不可达时按 V02 失败语义结算而非无限等待。\n\n## 8. 世界设定与创作基线 [W01–W08]\n\n- W01 世界与时代背景：近未来的小城「暮椿镇」，废弃三十年的老剧院「暮椿剧院」将在明晚重新开幕；镇上唯一能在一夜之间完成整备的，是剧院遗留的仓储整理机器人。\n- W02 场景所在地：暮椿剧院内部——关卡一为主舞台区（幕布与追光）、关卡二为后台仓储区（道具架与缆绳）、关卡三为观众厅（座椅与包厢）。\n- W03 玩家身份与当前任务：玩家操作整理机器人「初幕」；当前任务：在天亮前把全部道具箱推回舞台标记位，让开幕灯光测试可以照常进行。\n- W04 失败代价与结局表达：失败＝天亮前来不及完成整备（步数预算耗尽），开幕被迫推迟；结局表达见 §10 C02——三关完成时剧院重新亮灯，开幕如期举行。\n- W05 叙事来源：道具箱＝剧院历次演出遗留的布景箱（因此数量随区域递增）；目标点＝舞台灯光师用金色标记贴出的存放位；机器人「初幕」＝剧院老机械师退休前留下的整理机。所有角色与物件均原创，不使用任何商业剧院/机器人作品的命名或造型。\n- W06 视觉风格与色彩材质：2D 手绘风格化俯视画面；主色＝暖木色（#C89B6D 系）＋舞台深红（#8E2F3C 系）＋目标金（#F2C14E）；材质以哑光木材、绒面幕布、磨损金属为主；三关通过主题色变体区分（舞台偏红金、后台偏灰木、观众厅偏蓝绒）。\n- W07 环境氛围与声音语言：安静夜间的剧院——常驻低鸣环境声、尘埃光束（F04）；音效语言为「木质滑动声＋机械伺服声＋灯光提示音」，全部音效按 §9 F06 冻结清单交付。\n- W08 故事表达方式：开场视频（C01）交代任务 → 关卡主题变体承载过程叙事 → 结算视频（C02）与结算面板收束；故事只做包装与节奏，不改变任何机制数值。\n\n## 9. 演出、镜头与反馈 [F01–F10]\n\n- F01 视角与镜头：固定正交俯视（90°），整张棋盘在默认窗口（1280×720）内全部可见，无跟随、无平移；镜头边界＝棋盘外接矩形外加 8% 余量。\n- F02 关键操作镜头变化：过关瞬间镜头向该关最后一个被覆盖目标点轻微推近 5%（2 秒内完成并保持到结算）；失败时镜头轻微下沉变暗 0.5 秒；无震动类镜头变化。\n- F03 输入与延迟：见 I07；Z/R 的反馈延迟同 I07 目标。\n- F04 环境常驻效果：舞台区追光光束＋浮尘粒子（低密度，不遮挡格线）；后台区吊缆微摆；观众厅座椅尘埃。常驻效果纯表现层，不参与判定。\n- F05 事件反馈表（事件 → 表现 → 结束条件，全部为冻结需求）：\n\n| 事件 | 画面表现 | 音效 | 结束条件 |\n|---|---|---|---|\n| 推动成功 | 箱体滑动 0.15s＋箱底尘土小粒子 | 木质滑动声（与动画同步起止） | 滑动到位即停 |\n| 目标覆盖 | 目标点金圈点亮 0.3s＋箱子描金边 | 「叮」确认音 | 覆盖状态常亮至变化 |\n| 非法移动 | 机器人原地抖动 0.3s＋目标格红框闪 1 次 | 短促否定音 | 0.3s 结束 |\n| 撤销 | 箱体与机器人反向回放 0.15s | 回摆音（滑动声倒放感） | 回放到位即停 |\n| 重置确认 | 幕布暗转 0.5s | 幕布摩擦声 | 布局重载完成 |\n| 过关 | 全场景灯组亮起＋彩带粒子 | 上扬提示音＋掌声（一次，不循环） | 进入结算即淡出 |\n| 失败 | 灯光转暗＋HUD 变灰 | 低沉提示音 | 进入失败面板即停 |\n| 死角提示 | 该箱红色高亮＋文字标签一次 | 警示音一次 | 提示 2s 后仅保留描边 |\n\n- F06 关键音效清单：木质滑动、确认「叮」、否定音、回摆音、幕布声、胜利音、掌声、失败音、警示音；环境音：剧院低鸣（常驻循环，暂停时静音）；循环音开始/结束：环境低鸣随关卡载入开始、随结算/返回标题淡出 0.5s；无配音需求（对白以文本呈现）。\n- F07 VFX 信息性与遮挡约束：目标点金色圆环与死角红色高亮承担玩法信息（可辨认可解状态）；尘土与彩带粒子只出现在格间空隙，单帧粒子数 ≤ 40，不得遮挡格线与 HUD。\n- F08 音画同步：滑动/回放音与对应动画同帧起止；覆盖确认音在 cover 事件帧触发；胜利音在 win 事件帧触发。\n- F09 屏幕震动：仅过关瞬间 0.2 秒小幅震动；设置界面提供「镜头震动开/关」（关闭不影响判定）。\n- F10 前端界面：标题（开始/设置/退出）→ 选关（三关卡片＋完成标记）→ HUD（关卡号、步数预算剩余/已用、覆盖计数/目标点数、undo_count）→ 过关结算（步数/undo_count/用时/下一关/重开/返回）→ 失败结算（重试本关/返回选关）；关键状态均附图标＋文字（目标点金环＋「目标」标签、死角红框＋「死角」标签），不只靠颜色区分；Esc 暂停面板含继续/重置本关/返回选关/设置；窗口失焦自动暂停（F10 与 I05 一致）。\n\n## 10. 过场视频 [C01–C02]\n\n- C01 开幕整备（Opening，8 秒，1280×720@24fps）\n  - 触发时机：首次由标题进入关卡选择之前，每局一次\n  - 内容与角色场景：暮椿剧院夜景内部灯光次第亮起，机器人「初幕」推动一只道具箱穿过舞台，追光落在金色目标点上\n  - 资产对应：机器人、道具箱、剧院舞台与游戏内模型/贴图同源设计（同一套造型描述生成）\n  - 可跳过：Esc/Enter 跳过 → 直接进入关卡选择；自然播完 → 进入关卡选择\n  - 状态一致：播放期间不推进任何游戏计时；本局从「三关全未完成」状态开始\n- C02 剧院重新亮灯（Ending，10 秒，1280×720@24fps）\n  - 触发时机：第三关过关结算面板出现之前，每局一次\n  - 内容与角色场景：舞台、后台、观众厅三区灯组依次全亮，开幕横幅落下，「初幕」在追光下停在舞台中央鞠躬\n  - 资产对应：机器人、剧院三区与游戏内场景同源\n  - 可跳过：Esc/Enter 跳过 → 直接进入总结算面板；自然播完 → 进入总结算面板\n  - 状态一致：仅在真实达成三关后触发，与真实游戏进度一致\n\n## 11. 范围与正向能力清单 [N01–N06]\n\n- N01 本测例包含的玩法能力：三关静态推箱解谜、推动/覆盖/死角判定、事务性撤销（undo_count 统计）、整关重置、步数预算与失败结算。\n- N02 本测例包含的流程与界面：标题、选关、游玩、过关结算、失败结算、暂停（含失焦自动暂停）、重试与重开。\n- N03 本测例包含的演出能力：开场与结算视频（C01/C02）、§9 F04–F09 的全部事件反馈与音效、舞台三关主题变体。\n- N04 输入范围：键盘（WASD/方向键/Z/R/Esc/Enter）；无触控、手柄、多人需求（表现层可另行扩展，但不进入验收分母）。\n- N05 音频范围：§9 F06 冻结音效清单＋剧院环境音；无配音与背景音乐轨需求（对白以文本呈现）。\n- N06 表现层自由度：§9 未冻结的装饰造型、配色细节与粒子参数为生成自由度，由 L04 承担，不评估为缺失。\n\n## 12. 参考图绑定 [A01]\n\n- 本测例当前无已绑定参考图；规划的参考图（机器人「初幕」、道具箱、剧院舞台场景等）已登记于 `asset_tasks/puzzle_survival_rpg_sports/ref_images_manifest.jsonl`（含完整生成 prompt），作为待补前置依赖管理，正式任务 JSONL 不指向不存在文件。\n\n## 13. 复杂度档案\n\n```yaml\ndifficulty:\n  tier: S\n  complexity_profile: {coupling: C1, persistence: P0, recovery: R1, runtime_complexity: B0, hidden_state: H0}\n  dominant_dimensions: [recovery]\n  rationale: \"单主闭环（观察→规划→执行→检测→过关/重置）；推动仅改变本系统覆盖状态，无跨系统因果链；撤销与重置是唯一恢复路径；新增的日夜演出、视频与 VFX 均为表现层，不改变难度档\"\n  downgrade_boundary: \"删除撤销栈与死角提示后仍为 S（更简）；S 已是本计划下限\"\n  upgrade_boundary: \"若引入跨关保留的道具/规则改写或双箱联动机制（A→B 状态传递），升 M\"\n  stress_axes: []\n```\n\n## 生成任务明确性补充（2026-10-12）\n\n> 本补充只约束游戏生成输入，不引用 rubric。所有生成器必须以本文件规则和下列 JSONL 任务为准；未列出的装饰细节可以自由发挥，但不得省略已列资产或生命周期。\n\n### 故事与流程最低合同\n- **玩家身份与当前冲突**：以 §1、§8 的角色/世界/冲突为唯一叙事入口；开局必须让玩家知道“我是谁、现在要解决什么问题”。\n- **阶段性目标**：必须有可操作的阶段目标、至少一次状态变化/升级，并在 §7 的胜利、失败、重开入口中闭环；不能只生成一个无结果的场景演示。\n- **结果承接**：胜利/失败都要有明确结果文案或演出，并回到可重开、暂停或标题入口；视频、音频和 VFX 不得推进未完成的玩法状态。\n\n### 生成任务清单（JSONL 冻结口径）\n- scene：1 个；必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。\n- object：3 个（text-to-3D 1，image-to-3D 2）；object 任务资产为：sorting_robot, prop_crate, goal_marker。每项只允许一个物体；组合物必须拆成独立任务。\n- motion：1 个；覆盖动作：sort_and_place。\n- video/audio/mechanic/UI：分别为 2/6/1/1 个任务；若某项为 0，只能是本案例明确的 N/A，不得默默遗漏。\n\n### Video / motion / audio 生命周期\n- Video 每项必须写清 `trigger`、`start_condition`、`duration_sec`、`skippable`、`skip_behavior`、`end_condition` 和进入的下一个游戏状态；播放期间不得偷偷消耗计时或改变战斗/任务数值。\n- Motion 每项必须写清 `source_asset`、`trigger`、`start_condition`、`duration_sec`、`loop`、`end_condition` 和 `cancel_behavior`；动作要与对应输入/机制事件绑定，不可只写“walk animation”。\n- Audio 每项必须写清触发事件、时长、`loop`、`stop_condition`、优先级和 ducking；关键命中/提示音必须与事件帧同步，暂停/结算时按 §9 处理。\n\n### Mechanic / UI / 游玩手感\n- Mechanic JSON 与 §1–§7 配对：每个输入都要有 precondition、state_change、feedback、next_state；必须说明失败/禁用分支。\n- UI JSON 与 §9/F10 配对：HUD、菜单、结算、暂停、错误/禁用态要有 state binding；关键状态不能只用颜色表达。\n- 手感冻结：相机跟随/构图、FOV、碰撞/遮挡、镜头调整与镜头震动必须在 §9 说明；震动反馈必须写明触发、强度和持续时间，并提供关闭设置且不改变判定。\n\n### VFX 时机合同\n每个特效必须写清 `trigger event`、预备/前摇、active window、持续时间、结束条件、被打断/取消条件，以及和相机震动、音效、UI 的同步关系；命中特效、失败特效、胜利特效不能只写“有粒子”。\n\n",
+        "general_requirement_sha256": "3da769956ee4769074c0898083cd74f058191028d4c78acde20510d51b7740a0"
+      },
+      "checks": [
+        {
+          "id": "R01",
+          "kind": "audible_content_matches_request",
+          "target": "Quiet empty theater at night, faint hall hum, distant stage rigging creaks, no music",
+          "pass": "Observed sound source/event and sequence semantically match the requested audible content.",
+          "fail": "Opposite meaning, substantially unrelated, incoherent, or unrecognized.",
+          "excluded": [
+            "engine trigger",
+            "runtime synchronization",
+            "unverifiable spatial metadata"
+          ]
+        }
+      ]
+    }
+  },
+  "cg": {},
+  "3d": {
+    "G016_scene_001": {
+      "schema": "generated_per_asset_req.v1",
+      "task_id": "G016_scene_001",
+      "game_id": "G016_theater_sorting",
+      "sources_sha256": "fdd060f6a7f234661030ae8ff484a3d4d435193a92220fa79e10e621c9105285",
+      "policy": {
+        "version": "generated_req.v1",
+        "model": "gpt-6.1-sol",
+        "rubric_source": "full general_requirement.txt and exact priority task JSON prompt; generated without asset evidence",
+        "score_supported": "100 * PASS / (PASS + FAIL); null if denominator is zero",
+        "score_all_lower_bound": "100 * PASS / all_checks; UNVERIFIED is not a confirmed failure",
+        "coverage": "100 * (PASS + FAIL) / all_checks",
+        "comparison": "same frozen rubric across providers; report counts and coverage",
+        "req_vs_fidelity": "requirement checks are separate from DINO image similarity",
+        "static_limit": "metric units, rigging, physics, runtime behavior require additional evidence; do not infer from screenshots"
+      },
+      "dimensions": [
+        {
+          "id": "requirement_compliance",
+          "checks": [
+            {
+              "fail_criterion": "主体明显为室外、非剧院空间，或呈现明显不符的现代剧院设计。",
+              "id": "R01",
+              "pass_criterion": "可辨认为具有复古设计特征的剧院室内空间。",
+              "requirement": "场景身份为复古剧院内部。",
+              "sources": [
+                {
+                  "quote": "Vintage single-screen theater interior",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "室内结构被遮挡或展示不全，无法辨认空间用途与年代风格。"
+            },
+            {
+              "fail_criterion": "场景被拆成互不连贯的拼贴面板、物体陈列，或包含规定禁止的下半部文字区、UI。",
+              "id": "R02",
+              "pass_criterion": "各区域构成一个连贯的整体剧院场景，无文字分区、拼贴面板、物体 lineup 或 UI。",
+              "requirement": "采用连贯的单屏场景构成。",
+              "sources": [
+                {
+                  "quote": "single-screen theater interior",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "必须生成连贯可游玩的空间，不得出现下半部文字、拼贴面板、物体 lineup 或 UI。",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "六视角均未充分展示整体空间关系，无法确认各区域是否连贯。"
+            },
+            {
+              "fail_criterion": "明确呈现由白昼自然光主导的日间环境。",
+              "id": "R03",
+              "pass_criterion": "环境呈现夜间剧院的暗背景与人工照明氛围。",
+              "requirement": "剧院具有夜间环境氛围。",
+              "sources": [
+                {
+                  "quote": "theater interior at night",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "渲染照明覆盖了场景原有光照，或缺少足以区分昼夜的视觉线索。"
+            },
+            {
+              "fail_criterion": "缺少舞台，或舞台上摆放角色、道具箱等占用舞台的对象。",
+              "id": "R04",
+              "pass_criterion": "存在可辨认的舞台，舞台表演区域保持空置。",
+              "requirement": "场景包含空舞台。",
+              "sources": [
+                {
+                  "quote": "empty stage",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "舞台区域被遮挡或未完整露出，无法确认是否空置。"
+            },
+            {
+              "fail_criterion": "舞台缺少幕布，或幕布明确表现为轻薄、透明的帘布。",
+              "id": "R05",
+              "pass_criterion": "舞台具有幕布，布料体量与垂坠形态呈现厚重感。",
+              "requirement": "舞台配有厚重幕布。",
+              "sources": [
+                {
+                  "quote": "stage with heavy red curtains",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "幕布轮廓或布料形态展示不足，无法判断厚重感。"
+            },
+            {
+              "fail_criterion": "充分可见的场景中缺少后台储藏走廊，或仅有无法辨认为储藏通道的普通空间。",
+              "id": "R06",
+              "pass_criterion": "可辨认出具有后台储藏用途的走廊空间。",
+              "requirement": "场景包含可见的后台储藏走廊。",
+              "sources": [
+                {
+                  "quote": "backstage storage corridor",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "疑似后台区域被遮挡，无法判断其走廊结构或储藏用途。"
+            },
+            {
+              "fail_criterion": "充分可见的观众区域没有座椅，或座椅无法体现观众厅用途。",
+              "id": "R07",
+              "pass_criterion": "可见属于剧院观众厅的座椅区域。",
+              "requirement": "场景包含可见的观众厅座椅。",
+              "sources": [
+                {
+                  "quote": "auditorium seats visible",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "观众区域未露出或被遮挡，无法确认座椅是否存在。"
+            },
+            {
+              "fail_criterion": "仅有均匀环境照明，或主追光明确呈现生硬、锐利的照明效果。",
+              "id": "R08",
+              "pass_criterion": "可见局部聚焦的追光照明，并具有柔和的明暗过渡。",
+              "requirement": "场景使用柔和追光。",
+              "sources": [
+                {
+                  "quote": "visible in soft spotlight",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "固定渲染未保留场景灯光，或无法辨认光照分布与柔和程度。"
+            },
+            {
+              "fail_criterion": "缺少暖木色或舞台红的主要配色，或幕布明确呈现非红色。",
+              "id": "R09",
+              "pass_criterion": "暖木色与舞台红构成主要配色，舞台幕布呈红色；允许局部辅助色。",
+              "requirement": "采用暖木色与舞台红配色，并使用红色幕布。",
+              "sources": [
+                {
+                  "quote": "warm wood and stage-red palette",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "heavy red curtains",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "暖木色（#C89B6D 系）＋舞台深红（#8E2F3C 系）",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "材质未显示，或照明、曝光、色偏使主要颜色无法可靠辨认。"
+            },
+            {
+              "fail_criterion": "木质部分明确表现为镜面、高亮塑料或金属质感，缺乏哑光木材表现。",
+              "id": "R10",
+              "pass_criterion": "可辨认的木质部分具有木材质感，表面以哑光表现为主。",
+              "requirement": "木质部分采用哑光木材表现。",
+              "sources": [
+                {
+                  "quote": "材质以哑光木材、绒面幕布、磨损金属为主",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "木质表面分辨率、光照或可见范围不足，无法判断材质与光泽。"
+            },
+            {
+              "fail_criterion": "幕布明确呈现塑料、金属、透明薄纱等不符绒面的材质。",
+              "id": "R11",
+              "pass_criterion": "幕布具有柔软织物及绒面质感。",
+              "requirement": "幕布采用绒面材质表现。",
+              "sources": [
+                {
+                  "quote": "绒面幕布",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "幕布表面细节或照明不足，无法区分绒面与其他布料材质。"
+            },
+            {
+              "fail_criterion": "整体明确采用照片写实或其他缺乏手绘表现的视觉风格。",
+              "id": "R12",
+              "pass_criterion": "场景整体具有风格化造型与手绘式色彩、纹理或明暗处理。",
+              "requirement": "采用风格化手绘视觉风格。",
+              "sources": [
+                {
+                  "quote": "stylized hand-painted",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "仅展示无法辨认绘制风格的几何或无材质视图。"
+            }
+          ]
+        }
+      ],
+      "deferred_requirements": [
+        {
+          "reason": "静态六视角无法证明资源可导入引擎并正常用于游戏，需要文件检查与运行验证。",
+          "requirement": "场景达到游戏可用要求，并适配指定运行引擎。",
+          "sources": [
+            {
+              "quote": "game-ready 3D scene",
+              "source": "task_prompt"
+            },
+            {
+              "quote": "运行引擎：**Three.js（WebGL）**",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "文件格式需检查实际交付文件，渲染图无法证明。",
+          "requirement": "交付格式为 glb。",
+          "sources": [
+            {
+              "quote": "\"output_format\": \"glb\"",
+              "source": "task_json"
+            }
+          ]
+        },
+        {
+          "reason": "纹理尺寸需检查纹理资源或文件元数据，不能依据渲染清晰度推定。",
+          "requirement": "满足 texture_size 为 2048 的任务设置。",
+          "sources": [
+            {
+              "quote": "\"texture_size\": 2048",
+              "source": "task_json"
+            }
+          ]
+        },
+        {
+          "reason": "主题背景、视频参考及判定格的职责分配属于场景集成与运行逻辑，静态图无法验证；不据此要求本场景生成判定棋盘。",
+          "requirement": "场景仅用于主题背景与视频参考，不承载判定格。",
+          "sources": [
+            {
+              "quote": "此场景仅作主题背景与视频参考，不承载判定格",
+              "source": "task_json"
+            }
+          ]
+        },
+        {
+          "reason": "六视角只能展示设计外观，无法证明创作来源及原创性，需要来源记录等额外证据。",
+          "requirement": "剧院场景及美术设计须原创。",
+          "sources": [
+            {
+              "quote": "本作全部名称、角色、场景、文案与美术必须原创",
+              "source": "general_requirement"
+            }
+          ]
+        }
+      ],
+      "conflicts": []
+    },
+    "G016_theater_sorting_obj_003": {
+      "schema": "generated_per_asset_req.v1",
+      "task_id": "G016_theater_sorting_obj_003",
+      "game_id": "G016_theater_sorting",
+      "sources_sha256": "1d64d1d9428e13dd3b009a71bf8ee239cbc8b2d1cc3075ac3d197e46807de70f",
+      "policy": {
+        "version": "generated_req.v1",
+        "model": "gpt-6.1-sol",
+        "rubric_source": "full general_requirement.txt and exact priority task JSON prompt; generated without asset evidence",
+        "score_supported": "100 * PASS / (PASS + FAIL); null if denominator is zero",
+        "score_all_lower_bound": "100 * PASS / all_checks; UNVERIFIED is not a confirmed failure",
+        "coverage": "100 * (PASS + FAIL) / all_checks",
+        "comparison": "same frozen rubric across providers; report counts and coverage",
+        "req_vs_fidelity": "requirement checks are separate from DINO image similarity",
+        "static_limit": "metric units, rigging, physics, runtime behavior require additional evidence; do not infer from screenshots"
+      },
+      "dimensions": [
+        {
+          "id": "requirement_compliance",
+          "checks": [
+            {
+              "fail_criterion": "主体缺少圆环，或呈现为无法辨认为环形目标标记的其他形体。",
+              "id": "R01",
+              "pass_criterion": "能够辨认出作为目标标记主体的圆环结构。",
+              "requirement": "目标点标记以圆环为主体。",
+              "sources": [
+                {
+                  "quote": "floor inlay marker ring",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "目标点以「金色圆环＋『目标』文字标签」标识",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "主体受到遮挡或裁切，无法判断是否具有圆环结构。"
+            },
+            {
+              "fail_criterion": "圆环呈竖立标牌、高柱或其他明显不符合扁平地面嵌饰的形态。",
+              "id": "R02",
+              "pass_criterion": "圆环在侧视中呈扁平、低矮的地面嵌饰形态。",
+              "requirement": "圆环采用扁平的地面嵌饰结构。",
+              "sources": [
+                {
+                  "quote": "Flat brass floor inlay marker ring",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "侧面轮廓不可辨，无法判断圆环的扁平形态。"
+            },
+            {
+              "fail_criterion": "圆环明显呈现木材、塑料等其他材质，或缺少黄铜应有的金色金属观感。",
+              "id": "R03",
+              "pass_criterion": "圆环具有可辨识的黄铜色泽与金属质感，允许通过手绘方式表现。",
+              "requirement": "圆环呈现黄铜材质的金色金属观感。",
+              "sources": [
+                {
+                  "quote": "brass",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "金色圆环",
+                  "source": "general_requirement"
+                }
+              ],
+              "unverified_criterion": "光照、曝光或遮挡使圆环的颜色和材质无法辨识。"
+            },
+            {
+              "fail_criterion": "只有空心圆环或灯具外壳，没有可辨认的圆盘。",
+              "id": "R04",
+              "pass_criterion": "标记中能够辨认出圆盘形的实体或表面区域。",
+              "requirement": "标记包含圆盘构件。",
+              "sources": [
+                {
+                  "quote": "with a glowing warm-gold disc",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "圆盘可能所在的区域被遮挡，无法确认其存在。"
+            },
+            {
+              "fail_criterion": "圆盘明显呈冷色或其他非暖金色。",
+              "id": "R05",
+              "pass_criterion": "圆盘可见表面的主色呈暖金色。",
+              "requirement": "圆盘呈暖金色。",
+              "sources": [
+                {
+                  "quote": "warm-gold disc",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "圆盘不可见，或光照与曝光使其本色无法判断。"
+            },
+            {
+              "fail_criterion": "圆盘清晰可见，但仅呈普通受光表面，没有发光观感。",
+              "id": "R06",
+              "pass_criterion": "圆盘呈现可辨认的发光效果；不限定通过材质还是手绘实现。",
+              "requirement": "圆盘具有发光观感。",
+              "sources": [
+                {
+                  "quote": "glowing warm-gold disc",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "曝光或外部照明使圆盘自身的发光表现无法辨别。"
+            },
+            {
+              "fail_criterion": "各视角均只见圆环和圆盘，缺少可辨认的灯具外壳。",
+              "id": "R07",
+              "pass_criterion": "能够辨认出舞台灯具的罩壳或机壳结构，不要求未指定的具体灯型。",
+              "requirement": "标记包含舞台灯具外壳。",
+              "sources": [
+                {
+                  "quote": "stage-light housing",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "相关结构受到遮挡，无法判断其是否为灯具外壳。"
+            },
+            {
+              "fail_criterion": "整体明显采用写实摄影式表面表现，缺少手绘风格化特征。",
+              "id": "R08",
+              "pass_criterion": "色块、明暗或材质表达具有手绘风格化观感，不要求细密笔触。",
+              "requirement": "资产采用手绘风格化表现。",
+              "sources": [
+                {
+                  "quote": "stylized hand-painted",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "表面显示不足或渲染分辨率不足，无法辨别绘制风格。"
+            },
+            {
+              "fail_criterion": "主要表面呈连续圆滑的高细分外观，缺少要求的平直分面特征。",
+              "id": "R09",
+              "pass_criterion": "主要形体以简化的平面和明确转折表现出低多边形风格。",
+              "requirement": "外观采用平直分面的低多边形风格。",
+              "sources": [
+                {
+                  "quote": "low-poly style",
+                  "source": "task_prompt"
+                },
+                {
+                  "quote": "flat faceted surfaces",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "光照或显示尺度掩盖表面转折，无法判断是否具有平直分面。"
+            },
+            {
+              "fail_criterion": "杂乱的细碎突出物或混乱构形破坏主体轮廓，使标记形态难以辨认。",
+              "id": "R10",
+              "pass_criterion": "各可见方向的外轮廓简洁、清晰，主体形态容易辨认。",
+              "requirement": "资产具有清晰简洁的轮廓。",
+              "sources": [
+                {
+                  "quote": "clean silhouette",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "裁切、遮挡或背景混同使外轮廓无法辨读。"
+            },
+            {
+              "fail_criterion": "表面存在明确的细密刻纹、密集微小纹理或其他精细表面装饰。",
+              "id": "R11",
+              "pass_criterion": "表面保持简化，没有精细表面细节；大块手绘明暗与低多边形分面不视为违规。",
+              "requirement": "表面不添加精细细节。",
+              "sources": [
+                {
+                  "quote": "no fine surface detail",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "表面显示尺度或清晰度不足，无法判断是否存在精细细节。"
+            },
+            {
+              "fail_criterion": "呈现多个独立目标标记，或附带独立的机器人、箱子、场景等其他资产。",
+              "id": "R12",
+              "pass_criterion": "只呈现一个目标点标记，圆环、圆盘和灯具外壳作为该标记的组成部分。",
+              "requirement": "本任务仅呈现一个完整目标点标记物体。",
+              "sources": [
+                {
+                  "quote": "每项只允许一个物体；组合物必须拆成独立任务。",
+                  "source": "general_requirement"
+                },
+                {
+                  "quote": "Flat brass floor inlay marker ring with a glowing warm-gold disc and stage-light housing",
+                  "source": "task_prompt"
+                }
+              ],
+              "unverified_criterion": "遮挡或裁切使物体数量及各部件的归属无法判断；不从图像推断网格对象数量。"
+            }
+          ]
+        }
+      ],
+      "deferred_requirements": [
+        {
+          "reason": "固定六视角只能评价低多边形外观，不能证明实际三角面数量或是否完成面数最小化；需检查网格数据。",
+          "requirement": "实际三角面数量应遵循最小化要求。",
+          "sources": [
+            {
+              "quote": "minimal triangle count",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "静态外观不能证明纹理与材质确实采用PBR流程；需检查材质配置和纹理资源。",
+          "requirement": "资产使用PBR纹理。",
+          "sources": [
+            {
+              "quote": "PBR textures",
+              "source": "task_prompt"
+            }
+          ]
+        },
+        {
+          "reason": "游戏可用性及引擎兼容性需要导入和运行验证，不能由六视角静态渲染证明。",
+          "requirement": "资产达到游戏可用状态，并适用于规定的Three.js运行环境。",
+          "sources": [
+            {
+              "quote": "game-ready",
+              "source": "task_prompt"
+            },
+            {
+              "quote": "Three.js（WebGL）",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "六视角图像不能证明设计来源或原创性，需要图外的创作来源信息。",
+          "requirement": "资产设计原创，不使用商业作品的命名或造型。",
+          "sources": [
+            {
+              "quote": "original design",
+              "source": "task_prompt"
+            },
+            {
+              "quote": "所有角色与物件均原创，不使用任何商业剧院/机器人作品的命名或造型。",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "该要求针对游戏中的目标点识别与界面呈现，可由UI层提供文字。原文没有明确要求将文字制作在本模型上，资产六视角不能确认运行时标签。",
+          "requirement": "游戏中的目标点配有「目标」文字标签。",
+          "sources": [
+            {
+              "quote": "目标点以「金色圆环＋『目标』文字标签」标识",
+              "source": "general_requirement"
+            },
+            {
+              "quote": "目标点金环＋「目标」标签",
+              "source": "general_requirement"
+            }
+          ]
+        },
+        {
+          "reason": "需要触发覆盖事件并观察时间和状态变化；固定静态渲染只能检查发光外观，不能验证事件绑定、持续时间或状态保持。",
+          "requirement": "目标覆盖时金圈点亮0.3秒，覆盖亮起状态保持至状态变化。",
+          "sources": [
+            {
+              "quote": "目标点金圈点亮 0.3s",
+              "source": "general_requirement"
+            },
+            {
+              "quote": "覆盖状态常亮至变化",
+              "source": "general_requirement"
+            }
+          ]
+        }
+      ],
+      "conflicts": []
+    }
   }
 }
