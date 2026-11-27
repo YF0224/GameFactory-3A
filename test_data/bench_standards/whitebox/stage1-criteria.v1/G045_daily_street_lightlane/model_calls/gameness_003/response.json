@@ -1,0 +1,580 @@
+{
+  "revision": "outcome_frame_v1",
+  "summary": "依据 requirement.txt 与所列 CHECKS 冻结全部条目，未使用候选交付、运行证据或历史判定；本对象不报告得分或实现情况。各 id 保留原 layout、guidance、feedback 分组及含义，所有模型及后续模型适用同一目标。三档非累加：10% 为真实实现已接入玩法，源码可核查原需求参数；50% 为实际触发且基本反馈、界面或引导有效，核心对象与信息正确、无已知基本功能错误，但预期沟通效果尚未充分建立；100% 为真实原生结果画面及最少必要上下文足以让玩家辨认结果或下一步。单幅清晰画面即可，只有真实歧义、瞬态或因果关系需要补充上下文。精确时间、空间运动、数值公式、动画曲线及穷举分支边界在50%和100%均仅作诊断，不要求像素复刻。未覆盖属于未知；拒绝须有操作被处理并明确拒绝的证据，画面不变不足以证明。装饰动画或成功文字不能替代对应真实效果，不继承 Mechanic 判定。无冻结表现项的条目保留其明确排除含义，不新增验收条件。",
+  "diagnostic_only_categories": [
+    "exact_timing",
+    "exact_space_motion",
+    "exact_numeric_formula",
+    "exhaustive_branches_boundaries"
+  ],
+  "checks": {
+    "game.layout.hierarchy": {
+      "visible_goal": "玩家能从界面中区分当前目标、主要状态与辅助信息。",
+      "result_frame_description": "真实游戏界面中，当前目标和主要状态具有清楚的视觉主次，辅助提示不会淹没它们。",
+      "correct_target_and_information": "层级对应街区生活中的目标、资源和状态，次要说明与主要行动信息可区分。",
+      "necessary_context": "进入正常游戏界面的清晰画面即可。",
+      "representative_basic_function": "玩家能在HUD中辨认当前目标及相关主要状态。",
+      "basic_function_bugs": [
+        "主要目标被次要信息遮蔽而无法辨认",
+        "界面缺乏可辨的主次关系，无法找到主要状态"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "实际UI信息层级清楚，主要状态与次要信息可区分。"
+    },
+    "game.layout.readable": {
+      "visible_goal": "玩家能读清真实游戏界面的关键文字和控件。",
+      "result_frame_description": "界面中的状态、提示和操作文字清楚可辨，没有妨碍理解的遮挡或重叠。",
+      "correct_target_and_information": "可读对象是玩家当前使用的HUD或面板中的必要信息。",
+      "necessary_context": "真实界面的清晰完整画面即可。",
+      "representative_basic_function": "玩家能读懂当前界面的关键提示并辨认相应控件。",
+      "basic_function_bugs": [
+        "关键文字与背景无法区分",
+        "关键提示被裁切或重叠到无法理解",
+        "必要操作控件不可辨认"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。"
+    },
+    "game.guidance.controls": {
+      "visible_goal": "游戏画面清楚说明玩家进行街区活动所需的操作方法。",
+      "result_frame_description": "入场说明或情境提示把必要按键与移动、观察、交互等动作清楚对应。",
+      "correct_target_and_information": "说明针对当前可用的键鼠操作，交互提示明确指向相应动作。",
+      "necessary_context": "显示操作说明或真实交互提示的画面即可。",
+      "representative_basic_function": "玩家能从画面知道如何移动及如何与当前对象交互。",
+      "basic_function_bugs": [
+        "必要操作没有可发现的说明",
+        "按键说明对应错误动作",
+        "操作文字被遮挡到无法理解"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "实际游戏展示或清楚传达必要操作方法。"
+    },
+    "expanded.G.s0007": {
+      "visible_goal": "街区光照能传达昼夜氛围，夜间道路仍可辨认。",
+      "result_frame_description": "街区呈现可识别的时段光照，夜景中的道路和可行走方向清楚可见。",
+      "correct_target_and_information": "光照作用于真实街区道路与场景，而非仅有时段文字或独立装饰画。",
+      "necessary_context": "夜间街区画面为主要结果；仅在时段变化含义不清时补充其他时段画面。",
+      "representative_basic_function": "玩家能在夜景中辨认道路并理解当前环境处于夜间。",
+      "basic_function_bugs": [
+        "夜间道路黑到无法辨认",
+        "时段标签与场景光照含义明显矛盾"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "- P06 白天/黄昏/夜间光照变化，夜间道路可见"
+    },
+    "expanded.G.s0011": {
+      "visible_goal": "HUD让玩家理解当前街区生活状况与行动目标。",
+      "result_frame_description": "游戏画面中的HUD清楚组织日期时间、现金、租金、小地图、目标、生活状态、交互提示和注意度等信息。",
+      "correct_target_and_information": "信息属于当前玩家与当前街区情境，已付租金和未付租金的含义可辨。",
+      "necessary_context": "正常游玩且相关HUD可见的画面即可。",
+      "representative_basic_function": "玩家能从HUD读出自身资源、生活状况及当前行动指向。",
+      "basic_function_bugs": [
+        "现金与已付租金混淆",
+        "HUD主要信息无法辨认",
+        "提示明显指向错误角色或对象"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "- U01 HUD：日期时间、现金、已付/未付租金、小地图、当前目标、生活状态、附近交互提示、注意度"
+    },
+    "expanded.G.s0012": {
+      "visible_goal": "生活状态偏低时，玩家能看出需要关注的具体状态。",
+      "result_frame_description": "低状态在HUD或相关提示中被突出显示，玩家可辨认是哪项生活需要出现问题。",
+      "correct_target_and_information": "突出提醒对应实际偏低的生活状态，而非无关资源或其他角色。",
+      "necessary_context": "低状态及对应提醒同屏即可。",
+      "representative_basic_function": "玩家能通过突出提示辨认当前需要照顾的生活状态。",
+      "basic_function_bugs": [
+        "提醒标错生活状态",
+        "低状态与正常状态视觉上无法区分",
+        "警告文字不可读"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "低状态突出提醒。"
+    },
+    "expanded.G.s0013": {
+      "visible_goal": "界面准确表达玩家当前可观察的游戏状态。",
+      "result_frame_description": "状态面板、背包或地图所显示的对象和状态，与同一情境中可见的游戏结果相符。",
+      "correct_target_and_information": "核对对象为当前玩家的物品、任务、资源或已发现地点，核心状态含义一致。",
+      "necessary_context": "状态与其对应结果同屏即可；若不能同屏，只补充关联的结果画面。",
+      "representative_basic_function": "玩家能从界面正确辨认当前物品或任务状态。",
+      "basic_function_bugs": [
+        "已交出的物品仍显示为持有",
+        "未完成事项显示为完成",
+        "界面关联了错误对象"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "UI 显示与真实状态一致。"
+    },
+    "expanded.G.s0014": {
+      "visible_goal": "界面在适配后的视口中仍保持关键内容可读、操作入口可见。",
+      "result_frame_description": "适配后的游戏画面中，HUD和当前面板没有把必要文字或按钮裁出可用区域。",
+      "correct_target_and_information": "适配对象是实际游戏界面的关键信息与控件。",
+      "necessary_context": "适配后视口的完整原生画面即可；存在裁切歧义时补充相应界面。",
+      "representative_basic_function": "玩家能在适配后的界面读懂提示并找到必要按钮。",
+      "basic_function_bugs": [
+        "关键按钮被裁切而无法使用",
+        "主要文字重叠到无法理解",
+        "面板遮住必要操作入口"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "UI 适配 1920×1080 与 1280×720（冻结口径）"
+    },
+    "expanded.G.s0003": {
+      "visible_goal": "日期时间显示让玩家理解街区生活正在推进，并能辨认新日的清晨状态。",
+      "result_frame_description": "HUD呈现可理解的游戏日期与时钟，新日画面显示清晨生活情境。",
+      "correct_target_and_information": "时钟表示游戏内日期时间，与所显示的日程情境相符。",
+      "necessary_context": "新日画面可独立说明清晨状态；需要说明时钟推进时补充前后时钟画面。",
+      "representative_basic_function": "玩家能读懂当前游戏日期和时段。",
+      "basic_function_bugs": [
+        "日期时间显示无法理解",
+        "新日显示与清晨情境明显矛盾",
+        "时钟显示无效内容"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "- L01 基准 1 真实秒＝1 游戏分钟。新日 08:00 开始"
+    },
+    "expanded.G.s0004": {
+      "visible_goal": "玩家能理解角色因疲劳被送回家，并已在家中迎来清晨。",
+      "result_frame_description": "结果画面显示角色位于家中，伴有疲劳返家说明及清晨状态。",
+      "correct_target_and_information": "说明针对当前玩家的疲劳返家，地点与日期时段显示应与返家结果相符。",
+      "necessary_context": "返家结果与原因同屏即可；原因不在结果中时，仅补充疲劳返家提示画面。",
+      "representative_basic_function": "玩家能从结果画面理解自己为何回家以及接下来可继续生活。",
+      "basic_function_bugs": [
+        "声称返家但角色仍在原处",
+        "返家说明指向错误原因或角色",
+        "日期与清晨结果明显矛盾"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "24:00 提示回家，02:00 触发疲劳送回家并跳至当日 08:00（第 N 日 02:00→第 N 日 08:00，不再额外＋1 日）。每天只触发一次该事件。"
+    },
+    "expanded.G.s0016": {
+      "visible_goal": "重新进入后，玩家能认出此前保存的生活进度已恢复。",
+      "result_frame_description": "恢复后的游戏画面呈现与保存情境相符的角色位置和主要进度信息。",
+      "correct_target_and_information": "恢复内容属于此前保存的同一局玩家状态。",
+      "necessary_context": "保存前与恢复后的相关画面仅用于建立同一进度的对应关系。",
+      "representative_basic_function": "玩家能在恢复画面中认出已保存的资源或任务进度。",
+      "basic_function_bugs": [
+        "恢复成无关旧局",
+        "主要进度被清空却显示恢复成功",
+        "恢复后界面与场景状态明显矛盾"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "- S04 刷新恢复一致状态"
+    },
+    "expanded.G.s0017": {
+      "visible_goal": "存档无法使用时，界面明确解释问题并提供可理解的恢复选择。",
+      "result_frame_description": "存档错误或不兼容提示中显示恢复选项，玩家能理解可采取的下一步。",
+      "correct_target_and_information": "提示针对当前无法使用的存档，恢复与新开局的含义可区分。",
+      "necessary_context": "实际读档受阻后出现的错误与恢复界面即可。",
+      "representative_basic_function": "玩家能从存档问题提示中找到明确的恢复入口。",
+      "basic_function_bugs": [
+        "存档出错后静默清空进度",
+        "错误提示没有可理解的恢复入口",
+        "恢复选项含义与实际结果相反"
+      ],
+      "permitted_trigger_modes": ["automatic", "input", "rejection"],
+      "original_requirement_diagnostic_only": "存档带版本号，损坏/不兼容提示恢复选项，不静默清空。正常新开局重置局内数据，不串入旧局。"
+    },
+    "expanded.G.s0005": {
+      "visible_goal": "邻里事件处理界面让玩家看懂可选择的补救方式。",
+      "result_frame_description": "真实事件的处理面板展示解释、道歉或清理、赔偿或劳动等具有明确行动含义的选择。",
+      "correct_target_and_information": "选项对应当前邻里事件及其受影响对象。",
+      "necessary_context": "包含事件对象或事件说明的处理面板即可。",
+      "representative_basic_function": "玩家能在事件面板中辨认处理方式并选择补救行动。",
+      "basic_function_bugs": [
+        "选项没有可理解的处理含义",
+        "面板对应错误事件",
+        "必要选项控件不可使用"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "- A07 处理选项至少包括解释、道歉/清理、赔偿或劳动"
+    },
+    "expanded.G.s0006": {
+      "visible_goal": "处理邻里事件后，玩家能看出该事件的实际状态发生变化。",
+      "result_frame_description": "被处理的事件呈现可辨认的解决或补救进展，如现场恢复或事件条目状态更新。",
+      "correct_target_and_information": "变化属于玩家刚处理的事件，结果与所选处理含义一致。",
+      "necessary_context": "结果已明确关联处理对象时无需补帧；否则补充处理选择或事前状态。",
+      "representative_basic_function": "玩家能看到所选处理使当前事件进入新的可辨认状态。",
+      "basic_function_bugs": [
+        "仅显示成功文字而对应事件无实际变化",
+        "变化发生在错误事件上",
+        "处理结果与选项含义相反"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "其结果改变事件状态，避免只有文字提示。"
+    },
+    "expanded.G.s0024": {
+      "visible_goal": "角色真实移动时，姿态能让玩家辨认正在步行或跑步。",
+      "result_frame_description": "街区中的玩家角色呈现与当前移动方式相符的行走或奔跑姿态。",
+      "correct_target_and_information": "可视表现属于正在移动的玩家角色，而非无关角色或静态示意。",
+      "necessary_context": "清楚的移动姿态画面即可；姿态含义有歧义时补充相邻动作画面，不评价音频。",
+      "representative_basic_function": "玩家能从角色动作辨认当前移动状态。",
+      "basic_function_bugs": [
+        "角色移动时保持明显无关的静态姿势",
+        "步行与跑步表现语义明显颠倒",
+        "动画作用于错误角色"
+      ],
+      "permitted_trigger_modes": ["held", "input"],
+      "original_requirement_diagnostic_only": "事件【移动/跑步】实际发生时可视表现为【步行/跑步动画＋脚步节奏】，结束条件【移动停止】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0025": {
+      "visible_goal": "骑行反馈让玩家理解角色已上车并可找到车铃操作。",
+      "result_frame_description": "玩家角色与自行车呈现明确的骑乘关系，骑行情境中可见车铃提示钮。",
+      "correct_target_and_information": "骑乘及车铃提示针对玩家当前使用的自行车。",
+      "necessary_context": "骑乘结果与车铃提示清晰同屏即可；上车关系不清时补充过渡画面，不评价音频。",
+      "representative_basic_function": "玩家能辨认已进入骑行状态并知道车铃操作入口。",
+      "basic_function_bugs": [
+        "显示骑行提示但角色没有实际骑乘",
+        "车铃提示指向错误载具",
+        "车铃控件不可辨认或不可用"
+      ],
+      "permitted_trigger_modes": ["input"],
+      "original_requirement_diagnostic_only": "事件【骑行】实际发生时可视表现为【上车过渡＋车铃提示钮】，结束条件【下车或按铃】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0026": {
+      "visible_goal": "购物结账的画面让玩家理解购买的物品已收入背包。",
+      "result_frame_description": "收银情境中的金币与物品入包表现，清楚关联到已购买物品的背包结果。",
+      "correct_target_and_information": "表现针对本次购买的商品和玩家背包。",
+      "necessary_context": "结果已显示商品入包时无需补帧；否则补充结账表现及对应背包结果，不评价音频。",
+      "representative_basic_function": "玩家能从结账反馈辨认购买完成及所得物品。",
+      "basic_function_bugs": [
+        "只有金币装饰动画却未获得商品",
+        "入包物品与购买对象不符",
+        "购买失败却显示结账成功"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "事件【购物结账】实际发生时可视表现为【收银台金币滚动＋物品入包】，结束条件【动画收束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0027": {
+      "visible_goal": "门的可视开合让玩家理解角色正在通过相应建筑入口。",
+      "result_frame_description": "玩家使用的建筑入口呈现可辨认的门开启或关闭状态。",
+      "correct_target_and_information": "发生变化的是本次进出所用的门。",
+      "necessary_context": "入口与门状态清楚的画面即可；开合变化不明时补充关联画面，不评价音频。",
+      "representative_basic_function": "玩家能看到当前入口的门对进出行为作出可辨反应。",
+      "basic_function_bugs": [
+        "门的表现发生在错误入口",
+        "提示门已打开但对应门仍明显封闭",
+        "门表现与进出结果明显矛盾"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "事件【开关门/进出建筑】实际发生时可视表现为【门开合动画】，结束条件【门闭合】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0028": {
+      "visible_goal": "物品转移的画面让玩家理解拾取或交付的去向。",
+      "result_frame_description": "被操作物品呈现入包或交出的可辨转移表现，并与对应接收结果相符。",
+      "correct_target_and_information": "转移对象是本次拾取或交付的物品，接收方为玩家背包或指定交付对象。",
+      "necessary_context": "转移方向及结果清楚时无需补帧；否则补充对应背包或接收结果，不评价音频。",
+      "representative_basic_function": "玩家能辨认被操作物品已转交给正确接收方。",
+      "basic_function_bugs": [
+        "物品动画指向错误接收方",
+        "只有飞行动画而物品没有实际转移",
+        "转移了错误物品"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "事件【拾取/交付】实际发生时可视表现为【物品飞入背包/交出弧线】，结束条件【动画收束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0029": {
+      "visible_goal": "任务完成反馈让玩家明确知道完成的是哪项任务。",
+      "result_frame_description": "已完成任务的任务卡显示完成标记，相关日志条目得到可辨强调。",
+      "correct_target_and_information": "完成标记与日志强调对应刚完成的同一任务。",
+      "necessary_context": "完成任务名称和标记清楚的画面即可；对应关系不清时补充相关日志画面，不评价音频。",
+      "representative_basic_function": "玩家能从任务卡和日志辨认本次任务完成。",
+      "basic_function_bugs": [
+        "未完成任务被标记为完成",
+        "任务卡与日志指向不同任务",
+        "完成标记无法辨认"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "事件【任务完成】实际发生时可视表现为【任务卡打勾＋日志条目高亮】，结束条件【卡片定格】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0030": {
+      "visible_goal": "注意度升级的画面让玩家理解邻里已对自己的行为产生警觉。",
+      "result_frame_description": "HUD注意度呈现升级的视觉信号，相关目击者带有可辨的感叹标记。",
+      "correct_target_and_information": "警觉信号对应当前玩家引发的事件及其目击者。",
+      "necessary_context": "HUD与目击者同屏即可；关联不清时补充对应事件画面，不评价音频。",
+      "representative_basic_function": "玩家能辨认注意度已升高以及谁在关注自己。",
+      "basic_function_bugs": [
+        "警觉标记落在无关对象上",
+        "升级表现反而传达警觉降低",
+        "HUD警觉信号不可辨认"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "事件【注意度升级】实际发生时可视表现为【HUD 注意度色阶变化＋目击者感叹标记】，结束条件【等级回落或处理完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0031": {
+      "visible_goal": "处理选项的确认反馈让玩家理解自己的补救选择已被接受。",
+      "result_frame_description": "处理面板显示与所选补救行动对应的确认反馈。",
+      "correct_target_and_information": "反馈明确对应当前事件和玩家刚选择的处理方式。",
+      "necessary_context": "确认内容能识别选择时单幅即可；否则补充所选选项画面，不评价音频。",
+      "representative_basic_function": "玩家能看出补救选择已被确认。",
+      "basic_function_bugs": [
+        "确认了与所选项不同的行动",
+        "拒绝处理却显示已接受",
+        "面板反馈无法关联当前事件"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "事件【处理补救】实际发生时可视表现为【处理选项面板确认反馈】，结束条件【面板关闭】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0032": {
+      "visible_goal": "睡觉日结反馈让玩家理解旧日结束并已进入新日清晨。",
+      "result_frame_description": "日期横幅与晨光场景清楚传达睡眠后的新日结果。",
+      "correct_target_and_information": "横幅日期、HUD日期与玩家醒来的清晨情境相符。",
+      "necessary_context": "新日结果已明确标注睡眠日结时单幅即可；否则补充睡觉入口或日结过渡画面，不评价音频。",
+      "representative_basic_function": "玩家能从日结结果辨认已进入新的一天。",
+      "basic_function_bugs": [
+        "日期横幅与HUD日期矛盾",
+        "仅播放日结装饰却未进入新日",
+        "晨起结果被错误描述为旧日未结束"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "事件【睡觉日结】实际发生时可视表现为【屏幕渐暗→日期横幅→晨光亮起】，结束条件【进入次日 08:00】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0033": {
+      "visible_goal": "房租结算画面让玩家理解本次居住结算的真实结果。",
+      "result_frame_description": "结算面板说明房租处理结果，并以钥匙与明亮夜灯或搬家纸箱等对应意象表达居住去向。",
+      "correct_target_and_information": "结果指向当前玩家的房租与续约状态，续约和未续约的表达不得颠倒。",
+      "necessary_context": "面板与对应意象清楚时单幅即可；分开展示时仅补充关联的结局画面，不评价音频。",
+      "representative_basic_function": "玩家能从房租结算辨认当前居住结果。",
+      "basic_function_bugs": [
+        "续约与未续约意象颠倒",
+        "结算面板与实际租金状态矛盾",
+        "结算对象或结果文字不可理解"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "事件【房租结算】实际发生时可视表现为【结算面板＋对应 VC04 意象】，结束条件【面板定格】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0043": {
+      "visible_goal": "前端界面让玩家辨认当前页面的用途并找到相应操作入口。",
+      "result_frame_description": "当前标题、游戏HUD、功能面板或结算页面具有清楚的内容组织和可辨的操作入口。",
+      "correct_target_and_information": "页面内容与标题、游玩、背包地图日志、暂停或结算的当前用途相符。",
+      "necessary_context": "当前真实页面的完整画面即可；仅在页面用途不清时补充其入口画面。",
+      "representative_basic_function": "玩家能在当前页面找到与页面用途相符的主要操作。",
+      "basic_function_bugs": [
+        "页面用途与内容明显不符",
+        "主要操作入口被遮挡而不可用",
+        "页面之间缺乏可理解的返回或继续入口"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "- F10 前端界面：标题（开始/继续/设置/退出）→ HUD（U01 全项）→ 背包/地图/日志面板 → 暂停面板（继续/存档/设置/返回）→ 日结/房租结算面板（U02/U03）"
+    },
+    "expanded.G.s0044": {
+      "visible_goal": "关键状态通过图标和文字共同表达，使玩家理解其含义。",
+      "result_frame_description": "关键状态旁有语义对应的图标与可读文字。",
+      "correct_target_and_information": "图标和文字指向同一项玩家状态。",
+      "necessary_context": "关键状态区域的清晰画面即可。",
+      "representative_basic_function": "玩家能借助图标与文字辨认关键状态。",
+      "basic_function_bugs": [
+        "图标与文字含义相反",
+        "关键状态缺少可理解的文字说明",
+        "图标和文字关联到不同状态"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "关键状态图标＋文字并用"
+    },
+    "expanded.G.s0045": {
+      "visible_goal": "窗口失焦后，玩家能辨认游戏处于暂停状态。",
+      "result_frame_description": "失焦后的游戏窗口显示明确的暂停界面或暂停标识。",
+      "correct_target_and_information": "暂停提示属于当前游戏窗口，清楚表达当前模拟处于暂停状态。",
+      "necessary_context": "包含窗口失焦线索与暂停提示的画面即可；若要消除暂停是否真实生效的歧义，只补充相关状态对照画面。",
+      "representative_basic_function": "玩家能从失焦后的窗口理解游戏已经暂停。",
+      "basic_function_bugs": [
+        "显示暂停但可见模拟状态仍持续变化",
+        "暂停界面无法理解",
+        "暂停提示属于错误窗口或页面"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "窗口失焦自动暂停（C01 模拟冻结口径）。"
+    },
+    "expanded.G.s0021": {
+      "visible_goal": "交互高亮让玩家清楚辨认当前将操作的邻近对象。",
+      "result_frame_description": "邻近交互对象具有明确的选中高亮，提示文字与该对象对应。",
+      "correct_target_and_information": "高亮对象是当前可交互候选中的近邻目标，名称和动作提示不指向其他对象。",
+      "necessary_context": "角色、候选对象和高亮提示同屏即可；精确排序不由截图推断。",
+      "representative_basic_function": "玩家能在交互前辨认当前选中的对象。",
+      "basic_function_bugs": [
+        "高亮与提示指向不同对象",
+        "目标高亮无法辨认",
+        "明显不可交互对象被提示为当前有效目标"
+      ],
+      "permitted_trigger_modes": ["automatic", "input", "held"],
+      "original_requirement_diagnostic_only": "交互提示按候选排序高亮最近对象"
+    },
+    "expanded.G.s0022": {
+      "visible_goal": "画面恢复后，游戏时钟仍向玩家呈现连贯、可理解的生活时间。",
+      "result_frame_description": "恢复后的HUD显示有效日期与时间，并与当前生活情境保持一致。",
+      "correct_target_and_information": "显示对象是当前局的游戏时钟，不将加载或停顿提示误作游戏时间。",
+      "necessary_context": "恢复后的时钟画面为主要结果；需要排除明显日期跳变歧义时补充停顿前画面，截图不证明精确计时公式。",
+      "representative_basic_function": "玩家能在画面恢复后继续读懂当前游戏时间。",
+      "basic_function_bugs": [
+        "恢复后时钟显示无效内容",
+        "日期时间与当前场景明显矛盾",
+        "时间显示出现无法解释的倒退或跨日"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "顿帧不改变 C01 时钟口径。"
+    },
+    "expanded.G.s0001": {
+      "visible_goal": "交互后，玩家能看出操作作用于提示中的有效对象。",
+      "result_frame_description": "当前邻近目标出现与交互提示相符的对话、物品接收或其他对象反馈。",
+      "correct_target_and_information": "实际反馈对应提示中的可接近、无遮挡交互对象。",
+      "necessary_context": "目标身份与反馈同屏即可；结果中看不出原目标时补充交互前提示画面。",
+      "representative_basic_function": "玩家能看到交互指令由当前提示对象响应。",
+      "basic_function_bugs": [
+        "操作作用于提示以外的对象",
+        "明确被墙阻隔的对象仍被成功操作",
+        "反馈动作与所示交互含义相反"
+      ],
+      "permitted_trigger_modes": ["input", "rejection"],
+      "original_requirement_diagnostic_only": "- M04 E 交互：最近、有效、距离 ≤2m 且无遮挡的对象"
+    },
+    "expanded.G.s0002": {
+      "visible_goal": "交互反馈清楚表明当前对象是否可被操作，避免将隔墙对象误作已成功交互。",
+      "result_frame_description": "操作结果指向提示中的有效对象；受墙体阻隔的操作则出现可理解的不可交互反馈。",
+      "correct_target_and_information": "提示和实际响应属于同一对象，墙体阻隔不能被表达为成功对话或拾取。",
+      "necessary_context": "结果与目标清楚时单幅即可；拒绝场景需有已处理操作的反馈及可见阻隔关系，画面不变不能单独证明拒绝。",
+      "representative_basic_function": "玩家能从反馈辨认当前对象被操作或因阻隔而不能操作。",
+      "basic_function_bugs": [
+        "提示对象与响应对象不一致",
+        "隔墙操作被错误显示为成功",
+        "拒绝反馈无法辨认所针对对象"
+      ],
+      "permitted_trigger_modes": ["input", "rejection"],
+      "original_requirement_diagnostic_only": "不能隔墙对话或拾取。多个候选按距离、稳定对象 ID 排序，提示与实际对象一致。"
+    },
+    "expanded.G.s0041": {
+      "visible_goal": "本条明确不设屏幕震动的独立可视结果要求。",
+      "result_frame_description": "不存在必须交付的震动画面，普通游戏画面不承担证明震动有无的任务。",
+      "correct_target_and_information": "无独立冻结目标，不以是否出现屏幕震动判断沟通效果。",
+      "necessary_context": "无需为本条增加截图或动态上下文。",
+      "representative_basic_function": "本条未规定独立的画面基本功能。",
+      "basic_function_bugs": [
+        "本条无独立基本功能错误项；不得把未提供震动视为错误"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "- F09 屏幕震动：本作无震动需求（生活模拟固定手感）"
+    },
+    "expanded.G.s0042": {
+      "visible_goal": "本条保留表现层自由，不增加独立可视结果要求。",
+      "result_frame_description": "不存在本条要求的固定表现画面。",
+      "correct_target_and_information": "无独立冻结对象，具体视觉风格不作为本条验收目标。",
+      "necessary_context": "无需为本条增加证据画面。",
+      "representative_basic_function": "本条未规定独立的画面基本功能。",
+      "basic_function_bugs": [
+        "本条无独立基本功能错误项；不得因表现形式不同判错"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "表现层自由，不设冻结项。"
+    },
+    "expanded.G.s0050": {
+      "visible_goal": "行动界面让玩家理解当前资源是否支持所选行动及不能执行的原因。",
+      "result_frame_description": "所选行动旁显示相关资源或条件，受阻时明确说明缺少什么。",
+      "correct_target_and_information": "提示对应当前行动所需的现金、物品或状态条件。",
+      "necessary_context": "行动条件画面即可；拒绝结果须包含操作已被处理的明确原因反馈。",
+      "representative_basic_function": "玩家能根据界面理解当前行动为何可用或受阻。",
+      "basic_function_bugs": [
+        "拒绝原因指向无关资源",
+        "条件说明与行动可用性相反",
+        "受阻后没有可理解的原因反馈"
+      ],
+      "permitted_trigger_modes": ["automatic", "input", "rejection"],
+      "original_requirement_diagnostic_only": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因。"
+    },
+    "expanded.G.s0046": {
+      "visible_goal": "玩家在行动前能从游戏内界面知道当前目标及可做的下一步。",
+      "result_frame_description": "目标提示说明当前要做的事，并给出可理解的行动对象、地点或操作入口。",
+      "correct_target_and_information": "指引对应当前任务阶段与可用行动，不依赖工程文档。",
+      "necessary_context": "执行行动前的目标或任务提示画面即可。",
+      "representative_basic_function": "玩家能从当前目标提示找到下一步行动方向。",
+      "basic_function_bugs": [
+        "引导指向错误对象或地点",
+        "目标文字无法理解",
+        "提示要求的行动在当前情境不可执行且无说明"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。"
+    },
+    "expanded.G.s0048": {
+      "visible_goal": "目标状态反馈让玩家理解当前取得的进展或阶段结果。",
+      "result_frame_description": "目标卡、日志或阶段结算清楚标示当前进展及其完成或待补救含义。",
+      "correct_target_and_information": "呈现内容对应当前目标的真实状态，阶段结果不被误写为无条件结束游戏。",
+      "necessary_context": "当前目标或阶段结果明确的画面即可；只有变化含义不明时补充前一状态。",
+      "representative_basic_function": "玩家能辨认目标目前处于何种进展状态。",
+      "basic_function_bugs": [
+        "完成与失败结果颠倒",
+        "反馈对应错误目标",
+        "阶段状态无法辨认"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "目标进度、阶段变化与终局结果向玩家明确呈现。"
+    },
+    "expanded.G.s0053": {
+      "visible_goal": "玩家能从界面解释理解早先行动为何影响当前机会或保留状态。",
+      "result_frame_description": "对话、日志或目标说明把当前帮助、延期或其他后果与此前的信任、发现或行动记录联系起来。",
+      "correct_target_and_information": "解释指向需求已有的长期后果及相关角色或记录。",
+      "necessary_context": "因果解释已在当前画面明确时无需补帧；否则仅补充所指早先记录。",
+      "representative_basic_function": "玩家能理解当前机会或后果与此前行动的关系。",
+      "basic_function_bugs": [
+        "将后果归给错误角色或事件",
+        "解释与当前保留状态明显矛盾",
+        "长期后果已出现却没有可理解的原因说明"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "长期后果、跨阶段保留或失去的状态有可观察的解释；仅在需求存在时判断。"
+    },
+    "expanded.G.s0049": {
+      "visible_goal": "选择提示让玩家理解当前资源、路线或行动安排的代价与收益。",
+      "result_frame_description": "任务、地图或行动选项中清楚说明当前选择会消耗什么、带来什么或承担何种后果。",
+      "correct_target_and_information": "提示属于需求中的真实生活选择，如工作报酬、消费、路线限制或期限风险。",
+      "necessary_context": "包含所选行动及其代价收益说明的画面即可。",
+      "representative_basic_function": "玩家能在选择前看懂该行动的主要取舍。",
+      "basic_function_bugs": [
+        "将消耗误写为奖励",
+        "代价收益说明对应错误行动",
+        "关键取舍信息不可理解"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。"
+    },
+    "expanded.G.s0051": {
+      "visible_goal": "风险提示让玩家找到可采取的恢复或补救行动。",
+      "result_frame_description": "生活状态或邻里风险出现时，画面说明问题并提供可发现的休息、补救或安全恢复入口。",
+      "correct_target_and_information": "预警与入口对应当前风险，不引入需求之外的战斗或死亡系统。",
+      "necessary_context": "风险说明与相关行动入口清楚的画面即可。",
+      "representative_basic_function": "玩家能根据预警找到处理当前问题的行动入口。",
+      "basic_function_bugs": [
+        "预警指出错误风险",
+        "恢复入口无法发现或使用",
+        "所示入口与当前问题无关"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "危险预警与恢复入口可发现，玩家能据此调整操作。"
+    },
+    "expanded.G.s0047": {
+      "visible_goal": "核心操作反馈让玩家辨认本次行动是成功、失败还是被拒绝。",
+      "result_frame_description": "操作结果以清楚的状态、对象变化或原因提示表达本次行动的结果。",
+      "correct_target_and_information": "反馈指向刚执行的行动与目标，成功和受阻含义不混淆。",
+      "necessary_context": "结果与对象明确时单幅即可；拒绝须有已处理操作的明确反馈，必要时补充操作前情境。",
+      "representative_basic_function": "玩家能看懂当前操作的结果类别。",
+      "basic_function_bugs": [
+        "失败或拒绝显示为成功",
+        "反馈指向错误操作或对象",
+        "结果文字与可见实际效果相反"
+      ],
+      "permitted_trigger_modes": ["input", "automatic", "rejection"],
+      "original_requirement_diagnostic_only": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。"
+    },
+    "expanded.G.s0052": {
+      "visible_goal": "多个对象或事件在场时，玩家仍能把关键反馈对应到正确对象。",
+      "result_frame_description": "当前关键提示通过对象名称、位置标记或事件标题清楚表明反馈归属。",
+      "correct_target_and_information": "反馈明确属于本次行动或事件涉及的角色、物品或任务。",
+      "necessary_context": "相关对象与反馈同屏且归属清楚即可；存在真实歧义时仅补充对应事件画面。",
+      "representative_basic_function": "玩家能在多个对象的场景中辨认关键反馈针对谁。",
+      "basic_function_bugs": [
+        "反馈错误归属其他角色或事件",
+        "关键反馈被其他提示遮到无法理解",
+        "对象标记与提示名称相互矛盾"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "并发单位或多个事件同时发生时，关键反馈仍能对应到正确对象。"
+    }
+  }
+}

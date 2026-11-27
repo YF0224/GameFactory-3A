@@ -1,0 +1,25 @@
+{
+  "model_requested": "claude-opus-5-5",
+  "schema_transport": "structured_output",
+  "command": [
+    "/Users/yifanyang/.local/bin/claude",
+    "-p",
+    "--output-format",
+    "json",
+    "--model",
+    "claude-opus-5-5",
+    "--json-schema",
+    "<schema.json>",
+    "--tools",
+    "Read,Grep,Glob",
+    "--settings",
+    "{\"sandbox\": {\"enabled\": false}}",
+    "--add-dir",
+    "/Users/yifanyang/Desktop/GameFactory-3A-game-bench/test_data/bench_standards/whitebox/stage1-criteria.v1/G035_rift_expedition"
+  ],
+  "exit_code": 0,
+  "seconds": 139.73,
+  "attempt": 1,
+  "response_present": true,
+  "retry_of": null
+}

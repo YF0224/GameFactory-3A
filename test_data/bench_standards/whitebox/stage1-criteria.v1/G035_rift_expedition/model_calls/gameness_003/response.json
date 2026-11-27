@@ -1,0 +1,556 @@
+{
+  "revision": "outcome_frame_v1",
+  "summary": "依据 requirement.txt 与全部给定 CHECKS 冻结共同标准，保留原 criterion id 及 layout、guidance、feedback 含义，不依赖候选实现。三个等级非累加：10% 为源代码中真实实现并接入玩法；50% 为真实触发且基本展示、反馈或指引有效，对象与核心信息正确，无已知基本功能错误，但预期传达结果尚未充分建立；100% 为交付游戏的真实原生结果帧及最少必要上下文，足以看懂本项结果或下一步。界面、布局和指引可随真实界面进入自动触发；清楚的单帧足够，仅在歧义、瞬态效果或因果需要时补充上下文。精确时序、空间运动、数值公式及穷尽分支边界在50%和100%均仅作诊断，不作为门槛；原文保留用于追溯。各项只判断其主要可视结果，不继承 Mechanic 结论，不以装饰或成功标签替代实际效果；拒绝须有操作被处理并拒绝的依据，静止画面不足。未覆盖为未知，不视作错误。未提供候选交付或运行证据，本标准不包含观察、分数或判定。",
+  "diagnostic_only_categories": [
+    "exact_timing",
+    "exact_space_motion",
+    "exact_numeric_formula",
+    "exhaustive_branches_boundaries"
+  ],
+  "checks": {
+    "game.layout.hierarchy": {
+      "visible_goal": "当前界面的主要状态与次要说明有清楚的视觉层级。",
+      "result_frame_description": "真实游戏界面中，当前阶段的主要状态和可操作区域醒目，辅助说明能够与之区分。",
+      "correct_target_and_information": "层级对应当前界面的任务，例如战斗中的玩家状态、手牌与敌方意图，或路线图中的当前位置与可选节点。",
+      "necessary_context": "当前真实界面的一张清楚截图即可。",
+      "representative_basic_function": "战斗界面中玩家能辨认主要状态区、行动区和辅助说明。",
+      "basic_function_bugs": [
+        "主要状态被装饰或次要说明压住而无法辨认",
+        "主要操作与无关信息混杂，无法识别当前行动区"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "实际UI信息层级清楚，主要状态与次要信息可区分。"
+    },
+    "game.layout.readable": {
+      "visible_goal": "当前界面的关键文字和控件清楚可读。",
+      "result_frame_description": "游戏画面中的状态文字、选项和操作提示可辨认，没有妨碍理解的遮挡或重叠。",
+      "correct_target_and_information": "可读内容属于当前实际界面的状态、目标和操作入口。",
+      "necessary_context": "包含关键文字与控件的真实界面截图即可。",
+      "representative_basic_function": "事件面板上的选项及其说明能够直接阅读。",
+      "basic_function_bugs": [
+        "关键文字被裁切或遮住到无法理解",
+        "文字与背景无法区分",
+        "控件重叠导致无法辨认操作对象"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "实际UI文字、尺寸、对比度及布局可读，无明显遮挡/重叠。"
+    },
+    "game.guidance.controls": {
+      "visible_goal": "玩家能从游戏画面了解当前必要的操作方法。",
+      "result_frame_description": "当前界面显示与可操作对象对应的按键、鼠标动作或明确控件提示。",
+      "correct_target_and_information": "提示正确对应选节点、出牌、事件选择、结束回合或存档交互等当前可用操作。",
+      "necessary_context": "操作提示与其作用对象同屏即可；仅在提示含义不明时补充相关界面。",
+      "representative_basic_function": "战斗画面清楚说明如何出牌或结束回合。",
+      "basic_function_bugs": [
+        "必要操作没有任何可理解的界面提示",
+        "提示指向错误按键或错误对象",
+        "关键操作提示被遮住到无法理解"
+      ],
+      "permitted_trigger_modes": ["automatic", "input", "held"],
+      "original_requirement_diagnostic_only": "实际游戏展示或清楚传达必要操作方法。"
+    },
+    "expanded.G.s0008": {
+      "visible_goal": "悬停的手牌通过上浮和放大成为明确的当前查看对象。",
+      "result_frame_description": "指针所在卡牌相对周围手牌突出，其名称和内容仍可辨认。",
+      "correct_target_and_information": "突出的是实际悬停的那张手牌，卡牌身份与内容没有错配。",
+      "necessary_context": "突出状态的一帧通常足够；仅在变化不清楚时补充普通手牌状态。",
+      "representative_basic_function": "悬停手牌后，该牌在手牌区明显突出。",
+      "basic_function_bugs": [
+        "突出的是另一张卡牌",
+        "突出后卡牌内容被遮住到无法理解"
+      ],
+      "permitted_trigger_modes": ["input", "held"],
+      "original_requirement_diagnostic_only": "悬停卡牌上浮并放大 1.15 倍"
+    },
+    "expanded.G.s0009": {
+      "visible_goal": "拖牌指向目标时，合法受牌对象被清楚标出。",
+      "result_frame_description": "被拖动的卡牌与场上目标关系明确，可接受该牌的对象出现可辨认的高亮。",
+      "correct_target_and_information": "高亮对象符合该牌的作用对象，攻击牌不会把无关对象标为受击目标。",
+      "necessary_context": "拖牌与目标高亮同屏即可；目标关系有歧义时补充卡牌说明。",
+      "representative_basic_function": "拖动攻击牌指向敌人时，敌人出现目标高亮。",
+      "basic_function_bugs": [
+        "高亮了错误对象",
+        "目标标记与被拖动卡牌无关",
+        "高亮遮住目标身份到无法辨认"
+      ],
+      "permitted_trigger_modes": ["input", "held"],
+      "original_requirement_diagnostic_only": "拖到目标身上出牌，合法目标高亮"
+    },
+    "expanded.G.s0010": {
+      "visible_goal": "费用不足的出牌尝试得到明确的费用拒绝反馈。",
+      "result_frame_description": "尝试使用的卡牌出现警示，费用显示以醒目的错误状态说明不能支付。",
+      "correct_target_and_information": "警示对应所尝试的卡牌及玩家当前费用，传达费用不足而非出牌成功。",
+      "necessary_context": "应能看到被尝试的卡牌、费用及拒绝提示；单纯未变化的手牌不能证明拒绝。",
+      "representative_basic_function": "无法支付的卡牌出牌尝试显示费用警示并保留未打出状态。",
+      "basic_function_bugs": [
+        "费用不足却显示出牌成功",
+        "警示指向另一张卡牌或错误资源",
+        "操作被拒但没有可理解的拒绝反馈"
+      ],
+      "permitted_trigger_modes": ["rejection", "input"],
+      "original_requirement_diagnostic_only": "费用不足时卡牌左右抖动、费用数字红闪"
+    },
+    "expanded.G.s0011": {
+      "visible_goal": "抽到的卡牌以可辨认的入手表现连接牌堆与手牌。",
+      "result_frame_description": "画面显示抽牌卡片从牌堆进入手牌的视觉联系，新牌可在手牌区辨认。",
+      "correct_target_and_information": "入手表现对应实际抽到的卡牌，来源是抽牌堆，去向是玩家手牌。",
+      "necessary_context": "入手画面能同时说明来源和去向时一帧即可；否则补充相邻的抽牌与入手画面。",
+      "representative_basic_function": "抽牌时可看见新卡进入玩家手牌区。",
+      "basic_function_bugs": [
+        "卡牌被表现为进入错误区域",
+        "只有飞行动画而手牌中没有对应新牌",
+        "入手表现对应错误卡牌"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "抽牌从牌堆飞入手牌"
+    },
+    "expanded.G.s0012": {
+      "visible_goal": "战斗状态变化通过对应对象的飘字清楚表达。",
+      "result_frame_description": "发生伤害、获得格挡或状态层变化的对象旁出现可读飘字，能辨认变化种类。",
+      "correct_target_and_information": "飘字对应实际变化的角色及状态，获得与损失的方向不混淆。",
+      "necessary_context": "对象和飘字清楚同屏即可；仅在变化方向不明时补充相关状态显示。",
+      "representative_basic_function": "敌人受伤时，其旁出现伤害飘字。",
+      "basic_function_bugs": [
+        "飘字出现在错误对象上",
+        "伤害被显示为恢复或相反",
+        "飘字不可读，无法理解变化种类"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "伤害、格挡、状态层变化都要飘字。"
+    },
+    "expanded.G.s0014": {
+      "visible_goal": "路线选择反馈让玩家辨认已选节点及所走路线。",
+      "result_frame_description": "所选节点被点亮，路线视图清楚展示该节点与选定路径的联系。",
+      "correct_target_and_information": "点亮的是玩家选中的可选节点，所示路径通向该节点。",
+      "necessary_context": "点亮节点与路径的一帧足够；若路线视图变化的关系不明，再补充选择前画面。",
+      "representative_basic_function": "选择路线节点后，地图明显标出该节点和所选路线。",
+      "basic_function_bugs": [
+        "点亮了错误节点",
+        "路线指示通向与选择不符的节点",
+        "选中状态与未选状态无法辨认"
+      ],
+      "permitted_trigger_modes": ["input"],
+      "original_requirement_diagnostic_only": "事件【路线节点选定】实际发生时可视表现为【节点点亮＋镜头沿路线平移】，结束条件【平移完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0015": {
+      "visible_goal": "赌矿成功以晶体和矿收益反馈清楚传达。",
+      "result_frame_description": "赌矿事件画面出现晶体喷发表现及矿入账飘字，资源显示支持矿获得的含义。",
+      "correct_target_and_information": "反馈对应裂缝赌矿的矿收益，不能混成受伤或其他事件奖励。",
+      "necessary_context": "成功效果与矿收益同屏即可；若只有装饰效果，补充矿资源变化画面。",
+      "representative_basic_function": "赌矿成功画面显示晶体与矿获得反馈。",
+      "basic_function_bugs": [
+        "成功反馈却把矿变化显示为损失",
+        "反馈指向错误资源",
+        "只有成功装饰，没有可辨认的矿入账结果"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "事件【赌矿成功】实际发生时可视表现为【晶体喷发＋矿入账飘字】，结束条件【1.2 秒结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0016": {
+      "visible_goal": "赌矿失败以裂缝坍塌和玩家受伤反馈清楚传达。",
+      "result_frame_description": "赌矿事件显示裂缝坍塌意象及玩家生命损失飘字，玩家状态呈现受伤结果。",
+      "correct_target_and_information": "生命损失属于勘探员，不能错误显示为敌人受伤或矿收益。",
+      "necessary_context": "失败表现与生命损失清楚同屏即可；受伤关系不明时补充玩家状态变化画面。",
+      "representative_basic_function": "赌矿失败画面清楚显示玩家损失生命。",
+      "basic_function_bugs": [
+        "失败显示为玩家恢复生命",
+        "生命损失标在错误对象上",
+        "仅有坍塌装饰而没有可辨认的受伤结果"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "事件【赌矿失败】实际发生时可视表现为【裂缝坍塌＋−20 HP 飘字】，结束条件【1.2 秒结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0017": {
+      "visible_goal": "交换成交后，获得的稀有卡被清楚呈现为加入牌组。",
+      "result_frame_description": "交易结果或牌组展示中可以辨认新加入的强击或灼烧弹卡牌及其入组状态。",
+      "correct_target_and_information": "入组对象是该次交换获得的稀有卡，不能用普通卡或仅供预览的商品代替。",
+      "necessary_context": "可辨认入组结果的一帧即可；商品预览与已拥有状态不明时补充牌组展示。",
+      "representative_basic_function": "交换结果显示所得稀有卡已出现在玩家牌组中。",
+      "basic_function_bugs": [
+        "显示加入了错误卡牌",
+        "只有成交标签而无可辨认的入组结果",
+        "商品预览被误显示为玩家已拥有"
+      ],
+      "permitted_trigger_modes": ["input"],
+      "original_requirement_diagnostic_only": "事件【交换成交】实际发生时可视表现为【稀有卡入组】，结束条件【入组完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0018": {
+      "visible_goal": "受损补给造成的污染以明确的状态标记呈现。",
+      "result_frame_description": "HUD 上出现附着紫雾的补给污染标记，玩家能辨认当前携带该状态。",
+      "correct_target_and_information": "标记表示玩家接受补给后带来的敌方强化污染，不能显示为无关增益。",
+      "necessary_context": "带可辨认污染含义的 HUD 一帧即可；紫雾含义不明时补充状态说明。",
+      "representative_basic_function": "接受受损补给后，HUD 可见补给污染标记。",
+      "basic_function_bugs": [
+        "污染标记被标成玩家有利增益",
+        "紫雾只作背景装饰，无法辨认污染状态",
+        "标记指向错误状态"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "事件【补给污染生效】实际发生时可视表现为【紫雾附在 HUD 标记上（此后敌人带紫光）】，结束条件【挂载完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0019": {
+      "visible_goal": "存档石的保存反馈让玩家看懂本次存档已建立。",
+      "result_frame_description": "存档石周围出现符文环或保存光圈，并有可辨认的已保存状态或存档记录。",
+      "correct_target_and_information": "反馈对应当前节点的存档石与本次保存，不能将保存失败显示为成功。",
+      "necessary_context": "保存效果与已保存信息同屏即可；只有光效时补充可见存档记录，不能仅凭装饰推定保存。",
+      "representative_basic_function": "与存档石交互后，可见保存光效和本次存档状态。",
+      "basic_function_bugs": [
+        "未建立存档却显示保存成功",
+        "反馈对应错误存档或错误节点",
+        "只有无保存含义的装饰光圈"
+      ],
+      "permitted_trigger_modes": ["input"],
+      "original_requirement_diagnostic_only": "事件【存档】实际发生时可视表现为【符文环旋转＋保存成功光圈】，结束条件【光圈结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0020": {
+      "visible_goal": "读档以回溯闪光和恢复后的游戏画面传达返回存档状态。",
+      "result_frame_description": "读档画面出现可辨认的回溯闪光，恢复的节点与 HUD 状态可见。",
+      "correct_target_and_information": "恢复画面对应所读取的存档，而非新开局或无关场景。",
+      "necessary_context": "闪光含义及恢复对象清楚时使用结果帧；存在歧义时补充存档状态与恢复画面对照。",
+      "representative_basic_function": "读取已有存档后，可见回溯反馈及对应的恢复画面。",
+      "basic_function_bugs": [
+        "闪光后显示错误存档场景",
+        "只有读档装饰而没有可辨认的恢复结果",
+        "恢复画面被错误标为新开局"
+      ],
+      "permitted_trigger_modes": ["input"],
+      "original_requirement_diagnostic_only": "事件【读档】实际发生时可视表现为【倒放式闪光】，结束条件【闪光结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0021": {
+      "visible_goal": "出牌反馈清楚连接已打出的卡牌和受牌目标。",
+      "result_frame_description": "打出的卡牌有落位表现，相关目标被高亮，玩家能看懂该牌作用于谁。",
+      "correct_target_and_information": "落位卡牌与目标对应实际出牌，卡牌身份及受牌对象不混淆。",
+      "necessary_context": "卡牌与目标关系明确的一帧即可；手牌与出牌状态不明时补充出牌前画面。",
+      "representative_basic_function": "打出攻击牌时，该牌落位且对应敌人高亮。",
+      "basic_function_bugs": [
+        "高亮目标与出牌对象不符",
+        "落位的是另一张卡牌",
+        "未被接受的操作却呈现成功出牌反馈"
+      ],
+      "permitted_trigger_modes": ["input"],
+      "original_requirement_diagnostic_only": "事件【出牌】实际发生时可视表现为【卡牌落位＋目标高亮】，结束条件【结算完成】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0022": {
+      "visible_goal": "打击或强击命中时，受击敌人和伤害反馈清楚可辨。",
+      "result_frame_description": "受击敌人处出现刀光或冲击波及伤害飘字，画面明确表达攻击命中。",
+      "correct_target_and_information": "命中表现与伤害飘字对应本次攻击的敌人，表达伤害而非治疗。",
+      "necessary_context": "命中特效与受击对象清楚同屏即可；仅在攻击来源有歧义时补充出牌画面。",
+      "representative_basic_function": "打击命中敌人时显示该敌人的命中特效和伤害飘字。",
+      "basic_function_bugs": [
+        "命中特效或飘字落在错误对象上",
+        "攻击伤害显示为治疗",
+        "仅有无目标装饰，无法辨认命中结果"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "事件【攻击命中（打击/强击）】实际发生时可视表现为【刀光/冲击波＋伤害飘字（强击并震屏）】，结束条件【0.3 秒结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0023": {
+      "visible_goal": "蓄能反馈让玩家辨认勘探员获得了力量强化。",
+      "result_frame_description": "勘探员周围出现红色气场，并能从状态文字或标记辨认蓄能强化。",
+      "correct_target_and_information": "气场属于使用蓄能的勘探员，含义是力量增强而非受伤或敌方强化。",
+      "necessary_context": "红色气场与强化含义清楚同屏即可；含义不明时补充蓄能卡或状态说明。",
+      "representative_basic_function": "使用蓄能后，勘探员呈现可辨认的红色强化气场。",
+      "basic_function_bugs": [
+        "气场出现在错误角色上",
+        "蓄能被显示为负面伤害状态",
+        "气场与任何蓄能状态都没有可辨认联系"
+      ],
+      "permitted_trigger_modes": ["input"],
+      "original_requirement_diagnostic_only": "事件【蓄能】实际发生时可视表现为【红色气场】，结束条件【0.5 秒结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0024": {
+      "visible_goal": "获得格挡时，护盾表现明确指出被保护的角色。",
+      "result_frame_description": "获得格挡的角色周围出现护盾泡，相关状态可辨认为防护。",
+      "correct_target_and_information": "护盾属于实际获得格挡的对象，不能将攻击或受伤表现成获得格挡。",
+      "necessary_context": "护盾及其所属角色清楚的一帧即可；效果含义不明时补充格挡状态显示。",
+      "representative_basic_function": "使用防御牌后，勘探员出现可辨认的护盾泡。",
+      "basic_function_bugs": [
+        "护盾出现在错误对象上",
+        "没有格挡结果却显示获得格挡",
+        "护盾含义与画面中的伤害状态混淆"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "事件【获得格挡】实际发生时可视表现为【护盾泡】，结束条件【0.3 秒结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0025": {
+      "visible_goal": "中毒结算以绿色气泡和伤害反馈指明受毒伤对象。",
+      "result_frame_description": "中毒对象处出现绿色气泡与伤害飘字，玩家能辨认这是中毒造成的损伤。",
+      "correct_target_and_information": "反馈对应携带中毒的对象，伤害含义与其生命状态一致。",
+      "necessary_context": "中毒标记、对象及跳伤关系清楚时一帧即可；来源不明时补充状态说明。",
+      "representative_basic_function": "中毒敌人结算毒伤时出现绿色气泡与伤害反馈。",
+      "basic_function_bugs": [
+        "毒伤反馈出现在未中毒的错误对象上",
+        "中毒损伤显示为恢复",
+        "只有绿色装饰，无法辨认毒伤结果"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "事件【中毒结算】实际发生时可视表现为【绿色气泡跳伤】，结束条件【跳伤结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0026": {
+      "visible_goal": "首领攻击以清楚的冲击表现传达攻击来源及受击方向。",
+      "result_frame_description": "核心巨兽攻击画面中出现冲击波，玩家能辨认攻击来自首领并指向勘探员。",
+      "correct_target_and_information": "冲击表现属于首领的攻击，不能混成玩家攻击或首领防御。",
+      "necessary_context": "首领、冲击波及受击对象关系清楚的一帧即可；来源有歧义时补充相邻攻击画面。",
+      "representative_basic_function": "首领攻击勘探员时显示可辨认的冲击波。",
+      "basic_function_bugs": [
+        "攻击来源被表现为错误角色",
+        "冲击波指向与实际攻击无关的对象",
+        "首领防御被误显示为攻击命中"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "事件【首领攻击】实际发生时可视表现为【冲击波＋0.2 秒震屏＋0.08 秒顿帧】，结束条件【0.3 秒结束】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0027": {
+      "visible_goal": "终局演出清楚表达本局胜利或失败及相应结局意象。",
+      "result_frame_description": "终局画面通过全屏表现和结算信息传达本局结果，所示意象能辨认为带回晶体、紫雾随行或信号中断。",
+      "correct_target_and_information": "演出与本局结果相符，胜利结局意象对应是否携带补给污染，失败不显示为胜利。",
+      "necessary_context": "结局意象与结果明确的一帧即可；结果或污染对应关系不明时补充结算面板或污染标记。",
+      "representative_basic_function": "真实终局画面展示可辨认的结果意象并明确本局胜负。",
+      "basic_function_bugs": [
+        "胜利与失败含义反转",
+        "结局意象与可见污染状态相反",
+        "只有通用装饰而无法理解本局结果"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "事件【胜负结算】实际发生时可视表现为【全屏特效（双结局意象见 W04）】，结束条件【进入结算面板】。仅评价可视投影，音频未评。未触发事件不能PASS。"
+    },
+    "expanded.G.s0037": {
+      "visible_goal": "当前流程界面以匹配其用途的面板结构呈现必要信息和入口。",
+      "result_frame_description": "当前真实界面可辨认为标题、路线、事件、战斗、暂停、奖励或结算面板，内容组织让玩家知道所处阶段。",
+      "correct_target_and_information": "所展示面板包含与其角色对应的核心内容，例如路线选择信息、战斗状态，或胜利结算中的路线与构筑摘要。",
+      "necessary_context": "当前面板的一张完整截图即可，不要求以全部流程截图作为同一结果帧的附加门槛。",
+      "representative_basic_function": "路线图面板清楚呈现当前位置、节点标签与可选路线。",
+      "basic_function_bugs": [
+        "面板内容与当前阶段明显不符",
+        "核心信息缺失导致无法理解该面板用途",
+        "主要入口被遮住到无法辨认"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "- F10 前端界面：标题（开始/设置/退出，含 seed 显示与输入）→ 路线图界面（当前层/开放状态/已选路径/节点标签）→ 事件面板（选项 1–4）→ 战斗 HUD（HP/费用/牌堆计数/意图栏/污染标记，见 I06）→ 暂停面板（继续/重开/返回/设置）→ 奖励面板 → 结算面板（胜利显示路线选择/构筑终态/剩余 HP 与矿"
+    },
+    "expanded.G.s0038": {
+      "visible_goal": "失败结算清楚注明勘探员倒下的节点。",
+      "result_frame_description": "失败面板上显示可辨认的失败节点名称或地图位置标识。",
+      "correct_target_and_information": "所注明节点对应本局发生失败的位置，不能显示为其他节点或胜利终点。",
+      "necessary_context": "失败面板已明确节点时一帧即可；节点对应关系有歧义时补充失败地点画面。",
+      "representative_basic_function": "失败结算中的节点说明让玩家知道倒在哪里。",
+      "basic_function_bugs": [
+        "注明错误失败节点",
+        "仅显示失败而完全无法辨认地点",
+        "节点文字被遮住到无法理解"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "失败注明倒在哪一节点"
+    },
+    "expanded.G.s0039": {
+      "visible_goal": "结算界面清楚展示 Enter 重开的操作入口。",
+      "result_frame_description": "结算面板上有可读的 Enter 重开提示，玩家能辨认如何开始新一局。",
+      "correct_target_and_information": "提示对应结算后的重开操作，不能将返回菜单或继续旧局误标为重开。",
+      "necessary_context": "包含结算状态和重开提示的一帧即可。",
+      "representative_basic_function": "玩家在结算面板能直接读到 Enter 重开提示。",
+      "basic_function_bugs": [
+        "重开提示标注错误按键",
+        "提示把其他操作标成重开",
+        "重开入口被遮住到无法辨认"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "Enter 重开）"
+    },
+    "expanded.G.s0040": {
+      "visible_goal": "关键状态通过图标与文字共同表达含义。",
+      "result_frame_description": "关键状态区中的图标有对应文字标识，玩家不必仅凭颜色猜测状态。",
+      "correct_target_and_information": "图标和文字指向同一状态，例如生命、矿、格挡或补给污染。",
+      "necessary_context": "显示关键状态图标及文字的一帧即可。",
+      "representative_basic_function": "补给污染图标旁有可读的状态名称或说明。",
+      "basic_function_bugs": [
+        "图标与文字表达不同状态",
+        "关键状态只有无法解释的颜色标记",
+        "状态文字不可读"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "关键状态图标＋文字并用"
+    },
+    "expanded.G.s0041": {
+      "visible_goal": "窗口失焦后，游戏画面清楚显示暂停状态。",
+      "result_frame_description": "失焦的游戏窗口内可见暂停面板或明确的暂停标识。",
+      "correct_target_and_information": "暂停显示属于当前游戏阶段，不能误呈现为失败、结算或仍可操作的正常战斗。",
+      "necessary_context": "需有窗口失焦与暂停显示的最少可见关联；单纯不变化的游戏画面不能证明暂停。",
+      "representative_basic_function": "游戏窗口失焦后出现清楚的暂停界面。",
+      "basic_function_bugs": [
+        "失焦后仍明确显示为进行中的可操作界面",
+        "把失焦显示成失败结算",
+        "暂停标识被遮住到无法辨认"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "窗口失焦自动暂停。"
+    },
+    "expanded.G.s0001": {
+      "visible_goal": "HUD 持续提供理解当前勘探状态所需的核心信息。",
+      "result_frame_description": "当前玩法画面中可辨认路线层与开放状态、矿、生命、牌组计数和敌方增益状态。",
+      "correct_target_and_information": "状态标签指向玩家当前资源、当前路线和实际敌方增益，不混淆手牌与牌组或玩家与敌人。",
+      "necessary_context": "显示核心状态的真实界面一帧即可；图标含义不明时补充展开说明。",
+      "representative_basic_function": "路线界面中的 HUD 让玩家读懂当前资源与路线开放情况。",
+      "basic_function_bugs": [
+        "核心资源标签对应错误对象",
+        "开放与锁定状态表达相反",
+        "关键状态缺失或不可读到无法使用"
+      ],
+      "permitted_trigger_modes": ["automatic"],
+      "original_requirement_diagnostic_only": "- I06 UI 必须显示的状态：路线图当前层（含第 2 层开放状态）、矿、HP、牌组计数、敌方增益标记须常驻显示"
+    },
+    "expanded.G.s0003": {
+      "visible_goal": "当前节点的必要界面或交互物在真实游戏画面中可辨认。",
+      "result_frame_description": "当前场景显示与阶段对应的菜单、HUD、结算面板或节点交互物，并清楚呈现其用途。",
+      "correct_target_and_information": "画面中的对象属于需求所述勘探流程，例如事件节点的选项面板或节点完成后的存档石。",
+      "necessary_context": "当前真实场景与目标对象同屏即可；用途不明时补充其交互面板。",
+      "representative_basic_function": "节点完成后的场景中可辨认存档石及其交互入口。",
+      "basic_function_bugs": [
+        "当前节点展示了无关的交互对象",
+        "必要对象被遮住到无法辨认",
+        "只有装饰替身，无法识别应有的界面或交互用途"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "- L03 目标物/交互物/场景/UI 对象：本 spec §3–§7 引用的界面元素（菜单/HUD/结算面板）与交互物逐类存在且运行时可进入"
+    },
+    "expanded.G.s0004": {
+      "visible_goal": "当前对象的可见身份和核心属性表达与其玩法角色相符。",
+      "result_frame_description": "卡牌、敌人或路线节点的名称、类型和属性说明能让玩家认出其对应角色。",
+      "correct_target_and_information": "可见内容遵循需求中的对象语义，例如攻击牌表达攻击，防御牌表达格挡，首领具有可辨认的首领身份。",
+      "necessary_context": "对象与其属性说明同屏即可；无法从外观确定身份时补充标签或详情。",
+      "representative_basic_function": "防御卡的名称和说明清楚表达获得格挡。",
+      "basic_function_bugs": [
+        "对象名称与所示属性明显错配",
+        "攻击与防御等核心作用被颠倒",
+        "对象身份及核心属性均无法辨认"
+      ],
+      "permitted_trigger_modes": ["automatic", "input", "held"],
+      "original_requirement_diagnostic_only": "数量与属性以对应 G·M 条目为准。"
+    },
+    "expanded.G.s0002": {
+      "visible_goal": "游戏对象以可辨认的视觉身份呈现其在裂谷勘探中的角色。",
+      "result_frame_description": "当前画面中的路线节点、卡牌、角色、敌人或事件对象具有可识别外观与必要标签。",
+      "correct_target_and_information": "可见对象对应需求中的勘探员、裂谷敌人、命名卡牌、存档石及相关界面，不以无关装饰混充。",
+      "necessary_context": "展示当前对象身份的真实游戏帧即可；外观有歧义时补充名称或详情。",
+      "representative_basic_function": "战斗画面能区分勘探员、敌人和玩家手牌。",
+      "basic_function_bugs": [
+        "玩家与敌人的身份混淆",
+        "卡牌标签与对象身份错配",
+        "必要对象仅有无法辨认的占位表现"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "- L01 生成对象：路线图与节点图标、**卡牌 6 种（打击/防御/强击/护壁/蓄能/灼烧弹）**、敌人 3 型（外缘/精英/首领，原创造型）、勘探员角色、事件面板、存档石、HUD（矿/HP/牌组/标记）。"
+    },
+    "expanded.G.s0046": {
+      "visible_goal": "界面让玩家理解当前行动的资源条件及不可用原因。",
+      "result_frame_description": "相关选项旁显示所需资源与当前资源，不能执行时有明确的不足或受限说明。",
+      "correct_target_and_information": "条件说明对应正在考虑的操作和正确资源，例如矿不足不能支付营地补给。",
+      "necessary_context": "操作选项、资源及条件说明同屏即可；若依靠拒绝反馈，需有该操作被处理的可见提示。",
+      "representative_basic_function": "营地选项清楚显示支付条件，并说明资源不足导致不可用。",
+      "basic_function_bugs": [
+        "不可用原因指向错误资源",
+        "提示可执行但控件实际上不可用",
+        "拒绝后没有可理解的原因说明"
+      ],
+      "permitted_trigger_modes": ["automatic", "input", "rejection"],
+      "original_requirement_diagnostic_only": "界面支持玩家判断当前资源和行动条件，并明确传达无法执行的原因。"
+    },
+    "expanded.G.s0042": {
+      "visible_goal": "玩家在行动前能从画面理解当前目标和可执行的下一步。",
+      "result_frame_description": "当前界面显示阶段目标，并以可辨认的节点、选项或操作入口指向下一步。",
+      "correct_target_and_information": "目标与当前勘探阶段相符，例如选路线、处理事件或应对战斗，不要求玩家查阅工程文档。",
+      "necessary_context": "阶段目标与相关行动入口同屏即可。",
+      "representative_basic_function": "路线图说明当前需要选择分支，并清楚标出可选节点。",
+      "basic_function_bugs": [
+        "目标说明属于错误阶段",
+        "界面没有可辨认的下一步入口",
+        "把锁定操作提示为当前可执行动作"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "玩家能在操作前知道当前目标及可执行的下一步，不依赖阅读工程文档。"
+    },
+    "expanded.G.s0044": {
+      "visible_goal": "阶段结果反馈让玩家看懂当前勘探进展。",
+      "result_frame_description": "阶段完成或终局画面清楚标明刚取得的进展及当前所处阶段。",
+      "correct_target_and_information": "进度与实际路线阶段相符，普通节点完成不被误标为整局胜利。",
+      "necessary_context": "进度或结果明确的一帧即可；阶段关系有歧义时补充相邻路线画面。",
+      "representative_basic_function": "节点完成后的路线图清楚标出已走路径和当前阶段。",
+      "basic_function_bugs": [
+        "普通节点完成被显示为整局胜利",
+        "进度指向错误路线阶段",
+        "结果文字相互矛盾而无法理解进展"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "目标进度、阶段变化与终局结果向玩家明确呈现。"
+    },
+    "expanded.G.s0049": {
+      "visible_goal": "界面解释会延续到后续阶段的关键后果。",
+      "result_frame_description": "补给污染的状态说明清楚表达其会影响后续战斗，玩家能理解该状态的持续意义。",
+      "correct_target_and_information": "说明将受损补给与后续敌方强化关联，不能误称为仅当前画面装饰或玩家增益。",
+      "necessary_context": "状态标记与后果说明同屏即可；说明只在事件面板出现时使用该面板。",
+      "representative_basic_function": "受损补给说明告知玩家，接受补给会让后续敌人更强。",
+      "basic_function_bugs": [
+        "把持续污染解释为玩家有利状态",
+        "错误告知污染在离开节点后消失",
+        "只有无解释标记，无法理解跨阶段后果"
+      ],
+      "permitted_trigger_modes": ["automatic", "input", "held"],
+      "original_requirement_diagnostic_only": "长期后果、跨阶段保留或失去的状态有可观察的解释；仅在需求存在时判断。"
+    },
+    "expanded.G.s0045": {
+      "visible_goal": "选择界面在玩家决定前说明主要代价与收益。",
+      "result_frame_description": "路线节点或事件选项旁有可读的风险、支付资源和预期收益提示。",
+      "correct_target_and_information": "说明对应当前选项，例如交换消耗矿或生命并获得稀有卡，不颠倒付出与获得。",
+      "necessary_context": "待选对象与代价收益说明同屏即可。",
+      "representative_basic_function": "交换商选项清楚展示支付资源与可获得的稀有卡。",
+      "basic_function_bugs": [
+        "代价和收益方向颠倒",
+        "说明属于另一选项",
+        "关键风险被表达为无代价收益"
+      ],
+      "permitted_trigger_modes": ["automatic", "input", "held"],
+      "original_requirement_diagnostic_only": "冻结玩法中的资源/路线/时机选择有可理解的代价与收益提示。"
+    },
+    "expanded.G.s0047": {
+      "visible_goal": "玩家能发现危险提示及适用的恢复入口。",
+      "result_frame_description": "危险相关界面清楚展示敌方意图或风险说明，并让适用的存读档、暂停或重开入口易于辨认。",
+      "correct_target_and_information": "预警对应当前威胁，恢复入口名称准确，不把不可用的恢复方式描述为可用。",
+      "necessary_context": "当前危险或恢复界面已明确用途时一帧即可；入口含义不明时补充相关面板。",
+      "representative_basic_function": "失败后的界面清楚给出可理解的重开或读档恢复入口。",
+      "basic_function_bugs": [
+        "危险提示指向错误敌人或错误意图",
+        "恢复入口被遮住到无法发现",
+        "不可用的恢复方式被明确标为可用"
+      ],
+      "permitted_trigger_modes": ["automatic", "input"],
+      "original_requirement_diagnostic_only": "危险预警与恢复入口可发现，玩家能据此调整操作。"
+    },
+    "expanded.G.s0043": {
+      "visible_goal": "核心操作的反馈清楚表达本次操作是成功、失败还是被拒绝。",
+      "result_frame_description": "当前操作结果有可读提示或明确的对象状态，玩家不会把拒绝误认为成功。",
+      "correct_target_and_information": "反馈对应本次操作和受影响对象，表达结果类别，不重复要求精确数值核算。",
+      "necessary_context": "结果含义清楚的一帧即可；拒绝需有操作被处理的明确反馈，不能仅用未变化画面。",
+      "representative_basic_function": "资源不足的操作显示明确拒绝原因，与正常成功反馈可区分。",
+      "basic_function_bugs": [
+        "拒绝被显示为成功",
+        "成功操作被显示为失败",
+        "提示与本次操作或对象无关"
+      ],
+      "permitted_trigger_modes": ["input", "automatic", "rejection"],
+      "original_requirement_diagnostic_only": "核心操作产生的成功、失败或拒绝反馈可被区分；此处不重复计算 C2 数值正确性。"
+    },
+    "expanded.G.s0048": {
+      "visible_goal": "多个对象同屏时，关键反馈仍能清楚归属于正确对象。",
+      "result_frame_description": "包含多个敌人或反馈的画面中，伤害、状态或目标标记与各自对象有明确视觉联系。",
+      "correct_target_and_information": "被攻击或状态变化的对象与其反馈对应，不把其他敌人的反馈归给当前目标。",
+      "necessary_context": "对象及关联反馈同屏即可；归属仍不明时补充目标选中或相邻结果画面。",
+      "representative_basic_function": "多敌人战斗中，受击敌人的伤害飘字清楚归属于该敌人。",
+      "basic_function_bugs": [
+        "反馈标在错误对象上",
+        "重叠遮挡导致无法辨认反馈归属",
+        "不同对象的目标或状态标记明显错配"
+      ],
+      "permitted_trigger_modes": ["input", "automatic"],
+      "original_requirement_diagnostic_only": "并发单位或多个事件同时发生时，关键反馈仍能对应到正确对象。"
+    }
+  }
+}

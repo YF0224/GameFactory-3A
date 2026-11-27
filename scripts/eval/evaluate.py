@@ -41,7 +41,7 @@ DEFAULT_JUDGE = CLI_JUDGE_MODEL
 # Entry file per engine, used when auto-generating delivery.json from legacy run_meta.json
 _ENTRY_GLOB = {
     'godot':    ('project.godot',),
-    'unity3d':  ('*.unity', 'Assets/*.unity'),
+    'unity3d':  ('*.unity', 'Assets/*.unity', 'Assets/**/*.unity'),
     'ue5':      ('*.uproject',),
     'three_js': ('index.html', 'index.js'),
 }
@@ -116,6 +116,37 @@ def ensure_delivery(run_dir: Path) -> bool:
         })
         return True
     except Exception:  # noqa: BLE001
+        return False
+
+
+def ensure_standards(game_id: str, suite: str, judge: str) -> bool:
+    """Auto-generate and approve standards for a game if not already approved.
+
+    Runs freeze_standards.py with the judge model and approves immediately.
+    Returns True if standards are ready, False if generation failed.
+    """
+    from pipeline.eval.whitebox.core import standards, suites
+    build = suites.get(suite).build
+    try:
+        crit = build(game_id)
+        folder = standards.bench_dir(suite, crit['version'], game_id)
+        if (folder / 'approved.json').exists():
+            return True
+        # Draft missing standards using the judge model
+        req = common.EVAL_DATA / game_id / 'general_requirement.txt'
+        if not req.exists():
+            req = common.SAMPLES / game_id / 'general_requirement.txt'
+        result = standards.draft(game_id, crit['criteria'], suite=suite,
+                                 criteria_version=crit['version'],
+                                 requirement=req, model=judge)
+        if result['failed']:
+            print(f'  standards draft failed for {game_id}: {result["failed"]}')
+            return False
+        standards.approve(folder, reviewer='auto')
+        print(f'  standards auto-approved for {game_id}')
+        return True
+    except Exception as exc:
+        print(f'  standards generation failed for {game_id}: {exc}')
         return False
 
 
@@ -197,6 +228,9 @@ def main(argv=None) -> int:
         elif args.list:
             print(f'TODO {model} {case} {run.name} -> {out}')
         else:
+            # Auto-generate and approve standards if missing
+            if not (args.static_only or args.plan_only or args.source_only):
+                ensure_standards(case, suite, args.judge)
             ready.append((model, case, run, out))
     if ready and not (args.static_only or args.plan_only or args.source_only):
         engines = {read_json(run / 'delivery.json')['engine'] for _, _, run, _ in ready}

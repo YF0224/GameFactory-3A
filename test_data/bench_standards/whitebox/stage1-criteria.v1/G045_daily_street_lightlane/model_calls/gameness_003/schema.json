@@ -1,0 +1,2380 @@
+{
+  "type": "object",
+  "properties": {
+    "revision": {
+      "type": "string",
+      "enum": [
+        "outcome_frame_v1"
+      ]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "diagnostic_only_categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "exact_timing",
+          "exact_space_motion",
+          "exact_numeric_formula",
+          "exhaustive_branches_boundaries"
+        ]
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "checks": {
+      "type": "object",
+      "properties": {
+        "game.layout.hierarchy": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "game.layout.readable": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "game.guidance.controls": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0007": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0011": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0012": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0013": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0014": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0003": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0004": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0016": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0017": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0005": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0006": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0024": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0025": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0026": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0027": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0028": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0029": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0030": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0031": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0032": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0033": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0043": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0044": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0045": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0021": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0022": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0001": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0002": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0041": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0042": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0050": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0046": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0048": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0053": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0049": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0051": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0047": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "expanded.G.s0052": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target_and_information": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target_and_information",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "game.layout.hierarchy",
+        "game.layout.readable",
+        "game.guidance.controls",
+        "expanded.G.s0007",
+        "expanded.G.s0011",
+        "expanded.G.s0012",
+        "expanded.G.s0013",
+        "expanded.G.s0014",
+        "expanded.G.s0003",
+        "expanded.G.s0004",
+        "expanded.G.s0016",
+        "expanded.G.s0017",
+        "expanded.G.s0005",
+        "expanded.G.s0006",
+        "expanded.G.s0024",
+        "expanded.G.s0025",
+        "expanded.G.s0026",
+        "expanded.G.s0027",
+        "expanded.G.s0028",
+        "expanded.G.s0029",
+        "expanded.G.s0030",
+        "expanded.G.s0031",
+        "expanded.G.s0032",
+        "expanded.G.s0033",
+        "expanded.G.s0043",
+        "expanded.G.s0044",
+        "expanded.G.s0045",
+        "expanded.G.s0021",
+        "expanded.G.s0022",
+        "expanded.G.s0001",
+        "expanded.G.s0002",
+        "expanded.G.s0041",
+        "expanded.G.s0042",
+        "expanded.G.s0050",
+        "expanded.G.s0046",
+        "expanded.G.s0048",
+        "expanded.G.s0053",
+        "expanded.G.s0049",
+        "expanded.G.s0051",
+        "expanded.G.s0047",
+        "expanded.G.s0052"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "revision",
+    "summary",
+    "diagnostic_only_categories",
+    "checks"
+  ],
+  "additionalProperties": false
+}

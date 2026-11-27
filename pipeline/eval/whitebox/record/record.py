@@ -629,7 +629,7 @@ def _ue_admission(client, project: Path, out: Path, deadline: float) -> dict:
     authored-identical copy), and the candidate is admitted again."""
     from engine_adapters.ue5.playtest.native_record import verify_pin
     from ..core.prepare import IGNORE
-    from ..repair import ue_compile_compat
+    from pipeline.eval.repair import ue_compile_compat
     compatibility = ue_compile_compat.selection(out)
     folder = out / 'runtime' / 'ue_admission'
     if (folder / 'admission.json').is_file():
@@ -773,7 +773,7 @@ def _record(out: Path, manifest: dict, plan: dict, take: int = 1) -> dict:
     runtime = take_dir(out, take) / 'record'
     if (runtime / 'record_result.json').is_file():
         result = read_json(runtime / 'record_result.json')
-        from ..repair import ue_compile_compat
+        from pipeline.eval.repair import ue_compile_compat
         ue_compile_compat.validate_record(out, runtime, result)
         return result
     engine = manifest['engine']
@@ -782,10 +782,10 @@ def _record(out: Path, manifest: dict, plan: dict, take: int = 1) -> dict:
     if native.exists() and engine == 'three_js':
         return _recover_completed_threejs(out, manifest, plan, take)
     if native.exists() and engine == 'godot':
-        from ..repair import godot_completed_record_recovery
+        from pipeline.eval.repair import godot_completed_record_recovery
         return godot_completed_record_recovery.recover(out, manifest, plan, take)
     if native.exists() and engine == 'ue5':
-        from ..repair import ue_compile_compat
+        from pipeline.eval.repair import ue_compile_compat
         ue_compile_compat.recover_unstarted_native(out, runtime)
     if native.exists():
         raise HarnessError(f'{native} exists from an unfinished take; inspect it before recording again')
@@ -821,12 +821,12 @@ def _record(out: Path, manifest: dict, plan: dict, take: int = 1) -> dict:
             if take == 1 or not first_import.is_file():
                 _unity_import(binary, project, runtime, budget, prep_deadline)
         if engine == 'ue5':
-            from ..repair import ue_compile_compat
+            from pipeline.eval.repair import ue_compile_compat
             ue_compile_compat.recover_before_client(out, project, ue_compile_compat.selection(out))
         client = make_client(engine, project, binary)
         if engine == 'ue5':
             admitted = _ue_admission(client, project, out, prep_deadline)
-            from ..repair import ue_compile_compat
+            from pipeline.eval.repair import ue_compile_compat
             compatibility_binding = ue_compile_compat.bind_record(out, runtime, admitted)
     with gui_slot() as slot:
         started = time.monotonic()

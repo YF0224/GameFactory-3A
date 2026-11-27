@@ -1,0 +1,1183 @@
+{
+  "type": "object",
+  "properties": {
+    "revision": {
+      "type": "string",
+      "enum": [
+        "outcome_frame_v1"
+      ]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "diagnostic_only_categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "exact_timing",
+          "exact_space_motion",
+          "exact_numeric_formula",
+          "exhaustive_branches_boundaries"
+        ]
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "checks": {
+      "type": "object",
+      "properties": {
+        "atom.G045_daily_street_lightlane.WB.TC2.01.C2.tiered.01": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.02.C2.tiered.02": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.03.C2.tiered.03": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.04.C2.tiered.04": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.05.C2.tiered.05": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.06.C2.tiered.06": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.07.C2.tiered.07": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.08.C2.tiered.08": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.09.C2.tiered.09": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.10.C2.tiered.10": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.11.C2.tiered.11": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.12.C2.tiered.12": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.13.C2.tiered.13": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.14.C2.tiered.14": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.15.C2.tiered.15": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.16.C2.tiered.16": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.17.C2.tiered.17": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.18.C2.tiered.18": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.19.C2.tiered.19": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        },
+        "atom.G045_daily_street_lightlane.WB.TC2.20.C2.tiered.20": {
+          "type": "object",
+          "properties": {
+            "visible_goal": {
+              "type": "string"
+            },
+            "result_frame_description": {
+              "type": "string"
+            },
+            "correct_target": {
+              "type": "string"
+            },
+            "necessary_context": {
+              "type": "string"
+            },
+            "representative_basic_function": {
+              "type": "string"
+            },
+            "basic_function_bugs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            },
+            "permitted_trigger_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "input",
+                  "held",
+                  "automatic",
+                  "delayed",
+                  "rejection"
+                ]
+              },
+              "minItems": 1
+            },
+            "original_requirement_diagnostic_only": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "visible_goal",
+            "result_frame_description",
+            "correct_target",
+            "necessary_context",
+            "representative_basic_function",
+            "basic_function_bugs",
+            "permitted_trigger_modes",
+            "original_requirement_diagnostic_only"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "atom.G045_daily_street_lightlane.WB.TC2.01.C2.tiered.01",
+        "atom.G045_daily_street_lightlane.WB.TC2.02.C2.tiered.02",
+        "atom.G045_daily_street_lightlane.WB.TC2.03.C2.tiered.03",
+        "atom.G045_daily_street_lightlane.WB.TC2.04.C2.tiered.04",
+        "atom.G045_daily_street_lightlane.WB.TC2.05.C2.tiered.05",
+        "atom.G045_daily_street_lightlane.WB.TC2.06.C2.tiered.06",
+        "atom.G045_daily_street_lightlane.WB.TC2.07.C2.tiered.07",
+        "atom.G045_daily_street_lightlane.WB.TC2.08.C2.tiered.08",
+        "atom.G045_daily_street_lightlane.WB.TC2.09.C2.tiered.09",
+        "atom.G045_daily_street_lightlane.WB.TC2.10.C2.tiered.10",
+        "atom.G045_daily_street_lightlane.WB.TC2.11.C2.tiered.11",
+        "atom.G045_daily_street_lightlane.WB.TC2.12.C2.tiered.12",
+        "atom.G045_daily_street_lightlane.WB.TC2.13.C2.tiered.13",
+        "atom.G045_daily_street_lightlane.WB.TC2.14.C2.tiered.14",
+        "atom.G045_daily_street_lightlane.WB.TC2.15.C2.tiered.15",
+        "atom.G045_daily_street_lightlane.WB.TC2.16.C2.tiered.16",
+        "atom.G045_daily_street_lightlane.WB.TC2.17.C2.tiered.17",
+        "atom.G045_daily_street_lightlane.WB.TC2.18.C2.tiered.18",
+        "atom.G045_daily_street_lightlane.WB.TC2.19.C2.tiered.19",
+        "atom.G045_daily_street_lightlane.WB.TC2.20.C2.tiered.20"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "revision",
+    "summary",
+    "diagnostic_only_categories",
+    "checks"
+  ],
+  "additionalProperties": false
+}

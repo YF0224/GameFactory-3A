@@ -284,7 +284,7 @@ def score(out: Path, provisional: bool = False) -> dict:
     rows = read_json(out / 'input' / 'criteria.json')['criteria']
     verdicts = final_verdicts(out)
     manifest = read_json(out / 'manifest.json')
-    if manifest.get('suite') == 'stage3':
+    if manifest.get('suite') in ('stage3', 'refinement'):
         # declared trigger log lines the game printed in any normal take (pipeline.check_trigger_signals)
         seen = set()
         for f in out.glob('takes/*/trigger_signals.json'):
@@ -293,7 +293,7 @@ def score(out: Path, provisional: bool = False) -> dict:
         verdicts = {i: ({**v, '_trigger_signal_seen': True} if i in seen and isinstance(v, dict) else v)
                     for i, v in verdicts.items()}
     tracks = None
-    if manifest.get('suite') == 'stage3' and (out / 'direct_trigger.json').is_file():
+    if manifest.get('suite') in ('stage3', 'refinement') and (out / 'direct_trigger.json').is_file():
         metrics_ = suites.get('stage3').metrics
         direct = direct_verdicts(out, rows, metrics_)
         tracks = {'normal': {}, 'direct': {}, 'used_direct': []}
@@ -312,7 +312,7 @@ def score(out: Path, provisional: bool = False) -> dict:
                     verdicts = {**verdicts, i: direct[i][1]}
                     tracks['used_direct'].append(i)
     clean_direct = {}
-    if manifest.get('suite') == 'stage3' and (out / 'direct_trigger.json').is_file():
+    if manifest.get('suite') in ('stage3', 'refinement') and (out / 'direct_trigger.json').is_file():
         # user decision 2026-11-11: Direct Trigger ran the game's own functions and that take's game log is clean
         # (no error / exception lines, no crash) but no frame proves the result -> 50%
         metrics_ = suites.get('stage3').metrics
@@ -329,7 +329,7 @@ def score(out: Path, provisional: bool = False) -> dict:
                 verdicts = {**verdicts, i: {**verdicts[i], '_direct_clean_run': True}}
                 clean_direct[i] = clean[i]
     absent = {}
-    if manifest.get('suite') == 'stage3' and _direct_book(out / 'direct_trigger.json').get('complete'):
+    if manifest.get('suite') in ('stage3', 'refinement') and _direct_book(out / 'direct_trigger.json').get('complete'):
         # Absence = FAIL, only once normal play and all Direct Trigger rounds are done.
         metrics_ = suites.get('stage3').metrics
         tried = tried_checks(out)
@@ -370,7 +370,7 @@ def score(out: Path, provisional: bool = False) -> dict:
                   if result['complete'] else 'INCOMPLETE', audit_status='未审计')
     # stage3: import = assets that got into the project (rules); texture = imported 3D assets that look
     # like the originals (0/1 per asset). They replace the judged versions, kept under 'judged_*'.
-    if manifest.get('suite') == 'stage3':
+    if manifest.get('suite') in ('stage3', 'refinement'):
         dims = result.get('dimensions', {})
         tex = 'texture_ingame.json'
         if not (out / tex).is_file():
@@ -397,7 +397,7 @@ def score(out: Path, provisional: bool = False) -> dict:
                               'not_evaluable': len(d.get('not_evaluable', d.get('not_measurable', [])))},
                              'source': file}
     rules = out / 'playable_rules.json'
-    if manifest.get('suite', 'stage1') != 'stage1' and rules.is_file():
+    if manifest.get('suite', 'stage1') not in ('stage1', 'whitebox') and rules.is_file():
         checks = read_json(out / 'verdicts_playable_rules.json') if (out / 'verdicts_playable_rules.json').is_file() else {}
         status = {i: checks[i]['status'] if i in checks else 'HARNESS_ERROR' for i in playable_rules.IDS}
         result['playable'] = {'checks': status, 'score': round(100 * sum(v == 'PASS' for v in status.values()) / 3, 2)
@@ -405,7 +405,7 @@ def score(out: Path, provisional: bool = False) -> dict:
                               'note': 'rules only; reported beside the dimensions, not part of them'}
     if provisional:
         result['provisional'] = 'scored after a take; more takes may follow'
-    sc = state_summary(out, rows) if manifest.get('suite') == 'stage3' else None
+    sc = state_summary(out, rows) if manifest.get('suite') in ('stage3', 'refinement') else None
     if sc:
         result['state_conditioned'] = sc
     from pipeline.eval.repair import ue_compile_compat
@@ -1001,10 +1001,10 @@ def run(delivery_dir: Path, out: Path, *, standards_root: Path, peers=(), models
         elif stop_after != 'static_judge':
             history, pending, feedback = [], None, None
             take_secs = []
-            if suite == 'stage3' and BATCH > 0:
+            if suite in ('stage3', 'refinement') and BATCH > 0:
                 step = 'batched_takes'           # the take / stage is written to status.json as it runs
                 _batched_takes(out, manifest, rows, metrics, frozen, peers, started)
-            for take in (range(1, plan.MAX_TAKES + 1) if not (suite == 'stage3' and BATCH > 0) else ()):
+            for take in (range(1, plan.MAX_TAKES + 1) if not (suite in ('stage3', 'refinement') and BATCH > 0) else ()):
                 if take > 1:
                     # Per-project wall-clock budget: start another take only if one more average take fits.
                     left = PROJECT_BUDGET_S - (record.busy_clock() - started)
@@ -1043,9 +1043,9 @@ def run(delivery_dir: Path, out: Path, *, standards_root: Path, peers=(), models
                     break
                 pending, feedback = remaining, _feedback(out, take + 1, remaining, verdicts)
         all_rows = read_json(out / 'input' / 'criteria.json')['criteria']
-        if stop_after is None and suite == 'stage3':
+        if stop_after is None and suite in ('stage3', 'refinement'):
             step = 'import_texture'
-            from ..stage3 import import_presence, texture_ingame
+            from ...refinement import import_presence, texture_ingame
             import_presence.evaluate(out)
             # Texture: imported 3D assets photographed inside the running game at the end of each take
             # (UE / Unity recorders) vs the original asset (reference loader); mean F, availability, coverage.
@@ -1060,7 +1060,7 @@ def run(delivery_dir: Path, out: Path, *, standards_root: Path, peers=(), models
                                                                        'attempt': attempt})
                         if attempt == 1:
                             time.sleep(60)
-        if stop_after is None and suite != 'stage1':
+        if stop_after is None and suite not in ('stage1', 'whitebox'):
             # Suites without Playable rows still report it (import / launch / operate, by rules)
             # from their own recordings; reported beside the dimensions, never mixed into them.
             step = 'playable_rules'
@@ -1108,7 +1108,7 @@ def run_playable(delivery_dir: Path, out: Path, *, models: dict, takes: int = PL
         verdicts, feedback, history = {}, None, []
         first_take = 1
         if continuation is not None:
-            from ..repair import ue_g020_capture_continuation
+            from pipeline.eval.repair import ue_g020_capture_continuation
             first_take, feedback = ue_g020_capture_continuation.validate_resume(out, continuation, models, takes)
         for take in range(first_take, takes + 1):
             step = f'plan_t{take}'

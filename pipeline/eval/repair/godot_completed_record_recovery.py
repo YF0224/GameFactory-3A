@@ -44,7 +44,8 @@ def _process_audit(project, native):
 def recover(out: Path, manifest: dict, plan: dict, take: int):
     """Called with the take's postprocessing lock held by record.record."""
     from PIL import Image
-    from pipeline.eval.whitebox.core import prepare, record
+    from pipeline.eval.whitebox.core import prepare
+    from pipeline.eval.whitebox.record import record
 
     out = Path(out).resolve()
     runtime = out / 'takes' / str(take) / 'record'

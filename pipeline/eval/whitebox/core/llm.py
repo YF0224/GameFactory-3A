@@ -408,6 +408,27 @@ def accepted_response(calls_dir: Path, name: str) -> dict | None:
     folder = Path(calls_dir) / name
     pointer = folder / 'accepted_response.json'
     if not pointer.is_file():
+        # A restarted call may have been accepted in a numbered invocation folder.
+        # Reuse only the same saved request, schema, image bindings and model.
+        request_files = ('prompt.txt', 'schema.json', 'images.json')
+        candidates = sorted(Path(calls_dir).glob(name + '_[0-9][0-9][0-9]'))
+        for candidate in candidates:
+            if not (candidate / 'accepted_response.json').is_file():
+                continue
+            if not all((folder / f).is_file() and (candidate / f).is_file()
+                       and (folder / f).read_bytes() == (candidate / f).read_bytes()
+                       for f in request_files):
+                continue
+            original_invocation = folder / 'invocation.json'
+            retry_invocation = candidate / 'invocation.json'
+            if not retry_invocation.is_file():
+                continue
+            if original_invocation.is_file():
+                original_model = json.loads(original_invocation.read_text()).get('model_requested')
+                retry_model = json.loads(retry_invocation.read_text()).get('model_requested')
+                if original_model != retry_model:
+                    continue
+            return accepted_response(calls_dir, candidate.name)
         return None
     binding = json.loads(pointer.read_text())
     path = (folder / binding['path']).resolve()
